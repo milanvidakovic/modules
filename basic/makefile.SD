@@ -1,0 +1,23 @@
+TARGET=basic
+#TARGET=test
+#TARGET=snakes
+LIB=/mnt/c/Prj/Altera/C/moxiebox/modules/lib
+CFLAGS=-fsigned-char -S -fverbose-asm 
+#-fdump-rtl-expand
+
+FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio $(LIB)/graphics $(LIB)/spi $(LIB)/fat $(LIB)/enc28j60 $(LIB)/tcpip $(LIB)/floatimpl
+
+ASM_LIST := $(foreach file,$(FILES), $(file).s) $(LIB)/keyboard.s $(LIB)/files.s $(LIB)/graphics320.s $(LIB)/graphics640.s $(LIB)/fonts.s $(LIB)/consts.s
+
+all: compile assemble copy
+
+compile:
+	@for file in $(FILES); do \
+    moxiebox-gcc -DKERNEL $(CFLAGS) $${file}.c -o $${file}.s; \
+	done
+	
+assemble:
+	java -jar ../FPGA_Assembler.jar -s $(ASM_LIST)
+
+copy:
+	cp basic.bin ../boot.bin

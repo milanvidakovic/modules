@@ -1,0 +1,10 @@
+# VSCode
+.vscode
+
+# Build files
+*.s
+*.bin
+*.sym
+# Questions
+questions.txt
+

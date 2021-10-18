@@ -1,0 +1,11 @@
+10 MODE 2
+15 CLS 
+20 FOR I = 1 TO 200
+30 PLOT I, 200, 1
+40 NEXT I
+50 FOR K = 1 TO 10 
+60 DRAW 400, K * 8, 1, "Ovo je tekst." 
+70 NEXT K
+80 I = KEY() 
+90 CLS 
+100 MODE 0  

@@ -1,0 +1,5 @@
+10 DELAY 50
+20 A = ISKEY() 
+25 IF A = 27 END 
+30 IF A != 0 PRINT A," ";
+40 GOTO 10 

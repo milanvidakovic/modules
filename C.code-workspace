@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.default.includePath": [
+			"c:\\Prj\\Altera\\C\\moxiebox\\contrib\\root\\usr\\lib\\gcc\\moxiebox\\10.0.0\\include-fixed\\"
+		],
+		"files.associations": {
+			"kernel.h": "c",
+			"string.h": "c",
+			"consts.h": "c",
+			"sprintf.h": "c",
+			"stdarg.h": "c",
+			"graphics.h": "c",
+			"fpga.h": "c",
+			"keyboard.h": "c",
+			"stdio.h": "c",
+			"tcpip.h": "c",
+			"enc28j60.h": "c",
+			"spi.h": "c",
+			"files.h": "c",
+			"fat.h": "c",
+			"mouse.h": "c",
+			"floatimpl.h": "c"
+		}
+	}
+}

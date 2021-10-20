@@ -7328,9 +7328,6 @@ exec_eth:
 	.p2align	2
 .LC73:
 	.string	"COLOR: %d\n"
-	.p2align	2
-.LC74:
-	.string	"COLOR SET TO: %d\n"
 	.text
 	.p2align	1
 	.global	exec_color
@@ -7345,29 +7342,29 @@ exec_color:
 	ld.w	r0, [txtpos]	# txtpos.447_1, txtpos
 	ld.b	r0, [r0]	# _2, *txtpos.447_1
 # basic.c:2324: 	if (*txtpos == NL)
-	zex.b	r1, r0	# tmp32, _2
-	mov.w	r0, 10	# tmp33,
-	cmp.w	r1, r0	# tmp32, tmp33
+	zex.b	r1, r0	# tmp31, _2
+	mov.w	r0, 10	# tmp32,
+	cmp.w	r1, r0	# tmp31, tmp32
 	jnz	.L449		#
 # basic.c:2326: 		printf("COLOR: %d\n", color);
 	ld.w	r1, [color]	# color.448_3, color
-	mov.w	r0, sp	# tmp34,
+	mov.w	r0, sp	# tmp33,
 	st.w	[r0 + (4)], r1	#, color.448_3
-	mov.w	r1, .LC73	# tmp35,
-	st.w	[r0], r1	#, tmp35
+	mov.w	r1, .LC73	# tmp34,
+	st.w	[r0], r1	#, tmp34
 	call	printf		#
 # basic.c:2327: 		return;
 	j	.L448		#
 .L449:
 # basic.c:2329: 	expression_error = 0;
-	xor.w	r0, r0	# tmp36
-	st.b	[expression_error], r0	# expression_error, tmp36
+	xor.w	r0, r0	# tmp35
+	st.b	[expression_error], r0	# expression_error, tmp35
 # basic.c:2330: 	if (expression_error)
 	ld.b	r0, [expression_error]	# expression_error.449_4, expression_error
 # basic.c:2330: 	if (expression_error)
-	sex.b	r1, r0	# tmp37, expression_error.449_4
-	xor.w	r0, r0	# tmp38
-	cmp.w	r1, r0	# tmp37, tmp38
+	sex.b	r1, r0	# tmp36, expression_error.449_4
+	xor.w	r0, r0	# tmp37
+	cmp.w	r1, r0	# tmp36, tmp37
 	jz	.L451		#
 # basic.c:2332: 		qwhat();
 	call	qwhat		#
@@ -7378,13 +7375,6 @@ exec_color:
 	call	expression		#
 # basic.c:2335: 	color = expression();	
 	st.w	[color], r0	# color, _5
-# basic.c:2336: 	printf("COLOR SET TO: %d\n", color);
-	ld.w	r1, [color]	# color.450_6, color
-	mov.w	r0, sp	# tmp39,
-	st.w	[r0 + (4)], r1	#, color.450_6
-	mov.w	r1, .LC74	# tmp40,
-	st.w	[r0], r1	#, tmp40
-	call	printf		#
 .L448:
 # basic.c:2337: }
 	mov.w	sp, r13	#,
@@ -7393,7 +7383,7 @@ exec_color:
 	.size	exec_color, .-exec_color
 	.section	.rodata
 	.p2align	2
-.LC75:
+.LC74:
 	.string	"Current millis: %d\n"
 	.text
 	.p2align	1
@@ -7404,8 +7394,8 @@ direct:
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
 # basic.c:2345: 	if (*txtpos == NL)
-	ld.w	r0, [txtpos]	# txtpos.451_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.451_1
+	ld.w	r0, [txtpos]	# txtpos.450_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.450_1
 # basic.c:2345: 	if (*txtpos == NL)
 	zex.b	r1, r0	# tmp48, _2
 	mov.w	r0, 10	# tmp49,
@@ -7432,8 +7422,8 @@ direct:
 	j	.L455		#
 .L456:
 # basic.c:2359: 	switch (table_index)
-	ld.b	r0, [table_index]	# table_index.452_4, table_index
-	sex.b	r0, r0	# _5, table_index.452_4
+	ld.b	r0, [table_index]	# table_index.451_4, table_index
+	sex.b	r0, r0	# _5, table_index.451_4
 	mov.w	r1, 40	# tmp53,
 	cmp.w	r0, r1	# _5, tmp53
 	jz	.L457		#
@@ -7678,16 +7668,16 @@ direct:
 	j	.L495		#
 .L490:
 # basic.c:2377: 		current_line = program_start;
-	ld.w	r0, [program_start]	# program_start.453_6, program_start
-	st.w	[current_line], r0	# current_line, program_start.453_6
+	ld.w	r0, [program_start]	# program_start.452_6, program_start
+	st.w	[current_line], r0	# current_line, program_start.452_6
 # basic.c:2378: 		exec_run();
 	call	exec_run		#
 # basic.c:2379: 		break;
 	j	.L495		#
 .L489:
 # basic.c:2381: 		program_end = program_start;
-	ld.w	r0, [program_start]	# program_start.454_7, program_start
-	st.w	[program_end], r0	# program_end, program_start.454_7
+	ld.w	r0, [program_start]	# program_start.453_7, program_start
+	st.w	[program_end], r0	# program_end, program_start.453_7
 # basic.c:2382: 		break;
 	j	.L495		#
 .L488:
@@ -7709,15 +7699,15 @@ direct:
 # basic.c:2391: 		linenum = expression();
 	st.w	[linenum], r0	# linenum, _8
 # basic.c:2392: 		if (expression_error || *txtpos != NL)
-	ld.b	r0, [expression_error]	# expression_error.455_9, expression_error
+	ld.b	r0, [expression_error]	# expression_error.454_9, expression_error
 # basic.c:2392: 		if (expression_error || *txtpos != NL)
-	sex.b	r1, r0	# tmp127, expression_error.455_9
+	sex.b	r1, r0	# tmp127, expression_error.454_9
 	xor.w	r0, r0	# tmp128
 	cmp.w	r1, r0	# tmp127, tmp128
 	jnz	.L496		#
 # basic.c:2392: 		if (expression_error || *txtpos != NL)
-	ld.w	r0, [txtpos]	# txtpos.456_10, txtpos
-	ld.b	r0, [r0]	# _11, *txtpos.456_10
+	ld.w	r0, [txtpos]	# txtpos.455_10, txtpos
+	ld.b	r0, [r0]	# _11, *txtpos.455_10
 # basic.c:2392: 		if (expression_error || *txtpos != NL)
 	zex.b	r1, r0	# tmp129, _11
 	mov.w	r0, 10	# tmp130,
@@ -7762,8 +7752,8 @@ direct:
 	j	.L455		#
 .L481:
 # basic.c:2412: 		if (txtpos[0] != NL)
-	ld.w	r0, [txtpos]	# txtpos.457_14, txtpos
-	ld.b	r0, [r0]	# _15, *txtpos.457_14
+	ld.w	r0, [txtpos]	# txtpos.456_14, txtpos
+	ld.b	r0, [r0]	# _15, *txtpos.456_14
 # basic.c:2412: 		if (txtpos[0] != NL)
 	zex.b	r1, r0	# tmp132, _15
 	mov.w	r0, 10	# tmp133,
@@ -7775,8 +7765,8 @@ direct:
 	j	.L495		#
 .L499:
 # basic.c:2417: 			current_line = program_end;
-	ld.w	r0, [program_end]	# program_end.458_16, program_end
-	st.w	[current_line], r0	# current_line, program_end.458_16
+	ld.w	r0, [program_end]	# program_end.457_16, program_end
+	st.w	[current_line], r0	# current_line, program_end.457_16
 # basic.c:2418: 		break;
 	j	.L495		#
 .L480:
@@ -7786,9 +7776,9 @@ direct:
 	j	.L495		#
 .L479:
 # basic.c:2423: 		cls(color);
-	ld.w	r0, [color]	# color.459_17, color
+	ld.w	r0, [color]	# color.458_17, color
 	mov.w	r1, sp	# tmp134,
-	st.w	[r1], r0	#, color.459_17
+	st.w	[r1], r0	#, color.458_17
 	call	cls		#
 # basic.c:2424: 		break;
 	j	.L495		#
@@ -7877,7 +7867,7 @@ direct:
 	mov.w	r1, r0	# _18,
 	mov.w	r0, sp	# tmp135,
 	st.w	[r0 + (4)], r1	#, _18
-	mov.w	r1, .LC75	# tmp136,
+	mov.w	r1, .LC74	# tmp136,
 	st.w	[r0], r1	#, tmp136
 	call	printf		#
 # basic.c:2474: 	break;
@@ -7924,490 +7914,490 @@ init_K_API:
 	push	r13		#
 	mov.w	r13, sp	#,
 # basic.c:2494: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
-	mov.w	r1, cls	# cls.460_1,
+	mov.w	r1, cls	# cls.459_1,
 # basic.c:2494: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.461_2, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.460_2, K_API_STDIO
 # basic.c:2494: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
 	add.w	r1, 4 #111	# _3,
 # basic.c:2494: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
-	st.w	[r0], r1	# *K_API_STDIO.461_2, _3
+	st.w	[r0], r1	# *K_API_STDIO.460_2, _3
 # basic.c:2495: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
-	mov.w	r1, put_char	# put_char.462_4,
+	mov.w	r1, put_char	# put_char.461_4,
 # basic.c:2495: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.463_5, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.462_5, K_API_STDIO
 	add.w	r0, 4 #111	# _6,
 # basic.c:2495: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
 	add.w	r1, 4 #111	# _7,
 # basic.c:2495: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
 	st.w	[r0], r1	# *_6, _7
 # basic.c:2496: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
-	mov.w	r1, printf	# printf.464_8,
+	mov.w	r1, printf	# printf.463_8,
 # basic.c:2496: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.465_9, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.464_9, K_API_STDIO
 	add.w	r0, 8 #111	# _10,
 # basic.c:2496: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
 	add.w	r1, 4 #111	# _11,
 # basic.c:2496: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
 	st.w	[r0], r1	# *_10, _11
 # basic.c:2497: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
-	mov.w	r1, puts	# puts.466_12,
+	mov.w	r1, puts	# puts.465_12,
 # basic.c:2497: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.467_13, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.466_13, K_API_STDIO
 	add.w	r0, 12 #111	# _14,
 # basic.c:2497: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
 	add.w	r1, 4 #111	# _15,
 # basic.c:2497: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
 	st.w	[r0], r1	# *_14, _15
 # basic.c:2498: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
-	mov.w	r1, rand	# rand.468_16,
+	mov.w	r1, rand	# rand.467_16,
 # basic.c:2498: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.469_17, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.468_17, K_API_STDIO
 	add.w	r0, 16 #111	# _18,
 # basic.c:2498: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
 	add.w	r1, 4 #111	# _19,
 # basic.c:2498: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
 	st.w	[r0], r1	# *_18, _19
 # basic.c:2499: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
-	mov.w	r1, should_break	# should_break.470_20,
+	mov.w	r1, should_break	# should_break.469_20,
 # basic.c:2499: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.471_21, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.470_21, K_API_STDIO
 	add.w	r0, 20 #111	# _22,
 # basic.c:2499: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
 	add.w	r1, 4 #111	# _23,
 # basic.c:2499: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
 	st.w	[r0], r1	# *_22, _23
 # basic.c:2500: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
-	mov.w	r1, getc	# getc.472_24,
+	mov.w	r1, getc	# getc.471_24,
 # basic.c:2500: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.473_25, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.472_25, K_API_STDIO
 	add.w	r0, 24 #111	# _26,
 # basic.c:2500: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
 	add.w	r1, 4 #111	# _27,
 # basic.c:2500: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
 	st.w	[r0], r1	# *_26, _27
 # basic.c:2501: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
-	mov.w	r1, gets	# gets.474_28,
+	mov.w	r1, gets	# gets.473_28,
 # basic.c:2501: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.475_29, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.474_29, K_API_STDIO
 	add.w	r0, 28 #111	# _30,
 # basic.c:2501: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
 	add.w	r1, 4 #111	# _31,
 # basic.c:2501: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
 	st.w	[r0], r1	# *_30, _31
 # basic.c:2502: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
-	mov.w	r1, init_stdio	# init_stdio.476_32,
+	mov.w	r1, init_stdio	# init_stdio.475_32,
 # basic.c:2502: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.477_33, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.476_33, K_API_STDIO
 	add.w	r0, 32 #111	# _34,
 # basic.c:2502: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
 	add.w	r1, 4 #111	# _35,
 # basic.c:2502: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
 	st.w	[r0], r1	# *_34, _35
 # basic.c:2503: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
-	mov.w	r1, delay	# delay.478_36,
+	mov.w	r1, delay	# delay.477_36,
 # basic.c:2503: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.479_37, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.478_37, K_API_STDIO
 	add.w	r0, 36 #111	# _38,
 # basic.c:2503: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
 	add.w	r1, 4 #111	# _39,
 # basic.c:2503: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
 	st.w	[r0], r1	# *_38, _39
 # basic.c:2504: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
-	mov.w	r1, xy	# xy.480_40,
+	mov.w	r1, xy	# xy.479_40,
 # basic.c:2504: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.481_41, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.480_41, K_API_STDIO
 	add.w	r0, 40 #111	# _42,
 # basic.c:2504: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
 	add.w	r1, 4 #111	# _43,
 # basic.c:2504: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
 	st.w	[r0], r1	# *_42, _43
 # basic.c:2505: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
-	mov.w	r1, get_millis	# get_millis.482_44,
+	mov.w	r1, get_millis	# get_millis.481_44,
 # basic.c:2505: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.483_45, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.482_45, K_API_STDIO
 	add.w	r0, 44 #111	# _46,
 # basic.c:2505: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
 	add.w	r1, 4 #111	# _47,
 # basic.c:2505: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
 	st.w	[r0], r1	# *_46, _47
 # basic.c:2506: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
-	mov.w	r1, is_key_pressed	# is_key_pressed.484_48,
+	mov.w	r1, is_key_pressed	# is_key_pressed.483_48,
 # basic.c:2506: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.485_49, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.484_49, K_API_STDIO
 	add.w	r0, 48 #111	# _50,
 # basic.c:2506: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
 	add.w	r1, 4 #111	# _51,
 # basic.c:2506: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
 	st.w	[r0], r1	# *_50, _51
 # basic.c:2507: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
-	mov.w	r1, is_key_released	# is_key_released.486_52,
+	mov.w	r1, is_key_released	# is_key_released.485_52,
 # basic.c:2507: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.487_53, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.486_53, K_API_STDIO
 	add.w	r0, 52 #111	# _54,
 # basic.c:2507: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
 	add.w	r1, 4 #111	# _55,
 # basic.c:2507: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
 	st.w	[r0], r1	# *_54, _55
 # basic.c:2508: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
-	mov.w	r1, toggle_cursor	# toggle_cursor.488_56,
+	mov.w	r1, toggle_cursor	# toggle_cursor.487_56,
 # basic.c:2508: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.489_57, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.488_57, K_API_STDIO
 	add.w	r0, 56 #111	# _58,
 # basic.c:2508: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
 	add.w	r1, 4 #111	# _59,
 # basic.c:2508: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
 	st.w	[r0], r1	# *_58, _59
 # basic.c:2509: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
-	mov.w	r1, putchar	# putchar.490_60,
+	mov.w	r1, putchar	# putchar.489_60,
 # basic.c:2509: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.491_61, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.490_61, K_API_STDIO
 	add.w	r0, 60 #111	# _62,
 # basic.c:2509: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
 	add.w	r1, 4 #111	# _63,
 # basic.c:2509: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
 	st.w	[r0], r1	# *_62, _63
 # basic.c:2510: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
-	mov.w	r1, video_mode	# video_mode.492_64,
+	mov.w	r1, video_mode	# video_mode.491_64,
 # basic.c:2510: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.493_65, K_API_STDIO
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.492_65, K_API_STDIO
 	add.w	r0, 64 #111	# _66,
 # basic.c:2510: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
 	add.w	r1, 4 #111	# _67,
 # basic.c:2510: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
 	st.w	[r0], r1	# *_66, _67
 # basic.c:2511: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
-	mov.w	r1, scroll_up	# scroll_up.494_68,
+	mov.w	r1, scroll_up	# scroll_up.493_68,
 # basic.c:2511: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.495_69, K_API_GRAPHICS
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.494_69, K_API_GRAPHICS
 	add.w	r0, 68 #111	# _70,
 # basic.c:2511: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
 	add.w	r1, 4 #111	# _71,
 # basic.c:2511: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
 	st.w	[r0], r1	# *_70, _71
 # basic.c:2513: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
-	mov.w	r1, strlen	# strlen.496_72,
+	mov.w	r1, strlen	# strlen.495_72,
 # basic.c:2513: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.497_73, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.496_73, K_API_STRING
 # basic.c:2513: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
 	add.w	r1, 4 #111	# _74,
 # basic.c:2513: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
-	st.w	[r0], r1	# *K_API_STRING.497_73, _74
+	st.w	[r0], r1	# *K_API_STRING.496_73, _74
 # basic.c:2514: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
-	mov.w	r1, strcmp	# strcmp.498_75,
+	mov.w	r1, strcmp	# strcmp.497_75,
 # basic.c:2514: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.499_76, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.498_76, K_API_STRING
 	add.w	r0, 4 #111	# _77,
 # basic.c:2514: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
 	add.w	r1, 4 #111	# _78,
 # basic.c:2514: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
 	st.w	[r0], r1	# *_77, _78
 # basic.c:2515: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
-	mov.w	r1, strncmp	# strncmp.500_79,
+	mov.w	r1, strncmp	# strncmp.499_79,
 # basic.c:2515: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.501_80, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.500_80, K_API_STRING
 	add.w	r0, 8 #111	# _81,
 # basic.c:2515: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
 	add.w	r1, 4 #111	# _82,
 # basic.c:2515: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
 	st.w	[r0], r1	# *_81, _82
 # basic.c:2516: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
-	mov.w	r1, memcpy	# memcpy.502_83,
+	mov.w	r1, memcpy	# memcpy.501_83,
 # basic.c:2516: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.503_84, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.502_84, K_API_STRING
 	add.w	r0, 12 #111	# _85,
 # basic.c:2516: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
 	add.w	r1, 4 #111	# _86,
 # basic.c:2516: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
 	st.w	[r0], r1	# *_85, _86
 # basic.c:2517: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
-	mov.w	r1, memset	# memset.504_87,
+	mov.w	r1, memset	# memset.503_87,
 # basic.c:2517: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.505_88, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.504_88, K_API_STRING
 	add.w	r0, 16 #111	# _89,
 # basic.c:2517: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
 	add.w	r1, 4 #111	# _90,
 # basic.c:2517: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
 	st.w	[r0], r1	# *_89, _90
 # basic.c:2518: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
-	mov.w	r1, memmove	# memmove.506_91,
+	mov.w	r1, memmove	# memmove.505_91,
 # basic.c:2518: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.507_92, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.506_92, K_API_STRING
 	add.w	r0, 20 #111	# _93,
 # basic.c:2518: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
 	add.w	r1, 4 #111	# _94,
 # basic.c:2518: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
 	st.w	[r0], r1	# *_93, _94
 # basic.c:2519: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
-	mov.w	r1, strcpy	# strcpy.508_95,
+	mov.w	r1, strcpy	# strcpy.507_95,
 # basic.c:2519: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.509_96, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.508_96, K_API_STRING
 	add.w	r0, 24 #111	# _97,
 # basic.c:2519: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
 	add.w	r1, 4 #111	# _98,
 # basic.c:2519: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
 	st.w	[r0], r1	# *_97, _98
 # basic.c:2520: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
-	mov.w	r1, strncpy	# strncpy.510_99,
+	mov.w	r1, strncpy	# strncpy.509_99,
 # basic.c:2520: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.511_100, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.510_100, K_API_STRING
 	add.w	r0, 28 #111	# _101,
 # basic.c:2520: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
 	add.w	r1, 4 #111	# _102,
 # basic.c:2520: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
 	st.w	[r0], r1	# *_101, _102
 # basic.c:2521: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
-	mov.w	r1, strcat	# strcat.512_103,
+	mov.w	r1, strcat	# strcat.511_103,
 # basic.c:2521: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.513_104, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.512_104, K_API_STRING
 	add.w	r0, 32 #111	# _105,
 # basic.c:2521: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
 	add.w	r1, 4 #111	# _106,
 # basic.c:2521: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
 	st.w	[r0], r1	# *_105, _106
 # basic.c:2522: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
-	mov.w	r1, strstr	# strstr.514_107,
+	mov.w	r1, strstr	# strstr.513_107,
 # basic.c:2522: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.515_108, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.514_108, K_API_STRING
 	add.w	r0, 36 #111	# _109,
 # basic.c:2522: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
 	add.w	r1, 4 #111	# _110,
 # basic.c:2522: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
 	st.w	[r0], r1	# *_109, _110
 # basic.c:2523: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
-	mov.w	r1, tolower	# tolower.516_111,
+	mov.w	r1, tolower	# tolower.515_111,
 # basic.c:2523: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.517_112, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.516_112, K_API_STRING
 	add.w	r0, 40 #111	# _113,
 # basic.c:2523: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
 	add.w	r1, 4 #111	# _114,
 # basic.c:2523: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
 	st.w	[r0], r1	# *_113, _114
 # basic.c:2524: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
-	mov.w	r1, toupper	# toupper.518_115,
+	mov.w	r1, toupper	# toupper.517_115,
 # basic.c:2524: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.519_116, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.518_116, K_API_STRING
 	add.w	r0, 44 #111	# _117,
 # basic.c:2524: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
 	add.w	r1, 4 #111	# _118,
 # basic.c:2524: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
 	st.w	[r0], r1	# *_117, _118
 # basic.c:2525: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
-	mov.w	r1, str_toupper	# str_toupper.520_119,
+	mov.w	r1, str_toupper	# str_toupper.519_119,
 # basic.c:2525: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.521_120, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.520_120, K_API_STRING
 	add.w	r0, 48 #111	# _121,
 # basic.c:2525: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
 	add.w	r1, 4 #111	# _122,
 # basic.c:2525: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
 	st.w	[r0], r1	# *_121, _122
 # basic.c:2526: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
-	mov.w	r1, str_n_toupper	# str_n_toupper.522_123,
+	mov.w	r1, str_n_toupper	# str_n_toupper.521_123,
 # basic.c:2526: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.523_124, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.522_124, K_API_STRING
 	add.w	r0, 52 #111	# _125,
 # basic.c:2526: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
 	add.w	r1, 4 #111	# _126,
 # basic.c:2526: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
 	st.w	[r0], r1	# *_125, _126
 # basic.c:2527: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
-	mov.w	r1, isdigit	# isdigit.524_127,
+	mov.w	r1, isdigit	# isdigit.523_127,
 # basic.c:2527: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.525_128, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.524_128, K_API_STRING
 	add.w	r0, 56 #111	# _129,
 # basic.c:2527: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
 	add.w	r1, 4 #111	# _130,
 # basic.c:2527: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
 	st.w	[r0], r1	# *_129, _130
 # basic.c:2528: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
-	mov.w	r1, islower	# islower.526_131,
+	mov.w	r1, islower	# islower.525_131,
 # basic.c:2528: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.527_132, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.526_132, K_API_STRING
 	add.w	r0, 60 #111	# _133,
 # basic.c:2528: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
 	add.w	r1, 4 #111	# _134,
 # basic.c:2528: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
 	st.w	[r0], r1	# *_133, _134
 # basic.c:2529: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
-	mov.w	r1, isupper	# isupper.528_135,
+	mov.w	r1, isupper	# isupper.527_135,
 # basic.c:2529: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.529_136, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.528_136, K_API_STRING
 	add.w	r0, 64 #111	# _137,
 # basic.c:2529: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
 	add.w	r1, 4 #111	# _138,
 # basic.c:2529: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
 	st.w	[r0], r1	# *_137, _138
 # basic.c:2530: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
-	mov.w	r1, isalpha	# isalpha.530_139,
+	mov.w	r1, isalpha	# isalpha.529_139,
 # basic.c:2530: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.531_140, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.530_140, K_API_STRING
 	add.w	r0, 68 #111	# _141,
 # basic.c:2530: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
 	add.w	r1, 4 #111	# _142,
 # basic.c:2530: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
 	st.w	[r0], r1	# *_141, _142
 # basic.c:2531: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
-	mov.w	r1, isalnum	# isalnum.532_143,
+	mov.w	r1, isalnum	# isalnum.531_143,
 # basic.c:2531: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.533_144, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.532_144, K_API_STRING
 	add.w	r0, 72 #111	# _145,
 # basic.c:2531: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
 	add.w	r1, 4 #111	# _146,
 # basic.c:2531: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
 	st.w	[r0], r1	# *_145, _146
 # basic.c:2532: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
-	mov.w	r1, atoi	# atoi.534_147,
+	mov.w	r1, atoi	# atoi.533_147,
 # basic.c:2532: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.535_148, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.534_148, K_API_STRING
 	add.w	r0, 76 #111	# _149,
 # basic.c:2532: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
 	add.w	r1, 4 #111	# _150,
 # basic.c:2532: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
 	st.w	[r0], r1	# *_149, _150
 # basic.c:2533: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
-	mov.w	r1, isspace	# isspace.536_151,
+	mov.w	r1, isspace	# isspace.535_151,
 # basic.c:2533: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.537_152, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.536_152, K_API_STRING
 	add.w	r0, 80 #111	# _153,
 # basic.c:2533: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
 	add.w	r1, 4 #111	# _154,
 # basic.c:2533: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
 	st.w	[r0], r1	# *_153, _154
 # basic.c:2534: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
-	mov.w	r1, memcmp	# memcmp.538_155,
+	mov.w	r1, memcmp	# memcmp.537_155,
 # basic.c:2534: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.539_156, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.538_156, K_API_STRING
 	add.w	r0, 84 #111	# _157,
 # basic.c:2534: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
 	add.w	r1, 4 #111	# _158,
 # basic.c:2534: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
 	st.w	[r0], r1	# *_157, _158
 # basic.c:2535: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
-	mov.w	r1, strtok	# strtok.540_159,
+	mov.w	r1, strtok	# strtok.539_159,
 # basic.c:2535: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.541_160, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.540_160, K_API_STRING
 	add.w	r0, 88 #111	# _161,
 # basic.c:2535: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
 	add.w	r1, 4 #111	# _162,
 # basic.c:2535: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
 	st.w	[r0], r1	# *_161, _162
 # basic.c:2536: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
-	mov.w	r1, strchr	# strchr.542_163,
+	mov.w	r1, strchr	# strchr.541_163,
 # basic.c:2536: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.543_164, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.542_164, K_API_STRING
 	add.w	r0, 92 #111	# _165,
 # basic.c:2536: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
 	add.w	r1, 4 #111	# _166,
 # basic.c:2536: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
 	st.w	[r0], r1	# *_165, _166
 # basic.c:2537: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
-	mov.w	r1, strrchr	# strrchr.544_167,
+	mov.w	r1, strrchr	# strrchr.543_167,
 # basic.c:2537: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.545_168, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.544_168, K_API_STRING
 	add.w	r0, 96 #111	# _169,
 # basic.c:2537: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
 	add.w	r1, 4 #111	# _170,
 # basic.c:2537: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
 	st.w	[r0], r1	# *_169, _170
 # basic.c:2538: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
-	mov.w	r1, strncasecmp	# strncasecmp.546_171,
+	mov.w	r1, strncasecmp	# strncasecmp.545_171,
 # basic.c:2538: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.547_172, K_API_STRING
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.546_172, K_API_STRING
 	add.w	r0, 100 #111	# _173,
 # basic.c:2538: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
 	add.w	r1, 4 #111	# _174,
 # basic.c:2538: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
 	st.w	[r0], r1	# *_173, _174
 # basic.c:2540: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
-	mov.w	r1, sprintf	# sprintf.548_175,
+	mov.w	r1, sprintf	# sprintf.547_175,
 # basic.c:2540: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
-	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.549_176, K_API_SPRINTF
+	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.548_176, K_API_SPRINTF
 # basic.c:2540: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
 	add.w	r1, 4 #111	# _177,
 # basic.c:2540: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
-	st.w	[r0], r1	# *K_API_SPRINTF.549_176, _177
+	st.w	[r0], r1	# *K_API_SPRINTF.548_176, _177
 # basic.c:2541: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
-	mov.w	r1, vsprintf	# vsprintf.550_178,
+	mov.w	r1, vsprintf	# vsprintf.549_178,
 # basic.c:2541: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
-	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.551_179, K_API_SPRINTF
+	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.550_179, K_API_SPRINTF
 	add.w	r0, 4 #111	# _180,
 # basic.c:2541: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
 	add.w	r1, 4 #111	# _181,
 # basic.c:2541: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
 	st.w	[r0], r1	# *_180, _181
 # basic.c:2543: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
-	mov.w	r1, pixel	# pixel.552_182,
+	mov.w	r1, pixel	# pixel.551_182,
 # basic.c:2543: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.553_183, K_API_GRAPHICS
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.552_183, K_API_GRAPHICS
 # basic.c:2543: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
 	add.w	r1, 4 #111	# _184,
 # basic.c:2543: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
-	st.w	[r0], r1	# *K_API_GRAPHICS.553_183, _184
+	st.w	[r0], r1	# *K_API_GRAPHICS.552_183, _184
 # basic.c:2544: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
-	mov.w	r1, line	# line.554_185,
+	mov.w	r1, line	# line.553_185,
 # basic.c:2544: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.555_186, K_API_GRAPHICS
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.554_186, K_API_GRAPHICS
 	add.w	r0, 4 #111	# _187,
 # basic.c:2544: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
 	add.w	r1, 4 #111	# _188,
 # basic.c:2544: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
 	st.w	[r0], r1	# *_187, _188
 # basic.c:2545: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
-	mov.w	r1, circle	# circle.556_189,
+	mov.w	r1, circle	# circle.555_189,
 # basic.c:2545: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.557_190, K_API_GRAPHICS
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.556_190, K_API_GRAPHICS
 	add.w	r0, 8 #111	# _191,
 # basic.c:2545: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
 	add.w	r1, 4 #111	# _192,
 # basic.c:2545: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
 	st.w	[r0], r1	# *_191, _192
 # basic.c:2546: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
-	mov.w	r1, draw	# draw.558_193,
+	mov.w	r1, draw	# draw.557_193,
 # basic.c:2546: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.559_194, K_API_GRAPHICS
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.558_194, K_API_GRAPHICS
 	add.w	r0, 12 #111	# _195,
 # basic.c:2546: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
 	add.w	r1, 4 #111	# _196,
 # basic.c:2546: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
 	st.w	[r0], r1	# *_195, _196
 # basic.c:2548: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
-	mov.w	r1, init_spi	# init_spi.560_197,
+	mov.w	r1, init_spi	# init_spi.559_197,
 # basic.c:2548: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.561_198, K_API_SPI
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.560_198, K_API_SPI
 # basic.c:2548: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
 	add.w	r1, 4 #111	# _199,
 # basic.c:2548: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
-	st.w	[r0], r1	# *K_API_SPI.561_198, _199
+	st.w	[r0], r1	# *K_API_SPI.560_198, _199
 # basic.c:2549: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
-	mov.w	r1, deinit_spi	# deinit_spi.562_200,
+	mov.w	r1, deinit_spi	# deinit_spi.561_200,
 # basic.c:2549: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.563_201, K_API_SPI
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.562_201, K_API_SPI
 	add.w	r0, 4 #111	# _202,
 # basic.c:2549: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
 	add.w	r1, 4 #111	# _203,
 # basic.c:2549: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
 	st.w	[r0], r1	# *_202, _203
 # basic.c:2550: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
-	mov.w	r1, send_spi	# send_spi.564_204,
+	mov.w	r1, send_spi	# send_spi.563_204,
 # basic.c:2550: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.565_205, K_API_SPI
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.564_205, K_API_SPI
 	add.w	r0, 8 #111	# _206,
 # basic.c:2550: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
 	add.w	r1, 4 #111	# _207,
 # basic.c:2550: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
 	st.w	[r0], r1	# *_206, _207
 # basic.c:2551: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
-	mov.w	r1, read_spi	# read_spi.566_208,
+	mov.w	r1, read_spi	# read_spi.565_208,
 # basic.c:2551: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.567_209, K_API_SPI
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.566_209, K_API_SPI
 	add.w	r0, 12 #111	# _210,
 # basic.c:2551: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
 	add.w	r1, 4 #111	# _211,
 # basic.c:2551: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
 	st.w	[r0], r1	# *_210, _211
 # basic.c:2552: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
-	mov.w	r1, SPI_Byte	# SPI_Byte.568_212,
+	mov.w	r1, SPI_Byte	# SPI_Byte.567_212,
 # basic.c:2552: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.569_213, K_API_SPI
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.568_213, K_API_SPI
 	add.w	r0, 16 #111	# _214,
 # basic.c:2552: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
 	add.w	r1, 4 #111	# _215,
@@ -8427,25 +8417,25 @@ main:
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
 # basic.c:2560: 	program_start = program;
-	ld.w	r0, [program]	# program.570_1, program
-	st.w	[program_start], r0	# program_start, program.570_1
+	ld.w	r0, [program]	# program.569_1, program
+	st.w	[program_start], r0	# program_start, program.569_1
 # basic.c:2561: 	program_end = program_start;
-	ld.w	r0, [program_start]	# program_start.571_2, program_start
-	st.w	[program_end], r0	# program_end, program_start.571_2
+	ld.w	r0, [program_start]	# program_start.570_2, program_start
+	st.w	[program_end], r0	# program_end, program_start.570_2
 # basic.c:2562: 	bsp = program + kRamSize;  // Needed for printnum
-	ld.w	r0, [program]	# program.572_3, program
+	ld.w	r0, [program]	# program.571_3, program
 	mov.w	r1, 65536	# tmp48,
 	add.w	r0, r1 #222	# _4, tmp48
 # basic.c:2562: 	bsp = program + kRamSize;  // Needed for printnum
 	st.w	[bsp], r0	# bsp, _4
 # basic.c:2563: 	stack_limit = program + kRamSize - STACK_SIZE;
-	ld.w	r0, [program]	# program.573_5, program
+	ld.w	r0, [program]	# program.572_5, program
 	mov.w	r1, 65336	# tmp49,
 	add.w	r0, r1 #222	# _6, tmp49
 # basic.c:2563: 	stack_limit = program + kRamSize - STACK_SIZE;
 	st.w	[stack_limit], r0	# stack_limit, _6
 # basic.c:2564: 	variables_begin = stack_limit - 28 * VAR_SIZE;
-	ld.w	r0, [stack_limit]	# stack_limit.574_7, stack_limit
+	ld.w	r0, [stack_limit]	# stack_limit.573_7, stack_limit
 	add.w	r0, -112 #111	# _8,
 # basic.c:2564: 	variables_begin = stack_limit - 28 * VAR_SIZE;
 	st.w	[variables_begin], r0	# variables_begin, _8
@@ -8465,9 +8455,9 @@ main:
 	mov.w	r0, 1	# tmp53,
 	st.w	[color], r0	# color, tmp53
 # basic.c:2574: 	cls(color);
-	ld.w	r0, [color]	# color.575_9, color
+	ld.w	r0, [color]	# color.574_9, color
 	mov.w	r1, sp	# tmp54,
-	st.w	[r1], r0	#, color.575_9
+	st.w	[r1], r0	#, color.574_9
 	call	cls		#
 # basic.c:2575: 	uart_init_files();
 	call	uart_init_files		#
@@ -8514,10 +8504,10 @@ main:
 # basic.c:2602: 		ignore_blanks();
 	call	ignore_blanks		#
 # basic.c:2604: 		if (linenum == 0)
-	ld.w	r1, [linenum]	# linenum.576_11, linenum
+	ld.w	r1, [linenum]	# linenum.575_11, linenum
 # basic.c:2604: 		if (linenum == 0)
 	xor.w	r0, r0	# tmp61
-	cmp.w	r1, r0	# linenum.576_11, tmp61
+	cmp.w	r1, r0	# linenum.575_11, tmp61
 	jnz	.L508		#
 .L514:
 # basic.c:2607: 				res = direct();
@@ -8538,7 +8528,7 @@ main:
 	cmp.w	r1, r0	# tmp64, tmp65
 	jnz	.L511		#
 # basic.c:2612: 					txtpos = current_line + sizeof(LINENUM) + sizeof(char);
-	ld.w	r0, [current_line]	# current_line.577_12, current_line
+	ld.w	r0, [current_line]	# current_line.576_12, current_line
 	add.w	r0, 5 #111	# _13,
 # basic.c:2612: 					txtpos = current_line + sizeof(LINENUM) + sizeof(char);
 	st.w	[txtpos], r0	# txtpos, _13
@@ -8548,23 +8538,23 @@ main:
 # basic.c:2615: 				ignore_blanks();
 	call	ignore_blanks		#
 # basic.c:2616: 				if (*txtpos == NL || *txtpos != ':')
-	ld.w	r0, [txtpos]	# txtpos.578_14, txtpos
-	ld.b	r0, [r0]	# _15, *txtpos.578_14
+	ld.w	r0, [txtpos]	# txtpos.577_14, txtpos
+	ld.b	r0, [r0]	# _15, *txtpos.577_14
 # basic.c:2616: 				if (*txtpos == NL || *txtpos != ':')
 	zex.b	r1, r0	# tmp66, _15
 	mov.w	r0, 10	# tmp67,
 	cmp.w	r1, r0	# tmp66, tmp67
 	jz	.L516		#
 # basic.c:2616: 				if (*txtpos == NL || *txtpos != ':')
-	ld.w	r0, [txtpos]	# txtpos.579_16, txtpos
-	ld.b	r0, [r0]	# _17, *txtpos.579_16
+	ld.w	r0, [txtpos]	# txtpos.578_16, txtpos
+	ld.b	r0, [r0]	# _17, *txtpos.578_16
 # basic.c:2616: 				if (*txtpos == NL || *txtpos != ':')
 	zex.b	r1, r0	# tmp68, _17
 	mov.w	r0, 58	# tmp69,
 	cmp.w	r1, r0	# tmp68, tmp69
 	jnz	.L516		#
 # basic.c:2618: 				txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.580_18, txtpos
+	ld.w	r0, [txtpos]	# txtpos.579_18, txtpos
 	add.w	r0, 1 #111	# _19,
 	st.w	[txtpos], r0	# txtpos, _19
 # basic.c:2619: 				ignore_blanks();
@@ -8574,10 +8564,10 @@ main:
 	j	.L514		#
 .L508:
 # basic.c:2622: 		else if (linenum == 0xFFFF)
-	ld.w	r1, [linenum]	# linenum.581_20, linenum
+	ld.w	r1, [linenum]	# linenum.580_20, linenum
 # basic.c:2622: 		else if (linenum == 0xFFFF)
 	mov.w	r0, 65535	# tmp70,
-	cmp.w	r1, r0	# linenum.581_20, tmp70
+	cmp.w	r1, r0	# linenum.580_20, tmp70
 	jnz	.L515		#
 # basic.c:2624: 			qhow();
 	call	qhow		#

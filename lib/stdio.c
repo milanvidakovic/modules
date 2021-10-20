@@ -66,11 +66,13 @@ int swap(int c) {
 		default: return c;
 	}
 }
-void cls(int color) 
+void cls(int c) 
 {
 	int i;
 	short *v;
 	
+	color = c;
+
 	v = (short *)1024;
 	if (current_video_mode == 0)
 	{
@@ -299,6 +301,8 @@ void put_char(int c)
 			i = 59;
 		}
 		VIDEO = (char *)(1024 + (i * 160) - 1);
+		VIDEO += 2;
+		return;
 	} else {
 		i = (int)VIDEO;
 		i = (i - 1024) / 160;
@@ -312,7 +316,9 @@ void put_char(int c)
 			}
 		}
 	}
-	*VIDEO = c + 0xFF00;
+//	*VIDEO = c + 0xFF00;
+	*VIDEO = c;
+	*(VIDEO - 1) = swap(color);
 	VIDEO += 2;
 }
 int putchar(int c)

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <consts.h>
 
 int  MaxN = 2000;
 
@@ -8,6 +9,10 @@ int *zx = (int *)520000; //[2000];
 int *zy = (int *)530000; //[2000];
 int N; // duzina tela zmije 
 int smer; // 0 - gore, 1 - desno, 2 - dole, 3 - levo
+#define GORE  0
+#define DESNO 1
+#define DOLE  2
+#define LEVO  3
 
 // Ostali parametri
 int Poeni;
@@ -42,7 +47,7 @@ void IscrtajOkvir()
 {
 	int i, j;
 	
-  cls(0);
+  cls(color);
   xy(1, 2);
   printf("+");
   for (i = 1; i <= 78; i++) printf("-");
@@ -79,19 +84,19 @@ void InicijalizujZmiju()
   smer  = SlucajanBroj(0, 3);
   switch(smer)
   {
-  	case 0: 
+  	case GORE: 
       zx[i1] = zx[i0]; zy[i1] = zy[i0] + 1;
       zx[i2] = zx[i0]; zy[i2] = zy[i0] + 2;
       break;
-  	case 1:
+  	case DESNO:
       zy[i1] = zy[i0]; zx[i1] = zx[i0] - 1;
       zy[i2] = zy[i0]; zx[i2] = zx[i0] - 2;
       break;
-  	case 2:
+  	case DOLE:
       zx[i1] = zx[i0]; zy[i1] = zy[i0] - 1;
       zx[i2] = zx[i0]; zy[i2] = zy[i0] - 2;
       break;
-  	case 3:
+  	case LEVO:
       zy[i1] = zy[i0]; zx[i1] = zx[i0] + 1;
       zy[i2] = zy[i0]; zx[i2] = zx[i0] + 2;
       break;
@@ -112,10 +117,10 @@ void IzracunajPolozajGlave(int *x, int *y)
 {
   switch(smer)
   {
-  	case 0: {*x = zx[0]; 		 *y = zy[0] - 1; 	break;}
-  	case 1: {*x = zx[0] + 1; *y = zy[0]; 			break;}
-  	case 2: {*x = zx[0]; 		 *y = zy[0] + 1; 	break;}
-  	case 3: {*x = zx[0] - 1; *y = zy[0]; 			break;}
+  	case GORE: {*x = zx[0]; 		 *y = zy[0] - 1; 	break;}
+  	case DESNO: {*x = zx[0] + 1; *y = zy[0]; 			break;}
+  	case DOLE: {*x = zx[0]; 		 *y = zy[0] + 1; 	break;}
+  	case LEVO: {*x = zx[0] - 1; *y = zy[0]; 			break;}
   }
 }
 
@@ -189,29 +194,31 @@ int KrajIgre()
 
   ch = 0;
   flop = 1;
-  while (ch != 13)
+  while (ch != VK_ENTER)
   {
     xy(40, 1);
     if (flop) 
       printf("!!! KRAJ IGRE [ENTER]/ESC !!!");
     else
-      printf("                         ");
+      printf("                              ");
     flop = !flop;
     ch = is_key_pressed();
-    if (ch == 27)
+    if (ch == VK_ESC)
     	return 1;
     delay(200);
   }
   xy(40, 1);
-  printf("                            ");
+  printf("                                ");
   return 0;
 }
 
 int main()
 {
 	init_stdio();
-	current_video_mode = 0;
-	video_mode(0);
+	//current_video_mode = 0;
+	//video_mode(0);
+  color = 0;
+  cls(color);
 
 	while (1) 
 	{
@@ -227,18 +234,22 @@ int main()
 	  while (!kraj)
 	  {
 	      c = is_key_pressed();
-	      if ((c == 4000) && (smer != 2)) smer = 0;
-	      else if ((c == 4001) && (smer != 1)) smer = 3;
-	      else if ((c == 4002) && (smer != 0)) smer = 2;
-	      else if ((c == 4003) && (smer != 3)) smer = 1;
+	      if ((c == VK_UP_ARROW) && (smer != DOLE)) smer = GORE;
+	      else if ((c == VK_LEFT_ARROW) && (smer != DESNO)) smer = LEVO;
+	      else if ((c == VK_DOWN_ARROW) && (smer != GORE)) smer = DOLE;
+	      else if ((c == VK_RIGHT_ARROW) && (smer != LEVO)) smer = DESNO;
+        else if (c == VK_ESC) 
+        {
+          if (KrajIgre())
+            return 0;
+        }
 	    	PomeriZmiju();
 	    	delay(Usporenje);
 	  }
 	  if (KrajIgre())
 	  	break;
-	  printf("%%%%%%%%%%%%%%");
 	}
-  asm("mov.w r1, 1024\nmov.w r2, 1184\nmov.w r3, 9440\nblit\n");
+  //asm("mov.w r1, 1024\nmov.w r2, 1184\nmov.w r3, 9440\nblit\n");
 }
 
 

@@ -165,7 +165,6 @@ void dma_1_irq_triggered()
 
 uint8_t dma_receive(uint8_t *dst, uint16_t count)
 {
-    asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
     int counter = 0;
     finished_dma_read_1 = 0;
     *PORT_DMA_ADDR_1 = (unsigned int)dst;
@@ -178,7 +177,6 @@ uint8_t dma_receive(uint8_t *dst, uint16_t count)
         return false;
       }
     }
-    asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
     return true;
 }
 
@@ -199,11 +197,13 @@ uint8_t readData(uint32_t block,
   uint16_t roffset = offset_;
   int fail_counter = 0;
 
+  asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+
 spi_read_again:
   block = rblock;
   offset_ = roffset;
 
-  if (count == 0) return true;
+  if (count == 0) goto read_end;
   if ((count + offset) > 512) {
     // printf("BLAST0!");
     goto fail;
@@ -293,6 +293,9 @@ spi_read_again:
     readEnd();
   }
 
+read_end:
+  asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
+
   return true;
 
  fail:
@@ -309,6 +312,8 @@ spi_read_again:
   #if FAT_DEBUG
   printf("read data error code: %d\n", errorCode_);
   #endif
+
+  asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
   return false;
 }
 

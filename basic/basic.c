@@ -1497,7 +1497,6 @@ void exec_load()
 	
 	if (i > 0)
 	{
-		program_end = program_start;
 		printf("File size: %d\n", i);
 		if (strstr(s, ".BIN") != (char *)0) 
 		{
@@ -1508,6 +1507,7 @@ void exec_load()
 			printf("Loaded successfuly at address 0 (reachable by PEEK and POKE).\n");
 			return;
 		}
+		program_end = program_start;
 		k = 0;
 		for (j = 0; j <= i; j++)
 		{
@@ -2155,7 +2155,7 @@ void exec_exec()
 	}	
 	
 	//printf("address of txtpos: %d\n", txtpos);
-	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && i < 32; i++)
+	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	{
 		//printf("txtpos: %d ", txtpos[i]);
 		s[i] = txtpos[i];
@@ -2163,7 +2163,7 @@ void exec_exec()
 	s[i] = 0;
 
 	i = 0;
-	printf("Loading program: %s\n", s);
+	printf("Loading program: [%s]\n", s);
 	if (drive == 0)
 	{
 		// DRIVE 0 - SD card
@@ -2189,6 +2189,11 @@ void exec_exec()
 
 			buffer[len] = 0;
 			i = len;
+		} 
+		else 
+		{
+			printf("File open failed for file: [%s]\n", s);
+			return;
 		}
 	}
 	else if (drive == 2)

@@ -2295,7 +2295,7 @@ int switch_to_play_screen()
 	sw_sprite* alien_row;
 	int alien_sprite_width = 0;
 
-	// Spwan-ovanje alien-a.
+	// Spawn-ovanje alien-a.
 	for(int j = ROW_5_OCTOPUS; j >= ROW_1_SQUID; j--)
 	{
 
@@ -2838,7 +2838,7 @@ int switch_to_play_screen()
 			}
 		}
 
-		// Provera key-eva i mis-a
+		// Provera key-eva
 		if(player_alive == 2)
 		{
 
@@ -2906,9 +2906,6 @@ int main()
 
 	cls(0);	
 
-	//int start = get_millis();
-	//asm("push r1\npush r2\n push r3\nmov.w r1, 1024\nmov.w r2, 9024\nmov.w r3, 30000\nblit\npop r3\npop r2\npop r1\n");
-
 	copy_player_bullet_def();
 	int shouldExit = 0;
 	while(1)
@@ -2928,6 +2925,8 @@ int main()
 		if (shouldExit == 1)
 			break;
 	}
+	player_ship->addr = 0;
+	player_bullet_def ->addr = 0;
 	cls(0);
 	return 0;
 }

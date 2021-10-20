@@ -2,8 +2,8 @@
 # GNU C17 (GCC) version 10.0.0 20200111 (experimental) (moxiebox)
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
-# options passed:  -D KERNEL spaceinvaders.c -mel
-# -auxbase-strip spaceinvaders.s -fsigned-char -fverbose-asm
+# options passed:  spaceinvaders.c -mel -auxbase-strip spaceinvaders.s
+# -fsigned-char -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
 # -fauto-inc-dec -fdelete-null-pointer-checks -fearly-inlining
 # -feliminate-unused-debug-symbols -feliminate-unused-debug-types
@@ -12395,34 +12395,34 @@ main:
 # spaceinvaders.c:2904: 	init_stdio();
 	call	init_stdio		#
 # spaceinvaders.c:2905: 	video_mode(1);
-	mov.w	r1, sp	# tmp29,
-	mov.w	r0, 1	# tmp30,
-	st.w	[r1], r0	#, tmp30
+	mov.w	r1, sp	# tmp31,
+	mov.w	r0, 1	# tmp32,
+	st.w	[r1], r0	#, tmp32
 	call	video_mode		#
 # spaceinvaders.c:2907: 	cls(0);	
-	mov.w	r1, sp	# tmp31,
-	xor.w	r0, r0	# tmp32
-	st.w	[r1], r0	#, tmp32
+	mov.w	r1, sp	# tmp33,
+	xor.w	r0, r0	# tmp34
+	st.w	[r1], r0	#, tmp34
 	call	cls		#
 # spaceinvaders.c:2912: 	copy_player_bullet_def();
 	call	copy_player_bullet_def		#
 # spaceinvaders.c:2913: 	int shouldExit = 0;
-	xor.w	r0, r0	# tmp33
-	st.w	[r13 + (-4)], r0	# shouldExit, tmp33
+	xor.w	r0, r0	# tmp35
+	st.w	[r13 + (-4)], r0	# shouldExit, tmp35
 .L534:
 # spaceinvaders.c:2916: 		switch(current_screen)
 	ld.w	r0, [current_screen]	# current_screen.303_1, current_screen
-	mov.w	r1, 2	# tmp34,
-	cmp.w	r0, r1	# current_screen.303_1, tmp34
-	jz	.L528		#
-	mov.w	r1, 2	# tmp35,
-	cmp.w	r0, r1	# current_screen.303_1, tmp35
-	jgs	.L529		#
-	xor.w	r1, r1	# tmp36
+	mov.w	r1, 2	# tmp36,
 	cmp.w	r0, r1	# current_screen.303_1, tmp36
-	jz	.L530		#
-	mov.w	r1, 1	# tmp37,
+	jz	.L528		#
+	mov.w	r1, 2	# tmp37,
 	cmp.w	r0, r1	# current_screen.303_1, tmp37
+	jgs	.L529		#
+	xor.w	r1, r1	# tmp38
+	cmp.w	r0, r1	# current_screen.303_1, tmp38
+	jz	.L530		#
+	mov.w	r1, 1	# tmp39,
+	cmp.w	r0, r1	# current_screen.303_1, tmp39
 	jz	.L531		#
 	j	.L529		#
 .L530:
@@ -12445,23 +12445,33 @@ main:
 	nop	
 .L529:
 # spaceinvaders.c:2928: 		if (shouldExit == 1)
-	ld.w	r1, [r13 + (-4)]	# tmp38, shouldExit
-	mov.w	r0, 1	# tmp39,
-	cmp.w	r1, r0	# tmp38, tmp39
+	ld.w	r1, [r13 + (-4)]	# tmp40, shouldExit
+	mov.w	r0, 1	# tmp41,
+	cmp.w	r1, r0	# tmp40, tmp41
 	jz	.L537		#
 # spaceinvaders.c:2916: 		switch(current_screen)
 	j	.L534		#
 .L537:
 # spaceinvaders.c:2929: 			break;
 	nop	
-# spaceinvaders.c:2931: 	cls(0);
-	mov.w	r1, sp	# tmp40,
-	xor.w	r0, r0	# tmp41
-	st.w	[r1], r0	#, tmp41
+# spaceinvaders.c:2931: 	player_ship->addr = 0;
+	ld.w	r0, [player_ship]	# player_ship.304_2, player_ship
+# spaceinvaders.c:2931: 	player_ship->addr = 0;
+	xor.w	r1, r1	# tmp42
+	st.s	[r0], r1	# player_ship.304_2->addr, tmp42
+# spaceinvaders.c:2932: 	player_bullet_def ->addr = 0;
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.305_3, player_bullet_def
+# spaceinvaders.c:2932: 	player_bullet_def ->addr = 0;
+	xor.w	r1, r1	# tmp43
+	st.s	[r0], r1	# player_bullet_def.305_3->addr, tmp43
+# spaceinvaders.c:2933: 	cls(0);
+	mov.w	r1, sp	# tmp44,
+	xor.w	r0, r0	# tmp45
+	st.w	[r1], r0	#, tmp45
 	call	cls		#
-# spaceinvaders.c:2932: 	return 0;
-	xor.w	r0, r0	# _19
-# spaceinvaders.c:2933: }
+# spaceinvaders.c:2934: 	return 0;
+	xor.w	r0, r0	# _23
+# spaceinvaders.c:2935: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	

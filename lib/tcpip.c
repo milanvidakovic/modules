@@ -96,6 +96,8 @@ uint16_t delaycnt = 0; //request gateway ARP lookup
 uint16_t bufferSize; //!< Size of data buffer
 uint8_t broadcast_enabled; //!< True if broadcasts enabled (used to allow temporary disable of broadcast for DHCP or other internal functions)
 uint8_t promiscuous_enabled; //!< True if promiscuous mode enabled (used to allow temporary disable of promiscuous mode)
+
+
 uint8_t* tcpOffset () { return gPB + 0x36; } //!< Pointer to the start of TCP payload
 
 
@@ -916,25 +918,6 @@ uint8_t clientTcpReq (uint8_t (*result_cb)(uint8_t,uint8_t,uint16_t,uint16_t),
     return 0;
 }
 
-void browseUrl ( char *urlbuf,  char *urlbuf_varpart,  char *hoststr,  char *additionalheaderline, void (*callback)(uint8_t,uint16_t,uint16_t)) {
-    client_urlbuf = urlbuf;
-    client_urlbuf_var = urlbuf_varpart;
-    client_hoststr = hoststr;
-    client_additionalheaderline = additionalheaderline;
-    client_postval = 0;
-    client_browser_cb = callback;
-    www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
-}
-
-void httpPost ( char *urlbuf,  char *hoststr,  char *additionalheaderline,  char *postval, void (*callback)(uint8_t,uint16_t,uint16_t)) {
-    client_urlbuf = urlbuf;
-    client_hoststr = hoststr;
-    client_additionalheaderline = additionalheaderline;
-    client_postval = postval;
-    client_browser_cb = callback;
-    www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
-}
-
  uint16_t tcp_datafill_cb(uint8_t fd) {
     /*
     uint16_t len = Stash::length();
@@ -1265,3 +1248,69 @@ uint16_t packetLoop (uint16_t plen) {
 void persistTcpConnection(uint8_t persist) {
     persist_tcp_connection = persist;
 }
+
+
+#ifdef KERNEL
+void init_tcpip()
+{
+	enc28j60Init(MYMAC);
+
+	//printf("rev: %d\n", enc28j60getrev());
+	//printf("is link up: %d\n", isLinkUp());
+	if (isLinkUp())
+	{
+		tcpipBegin(1500, eth_buffer, MYMAC);
+		staticSetup(MYIP, GWIP, DNSIP, MASK);
+		parseIp(hisip, server_ip);
+		//printf("%d.%d.%d.%d\n", hisip[0], hisip[1], hisip[2], hisip[3]); 
+	} else 
+	{
+		printf("No ethernet link available\n.");
+	}
+}
+
+void browseUrl ( char *urlbuf,  char *urlbuf_varpart,  char *hoststr,  char *additionalheaderline, void (*callback)(uint8_t,uint16_t,uint16_t)) {
+    client_urlbuf = urlbuf;
+    client_urlbuf_var = urlbuf_varpart;
+    client_hoststr = hoststr;
+    client_additionalheaderline = additionalheaderline;
+    client_postval = 0;
+    client_browser_cb = callback;
+    www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
+}
+
+void httpPost ( char *urlbuf,  char *hoststr,  char *additionalheaderline,  char *postval, void (*callback)(uint8_t,uint16_t,uint16_t)) {
+    client_urlbuf = urlbuf;
+    client_hoststr = hoststr;
+    client_additionalheaderline = additionalheaderline;
+    client_postval = postval;
+    client_browser_cb = callback;
+    www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
+}
+
+uint16_t mainLoop(uint8_t * eth_buffer)
+{
+    return packetLoop(enc28j60PacketReceive(1500, eth_buffer));
+}
+
+#else
+
+void init_tcpip()
+{
+	asm("ld.w r0, [190600]\njr r0\n");
+}
+void browseUrl ( char *urlbuf,  char *urlbuf_varpart,  char *hoststr,  char *additionalheaderline, void (*callback)(uint8_t,uint16_t,uint16_t)) 
+{
+	asm("ld.w r0, [190604]\njr r0\n");
+}
+void httpPost ( char *urlbuf,  char *hoststr,  char *additionalheaderline,  char *postval, void (*callback)(uint8_t,uint16_t,uint16_t)) 
+{
+	asm("ld.w r0, [190608]\njr r0\n");
+}
+uint16_t mainLoop(uint8_t * eth_buffer)
+{
+	asm("ld.w r0, [190612]\njr r0\n");
+}
+
+#endif
+

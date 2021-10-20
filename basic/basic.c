@@ -9,7 +9,7 @@
 #include <keyboard.h>
 #include <spi.h>
 #include <fat.h>
-#include <enc28j60.h>
+//#include <enc28j60.h>
 #include <tcpip.h>
 #include <kernel.h>
 
@@ -225,24 +225,6 @@ const char relop_tab[] = {
 #define RELOP_OR		8
 #define RELOP_UNKNOWN	9
 
-
-void init_eth()
-{
-	enc28j60Init(MYMAC);
-
-	//printf("rev: %d\n", enc28j60getrev());
-	//printf("is link up: %d\n", isLinkUp());
-	if (isLinkUp())
-	{
-		tcpipBegin(1500, eth_buffer, MYMAC);
-		staticSetup(MYIP, GWIP, DNSIP, MASK);
-		parseIp(hisip, server_ip);
-		//printf("%d.%d.%d.%d\n", hisip[0], hisip[1], hisip[2], hisip[3]); 
-	} else 
-	{
-		printf("No ethernet link available\n.");
-	}
-}
 
 void getln(int prompt)
 {
@@ -1368,7 +1350,7 @@ int eth_read_file(char *buffer, char *file_name)
 	browseUrl("/load:", file_name, server_ip, 0, my_callback);
 //	delay(100);
 	while (len < size) {
-		packetLoop(enc28j60PacketReceive(1500, eth_buffer));
+		mainLoop(eth_buffer);
 		//printf("<%d>[%d] %d %d %d %d\n", to_print_off, to_print_len, eth_buffer[to_print_off], eth_buffer[to_print_off + 1], eth_buffer[to_print_off + 2], eth_buffer[to_print_off + 3]);
 		if (to_print_len > 0) {
 			if (size == 1000000) {
@@ -1426,7 +1408,7 @@ asm(
 	asm("push r13\npush r13\n");
 
 	if (eth)
-		packetLoop(enc28j60PacketReceive(1500, eth_buffer));
+		mainLoop(eth_buffer);
 
 	// restore the stack before returning
 	asm("pop r13\npop r13\n");
@@ -2228,7 +2210,7 @@ void exec_exec()
 		//current_video_mode = 0;
 		uart_init_files();
 		init_spi();
-		init_eth();
+		init_tcpip();
 		init_sd();
 	} 
 	else 
@@ -2258,7 +2240,7 @@ void exec_sys()
 	//current_video_mode = 0;
 	uart_init_files();
 	init_spi();
-	init_eth();
+	init_tcpip();
 	init_sd();
 }
 
@@ -2551,6 +2533,21 @@ void init_K_API() {
 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
 
+	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
+	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
+	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
+	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
+
+	
+	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
+	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
+	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
+	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
+	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
+	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
+	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
+	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
+	
 }
 
 int main()
@@ -2575,8 +2572,7 @@ int main()
 	uart_init_files();
 	init_spi();
 	init_sd();
-
-	init_eth();
+	init_tcpip();
 
 	exec_mem();
 

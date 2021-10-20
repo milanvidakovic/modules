@@ -396,71 +396,6 @@ fail:
 //------------------------------------------------------------------------------
 
 // SD Card functions
-uint8_t sdcard_init(){
-
-	*DMA_1_HANDLER_INSTR 	= 1;
-	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
-
-  writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
-  // 16-bit init start time allows over a minute
-  uint32_t t0 = (uint32_t)get_millis();
-  uint32_t arg;
-   // must supply min of 74 clock cycles with CS high.
-  for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
-
-  chipSelectLow();
-
-  // command to go idle in SPI mode
-  while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
-    if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
-      error(SD_CARD_ERROR_CMD0);
-      goto fail;
-    }
-  }
- 
-  // check SD version
-  if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
-    type(SD_CARD_TYPE_SD1);
-  } else {
-    // only need last byte of r7 response
-    for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
-    if (status_ != 0XAA) {
-      error(SD_CARD_ERROR_CMD8);
-      goto fail;
-    }
-    type(SD_CARD_TYPE_SD2);
-  }
-  // initialize card and send host supports SDHC if SD2
-  arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
-
-  while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
-    // check for timeout
-    if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
-      error(SD_CARD_ERROR_ACMD41);
-      goto fail;
-    }
-  }
-  // if SD2 read OCR register to check for SDHC card
-  if (get_type() == SD_CARD_TYPE_SD2) {
-    if (cardCommand(CMD58, 0)) {
-      error(SD_CARD_ERROR_CMD58);
-      goto fail;
-    }
-    if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
-    // discard rest of ocr - contains allowed voltage range
-    for (uint8_t i = 0; i < 3; i++) spiRec();
-  }
-  chipSelectHigh();
-
-  return true;
-
-fail:
-  chipSelectHigh();
-  #if FAT_DEBUG
-  printf("################## FAIL: errorCode: %d\n", errorCode_);
-  #endif
-  return false;
-}
 
 // ########################################################################################################
 /** Directory entry is part of a long name */
@@ -525,191 +460,11 @@ uint16_t reverse16(uint16_t bytes)
     return aux;
 }
 
-uint8_t volume_init(uint8_t part) {
-  uint32_t volumeStartBlock = 0;
-  // if part == 0 assume super floppy with FAT boot sector in block zero
-  // if part > 0 assume mbr volume with partition table
-  if (part) {
-    if (part > 4)return false;
-    if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
-    //part_t* p = &cacheBuffer_.mbr.part[part-1];
-    part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
-
-    #if FAT_DEBUG
-    printf("mbr: %d, boot: %d, totalSectors: %d, firstSector: %d\n", &(cacheBuffer_.mbr), &(p->boot), &(p->totalSectors), &(p->firstSector));
-    #endif
-    p->totalSectors = reverse32(p->totalSectors);
-    p->firstSector = reverse32(p->firstSector);
-    #if FAT_DEBUG
-    printf("boot: %d, totalSectors: %x, firstSector: %x\n", p->boot, p->totalSectors, p->firstSector);
-    #endif
-    if ((p->boot & 0X7F) !=0  ||
-      p->totalSectors < 100 ||
-      p->firstSector == 0) {
-      // not a valid partition
-      return false;
-    }
-    volumeStartBlock = p->firstSector;
-  }
-
-  #if FAT_DEBUG
-  printf("volumeStartBlock: %d\n", volumeStartBlock);
-  #endif
-
-  if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
-  //bpb_t* bpb = &cacheBuffer_.fbs.bpb;
-  bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
-  bpb.sectorsPerCluster = cacheBuffer_.data[13];
-  bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
-  bpb.fatCount = cacheBuffer_.data[16];
-  bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
-  bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
-  bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
-  bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
-  bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
-  bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
-
-  #if FAT_DEBUG
-  printf("bytesPerSector: %d, fatCount: %d, sectorsPerCluster: %d\n", bpb.bytesPerSector, bpb.fatCount, bpb.sectorsPerCluster);
-  #endif
-
-  if (bpb.bytesPerSector != 512 ||
-    bpb.fatCount == 0 ||
-    bpb.reservedSectorCount == 0 ||
-    bpb.sectorsPerCluster == 0) {
-       // not valid FAT volume
-      return false;
-  }
-  fatCount_ = bpb.fatCount;
-  blocksPerCluster_ = bpb.sectorsPerCluster;
-
-  // determine shift that is same as multiply by blocksPerCluster_
-  clusterSizeShift_ = 0;
-  while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
-    // error if not power of 2
-    if (clusterSizeShift_++ > 7) return false;
-  }
-  blocksPerFat_ = bpb.sectorsPerFat16 ?
-                    bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
-
-  fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
-  clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
-
-  #if FAT_DEBUG
-  printf("blocksPerCluster: %d       fatStartBlock: %d       clusterSize: %d\n", blocksPerCluster_, fatStartBlock_, clusterSize_);
-  #endif
-
-  // count for FAT16 zero for FAT32
-  rootDirEntryCount_ = bpb.rootDirEntryCount;
-
-  // directory start for FAT16 dataStart for FAT32
-  rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
-
-  // data start for FAT16 and FAT32
-  dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
-
-  #if FAT_DEBUG
-  printf("rootDirEntryCount: %d       rootDirStart: %d      dataStartBlock: %d\n", rootDirEntryCount_, rootDirStart_, dataStartBlock_);
-  #endif
-
-  // total blocks for FAT16 or FAT32
-  uint32_t totalBlocks = bpb.totalSectors16 ?
-                           bpb.totalSectors16 : bpb.totalSectors32;
-  // total data blocks
-  clusterCount_ = totalBlocks - (dataStartBlock_ - volumeStartBlock);
-
-  // divide by cluster size to get cluster count
-  clusterCount_ >>= clusterSizeShift_;
-
-  // FAT type is determined by cluster count
-  if (clusterCount_ < 4085) {
-    fatType_ = 12;
-  } else if (clusterCount_ < 65525) {
-    fatType_ = 16;
-  } else {
-    rootDirStart_ = bpb.fat32RootCluster;
-    fatType_ = 32;
-  }
-  #if FAT_DEBUG
-  printf("totalBlocks: %d       clusterCount: %d      fatType: %d\n", totalBlocks, clusterCount_, fatType_);
-  #endif
-
-  return true;
-}
 
 // ########################################################################################################
 
 uint8_t g_block_buf[512];
 
-uint32_t getDirEntry(file_descriptor_t* fd, uint32_t index)
-{
-  int i,j;
-  uint16_t cluster;
-  uint32_t file_size;
-  uint8_t b;
-  uint8_t *buf = g_block_buf;
-  char filename_upper[12];
-  uint32_t counter = 0;
-
-  for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-  {
-    #if FAT_DEBUG
-    printf("{{%d}} ", i);
-    printf("$$$$$$$$$$$");
-    #endif
-    
-    b = readBlock(rootDirStart_ + i, g_block_buf);
-    
-    #if FAT_DEBUG
-    printf("###########");
-    #endif
-
-    for(j = 0; j < 16; j++)
-    {
-      
-      #if FAT_DEBUG
-      printf("[[%d]] ", j);
-      #endif
-
-      if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
-      { 
-        continue; // free, or deleted file/folder, or phantom entry for long names?
-        if (counter > index)
-          return 0;
-      }
-      
-      if(counter == index)
-      {
-        file_size = *(buf + j*32 + 0x1c);
-        file_size += *(buf + j*32 + 0x1c + 1)<<8;
-        file_size += *(buf + j*32 + 0x1c + 2)<<16;
-        file_size += *(buf + j*32 + 0x1c + 3)<<24;
-        cluster = *(buf + j*32 + 0x1a);
-        cluster += *(buf + j*32 + 0x1a + 1) << 8;
-        cluster += *(buf + j*32 + 0x14 + 0) << 16;
-        cluster += *(buf + j*32 + 0x14 + 1) << 24;
-
-        strncpy(filename_upper, (char*)(buf+j*32), 11);
-        filename_upper[11] = '\0';
-
-        // fill in dir_entry
-        memmove(fd->dir_entry.filename, filename_upper, 12);
-        fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
-        memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
-        fd->dir_entry.filesize = file_size;
-        fd->dir_entry.block = rootDirStart_ + i;
-        fd->dir_entry.slot = j;
-        fd->dir_entry.first_cluster = cluster;
-        fd->curr_cluster = cluster;
-        return counter + 1;
-      } else if (counter > index) {
-        return 0;
-      }
-      counter++;
-    }
-  }
-  return 0;
-}
 
 uint8_t getFile(dir_entry_t* de, uint8_t* buf, char* filename, uint8_t length)
 {
@@ -971,106 +726,6 @@ uint8_t invalidate_dir_entry(dir_entry_t* de, uint8_t* buf)
   return write_dir_entry(de, buf);
 }
 
-/*
-  Deletes a given file.
-*/
-uint8_t file_delete(file_descriptor_t* fd)
-{
-  uint16_t clus = fd->dir_entry.first_cluster;
-
-  do
-  {
-    clus = clear_FAT(g_block_buf, clus);
-    if (!clus)
-    {
-      #if FAT_DEBUG
-      printf("Deleting file failed because there was a 0x00 in its FAT chain!\n");
-      #endif
-      return 0;
-    }
-  } while (clus < 0xfff8);
-  
-  if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
-  {
-    #if FAT_DEBUG
-    printf("Deleting file failed while invalidating directory entry!\n");
-    #endif
-    return 0;
-  }
-  
-  return 1;
-}
-
-/*
- * open a file for reading/writing. File has to be in the root directory.
- * If it does not exist, it will be created. An example argument for _filename_
- * is "test.txt". Filenames will be converted to all uppercase to adhere to the
- * FAT16 standard. _start_pos_ specifies the initial position for file
- * operations. It has to be set to SEEK_START or SEEK_END.
- */
-uint8_t file_open(char* filename, file_descriptor_t* fd, uint8_t mode)
-{
-  char FAT16_filename[12];
-  uint8_t file_exists;
-  int fail_counter = 0;
-
-open_again:
-
-  if (mode != O_READ && mode != O_WRITE)
-  {
-    #if FAT_DEBUG
-    printf("Unknown mode for fopen()!\r\n");
-    #endif
-    return 0;
-  }
-  if (strlen(filename) > 12)
-  {
-    #if FAT_DEBUG
-    printf("long filenames are not supported!\r\n");
-    #endif
-    return 0;
-  }
-  make83Name(filename, FAT16_filename);
-  
-  // make the FAT16-compatible filename
-  //    (must be all caps regardless if the file is not caps, 
-  //    11 chars long, delimited with spaces) 
-  //strcpy(FAT16_filename, str_toupper(filename));
-  
-  file_exists = getFile(&(fd->dir_entry), g_block_buf, FAT16_filename, 11);
-  if (mode == O_WRITE) 
-  {
-    if (file_exists)
-    {
-      if (!file_delete(fd))
-      {
-        #if FAT_DEBUG
-        printf("Delete file failed.\n");
-        #endif
-        goto fail_open;
-      }
-    }
-    // file does not exist, so we can create one
-    if (!create_file(&(fd->dir_entry), FAT16_filename, 11, g_block_buf))
-    {
-      printf("create_file failed.\n");
-      goto fail_open;
-    }
-    file_exists = 1;
-  }
-  
-  fd->curr_cluster = fd->dir_entry.first_cluster;
-  fd->position = 0;
-  
-  return file_exists;
-fail_open:
-  if (++fail_counter < FAIL_COUNTER_MAX)
-  {
-    delay(fail_counter*2);
-    goto open_again;
-  }  
-}
-
 // converts a file offset position to the actual address of the corresponding sector
 uint32_t get_sec_addr(uint16_t cluster, uint32_t position)
 {
@@ -1152,6 +807,325 @@ uint32_t clust2sect (	/* !=0: Sector number, 0: Failed - invalid cluster# */
   //printf("clst: %d, blocksPerCluster: %d, dataStartBlock: %d\n", clst, blocksPerCluster_, dataStartBlock_);
 	clst -= 2;
 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
+}
+
+
+// returns FAT index (cluster number) of first unused cluster found in FAT
+uint16_t get_unused_cluster(uint8_t* buf)
+{
+  uint8_t i,j;
+  uint8_t b; 
+  uint16_t FAT_entry;
+  
+  for (i = 0; i < 256; i++)
+  {
+    b = readBlock(fatStartBlock_ + i, buf);
+    for(j = 0; j < 256 ; j++)
+    {
+      FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+      if(FAT_entry == 0x0000)
+      {
+        #if FAT_DEBUG
+        printf("found unused cluster. FAT index: %x\n", ((i * 256) + j));
+        #endif   
+        return (i * 256) + j;
+      }
+    }
+  }
+  
+  #if FAT_DEBUG
+  printf("Failed to find unused cluster!\n");
+  #endif
+  return 0;
+}
+
+// make FAT[_cluster_] point to cluster _value_
+uint8_t update_FAT(uint8_t* buf, uint16_t cluster, uint16_t value)
+{
+  uint32_t sec_start;
+  uint32_t offset;
+  uint16_t value_rev;
+  
+  sec_start = (cluster * 2) / 512;
+  offset = (cluster * 2) % 512;
+
+  #if FAT_DEBUG
+  printf("Update FAT at: %d, offset: %d, value: %d\n", fatStartBlock_ + sec_start, offset, value);
+  #endif
+
+  if(!readBlock(fatStartBlock_ + sec_start, buf))
+  { 
+    #if FAT_DEBUG
+    printf("Problem updating FAT!\n");
+    #endif
+    return 0;
+  }
+  value_rev = reverse16(value);
+  memmove(buf + offset, &value_rev, 2);
+  if (!writeBlock(fatStartBlock_+ sec_start, buf, 1))
+  {
+    #if FAT_DEBUG
+    printf("Problem updating FAT!\n");
+    #endif
+    return 0;
+  }
+  
+  return 1;
+}
+
+
+
+// #######################################################################################################
+
+#ifdef KERNEL
+
+uint8_t sdcard_init(){
+
+	*DMA_1_HANDLER_INSTR 	= 1;
+	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
+
+  writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
+  // 16-bit init start time allows over a minute
+  uint32_t t0 = (uint32_t)get_millis();
+  uint32_t arg;
+   // must supply min of 74 clock cycles with CS high.
+  for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+
+  chipSelectLow();
+
+  // command to go idle in SPI mode
+  while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
+    if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+      error(SD_CARD_ERROR_CMD0);
+      goto fail;
+    }
+  }
+ 
+  // check SD version
+  if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
+    type(SD_CARD_TYPE_SD1);
+  } else {
+    // only need last byte of r7 response
+    for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+    if (status_ != 0XAA) {
+      error(SD_CARD_ERROR_CMD8);
+      goto fail;
+    }
+    type(SD_CARD_TYPE_SD2);
+  }
+  // initialize card and send host supports SDHC if SD2
+  arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
+
+  while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
+    // check for timeout
+    if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+      error(SD_CARD_ERROR_ACMD41);
+      goto fail;
+    }
+  }
+  // if SD2 read OCR register to check for SDHC card
+  if (get_type() == SD_CARD_TYPE_SD2) {
+    if (cardCommand(CMD58, 0)) {
+      error(SD_CARD_ERROR_CMD58);
+      goto fail;
+    }
+    if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
+    // discard rest of ocr - contains allowed voltage range
+    for (uint8_t i = 0; i < 3; i++) spiRec();
+  }
+  chipSelectHigh();
+
+  return true;
+
+fail:
+  chipSelectHigh();
+  #if FAT_DEBUG
+  printf("################## FAIL: errorCode: %d\n", errorCode_);
+  #endif
+  return false;
+}
+
+
+uint8_t volume_init(uint8_t part) {
+  uint32_t volumeStartBlock = 0;
+  // if part == 0 assume super floppy with FAT boot sector in block zero
+  // if part > 0 assume mbr volume with partition table
+  if (part) {
+    if (part > 4)return false;
+    if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+    //part_t* p = &cacheBuffer_.mbr.part[part-1];
+    part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
+
+    #if FAT_DEBUG
+    printf("mbr: %d, boot: %d, totalSectors: %d, firstSector: %d\n", &(cacheBuffer_.mbr), &(p->boot), &(p->totalSectors), &(p->firstSector));
+    #endif
+    p->totalSectors = reverse32(p->totalSectors);
+    p->firstSector = reverse32(p->firstSector);
+    #if FAT_DEBUG
+    printf("boot: %d, totalSectors: %x, firstSector: %x\n", p->boot, p->totalSectors, p->firstSector);
+    #endif
+    if ((p->boot & 0X7F) !=0  ||
+      p->totalSectors < 100 ||
+      p->firstSector == 0) {
+      // not a valid partition
+      return false;
+    }
+    volumeStartBlock = p->firstSector;
+  }
+
+  #if FAT_DEBUG
+  printf("volumeStartBlock: %d\n", volumeStartBlock);
+  #endif
+
+  if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+  //bpb_t* bpb = &cacheBuffer_.fbs.bpb;
+  bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
+  bpb.sectorsPerCluster = cacheBuffer_.data[13];
+  bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
+  bpb.fatCount = cacheBuffer_.data[16];
+  bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
+  bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+  bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
+  bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
+  bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+  bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+
+  #if FAT_DEBUG
+  printf("bytesPerSector: %d, fatCount: %d, sectorsPerCluster: %d\n", bpb.bytesPerSector, bpb.fatCount, bpb.sectorsPerCluster);
+  #endif
+
+  if (bpb.bytesPerSector != 512 ||
+    bpb.fatCount == 0 ||
+    bpb.reservedSectorCount == 0 ||
+    bpb.sectorsPerCluster == 0) {
+       // not valid FAT volume
+      return false;
+  }
+  fatCount_ = bpb.fatCount;
+  blocksPerCluster_ = bpb.sectorsPerCluster;
+
+  // determine shift that is same as multiply by blocksPerCluster_
+  clusterSizeShift_ = 0;
+  while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
+    // error if not power of 2
+    if (clusterSizeShift_++ > 7) return false;
+  }
+  blocksPerFat_ = bpb.sectorsPerFat16 ?
+                    bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
+
+  fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
+  clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
+
+  #if FAT_DEBUG
+  printf("blocksPerCluster: %d       fatStartBlock: %d       clusterSize: %d\n", blocksPerCluster_, fatStartBlock_, clusterSize_);
+  #endif
+
+  // count for FAT16 zero for FAT32
+  rootDirEntryCount_ = bpb.rootDirEntryCount;
+
+  // directory start for FAT16 dataStart for FAT32
+  rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
+
+  // data start for FAT16 and FAT32
+  dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+
+  #if FAT_DEBUG
+  printf("rootDirEntryCount: %d       rootDirStart: %d      dataStartBlock: %d\n", rootDirEntryCount_, rootDirStart_, dataStartBlock_);
+  #endif
+
+  // total blocks for FAT16 or FAT32
+  uint32_t totalBlocks = bpb.totalSectors16 ?
+                           bpb.totalSectors16 : bpb.totalSectors32;
+  // total data blocks
+  clusterCount_ = totalBlocks - (dataStartBlock_ - volumeStartBlock);
+
+  // divide by cluster size to get cluster count
+  clusterCount_ >>= clusterSizeShift_;
+
+  // FAT type is determined by cluster count
+  if (clusterCount_ < 4085) {
+    fatType_ = 12;
+  } else if (clusterCount_ < 65525) {
+    fatType_ = 16;
+  } else {
+    rootDirStart_ = bpb.fat32RootCluster;
+    fatType_ = 32;
+  }
+  #if FAT_DEBUG
+  printf("totalBlocks: %d       clusterCount: %d      fatType: %d\n", totalBlocks, clusterCount_, fatType_);
+  #endif
+
+  return true;
+}
+
+/*
+ * open a file for reading/writing. File has to be in the root directory.
+ * If it does not exist, it will be created. An example argument for _filename_
+ * is "test.txt". Filenames will be converted to all uppercase to adhere to the
+ * FAT16 standard. _start_pos_ specifies the initial position for file
+ * operations. It has to be set to SEEK_START or SEEK_END.
+ */
+uint8_t file_open(char* filename, file_descriptor_t* fd, uint8_t mode)
+{
+  char FAT16_filename[12];
+  uint8_t file_exists;
+  int fail_counter = 0;
+
+open_again:
+
+  if (mode != O_READ && mode != O_WRITE)
+  {
+    #if FAT_DEBUG
+    printf("Unknown mode for fopen()!\r\n");
+    #endif
+    return 0;
+  }
+  if (strlen(filename) > 12)
+  {
+    #if FAT_DEBUG
+    printf("long filenames are not supported!\r\n");
+    #endif
+    return 0;
+  }
+  make83Name(filename, FAT16_filename);
+  
+  // make the FAT16-compatible filename
+  //    (must be all caps regardless if the file is not caps, 
+  //    11 chars long, delimited with spaces) 
+  //strcpy(FAT16_filename, str_toupper(filename));
+  
+  file_exists = getFile(&(fd->dir_entry), g_block_buf, FAT16_filename, 11);
+  if (mode == O_WRITE) 
+  {
+    if (file_exists)
+    {
+      if (!file_delete(fd))
+      {
+        #if FAT_DEBUG
+        printf("Delete file failed.\n");
+        #endif
+        goto fail_open;
+      }
+    }
+    // file does not exist, so we can create one
+    if (!create_file(&(fd->dir_entry), FAT16_filename, 11, g_block_buf))
+    {
+      printf("create_file failed.\n");
+      goto fail_open;
+    }
+    file_exists = 1;
+  }
+  
+  fd->curr_cluster = fd->dir_entry.first_cluster;
+  fd->position = 0;
+  
+  return file_exists;
+fail_open:
+  if (++fail_counter < FAIL_COUNTER_MAX)
+  {
+    delay(fail_counter*2);
+    goto open_again;
+  }  
 }
 
 /*
@@ -1252,6 +1226,77 @@ fail_read:
   }
   return 0;
 }
+
+uint32_t getDirEntry(file_descriptor_t* fd, uint32_t index)
+{
+  int i,j;
+  uint16_t cluster;
+  uint32_t file_size;
+  uint8_t b;
+  uint8_t *buf = g_block_buf;
+  char filename_upper[12];
+  uint32_t counter = 0;
+
+  for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+  {
+    #if FAT_DEBUG
+    printf("{{%d}} ", i);
+    printf("$$$$$$$$$$$");
+    #endif
+    
+    b = readBlock(rootDirStart_ + i, g_block_buf);
+    
+    #if FAT_DEBUG
+    printf("###########");
+    #endif
+
+    for(j = 0; j < 16; j++)
+    {
+      
+      #if FAT_DEBUG
+      printf("[[%d]] ", j);
+      #endif
+
+      if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+      { 
+        continue; // free, or deleted file/folder, or phantom entry for long names?
+        if (counter > index)
+          return 0;
+      }
+      
+      if(counter == index)
+      {
+        file_size = *(buf + j*32 + 0x1c);
+        file_size += *(buf + j*32 + 0x1c + 1)<<8;
+        file_size += *(buf + j*32 + 0x1c + 2)<<16;
+        file_size += *(buf + j*32 + 0x1c + 3)<<24;
+        cluster = *(buf + j*32 + 0x1a);
+        cluster += *(buf + j*32 + 0x1a + 1) << 8;
+        cluster += *(buf + j*32 + 0x14 + 0) << 16;
+        cluster += *(buf + j*32 + 0x14 + 1) << 24;
+
+        strncpy(filename_upper, (char*)(buf+j*32), 11);
+        filename_upper[11] = '\0';
+
+        // fill in dir_entry
+        memmove(fd->dir_entry.filename, filename_upper, 12);
+        fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
+        memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
+        fd->dir_entry.filesize = file_size;
+        fd->dir_entry.block = rootDirStart_ + i;
+        fd->dir_entry.slot = j;
+        fd->dir_entry.first_cluster = cluster;
+        fd->curr_cluster = cluster;
+        return counter + 1;
+      } else if (counter > index) {
+        return 0;
+      }
+      counter++;
+    }
+  }
+  return 0;
+}
+
 /*
  * set file position to the offset position
  */
@@ -1303,69 +1348,6 @@ uint8_t file_seek(file_descriptor_t *fd, uint32_t offset)
       printf("NEXT CLUSTER: fd.position %d, offset: %d, fd.cluster\n", fd->position, offset, fd->curr_cluster);
       #endif
     }
-  }
-  
-  return 1;
-}
-
-// returns FAT index (cluster number) of first unused cluster found in FAT
-uint16_t get_unused_cluster(uint8_t* buf)
-{
-  uint8_t i,j;
-  uint8_t b; 
-  uint16_t FAT_entry;
-  
-  for (i = 0; i < 256; i++)
-  {
-    b = readBlock(fatStartBlock_ + i, buf);
-    for(j = 0; j < 256 ; j++)
-    {
-      FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
-      if(FAT_entry == 0x0000)
-      {
-        #if FAT_DEBUG
-        printf("found unused cluster. FAT index: %x\n", ((i * 256) + j));
-        #endif   
-        return (i * 256) + j;
-      }
-    }
-  }
-  
-  #if FAT_DEBUG
-  printf("Failed to find unused cluster!\n");
-  #endif
-  return 0;
-}
-
-// make FAT[_cluster_] point to cluster _value_
-uint8_t update_FAT(uint8_t* buf, uint16_t cluster, uint16_t value)
-{
-  uint32_t sec_start;
-  uint32_t offset;
-  uint16_t value_rev;
-  
-  sec_start = (cluster * 2) / 512;
-  offset = (cluster * 2) % 512;
-
-  #if FAT_DEBUG
-  printf("Update FAT at: %d, offset: %d, value: %d\n", fatStartBlock_ + sec_start, offset, value);
-  #endif
-
-  if(!readBlock(fatStartBlock_ + sec_start, buf))
-  { 
-    #if FAT_DEBUG
-    printf("Problem updating FAT!\n");
-    #endif
-    return 0;
-  }
-  value_rev = reverse16(value);
-  memmove(buf + offset, &value_rev, 2);
-  if (!writeBlock(fatStartBlock_+ sec_start, buf, 1))
-  {
-    #if FAT_DEBUG
-    printf("Problem updating FAT!\n");
-    #endif
-    return 0;
   }
   
   return 1;
@@ -1451,3 +1433,73 @@ uint16_t file_write(file_descriptor_t* fd, uint8_t* write_str, uint16_t length)
   return bytes_written;
 }
 
+/*
+  Deletes a given file.
+*/
+uint8_t file_delete(file_descriptor_t* fd)
+{
+  uint16_t clus = fd->dir_entry.first_cluster;
+
+  do
+  {
+    clus = clear_FAT(g_block_buf, clus);
+    if (!clus)
+    {
+      #if FAT_DEBUG
+      printf("Deleting file failed because there was a 0x00 in its FAT chain!\n");
+      #endif
+      return 0;
+    }
+  } while (clus < 0xfff8);
+  
+  if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
+  {
+    #if FAT_DEBUG
+    printf("Deleting file failed while invalidating directory entry!\n");
+    #endif
+    return 0;
+  }
+  
+  return 1;
+}
+
+#else
+
+uint8_t sdcard_init()
+{
+	asm("ld.w r0, [190700]\njr r0\n");
+}
+uint8_t volume_init(uint8_t part)
+{
+	asm("ld.w r0, [190704]\njr r0\n");
+}
+uint8_t file_open(char* filename, file_descriptor_t* fd, uint8_t mode) 
+{
+	asm("ld.w r0, [190708]\njr r0\n");
+}
+uint16_t file_read(file_descriptor_t *fd, char *buf, uint16_t length)
+{
+	asm("ld.w r0, [190712]\njr r0\n");
+}
+
+uint32_t getDirEntry(file_descriptor_t* fd, uint32_t index)
+{
+	asm("ld.w r0, [190716]\njr r0\n");
+}
+
+uint8_t file_seek(file_descriptor_t *fd, uint32_t offset)
+{
+	asm("ld.w r0, [190720]\njr r0\n");
+}
+
+uint16_t file_write(file_descriptor_t* fd, uint8_t* write_str, uint16_t length)
+{
+	asm("ld.w r0, [190724]\njr r0\n");
+}
+
+uint8_t file_delete(file_descriptor_t* fd)
+{
+	asm("ld.w r0, [190728]\njr r0\n");
+}
+
+#endif

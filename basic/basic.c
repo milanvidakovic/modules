@@ -2209,9 +2209,12 @@ void exec_exec()
 	}
 	if (i > 0) 
 	{
+		int old_color = color;
 		asm("mov.w r0, 197632\ncallr r0\n"); //asm("call 197632\n");
 		init_stdio();
 		video_mode(0);
+		color = old_color;
+		cls(color);
 		//current_video_mode = 0;
 		uart_init_files();
 		init_spi();
@@ -2239,9 +2242,12 @@ void exec_sys()
 	}
 	printf("call %d\n", addr);
 	addr += 197632;
+	int old_color = color;
 	asm("ld.w r0, [r13 + (-4)]\ncallr r0\n");
 	init_stdio();
 	video_mode(0);
+	color = old_color;
+	cls(color);
 	//current_video_mode = 0;
 	uart_init_files();
 	init_spi();

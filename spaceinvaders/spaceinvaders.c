@@ -2900,7 +2900,6 @@ int switch_to_play_screen()
 
 int main()
 {
-
 	init_stdio();
 	video_mode(1);
 
@@ -2927,6 +2926,7 @@ int main()
 	}
 	player_ship->addr = 0;
 	player_bullet_def ->addr = 0;
+	video_mode(0);
 	cls(0);
 	return 0;
 }

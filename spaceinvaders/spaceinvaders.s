@@ -12392,25 +12392,25 @@ main:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# spaceinvaders.c:2904: 	init_stdio();
+# spaceinvaders.c:2903: 	init_stdio();
 	call	init_stdio		#
-# spaceinvaders.c:2905: 	video_mode(1);
+# spaceinvaders.c:2904: 	video_mode(1);
 	mov.w	r1, sp	# tmp31,
 	mov.w	r0, 1	# tmp32,
 	st.w	[r1], r0	#, tmp32
 	call	video_mode		#
-# spaceinvaders.c:2907: 	cls(0);	
+# spaceinvaders.c:2906: 	cls(0);	
 	mov.w	r1, sp	# tmp33,
 	xor.w	r0, r0	# tmp34
 	st.w	[r1], r0	#, tmp34
 	call	cls		#
-# spaceinvaders.c:2912: 	copy_player_bullet_def();
+# spaceinvaders.c:2908: 	copy_player_bullet_def();
 	call	copy_player_bullet_def		#
-# spaceinvaders.c:2913: 	int shouldExit = 0;
+# spaceinvaders.c:2909: 	int shouldExit = 0;
 	xor.w	r0, r0	# tmp35
 	st.w	[r13 + (-4)], r0	# shouldExit, tmp35
 .L534:
-# spaceinvaders.c:2916: 		switch(current_screen)
+# spaceinvaders.c:2912: 		switch(current_screen)
 	ld.w	r0, [current_screen]	# current_screen.303_1, current_screen
 	mov.w	r1, 2	# tmp36,
 	cmp.w	r0, r1	# current_screen.303_1, tmp36
@@ -12426,52 +12426,57 @@ main:
 	jz	.L531		#
 	j	.L529		#
 .L530:
-# spaceinvaders.c:2919: 				shouldExit = switch_to_main_menu_screen();
+# spaceinvaders.c:2915: 				shouldExit = switch_to_main_menu_screen();
 	call	switch_to_main_menu_screen		#
 	st.w	[r13 + (-4)], r0	# shouldExit,
-# spaceinvaders.c:2920: 				break;
+# spaceinvaders.c:2916: 				break;
 	j	.L529		#
 .L531:
-# spaceinvaders.c:2922: 				shouldExit = switch_to_get_ready_screen();
+# spaceinvaders.c:2918: 				shouldExit = switch_to_get_ready_screen();
 	call	switch_to_get_ready_screen		#
 	st.w	[r13 + (-4)], r0	# shouldExit,
-# spaceinvaders.c:2923: 				break;
+# spaceinvaders.c:2919: 				break;
 	j	.L529		#
 .L528:
-# spaceinvaders.c:2925: 				shouldExit = switch_to_play_screen();
+# spaceinvaders.c:2921: 				shouldExit = switch_to_play_screen();
 	call	switch_to_play_screen		#
 	st.w	[r13 + (-4)], r0	# shouldExit,
-# spaceinvaders.c:2926: 				break;	
+# spaceinvaders.c:2922: 				break;	
 	nop	
 .L529:
-# spaceinvaders.c:2928: 		if (shouldExit == 1)
+# spaceinvaders.c:2924: 		if (shouldExit == 1)
 	ld.w	r1, [r13 + (-4)]	# tmp40, shouldExit
 	mov.w	r0, 1	# tmp41,
 	cmp.w	r1, r0	# tmp40, tmp41
 	jz	.L537		#
-# spaceinvaders.c:2916: 		switch(current_screen)
+# spaceinvaders.c:2912: 		switch(current_screen)
 	j	.L534		#
 .L537:
-# spaceinvaders.c:2929: 			break;
+# spaceinvaders.c:2925: 			break;
 	nop	
-# spaceinvaders.c:2931: 	player_ship->addr = 0;
+# spaceinvaders.c:2927: 	player_ship->addr = 0;
 	ld.w	r0, [player_ship]	# player_ship.304_2, player_ship
-# spaceinvaders.c:2931: 	player_ship->addr = 0;
+# spaceinvaders.c:2927: 	player_ship->addr = 0;
 	xor.w	r1, r1	# tmp42
 	st.s	[r0], r1	# player_ship.304_2->addr, tmp42
-# spaceinvaders.c:2932: 	player_bullet_def ->addr = 0;
+# spaceinvaders.c:2928: 	player_bullet_def ->addr = 0;
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.305_3, player_bullet_def
-# spaceinvaders.c:2932: 	player_bullet_def ->addr = 0;
+# spaceinvaders.c:2928: 	player_bullet_def ->addr = 0;
 	xor.w	r1, r1	# tmp43
 	st.s	[r0], r1	# player_bullet_def.305_3->addr, tmp43
-# spaceinvaders.c:2933: 	cls(0);
+# spaceinvaders.c:2929: 	video_mode(0);
 	mov.w	r1, sp	# tmp44,
 	xor.w	r0, r0	# tmp45
 	st.w	[r1], r0	#, tmp45
+	call	video_mode		#
+# spaceinvaders.c:2930: 	cls(0);
+	mov.w	r1, sp	# tmp46,
+	xor.w	r0, r0	# tmp47
+	st.w	[r1], r0	#, tmp47
 	call	cls		#
-# spaceinvaders.c:2934: 	return 0;
-	xor.w	r0, r0	# _23
-# spaceinvaders.c:2935: }
+# spaceinvaders.c:2931: 	return 0;
+	xor.w	r0, r0	# _24
+# spaceinvaders.c:2932: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	

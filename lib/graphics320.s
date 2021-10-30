@@ -22,9 +22,9 @@ pixel320:
 	push r5
 	
 
-	mov.w r3, 1024
-	mov.w r4, 160
-	mov.w r5, 240
+	mov.w r3, 1024			# start address (video memory, frame buffer)
+	mov.w r4, 160			# line width in bytes (2 pixels per byte, 320 pixels -> 160 bytes per line)
+	mov.w r5, 240			# frame buffer height in pixels
 	pix
 
 	# mul.w r1, 160	# gives the offset from the beginning of the framebuffer

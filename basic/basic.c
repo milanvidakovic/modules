@@ -2358,7 +2358,8 @@ int direct()
 	}
 	case KW_BYE:
 	case KW_EXIT:
-		return 1;
+		printf("I cannot exit. I am the boss.\n");
+		break;
 	case KW_PRINT:
 	case KW_QMARK:
 		exec_print();

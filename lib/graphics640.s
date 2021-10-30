@@ -14,52 +14,58 @@ err640:
 	.global	pixel640
 	.type	pixel640, @function
 pixel640:
-	push r0
-	push r1
-	push r2
+	# push r0
+	# push r1
+	# push r2
 	push r3
 	push r4
 	push r5
+
+	mov.w r3, 1024			# start address (video memory, frame buffer)
+	mov.w r4, 80			# line width in bytes (8 pixels per byte, 640 pixels -> 80 bytes per line)
+	mov.w r5, 480			# frame buffer height in pixels
+	pix
+
 	
-	mul.w r1, 80	# gives the offset from the beginning of the framebuffer for the line (using the y coordinate)
-	add.w r1, _VIDEO
-	mov.w r5, r0
-	and.w r5, 15	# r5 holds the position of the pixel within the byte (0 - 15)
-	shr.w r0, 4 	# divide x coordinate by 16; it gives the offset from the beginning of the line
+#	mul.w r1, 80	# gives the offset from the beginning of the framebuffer for the line (using the y coordinate)
+#	add.w r1, _VIDEO
+#	mov.w r5, r0
+#	and.w r5, 15	# r5 holds the position of the pixel within the byte (0 - 15)
+#	shr.w r0, 4 	# divide x coordinate by 16; it gives the offset from the beginning of the line
 								# r0 is the offset in words (two bytes)
 								# r5 holds the position of the pixel within the byte (0 - 15)
-	shl.w r0, 1		# offset in bytes
-	add.w r0, r1	# r0 holds the address of the pixel (the group of 16 pixels in that byte)
+#	shl.w r0, 1		# offset in bytes
+#	add.w r0, r1	# r0 holds the address of the pixel (the group of 16 pixels in that byte)
 	
-	mov.w r3, 15		# set the mask for wiping 
-	sub.w r3, r5		# (r5 == 0) -> (r3 == 15); (r5 == 15) -> (r3 == 0)
-	mov.w r4, 1			# r4 will hold the mask for setting/resetting pixel
-	shl.w r4, r3		# r4 = r4 * r3 -> r4 has the appropriate bit set to 1 (the one that needs to be set)
+#	mov.w r3, 15		# set the mask for wiping 
+#	sub.w r3, r5		# (r5 == 0) -> (r3 == 15); (r5 == 15) -> (r3 == 0)
+#	mov.w r4, 1			# r4 will hold the mask for setting/resetting pixel
+#	shl.w r4, r3		# r4 = r4 * r3 -> r4 has the appropriate bit set to 1 (the one that needs to be set)
 	
-	cmp.w r0, _VIDEO
-	jse .pixel640_e
-	cmp.w r0, 39424	# _VIDEO + 38400
-	jge .pixel640_e
+#	cmp.w r0, _VIDEO
+#	jse .pixel640_e
+#	cmp.w r0, 39424	# _VIDEO + 38400
+#	jge .pixel640_e
 	
-	ld.s r3, [r0]		# r3 holds all the pixels
-	cmp.w r2, 1
-	jz .set_pixel640		# if the color is 1, we set the pixel# otherwise we reset the pixel
-	inv.w r4				# we invert the mask to reset the pixel
-	and.w r3, r4		# we erase the pixel to be changed
-.pixel_back640:	
-	st.s [r0], r3	# save two pixels into the framebuffer
+#	ld.s r3, [r0]		# r3 holds all the pixels
+#	cmp.w r2, 1
+#	jz .set_pixel640		# if the color is 1, we set the pixel# otherwise we reset the pixel
+#	inv.w r4				# we invert the mask to reset the pixel
+#	and.w r3, r4		# we erase the pixel to be changed
+# .pixel_back640:	
+#	st.s [r0], r3	# save two pixels into the framebuffer
 
-.pixel640_e:
+# .pixel640_e:
 	pop r5
 	pop r4
 	pop r3
-	pop r2
-	pop r1
-	pop r0	
+	# pop r2
+	# pop r1
+	# pop r0	
 	ret
-.set_pixel640:
-	or.w r3, r4		# we set the pixel
-	j .pixel_back640
+# .set_pixel640:
+#	or.w r3, r4		# we set the pixel
+#	j .pixel_back640
 	
 	.size	pixel640, .-pixel640
 	

@@ -376,10 +376,10 @@ int getc()
 	key_is_pressed = 0;
 	while (1) 
 	{
-		if ((packet_counter++) == 100) {
+		/*if ((packet_counter++) == 100) {
 			packet_counter = 0;
 			//ploop();
-		}
+		}*/
 		if (key_is_pressed == 1) 
 		{
 			key_is_pressed = 0;

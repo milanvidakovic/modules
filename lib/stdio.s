@@ -1860,36 +1860,23 @@ getc:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:375: 	*VIRTUAL_KEY_ADDR = 0;
 	ld.w	r0, [VIRTUAL_KEY_ADDR]	# VIRTUAL_KEY_ADDR.63_1, VIRTUAL_KEY_ADDR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:375: 	*VIRTUAL_KEY_ADDR = 0;
-	xor.w	r1, r1	# tmp32
-	st.s	[r0], r1	# *VIRTUAL_KEY_ADDR.63_1, tmp32
+	xor.w	r1, r1	# tmp30
+	st.s	[r0], r1	# *VIRTUAL_KEY_ADDR.63_1, tmp30
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:376: 	key_is_pressed = 0;
+	xor.w	r0, r0	# tmp31
+	st.w	[key_is_pressed], r0	# key_is_pressed, tmp31
+.L126:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:383: 		if (key_is_pressed == 1) 
+	ld.w	r1, [key_is_pressed]	# key_is_pressed.64_2, key_is_pressed
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:383: 		if (key_is_pressed == 1) 
+	mov.w	r0, 1	# tmp32,
+	cmp.w	r1, r0	# key_is_pressed.64_2, tmp32
+	jnz	.L126		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:385: 			key_is_pressed = 0;
 	xor.w	r0, r0	# tmp33
 	st.w	[key_is_pressed], r0	# key_is_pressed, tmp33
-.L127:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:379: 		if ((packet_counter++) == 100) {
-	ld.w	r0, [packet_counter]	# packet_counter.64_2, packet_counter
-	mov.w	r1, r0	# _4, packet_counter.64_2
-	add.w	r1, 1 #111	# _4,
-	st.w	[packet_counter], r1	# packet_counter, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:379: 		if ((packet_counter++) == 100) {
-	mov.w	r1, 100	# tmp34,
-	cmp.w	r0, r1	# packet_counter.64_2, tmp34
-	jnz	.L124		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:380: 			packet_counter = 0;
-	xor.w	r0, r0	# tmp35
-	st.w	[packet_counter], r0	# packet_counter, tmp35
-.L124:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:383: 		if (key_is_pressed == 1) 
-	ld.w	r1, [key_is_pressed]	# key_is_pressed.66_5, key_is_pressed
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:383: 		if (key_is_pressed == 1) 
-	mov.w	r0, 1	# tmp36,
-	cmp.w	r1, r0	# key_is_pressed.66_5, tmp36
-	jnz	.L127		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:385: 			key_is_pressed = 0;
-	xor.w	r0, r0	# tmp37
-	st.w	[key_is_pressed], r0	# key_is_pressed, tmp37
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:387: 			return vk_pressed;
-	ld.w	r0, [vk_pressed]	# _14, vk_pressed
+	ld.w	r0, [vk_pressed]	# _7, vk_pressed
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:390: }
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -1903,8 +1890,8 @@ toggle_cursor:
 	mov.w	r13, sp	#,
 	sub.w	sp, 4 #111	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:394: 	i = *(VIDEO - 1);
-	ld.w	r0, [VIDEO]	# VIDEO.67_1, VIDEO
-	ld.b	r0, [r0 + (-1)]	# tmp29, MEM[(char *)VIDEO.67_1 + 4294967295B]
+	ld.w	r0, [VIDEO]	# VIDEO.65_1, VIDEO
+	ld.b	r0, [r0 + (-1)]	# tmp29, MEM[(char *)VIDEO.65_1 + 4294967295B]
 	st.b	[r13 + (-1)], r0	# i, tmp29
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:395: 	i = i ^ 0x77; 
 	ld.b	r0, [r13 + (-1)]	# tmp30, i
@@ -1912,7 +1899,7 @@ toggle_cursor:
 	xor.w	r0, r1	# tmp31, tmp32
 	st.b	[r13 + (-1)], r0	# i, tmp33
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:396: 	*(VIDEO - 1) = i;
-	ld.w	r0, [VIDEO]	# VIDEO.68_2, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.66_2, VIDEO
 	add.w	r0, -1 #111	# _3,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:396: 	*(VIDEO - 1) = i;
 	ld.b	r1, [r13 + (-1)]	# tmp34, i
@@ -1931,17 +1918,17 @@ gets:
 	mov.w	r13, sp	#,
 	sub.w	sp, 48 #111	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:402: 	*VIRTUAL_KEY_ADDR = 0;
-	ld.w	r0, [VIRTUAL_KEY_ADDR]	# VIRTUAL_KEY_ADDR.69_1, VIRTUAL_KEY_ADDR
+	ld.w	r0, [VIRTUAL_KEY_ADDR]	# VIRTUAL_KEY_ADDR.67_1, VIRTUAL_KEY_ADDR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:402: 	*VIRTUAL_KEY_ADDR = 0;
 	xor.w	r1, r1	# tmp145
-	st.s	[r0], r1	# *VIRTUAL_KEY_ADDR.69_1, tmp145
+	st.s	[r0], r1	# *VIRTUAL_KEY_ADDR.67_1, tmp145
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:403: 	shift_pressed = 0;
 	xor.w	r0, r0	# tmp146
 	st.w	[shift_pressed], r0	# shift_pressed, tmp146
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:405: 	start_video = (int)VIDEO;
-	ld.w	r0, [VIDEO]	# VIDEO.70_2, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.68_2, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:405: 	start_video = (int)VIDEO;
-	st.w	[r13 + (-16)], r0	# start_video, VIDEO.70_2
+	st.w	[r13 + (-16)], r0	# start_video, VIDEO.68_2
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:406: 	j = 0;
 	xor.w	r0, r0	# tmp147
 	st.w	[r13 + (-4)], r0	# j, tmp147
@@ -1955,11 +1942,11 @@ gets:
 	ld.w	r1, [r13 + (-12)]	# tmp150, len
 	xor.w	r0, r0	# tmp151
 	cmp.w	r1, r0	# tmp150, tmp151
-	jses	.L131		#
+	jses	.L130		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:410: 		prev_video = (int)VIDEO;
-	ld.w	r0, [VIDEO]	# VIDEO.71_3, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.69_3, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:410: 		prev_video = (int)VIDEO;
-	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.71_3
+	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.69_3
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:411: 		print_str(s);
 	mov.w	r1, sp	# tmp152,
 	ld.w	r0, [r13 + (8)]	# tmp153, s
@@ -1968,32 +1955,32 @@ gets:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:412: 		j = len;
 	ld.w	r0, [r13 + (-12)]	# tmp154, len
 	st.w	[r13 + (-4)], r0	# j, tmp154
-.L131:
+.L130:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:415: 	toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:416: 	gets_finished = 0;
 	xor.w	r0, r0	# tmp155
 	st.w	[gets_finished], r0	# gets_finished, tmp155
-.L167:
+.L166:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:420: 		if ((packet_counter++) == 100) {
-	ld.w	r0, [packet_counter]	# packet_counter.72_4, packet_counter
-	mov.w	r1, r0	# _6, packet_counter.72_4
+	ld.w	r0, [packet_counter]	# packet_counter.70_4, packet_counter
+	mov.w	r1, r0	# _6, packet_counter.70_4
 	add.w	r1, 1 #111	# _6,
 	st.w	[packet_counter], r1	# packet_counter, _6
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:420: 		if ((packet_counter++) == 100) {
 	mov.w	r1, 100	# tmp156,
-	cmp.w	r0, r1	# packet_counter.72_4, tmp156
-	jnz	.L132		#
+	cmp.w	r0, r1	# packet_counter.70_4, tmp156
+	jnz	.L131		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:421: 			packet_counter = 0;
 	xor.w	r0, r0	# tmp157
 	st.w	[packet_counter], r0	# packet_counter, tmp157
-.L132:
+.L131:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:425: 		if (gets_finished == 1) 
-	ld.w	r1, [gets_finished]	# gets_finished.74_7, gets_finished
+	ld.w	r1, [gets_finished]	# gets_finished.72_7, gets_finished
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:425: 		if (gets_finished == 1) 
 	mov.w	r0, 1	# tmp158,
-	cmp.w	r1, r0	# gets_finished.74_7, tmp158
-	jnz	.L167		#
+	cmp.w	r1, r0	# gets_finished.72_7, tmp158
+	jnz	.L166		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:427: 			gets_finished = 0;
 	xor.w	r0, r0	# tmp159
 	st.w	[gets_finished], r0	# gets_finished, tmp159
@@ -2004,77 +1991,77 @@ gets:
 	ld.w	r1, [r13 + (-24)]	# tmp161, i
 	mov.w	r0, 4003	# tmp162,
 	cmp.w	r1, r0	# tmp161, tmp162
-	jz	.L134		#
+	jz	.L133		#
 	ld.w	r1, [r13 + (-24)]	# tmp163, i
 	mov.w	r0, 4003	# tmp164,
 	cmp.w	r1, r0	# tmp163, tmp164
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp165, i
 	mov.w	r0, 4002	# tmp166,
 	cmp.w	r1, r0	# tmp165, tmp166
-	jz	.L136		#
+	jz	.L135		#
 	ld.w	r1, [r13 + (-24)]	# tmp167, i
 	mov.w	r0, 4002	# tmp168,
 	cmp.w	r1, r0	# tmp167, tmp168
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp169, i
 	mov.w	r0, 4001	# tmp170,
 	cmp.w	r1, r0	# tmp169, tmp170
-	jz	.L137		#
+	jz	.L136		#
 	ld.w	r1, [r13 + (-24)]	# tmp171, i
 	mov.w	r0, 4001	# tmp172,
 	cmp.w	r1, r0	# tmp171, tmp172
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp173, i
 	mov.w	r0, 4000	# tmp174,
 	cmp.w	r1, r0	# tmp173, tmp174
-	jz	.L138		#
+	jz	.L137		#
 	ld.w	r1, [r13 + (-24)]	# tmp175, i
 	mov.w	r0, 4000	# tmp176,
 	cmp.w	r1, r0	# tmp175, tmp176
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp177, i
 	mov.w	r0, 3004	# tmp178,
 	cmp.w	r1, r0	# tmp177, tmp178
-	jz	.L139		#
+	jz	.L138		#
 	ld.w	r1, [r13 + (-24)]	# tmp179, i
 	mov.w	r0, 3004	# tmp180,
 	cmp.w	r1, r0	# tmp179, tmp180
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp181, i
 	mov.w	r0, 3003	# tmp182,
 	cmp.w	r1, r0	# tmp181, tmp182
-	jz	.L140		#
+	jz	.L139		#
 	ld.w	r1, [r13 + (-24)]	# tmp183, i
 	mov.w	r0, 3003	# tmp184,
 	cmp.w	r1, r0	# tmp183, tmp184
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp185, i
 	mov.w	r0, 3001	# tmp186,
 	cmp.w	r1, r0	# tmp185, tmp186
-	jz	.L141		#
+	jz	.L140		#
 	ld.w	r1, [r13 + (-24)]	# tmp187, i
 	mov.w	r0, 3001	# tmp188,
 	cmp.w	r1, r0	# tmp187, tmp188
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp189, i
 	mov.w	r0, 27	# tmp190,
 	cmp.w	r1, r0	# tmp189, tmp190
-	jz	.L142		#
+	jz	.L141		#
 	ld.w	r1, [r13 + (-24)]	# tmp191, i
 	mov.w	r0, 27	# tmp192,
 	cmp.w	r1, r0	# tmp191, tmp192
-	jgs	.L135		#
+	jgs	.L134		#
 	ld.w	r1, [r13 + (-24)]	# tmp193, i
 	mov.w	r0, 8	# tmp194,
 	cmp.w	r1, r0	# tmp193, tmp194
-	jz	.L143		#
+	jz	.L142		#
 	ld.w	r1, [r13 + (-24)]	# tmp195, i
 	mov.w	r0, 13	# tmp196,
 	cmp.w	r1, r0	# tmp195, tmp196
-	jz	.L144		#
-	j	.L135		#
-.L142:
+	jz	.L143		#
+	j	.L134		#
+.L141:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:432: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:433: 					blank_line(start_video);
@@ -2093,25 +2080,25 @@ gets:
 	xor.w	r0, r0	# tmp202
 	st.w	[r13 + (-4)], r0	# j, tmp202
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:437: 					VIDEO = (char *)start_video;
-	ld.w	r0, [r13 + (-16)]	# start_video.75_8, start_video
+	ld.w	r0, [r13 + (-16)]	# start_video.73_8, start_video
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:437: 					VIDEO = (char *)start_video;
-	st.w	[VIDEO], r0	# VIDEO, start_video.75_8
+	st.w	[VIDEO], r0	# VIDEO, start_video.73_8
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:438: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:439: 					break;
-	j	.L133		#
-.L144:
+	j	.L132		#
+.L143:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:441: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:442: 					s[len] = 0;
-	ld.w	r1, [r13 + (-12)]	# len.76_9, len
+	ld.w	r1, [r13 + (-12)]	# len.74_9, len
 	ld.w	r0, [r13 + (8)]	# tmp203, s
-	add.w	r0, r1 #222	# _10, len.76_9
+	add.w	r0, r1 #222	# _10, len.74_9
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:442: 					s[len] = 0;
 	xor.w	r1, r1	# tmp204
 	st.b	[r0], r1	# *_10, tmp204
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:443: 					VIDEO += (len - j) * 2;
-	ld.w	r2, [VIDEO]	# VIDEO.77_11, VIDEO
+	ld.w	r2, [VIDEO]	# VIDEO.75_11, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:443: 					VIDEO += (len - j) * 2;
 	ld.w	r0, [r13 + (-12)]	# tmp205, len
 	ld.w	r1, [r13 + (-4)]	# tmp206, j
@@ -2120,7 +2107,7 @@ gets:
 	add.w	r0, r0 #222	# tmp207, _12
 	mov.w	r1, r0	# _14, _13
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:443: 					VIDEO += (len - j) * 2;
-	mov.w	r0, r2	# _15, VIDEO.77_11
+	mov.w	r0, r2	# _15, VIDEO.75_11
 	add.w	r0, r1 #222	# _15, _14
 	st.w	[VIDEO], r0	# VIDEO, _15
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:444: 					put_char(13);
@@ -2137,7 +2124,7 @@ gets:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:446: 					if (strlen(s) > 0)
 	xor.w	r0, r0	# tmp212
 	cmp.w	r1, r0	# _16, tmp212
-	jses	.L145		#
+	jses	.L144		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:448: 						if (_history_size = HISTORY_MAX)
 	mov.w	r0, 4	# tmp213,
 	st.w	[_history_size], r0	# _history_size, tmp213
@@ -2145,8 +2132,8 @@ gets:
 	xor.w	r0, r0	# tmp214
 	st.w	[r13 + (-8)], r0	# k, tmp214
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:450: 							for (k = 0; k < HISTORY_MAX - 1; k++)
-	j	.L146		#
-.L147:
+	j	.L145		#
+.L146:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:452: 								strcpy(_history[k], _history[k + 1]);
 	ld.w	r1, [r13 + (-8)]	# tmp216, k
 	mov.w	r0, 8	# tmp217,
@@ -2171,17 +2158,17 @@ gets:
 	ld.w	r0, [r13 + (-8)]	# tmp225, k
 	add.w	r0, 1 #111	# tmp224,
 	st.w	[r13 + (-8)], r0	# k, tmp224
-.L146:
+.L145:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:450: 							for (k = 0; k < HISTORY_MAX - 1; k++)
 	ld.w	r1, [r13 + (-8)]	# tmp226, k
 	mov.w	r0, 2	# tmp227,
 	cmp.w	r1, r0	# tmp226, tmp227
-	jses	.L147		#
+	jses	.L146		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:454: 							_history_size = HISTORY_MAX - 1;
 	mov.w	r0, 3	# tmp228,
 	st.w	[_history_size], r0	# _history_size, tmp228
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:456: 						strcpy(_history[_history_size], s);
-	ld.w	r1, [_history_size]	# _history_size.78_20, _history_size
+	ld.w	r1, [_history_size]	# _history_size.76_20, _history_size
 	mov.w	r0, 8	# tmp230,
 	shl.w	r1, r0	# tmp229, tmp230
 	mov.w	r0, _history	# tmp231,
@@ -2193,23 +2180,23 @@ gets:
 	st.w	[r0], r1	#, _21
 	call	strcpy		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:457: 						_history_idx = _history_size;
-	ld.w	r0, [_history_size]	# _history_size.79_22, _history_size
-	st.w	[_history_idx], r0	# _history_idx, _history_size.79_22
+	ld.w	r0, [_history_size]	# _history_size.77_22, _history_size
+	st.w	[_history_idx], r0	# _history_idx, _history_size.77_22
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:458: 						_history_size++;
-	ld.w	r0, [_history_size]	# _history_size.80_23, _history_size
+	ld.w	r0, [_history_size]	# _history_size.78_23, _history_size
 	add.w	r0, 1 #111	# _24,
 	st.w	[_history_size], r0	# _history_size, _24
-.L145:
+.L144:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:467: 					return s;
 	ld.w	r0, [r13 + (8)]	# _232, s
-	j	.L168		#
-.L138:
+	j	.L167		#
+.L137:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:469: 					if (_history_size == 0)
-	ld.w	r1, [_history_size]	# _history_size.81_25, _history_size
+	ld.w	r1, [_history_size]	# _history_size.79_25, _history_size
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:469: 					if (_history_size == 0)
 	xor.w	r0, r0	# tmp234
-	cmp.w	r1, r0	# _history_size.81_25, tmp234
-	jz	.L169		#
+	cmp.w	r1, r0	# _history_size.79_25, tmp234
+	jz	.L168		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:471: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:472: 					blank_line(start_video);
@@ -2218,15 +2205,15 @@ gets:
 	st.w	[r1], r0	#, tmp236
 	call	blank_line		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:473: 					VIDEO = (char *)start_video;
-	ld.w	r0, [r13 + (-16)]	# start_video.82_26, start_video
+	ld.w	r0, [r13 + (-16)]	# start_video.80_26, start_video
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:473: 					VIDEO = (char *)start_video;
-	st.w	[VIDEO], r0	# VIDEO, start_video.82_26
+	st.w	[VIDEO], r0	# VIDEO, start_video.80_26
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:475: 					s[0] = 0;
 	ld.w	r0, [r13 + (8)]	# tmp237, s
 	xor.w	r1, r1	# tmp238
 	st.b	[r0], r1	# *s_155(D), tmp238
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:476: 					strcpy(s, _history[_history_idx]);
-	ld.w	r1, [_history_idx]	# _history_idx.83_27, _history_idx
+	ld.w	r1, [_history_idx]	# _history_idx.81_27, _history_idx
 	mov.w	r0, 8	# tmp240,
 	shl.w	r1, r0	# tmp239, tmp240
 	mov.w	r0, _history	# tmp241,
@@ -2255,30 +2242,30 @@ gets:
 	st.w	[r1], r0	#, tmp249
 	call	print_str		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:481: 					_history_idx--;
-	ld.w	r0, [_history_idx]	# _history_idx.84_29, _history_idx
+	ld.w	r0, [_history_idx]	# _history_idx.82_29, _history_idx
 	add.w	r0, -1 #111	# _30,
 	st.w	[_history_idx], r0	# _history_idx, _30
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:482: 					if (_history_idx < 0)
-	ld.w	r1, [_history_idx]	# _history_idx.85_31, _history_idx
+	ld.w	r1, [_history_idx]	# _history_idx.83_31, _history_idx
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:482: 					if (_history_idx < 0)
 	xor.w	r0, r0	# tmp250
-	cmp.w	r1, r0	# _history_idx.85_31, tmp250
-	jges	.L150		#
+	cmp.w	r1, r0	# _history_idx.83_31, tmp250
+	jges	.L149		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:483: 						_history_idx = 0;
 	xor.w	r0, r0	# tmp251
 	st.w	[_history_idx], r0	# _history_idx, tmp251
-.L150:
+.L149:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:486: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:487: 					break;
-	j	.L133		#
-.L136:
+	j	.L132		#
+.L135:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:489: 					if (_history_size == 0)
-	ld.w	r1, [_history_size]	# _history_size.86_32, _history_size
+	ld.w	r1, [_history_size]	# _history_size.84_32, _history_size
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:489: 					if (_history_size == 0)
 	xor.w	r0, r0	# tmp252
-	cmp.w	r1, r0	# _history_size.86_32, tmp252
-	jz	.L170		#
+	cmp.w	r1, r0	# _history_size.84_32, tmp252
+	jz	.L169		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:491: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:492: 					blank_line(start_video);
@@ -2287,15 +2274,15 @@ gets:
 	st.w	[r1], r0	#, tmp254
 	call	blank_line		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:493: 					VIDEO = (char *)start_video;
-	ld.w	r0, [r13 + (-16)]	# start_video.87_33, start_video
+	ld.w	r0, [r13 + (-16)]	# start_video.85_33, start_video
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:493: 					VIDEO = (char *)start_video;
-	st.w	[VIDEO], r0	# VIDEO, start_video.87_33
+	st.w	[VIDEO], r0	# VIDEO, start_video.85_33
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:495: 					s[0] = 0;
 	ld.w	r0, [r13 + (8)]	# tmp255, s
 	xor.w	r1, r1	# tmp256
 	st.b	[r0], r1	# *s_155(D), tmp256
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:496: 					strcpy(s, _history[_history_idx]);
-	ld.w	r1, [_history_idx]	# _history_idx.88_34, _history_idx
+	ld.w	r1, [_history_idx]	# _history_idx.86_34, _history_idx
 	mov.w	r0, 8	# tmp258,
 	shl.w	r1, r0	# tmp257, tmp258
 	mov.w	r0, _history	# tmp259,
@@ -2324,31 +2311,31 @@ gets:
 	st.w	[r1], r0	#, tmp267
 	call	print_str		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:501: 					_history_idx++;
-	ld.w	r0, [_history_idx]	# _history_idx.89_36, _history_idx
+	ld.w	r0, [_history_idx]	# _history_idx.87_36, _history_idx
 	add.w	r0, 1 #111	# _37,
 	st.w	[_history_idx], r0	# _history_idx, _37
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:502: 					if (_history_idx == _history_size)
-	ld.w	r1, [_history_idx]	# _history_idx.90_38, _history_idx
-	ld.w	r0, [_history_size]	# _history_size.91_39, _history_size
+	ld.w	r1, [_history_idx]	# _history_idx.88_38, _history_idx
+	ld.w	r0, [_history_size]	# _history_size.89_39, _history_size
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:502: 					if (_history_idx == _history_size)
-	cmp.w	r1, r0	# _history_idx.90_38, _history_size.91_39
-	jnz	.L152		#
+	cmp.w	r1, r0	# _history_idx.88_38, _history_size.89_39
+	jnz	.L151		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:503: 						_history_idx = _history_size - 1;
-	ld.w	r0, [_history_size]	# _history_size.92_40, _history_size
+	ld.w	r0, [_history_size]	# _history_size.90_40, _history_size
 	add.w	r0, -1 #111	# _41,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:503: 						_history_idx = _history_size - 1;
 	st.w	[_history_idx], r0	# _history_idx, _41
-.L152:
+.L151:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:506: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:507: 					break;
-	j	.L133		#
-.L137:
+	j	.L132		#
+.L136:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:509: 					if (j > 0)
 	ld.w	r1, [r13 + (-4)]	# tmp268, j
 	xor.w	r0, r0	# tmp269
 	cmp.w	r1, r0	# tmp268, tmp269
-	jses	.L171		#
+	jses	.L170		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:511: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:512: 						j--;
@@ -2356,24 +2343,24 @@ gets:
 	add.w	r0, -1 #111	# tmp270,
 	st.w	[r13 + (-4)], r0	# j, tmp270
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:513: 						VIDEO -= 2;
-	ld.w	r0, [VIDEO]	# VIDEO.93_42, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.91_42, VIDEO
 	add.w	r0, -2 #111	# _43,
 	st.w	[VIDEO], r0	# VIDEO, _43
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:514: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:516: 					break;
-	j	.L171		#
-.L134:
+	j	.L170		#
+.L133:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:518: 					if (s[j] != 0)
-	ld.w	r1, [r13 + (-4)]	# j.94_44, j
+	ld.w	r1, [r13 + (-4)]	# j.92_44, j
 	ld.w	r0, [r13 + (8)]	# tmp272, s
-	add.w	r0, r1 #222	# _45, j.94_44
+	add.w	r0, r1 #222	# _45, j.92_44
 	ld.b	r0, [r0]	# _46, *_45
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:518: 					if (s[j] != 0)
 	sex.b	r1, r0	# tmp273, _46
 	xor.w	r0, r0	# tmp274
 	cmp.w	r1, r0	# tmp273, tmp274
-	jz	.L172		#
+	jz	.L171		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:520: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:521: 						j++;
@@ -2381,25 +2368,25 @@ gets:
 	add.w	r0, 1 #111	# tmp275,
 	st.w	[r13 + (-4)], r0	# j, tmp275
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:522: 						VIDEO += 2;
-	ld.w	r0, [VIDEO]	# VIDEO.95_47, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.93_47, VIDEO
 	add.w	r0, 2 #111	# _48,
 	st.w	[VIDEO], r0	# VIDEO, _48
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:523: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:525: 					break;
-	j	.L172		#
-.L141:
+	j	.L171		#
+.L140:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:527: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:528: 					VIDEO -= j*2;
-	ld.w	r2, [VIDEO]	# VIDEO.96_49, VIDEO
+	ld.w	r2, [VIDEO]	# VIDEO.94_49, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:528: 					VIDEO -= j*2;
 	ld.w	r0, [r13 + (-4)]	# tmp277, j
 	add.w	r0, r0 #222	# tmp278, tmp277
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:528: 					VIDEO -= j*2;
 	mov.w	r1, r0	# _52, _51
 neg.w	r1	# _52
-	mov.w	r0, r2	# _53, VIDEO.96_49
+	mov.w	r0, r2	# _53, VIDEO.94_49
 	add.w	r0, r1 #222	# _53, _52
 	st.w	[VIDEO], r0	# VIDEO, _53
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:529: 					j = 0;
@@ -2408,12 +2395,12 @@ neg.w	r1	# _52
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:530: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:531: 					break;
-	j	.L133		#
-.L139:
+	j	.L132		#
+.L138:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:534: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:535: 					VIDEO += (len-j)*2;
-	ld.w	r2, [VIDEO]	# VIDEO.97_54, VIDEO
+	ld.w	r2, [VIDEO]	# VIDEO.95_54, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:535: 					VIDEO += (len-j)*2;
 	ld.w	r0, [r13 + (-12)]	# tmp280, len
 	ld.w	r1, [r13 + (-4)]	# tmp281, j
@@ -2422,7 +2409,7 @@ neg.w	r1	# _52
 	add.w	r0, r0 #222	# tmp282, _55
 	mov.w	r1, r0	# _57, _56
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:535: 					VIDEO += (len-j)*2;
-	mov.w	r0, r2	# _58, VIDEO.97_54
+	mov.w	r0, r2	# _58, VIDEO.95_54
 	add.w	r0, r1 #222	# _58, _57
 	st.w	[VIDEO], r0	# VIDEO, _58
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:536: 					j = len;
@@ -2431,42 +2418,42 @@ neg.w	r1	# _52
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:537: 					toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:538: 					break;
-	j	.L133		#
-.L140:
+	j	.L132		#
+.L139:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:540: 					if (j < len)
 	ld.w	r1, [r13 + (-4)]	# tmp284, j
 	ld.w	r0, [r13 + (-12)]	# tmp285, len
 	cmp.w	r1, r0	# tmp284, tmp285
-	jges	.L173		#
+	jges	.L172		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:542: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:543: 						prev_video = (int)VIDEO;
-	ld.w	r0, [VIDEO]	# VIDEO.98_59, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.96_59, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:543: 						prev_video = (int)VIDEO;
-	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.98_59
+	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.96_59
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:544: 						for (k = j; k < len; k++)
 	ld.w	r0, [r13 + (-4)]	# tmp286, j
 	st.w	[r13 + (-8)], r0	# k, tmp286
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:544: 						for (k = j; k < len; k++)
-	j	.L156		#
-.L157:
+	j	.L155		#
+.L156:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:546: 							s[k] = s[k+1];
-	ld.w	r0, [r13 + (-8)]	# k.99_60, k
+	ld.w	r0, [r13 + (-8)]	# k.97_60, k
 	add.w	r0, 1 #111	# _61,
 	ld.w	r1, [r13 + (8)]	# tmp287, s
 	add.w	r1, r0 #222	# _62, _61
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:546: 							s[k] = s[k+1];
-	ld.w	r2, [r13 + (-8)]	# k.100_63, k
+	ld.w	r2, [r13 + (-8)]	# k.98_63, k
 	ld.w	r0, [r13 + (8)]	# tmp288, s
-	add.w	r0, r2 #222	# _64, k.100_63
+	add.w	r0, r2 #222	# _64, k.98_63
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:546: 							s[k] = s[k+1];
 	ld.b	r1, [r1]	# _65, *_62
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:546: 							s[k] = s[k+1];
 	st.b	[r0], r1	# *_64, _65
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:547: 							put_char(s[k]);
-	ld.w	r1, [r13 + (-8)]	# k.101_66, k
+	ld.w	r1, [r13 + (-8)]	# k.99_66, k
 	ld.w	r0, [r13 + (8)]	# tmp289, s
-	add.w	r0, r1 #222	# _67, k.101_66
+	add.w	r0, r1 #222	# _67, k.99_66
 	ld.b	r0, [r0]	# _68, *_67
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:547: 							put_char(s[k]);
 	sex.b	r0, r0	# _69, _68
@@ -2477,35 +2464,35 @@ neg.w	r1	# _52
 	ld.w	r0, [r13 + (-8)]	# tmp292, k
 	add.w	r0, 1 #111	# tmp291,
 	st.w	[r13 + (-8)], r0	# k, tmp291
-.L156:
+.L155:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:544: 						for (k = j; k < len; k++)
 	ld.w	r1, [r13 + (-8)]	# tmp293, k
 	ld.w	r0, [r13 + (-12)]	# tmp294, len
 	cmp.w	r1, r0	# tmp293, tmp294
-	jss	.L157		#
+	jss	.L156		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:549: 						len--;
 	ld.w	r0, [r13 + (-12)]	# tmp296, len
 	add.w	r0, -1 #111	# tmp295,
 	st.w	[r13 + (-12)], r0	# len, tmp295
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:550: 						VIDEO = (char *)prev_video;
-	ld.w	r0, [r13 + (-20)]	# prev_video.102_70, prev_video
+	ld.w	r0, [r13 + (-20)]	# prev_video.100_70, prev_video
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:550: 						VIDEO = (char *)prev_video;
-	st.w	[VIDEO], r0	# VIDEO, prev_video.102_70
+	st.w	[VIDEO], r0	# VIDEO, prev_video.100_70
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:551: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:553: 					break;
-	j	.L173		#
-.L143:
+	j	.L172		#
+.L142:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:555: 					if (j > 0)
 	ld.w	r1, [r13 + (-4)]	# tmp297, j
 	xor.w	r0, r0	# tmp298
 	cmp.w	r1, r0	# tmp297, tmp298
-	jses	.L174		#
+	jses	.L173		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:557: 						if (j == len)
 	ld.w	r1, [r13 + (-4)]	# tmp299, j
 	ld.w	r0, [r13 + (-12)]	# tmp300, len
 	cmp.w	r1, r0	# tmp299, tmp300
-	jnz	.L159		#
+	jnz	.L158		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:559: 							j--;
 	ld.w	r0, [r13 + (-4)]	# tmp302, j
 	add.w	r0, -1 #111	# tmp301,
@@ -2515,51 +2502,51 @@ neg.w	r1	# _52
 	add.w	r0, -1 #111	# tmp303,
 	st.w	[r13 + (-12)], r0	# len, tmp303
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:561: 							s[j] = 0;
-	ld.w	r1, [r13 + (-4)]	# j.103_71, j
+	ld.w	r1, [r13 + (-4)]	# j.101_71, j
 	ld.w	r0, [r13 + (8)]	# tmp305, s
-	add.w	r0, r1 #222	# _72, j.103_71
+	add.w	r0, r1 #222	# _72, j.101_71
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:561: 							s[j] = 0;
 	xor.w	r1, r1	# tmp306
 	st.b	[r0], r1	# *_72, tmp306
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:562: 							toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:563: 							VIDEO -= 2;						
-	ld.w	r0, [VIDEO]	# VIDEO.104_73, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.102_73, VIDEO
 	add.w	r0, -2 #111	# _74,
 	st.w	[VIDEO], r0	# VIDEO, _74
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:564: 							*VIDEO = 0;
-	ld.w	r0, [VIDEO]	# VIDEO.105_75, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.103_75, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:564: 							*VIDEO = 0;
 	xor.w	r1, r1	# tmp307
-	st.b	[r0], r1	# *VIDEO.105_75, tmp307
+	st.b	[r0], r1	# *VIDEO.103_75, tmp307
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:565: 							toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:583: 					break;
-	j	.L174		#
-.L159:
+	j	.L173		#
+.L158:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:569: 							toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:570: 							VIDEO -= 2;
-	ld.w	r0, [VIDEO]	# VIDEO.106_76, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.104_76, VIDEO
 	add.w	r0, -2 #111	# _77,
 	st.w	[VIDEO], r0	# VIDEO, _77
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:571: 							prev_video = (int)VIDEO;
-	ld.w	r0, [VIDEO]	# VIDEO.107_78, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.105_78, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:571: 							prev_video = (int)VIDEO;
-	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.107_78
+	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.105_78
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:572: 							for (k = j; k <= len; k++)
 	ld.w	r0, [r13 + (-4)]	# tmp308, j
 	st.w	[r13 + (-8)], r0	# k, tmp308
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:572: 							for (k = j; k <= len; k++)
-	j	.L160		#
-.L161:
+	j	.L159		#
+.L160:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:574: 								s[k-1] = s[k];
-	ld.w	r0, [r13 + (-8)]	# k.108_79, k
+	ld.w	r0, [r13 + (-8)]	# k.106_79, k
 	ld.w	r1, [r13 + (8)]	# tmp309, s
-	add.w	r1, r0 #222	# _80, k.108_79
+	add.w	r1, r0 #222	# _80, k.106_79
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:574: 								s[k-1] = s[k];
-	ld.w	r0, [r13 + (-8)]	# k.109_81, k
-	mov.w	r2, r0	# _82, k.109_81
+	ld.w	r0, [r13 + (-8)]	# k.107_81, k
+	mov.w	r2, r0	# _82, k.107_81
 	add.w	r2, -1 #111	# _82,
 	ld.w	r0, [r13 + (8)]	# tmp310, s
 	add.w	r0, r2 #222	# _83, _82
@@ -2568,8 +2555,8 @@ neg.w	r1	# _52
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:574: 								s[k-1] = s[k];
 	st.b	[r0], r1	# *_83, _84
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:575: 								put_char(s[k-1]);
-	ld.w	r0, [r13 + (-8)]	# k.110_85, k
-	mov.w	r1, r0	# _86, k.110_85
+	ld.w	r0, [r13 + (-8)]	# k.108_85, k
+	mov.w	r1, r0	# _86, k.108_85
 	add.w	r1, -1 #111	# _86,
 	ld.w	r0, [r13 + (8)]	# tmp311, s
 	add.w	r0, r1 #222	# _87, _86
@@ -2583,12 +2570,12 @@ neg.w	r1	# _52
 	ld.w	r0, [r13 + (-8)]	# tmp314, k
 	add.w	r0, 1 #111	# tmp313,
 	st.w	[r13 + (-8)], r0	# k, tmp313
-.L160:
+.L159:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:572: 							for (k = j; k <= len; k++)
 	ld.w	r1, [r13 + (-8)]	# tmp315, k
 	ld.w	r0, [r13 + (-12)]	# tmp316, len
 	cmp.w	r1, r0	# tmp315, tmp316
-	jses	.L161		#
+	jses	.L160		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:577: 							j--;
 	ld.w	r0, [r13 + (-4)]	# tmp318, j
 	add.w	r0, -1 #111	# tmp317,
@@ -2598,19 +2585,19 @@ neg.w	r1	# _52
 	add.w	r0, -1 #111	# tmp319,
 	st.w	[r13 + (-12)], r0	# len, tmp319
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:579: 							VIDEO = (char *)prev_video;
-	ld.w	r0, [r13 + (-20)]	# prev_video.111_90, prev_video
+	ld.w	r0, [r13 + (-20)]	# prev_video.109_90, prev_video
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:579: 							VIDEO = (char *)prev_video;
-	st.w	[VIDEO], r0	# VIDEO, prev_video.111_90
+	st.w	[VIDEO], r0	# VIDEO, prev_video.109_90
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:580: 							toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:583: 					break;
-	j	.L174		#
-.L135:
+	j	.L173		#
+.L134:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:585: 					if (j == len)
 	ld.w	r1, [r13 + (-4)]	# tmp321, j
 	ld.w	r0, [r13 + (-12)]	# tmp322, len
 	cmp.w	r1, r0	# tmp321, tmp322
-	jnz	.L162		#
+	jnz	.L161		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:587: 						s[j] = vk_to_char(i);
 	mov.w	r1, sp	# tmp323,
 	ld.w	r0, [r13 + (-24)]	# tmp324, i
@@ -2618,15 +2605,15 @@ neg.w	r1	# _52
 	call	vk_to_char		#
 	mov.w	r2, r0	# _91,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:587: 						s[j] = vk_to_char(i);
-	ld.w	r1, [r13 + (-4)]	# j.112_92, j
+	ld.w	r1, [r13 + (-4)]	# j.110_92, j
 	ld.w	r0, [r13 + (8)]	# tmp325, s
-	add.w	r0, r1 #222	# _93, j.112_92
+	add.w	r0, r1 #222	# _93, j.110_92
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:587: 						s[j] = vk_to_char(i);
 	mov.w	r1, r2	# _94, _91
 	st.b	[r0], r1	# *_93, _94
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:588: 						s[j+1] = 0;
-	ld.w	r0, [r13 + (-4)]	# j.113_95, j
-	mov.w	r1, r0	# _96, j.113_95
+	ld.w	r0, [r13 + (-4)]	# j.111_95, j
+	mov.w	r1, r0	# _96, j.111_95
 	add.w	r1, 1 #111	# _96,
 	ld.w	r0, [r13 + (8)]	# tmp326, s
 	add.w	r0, r1 #222	# _97, _96
@@ -2636,9 +2623,9 @@ neg.w	r1	# _52
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:589: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:590: 						put_char(s[j]);
-	ld.w	r1, [r13 + (-4)]	# j.114_98, j
+	ld.w	r1, [r13 + (-4)]	# j.112_98, j
 	ld.w	r0, [r13 + (8)]	# tmp328, s
-	add.w	r0, r1 #222	# _99, j.114_98
+	add.w	r0, r1 #222	# _99, j.112_98
 	ld.b	r0, [r0]	# _100, *_99
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:590: 						put_char(s[j]);
 	sex.b	r0, r0	# _101, _100
@@ -2655,27 +2642,27 @@ neg.w	r1	# _52
 	ld.w	r0, [r13 + (-12)]	# tmp333, len
 	add.w	r0, 1 #111	# tmp332,
 	st.w	[r13 + (-12)], r0	# len, tmp332
-	j	.L167		#
-.L162:
+	j	.L166		#
+.L161:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:596: 						toggle_cursor();
 	call	toggle_cursor		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:597: 						prev_video = (int)VIDEO;
-	ld.w	r0, [VIDEO]	# VIDEO.115_102, VIDEO
+	ld.w	r0, [VIDEO]	# VIDEO.113_102, VIDEO
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:597: 						prev_video = (int)VIDEO;
-	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.115_102
+	st.w	[r13 + (-20)], r0	# prev_video, VIDEO.113_102
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:598: 						for (k = len; k >= j; k--)
 	ld.w	r0, [r13 + (-12)]	# tmp334, len
 	st.w	[r13 + (-8)], r0	# k, tmp334
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:598: 						for (k = len; k >= j; k--)
-	j	.L163		#
-.L164:
+	j	.L162		#
+.L163:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:600: 							s[k+1] = s[k];
-	ld.w	r0, [r13 + (-8)]	# k.116_103, k
+	ld.w	r0, [r13 + (-8)]	# k.114_103, k
 	ld.w	r1, [r13 + (8)]	# tmp335, s
-	add.w	r1, r0 #222	# _104, k.116_103
+	add.w	r1, r0 #222	# _104, k.114_103
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:600: 							s[k+1] = s[k];
-	ld.w	r0, [r13 + (-8)]	# k.117_105, k
-	mov.w	r2, r0	# _106, k.117_105
+	ld.w	r0, [r13 + (-8)]	# k.115_105, k
+	mov.w	r2, r0	# _106, k.115_105
 	add.w	r2, 1 #111	# _106,
 	ld.w	r0, [r13 + (8)]	# tmp336, s
 	add.w	r0, r2 #222	# _107, _106
@@ -2687,12 +2674,12 @@ neg.w	r1	# _52
 	ld.w	r0, [r13 + (-8)]	# tmp338, k
 	add.w	r0, -1 #111	# tmp337,
 	st.w	[r13 + (-8)], r0	# k, tmp337
-.L163:
+.L162:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:598: 						for (k = len; k >= j; k--)
 	ld.w	r1, [r13 + (-8)]	# tmp339, k
 	ld.w	r0, [r13 + (-4)]	# tmp340, j
 	cmp.w	r1, r0	# tmp339, tmp340
-	jges	.L164		#
+	jges	.L163		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:602: 						s[j] = vk_to_char(i);
 	mov.w	r1, sp	# tmp341,
 	ld.w	r0, [r13 + (-24)]	# tmp342, i
@@ -2700,9 +2687,9 @@ neg.w	r1	# _52
 	call	vk_to_char		#
 	mov.w	r2, r0	# _109,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:602: 						s[j] = vk_to_char(i);
-	ld.w	r1, [r13 + (-4)]	# j.118_110, j
+	ld.w	r1, [r13 + (-4)]	# j.116_110, j
 	ld.w	r0, [r13 + (8)]	# tmp343, s
-	add.w	r0, r1 #222	# _111, j.118_110
+	add.w	r0, r1 #222	# _111, j.116_110
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:602: 						s[j] = vk_to_char(i);
 	mov.w	r1, r2	# _112, _109
 	st.b	[r0], r1	# *_111, _112
@@ -2710,12 +2697,12 @@ neg.w	r1	# _52
 	ld.w	r0, [r13 + (-4)]	# tmp344, j
 	st.w	[r13 + (-8)], r0	# k, tmp344
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:603: 						for (k = j; k <= len; k++)
-	j	.L165		#
-.L166:
+	j	.L164		#
+.L165:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:605: 							put_char(s[k]);
-	ld.w	r1, [r13 + (-8)]	# k.119_113, k
+	ld.w	r1, [r13 + (-8)]	# k.117_113, k
 	ld.w	r0, [r13 + (8)]	# tmp345, s
-	add.w	r0, r1 #222	# _114, k.119_113
+	add.w	r0, r1 #222	# _114, k.117_113
 	ld.b	r0, [r0]	# _115, *_114
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:605: 							put_char(s[k]);
 	sex.b	r0, r0	# _116, _115
@@ -2726,12 +2713,12 @@ neg.w	r1	# _52
 	ld.w	r0, [r13 + (-8)]	# tmp348, k
 	add.w	r0, 1 #111	# tmp347,
 	st.w	[r13 + (-8)], r0	# k, tmp347
-.L165:
+.L164:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:603: 						for (k = j; k <= len; k++)
 	ld.w	r1, [r13 + (-8)]	# tmp349, k
 	ld.w	r0, [r13 + (-12)]	# tmp350, len
 	cmp.w	r1, r0	# tmp349, tmp350
-	jses	.L166		#
+	jses	.L165		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:607: 						j++;
 	ld.w	r0, [r13 + (-4)]	# tmp352, j
 	add.w	r0, 1 #111	# tmp351,
@@ -2747,34 +2734,34 @@ neg.w	r1	# _52
 	st.w	[VIDEO], r0	# VIDEO, _118
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:611: 						toggle_cursor();
 	call	toggle_cursor		#
-	j	.L167		#
-.L169:
+	j	.L166		#
+.L168:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:470: 						break;
 	nop	
-	j	.L167		#
-.L170:
+	j	.L166		#
+.L169:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:490: 						break;
 	nop	
-	j	.L167		#
-.L171:
+	j	.L166		#
+.L170:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:516: 					break;
 	nop	
-	j	.L167		#
-.L172:
+	j	.L166		#
+.L171:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:525: 					break;
 	nop	
-	j	.L167		#
-.L173:
+	j	.L166		#
+.L172:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:553: 					break;
 	nop	
-	j	.L167		#
-.L174:
+	j	.L166		#
+.L173:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:583: 					break;
 	nop	
-.L133:
+.L132:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:420: 		if ((packet_counter++) == 100) {
-	j	.L167		#
-.L168:
+	j	.L166		#
+.L167:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:617: }
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -2787,43 +2774,43 @@ init_stdio:
 	push	r13		#
 	mov.w	r13, sp	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:620: 	*PS2_HANDLER_INSTR 				= 1;
-	ld.w	r0, [PS2_HANDLER_INSTR]	# PS2_HANDLER_INSTR.120_1, PS2_HANDLER_INSTR
+	ld.w	r0, [PS2_HANDLER_INSTR]	# PS2_HANDLER_INSTR.118_1, PS2_HANDLER_INSTR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:620: 	*PS2_HANDLER_INSTR 				= 1;
 	mov.s	r1, 1	# tmp36,
-	st.s	[r0], r1	# *PS2_HANDLER_INSTR.120_1, tmp36
+	st.s	[r0], r1	# *PS2_HANDLER_INSTR.118_1, tmp36
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:621: 	*PS2_HANDLER_ADDR 				= (int)irq_triggered;
-	ld.w	r0, [PS2_HANDLER_ADDR]	# PS2_HANDLER_ADDR.121_2, PS2_HANDLER_ADDR
+	ld.w	r0, [PS2_HANDLER_ADDR]	# PS2_HANDLER_ADDR.119_2, PS2_HANDLER_ADDR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:621: 	*PS2_HANDLER_ADDR 				= (int)irq_triggered;
-	mov.w	r1, irq_triggered	# irq_triggered.122_3,
+	mov.w	r1, irq_triggered	# irq_triggered.120_3,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:621: 	*PS2_HANDLER_ADDR 				= (int)irq_triggered;
-	st.w	[r0], r1	# *PS2_HANDLER_ADDR.121_2, irq_triggered.122_3
+	st.w	[r0], r1	# *PS2_HANDLER_ADDR.119_2, irq_triggered.120_3
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:622: 	*KEY_PRESSED_HANDLER_INSTR 		= 1;
-	ld.w	r0, [KEY_PRESSED_HANDLER_INSTR]	# KEY_PRESSED_HANDLER_INSTR.123_4, KEY_PRESSED_HANDLER_INSTR
+	ld.w	r0, [KEY_PRESSED_HANDLER_INSTR]	# KEY_PRESSED_HANDLER_INSTR.121_4, KEY_PRESSED_HANDLER_INSTR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:622: 	*KEY_PRESSED_HANDLER_INSTR 		= 1;
 	mov.s	r1, 1	# tmp37,
-	st.s	[r0], r1	# *KEY_PRESSED_HANDLER_INSTR.123_4, tmp37
+	st.s	[r0], r1	# *KEY_PRESSED_HANDLER_INSTR.121_4, tmp37
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:623: 	*KEY_PRESSED_HANDLER_ADDR 		= (int)&key_pressed;
-	ld.w	r0, [KEY_PRESSED_HANDLER_ADDR]	# KEY_PRESSED_HANDLER_ADDR.124_5, KEY_PRESSED_HANDLER_ADDR
+	ld.w	r0, [KEY_PRESSED_HANDLER_ADDR]	# KEY_PRESSED_HANDLER_ADDR.122_5, KEY_PRESSED_HANDLER_ADDR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:623: 	*KEY_PRESSED_HANDLER_ADDR 		= (int)&key_pressed;
-	mov.w	r1, key_pressed	# key_pressed.125_6,
+	mov.w	r1, key_pressed	# key_pressed.123_6,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:623: 	*KEY_PRESSED_HANDLER_ADDR 		= (int)&key_pressed;
-	st.w	[r0], r1	# *KEY_PRESSED_HANDLER_ADDR.124_5, key_pressed.125_6
+	st.w	[r0], r1	# *KEY_PRESSED_HANDLER_ADDR.122_5, key_pressed.123_6
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:624: 	*KEY_RELEASED_HANDLER_INSTR 	= 1;
-	ld.w	r0, [KEY_RELEASED_HANDLER_INSTR]	# KEY_RELEASED_HANDLER_INSTR.126_7, KEY_RELEASED_HANDLER_INSTR
+	ld.w	r0, [KEY_RELEASED_HANDLER_INSTR]	# KEY_RELEASED_HANDLER_INSTR.124_7, KEY_RELEASED_HANDLER_INSTR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:624: 	*KEY_RELEASED_HANDLER_INSTR 	= 1;
 	mov.s	r1, 1	# tmp38,
-	st.s	[r0], r1	# *KEY_RELEASED_HANDLER_INSTR.126_7, tmp38
+	st.s	[r0], r1	# *KEY_RELEASED_HANDLER_INSTR.124_7, tmp38
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:625: 	*KEY_RELEASED_HANDLER_ADDR	 	= (int)&key_released;
-	ld.w	r0, [KEY_RELEASED_HANDLER_ADDR]	# KEY_RELEASED_HANDLER_ADDR.127_8, KEY_RELEASED_HANDLER_ADDR
+	ld.w	r0, [KEY_RELEASED_HANDLER_ADDR]	# KEY_RELEASED_HANDLER_ADDR.125_8, KEY_RELEASED_HANDLER_ADDR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:625: 	*KEY_RELEASED_HANDLER_ADDR	 	= (int)&key_released;
-	mov.w	r1, key_released	# key_released.128_9,
+	mov.w	r1, key_released	# key_released.126_9,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:625: 	*KEY_RELEASED_HANDLER_ADDR	 	= (int)&key_released;
-	st.w	[r0], r1	# *KEY_RELEASED_HANDLER_ADDR.127_8, key_released.128_9
+	st.w	[r0], r1	# *KEY_RELEASED_HANDLER_ADDR.125_8, key_released.126_9
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:626: 	*VIRTUAL_KEY_ADDR = 0;
-	ld.w	r0, [VIRTUAL_KEY_ADDR]	# VIRTUAL_KEY_ADDR.129_10, VIRTUAL_KEY_ADDR
+	ld.w	r0, [VIRTUAL_KEY_ADDR]	# VIRTUAL_KEY_ADDR.127_10, VIRTUAL_KEY_ADDR
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:626: 	*VIRTUAL_KEY_ADDR = 0;
 	xor.w	r1, r1	# tmp39
-	st.s	[r0], r1	# *VIRTUAL_KEY_ADDR.129_10, tmp39
+	st.s	[r0], r1	# *VIRTUAL_KEY_ADDR.127_10, tmp39
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:627: }
 	nop	
 	mov.w	sp, r13	#,
@@ -2844,19 +2831,19 @@ delay:
 	xor.w	r0, r0	# tmp31
 	st.w	[r13 + (-8)], r0	# e2, tmp31
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:631: 	while(millis > 0)
-	j	.L177		#
-.L179:
+	j	.L176		#
+.L178:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:633: 		e1 = *PORT_MILLIS & 0x7fffffff;
-	ld.w	r0, [PORT_MILLIS]	# PORT_MILLIS.130_1, PORT_MILLIS
-	ld.w	r0, [r0]	# _2, *PORT_MILLIS.130_1
+	ld.w	r0, [PORT_MILLIS]	# PORT_MILLIS.128_1, PORT_MILLIS
+	ld.w	r0, [r0]	# _2, *PORT_MILLIS.128_1
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:633: 		e1 = *PORT_MILLIS & 0x7fffffff;
 	mov.w	r1, 2147483647	# tmp33,
 	and.w	r0, r1	# tmp32, tmp33
 	st.w	[r13 + (-4)], r0	# e1, tmp32
-.L178:
+.L177:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:635: 			e2 = *PORT_MILLIS & 0x7fffffff;
-	ld.w	r0, [PORT_MILLIS]	# PORT_MILLIS.131_3, PORT_MILLIS
-	ld.w	r0, [r0]	# _4, *PORT_MILLIS.131_3
+	ld.w	r0, [PORT_MILLIS]	# PORT_MILLIS.129_3, PORT_MILLIS
+	ld.w	r0, [r0]	# _4, *PORT_MILLIS.129_3
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:635: 			e2 = *PORT_MILLIS & 0x7fffffff;
 	mov.w	r1, 2147483647	# tmp35,
 	and.w	r0, r1	# tmp34, tmp35
@@ -2865,17 +2852,17 @@ delay:
 	ld.w	r1, [r13 + (-4)]	# tmp36, e1
 	ld.w	r0, [r13 + (-8)]	# tmp37, e2
 	cmp.w	r1, r0	# tmp36, tmp37
-	jz	.L178		#
+	jz	.L177		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:637: 		millis--;
 	ld.w	r0, [r13 + (8)]	# tmp39, millis
 	add.w	r0, -1 #111	# tmp38,
 	st.w	[r13 + (8)], r0	# millis, tmp38
-.L177:
+.L176:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:631: 	while(millis > 0)
 	ld.w	r1, [r13 + (8)]	# tmp40, millis
 	xor.w	r0, r0	# tmp41
 	cmp.w	r1, r0	# tmp40, tmp41
-	jgs	.L179		#
+	jgs	.L178		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:639: }
 	nop	
 	nop	
@@ -2926,8 +2913,8 @@ get_millis:
 	push	r13		#
 	mov.w	r13, sp	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:646: 	return *PORT_MILLIS & 0x7fffffff;
-	ld.w	r0, [PORT_MILLIS]	# PORT_MILLIS.132_1, PORT_MILLIS
-	ld.w	r0, [r0]	# _2, *PORT_MILLIS.132_1
+	ld.w	r0, [PORT_MILLIS]	# PORT_MILLIS.130_1, PORT_MILLIS
+	ld.w	r0, [r0]	# _2, *PORT_MILLIS.130_1
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:646: 	return *PORT_MILLIS & 0x7fffffff;
 	mov.w	r1, 2147483647	# tmp30,
 	and.w	r0, r1	# _4, tmp30
@@ -2943,21 +2930,21 @@ is_key_pressed:
 	push	r13		#
 	mov.w	r13, sp	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:652: 	if (key_is_pressed) {
-	ld.w	r1, [key_is_pressed]	# key_is_pressed.133_1, key_is_pressed
+	ld.w	r1, [key_is_pressed]	# key_is_pressed.131_1, key_is_pressed
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:652: 	if (key_is_pressed) {
 	xor.w	r0, r0	# tmp29
-	cmp.w	r1, r0	# key_is_pressed.133_1, tmp29
-	jz	.L184		#
+	cmp.w	r1, r0	# key_is_pressed.131_1, tmp29
+	jz	.L183		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:653: 		key_is_pressed = 0;
 	xor.w	r0, r0	# tmp30
 	st.w	[key_is_pressed], r0	# key_is_pressed, tmp30
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:654: 		return vk_pressed;
 	ld.w	r0, [vk_pressed]	# _2, vk_pressed
-	j	.L185		#
-.L184:
+	j	.L184		#
+.L183:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:656: 	return 0;
 	xor.w	r0, r0	# _2
-.L185:
+.L184:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:657: }
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -2970,21 +2957,21 @@ is_key_released:
 	push	r13		#
 	mov.w	r13, sp	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:662: 	if (key_is_released) {
-	ld.w	r1, [key_is_released]	# key_is_released.134_1, key_is_released
+	ld.w	r1, [key_is_released]	# key_is_released.132_1, key_is_released
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:662: 	if (key_is_released) {
 	xor.w	r0, r0	# tmp29
-	cmp.w	r1, r0	# key_is_released.134_1, tmp29
-	jz	.L187		#
+	cmp.w	r1, r0	# key_is_released.132_1, tmp29
+	jz	.L186		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:663: 		key_is_released = 0;
 	xor.w	r0, r0	# tmp30
 	st.w	[key_is_released], r0	# key_is_released, tmp30
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:664: 		return vk_released;
 	ld.w	r0, [vk_released]	# _2, vk_released
-	j	.L188		#
-.L187:
+	j	.L187		#
+.L186:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:666: 	return 0;
 	xor.w	r0, r0	# _2
-.L188:
+.L187:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:667: }
 	mov.w	sp, r13	#,
 	pop	r13		#

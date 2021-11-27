@@ -136,9 +136,13 @@ typedef struct {
 	int timer_for_destroy;
 } sw_spr_alien_bullet;
 
+/* adresa u memoriji gde se nalazi struktura koja opisuje player_ship sprite */
 hw_sprite *player_ship = (hw_sprite *)128;
+/* adresa u memoriji gde se nalazi bitmapa od player_ship sprajta */
 int sprite_addr = 512;
+/* adresa u memoriji gde se nalazi struktura koja opisuje player_bullet sprite */
 hw_sprite *player_bullet_def = (hw_sprite *)136; // 128 + 8 (velicina hw_sprite-a je 8)
+/* adresa u memoriji gde se nalazi bitmapa od player_bullet sprajta */
 int player_bullet_addr = 640; // 512 + 128 (velicina sprite_addr je 128)
 
 sw_sprite row_1_squid[11];
@@ -1760,7 +1764,7 @@ void spawn_alien_bullet(int alien_bullet_index)
 		* Ako funkcija za 100000 pokusaja ne uspe da nadje cifru, zavrsice sa radom.
 		*/
 		num_of_checks++;
-		if(num_of_checks > 100000)
+		if(num_of_checks > 100)
 			return;
 
 		// Randomizujeje se kolona koja se proverava.
@@ -1768,7 +1772,7 @@ void spawn_alien_bullet(int alien_bullet_index)
 
 		/*
 		 * Ova for petlja sluzi da bi se proverilo da li je kolona vec ispitana.
-		 * Ako petlja najdje na alien_column, to znaci da je alien_column kolona
+		 * Ako petlja naidje na alien_column, to znaci da je alien_column kolona
 		 * vec ispitana, zatim se restartuje petlja i randomizuje novi broj.
 		 * Ako se naidje na -1, ova kolona nije proverena i vrsi se provera.
 		 */		

@@ -194,7 +194,7 @@ uint8_t readData(uint32_t block,
         uint16_t offset, uint16_t count, uint8_t* dst) {
   uint16_t n;
   uint32_t rblock = block;
-  uint16_t roffset = offset_;
+  uint16_t roffset = offset;
   int fail_counter = 0;
 
   asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
@@ -1292,6 +1292,8 @@ uint32_t getDirEntry(file_descriptor_t* fd, uint32_t index)
         fd->dir_entry.slot = j;
         fd->dir_entry.first_cluster = cluster;
         fd->curr_cluster = cluster;
+        if ((file_size > 2000000000) || (cluster > 65534))
+          return 0;
         return counter + 1;
       } else if (counter > index) {
         return 0;

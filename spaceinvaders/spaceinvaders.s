@@ -7867,9 +7867,9 @@ mov.w	r0, r14	# tmp64
 	ld.w	r0, [r13 + (-20)]	# tmp83, num_of_checks
 	add.w	r0, 1 #111	# tmp82,
 	st.w	[r13 + (-20)], r0	# num_of_checks, tmp82
-# spaceinvaders.c:1763: 		if(num_of_checks > 100000)
+# spaceinvaders.c:1763: 		if(num_of_checks > 100)
 	ld.w	r1, [r13 + (-20)]	# tmp84, num_of_checks
-	mov.w	r0, 100000	# tmp85,
+	mov.w	r0, 100	# tmp85,
 	cmp.w	r1, r0	# tmp84, tmp85
 	jgs	.L306		#
 # spaceinvaders.c:1767: 		alien_column = rand() % 11;

@@ -16,7 +16,7 @@ substate:
 	.data
 	.p2align	1
 	.type	vk_table1, @object
-	.size	vk_table1, 262
+	.size	vk_table1, 264
 vk_table1:
 	.short	256
 	.short	309
@@ -148,6 +148,7 @@ vk_table1:
 	.short	256
 	.short	256
 	.short	256
+	.short	256
 	.short	307
 
 	.global	vk_table2
@@ -256,7 +257,7 @@ make_code:
 
 .make0:
 	cmp.w r0, 240	#0xF0
-	jz	break_code	# two keys pressed fast, so instead of make code, here cames the other break code
+	jz	break_code	# two keys pressed fast, so instead of make code, here comes the other break code
 	cmp.w r0, 224 #0xE0
 	jz .extended0		# check if the received make code is the extended0 (E0)
 	cmp.w r0, 225 # 0xE1

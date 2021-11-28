@@ -1464,6 +1464,7 @@ void exec_load()
 	{
 		// DRIVE 0 - SD card
 		file_descriptor_t fd;
+load_load_again:		
 		if(file_open(s, &fd, O_READ))
 		{
 			int len = fd.dir_entry.filesize;
@@ -1484,6 +1485,40 @@ void exec_load()
 
 			buffer[len] = 0;
 			i = len;
+
+			// perform the checksum check
+			char fileName[20];
+			strcpy(fileName, s);
+			int sum = 0;
+			for (int j = 0; j < i; j++) {
+				sum += buffer[j];
+			}
+			printf("\nSum: %d\n", sum);
+
+			for (int j = 0; j < strlen(fileName); j++) 
+			{
+				if (fileName[j] == '.') 
+				{
+					fileName[j] = 0;
+					printf("fileName: [%s], len: %d, j: %d\n", fileName, strlen(fileName), j);
+					strcpy(fileName + j, ".sum");
+					printf("Checksum file: [%s]\n", fileName);
+					if(file_open(fileName, &fd, O_READ))
+					{
+						char buffer2[512];
+						if (file_read(&fd, buffer2, 4))
+						{
+							int checksum = *((int *)buffer2);
+							printf("Checksum: %d\n", checksum);
+							if (checksum != sum)
+								goto load_load_again;
+						}
+					}
+					break;
+				}
+			}	
+
+
 		} else 
 		{
 			printf("SD card file open failed\n");
@@ -1497,6 +1532,13 @@ void exec_load()
 	
 	if (i > 0)
 	{
+
+		int sum = 0;
+		for (int j = 0; j < i; j++) {
+			sum += buffer[j];
+		}
+		printf("sum: %d\n", sum);
+
 		printf("File size: %d\n", i);
 		if (strstr(s, ".BIN") != (char *)0) 
 		{
@@ -2168,6 +2210,7 @@ void exec_exec()
 	{
 		// DRIVE 0 - SD card
 		file_descriptor_t fd;
+load_again:		
 		if(file_open(s, &fd, O_READ))
 		{
 			int len = fd.dir_entry.filesize;
@@ -2189,6 +2232,39 @@ void exec_exec()
 
 			buffer[len] = 0;
 			i = len;
+
+			// perform the checksum check
+			char fileName[20];
+			strcpy(fileName, s);
+			int sum = 0;
+			for (int j = 0; j < i; j++) {
+				sum += buffer[j];
+			}
+			printf("\nSum: %d\n", sum);
+
+			for (int j = 0; j < strlen(fileName); j++) 
+			{
+				if (fileName[j] == '.') 
+				{
+					fileName[j] = 0;
+					printf("fileName: [%s], len: %d, j: %d\n", fileName, strlen(fileName), j);
+					strcpy(fileName + j, ".sum");
+					printf("Checksum file: [%s]\n", fileName);
+					if(file_open(fileName, &fd, O_READ))
+					{
+						char buffer2[512];
+						if (file_read(&fd, buffer2, 4))
+						{
+							int checksum = *((int *)buffer2);
+							printf("Checksum: %d\n", checksum);
+							if (checksum != sum)
+								goto load_again;
+						}
+					}
+					break;
+				}
+			}	
+
 		} 
 		else 
 		{
@@ -2209,6 +2285,7 @@ void exec_exec()
 	}
 	if (i > 0) 
 	{
+
 		int old_color = color;
 		asm("mov.w r0, 197632\ncallr r0\n"); //asm("call 197632\n");
 		init_stdio();

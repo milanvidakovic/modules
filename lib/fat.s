@@ -493,7 +493,7 @@ waitStartBlock:
 	ld.w	r0, [r13 + (-4)]	# tmp35, t0
 	sub.w	r1, r0 #222	# _3, tmp35
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:117:     if ((millis - t0) > SD_READ_TIMEOUT) {
-	mov.w	r0, 300	# tmp36,
+	mov.w	r0, 100	# tmp36,
 	cmp.w	r1, r0	# _3, tmp36
 	jse	.L31		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:118:       error(SD_CARD_ERROR_READ_TIMEOUT);

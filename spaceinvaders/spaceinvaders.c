@@ -575,6 +575,15 @@ short ufo_explosion[] = {
 	0x0070, 0x0070, 0x0070, 0x0007, 0x0000, 0x0000    //7
 };
 
+
+void delay_millis(int d) 
+{
+	int t0 = get_millis();
+	while ((get_millis() - t0) < d ) {
+		
+	}
+}
+
 // Kopira vrednosti iz player_bullet sprite-a u player_bullet adresu.
 void copy_player_bullet_def()
 {	
@@ -780,7 +789,7 @@ short draw_bitmap_with_clear_background(int x, int y, int width, int height, sho
 			 * ako je npr. x = 20, onda ce short bitmape zameniti short na ekranu koji je na poziciji 20.
 			 * Medjutim, x nece uvek biti deljiv sa 4. Ako nije, onda 
 			 * Zato racunamo (x % 4), da vidimo gde treba da stavimo short.
-			 * Recimo da je short koji ocemo da stavimo 0x1234
+			 * Recimo da je short koji hocemo da stavimo 0x1234
 			 * Postoje dve situacije, short "legne" na short na ekranu ili short jednim delom prelazi na jedan short,
 			 * a drugim delom na short pored njega.
 			 * Shift-ovanjem bita u desno za 4 pomeramo short za jednu poziciju u levo. Dobijamo 0x0123
@@ -1890,25 +1899,25 @@ void display_game_over_text()
 	int game_over_text_y_pos = GREEN_THRESHOLD_0 - 16;
 	sprintf(str, "G");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms);
+	delay_millis(letter_delay_ms);
 	sprintf(str, "GA");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms);
+	delay_millis(letter_delay_ms);
 	sprintf(str, "GAM");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms);
+	delay_millis(letter_delay_ms);
 	sprintf(str, "GAME");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms * 3);
+	delay_millis(letter_delay_ms * 3);
 	sprintf(str, "GAME O");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms);
+	delay_millis(letter_delay_ms);
 	sprintf(str, "GAME OV");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms);
+	delay_millis(letter_delay_ms);
 	sprintf(str, "GAME OVE");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
-	delay(letter_delay_ms);
+	delay_millis(letter_delay_ms);
 	sprintf(str, "GAME OVER");
 	draw(game_over_text_x_pos, game_over_text_y_pos, PURPLE, str);
 }
@@ -2123,7 +2132,7 @@ int switch_to_main_menu_screen()
 		}
 
 		timer -= 2;
-		delay(delay_ms);
+		delay_millis(delay_ms);
 	}
 }
 
@@ -2168,7 +2177,7 @@ int switch_to_get_ready_screen()
 
 		timer_for_label_visibility -= 2;
 		timer_for_screen_change -= 2;
-		delay(delay_ms);
+		delay_millis(delay_ms);
 	}
 }
 
@@ -2329,7 +2338,7 @@ int switch_to_play_screen()
 
 		for(int i = 0; i < 11; i++)
 		{
-			delay(16);
+			delay_millis(16);
 			initialize_alien(
 				&alien_row[i],
 				alien_spawn_x + 16 * i,
@@ -2342,7 +2351,7 @@ int switch_to_play_screen()
 
 		alien_spawn_y -= 16;
 	}
-	delay(16);
+	delay_millis(16);
 	
 
 	while (1)
@@ -2510,7 +2519,7 @@ int switch_to_play_screen()
 			{
 				if(number_of_aliens == 0)
 				{
-					delay(1000);
+					delay_millis(1000);
 					change_current_wave();
 					cls(0);
 					return 0;
@@ -2828,7 +2837,7 @@ int switch_to_play_screen()
 				{
 					update_high_score_if_lower_than_score();
 					display_game_over_text();
-					delay(3000);
+					delay_millis(3000);
 					cls(0);
 					current_screen = MAIN_MENU_SCREEN;
 					return 0;
@@ -2898,12 +2907,13 @@ int switch_to_play_screen()
 			
 		}
 
-		delay(delay_ms);
+		delay_millis(delay_ms);
 	}
 }
 
 int main()
 {
+	asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
 	init_stdio();
 	video_mode(1);
 
@@ -2932,6 +2942,7 @@ int main()
 	player_bullet_def ->addr = 0;
 	video_mode(0);
 	cls(0);
+	asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn on timer irq
 	return 0;
 }
 

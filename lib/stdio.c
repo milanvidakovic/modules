@@ -627,14 +627,9 @@ void init_stdio()
 }
 void delay(int millis)
 {
-	int e1 = 0, e2 = 0;	
-	while(millis > 0)
-	{
-		e1 = *PORT_MILLIS & 0x7fffffff;
-		do  {
-			e2 = *PORT_MILLIS & 0x7fffffff;
-		} while (e1 == e2);
-		millis--;
+	int t0 = get_millis();
+	while ((get_millis() - t0) < millis ) {
+		
 	}
 }
 void xy(int x, int y)

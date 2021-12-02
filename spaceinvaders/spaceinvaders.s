@@ -9398,8 +9398,8 @@ switch_to_get_ready_screen:
 # spaceinvaders.c:2148: 	int timer_for_label_visibility = 0;
 	xor.w	r0, r0	# tmp35
 	st.w	[r13 + (-8)], r0	# timer_for_label_visibility, tmp35
-# spaceinvaders.c:2149: 	int timer_for_screen_change = 3000;
-	mov.w	r0, 3000	# tmp36,
+# spaceinvaders.c:2149: 	int timer_for_screen_change = 1000;
+	mov.w	r0, 1000	# tmp36,
 	st.w	[r13 + (-12)], r0	# timer_for_screen_change, tmp36
 # spaceinvaders.c:2151: 	draw_score_labels();
 	call	draw_score_labels		#

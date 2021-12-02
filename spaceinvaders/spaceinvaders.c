@@ -2146,7 +2146,7 @@ int switch_to_get_ready_screen()
 
 	int state = DRAW;
 	int timer_for_label_visibility = 0;
-	int timer_for_screen_change = 3000;
+	int timer_for_screen_change = 1000;
 
 	draw_score_labels();
 	draw_high_score();

@@ -117,19 +117,347 @@ type_:
 	.size	writeCRC_, 1
 writeCRC_:
 	.zero	1
+	.global	crc_table
+	.data
+	.p2align	1
+	.type	crc_table, @object
+	.size	crc_table, 512
+crc_table:
+	.short	0
+	.short	4129
+	.short	8258
+	.short	12387
+	.short	16516
+	.short	20645
+	.short	24774
+	.short	28903
+	.short	-32504
+	.short	-28375
+	.short	-24246
+	.short	-20117
+	.short	-15988
+	.short	-11859
+	.short	-7730
+	.short	-3601
+	.short	4657
+	.short	528
+	.short	12915
+	.short	8786
+	.short	21173
+	.short	17044
+	.short	29431
+	.short	25302
+	.short	-27847
+	.short	-31976
+	.short	-19589
+	.short	-23718
+	.short	-11331
+	.short	-15460
+	.short	-3073
+	.short	-7202
+	.short	9314
+	.short	13379
+	.short	1056
+	.short	5121
+	.short	25830
+	.short	29895
+	.short	17572
+	.short	21637
+	.short	-23190
+	.short	-19125
+	.short	-31448
+	.short	-27383
+	.short	-6674
+	.short	-2609
+	.short	-14932
+	.short	-10867
+	.short	13907
+	.short	9842
+	.short	5649
+	.short	1584
+	.short	30423
+	.short	26358
+	.short	22165
+	.short	18100
+	.short	-18597
+	.short	-22662
+	.short	-26855
+	.short	-30920
+	.short	-2081
+	.short	-6146
+	.short	-10339
+	.short	-14404
+	.short	18628
+	.short	22757
+	.short	26758
+	.short	30887
+	.short	2112
+	.short	6241
+	.short	10242
+	.short	14371
+	.short	-13876
+	.short	-9747
+	.short	-5746
+	.short	-1617
+	.short	-30392
+	.short	-26263
+	.short	-22262
+	.short	-18133
+	.short	23285
+	.short	19156
+	.short	31415
+	.short	27286
+	.short	6769
+	.short	2640
+	.short	14899
+	.short	10770
+	.short	-9219
+	.short	-13348
+	.short	-1089
+	.short	-5218
+	.short	-25735
+	.short	-29864
+	.short	-17605
+	.short	-21734
+	.short	27814
+	.short	31879
+	.short	19684
+	.short	23749
+	.short	11298
+	.short	15363
+	.short	3168
+	.short	7233
+	.short	-4690
+	.short	-625
+	.short	-12820
+	.short	-8755
+	.short	-21206
+	.short	-17141
+	.short	-29336
+	.short	-25271
+	.short	32407
+	.short	28342
+	.short	24277
+	.short	20212
+	.short	15891
+	.short	11826
+	.short	7761
+	.short	3696
+	.short	-97
+	.short	-4162
+	.short	-8227
+	.short	-12292
+	.short	-16613
+	.short	-20678
+	.short	-24743
+	.short	-28808
+	.short	-28280
+	.short	-32343
+	.short	-20022
+	.short	-24085
+	.short	-12020
+	.short	-16083
+	.short	-3762
+	.short	-7825
+	.short	4224
+	.short	161
+	.short	12482
+	.short	8419
+	.short	20484
+	.short	16421
+	.short	28742
+	.short	24679
+	.short	-31815
+	.short	-27752
+	.short	-23557
+	.short	-19494
+	.short	-15555
+	.short	-11492
+	.short	-7297
+	.short	-3234
+	.short	689
+	.short	4752
+	.short	8947
+	.short	13010
+	.short	16949
+	.short	21012
+	.short	25207
+	.short	29270
+	.short	-18966
+	.short	-23093
+	.short	-27224
+	.short	-31351
+	.short	-2706
+	.short	-6833
+	.short	-10964
+	.short	-15091
+	.short	13538
+	.short	9411
+	.short	5280
+	.short	1153
+	.short	29798
+	.short	25671
+	.short	21540
+	.short	17413
+	.short	-22565
+	.short	-18438
+	.short	-30823
+	.short	-26696
+	.short	-6305
+	.short	-2178
+	.short	-14563
+	.short	-10436
+	.short	9939
+	.short	14066
+	.short	1681
+	.short	5808
+	.short	26199
+	.short	30326
+	.short	17941
+	.short	22068
+	.short	-9908
+	.short	-13971
+	.short	-1778
+	.short	-5841
+	.short	-26168
+	.short	-30231
+	.short	-18038
+	.short	-22101
+	.short	22596
+	.short	18533
+	.short	30726
+	.short	26663
+	.short	6336
+	.short	2273
+	.short	14466
+	.short	10403
+	.short	-13443
+	.short	-9380
+	.short	-5313
+	.short	-1250
+	.short	-29703
+	.short	-25640
+	.short	-21573
+	.short	-17510
+	.short	19061
+	.short	23124
+	.short	27191
+	.short	31254
+	.short	2801
+	.short	6864
+	.short	10931
+	.short	14994
+	.short	-722
+	.short	-4849
+	.short	-8852
+	.short	-12979
+	.short	-16982
+	.short	-21109
+	.short	-25112
+	.short	-29239
+	.short	31782
+	.short	27655
+	.short	23652
+	.short	19525
+	.short	15522
+	.short	11395
+	.short	7392
+	.short	3265
+	.short	-4321
+	.short	-194
+	.short	-12451
+	.short	-8324
+	.short	-20581
+	.short	-16454
+	.short	-28711
+	.short	-24584
+	.short	28183
+	.short	32310
+	.short	20053
+	.short	24180
+	.short	11923
+	.short	16050
+	.short	3793
+	.short	7920
 	.text
+	.p2align	1
+	.global	crc16
+	.type	crc16, @function
+crc16:
+	push	r13		#
+	mov.w	r13, sp	#,
+	sub.w	sp, 12 #111	#,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:67:   crc_t crc = 0x0000;
+	xor.w	r0, r0	# tmp41
+	st.s	[r13 + (-2)], r0	# crc, tmp41
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:69:   const unsigned char *d = (const unsigned char *)ptr;
+	ld.w	r0, [r13 + (8)]	# tmp42, ptr
+	st.w	[r13 + (-8)], r0	# d, tmp42
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:72:   while (count--) {
+	j	.L2		#
+.L3:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:73:       tbl_idx = ((crc >> 8) ^ *d) & 0xff;
+	ld.s	r0, [r13 + (-2)]	# tmp43, crc
+	mov.w	r1, 8	# tmp45,
+	shr.w	r0, r1	# tmp44, tmp45
+	zex.s	r0, r0	# _2, _1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:73:       tbl_idx = ((crc >> 8) ^ *d) & 0xff;
+	ld.w	r1, [r13 + (-8)]	# tmp46, d
+	ld.b	r1, [r1]	# _3, *d_16
+	zex.b	r1, r1	# _4, _3
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:73:       tbl_idx = ((crc >> 8) ^ *d) & 0xff;
+	xor.w	r0, r1	# _5, _4
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:73:       tbl_idx = ((crc >> 8) ^ *d) & 0xff;
+	mov.w	r1, 255	# tmp48,
+	and.w	r0, r1	# tmp47, tmp48
+	st.w	[r13 + (-12)], r0	# tbl_idx, tmp47
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:74:       crc = (crc_table[tbl_idx] ^ (crc << 8)) & 0xffff;
+	ld.w	r0, [r13 + (-12)]	# tmp49, tbl_idx
+	add.w	r0, r0 #222	# tmp50, tmp49
+	mov.w	r1, crc_table	# tmp52,
+	add.w	r0, r1 #222	# tmp51, tmp52
+	ld.s	r0, [r0]	# _7, crc_table
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:74:       crc = (crc_table[tbl_idx] ^ (crc << 8)) & 0xffff;
+	ld.s	r1, [r13 + (-2)]	# _9, crc
+	mov.w	r2, 8	# tmp53,
+	shl.w	r1, r2	# _10, tmp53
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:74:       crc = (crc_table[tbl_idx] ^ (crc << 8)) & 0xffff;
+	xor.w	r0, r1	# tmp54, _11
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:74:       crc = (crc_table[tbl_idx] ^ (crc << 8)) & 0xffff;
+	st.s	[r13 + (-2)], r0	# crc, _12
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:75:       d++;
+	ld.w	r0, [r13 + (-8)]	# tmp56, d
+	add.w	r0, 1 #111	# tmp55,
+	st.w	[r13 + (-8)], r0	# d, tmp55
+.L2:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:72:   while (count--) {
+	ld.w	r0, [r13 + (12)]	# count.0_13, count
+	mov.w	r1, r0	# tmp57, count.0_13
+	add.w	r1, -1 #111	# tmp57,
+	st.w	[r13 + (12)], r1	# count, tmp57
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:72:   while (count--) {
+	xor.w	r1, r1	# tmp58
+	cmp.w	r0, r1	# count.0_13, tmp58
+	jnz	.L3		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:77:   return crc & 0xffff;
+	ld.s	r0, [r13 + (-2)]	# _22, crc
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78: }
+	mov.w	sp, r13	#,
+	pop	r13		#
+	ret	
+	.size	crc16, .-crc16
 	.p2align	1
 	.global	chipSelectHigh
 	.type	chipSelectHigh, @function
 chipSelectHigh:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:27:   *PORT_SPI_CS2 = 1;
-	ld.w	r0, [PORT_SPI_CS2]	# PORT_SPI_CS2.0_1, PORT_SPI_CS2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:27:   *PORT_SPI_CS2 = 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:82:   *PORT_SPI_CS2 = 1;
+	ld.w	r0, [PORT_SPI_CS2]	# PORT_SPI_CS2.1_1, PORT_SPI_CS2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:82:   *PORT_SPI_CS2 = 1;
 	mov.s	r1, 1	# tmp27,
-	st.s	[r0], r1	# *PORT_SPI_CS2.0_1, tmp27
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:28: }
+	st.s	[r0], r1	# *PORT_SPI_CS2.1_1, tmp27
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:83: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -141,12 +469,12 @@ chipSelectHigh:
 chipSelectLow:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:30:   *PORT_SPI_CS2 = 0;
-	ld.w	r0, [PORT_SPI_CS2]	# PORT_SPI_CS2.1_1, PORT_SPI_CS2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:30:   *PORT_SPI_CS2 = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:85:   *PORT_SPI_CS2 = 0;
+	ld.w	r0, [PORT_SPI_CS2]	# PORT_SPI_CS2.2_1, PORT_SPI_CS2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:85:   *PORT_SPI_CS2 = 0;
 	xor.w	r1, r1	# tmp27
-	st.s	[r0], r1	# *PORT_SPI_CS2.1_1, tmp27
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:31: }
+	st.s	[r0], r1	# *PORT_SPI_CS2.2_1, tmp27
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:86: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -159,19 +487,19 @@ spiRec:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:34:     send_spi(SPI0, 0xFF);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:89:     send_spi(SPI0, 0xFF);
 	mov.w	r0, sp	# tmp29,
 	mov.w	r1, 255	# tmp30,
 	st.w	[r0 + (4)], r1	#, tmp30
 	xor.w	r1, r1	# tmp31
 	st.w	[r0], r1	#, tmp31
 	call	send_spi		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:35:     return read_spi(SPI0);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:90:     return read_spi(SPI0);
 	mov.w	r1, sp	# tmp32,
 	xor.w	r0, r0	# tmp33
 	st.w	[r1], r0	#, tmp33
 	call	read_spi		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:36: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:91: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -185,14 +513,14 @@ spiSend:
 	sub.w	sp, 28 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp27, b
 	st.b	[r13 + (-4)], r0	# b, tmp28
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:39:     send_spi(SPI0, b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:94:     send_spi(SPI0, b);
 	ld.b	r1, [r13 + (-4)]	# _1, b
 	mov.w	r0, sp	# tmp29,
 	st.w	[r0 + (4)], r1	#, _1
 	xor.w	r1, r1	# tmp30
 	st.w	[r0], r1	#, tmp30
 	call	send_spi		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:40: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:95: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -204,38 +532,71 @@ spiSend:
 readEnd:
 	push	r13		#
 	mov.w	r13, sp	#,
-	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:46:   if (inBlock_) {
-	ld.b	r0, [inBlock_]	# inBlock_.2_1, inBlock_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:46:   if (inBlock_) {
-	zex.b	r1, r0	# tmp29, inBlock_.2_1
-	xor.w	r0, r0	# tmp30
-	cmp.w	r1, r0	# tmp29, tmp30
-	jz	.L10		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:48:     while (offset_++ < 514) spiRec();
-	j	.L8		#
-.L9:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:48:     while (offset_++ < 514) spiRec();
+	sub.w	sp, 28 #111	#,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:101:   uint16_t crc = 0;
+	xor.w	r0, r0	# tmp35
+	st.s	[r13 + (-2)], r0	# crc, tmp35
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:102:   if (inBlock_) {
+	ld.b	r0, [inBlock_]	# inBlock_.3_1, inBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:102:   if (inBlock_) {
+	zex.b	r1, r0	# tmp36, inBlock_.3_1
+	xor.w	r0, r0	# tmp37
+	cmp.w	r1, r0	# tmp36, tmp37
+	jz	.L11		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:104:     while (offset_++ < 514) { 
+	j	.L12		#
+.L14:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:105:       uint8_t b = spiRec();
 	call	spiRec		#
-.L8:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:48:     while (offset_++ < 514) spiRec();
-	ld.s	r0, [offset_]	# offset_.3_2, offset_
-	mov.w	r1, r0	# tmp31,
-	add.w	r1, 1 #111	# tmp31,
-	st.s	[offset_], r1	# offset_, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:48:     while (offset_++ < 514) spiRec();
-	zex.s	r1, r0	# tmp32, offset_.3_2
-	mov.w	r0, 513	# tmp33,
-	cmp.w	r1, r0	# tmp32, tmp33
-	jse	.L9		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:49:     chipSelectHigh();
+	st.b	[r13 + (-3)], r0	# b,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:106:        if (offset_ == 513) {
+	ld.s	r0, [offset_]	# offset_.4_2, offset_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:106:        if (offset_ == 513) {
+	zex.s	r1, r0	# tmp38, offset_.4_2
+	mov.w	r0, 513	# tmp39,
+	cmp.w	r1, r0	# tmp38, tmp39
+	jnz	.L13		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:107:         crc = b << 8;
+	ld.b	r0, [r13 + (-3)]	# tmp40, b
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:107:         crc = b << 8;
+	mov.w	r1, 8	# tmp42,
+	shl.w	r0, r1	# tmp41, tmp42
+	st.s	[r13 + (-2)], r0	# crc, tmp43
+	j	.L12		#
+.L13:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:108:       } else if (offset_ == 514) 
+	ld.s	r0, [offset_]	# offset_.5_4, offset_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:108:       } else if (offset_ == 514) 
+	zex.s	r1, r0	# tmp44, offset_.5_4
+	mov.w	r0, 514	# tmp45,
+	cmp.w	r1, r0	# tmp44, tmp45
+	jnz	.L12		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:110:         crc |= b;
+	ld.b	r0, [r13 + (-3)]	# tmp46, b
+	mov.w	r1, r0	# _5, tmp46
+	ld.s	r0, [r13 + (-2)]	# tmp47, crc
+	or.w	r0, r1	# tmp48, _5
+	st.s	[r13 + (-2)], r0	# crc, tmp49
+.L12:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:104:     while (offset_++ < 514) { 
+	ld.s	r0, [offset_]	# offset_.6_6, offset_
+	mov.w	r1, r0	# tmp50,
+	add.w	r1, 1 #111	# tmp50,
+	st.s	[offset_], r1	# offset_, _8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:104:     while (offset_++ < 514) { 
+	zex.s	r1, r0	# tmp51, offset_.6_6
+	mov.w	r0, 513	# tmp52,
+	cmp.w	r1, r0	# tmp51, tmp52
+	jse	.L14		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:113:     chipSelectHigh();
 	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:50:     inBlock_ = 0;
-	xor.w	r0, r0	# tmp34
-	st.b	[inBlock_], r0	# inBlock_, tmp34
-.L10:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:52: }
-	nop	
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:114:     inBlock_ = 0;
+	xor.w	r0, r0	# tmp53
+	st.b	[inBlock_], r0	# inBlock_, tmp53
+.L11:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:116:   return crc;
+	ld.s	r0, [r13 + (-2)]	# _22, crc
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:117: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -247,35 +608,35 @@ waitNotBusy:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:56:   uint32_t t0 = get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:121:   uint32_t t0 = get_millis();
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:56:   uint32_t t0 = get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:121:   uint32_t t0 = get_millis();
 	st.w	[r13 + (-4)], r0	# t0, _1
-.L14:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:58:     if (spiRec() == 0XFF) return true;
+.L19:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:123:     if (spiRec() == 0XFF) return true;
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:58:     if (spiRec() == 0XFF) return true;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:123:     if (spiRec() == 0XFF) return true;
 	zex.b	r1, r0	# tmp33, _2
 	mov.w	r0, 255	# tmp34,
 	cmp.w	r1, r0	# tmp33, tmp34
-	jnz	.L12		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:58:     if (spiRec() == 0XFF) return true;
+	jnz	.L17		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:123:     if (spiRec() == 0XFF) return true;
 	mov.b	r0, 1	# _6,
-	j	.L13		#
-.L12:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:60:   while ((get_millis() - t0) < timeoutMillis);
+	j	.L18		#
+.L17:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:125:   while ((get_millis() - t0) < timeoutMillis);
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:60:   while ((get_millis() - t0) < timeoutMillis);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:125:   while ((get_millis() - t0) < timeoutMillis);
 	ld.w	r1, [r13 + (-4)]	# tmp35, t0
 	sub.w	r0, r1 #222	# _5, tmp35
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:60:   while ((get_millis() - t0) < timeoutMillis);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:125:   while ((get_millis() - t0) < timeoutMillis);
 	ld.w	r1, [r13 + (8)]	# tmp36, timeoutMillis
 	cmp.w	r1, r0	# tmp36, _5
-	jg	.L14		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:61:   return false;
+	jg	.L19		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:126:   return false;
 	xor.w	r0, r0	# _6
-.L13:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:62: }
+.L18:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:127: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -289,16 +650,16 @@ cardCommand:
 	sub.w	sp, 32 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp41, cmd
 	st.b	[r13 + (-8)], r0	# cmd, tmp42
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:66:   readEnd();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:131:   readEnd();
 	call	readEnd		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:69:   chipSelectLow();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:134:   chipSelectLow();
 	call	chipSelectLow		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:72:   waitNotBusy(300);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:137:   waitNotBusy(300);
 	mov.w	r1, sp	# tmp43,
 	mov.w	r0, 300	# tmp44,
 	st.w	[r1], r0	#, tmp44
 	call	waitNotBusy		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:75:   spiSend(cmd | 0x40);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:140:   spiSend(cmd | 0x40);
 	ld.b	r0, [r13 + (-8)]	# tmp45, cmd
 	mov.w	r1, 64	# tmp47,
 	or.w	r0, r1	# tmp46, tmp47
@@ -306,89 +667,89 @@ cardCommand:
 	mov.w	r1, sp	# tmp48,
 	st.w	[r1], r0	#, _2
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:143:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
 	mov.b	r0, 24	# tmp49,
 	st.b	[r13 + (-1)], r0	# s, tmp49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
-	j	.L16		#
-.L17:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:143:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
+	j	.L21		#
+.L22:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:143:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
 	ld.b	r0, [r13 + (-1)]	#, s
 	sex.b	r1, r0	# _3,
 	ld.w	r0, [r13 + (12)]	# tmp50, arg
 	shr.w	r0, r1	# _4, _3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:143:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
 	zex.b	r0, r0	# _6, _5
 	mov.w	r1, sp	# tmp51,
 	st.w	[r1], r0	#, _6
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
-	ld.b	r0, [r13 + (-1)]	# s.5_7, s
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:143:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
+	ld.b	r0, [r13 + (-1)]	# s.8_7, s
 	add.w	r0, -8 #111	# tmp52,
 	st.b	[r13 + (-1)], r0	# s, _8
-.L16:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:78:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
+.L21:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:143:   for (int8_t s = 24; s >= 0; s -= 8) spiSend(arg >> s);
 	ld.b	r0, [r13 + (-1)]	#, s
 	sex.b	r1, r0	# tmp53,
 	xor.w	r0, r0	# tmp54
 	cmp.w	r1, r0	# tmp53, tmp54
-	jges	.L17		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:81:   uint8_t crc = 0XFF;
+	jges	.L22		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:146:   uint8_t crc = 0XFF;
 	mov.b	r0, -1	# tmp55,
 	st.b	[r13 + (-2)], r0	# crc, tmp55
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:82:   if (cmd == CMD0) crc = 0X95;  // correct crc for CMD0 with arg 0
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:147:   if (cmd == CMD0) crc = 0X95;  // correct crc for CMD0 with arg 0
 	ld.b	r1, [r13 + (-8)]	# tmp56, cmd
 	xor.w	r0, r0	# tmp57
 	cmp.w	r1, r0	# tmp56, tmp57
-	jnz	.L18		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:82:   if (cmd == CMD0) crc = 0X95;  // correct crc for CMD0 with arg 0
+	jnz	.L23		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:147:   if (cmd == CMD0) crc = 0X95;  // correct crc for CMD0 with arg 0
 	mov.b	r0, -107	# tmp58,
 	st.b	[r13 + (-2)], r0	# crc, tmp58
-.L18:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:83:   if (cmd == CMD8) crc = 0X87;  // correct crc for CMD8 with arg 0X1AA
+.L23:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:148:   if (cmd == CMD8) crc = 0X87;  // correct crc for CMD8 with arg 0X1AA
 	ld.b	r1, [r13 + (-8)]	# tmp59, cmd
 	mov.w	r0, 8	# tmp60,
 	cmp.w	r1, r0	# tmp59, tmp60
-	jnz	.L19		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:83:   if (cmd == CMD8) crc = 0X87;  // correct crc for CMD8 with arg 0X1AA
+	jnz	.L24		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:148:   if (cmd == CMD8) crc = 0X87;  // correct crc for CMD8 with arg 0X1AA
 	mov.b	r0, -121	# tmp61,
 	st.b	[r13 + (-2)], r0	# crc, tmp61
-.L19:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:84:   spiSend(crc);
+.L24:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:149:   spiSend(crc);
 	ld.b	r0, [r13 + (-2)]	# _9, crc
 	mov.w	r1, sp	# tmp62,
 	st.w	[r1], r0	#, _9
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
 	xor.w	r0, r0	# tmp63
 	st.b	[r13 + (-3)], r0	# i, tmp63
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
-	j	.L20		#
-.L22:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
-	ld.b	r0, [r13 + (-3)]	# i.6_10, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+	j	.L25		#
+.L27:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+	ld.b	r0, [r13 + (-3)]	# i.9_10, i
 	add.w	r0, 1 #111	# tmp64,
 	st.b	[r13 + (-3)], r0	# i, tmp65
-.L20:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+.L25:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
 	st.b	[status_], r0	# status_, _11
-	ld.b	r0, [status_]	# status_.7_12, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
-	sex.b	r1, r0	# tmp66, status_.8_13
+	ld.b	r0, [status_]	# status_.10_12, status_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+	sex.b	r1, r0	# tmp66, status_.11_13
 	xor.w	r0, r0	# tmp67
 	cmp.w	r1, r0	# tmp66, tmp67
-	jges	.L21		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:87:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
+	jges	.L26		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152:   for (uint8_t i = 0; ((status_ = spiRec()) & 0X80) && i != 0XFF; i++);
 	ld.b	r1, [r13 + (-3)]	# tmp68, i
 	mov.w	r0, 255	# tmp69,
 	cmp.w	r1, r0	# tmp68, tmp69
-	jnz	.L22		#
-.L21:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:88:   return status_;
+	jnz	.L27		#
+.L26:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:153:   return status_;
 	ld.b	r0, [status_]	# _35, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:89: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:154: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -402,21 +763,21 @@ cardAcmd:
 	sub.w	sp, 28 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp29, cmd
 	st.b	[r13 + (-4)], r0	# cmd, tmp30
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:92:   cardCommand(CMD55, 0);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:157:   cardCommand(CMD55, 0);
 	mov.w	r0, sp	# tmp31,
 	xor.w	r1, r1	# tmp32
 	st.w	[r0 + (4)], r1	#, tmp32
 	mov.w	r1, 55	# tmp33,
 	st.w	[r0], r1	#, tmp33
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:93:   return cardCommand(cmd, arg);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:158:   return cardCommand(cmd, arg);
 	ld.b	r1, [r13 + (-4)]	# _1, cmd
 	mov.w	r0, sp	# tmp34,
 	ld.w	r2, [r13 + (12)]	# tmp35, arg
 	st.w	[r0 + (4)], r2	#, tmp35
 	st.w	[r0], r1	#, _1
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:94: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:159: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -430,10 +791,10 @@ error:
 	sub.w	sp, 4 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp26, code
 	st.b	[r13 + (-4)], r0	# code, tmp27
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:98:   errorCode_ = code;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:163:   errorCode_ = code;
 	ld.b	r0, [r13 + (-4)]	# tmp28, code
 	st.b	[errorCode_], r0	# errorCode_, tmp28
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:99: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:164: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -445,9 +806,9 @@ error:
 get_type:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:103:   return type_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:168:   return type_;
 	ld.b	r0, [type_]	# _2, type_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:104: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:169: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -461,10 +822,10 @@ type:
 	sub.w	sp, 4 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp26, value
 	st.b	[r13 + (-4)], r0	# value, tmp27
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:108:   type_ = value;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:173:   type_ = value;
 	ld.b	r0, [r13 + (-4)]	# tmp28, value
 	st.b	[type_], r0	# type_, tmp28
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:109: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:174: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -477,68 +838,68 @@ waitStartBlock:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 32 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:113:   uint32_t t0 = get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:178:   uint32_t t0 = get_millis();
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:113:   uint32_t t0 = get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:178:   uint32_t t0 = get_millis();
 	st.w	[r13 + (-4)], r0	# t0, _1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:115:   while ((status_ = spiRec()) == 0XFF) {
-	j	.L31		#
-.L33:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:116:     millis = get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:180:   while ((status_ = spiRec()) == 0XFF) {
+	j	.L36		#
+.L38:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:181:     millis = get_millis();
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:116:     millis = get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:181:     millis = get_millis();
 	st.w	[r13 + (-8)], r0	# millis, _2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:117:     if ((millis - t0) > SD_READ_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:182:     if ((millis - t0) > SD_READ_TIMEOUT) {
 	ld.w	r1, [r13 + (-8)]	# tmp34, millis
 	ld.w	r0, [r13 + (-4)]	# tmp35, t0
 	sub.w	r1, r0 #222	# _3, tmp35
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:117:     if ((millis - t0) > SD_READ_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:182:     if ((millis - t0) > SD_READ_TIMEOUT) {
 	mov.w	r0, 100	# tmp36,
 	cmp.w	r1, r0	# _3, tmp36
-	jse	.L31		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:118:       error(SD_CARD_ERROR_READ_TIMEOUT);
+	jse	.L36		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:183:       error(SD_CARD_ERROR_READ_TIMEOUT);
 	mov.w	r1, sp	# tmp37,
 	mov.w	r0, 15	# tmp38,
 	st.w	[r1], r0	#, tmp38
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:119:       goto fail;
-	j	.L32		#
-.L31:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:115:   while ((status_ = spiRec()) == 0XFF) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:184:       goto fail;
+	j	.L37		#
+.L36:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:180:   while ((status_ = spiRec()) == 0XFF) {
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:115:   while ((status_ = spiRec()) == 0XFF) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:180:   while ((status_ = spiRec()) == 0XFF) {
 	st.b	[status_], r0	# status_, _4
-	ld.b	r0, [status_]	# status_.9_5, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:115:   while ((status_ = spiRec()) == 0XFF) {
-	zex.b	r1, r0	# tmp39, status_.9_5
+	ld.b	r0, [status_]	# status_.12_5, status_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:180:   while ((status_ = spiRec()) == 0XFF) {
+	zex.b	r1, r0	# tmp39, status_.12_5
 	mov.w	r0, 255	# tmp40,
 	cmp.w	r1, r0	# tmp39, tmp40
-	jz	.L33		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:122:   if (status_ != DATA_START_BLOCK) {
-	ld.b	r0, [status_]	# status_.10_6, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:122:   if (status_ != DATA_START_BLOCK) {
-	zex.b	r1, r0	# tmp41, status_.10_6
+	jz	.L38		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:187:   if (status_ != DATA_START_BLOCK) {
+	ld.b	r0, [status_]	# status_.13_6, status_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:187:   if (status_ != DATA_START_BLOCK) {
+	zex.b	r1, r0	# tmp41, status_.13_6
 	mov.w	r0, 254	# tmp42,
 	cmp.w	r1, r0	# tmp41, tmp42
-	jz	.L34		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:123:     error(SD_CARD_ERROR_READ);
+	jz	.L39		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:188:     error(SD_CARD_ERROR_READ);
 	mov.w	r1, sp	# tmp43,
 	mov.w	r0, 13	# tmp44,
 	st.w	[r1], r0	#, tmp44
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:124:     goto fail;
-	j	.L32		#
-.L34:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:126:   return true;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:189:     goto fail;
+	j	.L37		#
+.L39:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:191:   return true;
 	mov.b	r0, 1	# _7,
-	j	.L35		#
-.L32:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:129:   chipSelectHigh();
+	j	.L40		#
+.L37:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:194:   chipSelectHigh();
 	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:133:   return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:198:   return false;
 	xor.w	r0, r0	# _7
-.L35:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:134: }
+.L40:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:199: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -604,8 +965,8 @@ irq_counter:
 dma_1_irq_triggered:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:152: 	asm 
-# 152 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:217: 	asm 
+# 217 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
 	push r0
 push r1
 push r2
@@ -621,11 +982,11 @@ push r11
 push r12
 push r13
 
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:157: 	finished_dma_read_1 = 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:222: 	finished_dma_read_1 = 1;
 	mov.w	r0, 1	# tmp26,
 	st.w	[finished_dma_read_1], r0	# finished_dma_read_1, tmp26
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:160:   asm 
-# 160 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:225:   asm 
+# 225 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
 	pop r13
 pop r12
 pop r11
@@ -643,7 +1004,7 @@ pop r0
 mov.w sp,r13
 pop r13
 iret
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:164: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:229: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -658,64 +1019,64 @@ dma_receive:
 	sub.w	sp, 8 #111	#,
 	ld.w	r0, [r13 + (12)]	# tmp37, count
 	st.s	[r13 + (-8)], r0	# count, tmp38
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:168:     int counter = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:233:     int counter = 0;
 	xor.w	r0, r0	# tmp39
 	st.w	[r13 + (-4)], r0	# counter, tmp39
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:169:     finished_dma_read_1 = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:234:     finished_dma_read_1 = 0;
 	xor.w	r0, r0	# tmp40
 	st.w	[finished_dma_read_1], r0	# finished_dma_read_1, tmp40
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:170:     *PORT_DMA_ADDR_1 = (unsigned int)dst;
-	ld.w	r0, [PORT_DMA_ADDR_1]	# PORT_DMA_ADDR_1.11_1, PORT_DMA_ADDR_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:170:     *PORT_DMA_ADDR_1 = (unsigned int)dst;
-	ld.w	r1, [r13 + (8)]	# dst.12_2, dst
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:170:     *PORT_DMA_ADDR_1 = (unsigned int)dst;
-	st.w	[r0], r1	# *PORT_DMA_ADDR_1.11_1, dst.12_2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:171:     *PORT_DMA_COUNT_1 = count;
-	ld.w	r0, [PORT_DMA_COUNT_1]	# PORT_DMA_COUNT_1.13_3, PORT_DMA_COUNT_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:171:     *PORT_DMA_COUNT_1 = count;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:235:     *PORT_DMA_ADDR_1 = (unsigned int)dst;
+	ld.w	r0, [PORT_DMA_ADDR_1]	# PORT_DMA_ADDR_1.14_1, PORT_DMA_ADDR_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:235:     *PORT_DMA_ADDR_1 = (unsigned int)dst;
+	ld.w	r1, [r13 + (8)]	# dst.15_2, dst
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:235:     *PORT_DMA_ADDR_1 = (unsigned int)dst;
+	st.w	[r0], r1	# *PORT_DMA_ADDR_1.14_1, dst.15_2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:236:     *PORT_DMA_COUNT_1 = count;
+	ld.w	r0, [PORT_DMA_COUNT_1]	# PORT_DMA_COUNT_1.16_3, PORT_DMA_COUNT_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:236:     *PORT_DMA_COUNT_1 = count;
 	ld.s	r1, [r13 + (-8)]	# _4, count
-	st.w	[r0], r1	# *PORT_DMA_COUNT_1.13_3, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:172:     *PORT_DMA_START_RCV_1 = 1;
-	ld.w	r0, [PORT_DMA_START_RCV_1]	# PORT_DMA_START_RCV_1.14_5, PORT_DMA_START_RCV_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:172:     *PORT_DMA_START_RCV_1 = 1;
+	st.w	[r0], r1	# *PORT_DMA_COUNT_1.16_3, _4
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:237:     *PORT_DMA_START_RCV_1 = 1;
+	ld.w	r0, [PORT_DMA_START_RCV_1]	# PORT_DMA_START_RCV_1.17_5, PORT_DMA_START_RCV_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:237:     *PORT_DMA_START_RCV_1 = 1;
 	mov.s	r1, 1	# tmp41,
-	st.s	[r0], r1	# *PORT_DMA_START_RCV_1.14_5, tmp41
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:173:     while (!finished_dma_read_1) {
-	j	.L38		#
-.L40:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:174:       if (counter++ == 5535) {
-	ld.w	r0, [r13 + (-4)]	# counter.15_6, counter
-	mov.w	r1, r0	# tmp42, counter.15_6
+	st.s	[r0], r1	# *PORT_DMA_START_RCV_1.17_5, tmp41
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:238:     while (!finished_dma_read_1) {
+	j	.L43		#
+.L45:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:239:       if (counter++ == 5535) {
+	ld.w	r0, [r13 + (-4)]	# counter.18_6, counter
+	mov.w	r1, r0	# tmp42, counter.18_6
 	add.w	r1, 1 #111	# tmp42,
 	st.w	[r13 + (-4)], r1	# counter, tmp42
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:174:       if (counter++ == 5535) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:239:       if (counter++ == 5535) {
 	mov.w	r1, 5535	# tmp43,
-	cmp.w	r0, r1	# counter.15_6, tmp43
-	jnz	.L38		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:175:         *PORT_DMA_COUNT_1 = 0;
-	ld.w	r0, [PORT_DMA_COUNT_1]	# PORT_DMA_COUNT_1.16_7, PORT_DMA_COUNT_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:175:         *PORT_DMA_COUNT_1 = 0;
+	cmp.w	r0, r1	# counter.18_6, tmp43
+	jnz	.L43		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:240:         *PORT_DMA_COUNT_1 = 0;
+	ld.w	r0, [PORT_DMA_COUNT_1]	# PORT_DMA_COUNT_1.19_7, PORT_DMA_COUNT_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:240:         *PORT_DMA_COUNT_1 = 0;
 	xor.w	r1, r1	# tmp44
-	st.w	[r0], r1	# *PORT_DMA_COUNT_1.16_7, tmp44
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:176:         *PORT_DMA_START_RCV_1 = 0;
-	ld.w	r0, [PORT_DMA_START_RCV_1]	# PORT_DMA_START_RCV_1.17_8, PORT_DMA_START_RCV_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:176:         *PORT_DMA_START_RCV_1 = 0;
+	st.w	[r0], r1	# *PORT_DMA_COUNT_1.19_7, tmp44
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:241:         *PORT_DMA_START_RCV_1 = 0;
+	ld.w	r0, [PORT_DMA_START_RCV_1]	# PORT_DMA_START_RCV_1.20_8, PORT_DMA_START_RCV_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:241:         *PORT_DMA_START_RCV_1 = 0;
 	xor.w	r1, r1	# tmp45
-	st.s	[r0], r1	# *PORT_DMA_START_RCV_1.17_8, tmp45
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:177:         return false;
+	st.s	[r0], r1	# *PORT_DMA_START_RCV_1.20_8, tmp45
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:242:         return false;
 	xor.w	r0, r0	# _11
-	j	.L39		#
-.L38:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:173:     while (!finished_dma_read_1) {
-	ld.w	r1, [finished_dma_read_1]	# finished_dma_read_1.18_9, finished_dma_read_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:173:     while (!finished_dma_read_1) {
+	j	.L44		#
+.L43:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:238:     while (!finished_dma_read_1) {
+	ld.w	r1, [finished_dma_read_1]	# finished_dma_read_1.21_9, finished_dma_read_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:238:     while (!finished_dma_read_1) {
 	xor.w	r0, r0	# tmp46
-	cmp.w	r1, r0	# finished_dma_read_1.18_9, tmp46
-	jz	.L40		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:180:     return true;
+	cmp.w	r1, r0	# finished_dma_read_1.21_9, tmp46
+	jz	.L45		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:245:     return true;
 	mov.b	r0, 1	# _11,
-.L39:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:181: }
+.L44:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:246: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -726,278 +1087,312 @@ dma_receive:
 readData:
 	push	r13		#
 	mov.w	r13, sp	#,
-	sub.w	sp, 48 #111	#,
-	ld.w	r1, [r13 + (12)]	# tmp54, offset
-	ld.w	r0, [r13 + (16)]	# tmp56, count
-	st.s	[r13 + (-20)], r1	# offset, tmp55
-	st.s	[r13 + (-24)], r0	# count, tmp57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:196:   uint32_t rblock = block;
-	ld.w	r0, [r13 + (8)]	# tmp58, block
-	st.w	[r13 + (-12)], r0	# rblock, tmp58
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:197:   uint16_t roffset = offset;
-	ld.s	r0, [r13 + (-20)]	# tmp59, offset
-	st.s	[r13 + (-14)], r0	# roffset, tmp59
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:198:   int fail_counter = 0;
-	xor.w	r0, r0	# tmp60
-	st.w	[r13 + (-4)], r0	# fail_counter, tmp60
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:200:   asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
-# 200 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
+	sub.w	sp, 52 #111	#,
+	ld.w	r1, [r13 + (12)]	# tmp56, offset
+	ld.w	r0, [r13 + (16)]	# tmp58, count
+	st.s	[r13 + (-24)], r1	# offset, tmp57
+	st.s	[r13 + (-28)], r0	# count, tmp59
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:261:   uint32_t rblock = block;
+	ld.w	r0, [r13 + (8)]	# tmp60, block
+	st.w	[r13 + (-16)], r0	# rblock, tmp60
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:262:   uint16_t roffset = offset;
+	ld.s	r0, [r13 + (-24)]	# tmp61, offset
+	st.s	[r13 + (-18)], r0	# roffset, tmp61
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:263:   int fail_counter = 0;
+	xor.w	r0, r0	# tmp62
+	st.w	[r13 + (-4)], r0	# fail_counter, tmp62
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:265:   asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+# 265 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
 	irq 0
 
-.L42:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:203:   block = rblock;
-	ld.w	r0, [r13 + (-12)]	# tmp61, rblock
-	st.w	[r13 + (8)], r0	# block, tmp61
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:204:   offset_ = roffset;
-	ld.s	r0, [r13 + (-14)]	# tmp62, roffset
-	st.s	[offset_], r0	# offset_, tmp62
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:206:   if (count == 0) goto read_end;
-	ld.s	r1, [r13 + (-24)]	# tmp63, count
-	xor.w	r0, r0	# tmp64
-	cmp.w	r1, r0	# tmp63, tmp64
-	jz	.L60		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:207:   if ((count + offset) > 512) {
-	ld.s	r1, [r13 + (-24)]	# _1, count
-	ld.s	r0, [r13 + (-20)]	# _2, offset
-	add.w	r1, r0 #222	# _3, _2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:207:   if ((count + offset) > 512) {
-	mov.w	r0, 512	# tmp65,
-	cmp.w	r1, r0	# _3, tmp65
-	jgs	.L61		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:220:   if (!inBlock_ || block != block_ || offset < offset_) {
-	ld.b	r0, [inBlock_]	# inBlock_.19_4, inBlock_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:220:   if (!inBlock_ || block != block_ || offset < offset_) {
-	zex.b	r1, r0	# tmp66, inBlock_.19_4
-	xor.w	r0, r0	# tmp67
-	cmp.w	r1, r0	# tmp66, tmp67
-	jz	.L47		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:220:   if (!inBlock_ || block != block_ || offset < offset_) {
-	ld.w	r0, [block_]	# block_.20_5, block_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:220:   if (!inBlock_ || block != block_ || offset < offset_) {
-	ld.w	r1, [r13 + (8)]	# tmp68, block
-	cmp.w	r1, r0	# tmp68, block_.20_5
-	jnz	.L47		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:220:   if (!inBlock_ || block != block_ || offset < offset_) {
-	ld.s	r0, [offset_]	# offset_.21_6, offset_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:220:   if (!inBlock_ || block != block_ || offset < offset_) {
-	ld.s	r1, [r13 + (-20)]	# tmp69, offset
-	zex.s	r0, r0	# tmp70, offset_.21_6
-	cmp.w	r1, r0	# tmp69, tmp70
-	jge	.L48		#
 .L47:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:224:     block_ = block;
-	ld.w	r0, [r13 + (8)]	# tmp71, block
-	st.w	[block_], r0	# block_, tmp71
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:226:     if (get_type()!= SD_CARD_TYPE_SDHC) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:268:   block = rblock;
+	ld.w	r0, [r13 + (-16)]	# tmp63, rblock
+	st.w	[r13 + (8)], r0	# block, tmp63
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:269:   offset_ = roffset;
+	ld.s	r0, [r13 + (-18)]	# tmp64, roffset
+	st.s	[offset_], r0	# offset_, tmp64
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:271:   if (count == 0) goto read_end;
+	ld.s	r1, [r13 + (-28)]	# tmp65, count
+	xor.w	r0, r0	# tmp66
+	cmp.w	r1, r0	# tmp65, tmp66
+	jz	.L66		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:272:   if ((count + offset) > 512) {
+	ld.s	r1, [r13 + (-28)]	# _1, count
+	ld.s	r0, [r13 + (-24)]	# _2, offset
+	add.w	r1, r0 #222	# _3, _2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:272:   if ((count + offset) > 512) {
+	mov.w	r0, 512	# tmp67,
+	cmp.w	r1, r0	# _3, tmp67
+	jgs	.L67		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:285:   if (!inBlock_ || block != block_ || offset < offset_) {
+	ld.b	r0, [inBlock_]	# inBlock_.22_4, inBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:285:   if (!inBlock_ || block != block_ || offset < offset_) {
+	zex.b	r1, r0	# tmp68, inBlock_.22_4
+	xor.w	r0, r0	# tmp69
+	cmp.w	r1, r0	# tmp68, tmp69
+	jz	.L52		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:285:   if (!inBlock_ || block != block_ || offset < offset_) {
+	ld.w	r0, [block_]	# block_.23_5, block_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:285:   if (!inBlock_ || block != block_ || offset < offset_) {
+	ld.w	r1, [r13 + (8)]	# tmp70, block
+	cmp.w	r1, r0	# tmp70, block_.23_5
+	jnz	.L52		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:285:   if (!inBlock_ || block != block_ || offset < offset_) {
+	ld.s	r0, [offset_]	# offset_.24_6, offset_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:285:   if (!inBlock_ || block != block_ || offset < offset_) {
+	ld.s	r1, [r13 + (-24)]	# tmp71, offset
+	zex.s	r0, r0	# tmp72, offset_.24_6
+	cmp.w	r1, r0	# tmp71, tmp72
+	jge	.L53		#
+.L52:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:289:     block_ = block;
+	ld.w	r0, [r13 + (8)]	# tmp73, block
+	st.w	[block_], r0	# block_, tmp73
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:291:     if (get_type()!= SD_CARD_TYPE_SDHC) 
 	call	get_type		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:226:     if (get_type()!= SD_CARD_TYPE_SDHC) 
-	zex.b	r1, r0	# tmp72, _7
-	mov.w	r0, 3	# tmp73,
-	cmp.w	r1, r0	# tmp72, tmp73
-	jz	.L49		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:227:       block <<= 9;
-	ld.w	r0, [r13 + (8)]	# tmp75, block
-	mov.w	r1, 9	# tmp76,
-	shl.w	r0, r1	# tmp74, tmp76
-	st.w	[r13 + (8)], r0	# block, tmp74
-.L49:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:228:     if (cardCommand(CMD17, block)) {
-	mov.w	r0, sp	# tmp77,
-	ld.w	r1, [r13 + (8)]	# tmp78, block
-	st.w	[r0 + (4)], r1	#, tmp78
-	mov.w	r1, 17	# tmp79,
-	st.w	[r0], r1	#, tmp79
-	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:228:     if (cardCommand(CMD17, block)) {
-	zex.b	r1, r0	# tmp80, _8
-	xor.w	r0, r0	# tmp81
-	cmp.w	r1, r0	# tmp80, tmp81
-	jz	.L50		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:229:       error(SD_CARD_ERROR_CMD17);
-	mov.w	r1, sp	# tmp82,
-	mov.w	r0, 3	# tmp83,
-	st.w	[r1], r0	#, tmp83
-	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:231:       goto fail;
-	j	.L46		#
-.L50:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:233:     if (!waitStartBlock()) {
-	call	waitStartBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:233:     if (!waitStartBlock()) {
-	zex.b	r1, r0	# tmp84, _9
-	xor.w	r0, r0	# tmp85
-	cmp.w	r1, r0	# tmp84, tmp85
-	jz	.L62		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:237:     offset_ = 0;
-	xor.w	r0, r0	# tmp86
-	st.s	[offset_], r0	# offset_, tmp86
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:238:     inBlock_ = 1;
-	mov.b	r0, 1	# tmp87,
-	st.b	[inBlock_], r0	# inBlock_, tmp87
-.L48:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:241:   int counter = 1;
-	mov.w	r0, 1	# tmp88,
-	st.w	[r13 + (-8)], r0	# counter, tmp88
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:244:   if ((offset - offset_) > 0)
-	ld.s	r1, [r13 + (-20)]	# _10, offset
-	ld.s	r0, [offset_]	# offset_.22_11, offset_
-	zex.s	r0, r0	# _12, offset_.22_11
-	sub.w	r1, r0 #222	# _13, _12
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:244:   if ((offset - offset_) > 0)
-	xor.w	r0, r0	# tmp89
-	cmp.w	r1, r0	# _13, tmp89
-	jses	.L52		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:250:     while(!dma_receive(dst, offset - offset_)) 
-	j	.L53		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:291:     if (get_type()!= SD_CARD_TYPE_SDHC) 
+	zex.b	r1, r0	# tmp74, _7
+	mov.w	r0, 3	# tmp75,
+	cmp.w	r1, r0	# tmp74, tmp75
+	jz	.L54		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:292:       block <<= 9;
+	ld.w	r0, [r13 + (8)]	# tmp77, block
+	mov.w	r1, 9	# tmp78,
+	shl.w	r0, r1	# tmp76, tmp78
+	st.w	[r13 + (8)], r0	# block, tmp76
 .L54:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:252:       delay(2*counter);
-	ld.w	r0, [r13 + (-8)]	# tmp90, counter
-	add.w	r0, r0 #222	# tmp91, tmp90
-	mov.w	r1, sp	# tmp92,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:293:     if (cardCommand(CMD17, block)) {
+	mov.w	r0, sp	# tmp79,
+	ld.w	r1, [r13 + (8)]	# tmp80, block
+	st.w	[r0 + (4)], r1	#, tmp80
+	mov.w	r1, 17	# tmp81,
+	st.w	[r0], r1	#, tmp81
+	call	cardCommand		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:293:     if (cardCommand(CMD17, block)) {
+	zex.b	r1, r0	# tmp82, _8
+	xor.w	r0, r0	# tmp83
+	cmp.w	r1, r0	# tmp82, tmp83
+	jz	.L55		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:294:       error(SD_CARD_ERROR_CMD17);
+	mov.w	r1, sp	# tmp84,
+	mov.w	r0, 3	# tmp85,
+	st.w	[r1], r0	#, tmp85
+	call	error		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:296:       goto fail;
+	j	.L51		#
+.L55:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:298:     if (!waitStartBlock()) {
+	call	waitStartBlock		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:298:     if (!waitStartBlock()) {
+	zex.b	r1, r0	# tmp86, _9
+	xor.w	r0, r0	# tmp87
+	cmp.w	r1, r0	# tmp86, tmp87
+	jz	.L68		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:302:     offset_ = 0;
+	xor.w	r0, r0	# tmp88
+	st.s	[offset_], r0	# offset_, tmp88
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:303:     inBlock_ = 1;
+	mov.b	r0, 1	# tmp89,
+	st.b	[inBlock_], r0	# inBlock_, tmp89
+.L53:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:306:   int counter = 1;
+	mov.w	r0, 1	# tmp90,
+	st.w	[r13 + (-8)], r0	# counter, tmp90
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:309:   if ((offset - offset_) > 0)
+	ld.s	r1, [r13 + (-24)]	# _10, offset
+	ld.s	r0, [offset_]	# offset_.25_11, offset_
+	zex.s	r0, r0	# _12, offset_.25_11
+	sub.w	r1, r0 #222	# _13, _12
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:309:   if ((offset - offset_) > 0)
+	xor.w	r0, r0	# tmp91
+	cmp.w	r1, r0	# _13, tmp91
+	jses	.L57		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:315:     while(!dma_receive(dst, offset - offset_)) 
+	j	.L58		#
+.L59:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:317:       delay(2*counter);
+	ld.w	r0, [r13 + (-8)]	# tmp92, counter
+	add.w	r0, r0 #222	# tmp93, tmp92
+	mov.w	r1, sp	# tmp94,
 	st.w	[r1], r0	#, _14
 	call	delay		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:253:       if (++counter == 3) {
-	ld.w	r0, [r13 + (-8)]	# tmp94, counter
-	add.w	r0, 1 #111	# tmp93,
-	st.w	[r13 + (-8)], r0	# counter, tmp93
-	ld.w	r1, [r13 + (-8)]	# tmp95, counter
-	mov.w	r0, 3	# tmp96,
-	cmp.w	r1, r0	# tmp95, tmp96
-	jz	.L63		#
-.L53:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:250:     while(!dma_receive(dst, offset - offset_)) 
-	ld.s	r1, [offset_]	# offset_.23_15, offset_
-	ld.s	r0, [r13 + (-20)]	# tmp97, offset
-	sub.w	r0, r1 #222	# tmp98, tmp99
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:250:     while(!dma_receive(dst, offset - offset_)) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:318:       if (++counter == 3) {
+	ld.w	r0, [r13 + (-8)]	# tmp96, counter
+	add.w	r0, 1 #111	# tmp95,
+	st.w	[r13 + (-8)], r0	# counter, tmp95
+	ld.w	r1, [r13 + (-8)]	# tmp97, counter
+	mov.w	r0, 3	# tmp98,
+	cmp.w	r1, r0	# tmp97, tmp98
+	jz	.L69		#
+.L58:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:315:     while(!dma_receive(dst, offset - offset_)) 
+	ld.s	r1, [offset_]	# offset_.26_15, offset_
+	ld.s	r0, [r13 + (-24)]	# tmp99, offset
+	sub.w	r0, r1 #222	# tmp100, tmp101
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:315:     while(!dma_receive(dst, offset - offset_)) 
 	zex.s	r1, r0	# _17, _16
-	mov.w	r0, sp	# tmp100,
+	mov.w	r0, sp	# tmp102,
 	st.w	[r0 + (4)], r1	#, _17
-	ld.w	r1, [r13 + (20)]	# tmp101, dst
-	st.w	[r0], r1	#, tmp101
+	ld.w	r1, [r13 + (20)]	# tmp103, dst
+	st.w	[r0], r1	#, tmp103
 	call	dma_receive		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:250:     while(!dma_receive(dst, offset - offset_)) 
-	zex.b	r1, r0	# tmp102, _18
-	xor.w	r0, r0	# tmp103
-	cmp.w	r1, r0	# tmp102, tmp103
-	jz	.L54		#
-.L52:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:269:   counter = 1;
-	mov.w	r0, 1	# tmp104,
-	st.w	[r13 + (-8)], r0	# counter, tmp104
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:270:   while (!dma_receive(dst, count)) 
-	j	.L55		#
-.L56:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:272:     delay(2*counter);
-	ld.w	r0, [r13 + (-8)]	# tmp105, counter
-	add.w	r0, r0 #222	# tmp106, tmp105
-	mov.w	r1, sp	# tmp107,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:315:     while(!dma_receive(dst, offset - offset_)) 
+	zex.b	r1, r0	# tmp104, _18
+	xor.w	r0, r0	# tmp105
+	cmp.w	r1, r0	# tmp104, tmp105
+	jz	.L59		#
+.L57:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:334:   counter = 1;
+	mov.w	r0, 1	# tmp106,
+	st.w	[r13 + (-8)], r0	# counter, tmp106
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:335:   while (!dma_receive(dst, count)) 
+	j	.L60		#
+.L61:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:337:     delay(2*counter);
+	ld.w	r0, [r13 + (-8)]	# tmp107, counter
+	add.w	r0, r0 #222	# tmp108, tmp107
+	mov.w	r1, sp	# tmp109,
 	st.w	[r1], r0	#, _19
 	call	delay		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:273:     if (++counter == 3) {
-	ld.w	r0, [r13 + (-8)]	# tmp109, counter
-	add.w	r0, 1 #111	# tmp108,
-	st.w	[r13 + (-8)], r0	# counter, tmp108
-	ld.w	r1, [r13 + (-8)]	# tmp110, counter
-	mov.w	r0, 3	# tmp111,
-	cmp.w	r1, r0	# tmp110, tmp111
-	jz	.L64		#
-.L55:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:270:   while (!dma_receive(dst, count)) 
-	ld.s	r1, [r13 + (-24)]	# _20, count
-	mov.w	r0, sp	# tmp112,
-	st.w	[r0 + (4)], r1	#, _20
-	ld.w	r1, [r13 + (20)]	# tmp113, dst
-	st.w	[r0], r1	#, tmp113
-	call	dma_receive		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:270:   while (!dma_receive(dst, count)) 
-	zex.b	r1, r0	# tmp114, _21
-	xor.w	r0, r0	# tmp115
-	cmp.w	r1, r0	# tmp114, tmp115
-	jz	.L56		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:290:   offset_ += count;
-	ld.s	r1, [offset_]	# offset_.24_22, offset_
-	ld.s	r0, [r13 + (-24)]	# tmp116, count
-	add.w	r0, r1 #222	# tmp117, tmp118
-	st.s	[offset_], r0	# offset_, _23
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:291:   if (!partialBlockRead_ || offset_ >= 512) {
-	ld.b	r0, [partialBlockRead_]	# partialBlockRead_.25_24, partialBlockRead_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:291:   if (!partialBlockRead_ || offset_ >= 512) {
-	zex.b	r1, r0	# tmp119, partialBlockRead_.25_24
-	xor.w	r0, r0	# tmp120
-	cmp.w	r1, r0	# tmp119, tmp120
-	jz	.L57		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:291:   if (!partialBlockRead_ || offset_ >= 512) {
-	ld.s	r0, [offset_]	# offset_.26_25, offset_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:291:   if (!partialBlockRead_ || offset_ >= 512) {
-	zex.s	r1, r0	# tmp121, offset_.26_25
-	mov.w	r0, 511	# tmp122,
-	cmp.w	r1, r0	# tmp121, tmp122
-	jse	.L65		#
-.L57:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:293:     readEnd();
-	call	readEnd		#
-	j	.L44		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:338:     if (++counter == 3) {
+	ld.w	r0, [r13 + (-8)]	# tmp111, counter
+	add.w	r0, 1 #111	# tmp110,
+	st.w	[r13 + (-8)], r0	# counter, tmp110
+	ld.w	r1, [r13 + (-8)]	# tmp112, counter
+	mov.w	r0, 3	# tmp113,
+	cmp.w	r1, r0	# tmp112, tmp113
+	jz	.L70		#
 .L60:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:206:   if (count == 0) goto read_end;
-	nop	
-	j	.L44		#
-.L65:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:296: read_end:
-	nop	
-.L44:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:297:   asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-# 297 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
-	irq 1
-
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:299:   return true;
-	mov.b	r0, 1	# _31,
-	j	.L58		#
-.L61:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:209:     goto fail;
-	nop	
-	j	.L46		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:335:   while (!dma_receive(dst, count)) 
+	ld.s	r1, [r13 + (-28)]	# _20, count
+	mov.w	r0, sp	# tmp114,
+	st.w	[r0 + (4)], r1	#, _20
+	ld.w	r1, [r13 + (20)]	# tmp115, dst
+	st.w	[r0], r1	#, tmp115
+	call	dma_receive		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:335:   while (!dma_receive(dst, count)) 
+	zex.b	r1, r0	# tmp116, _21
+	xor.w	r0, r0	# tmp117
+	cmp.w	r1, r0	# tmp116, tmp117
+	jz	.L61		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:355:   offset_ += count;
+	ld.s	r1, [offset_]	# offset_.27_22, offset_
+	ld.s	r0, [r13 + (-28)]	# tmp118, count
+	add.w	r0, r1 #222	# tmp119, tmp120
+	st.s	[offset_], r0	# offset_, _23
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:356:   uint16_t crc = 0;
+	xor.w	r0, r0	# tmp121
+	st.s	[r13 + (-10)], r0	# crc, tmp121
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:357:   if (!partialBlockRead_ || offset_ >= 512) {
+	ld.b	r0, [partialBlockRead_]	# partialBlockRead_.28_24, partialBlockRead_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:357:   if (!partialBlockRead_ || offset_ >= 512) {
+	zex.b	r1, r0	# tmp122, partialBlockRead_.28_24
+	xor.w	r0, r0	# tmp123
+	cmp.w	r1, r0	# tmp122, tmp123
+	jz	.L62		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:357:   if (!partialBlockRead_ || offset_ >= 512) {
+	ld.s	r0, [offset_]	# offset_.29_25, offset_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:357:   if (!partialBlockRead_ || offset_ >= 512) {
+	zex.s	r1, r0	# tmp124, offset_.29_25
+	mov.w	r0, 511	# tmp125,
+	cmp.w	r1, r0	# tmp124, tmp125
+	jse	.L63		#
 .L62:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:235:       goto fail;
-	nop	
-	j	.L46		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:359:     crc = readEnd();
+	call	readEnd		#
+	st.s	[r13 + (-10)], r0	# crc,
 .L63:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:255:         goto fail;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:362:   if (crc != 0xFFFF)
+	ld.s	r1, [r13 + (-10)]	# tmp126, crc
+	mov.w	r0, 65535	# tmp127,
+	cmp.w	r1, r0	# tmp126, tmp127
+	jz	.L71		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:365:     if((crc != crc16(dst, count)) && (fail_counter == 0))
+	ld.s	r1, [r13 + (-28)]	# _26, count
+	mov.w	r0, sp	# tmp128,
+	st.w	[r0 + (4)], r1	#, _26
+	ld.w	r1, [r13 + (20)]	# tmp129, dst
+	st.w	[r0], r1	#, tmp129
+	call	crc16		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:365:     if((crc != crc16(dst, count)) && (fail_counter == 0))
+	ld.s	r1, [r13 + (-10)]	# tmp130, crc
+	zex.s	r0, r0	# tmp131, _27
+	cmp.w	r1, r0	# tmp130, tmp131
+	jz	.L71		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:365:     if((crc != crc16(dst, count)) && (fail_counter == 0))
+	ld.w	r1, [r13 + (-4)]	# tmp132, fail_counter
+	xor.w	r0, r0	# tmp133
+	cmp.w	r1, r0	# tmp132, tmp133
+	jz	.L72		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:373: read_end:
+	j	.L71		#
+.L66:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:271:   if (count == 0) goto read_end;
 	nop	
-	j	.L46		#
-.L64:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:275:       goto fail;
+	j	.L49		#
+.L71:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:373: read_end:
 	nop	
-.L46:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:303:   chipSelectHigh();
-	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:305:   if (++fail_counter < FAIL_COUNTER_MAX)
-	ld.w	r0, [r13 + (-4)]	# tmp124, fail_counter
-	add.w	r0, 1 #111	# tmp123,
-	st.w	[r13 + (-4)], r0	# fail_counter, tmp123
-	ld.w	r1, [r13 + (-4)]	# tmp125, fail_counter
-	mov.w	r0, 1	# tmp126,
-	cmp.w	r1, r0	# tmp125, tmp126
-	jgs	.L59		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:307:     delay(fail_counter*2);
-	ld.w	r0, [r13 + (-4)]	# tmp127, fail_counter
-	add.w	r0, r0 #222	# tmp128, tmp127
-	mov.w	r1, sp	# tmp129,
-	st.w	[r1], r0	#, _26
-	call	delay		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:308:     chipSelectLow();
-	call	chipSelectLow		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:309:     goto spi_read_again;
-	j	.L42		#
-.L59:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:316:   asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-# 316 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
+.L49:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:374:   asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
+# 374 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
 	irq 1
 
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:317:   return false;
-	xor.w	r0, r0	# _31
-.L58:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:318: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:376:   return true;
+	mov.b	r0, 1	# _34,
+	j	.L64		#
+.L67:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:274:     goto fail;
+	nop	
+	j	.L51		#
+.L68:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:300:       goto fail;
+	nop	
+	j	.L51		#
+.L69:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:320:         goto fail;
+	nop	
+	j	.L51		#
+.L70:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:340:       goto fail;
+	nop	
+	j	.L51		#
+.L72:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:368:       goto fail;
+	nop	
+.L51:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:380:   chipSelectHigh();
+	call	chipSelectHigh		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:382:   sdcard_init();
+	call	sdcard_init		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:384:   if (++fail_counter < FAIL_COUNTER_MAX)
+	ld.w	r0, [r13 + (-4)]	# tmp135, fail_counter
+	add.w	r0, 1 #111	# tmp134,
+	st.w	[r13 + (-4)], r0	# fail_counter, tmp134
+	ld.w	r1, [r13 + (-4)]	# tmp136, fail_counter
+	mov.w	r0, 1	# tmp137,
+	cmp.w	r1, r0	# tmp136, tmp137
+	jgs	.L65		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:386:     delay(fail_counter*2);
+	ld.w	r0, [r13 + (-4)]	# tmp138, fail_counter
+	add.w	r0, r0 #222	# tmp139, tmp138
+	mov.w	r1, sp	# tmp140,
+	st.w	[r1], r0	#, _28
+	call	delay		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:387:     chipSelectLow();
+	call	chipSelectLow		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:388:     goto spi_read_again;
+	j	.L47		#
+.L65:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:395:   asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
+# 395 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c" 1
+	irq 1
+
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:396:   return false;
+	xor.w	r0, r0	# _34
+.L64:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:397: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1009,7 +1404,7 @@ readBlock:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:330:   return readData(block, 0, 512, dst);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:409:   return readData(block, 0, 512, dst);
 	mov.w	r0, sp	# tmp28,
 	ld.w	r1, [r13 + (12)]	# tmp29, dst
 	st.w	[r0 + (12)], r1	#, tmp29
@@ -1020,7 +1415,7 @@ readBlock:
 	ld.w	r1, [r13 + (8)]	# tmp32, block
 	st.w	[r0], r1	#, tmp32
 	call	readData		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:331: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:410: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1034,75 +1429,75 @@ writeData:
 	sub.w	sp, 32 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp38, token
 	st.b	[r13 + (-8)], r0	# token, tmp39
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:335:   spiSend(token);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:414:   spiSend(token);
 	ld.b	r0, [r13 + (-8)]	# _1, token
 	mov.w	r1, sp	# tmp40,
 	st.w	[r1], r0	#, _1
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:336:   for (uint16_t i = 0; i < 512; i++) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:415:   for (uint16_t i = 0; i < 512; i++) {
 	xor.w	r0, r0	# tmp41
 	st.s	[r13 + (-2)], r0	# i, tmp41
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:336:   for (uint16_t i = 0; i < 512; i++) {
-	j	.L69		#
-.L70:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:337:     spiSend(src[i]);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:415:   for (uint16_t i = 0; i < 512; i++) {
+	j	.L76		#
+.L77:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:416:     spiSend(src[i]);
 	ld.s	r1, [r13 + (-2)]	# _2, i
 	ld.w	r0, [r13 + (12)]	# tmp42, src
 	add.w	r0, r1 #222	# _3, _2
 	ld.b	r0, [r0]	# _4, *_3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:337:     spiSend(src[i]);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:416:     spiSend(src[i]);
 	zex.b	r0, r0	# _5, _4
 	mov.w	r1, sp	# tmp43,
 	st.w	[r1], r0	#, _5
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:336:   for (uint16_t i = 0; i < 512; i++) {
-	ld.s	r0, [r13 + (-2)]	# i.27_6, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:415:   for (uint16_t i = 0; i < 512; i++) {
+	ld.s	r0, [r13 + (-2)]	# i.30_6, i
 	add.w	r0, 1 #111	# tmp44,
 	st.s	[r13 + (-2)], r0	# i, tmp45
-.L69:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:336:   for (uint16_t i = 0; i < 512; i++) {
+.L76:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:415:   for (uint16_t i = 0; i < 512; i++) {
 	ld.s	r1, [r13 + (-2)]	# tmp46, i
 	mov.w	r0, 511	# tmp47,
 	cmp.w	r1, r0	# tmp46, tmp47
-	jse	.L70		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:339:   spiSend(0xff);  // dummy crc
+	jse	.L77		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:418:   spiSend(0xff);  // dummy crc
 	mov.w	r1, sp	# tmp48,
 	mov.w	r0, 255	# tmp49,
 	st.w	[r1], r0	#, tmp49
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:340:   spiSend(0xff);  // dummy crc
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:419:   spiSend(0xff);  // dummy crc
 	mov.w	r1, sp	# tmp50,
 	mov.w	r0, 255	# tmp51,
 	st.w	[r1], r0	#, tmp51
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:342:   status_ = spiRec();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:421:   status_ = spiRec();
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:342:   status_ = spiRec();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:421:   status_ = spiRec();
 	st.b	[status_], r0	# status_, _7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:343:   if ((status_ & DATA_RES_MASK) != DATA_RES_ACCEPTED) {
-	ld.b	r0, [status_]	# status_.28_8, status_
-	zex.b	r1, r0	# _9, status_.28_8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:422:   if ((status_ & DATA_RES_MASK) != DATA_RES_ACCEPTED) {
+	ld.b	r0, [status_]	# status_.31_8, status_
+	zex.b	r1, r0	# _9, status_.31_8
 	mov.w	r0, 31	# tmp52,
 	and.w	r1, r0	# _10, tmp52
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:343:   if ((status_ & DATA_RES_MASK) != DATA_RES_ACCEPTED) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:422:   if ((status_ & DATA_RES_MASK) != DATA_RES_ACCEPTED) {
 	mov.w	r0, 5	# tmp53,
 	cmp.w	r1, r0	# _10, tmp53
-	jz	.L71		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:344:     error(SD_CARD_ERROR_WRITE);
+	jz	.L78		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:423:     error(SD_CARD_ERROR_WRITE);
 	mov.w	r1, sp	# tmp54,
 	mov.w	r0, 17	# tmp55,
 	st.w	[r1], r0	#, tmp55
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:345:     chipSelectHigh();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:424:     chipSelectHigh();
 	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:346:     return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:425:     return false;
 	xor.w	r0, r0	# _12
-	j	.L72		#
-.L71:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:348:   return true;
+	j	.L79		#
+.L78:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:427:   return true;
 	mov.b	r0, 1	# _12,
-.L72:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:349: }
+.L79:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:428: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1116,130 +1511,130 @@ writeBlock:
 	sub.w	sp, 28 #111	#,
 	ld.w	r0, [r13 + (16)]	# tmp34, blocking
 	st.b	[r13 + (-4)], r0	# blocking, tmp35
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:366:   if (blockNumber == 0) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:445:   if (blockNumber == 0) {
 	ld.w	r1, [r13 + (8)]	# tmp36, blockNumber
 	xor.w	r0, r0	# tmp37
 	cmp.w	r1, r0	# tmp36, tmp37
-	jnz	.L74		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:367:     error(SD_CARD_ERROR_WRITE_BLOCK_ZERO);
+	jnz	.L81		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:446:     error(SD_CARD_ERROR_WRITE_BLOCK_ZERO);
 	mov.w	r1, sp	# tmp38,
 	mov.w	r0, 18	# tmp39,
 	st.w	[r1], r0	#, tmp39
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:368:     goto fail;
-	j	.L75		#
-.L74:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:372:   if (get_type() != SD_CARD_TYPE_SDHC) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:447:     goto fail;
+	j	.L82		#
+.L81:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:451:   if (get_type() != SD_CARD_TYPE_SDHC) {
 	call	get_type		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:372:   if (get_type() != SD_CARD_TYPE_SDHC) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:451:   if (get_type() != SD_CARD_TYPE_SDHC) {
 	zex.b	r1, r0	# tmp40, _1
 	mov.w	r0, 3	# tmp41,
 	cmp.w	r1, r0	# tmp40, tmp41
-	jz	.L76		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:373:     blockNumber <<= 9;
+	jz	.L83		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:452:     blockNumber <<= 9;
 	ld.w	r0, [r13 + (8)]	# tmp43, blockNumber
 	mov.w	r1, 9	# tmp44,
 	shl.w	r0, r1	# tmp42, tmp44
 	st.w	[r13 + (8)], r0	# blockNumber, tmp42
-.L76:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:375:   if (cardCommand(CMD24, blockNumber)) {
+.L83:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:454:   if (cardCommand(CMD24, blockNumber)) {
 	mov.w	r0, sp	# tmp45,
 	ld.w	r1, [r13 + (8)]	# tmp46, blockNumber
 	st.w	[r0 + (4)], r1	#, tmp46
 	mov.w	r1, 24	# tmp47,
 	st.w	[r0], r1	#, tmp47
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:375:   if (cardCommand(CMD24, blockNumber)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:454:   if (cardCommand(CMD24, blockNumber)) {
 	zex.b	r1, r0	# tmp48, _2
 	xor.w	r0, r0	# tmp49
 	cmp.w	r1, r0	# tmp48, tmp49
-	jz	.L77		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:376:     error(SD_CARD_ERROR_CMD24);
+	jz	.L84		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:455:     error(SD_CARD_ERROR_CMD24);
 	mov.w	r1, sp	# tmp50,
 	mov.w	r0, 4	# tmp51,
 	st.w	[r1], r0	#, tmp51
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:377:     goto fail;
-	j	.L75		#
-.L77:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:379:   if (!writeData(DATA_START_BLOCK, src)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:456:     goto fail;
+	j	.L82		#
+.L84:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:458:   if (!writeData(DATA_START_BLOCK, src)) {
 	mov.w	r0, sp	# tmp52,
 	ld.w	r1, [r13 + (12)]	# tmp53, src
 	st.w	[r0 + (4)], r1	#, tmp53
 	mov.w	r1, 254	# tmp54,
 	st.w	[r0], r1	#, tmp54
 	call	writeData		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:379:   if (!writeData(DATA_START_BLOCK, src)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:458:   if (!writeData(DATA_START_BLOCK, src)) {
 	zex.b	r1, r0	# tmp55, _3
 	xor.w	r0, r0	# tmp56
 	cmp.w	r1, r0	# tmp55, tmp56
-	jz	.L83		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:382:   if (blocking) {
+	jz	.L90		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:461:   if (blocking) {
 	ld.b	r1, [r13 + (-4)]	# tmp57, blocking
 	xor.w	r0, r0	# tmp58
 	cmp.w	r1, r0	# tmp57, tmp58
-	jz	.L79		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:384:     if (!waitNotBusy(SD_WRITE_TIMEOUT)) {
+	jz	.L86		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:463:     if (!waitNotBusy(SD_WRITE_TIMEOUT)) {
 	mov.w	r1, sp	# tmp59,
 	mov.w	r0, 600	# tmp60,
 	st.w	[r1], r0	#, tmp60
 	call	waitNotBusy		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:384:     if (!waitNotBusy(SD_WRITE_TIMEOUT)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:463:     if (!waitNotBusy(SD_WRITE_TIMEOUT)) {
 	zex.b	r1, r0	# tmp61, _4
 	xor.w	r0, r0	# tmp62
 	cmp.w	r1, r0	# tmp61, tmp62
-	jnz	.L80		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:385:       error(SD_CARD_ERROR_WRITE_TIMEOUT);
+	jnz	.L87		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:464:       error(SD_CARD_ERROR_WRITE_TIMEOUT);
 	mov.w	r1, sp	# tmp63,
 	mov.w	r0, 21	# tmp64,
 	st.w	[r1], r0	#, tmp64
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:386:       goto fail;
-	j	.L75		#
-.L80:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:389:     if (cardCommand(CMD13, 0) || spiRec()) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:465:       goto fail;
+	j	.L82		#
+.L87:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:468:     if (cardCommand(CMD13, 0) || spiRec()) {
 	mov.w	r0, sp	# tmp65,
 	xor.w	r1, r1	# tmp66
 	st.w	[r0 + (4)], r1	#, tmp66
 	mov.w	r1, 13	# tmp67,
 	st.w	[r0], r1	#, tmp67
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:389:     if (cardCommand(CMD13, 0) || spiRec()) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:468:     if (cardCommand(CMD13, 0) || spiRec()) {
 	zex.b	r1, r0	# tmp68, _5
 	xor.w	r0, r0	# tmp69
 	cmp.w	r1, r0	# tmp68, tmp69
-	jnz	.L81		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:389:     if (cardCommand(CMD13, 0) || spiRec()) {
+	jnz	.L88		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:468:     if (cardCommand(CMD13, 0) || spiRec()) {
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:389:     if (cardCommand(CMD13, 0) || spiRec()) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:468:     if (cardCommand(CMD13, 0) || spiRec()) {
 	zex.b	r1, r0	# tmp70, _6
 	xor.w	r0, r0	# tmp71
 	cmp.w	r1, r0	# tmp70, tmp71
-	jz	.L79		#
-.L81:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:390:       error(SD_CARD_ERROR_WRITE_PROGRAMMING);
+	jz	.L86		#
+.L88:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:469:       error(SD_CARD_ERROR_WRITE_PROGRAMMING);
 	mov.w	r1, sp	# tmp72,
 	mov.w	r0, 20	# tmp73,
 	st.w	[r1], r0	#, tmp73
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:391:       goto fail;
-	j	.L75		#
-.L79:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:394:   chipSelectHigh();
-	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:395:   return true;
-	mov.b	r0, 1	# _8,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:470:       goto fail;
 	j	.L82		#
-.L83:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:380:     goto fail;
-	nop	
-.L75:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:398:   chipSelectHigh();
+.L86:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:473:   chipSelectHigh();
 	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:399:   return false;
-	xor.w	r0, r0	# _8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:474:   return true;
+	mov.b	r0, 1	# _8,
+	j	.L89		#
+.L90:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:459:     goto fail;
+	nop	
 .L82:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:400: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:477:   chipSelectHigh();
+	call	chipSelectHigh		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:478:   return false;
+	xor.w	r0, r0	# _8
+.L89:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:479: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1250,22 +1645,22 @@ writeBlock:
 DIR_IS_LONG_NAME:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:408:   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:487:   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
 	ld.w	r0, [r13 + (8)]	# tmp32, dir
 	ld.b	r0, [r0 + (11)]	# _1, dir_6(D)->attributes
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:408:   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:487:   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
 	zex.b	r1, r0	# _2, _1
 	mov.w	r0, 63	# tmp33,
 	mov.w	r2, r1	# _3, _2
 	and.w	r2, r0	# _3, tmp33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:408:   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:487:   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
 	mov.b	r0, 1	# _4,
 	mov.w	r1, 15	# tmp36,
 	cmp.w	r2, r1	# _3, tmp36
-	jz	.L85		#
+	jz	.L92		#
 	xor.w	r0, r0	# _4
-.L85:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:409: }
+.L92:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1283,17 +1678,17 @@ DIR_ATT_FILE_TYPE_MASK:
 DIR_IS_FILE:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:414:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == 0;
 	ld.w	r0, [r13 + (8)]	# tmp32, dir
 	ld.b	r0, [r0 + (11)]	# _1, dir_6(D)->attributes
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:414:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == 0;
-	mov.b	r1, 24	# DIR_ATT_FILE_TYPE_MASK.29_2,
-	and.w	r0, r1	# tmp33, DIR_ATT_FILE_TYPE_MASK.29_2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == 0;
+	mov.b	r1, 24	# DIR_ATT_FILE_TYPE_MASK.32_2,
+	and.w	r0, r1	# tmp33, DIR_ATT_FILE_TYPE_MASK.32_2
 	zex.b	r0, r0	# tmp34, _3
 	add.w	r0, -1 #111	# tmp35,
 	mov.w	r1, 31	# tmp37,
 	shr.w	r0, r1	# tmp36, tmp37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:415: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:494: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1304,19 +1699,19 @@ DIR_IS_FILE:
 DIR_IS_SUBDIR:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:418:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == DIR_ATT_DIRECTORY;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:497:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == DIR_ATT_DIRECTORY;
 	ld.w	r0, [r13 + (8)]	# tmp32, dir
 	ld.b	r0, [r0 + (11)]	# _1, dir_6(D)->attributes
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:418:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == DIR_ATT_DIRECTORY;
-	mov.b	r1, 24	# DIR_ATT_FILE_TYPE_MASK.30_2,
-	and.w	r0, r1	# tmp33, DIR_ATT_FILE_TYPE_MASK.30_2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:497:   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == DIR_ATT_DIRECTORY;
+	mov.b	r1, 24	# DIR_ATT_FILE_TYPE_MASK.33_2,
+	and.w	r0, r1	# tmp33, DIR_ATT_FILE_TYPE_MASK.33_2
 	mov.w	r1, 16	# tmp35,
 	xor.w	r0, r1	# tmp34, tmp35
 	zex.b	r0, r0	# tmp36, tmp34
 	add.w	r0, -1 #111	# tmp37,
 	mov.w	r1, 31	# tmp39,
 	shr.w	r0, r1	# tmp38, tmp39
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:419: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:498: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1327,22 +1722,22 @@ DIR_IS_SUBDIR:
 DIR_IS_FILE_OR_SUBDIR:
 	push	r13		#
 	mov.w	r13, sp	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:422:   return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:501:   return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
 	ld.w	r0, [r13 + (8)]	# tmp32, dir
 	ld.b	r0, [r0 + (11)]	# _1, dir_6(D)->attributes
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:422:   return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:501:   return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
 	zex.b	r1, r0	# _2, _1
 	mov.w	r0, 8	# tmp33,
 	mov.w	r2, r1	# _3, _2
 	and.w	r2, r0	# _3, tmp33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:422:   return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:501:   return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
 	mov.b	r0, 1	# _4,
 	xor.w	r1, r1	# tmp34
 	cmp.w	r2, r1	# _3, tmp34
-	jz	.L92		#
+	jz	.L99		#
 	xor.w	r0, r0	# _4
-.L92:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:423: }
+.L99:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:502: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1436,47 +1831,47 @@ reverse32:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 12 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:444:     uint32_t aux = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:523:     uint32_t aux = 0;
 	xor.w	r0, r0	# tmp33
 	st.w	[r13 + (-4)], r0	# aux, tmp33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:447:     for(i = 0; i < 32; i+=8)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:526:     for(i = 0; i < 32; i+=8)
 	xor.w	r0, r0	# tmp34
 	st.w	[r13 + (-8)], r0	# i, tmp34
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:447:     for(i = 0; i < 32; i+=8)
-	j	.L95		#
-.L96:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:449:         byte = (bytes >> i) & 0xff;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:526:     for(i = 0; i < 32; i+=8)
+	j	.L102		#
+.L103:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:528:         byte = (bytes >> i) & 0xff;
 	ld.w	r0, [r13 + (8)]	# tmp35, bytes
 	ld.w	r1, [r13 + (-8)]	# tmp36, i
 	shr.w	r0, r1	# _1, tmp36
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:449:         byte = (bytes >> i) & 0xff;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:528:         byte = (bytes >> i) & 0xff;
 	st.b	[r13 + (-9)], r0	# byte, tmp37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:450:         aux |= byte << (32 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:529:         aux |= byte << (32 - 8 - i);
 	ld.b	r0, [r13 + (-9)]	# _2, byte
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:450:         aux |= byte << (32 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:529:         aux |= byte << (32 - 8 - i);
 	mov.w	r1, 24	# tmp38,
 	ld.w	r2, [r13 + (-8)]	# tmp39, i
 	sub.w	r1, r2 #222	# _3, tmp39
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:450:         aux |= byte << (32 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:529:         aux |= byte << (32 - 8 - i);
 	shl.w	r0, r1	# _4, _3
 	mov.w	r1, r0	# _5, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:450:         aux |= byte << (32 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:529:         aux |= byte << (32 - 8 - i);
 	ld.w	r0, [r13 + (-4)]	# tmp41, aux
 	or.w	r0, r1	# tmp40, _5
 	st.w	[r13 + (-4)], r0	# aux, tmp40
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:447:     for(i = 0; i < 32; i+=8)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:526:     for(i = 0; i < 32; i+=8)
 	ld.w	r0, [r13 + (-8)]	# tmp43, i
 	add.w	r0, 8 #111	# tmp42,
 	st.w	[r13 + (-8)], r0	# i, tmp42
-.L95:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:447:     for(i = 0; i < 32; i+=8)
+.L102:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:526:     for(i = 0; i < 32; i+=8)
 	ld.w	r1, [r13 + (-8)]	# tmp44, i
 	mov.w	r0, 31	# tmp45,
 	cmp.w	r1, r0	# tmp44, tmp45
-	jses	.L96		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:452:     return aux;
+	jses	.L103		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:531:     return aux;
 	ld.w	r0, [r13 + (-4)]	# _10, aux
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:453: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:532: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1490,46 +1885,46 @@ reverse16:
 	sub.w	sp, 16 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp36, bytes
 	st.s	[r13 + (-16)], r0	# bytes, tmp37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:457:     uint16_t aux = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:536:     uint16_t aux = 0;
 	xor.w	r0, r0	# tmp38
 	st.s	[r13 + (-2)], r0	# aux, tmp38
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:460:     for(i = 0; i < 16; i+=8)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:539:     for(i = 0; i < 16; i+=8)
 	xor.w	r0, r0	# tmp39
 	st.w	[r13 + (-8)], r0	# i, tmp39
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:460:     for(i = 0; i < 16; i+=8)
-	j	.L99		#
-.L100:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:462:         byte = (bytes >> i) & 0xff;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:539:     for(i = 0; i < 16; i+=8)
+	j	.L106		#
+.L107:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:541:         byte = (bytes >> i) & 0xff;
 	ld.s	r0, [r13 + (-16)]	# _1, bytes
 	ld.w	r1, [r13 + (-8)]	# tmp40, i
 	shr.w	r0, r1	# _2, tmp40
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:462:         byte = (bytes >> i) & 0xff;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:541:         byte = (bytes >> i) & 0xff;
 	st.b	[r13 + (-9)], r0	# byte, tmp41
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:463:         aux |= byte << (16 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:542:         aux |= byte << (16 - 8 - i);
 	ld.b	r0, [r13 + (-9)]	# _3, byte
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:463:         aux |= byte << (16 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:542:         aux |= byte << (16 - 8 - i);
 	mov.w	r1, 8	# tmp42,
 	ld.w	r2, [r13 + (-8)]	# tmp43, i
 	sub.w	r1, r2 #222	# _4, tmp43
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:463:         aux |= byte << (16 - 8 - i);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:542:         aux |= byte << (16 - 8 - i);
 	shl.w	r0, r1	# _5, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:463:         aux |= byte << (16 - 8 - i);
-	ld.s	r1, [r13 + (-2)]	# aux.31_7, aux
-	or.w	r0, r1	# tmp44, aux.31_7
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:542:         aux |= byte << (16 - 8 - i);
+	ld.s	r1, [r13 + (-2)]	# aux.34_7, aux
+	or.w	r0, r1	# tmp44, aux.34_7
 	st.s	[r13 + (-2)], r0	# aux, _8
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:460:     for(i = 0; i < 16; i+=8)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:539:     for(i = 0; i < 16; i+=8)
 	ld.w	r0, [r13 + (-8)]	# tmp46, i
 	add.w	r0, 8 #111	# tmp45,
 	st.w	[r13 + (-8)], r0	# i, tmp45
-.L99:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:460:     for(i = 0; i < 16; i+=8)
+.L106:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:539:     for(i = 0; i < 16; i+=8)
 	ld.w	r1, [r13 + (-8)]	# tmp47, i
 	mov.w	r0, 15	# tmp48,
 	cmp.w	r1, r0	# tmp47, tmp48
-	jses	.L100		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:465:     return aux;
+	jses	.L107		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:544:     return aux;
 	ld.s	r0, [r13 + (-2)]	# _13, aux
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:466: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:545: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1551,103 +1946,103 @@ getFile:
 	sub.w	sp, 60 #111	#,
 	ld.w	r0, [r13 + (20)]	# tmp114, length
 	st.b	[r13 + (-36)], r0	# length, tmp115
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:482:   filename[11] = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:561:   filename[11] = 0;
 	ld.w	r0, [r13 + (16)]	# tmp116, filename
 	add.w	r0, 11 #111	# _1,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:482:   filename[11] = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:561:   filename[11] = 0;
 	xor.w	r1, r1	# tmp117
 	st.b	[r0], r1	# *_1, tmp117
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:567:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	xor.w	r0, r0	# tmp118
 	st.w	[r13 + (-4)], r0	# i, tmp118
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	j	.L103		#
-.L110:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:490:     b = readBlock(rootDirStart_ + i, buf);
-	ld.w	r1, [rootDirStart_]	# rootDirStart_.32_2, rootDirStart_
-	ld.w	r0, [r13 + (-4)]	# i.33_3, i
-	add.w	r1, r0 #222	# _4, i.33_3
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:567:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	j	.L110		#
+.L117:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:569:     b = readBlock(rootDirStart_ + i, buf);
+	ld.w	r1, [rootDirStart_]	# rootDirStart_.35_2, rootDirStart_
+	ld.w	r0, [r13 + (-4)]	# i.36_3, i
+	add.w	r1, r0 #222	# _4, i.36_3
 	mov.w	r0, sp	# tmp119,
 	ld.w	r2, [r13 + (12)]	# tmp120, buf
 	st.w	[r0 + (4)], r2	#, tmp120
 	st.w	[r0], r1	#, _4
 	call	readBlock		#
 	st.b	[r13 + (-9)], r0	# b,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:491:     for(j = 0; j < 16; j++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:570:     for(j = 0; j < 16; j++)
 	xor.w	r0, r0	# tmp121
 	st.w	[r13 + (-8)], r0	# j, tmp121
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:491:     for(j = 0; j < 16; j++)
-	j	.L104		#
-.L109:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:570:     for(j = 0; j < 16; j++)
+	j	.L111		#
+.L116:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp122, j
 	mov.w	r1, 5	# tmp123,
 	shl.w	r0, r1	# _5, tmp123
 	mov.w	r1, r0	# _6, _5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (12)]	# tmp124, buf
 	add.w	r0, r1 #222	# _7, _6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _8, *_7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp125, _8
 	xor.w	r0, r0	# tmp126
 	cmp.w	r1, r0	# tmp125, tmp126
-	jz	.L112		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+	jz	.L119		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp127, j
 	mov.w	r1, 5	# tmp128,
 	shl.w	r0, r1	# _9, tmp128
 	mov.w	r1, r0	# _10, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (12)]	# tmp129, buf
 	add.w	r0, r1 #222	# _11, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _12, *_11
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp130, _12
 	mov.w	r0, 46	# tmp131,
 	cmp.w	r1, r0	# tmp130, tmp131
-	jz	.L112		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+	jz	.L119		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp132, j
 	mov.w	r1, 5	# tmp133,
 	shl.w	r0, r1	# _13, tmp133
 	mov.w	r1, r0	# _14, _13
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (12)]	# tmp134, buf
 	add.w	r0, r1 #222	# _15, _14
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _16, *_15
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp135, _16
 	mov.w	r0, 229	# tmp136,
 	cmp.w	r1, r0	# tmp135, tmp136
-	jz	.L112		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+	jz	.L119		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp137, j
 	mov.w	r1, 5	# tmp138,
 	shl.w	r0, r1	# _17, tmp138
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	mov.w	r1, r0	# _19, _18
 	add.w	r1, 11 #111	# _19,
 	ld.w	r0, [r13 + (12)]	# tmp139, buf
 	add.w	r0, r1 #222	# _20, _19
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _21, *_20
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:493:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:572:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp140, _21
 	mov.w	r0, 15	# tmp141,
 	cmp.w	r1, r0	# tmp140, tmp141
-	jz	.L112		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:498:       strncpy(filename_upper, (char*)(buf+j*32), 11);
+	jz	.L119		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:       strncpy(filename_upper, (char*)(buf+j*32), 11);
 	ld.w	r0, [r13 + (-8)]	# tmp142, j
 	mov.w	r1, 5	# tmp143,
 	shl.w	r0, r1	# _22, tmp143
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:498:       strncpy(filename_upper, (char*)(buf+j*32), 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:       strncpy(filename_upper, (char*)(buf+j*32), 11);
 	ld.w	r1, [r13 + (12)]	# tmp144, buf
 	add.w	r1, r0 #222	# _24, _23
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:498:       strncpy(filename_upper, (char*)(buf+j*32), 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:       strncpy(filename_upper, (char*)(buf+j*32), 11);
 	mov.w	r0, sp	# tmp145,
 	mov.w	r2, 11	# tmp146,
 	st.w	[r0 + (8)], r2	#, tmp146
@@ -1656,10 +2051,10 @@ getFile:
 	add.w	r1, -30 #111	# tmp147,
 	st.w	[r0], r1	#, tmp147
 	call	strncpy		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:499:       filename_upper[11] = '\0';
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:578:       filename_upper[11] = '\0';
 	xor.w	r0, r0	# tmp148
 	st.b	[r13 + (-19)], r0	# filename_upper, tmp148
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:505:       if(strcmp(filename, filename_upper) == 0)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:584:       if(strcmp(filename, filename_upper) == 0)
 	mov.w	r0, sp	# tmp149,
 	mov.w	r1, r13	# tmp150,
 	add.w	r1, -30 #111	# tmp150,
@@ -1668,121 +2063,121 @@ getFile:
 	st.w	[r0], r1	#, tmp151
 	call	strcmp		#
 	mov.w	r1, r0	# _25,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:505:       if(strcmp(filename, filename_upper) == 0)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:584:       if(strcmp(filename, filename_upper) == 0)
 	xor.w	r0, r0	# tmp152
 	cmp.w	r1, r0	# _25, tmp152
-	jnz	.L107		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:511:         file_size = *(buf + j*32 + 0x1c);
+	jnz	.L114		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:590:         file_size = *(buf + j*32 + 0x1c);
 	ld.w	r0, [r13 + (-8)]	# tmp153, j
 	mov.w	r1, 5	# tmp154,
 	shl.w	r0, r1	# _26, tmp154
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:511:         file_size = *(buf + j*32 + 0x1c);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:590:         file_size = *(buf + j*32 + 0x1c);
 	mov.w	r1, r0	# _28, _27
 	add.w	r1, 28 #111	# _28,
 	ld.w	r0, [r13 + (12)]	# tmp155, buf
 	add.w	r0, r1 #222	# _29, _28
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:511:         file_size = *(buf + j*32 + 0x1c);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:590:         file_size = *(buf + j*32 + 0x1c);
 	ld.b	r0, [r0]	# _30, *_29
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:511:         file_size = *(buf + j*32 + 0x1c);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:590:         file_size = *(buf + j*32 + 0x1c);
 	zex.b	r0, r0	# tmp156, _30
 	st.w	[r13 + (-16)], r0	# file_size, tmp156
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:512:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:591:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	ld.w	r0, [r13 + (-8)]	# tmp157, j
 	mov.w	r1, 5	# tmp158,
 	shl.w	r0, r1	# _31, tmp158
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:512:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:591:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	mov.w	r1, r0	# _33, _32
 	add.w	r1, 29 #111	# _33,
 	ld.w	r0, [r13 + (12)]	# tmp159, buf
 	add.w	r0, r1 #222	# _34, _33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:512:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:591:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	ld.b	r0, [r0]	# _35, *_34
 	zex.b	r0, r0	# _36, _35
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:512:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:591:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	mov.w	r1, 8	# tmp160,
 	shl.w	r0, r1	# _37, tmp160
 	mov.w	r1, r0	# _38, _37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:512:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:591:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	ld.w	r0, [r13 + (-16)]	# tmp162, file_size
 	add.w	r0, r1 #222	# tmp161, _38
 	st.w	[r13 + (-16)], r0	# file_size, tmp161
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:513:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:592:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	ld.w	r0, [r13 + (-8)]	# tmp163, j
 	mov.w	r1, 5	# tmp164,
 	shl.w	r0, r1	# _39, tmp164
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:513:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:592:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	mov.w	r1, r0	# _41, _40
 	add.w	r1, 30 #111	# _41,
 	ld.w	r0, [r13 + (12)]	# tmp165, buf
 	add.w	r0, r1 #222	# _42, _41
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:513:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:592:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	ld.b	r0, [r0]	# _43, *_42
 	zex.b	r0, r0	# _44, _43
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:513:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:592:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	mov.w	r1, 16	# tmp166,
 	shl.w	r0, r1	# _45, tmp166
 	mov.w	r1, r0	# _46, _45
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:513:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:592:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	ld.w	r0, [r13 + (-16)]	# tmp168, file_size
 	add.w	r0, r1 #222	# tmp167, _46
 	st.w	[r13 + (-16)], r0	# file_size, tmp167
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:514:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:593:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	ld.w	r0, [r13 + (-8)]	# tmp169, j
 	mov.w	r1, 5	# tmp170,
 	shl.w	r0, r1	# _47, tmp170
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:514:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:593:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	mov.w	r1, r0	# _49, _48
 	add.w	r1, 31 #111	# _49,
 	ld.w	r0, [r13 + (12)]	# tmp171, buf
 	add.w	r0, r1 #222	# _50, _49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:514:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:593:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	ld.b	r0, [r0]	# _51, *_50
 	zex.b	r0, r0	# _52, _51
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:514:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:593:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	mov.w	r1, 24	# tmp172,
 	shl.w	r0, r1	# _53, tmp172
 	mov.w	r1, r0	# _54, _53
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:514:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:593:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	ld.w	r0, [r13 + (-16)]	# tmp174, file_size
 	add.w	r0, r1 #222	# tmp173, _54
 	st.w	[r13 + (-16)], r0	# file_size, tmp173
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:515:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:594:         cluster = *(buf + j*32 + 0x1a);
 	ld.w	r0, [r13 + (-8)]	# tmp175, j
 	mov.w	r1, 5	# tmp176,
 	shl.w	r0, r1	# _55, tmp176
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:515:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:594:         cluster = *(buf + j*32 + 0x1a);
 	mov.w	r1, r0	# _57, _56
 	add.w	r1, 26 #111	# _57,
 	ld.w	r0, [r13 + (12)]	# tmp177, buf
 	add.w	r0, r1 #222	# _58, _57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:515:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:594:         cluster = *(buf + j*32 + 0x1a);
 	ld.b	r0, [r0]	# _59, *_58
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:515:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:594:         cluster = *(buf + j*32 + 0x1a);
 	zex.b	r0, r0	# tmp178, _59
 	st.s	[r13 + (-18)], r0	# cluster, tmp179
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:516:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:595:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	ld.w	r0, [r13 + (-8)]	# tmp180, j
 	mov.w	r1, 5	# tmp181,
 	shl.w	r0, r1	# _60, tmp181
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:516:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:595:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	mov.w	r1, r0	# _62, _61
 	add.w	r1, 27 #111	# _62,
 	ld.w	r0, [r13 + (12)]	# tmp182, buf
 	add.w	r0, r1 #222	# _63, _62
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:516:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:595:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	ld.b	r0, [r0]	# _64, *_63
 	zex.b	r0, r0	# tmp183, _64
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:516:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:595:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	mov.w	r1, 8	# tmp185,
 	shl.w	r0, r1	# tmp184, tmp185
 	mov.w	r1, r0	# _66, tmp184
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:516:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:595:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	ld.s	r0, [r13 + (-18)]	# tmp186, cluster
 	add.w	r0, r1 #222	# tmp187, tmp188
 	st.s	[r13 + (-18)], r0	# cluster, tmp189
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:521:         memmove(de->filename, filename, length);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:600:         memmove(de->filename, filename, length);
 	ld.w	r1, [r13 + (8)]	# _67, de
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:521:         memmove(de->filename, filename, length);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:600:         memmove(de->filename, filename, length);
 	ld.b	r2, [r13 + (-36)]	# _68, length
 	mov.w	r0, sp	# tmp190,
 	st.w	[r0 + (8)], r2	#, _68
@@ -1790,93 +2185,93 @@ getFile:
 	st.w	[r0 + (4)], r2	#, tmp191
 	st.w	[r0], r1	#, _67
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:522:         de->attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:601:         de->attributes = *(buf + j*32 + 0x0b);
 	ld.w	r0, [r13 + (-8)]	# tmp192, j
 	mov.w	r1, 5	# tmp193,
 	shl.w	r0, r1	# _69, tmp193
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:522:         de->attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:601:         de->attributes = *(buf + j*32 + 0x0b);
 	mov.w	r1, r0	# _71, _70
 	add.w	r1, 11 #111	# _71,
 	ld.w	r0, [r13 + (12)]	# tmp194, buf
 	add.w	r0, r1 #222	# _72, _71
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:522:         de->attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:601:         de->attributes = *(buf + j*32 + 0x0b);
 	ld.b	r1, [r0]	# _73, *_72
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:522:         de->attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:601:         de->attributes = *(buf + j*32 + 0x0b);
 	ld.w	r0, [r13 + (8)]	# tmp195, de
 	st.b	[r0 + (12)], r1	# de_114(D)->attributes, _73
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:523:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:602:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
 	ld.w	r0, [r13 + (8)]	# tmp196, de
 	mov.w	r1, r0	# _74, tmp196
 	add.w	r1, 13 #111	# _74,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:523:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:602:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
 	ld.w	r0, [r13 + (-8)]	# tmp197, j
 	mov.w	r2, 5	# tmp198,
 	shl.w	r0, r2	# _75, tmp198
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:523:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:602:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
 	add.w	r0, 12 #111	# _77,
 	ld.w	r2, [r13 + (12)]	# tmp199, buf
 	add.w	r2, r0 #222	# _78, _77
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:523:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:602:         memmove(de->unused_attr, buf + j*32 + 0x0c, 14);
 	mov.w	r0, sp	# tmp200,
 	mov.w	r3, 14	# tmp201,
 	st.w	[r0 + (8)], r3	#, tmp201
 	st.w	[r0 + (4)], r2	#, _78
 	st.w	[r0], r1	#, _74
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:524:         de->filesize = file_size;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:603:         de->filesize = file_size;
 	ld.w	r0, [r13 + (8)]	# tmp202, de
 	ld.w	r1, [r13 + (-16)]	# tmp203, file_size
 	st.w	[r0 + (32)], r1	# de_114(D)->filesize, tmp203
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:525:         de->block = rootDirStart_ + i;
-	ld.w	r1, [rootDirStart_]	# rootDirStart_.34_79, rootDirStart_
-	ld.w	r0, [r13 + (-4)]	# i.35_80, i
-	add.w	r1, r0 #222	# _81, i.35_80
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:525:         de->block = rootDirStart_ + i;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:604:         de->block = rootDirStart_ + i;
+	ld.w	r1, [rootDirStart_]	# rootDirStart_.37_79, rootDirStart_
+	ld.w	r0, [r13 + (-4)]	# i.38_80, i
+	add.w	r1, r0 #222	# _81, i.38_80
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:604:         de->block = rootDirStart_ + i;
 	ld.w	r0, [r13 + (8)]	# tmp204, de
 	st.w	[r0 + (36)], r1	# de_114(D)->block, _81
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:526:         de->slot = j;
-	ld.w	r1, [r13 + (-8)]	# j.36_82, j
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:605:         de->slot = j;
+	ld.w	r1, [r13 + (-8)]	# j.39_82, j
 	ld.w	r0, [r13 + (8)]	# tmp205, de
-	st.w	[r0 + (40)], r1	# de_114(D)->slot, j.36_82
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:527:         de->first_cluster = cluster;
+	st.w	[r0 + (40)], r1	# de_114(D)->slot, j.39_82
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:606:         de->first_cluster = cluster;
 	ld.w	r0, [r13 + (8)]	# tmp206, de
 	ld.s	r1, [r13 + (-18)]	# tmp207, cluster
 	st.s	[r0 + (28)], r1	# de_114(D)->first_cluster, tmp207
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:532:         return 1;                        
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:611:         return 1;                        
 	mov.b	r0, 1	# _89,
-	j	.L111		#
-.L112:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:495:         continue; // free, or deleted file/folder
+	j	.L118		#
+.L119:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:574:         continue; // free, or deleted file/folder
 	nop	
-.L107:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:491:     for(j = 0; j < 16; j++)
+.L114:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:570:     for(j = 0; j < 16; j++)
 	ld.w	r0, [r13 + (-8)]	# tmp209, j
 	add.w	r0, 1 #111	# tmp208,
 	st.w	[r13 + (-8)], r0	# j, tmp208
-.L104:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:491:     for(j = 0; j < 16; j++)
+.L111:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:570:     for(j = 0; j < 16; j++)
 	ld.w	r1, [r13 + (-8)]	# tmp210, j
 	mov.w	r0, 15	# tmp211,
 	cmp.w	r1, r0	# tmp210, tmp211
-	jses	.L109		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	jses	.L116		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:567:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	ld.w	r0, [r13 + (-4)]	# tmp213, i
 	add.w	r0, 1 #111	# tmp212,
 	st.w	[r13 + (-4)], r0	# i, tmp212
-.L103:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.37_83, dataStartBlock_
-	ld.w	r0, [rootDirStart_]	# rootDirStart_.38_84, rootDirStart_
-	sub.w	r1, r0 #222	# _85, rootDirStart_.38_84
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	ld.w	r0, [r13 + (-4)]	# i.39_86, i
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:488:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	cmp.w	r1, r0	# _85, i.39_86
-	jg	.L110		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:537:   return 0;
+.L110:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:567:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.40_83, dataStartBlock_
+	ld.w	r0, [rootDirStart_]	# rootDirStart_.41_84, rootDirStart_
+	sub.w	r1, r0 #222	# _85, rootDirStart_.41_84
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:567:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	ld.w	r0, [r13 + (-4)]	# i.42_86, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:567:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	cmp.w	r1, r0	# _85, i.42_86
+	jg	.L117		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:616:   return 0;
 	xor.w	r0, r0	# _89
-.L111:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:538: }
+.L118:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:617: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -1888,62 +2283,62 @@ make83Name:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:542:   uint8_t n = 7;  // max index for part before dot
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:621:   uint8_t n = 7;  // max index for part before dot
 	mov.b	r0, 7	# tmp41,
 	st.b	[r13 + (-1)], r0	# n, tmp41
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:543:   uint8_t i = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:622:   uint8_t i = 0;
 	xor.w	r0, r0	# tmp42
 	st.b	[r13 + (-2)], r0	# i, tmp42
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:545:   while (i < 11) name[i++] = ' ';
-	j	.L114		#
-.L115:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:545:   while (i < 11) name[i++] = ' ';
-	ld.b	r0, [r13 + (-2)]	# i.40_1, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:624:   while (i < 11) name[i++] = ' ';
+	j	.L121		#
+.L122:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:624:   while (i < 11) name[i++] = ' ';
+	ld.b	r0, [r13 + (-2)]	# i.43_1, i
 	mov.w	r1, r0	# tmp43,
 	add.w	r1, 1 #111	# tmp43,
 	st.b	[r13 + (-2)], r1	# i, tmp44
-	zex.b	r1, r0	# _2, i.40_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:545:   while (i < 11) name[i++] = ' ';
+	zex.b	r1, r0	# _2, i.43_1
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:624:   while (i < 11) name[i++] = ' ';
 	ld.w	r0, [r13 + (12)]	# tmp45, name
 	add.w	r0, r1 #222	# _3, _2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:545:   while (i < 11) name[i++] = ' ';
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:624:   while (i < 11) name[i++] = ' ';
 	mov.b	r1, 32	# tmp46,
 	st.b	[r0], r1	# *_3, tmp46
-.L114:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:545:   while (i < 11) name[i++] = ' ';
+.L121:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:624:   while (i < 11) name[i++] = ' ';
 	ld.b	r1, [r13 + (-2)]	# tmp47, i
 	mov.w	r0, 10	# tmp48,
 	cmp.w	r1, r0	# tmp47, tmp48
-	jse	.L115		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:546:   i = 0;
+	jse	.L122		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:625:   i = 0;
 	xor.w	r0, r0	# tmp49
 	st.b	[r13 + (-2)], r0	# i, tmp49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:547:   while ((c = *str++) != '\0') {
-	j	.L116		#
-.L127:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:548:     if (c == '.') {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:626:   while ((c = *str++) != '\0') {
+	j	.L123		#
+.L134:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:627:     if (c == '.') {
 	ld.b	r1, [r13 + (-9)]	# tmp50, c
 	mov.w	r0, 46	# tmp51,
 	cmp.w	r1, r0	# tmp50, tmp51
-	jnz	.L117		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:549:       if (n == 10) return false;  // only one dot allowed
+	jnz	.L124		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:628:       if (n == 10) return false;  // only one dot allowed
 	ld.b	r1, [r13 + (-1)]	# tmp52, n
 	mov.w	r0, 10	# tmp53,
 	cmp.w	r1, r0	# tmp52, tmp53
-	jnz	.L118		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:549:       if (n == 10) return false;  // only one dot allowed
+	jnz	.L125		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:628:       if (n == 10) return false;  // only one dot allowed
 	xor.w	r0, r0	# _18
-	j	.L119		#
-.L118:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:550:       n = 10;  // max index for full 8.3 name
+	j	.L126		#
+.L125:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:629:       n = 10;  // max index for full 8.3 name
 	mov.b	r0, 10	# tmp54,
 	st.b	[r13 + (-1)], r0	# n, tmp54
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:551:       i = 8;   // place for extension
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:630:       i = 8;   // place for extension
 	mov.b	r0, 8	# tmp55,
 	st.b	[r13 + (-2)], r0	# i, tmp55
-	j	.L116		#
-.L117:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:556:       const uint8_t valid[] = "|<>^+=?/[];,*\"\\";
+	j	.L123		#
+.L124:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:635:       const uint8_t valid[] = "|<>^+=?/[];,*\"\\";
 	mov.s	r0, 31804	# tmp56,
 	st.s	[r13 + (-26)], r0	# valid, tmp56
 	mov.s	r0, 15966	# tmp57,
@@ -1960,108 +2355,108 @@ make83Name:
 	st.s	[r13 + (-14)], r0	# valid, tmp62
 	mov.s	r0, 23552	# tmp63,
 	st.s	[r13 + (-12)], r0	# valid, tmp63
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:557:       const uint8_t *p = valid;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:636:       const uint8_t *p = valid;
 	mov.w	r0, r13	# tmp64,
 	add.w	r0, -26 #111	# tmp64,
 	st.w	[r13 + (-8)], r0	# p, tmp64
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:558:       while ((b = *p++)) if (b == c) return false;
-	j	.L120		#
-.L122:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:558:       while ((b = *p++)) if (b == c) return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:637:       while ((b = *p++)) if (b == c) return false;
+	j	.L127		#
+.L129:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:637:       while ((b = *p++)) if (b == c) return false;
 	ld.b	r1, [r13 + (-10)]	# tmp65, b
 	ld.b	r0, [r13 + (-9)]	# tmp66, c
 	cmp.w	r1, r0	# tmp65, tmp66
-	jnz	.L120		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:558:       while ((b = *p++)) if (b == c) return false;
+	jnz	.L127		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:637:       while ((b = *p++)) if (b == c) return false;
 	xor.w	r0, r0	# _18
-	j	.L119		#
-.L120:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:558:       while ((b = *p++)) if (b == c) return false;
-	ld.w	r0, [r13 + (-8)]	# p.41_4, p
-	mov.w	r1, r0	# tmp67, p.41_4
+	j	.L126		#
+.L127:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:637:       while ((b = *p++)) if (b == c) return false;
+	ld.w	r0, [r13 + (-8)]	# p.44_4, p
+	mov.w	r1, r0	# tmp67, p.44_4
 	add.w	r1, 1 #111	# tmp67,
 	st.w	[r13 + (-8)], r1	# p, tmp67
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:558:       while ((b = *p++)) if (b == c) return false;
-	ld.b	r0, [r0]	# tmp68, *p.41_4
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:637:       while ((b = *p++)) if (b == c) return false;
+	ld.b	r0, [r0]	# tmp68, *p.44_4
 	st.b	[r13 + (-10)], r0	# b, tmp68
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:558:       while ((b = *p++)) if (b == c) return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:637:       while ((b = *p++)) if (b == c) return false;
 	ld.b	r1, [r13 + (-10)]	# tmp69, b
 	xor.w	r0, r0	# tmp70
 	cmp.w	r1, r0	# tmp69, tmp70
-	jnz	.L122		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:561:       if (i > n || c < 0X21 || c > 0X7E)return false;
+	jnz	.L129		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:640:       if (i > n || c < 0X21 || c > 0X7E)return false;
 	ld.b	r1, [r13 + (-2)]	# tmp71, i
 	ld.b	r0, [r13 + (-1)]	# tmp72, n
 	cmp.w	r1, r0	# tmp71, tmp72
-	jg	.L123		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:561:       if (i > n || c < 0X21 || c > 0X7E)return false;
+	jg	.L130		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:640:       if (i > n || c < 0X21 || c > 0X7E)return false;
 	ld.b	r1, [r13 + (-9)]	# tmp73, c
 	mov.w	r0, 32	# tmp74,
 	cmp.w	r1, r0	# tmp73, tmp74
-	jse	.L123		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:561:       if (i > n || c < 0X21 || c > 0X7E)return false;
+	jse	.L130		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:640:       if (i > n || c < 0X21 || c > 0X7E)return false;
 	ld.b	r1, [r13 + (-9)]	# tmp75, c
 	mov.w	r0, 126	# tmp76,
 	cmp.w	r1, r0	# tmp75, tmp76
-	jse	.L124		#
-.L123:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:561:       if (i > n || c < 0X21 || c > 0X7E)return false;
+	jse	.L131		#
+.L130:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:640:       if (i > n || c < 0X21 || c > 0X7E)return false;
 	xor.w	r0, r0	# _18
-	j	.L119		#
-.L124:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:563:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
+	j	.L126		#
+.L131:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
 	ld.b	r1, [r13 + (-9)]	# tmp77, c
 	mov.w	r0, 96	# tmp78,
 	cmp.w	r1, r0	# tmp77, tmp78
-	jse	.L125		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:563:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
+	jse	.L132		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
 	ld.b	r1, [r13 + (-9)]	# tmp79, c
 	mov.w	r0, 122	# tmp80,
 	cmp.w	r1, r0	# tmp79, tmp80
-	jg	.L125		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:563:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
+	jg	.L132		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
 	ld.b	r0, [r13 + (-9)]	# tmp81, c
 	add.w	r0, -32 #111	# tmp82,
-	j	.L126		#
-.L125:
-	ld.b	r0, [r13 + (-9)]	# iftmp.42_20, c
-.L126:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:563:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
-	ld.b	r1, [r13 + (-2)]	# i.43_5, i
+	j	.L133		#
+.L132:
+	ld.b	r0, [r13 + (-9)]	# iftmp.45_20, c
+.L133:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
+	ld.b	r1, [r13 + (-2)]	# i.46_5, i
 	mov.w	r2, r1	# tmp83,
 	add.w	r2, 1 #111	# tmp83,
 	st.b	[r13 + (-2)], r2	# i, tmp84
-	zex.b	r2, r1	# _6, i.43_5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:563:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
+	zex.b	r2, r1	# _6, i.46_5
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
 	ld.w	r1, [r13 + (12)]	# tmp85, name
 	add.w	r1, r2 #222	# _7, _6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:563:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
-	st.b	[r1], r0	# *_7, iftmp.42_20
-.L116:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:547:   while ((c = *str++) != '\0') {
-	ld.w	r0, [r13 + (8)]	# str.44_8, str
-	mov.w	r1, r0	# tmp86, str.44_8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:       name[i++] = c < 'a' || c > 'z' ?  c : c + ('A' - 'a');
+	st.b	[r1], r0	# *_7, iftmp.45_20
+.L123:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:626:   while ((c = *str++) != '\0') {
+	ld.w	r0, [r13 + (8)]	# str.47_8, str
+	mov.w	r1, r0	# tmp86, str.47_8
 	add.w	r1, 1 #111	# tmp86,
 	st.w	[r13 + (8)], r1	# str, tmp86
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:547:   while ((c = *str++) != '\0') {
-	ld.b	r0, [r0]	# _9, *str.44_8
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:547:   while ((c = *str++) != '\0') {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:626:   while ((c = *str++) != '\0') {
+	ld.b	r0, [r0]	# _9, *str.47_8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:626:   while ((c = *str++) != '\0') {
 	st.b	[r13 + (-9)], r0	# c, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:547:   while ((c = *str++) != '\0') {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:626:   while ((c = *str++) != '\0') {
 	ld.b	r1, [r13 + (-9)]	# tmp87, c
 	xor.w	r0, r0	# tmp88
 	cmp.w	r1, r0	# tmp87, tmp88
-	jnz	.L127		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:566:   name[11] = 0;
+	jnz	.L134		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:645:   name[11] = 0;
 	ld.w	r0, [r13 + (12)]	# tmp89, name
 	add.w	r0, 11 #111	# _10,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:566:   name[11] = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:645:   name[11] = 0;
 	xor.w	r1, r1	# tmp90
 	st.b	[r0], r1	# *_10, tmp90
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:568:   return name[0] != ' ';
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:647:   return name[0] != ' ';
 	ld.w	r0, [r13 + (12)]	# tmp91, name
 	ld.b	r0, [r0]	# _11, *name_31(D)
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:568:   return name[0] != ' ';
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:647:   return name[0] != ' ';
 	mov.w	r1, 32	# tmp93,
 	xor.w	r0, r1	# tmp92, tmp93
 	zex.b	r0, r0	# tmp94, tmp92
@@ -2069,8 +2464,8 @@ make83Name:
 neg.w	r0	# tmp95
 	mov.w	r1, 31	# tmp97,
 	shr.w	r0, r1	# tmp96, tmp97
-.L119:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:569: }
+.L126:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:648: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2082,104 +2477,104 @@ get_empty_dir_entry:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:656:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	xor.w	r0, r0	# tmp49
 	st.b	[r13 + (-1)], r0	# i, tmp49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	j	.L129		#
-.L135:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:579:     b = readBlock(rootDirStart_ + i, buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:656:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	j	.L136		#
+.L142:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:658:     b = readBlock(rootDirStart_ + i, buf);
 	ld.b	r1, [r13 + (-1)]	# _1, i
-	ld.w	r0, [rootDirStart_]	# rootDirStart_.45_2, rootDirStart_
-	add.w	r1, r0 #222	# _3, rootDirStart_.45_2
+	ld.w	r0, [rootDirStart_]	# rootDirStart_.48_2, rootDirStart_
+	add.w	r1, r0 #222	# _3, rootDirStart_.48_2
 	mov.w	r0, sp	# tmp50,
 	ld.w	r2, [r13 + (8)]	# tmp51, buf
 	st.w	[r0 + (4)], r2	#, tmp51
 	st.w	[r0], r1	#, _3
 	call	readBlock		#
 	st.b	[r13 + (-3)], r0	# b,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:580:     for(j = 0 ; j < 16; j++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:     for(j = 0 ; j < 16; j++)
 	xor.w	r0, r0	# tmp52
 	st.b	[r13 + (-2)], r0	# j, tmp52
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:580:     for(j = 0 ; j < 16; j++)
-	j	.L130		#
-.L134:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:582:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:     for(j = 0 ; j < 16; j++)
+	j	.L137		#
+.L141:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
 	ld.b	r0, [r13 + (-2)]	# _4, j
 	mov.w	r1, 5	# tmp53,
 	shl.w	r0, r1	# _5, tmp53
 	mov.w	r1, r0	# _6, _5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:582:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
 	ld.w	r0, [r13 + (8)]	# tmp54, buf
 	add.w	r0, r1 #222	# _7, _6
 	ld.b	r0, [r0]	# _8, *_7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:582:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
 	zex.b	r1, r0	# tmp55, _8
 	xor.w	r0, r0	# tmp56
 	cmp.w	r1, r0	# tmp55, tmp56
-	jz	.L131		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:582:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
+	jz	.L138		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
 	ld.b	r0, [r13 + (-2)]	# _9, j
 	mov.w	r1, 5	# tmp57,
 	shl.w	r0, r1	# _10, tmp57
 	mov.w	r1, r0	# _11, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:582:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
 	ld.w	r0, [r13 + (8)]	# tmp58, buf
 	add.w	r0, r1 #222	# _12, _11
 	ld.b	r0, [r0]	# _13, *_12
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:582:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:       if(buf[j*32] == 0x00 || buf[j*32] == 0xE5)
 	zex.b	r1, r0	# tmp59, _13
 	mov.w	r0, 229	# tmp60,
 	cmp.w	r1, r0	# tmp59, tmp60
-	jnz	.L132		#
-.L131:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:587:         *block = i;
+	jnz	.L139		#
+.L138:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:666:         *block = i;
 	ld.b	r0, [r13 + (-1)]	# tmp61, i
 	mov.w	r1, r0	# _14, tmp61
 	ld.w	r0, [r13 + (12)]	# tmp62, block
 	st.s	[r0], r1	# *block_37(D), _14
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:588:         *slot = j;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:667:         *slot = j;
 	ld.b	r0, [r13 + (-2)]	# tmp63, j
 	mov.w	r1, r0	# _15, tmp63
 	ld.w	r0, [r13 + (16)]	# tmp64, slot
 	st.s	[r0], r1	# *slot_39(D), _15
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:589:         return (1);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:668:         return (1);
 	mov.w	r0, 1	# _24,
-	j	.L133		#
-.L132:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:580:     for(j = 0 ; j < 16; j++)
-	ld.b	r0, [r13 + (-2)]	# j.46_16, j
+	j	.L140		#
+.L139:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:     for(j = 0 ; j < 16; j++)
+	ld.b	r0, [r13 + (-2)]	# j.49_16, j
 	add.w	r0, 1 #111	# tmp65,
 	st.b	[r13 + (-2)], r0	# j, tmp66
-.L130:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:580:     for(j = 0 ; j < 16; j++)
+.L137:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:     for(j = 0 ; j < 16; j++)
 	ld.b	r1, [r13 + (-2)]	# tmp67, j
 	mov.w	r0, 15	# tmp68,
 	cmp.w	r1, r0	# tmp67, tmp68
-	jse	.L134		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:592:     delay(1);
+	jse	.L141		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:671:     delay(1);
 	mov.w	r1, sp	# tmp69,
 	mov.w	r0, 1	# tmp70,
 	st.w	[r1], r0	#, tmp70
 	call	delay		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	ld.b	r0, [r13 + (-1)]	# i.47_17, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:656:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	ld.b	r0, [r13 + (-1)]	# i.50_17, i
 	add.w	r0, 1 #111	# tmp71,
 	st.b	[r13 + (-1)], r0	# i, tmp72
-.L129:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+.L136:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:656:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	ld.b	r1, [r13 + (-1)]	# _18, i
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	ld.w	r0, [dataStartBlock_]	# dataStartBlock_.48_19, dataStartBlock_
-	ld.w	r2, [rootDirStart_]	# rootDirStart_.49_20, rootDirStart_
-	sub.w	r0, r2 #222	# _21, rootDirStart_.49_20
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:577:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:656:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	ld.w	r0, [dataStartBlock_]	# dataStartBlock_.51_19, dataStartBlock_
+	ld.w	r2, [rootDirStart_]	# rootDirStart_.52_20, rootDirStart_
+	sub.w	r0, r2 #222	# _21, rootDirStart_.52_20
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:656:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	cmp.w	r1, r0	# _18, _21
-	js	.L135		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:598:   return 0;
+	js	.L142		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:677:   return 0;
 	xor.w	r0, r0	# _24
-.L133:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:599: }
+.L140:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:678: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2193,9 +2588,9 @@ create_dir_entry:
 	sub.w	sp, 36 #111	#,
 	ld.w	r0, [r13 + (16)]	# tmp37, fn_length
 	st.b	[r13 + (-12)], r0	# fn_length, tmp38
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:605:   memmove(de->filename, filename, fn_length);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:684:   memmove(de->filename, filename, fn_length);
 	ld.w	r1, [r13 + (8)]	# _1, de
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:605:   memmove(de->filename, filename, fn_length);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:684:   memmove(de->filename, filename, fn_length);
 	ld.b	r2, [r13 + (-12)]	# _2, fn_length
 	mov.w	r0, sp	# tmp39,
 	st.w	[r0 + (8)], r2	#, _2
@@ -2203,19 +2598,19 @@ create_dir_entry:
 	st.w	[r0 + (4)], r2	#, tmp40
 	st.w	[r0], r1	#, _1
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:606:   de->attributes = DIR_ATT_ARCHIVE;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:685:   de->attributes = DIR_ATT_ARCHIVE;
 	ld.w	r0, [r13 + (8)]	# tmp41, de
 	mov.b	r1, 32	# tmp42,
 	st.b	[r0 + (12)], r1	# de_12(D)->attributes, tmp42
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:607:   de->filesize = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:686:   de->filesize = 0;
 	ld.w	r0, [r13 + (8)]	# tmp43, de
 	xor.w	r1, r1	# tmp44
 	st.w	[r0 + (32)], r1	# de_12(D)->filesize, tmp44
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:608:   memset(de->unused_attr, 0, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:687:   memset(de->unused_attr, 0, 14);
 	ld.w	r0, [r13 + (8)]	# tmp45, de
 	mov.w	r1, r0	# _3, tmp45
 	add.w	r1, 13 #111	# _3,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:608:   memset(de->unused_attr, 0, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:687:   memset(de->unused_attr, 0, 14);
 	mov.w	r0, sp	# tmp46,
 	mov.w	r2, 14	# tmp47,
 	st.w	[r0 + (8)], r2	#, tmp47
@@ -2223,7 +2618,7 @@ create_dir_entry:
 	st.w	[r0 + (4)], r2	#, tmp48
 	st.w	[r0], r1	#, _3
 	call	memset		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:612:   dir_entry_addr = get_empty_dir_entry(buf, &block, &slot);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:691:   dir_entry_addr = get_empty_dir_entry(buf, &block, &slot);
 	mov.w	r0, sp	# tmp49,
 	mov.w	r1, r13	# tmp50,
 	add.w	r1, -8 #111	# tmp50,
@@ -2235,36 +2630,36 @@ create_dir_entry:
 	st.w	[r0], r1	#, tmp52
 	call	get_empty_dir_entry		#
 	st.w	[r13 + (-4)], r0	# dir_entry_addr,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:616:   if (!dir_entry_addr) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:695:   if (!dir_entry_addr) 
 	ld.w	r1, [r13 + (-4)]	# tmp53, dir_entry_addr
 	xor.w	r0, r0	# tmp54
 	cmp.w	r1, r0	# tmp53, tmp54
-	jnz	.L137		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:621:     return 0;
+	jnz	.L144		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:700:     return 0;
 	xor.w	r0, r0	# _10
-	j	.L139		#
-.L137:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:623:   de->block = rootDirStart_ + block;
-	ld.s	r0, [r13 + (-6)]	# block.50_4, block
-	zex.s	r1, r0	# _5, block.50_4
-	ld.w	r0, [rootDirStart_]	# rootDirStart_.51_6, rootDirStart_
-	add.w	r1, r0 #222	# _7, rootDirStart_.51_6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:623:   de->block = rootDirStart_ + block;
+	j	.L146		#
+.L144:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:702:   de->block = rootDirStart_ + block;
+	ld.s	r0, [r13 + (-6)]	# block.53_4, block
+	zex.s	r1, r0	# _5, block.53_4
+	ld.w	r0, [rootDirStart_]	# rootDirStart_.54_6, rootDirStart_
+	add.w	r1, r0 #222	# _7, rootDirStart_.54_6
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:702:   de->block = rootDirStart_ + block;
 	ld.w	r0, [r13 + (8)]	# tmp55, de
 	st.w	[r0 + (36)], r1	# de_12(D)->block, _7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:624:   de->slot = slot;
-	ld.s	r0, [r13 + (-8)]	# slot.52_8, slot
-	zex.s	r1, r0	# _9, slot.52_8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:703:   de->slot = slot;
+	ld.s	r0, [r13 + (-8)]	# slot.55_8, slot
+	zex.s	r1, r0	# _9, slot.55_8
 	ld.w	r0, [r13 + (8)]	# tmp56, de
 	st.w	[r0 + (40)], r1	# de_12(D)->slot, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:627:   de->first_cluster = 0x0000;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:706:   de->first_cluster = 0x0000;
 	ld.w	r0, [r13 + (8)]	# tmp57, de
 	xor.w	r1, r1	# tmp58
 	st.s	[r0 + (28)], r1	# de_12(D)->first_cluster, tmp58
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:629:   return 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:708:   return 1;
 	mov.b	r0, 1	# _10,
-.L139:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:630: }
+.L146:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:709: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2276,18 +2671,18 @@ write_dir_entry:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 40 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:641:   de_sec_offset = (de->slot * 32);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:720:   de_sec_offset = (de->slot * 32);
 	ld.w	r0, [r13 + (8)]	# tmp48, de
 	ld.w	r0, [r0 + (40)]	# _1, de_22(D)->slot
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:641:   de_sec_offset = (de->slot * 32);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:720:   de_sec_offset = (de->slot * 32);
 	mov.w	r1, 5	# tmp50,
 	shl.w	r0, r1	# tmp49, tmp50
 	st.w	[r13 + (-4)], r0	# de_sec_offset, tmp49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:642:   de_sec_start = de->block;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:721:   de_sec_start = de->block;
 	ld.w	r0, [r13 + (8)]	# tmp51, de
 	ld.w	r0, [r0 + (36)]	# tmp52, de_22(D)->block
 	st.w	[r13 + (-8)], r0	# de_sec_start, tmp52
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:643:   b = readBlock(de_sec_start, buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:722:   b = readBlock(de_sec_start, buf);
 	mov.w	r0, sp	# tmp53,
 	ld.w	r1, [r13 + (12)]	# tmp54, buf
 	st.w	[r0 + (4)], r1	#, tmp54
@@ -2295,71 +2690,71 @@ write_dir_entry:
 	st.w	[r0], r1	#, tmp55
 	call	readBlock		#
 	st.b	[r13 + (-9)], r0	# b,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:649:   cluster_rev = reverse16(de->first_cluster);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:728:   cluster_rev = reverse16(de->first_cluster);
 	ld.w	r0, [r13 + (8)]	# tmp56, de
 	ld.s	r0, [r0 + (28)]	# _2, de_22(D)->first_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:649:   cluster_rev = reverse16(de->first_cluster);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:728:   cluster_rev = reverse16(de->first_cluster);
 	zex.s	r0, r0	# _3, _2
 	mov.w	r1, sp	# tmp57,
 	st.w	[r1], r0	#, _3
 	call	reverse16		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:649:   cluster_rev = reverse16(de->first_cluster);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:728:   cluster_rev = reverse16(de->first_cluster);
 	st.s	[r13 + (-12)], r0	# cluster_rev, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:650:   filesize_rev = reverse32(de->filesize);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:729:   filesize_rev = reverse32(de->filesize);
 	ld.w	r0, [r13 + (8)]	# tmp58, de
 	ld.w	r0, [r0 + (32)]	# _5, de_22(D)->filesize
 	mov.w	r1, sp	# tmp59,
 	st.w	[r1], r0	#, _5
 	call	reverse32		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:650:   filesize_rev = reverse32(de->filesize);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:729:   filesize_rev = reverse32(de->filesize);
 	st.w	[r13 + (-16)], r0	# filesize_rev, _6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:658:   memmove(buf+de_sec_offset+0x00, de->filename, 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:   memmove(buf+de_sec_offset+0x00, de->filename, 11);
 	ld.w	r1, [r13 + (12)]	# tmp60, buf
 	ld.w	r0, [r13 + (-4)]	# tmp61, de_sec_offset
 	add.w	r1, r0 #222	# _7, tmp61
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:658:   memmove(buf+de_sec_offset+0x00, de->filename, 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:   memmove(buf+de_sec_offset+0x00, de->filename, 11);
 	ld.w	r2, [r13 + (8)]	# _8, de
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:658:   memmove(buf+de_sec_offset+0x00, de->filename, 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:   memmove(buf+de_sec_offset+0x00, de->filename, 11);
 	mov.w	r0, sp	# tmp62,
 	mov.w	r3, 11	# tmp63,
 	st.w	[r0 + (8)], r3	#, tmp63
 	st.w	[r0 + (4)], r2	#, _8
 	st.w	[r0], r1	#, _7
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:   memmove(buf+de_sec_offset+0x0b, &(de->attributes), 1);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:738:   memmove(buf+de_sec_offset+0x0b, &(de->attributes), 1);
 	ld.w	r0, [r13 + (-4)]	# tmp64, de_sec_offset
 	mov.w	r1, r0	# _9, tmp64
 	add.w	r1, 11 #111	# _9,
 	ld.w	r0, [r13 + (12)]	# tmp65, buf
 	add.w	r0, r1 #222	# _10, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:   memmove(buf+de_sec_offset+0x0b, &(de->attributes), 1);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:738:   memmove(buf+de_sec_offset+0x0b, &(de->attributes), 1);
 	ld.w	r1, [r13 + (8)]	# tmp66, de
 	add.w	r1, 12 #111	# _11,
 	ld.b	r1, [r1]	# _33, MEM[(char * {ref-all})_11]
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:659:   memmove(buf+de_sec_offset+0x0b, &(de->attributes), 1);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:738:   memmove(buf+de_sec_offset+0x0b, &(de->attributes), 1);
 	st.b	[r0], r1	# MEM[(char * {ref-all})_10], _33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:660:   memmove(buf+de_sec_offset+0x0c, &(de->unused_attr), 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:739:   memmove(buf+de_sec_offset+0x0c, &(de->unused_attr), 14);
 	ld.w	r0, [r13 + (-4)]	# tmp67, de_sec_offset
 	add.w	r0, 12 #111	# _12,
 	ld.w	r1, [r13 + (12)]	# tmp68, buf
 	add.w	r1, r0 #222	# _13, _12
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:660:   memmove(buf+de_sec_offset+0x0c, &(de->unused_attr), 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:739:   memmove(buf+de_sec_offset+0x0c, &(de->unused_attr), 14);
 	ld.w	r0, [r13 + (8)]	# tmp69, de
 	mov.w	r2, r0	# _14, tmp69
 	add.w	r2, 13 #111	# _14,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:660:   memmove(buf+de_sec_offset+0x0c, &(de->unused_attr), 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:739:   memmove(buf+de_sec_offset+0x0c, &(de->unused_attr), 14);
 	mov.w	r0, sp	# tmp70,
 	mov.w	r3, 14	# tmp71,
 	st.w	[r0 + (8)], r3	#, tmp71
 	st.w	[r0 + (4)], r2	#, _14
 	st.w	[r0], r1	#, _13
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:   memmove(buf+de_sec_offset+0x1a, &cluster_rev, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:740:   memmove(buf+de_sec_offset+0x1a, &cluster_rev, 2);
 	ld.w	r0, [r13 + (-4)]	# tmp72, de_sec_offset
 	add.w	r0, 26 #111	# _15,
 	ld.w	r1, [r13 + (12)]	# tmp73, buf
 	add.w	r1, r0 #222	# _16, _15
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:661:   memmove(buf+de_sec_offset+0x1a, &cluster_rev, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:740:   memmove(buf+de_sec_offset+0x1a, &cluster_rev, 2);
 	mov.w	r0, sp	# tmp74,
 	mov.w	r2, 2	# tmp75,
 	st.w	[r0 + (8)], r2	#, tmp75
@@ -2368,12 +2763,12 @@ write_dir_entry:
 	st.w	[r0 + (4)], r2	#, tmp76
 	st.w	[r0], r1	#, _16
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:662:   memmove(buf+de_sec_offset+0x1c, &filesize_rev, 4);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:741:   memmove(buf+de_sec_offset+0x1c, &filesize_rev, 4);
 	ld.w	r0, [r13 + (-4)]	# tmp77, de_sec_offset
 	add.w	r0, 28 #111	# _17,
 	ld.w	r1, [r13 + (12)]	# tmp78, buf
 	add.w	r1, r0 #222	# _18, _17
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:662:   memmove(buf+de_sec_offset+0x1c, &filesize_rev, 4);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:741:   memmove(buf+de_sec_offset+0x1c, &filesize_rev, 4);
 	mov.w	r0, sp	# tmp79,
 	mov.w	r2, 4	# tmp80,
 	st.w	[r0 + (8)], r2	#, tmp80
@@ -2382,7 +2777,7 @@ write_dir_entry:
 	st.w	[r0 + (4)], r2	#, tmp81
 	st.w	[r0], r1	#, _18
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:664:   if(!writeBlock(de_sec_start, buf, true))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:743:   if(!writeBlock(de_sec_start, buf, true))
 	mov.w	r0, sp	# tmp82,
 	mov.w	r1, 1	# tmp83,
 	st.w	[r0 + (8)], r1	#, tmp83
@@ -2391,19 +2786,19 @@ write_dir_entry:
 	ld.w	r1, [r13 + (-8)]	# tmp85, de_sec_start
 	st.w	[r0], r1	#, tmp85
 	call	writeBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:664:   if(!writeBlock(de_sec_start, buf, true))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:743:   if(!writeBlock(de_sec_start, buf, true))
 	zex.b	r1, r0	# tmp86, _19
 	xor.w	r0, r0	# tmp87
 	cmp.w	r1, r0	# tmp86, tmp87
-	jnz	.L141		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:669:     return 0;
+	jnz	.L148		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:748:     return 0;
 	xor.w	r0, r0	# _20
-	j	.L143		#
-.L141:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:672:   return 1;
+	j	.L150		#
+.L148:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:751:   return 1;
 	mov.b	r0, 1	# _20,
-.L143:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:673: }
+.L150:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:752: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2417,7 +2812,7 @@ create_file:
 	sub.w	sp, 28 #111	#,
 	ld.w	r0, [r13 + (16)]	# tmp31, fn_length
 	st.b	[r13 + (-4)], r0	# fn_length, tmp32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:678:   if(!create_dir_entry(de, filename, fn_length, buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:757:   if(!create_dir_entry(de, filename, fn_length, buf))
 	ld.b	r1, [r13 + (-4)]	# _1, fn_length
 	mov.w	r0, sp	# tmp33,
 	ld.w	r2, [r13 + (20)]	# tmp34, buf
@@ -2428,35 +2823,35 @@ create_file:
 	ld.w	r1, [r13 + (8)]	# tmp36, de
 	st.w	[r0], r1	#, tmp36
 	call	create_dir_entry		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:678:   if(!create_dir_entry(de, filename, fn_length, buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:757:   if(!create_dir_entry(de, filename, fn_length, buf))
 	zex.b	r1, r0	# tmp37, _2
 	xor.w	r0, r0	# tmp38
 	cmp.w	r1, r0	# tmp37, tmp38
-	jnz	.L145		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:683:     return 0;
+	jnz	.L152		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:762:     return 0;
 	xor.w	r0, r0	# _4
-	j	.L146		#
-.L145:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:686:   if(!write_dir_entry(de, buf))
+	j	.L153		#
+.L152:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:765:   if(!write_dir_entry(de, buf))
 	mov.w	r0, sp	# tmp39,
 	ld.w	r1, [r13 + (20)]	# tmp40, buf
 	st.w	[r0 + (4)], r1	#, tmp40
 	ld.w	r1, [r13 + (8)]	# tmp41, de
 	st.w	[r0], r1	#, tmp41
 	call	write_dir_entry		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:686:   if(!write_dir_entry(de, buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:765:   if(!write_dir_entry(de, buf))
 	zex.b	r1, r0	# tmp42, _3
 	xor.w	r0, r0	# tmp43
 	cmp.w	r1, r0	# tmp42, tmp43
-	jnz	.L147		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:691:     return 0;
+	jnz	.L154		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:770:     return 0;
 	xor.w	r0, r0	# _4
-	j	.L146		#
-.L147:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:694:   return 1;
+	j	.L153		#
+.L154:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:773:   return 1;
 	mov.b	r0, 1	# _4,
-.L146:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:695: }
+.L153:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:774: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2470,27 +2865,27 @@ clear_FAT:
 	sub.w	sp, 36 #111	#,
 	ld.w	r0, [r13 + (12)]	# tmp49, cluster
 	st.s	[r13 + (-12)], r0	# cluster, tmp50
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:703:   sec_start = (cluster * 2) / 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:782:   sec_start = (cluster * 2) / 512;
 	ld.s	r0, [r13 + (-12)]	# _1, cluster
 	xor.w	r1, r1	# tmp52
 	cmp.w	r0, r1	# tmp51, tmp52
-	jges	.L149		#
+	jges	.L156		#
 	add.w	r0, 255 #111	# tmp51,
-.L149:
+.L156:
 	mov.w	r1, 8	# tmp54,
 	shr.w	r0, r1	# tmp53, tmp54
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:703:   sec_start = (cluster * 2) / 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:782:   sec_start = (cluster * 2) / 512;
 	st.w	[r13 + (-4)], r0	# sec_start, _2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:704:   uint16_t offset = (cluster * 2) % 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:783:   uint16_t offset = (cluster * 2) % 512;
 	ld.s	r0, [r13 + (-12)]	# tmp55, cluster
 	mov.w	r1, r0	# tmp57, tmp55
 	add.w	r0, r1 #222	# tmp56, tmp57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:704:   uint16_t offset = (cluster * 2) % 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:783:   uint16_t offset = (cluster * 2) % 512;
 	mov.w	r1, 510	# tmp59,
 	and.w	r0, r1	# tmp58, tmp59
 	st.s	[r13 + (-6)], r0	# offset, tmp60
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:706:   if(!readBlock(fatStartBlock_ + sec_start, buf))
-	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.53_4, fatStartBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:785:   if(!readBlock(fatStartBlock_ + sec_start, buf))
+	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.56_4, fatStartBlock_
 	ld.w	r0, [r13 + (-4)]	# tmp61, sec_start
 	add.w	r1, r0 #222	# _5, tmp61
 	mov.w	r0, sp	# tmp62,
@@ -2498,41 +2893,41 @@ clear_FAT:
 	st.w	[r0 + (4)], r2	#, tmp63
 	st.w	[r0], r1	#, _5
 	call	readBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:706:   if(!readBlock(fatStartBlock_ + sec_start, buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:785:   if(!readBlock(fatStartBlock_ + sec_start, buf))
 	zex.b	r1, r0	# tmp64, _6
 	xor.w	r0, r0	# tmp65
 	cmp.w	r1, r0	# tmp64, tmp65
-	jnz	.L150		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:711:     return 0;
+	jnz	.L157		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:790:     return 0;
 	xor.w	r0, r0	# _22
-	j	.L151		#
-.L150:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:714:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
+	j	.L158		#
+.L157:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
 	ld.s	r1, [r13 + (-6)]	# _7, offset
 	ld.w	r0, [r13 + (8)]	# tmp66, buf
 	add.w	r0, r1 #222	# _8, _7
 	ld.b	r0, [r0]	# _9, *_8
 	zex.b	r0, r0	# tmp67, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:714:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
 	ld.s	r1, [r13 + (-6)]	# _11, offset
 	mov.w	r2, r1	# _12, _11
 	add.w	r2, 1 #111	# _12,
 	ld.w	r1, [r13 + (8)]	# tmp68, buf
 	add.w	r1, r2 #222	# _13, _12
 	ld.b	r1, [r1]	# _14, *_13
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:714:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
 	zex.b	r1, r1	# tmp69, _14
 	mov.w	r2, 8	# tmp71,
 	shl.w	r1, r2	# tmp70, tmp71
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:714:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793:   ori_cluster = buf[offset] + buf[offset + 1] * 256;
 	add.w	r0, r1 #222	# tmp72, tmp73
 	st.s	[r13 + (-8)], r0	# ori_cluster, tmp74
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:716:   memmove(buf + offset, (uint16_t)0, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:795:   memmove(buf + offset, (uint16_t)0, 2);
 	ld.s	r0, [r13 + (-6)]	# _17, offset
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:716:   memmove(buf + offset, (uint16_t)0, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:795:   memmove(buf + offset, (uint16_t)0, 2);
 	ld.w	r1, [r13 + (8)]	# tmp75, buf
 	add.w	r1, r0 #222	# _18, _17
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:716:   memmove(buf + offset, (uint16_t)0, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:795:   memmove(buf + offset, (uint16_t)0, 2);
 	mov.w	r0, sp	# tmp76,
 	mov.w	r2, 2	# tmp77,
 	st.w	[r0 + (8)], r2	#, tmp77
@@ -2540,8 +2935,8 @@ clear_FAT:
 	st.w	[r0 + (4)], r2	#, tmp78
 	st.w	[r0], r1	#, _18
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:717:   if (!writeBlock(fatStartBlock_ + sec_start, buf, 1))
-	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.54_19, fatStartBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:796:   if (!writeBlock(fatStartBlock_ + sec_start, buf, 1))
+	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.57_19, fatStartBlock_
 	ld.w	r0, [r13 + (-4)]	# tmp79, sec_start
 	add.w	r1, r0 #222	# _20, tmp79
 	mov.w	r0, sp	# tmp80,
@@ -2551,19 +2946,19 @@ clear_FAT:
 	st.w	[r0 + (4)], r2	#, tmp82
 	st.w	[r0], r1	#, _20
 	call	writeBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:717:   if (!writeBlock(fatStartBlock_ + sec_start, buf, 1))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:796:   if (!writeBlock(fatStartBlock_ + sec_start, buf, 1))
 	zex.b	r1, r0	# tmp83, _21
 	xor.w	r0, r0	# tmp84
 	cmp.w	r1, r0	# tmp83, tmp84
-	jnz	.L152		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:722:     return 0;
+	jnz	.L159		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:801:     return 0;
 	xor.w	r0, r0	# _22
-	j	.L151		#
-.L152:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:725:   return ori_cluster;
+	j	.L158		#
+.L159:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:804:   return ori_cluster;
 	ld.s	r0, [r13 + (-8)]	# _22, ori_cluster
-.L151:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:726: }
+.L158:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:805: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2575,18 +2970,18 @@ invalidate_dir_entry:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:730:   de->filename[0] = 0xe5;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:809:   de->filename[0] = 0xe5;
 	ld.w	r0, [r13 + (8)]	# tmp28, de
 	mov.b	r1, -27	# tmp29,
 	st.b	[r0], r1	# de_2(D)->filename, tmp29
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:731:   return write_dir_entry(de, buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:810:   return write_dir_entry(de, buf);
 	mov.w	r0, sp	# tmp30,
 	ld.w	r1, [r13 + (12)]	# tmp31, buf
 	st.w	[r0 + (4)], r1	#, tmp31
 	ld.w	r1, [r13 + (8)]	# tmp32, de
 	st.w	[r0], r1	#, tmp32
 	call	write_dir_entry		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:732: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:811: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2600,26 +2995,26 @@ get_sec_addr:
 	sub.w	sp, 4 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp39, cluster
 	st.s	[r13 + (-4)], r0	# cluster, tmp40
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
 	ld.s	r0, [r13 + (-4)]	# _1, cluster
 	add.w	r0, -2 #111	# _2,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
 	ld.b	r1, [bpb+2]	# _3, bpb.sectorsPerCluster
 	zex.b	r1, r1	# _4, _3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
 	mul.w	r0, r1	# _5, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
-	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.55_7, dataStartBlock_
-	add.w	r0, r1 #222	# _8, dataStartBlock_.55_7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.58_7, dataStartBlock_
+	add.w	r0, r1 #222	# _8, dataStartBlock_.58_7
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
 	ld.s	r1, [bpb]	# _9, bpb.bytesPerSector
 	zex.s	r2, r1	# _10, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
 	ld.w	r1, [r13 + (12)]	# tmp41, position
 	div.w	r1, r2	# _11, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:737:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:816:     return dataStartBlock_ + ((cluster-2) * bpb.sectorsPerCluster) + (position / bpb.bytesPerSector);
 	add.w	r0, r1 #222	# _15, _11
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:738: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:817: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2633,63 +3028,63 @@ next_cluster:
 	sub.w	sp, 36 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp43, cluster
 	st.s	[r13 + (-12)], r0	# cluster, tmp44
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:749:   if (cluster > (clusterCount_ + 1)) return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:828:   if (cluster > (clusterCount_ + 1)) return false;
 	ld.s	r1, [r13 + (-12)]	# _1, cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:749:   if (cluster > (clusterCount_ + 1)) return false;
-	ld.w	r0, [clusterCount_]	# clusterCount_.56_2, clusterCount_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:828:   if (cluster > (clusterCount_ + 1)) return false;
+	ld.w	r0, [clusterCount_]	# clusterCount_.59_2, clusterCount_
 	add.w	r0, 1 #111	# _3,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:749:   if (cluster > (clusterCount_ + 1)) return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:828:   if (cluster > (clusterCount_ + 1)) return false;
 	cmp.w	r1, r0	# _1, _3
-	jse	.L158		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:749:   if (cluster > (clusterCount_ + 1)) return false;
+	jse	.L165		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:828:   if (cluster > (clusterCount_ + 1)) return false;
 	xor.w	r0, r0	# _16
-	j	.L159		#
-.L158:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:750:   uint32_t offset = cluster << 1;
+	j	.L166		#
+.L165:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:829:   uint32_t offset = cluster << 1;
 	ld.s	r0, [r13 + (-12)]	# _4, cluster
 	add.w	r0, r0 #222	# tmp45, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:750:   uint32_t offset = cluster << 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:829:   uint32_t offset = cluster << 1;
 	st.w	[r13 + (-4)], r0	# offset, _5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:754:   if(!readBlock(fatStartBlock_, buff))
-	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.57_6, fatStartBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:833:   if(!readBlock(fatStartBlock_, buff))
+	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.60_6, fatStartBlock_
 	mov.w	r0, sp	# tmp46,
 	ld.w	r2, [r13 + (12)]	# tmp47, buff
 	st.w	[r0 + (4)], r2	#, tmp47
-	st.w	[r0], r1	#, fatStartBlock_.57_6
+	st.w	[r0], r1	#, fatStartBlock_.60_6
 	call	readBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:754:   if(!readBlock(fatStartBlock_, buff))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:833:   if(!readBlock(fatStartBlock_, buff))
 	zex.b	r1, r0	# tmp48, _7
 	xor.w	r0, r0	# tmp49
 	cmp.w	r1, r0	# tmp48, tmp49
-	jnz	.L160		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:759:     return 0;
+	jnz	.L167		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:838:     return 0;
 	xor.w	r0, r0	# _16
-	j	.L159		#
-.L160:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:762:   next = buff[offset]  + buff[offset + 1] * 256;
+	j	.L166		#
+.L167:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:841:   next = buff[offset]  + buff[offset + 1] * 256;
 	ld.w	r0, [r13 + (12)]	# tmp50, buff
 	ld.w	r1, [r13 + (-4)]	# tmp51, offset
 	add.w	r0, r1 #222	# _8, tmp51
 	ld.b	r0, [r0]	# _9, *_8
 	zex.b	r0, r0	# tmp52, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:762:   next = buff[offset]  + buff[offset + 1] * 256;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:841:   next = buff[offset]  + buff[offset + 1] * 256;
 	ld.w	r1, [r13 + (-4)]	# tmp53, offset
 	mov.w	r2, r1	# _11, tmp53
 	add.w	r2, 1 #111	# _11,
 	ld.w	r1, [r13 + (12)]	# tmp54, buff
 	add.w	r1, r2 #222	# _12, _11
 	ld.b	r1, [r1]	# _13, *_12
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:762:   next = buff[offset]  + buff[offset + 1] * 256;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:841:   next = buff[offset]  + buff[offset + 1] * 256;
 	zex.b	r1, r1	# tmp55, _13
 	mov.w	r2, 8	# tmp57,
 	shl.w	r1, r2	# tmp56, tmp57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:762:   next = buff[offset]  + buff[offset + 1] * 256;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:841:   next = buff[offset]  + buff[offset + 1] * 256;
 	add.w	r0, r1 #222	# tmp58, tmp59
 	st.s	[r13 + (-6)], r0	# next, tmp60
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:764:   return next;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:843:   return next;
 	ld.s	r0, [r13 + (-6)]	# _16, next
-.L159:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:765: }
+.L166:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:844: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2701,28 +3096,28 @@ ld_word:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 4 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:775: 	rv = ptr[1];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:854: 	rv = ptr[1];
 	ld.w	r0, [r13 + (8)]	# tmp36, ptr
 	add.w	r0, 1 #111	# _1,
 	ld.b	r0, [r0]	# _2, *_1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:775: 	rv = ptr[1];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:854: 	rv = ptr[1];
 	zex.b	r0, r0	# tmp37, _2
 	st.s	[r13 + (-2)], r0	# rv, tmp38
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:776: 	rv = rv << 8 | ptr[0];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:855: 	rv = rv << 8 | ptr[0];
 	ld.s	r0, [r13 + (-2)]	# _3, rv
 	mov.w	r1, 8	# tmp39,
 	shl.w	r0, r1	# _4, tmp39
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:776: 	rv = rv << 8 | ptr[0];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:855: 	rv = rv << 8 | ptr[0];
 	ld.w	r1, [r13 + (8)]	# tmp40, ptr
 	ld.b	r1, [r1]	# _6, *ptr_9(D)
 	zex.b	r1, r1	# tmp41, _6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:776: 	rv = rv << 8 | ptr[0];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:855: 	rv = rv << 8 | ptr[0];
 	or.w	r0, r1	# tmp42, _7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:776: 	rv = rv << 8 | ptr[0];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:855: 	rv = rv << 8 | ptr[0];
 	st.s	[r13 + (-2)], r0	# rv, _8
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:777: 	return rv;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:856: 	return rv;
 	ld.s	r0, [r13 + (-2)]	# _13, rv
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:778: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:857: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2737,14 +3132,14 @@ get_next_from_fat:
 	sub.w	sp, r12 #222	#,
 	ld.w	r0, [r13 + (12)]	# tmp36, clst
 	st.s	[r13 + (-520)], r0	# clst, tmp37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793: 	if (readData(fatStartBlock_ + clst / 256, (clst % 256) * 2, 2, buf)) {//,  ((UINT)clst % 256) * 2, 2)) return 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:872: 	if (readData(fatStartBlock_ + clst / 256, (clst % 256) * 2, 2, buf)) {//,  ((UINT)clst % 256) * 2, 2)) return 1;
 	ld.s	r0, [r13 + (-520)]	# tmp39, clst
 	mov.w	r1, 8	# tmp40,
 	shr.w	r0, r1	# tmp38, tmp40
 	zex.s	r1, r0	# _2, _1
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793: 	if (readData(fatStartBlock_ + clst / 256, (clst % 256) * 2, 2, buf)) {//,  ((UINT)clst % 256) * 2, 2)) return 1;
-	ld.w	r0, [fatStartBlock_]	# fatStartBlock_.58_3, fatStartBlock_
-	add.w	r1, r0 #222	# _4, fatStartBlock_.58_3
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:872: 	if (readData(fatStartBlock_ + clst / 256, (clst % 256) * 2, 2, buf)) {//,  ((UINT)clst % 256) * 2, 2)) return 1;
+	ld.w	r0, [fatStartBlock_]	# fatStartBlock_.61_3, fatStartBlock_
+	add.w	r1, r0 #222	# _4, fatStartBlock_.61_3
 	ld.s	r0, [r13 + (-520)]	# tmp41, clst
 	mov.w	r2, 255	# tmp43,
 	and.w	r0, r2	# tmp42, tmp43
@@ -2761,12 +3156,12 @@ get_next_from_fat:
 	st.w	[r0 + (4)], r2	#, _7
 	st.w	[r0], r1	#, _4
 	call	readData		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:793: 	if (readData(fatStartBlock_ + clst / 256, (clst % 256) * 2, 2, buf)) {//,  ((UINT)clst % 256) * 2, 2)) return 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:872: 	if (readData(fatStartBlock_ + clst / 256, (clst % 256) * 2, 2, buf)) {//,  ((UINT)clst % 256) * 2, 2)) return 1;
 	zex.b	r1, r0	# tmp50, _8
 	xor.w	r0, r0	# tmp51
 	cmp.w	r1, r0	# tmp50, tmp51
-	jz	.L164		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:794:     ret = ld_word(buf);
+	jz	.L171		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:873:     ret = ld_word(buf);
 	mov.w	r2, sp	# tmp52,
 	mov.w	r1, -514	# tmp54,
 	mov.w	r0, r13	# tmp53,
@@ -2774,14 +3169,14 @@ get_next_from_fat:
 	st.w	[r2], r0	#, tmp53
 	call	ld_word		#
 	st.s	[r13 + (-2)], r0	# ret,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:796: 	  return ret;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:875: 	  return ret;
 	ld.s	r0, [r13 + (-2)]	# _9, ret
-	j	.L166		#
-.L164:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:799: 	return 1;	/* An error occured at the disk I/O layer */
+	j	.L173		#
+.L171:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:878: 	return 1;	/* An error occured at the disk I/O layer */
 	mov.s	r0, 1	# _9,
-.L166:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:800: }
+.L173:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:879: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2795,20 +3190,20 @@ clust2sect:
 	sub.w	sp, 4 #111	#,
 	ld.w	r0, [r13 + (12)]	# tmp33, clst
 	st.s	[r13 + (-4)], r0	# clst, tmp34
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:813: 	clst -= 2;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:892: 	clst -= 2;
 	ld.s	r0, [r13 + (-4)]	# tmp35, clst
 	add.w	r0, -2 #111	# tmp36,
 	st.s	[r13 + (-4)], r0	# clst, tmp37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:814: 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:893: 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
 	ld.s	r0, [r13 + (-4)]	# _1, clst
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:814: 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
-	ld.b	r1, [blocksPerCluster_]	# blocksPerCluster_.59_2, blocksPerCluster_
-	zex.b	r1, r1	# _3, blocksPerCluster_.59_2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:893: 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
+	ld.b	r1, [blocksPerCluster_]	# blocksPerCluster_.62_2, blocksPerCluster_
+	zex.b	r1, r1	# _3, blocksPerCluster_.62_2
 	mul.w	r0, r1	# _4, _3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:814: 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
-	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.60_5, dataStartBlock_
-	add.w	r0, r1 #222	# _9, dataStartBlock_.60_5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:815: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:893: 	return (uint32_t)clst * blocksPerCluster_ + dataStartBlock_;
+	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.63_5, dataStartBlock_
+	add.w	r0, r1 #222	# _9, dataStartBlock_.63_5
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:894: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2820,74 +3215,74 @@ get_unused_cluster:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 32 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:825:   for (i = 0; i < 256; i++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:904:   for (i = 0; i < 256; i++)
 	xor.w	r0, r0	# tmp51
 	st.b	[r13 + (-2)], r0	# i, tmp51
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:827:     b = readBlock(fatStartBlock_ + i, buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:906:     b = readBlock(fatStartBlock_ + i, buf);
 	ld.b	r1, [r13 + (-2)]	# _1, i
-	ld.w	r0, [fatStartBlock_]	# fatStartBlock_.61_2, fatStartBlock_
-	add.w	r1, r0 #222	# _3, fatStartBlock_.61_2
+	ld.w	r0, [fatStartBlock_]	# fatStartBlock_.64_2, fatStartBlock_
+	add.w	r1, r0 #222	# _3, fatStartBlock_.64_2
 	mov.w	r0, sp	# tmp52,
 	ld.w	r2, [r13 + (8)]	# tmp53, buf
 	st.w	[r0 + (4)], r2	#, tmp53
 	st.w	[r0], r1	#, _3
 	call	readBlock		#
 	st.b	[r13 + (-3)], r0	# b,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:828:     for(j = 0; j < 256 ; j++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:907:     for(j = 0; j < 256 ; j++)
 	xor.w	r0, r0	# tmp54
 	st.b	[r13 + (-1)], r0	# j, tmp54
-.L172:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+.L179:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	ld.b	r0, [r13 + (-1)]	# _4, j
 	add.w	r0, r0 #222	# tmp55, _4
 	mov.w	r1, r0	# _6, _5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	ld.w	r0, [r13 + (8)]	# tmp56, buf
 	add.w	r0, r1 #222	# _7, _6
 	ld.b	r0, [r0]	# _8, *_7
 	zex.b	r0, r0	# tmp57, _8
 	mov.w	r2, r0	# _9, tmp57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	ld.b	r0, [r13 + (-1)]	# _10, j
 	add.w	r0, r0 #222	# tmp58, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	mov.w	r1, r0	# _13, _12
 	add.w	r1, 1 #111	# _13,
 	ld.w	r0, [r13 + (8)]	# tmp59, buf
 	add.w	r0, r1 #222	# _14, _13
 	ld.b	r0, [r0]	# _15, *_14
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	zex.b	r0, r0	# _16, _15
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	mov.w	r1, 8	# tmp60,
 	shl.w	r0, r1	# _17, tmp60
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	mov.w	r1, r0	# _18, _17
 	mov.w	r0, r2	# tmp61,
 	or.w	r0, r1	# tmp61, _18
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
 	st.s	[r13 + (-6)], r0	# FAT_entry, _19
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:831:       if(FAT_entry == 0x0000)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:910:       if(FAT_entry == 0x0000)
 	ld.s	r1, [r13 + (-6)]	# tmp62, FAT_entry
 	xor.w	r0, r0	# tmp63
 	cmp.w	r1, r0	# tmp62, tmp63
-	jnz	.L170		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:836:         return (i * 256) + j;
+	jnz	.L177		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:915:         return (i * 256) + j;
 	ld.b	r0, [r13 + (-2)]	# tmp64, i
 	mov.w	r1, 8	# tmp66,
 	shl.w	r0, r1	# tmp65, tmp66
 	ld.b	r1, [r13 + (-1)]	# tmp67, j
 	add.w	r0, r1 #222	# tmp68, tmp69
-	j	.L173		#
-.L170:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:828:     for(j = 0; j < 256 ; j++)
-	ld.b	r0, [r13 + (-1)]	# j.62_23, j
+	j	.L180		#
+.L177:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:907:     for(j = 0; j < 256 ; j++)
+	ld.b	r0, [r13 + (-1)]	# j.65_23, j
 	add.w	r0, 1 #111	# tmp70,
 	st.b	[r13 + (-1)], r0	# j, tmp71
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:830:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
-	j	.L172		#
-.L173:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:845: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:909:       FAT_entry = buf[j*2]&0x00ff | (buf[j*2+1]&0x00ff)<<8;
+	j	.L179		#
+.L180:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:924: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2903,26 +3298,26 @@ update_FAT:
 	ld.w	r0, [r13 + (16)]	# tmp44, value
 	st.s	[r13 + (-16)], r1	# cluster, tmp43
 	st.s	[r13 + (-20)], r0	# value, tmp45
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:854:   sec_start = (cluster * 2) / 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:933:   sec_start = (cluster * 2) / 512;
 	ld.s	r0, [r13 + (-16)]	# _1, cluster
 	xor.w	r1, r1	# tmp47
 	cmp.w	r0, r1	# tmp46, tmp47
-	jges	.L175		#
+	jges	.L182		#
 	add.w	r0, 255 #111	# tmp46,
-.L175:
+.L182:
 	mov.w	r1, 8	# tmp49,
 	shr.w	r0, r1	# tmp48, tmp49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:854:   sec_start = (cluster * 2) / 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:933:   sec_start = (cluster * 2) / 512;
 	st.w	[r13 + (-4)], r0	# sec_start, _2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:855:   offset = (cluster * 2) % 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:934:   offset = (cluster * 2) % 512;
 	ld.s	r0, [r13 + (-16)]	# _3, cluster
 	add.w	r0, r0 #222	# tmp50, _3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:855:   offset = (cluster * 2) % 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:934:   offset = (cluster * 2) % 512;
 	mov.w	r1, 510	# tmp52,
 	and.w	r0, r1	# tmp51, tmp52
 	st.w	[r13 + (-8)], r0	# offset, tmp51
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:861:   if(!readBlock(fatStartBlock_ + sec_start, buf))
-	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.64_6, fatStartBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:940:   if(!readBlock(fatStartBlock_ + sec_start, buf))
+	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.67_6, fatStartBlock_
 	ld.w	r0, [r13 + (-4)]	# tmp53, sec_start
 	add.w	r1, r0 #222	# _7, tmp53
 	mov.w	r0, sp	# tmp54,
@@ -2930,27 +3325,27 @@ update_FAT:
 	st.w	[r0 + (4)], r2	#, tmp55
 	st.w	[r0], r1	#, _7
 	call	readBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:861:   if(!readBlock(fatStartBlock_ + sec_start, buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:940:   if(!readBlock(fatStartBlock_ + sec_start, buf))
 	zex.b	r1, r0	# tmp56, _8
 	xor.w	r0, r0	# tmp57
 	cmp.w	r1, r0	# tmp56, tmp57
-	jnz	.L176		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:866:     return 0;
+	jnz	.L183		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:945:     return 0;
 	xor.w	r0, r0	# _15
-	j	.L179		#
-.L176:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:868:   value_rev = reverse16(value);
+	j	.L186		#
+.L183:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:947:   value_rev = reverse16(value);
 	ld.s	r0, [r13 + (-20)]	# _9, value
 	mov.w	r1, sp	# tmp58,
 	st.w	[r1], r0	#, _9
 	call	reverse16		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:868:   value_rev = reverse16(value);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:947:   value_rev = reverse16(value);
 	st.s	[r13 + (-10)], r0	# value_rev, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:869:   memmove(buf + offset, &value_rev, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:948:   memmove(buf + offset, &value_rev, 2);
 	ld.w	r1, [r13 + (8)]	# tmp59, buf
 	ld.w	r0, [r13 + (-8)]	# tmp60, offset
 	add.w	r1, r0 #222	# _11, tmp60
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:869:   memmove(buf + offset, &value_rev, 2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:948:   memmove(buf + offset, &value_rev, 2);
 	mov.w	r0, sp	# tmp61,
 	mov.w	r2, 2	# tmp62,
 	st.w	[r0 + (8)], r2	#, tmp62
@@ -2959,8 +3354,8 @@ update_FAT:
 	st.w	[r0 + (4)], r2	#, tmp63
 	st.w	[r0], r1	#, _11
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:870:   if (!writeBlock(fatStartBlock_+ sec_start, buf, 1))
-	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.65_12, fatStartBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:949:   if (!writeBlock(fatStartBlock_+ sec_start, buf, 1))
+	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.68_12, fatStartBlock_
 	ld.w	r0, [r13 + (-4)]	# tmp64, sec_start
 	add.w	r1, r0 #222	# _13, tmp64
 	mov.w	r0, sp	# tmp65,
@@ -2970,19 +3365,19 @@ update_FAT:
 	st.w	[r0 + (4)], r2	#, tmp67
 	st.w	[r0], r1	#, _13
 	call	writeBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:870:   if (!writeBlock(fatStartBlock_+ sec_start, buf, 1))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:949:   if (!writeBlock(fatStartBlock_+ sec_start, buf, 1))
 	zex.b	r1, r0	# tmp68, _14
 	xor.w	r0, r0	# tmp69
 	cmp.w	r1, r0	# tmp68, tmp69
-	jnz	.L178		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:875:     return 0;
+	jnz	.L185		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:954:     return 0;
 	xor.w	r0, r0	# _15
-	j	.L179		#
-.L178:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:878:   return 1;
+	j	.L186		#
+.L185:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:957:   return 1;
 	mov.b	r0, 1	# _15,
-.L179:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:879: }
+.L186:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:958: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -2994,284 +3389,284 @@ sdcard_init:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 36 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:889: 	*DMA_1_HANDLER_INSTR 	= 1;
-	ld.w	r0, [DMA_1_HANDLER_INSTR]	# DMA_1_HANDLER_INSTR.66_1, DMA_1_HANDLER_INSTR
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:889: 	*DMA_1_HANDLER_INSTR 	= 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:968: 	*DMA_1_HANDLER_INSTR 	= 1;
+	ld.w	r0, [DMA_1_HANDLER_INSTR]	# DMA_1_HANDLER_INSTR.69_1, DMA_1_HANDLER_INSTR
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:968: 	*DMA_1_HANDLER_INSTR 	= 1;
 	mov.s	r1, 1	# tmp61,
-	st.s	[r0], r1	# *DMA_1_HANDLER_INSTR.66_1, tmp61
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:890: 	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
-	ld.w	r0, [DMA_1_HANDLER_ADDR]	# DMA_1_HANDLER_ADDR.67_2, DMA_1_HANDLER_ADDR
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:890: 	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
-	mov.w	r1, dma_1_irq_triggered	# dma_1_irq_triggered.68_3,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:890: 	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
-	st.w	[r0], r1	# *DMA_1_HANDLER_ADDR.67_2, dma_1_irq_triggered.68_3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:892:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
+	st.s	[r0], r1	# *DMA_1_HANDLER_INSTR.69_1, tmp61
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:969: 	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
+	ld.w	r0, [DMA_1_HANDLER_ADDR]	# DMA_1_HANDLER_ADDR.70_2, DMA_1_HANDLER_ADDR
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:969: 	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
+	mov.w	r1, dma_1_irq_triggered	# dma_1_irq_triggered.71_3,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:969: 	*DMA_1_HANDLER_ADDR 	= (int)&dma_1_irq_triggered;
+	st.w	[r0], r1	# *DMA_1_HANDLER_ADDR.70_2, dma_1_irq_triggered.71_3
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:971:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
 	xor.w	r0, r0	# tmp62
 	st.b	[type_], r0	# type_, tmp62
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:892:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
-	ld.b	r0, [type_]	# type_.69_4, type_
-	st.b	[partialBlockRead_], r0	# partialBlockRead_, type_.69_4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:892:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
-	ld.b	r0, [partialBlockRead_]	# partialBlockRead_.70_5, partialBlockRead_
-	st.b	[inBlock_], r0	# inBlock_, partialBlockRead_.70_5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:892:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
-	ld.b	r0, [inBlock_]	# inBlock_.71_6, inBlock_
-	st.b	[errorCode_], r0	# errorCode_, inBlock_.71_6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:892:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
-	ld.b	r0, [errorCode_]	# errorCode_.72_7, errorCode_
-	st.b	[writeCRC_], r0	# writeCRC_, errorCode_.72_7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:894:   uint32_t t0 = (uint32_t)get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:971:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
+	ld.b	r0, [type_]	# type_.72_4, type_
+	st.b	[partialBlockRead_], r0	# partialBlockRead_, type_.72_4
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:971:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
+	ld.b	r0, [partialBlockRead_]	# partialBlockRead_.73_5, partialBlockRead_
+	st.b	[inBlock_], r0	# inBlock_, partialBlockRead_.73_5
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:971:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
+	ld.b	r0, [inBlock_]	# inBlock_.74_6, inBlock_
+	st.b	[errorCode_], r0	# errorCode_, inBlock_.74_6
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:971:   writeCRC_ = errorCode_ = inBlock_ = partialBlockRead_ = type_ = 0;
+	ld.b	r0, [errorCode_]	# errorCode_.75_7, errorCode_
+	st.b	[writeCRC_], r0	# writeCRC_, errorCode_.75_7
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:973:   uint32_t t0 = (uint32_t)get_millis();
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:894:   uint32_t t0 = (uint32_t)get_millis();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:973:   uint32_t t0 = (uint32_t)get_millis();
 	st.w	[r13 + (-8)], r0	# t0, _8
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:897:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:976:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
 	xor.w	r0, r0	# tmp63
 	st.b	[r13 + (-1)], r0	# i, tmp63
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:897:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
-	j	.L181		#
-.L182:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:897:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:976:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+	j	.L188		#
+.L189:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:976:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
 	mov.w	r1, sp	# tmp64,
 	mov.w	r0, 255	# tmp65,
 	st.w	[r1], r0	#, tmp65
 	call	spiSend		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:897:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
-	ld.b	r0, [r13 + (-1)]	# i.73_9, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:976:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+	ld.b	r0, [r13 + (-1)]	# i.76_9, i
 	add.w	r0, 1 #111	# tmp66,
 	st.b	[r13 + (-1)], r0	# i, tmp67
-.L181:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:897:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
+.L188:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:976:   for (uint8_t i = 0; i < 10; i++) spiSend(0XFF);
 	ld.b	r1, [r13 + (-1)]	# tmp68, i
 	mov.w	r0, 9	# tmp69,
 	cmp.w	r1, r0	# tmp68, tmp69
-	jse	.L182		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:899:   chipSelectLow();
+	jse	.L189		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:978:   chipSelectLow();
 	call	chipSelectLow		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:902:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
-	j	.L183		#
-.L185:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:903:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:981:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
+	j	.L190		#
+.L192:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:982:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:903:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:982:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	mov.w	r1, r0	# _11, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:903:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:982:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	ld.w	r0, [r13 + (-8)]	# tmp70, t0
 	sub.w	r1, r0 #222	# _12, tmp70
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:903:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:982:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	mov.w	r0, 2000	# tmp71,
 	cmp.w	r1, r0	# _12, tmp71
-	jse	.L183		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:904:       error(SD_CARD_ERROR_CMD0);
+	jse	.L190		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:983:       error(SD_CARD_ERROR_CMD0);
 	mov.w	r1, sp	# tmp72,
 	mov.w	r0, 1	# tmp73,
 	st.w	[r1], r0	#, tmp73
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:905:       goto fail;
-	j	.L184		#
-.L183:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:902:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:984:       goto fail;
+	j	.L191		#
+.L190:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:981:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
 	mov.w	r0, sp	# tmp74,
 	xor.w	r1, r1	# tmp75
 	st.w	[r0 + (4)], r1	#, tmp75
 	xor.w	r1, r1	# tmp76
 	st.w	[r0], r1	#, tmp76
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:902:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:981:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
 	st.b	[status_], r0	# status_, _13
-	ld.b	r0, [status_]	# status_.74_14, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:902:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
-	zex.b	r1, r0	# tmp77, status_.74_14
+	ld.b	r0, [status_]	# status_.77_14, status_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:981:   while ((status_ = cardCommand(CMD0, 0)) != R1_IDLE_STATE) {
+	zex.b	r1, r0	# tmp77, status_.77_14
 	mov.w	r0, 1	# tmp78,
 	cmp.w	r1, r0	# tmp77, tmp78
-	jnz	.L185		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:910:   if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
+	jnz	.L192		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
 	mov.w	r0, sp	# tmp79,
 	mov.w	r1, 426	# tmp80,
 	st.w	[r0 + (4)], r1	#, tmp80
 	mov.w	r1, 8	# tmp81,
 	st.w	[r0], r1	#, tmp81
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:910:   if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
 	zex.b	r1, r0	# _16, _15
 	mov.w	r0, 4	# tmp82,
 	and.w	r1, r0	# _17, tmp82
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:910:   if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   if ((cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
 	xor.w	r0, r0	# tmp83
 	cmp.w	r1, r0	# _17, tmp83
-	jz	.L186		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:911:     type(SD_CARD_TYPE_SD1);
+	jz	.L193		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:990:     type(SD_CARD_TYPE_SD1);
 	mov.w	r1, sp	# tmp84,
 	mov.w	r0, 1	# tmp85,
 	st.w	[r1], r0	#, tmp85
 	call	type		#
-	j	.L187		#
-.L186:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:914:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+	j	.L194		#
+.L193:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
 	xor.w	r0, r0	# tmp86
 	st.b	[r13 + (-2)], r0	# i, tmp86
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:914:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
-	j	.L188		#
-.L189:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:914:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+	j	.L195		#
+.L196:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:914:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
 	st.b	[status_], r0	# status_, _18
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:914:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
-	ld.b	r0, [r13 + (-2)]	# i.75_19, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+	ld.b	r0, [r13 + (-2)]	# i.78_19, i
 	add.w	r0, 1 #111	# tmp87,
 	st.b	[r13 + (-2)], r0	# i, tmp88
-.L188:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:914:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
+.L195:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:     for (uint8_t i = 0; i < 4; i++) status_ = spiRec();
 	ld.b	r1, [r13 + (-2)]	# tmp89, i
 	mov.w	r0, 3	# tmp90,
 	cmp.w	r1, r0	# tmp89, tmp90
-	jse	.L189		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:915:     if (status_ != 0XAA) {
-	ld.b	r0, [status_]	# status_.76_20, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:915:     if (status_ != 0XAA) {
-	zex.b	r1, r0	# tmp91, status_.76_20
+	jse	.L196		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:     if (status_ != 0XAA) {
+	ld.b	r0, [status_]	# status_.79_20, status_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:     if (status_ != 0XAA) {
+	zex.b	r1, r0	# tmp91, status_.79_20
 	mov.w	r0, 170	# tmp92,
 	cmp.w	r1, r0	# tmp91, tmp92
-	jz	.L190		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:916:       error(SD_CARD_ERROR_CMD8);
+	jz	.L197		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:       error(SD_CARD_ERROR_CMD8);
 	mov.w	r1, sp	# tmp93,
 	mov.w	r0, 2	# tmp94,
 	st.w	[r1], r0	#, tmp94
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:917:       goto fail;
-	j	.L184		#
-.L190:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:919:     type(SD_CARD_TYPE_SD2);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:       goto fail;
+	j	.L191		#
+.L197:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:998:     type(SD_CARD_TYPE_SD2);
 	mov.w	r1, sp	# tmp95,
 	mov.w	r0, 2	# tmp96,
 	st.w	[r1], r0	#, tmp96
 	call	type		#
-.L187:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:922:   arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
+.L194:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1001:   arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
 	call	get_type		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:922:   arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1001:   arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
 	zex.b	r1, r0	# tmp97, _21
 	mov.w	r0, 2	# tmp98,
 	cmp.w	r1, r0	# tmp97, tmp98
-	jnz	.L191		#
-	mov.w	r0, 1073741824	# iftmp.77_36,
-	j	.L192		#
-.L191:
-	xor.w	r0, r0	# iftmp.77_36
-.L192:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:922:   arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
-	st.w	[r13 + (-12)], r0	# arg, iftmp.77_36
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:924:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
-	j	.L193		#
-.L194:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:926:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+	jnz	.L198		#
+	mov.w	r0, 1073741824	# iftmp.80_36,
+	j	.L199		#
+.L198:
+	xor.w	r0, r0	# iftmp.80_36
+.L199:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1001:   arg = get_type() == SD_CARD_TYPE_SD2 ? 0X40000000 : 0;
+	st.w	[r13 + (-12)], r0	# arg, iftmp.80_36
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1003:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
+	j	.L200		#
+.L201:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1005:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	call	get_millis		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:926:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1005:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	mov.w	r1, r0	# _23, _22
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:926:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1005:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	ld.w	r0, [r13 + (-8)]	# tmp99, t0
 	sub.w	r1, r0 #222	# _24, tmp99
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:926:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1005:     if (((uint32_t)get_millis() - t0) > SD_INIT_TIMEOUT) {
 	mov.w	r0, 2000	# tmp100,
 	cmp.w	r1, r0	# _24, tmp100
-	jse	.L193		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:927:       error(SD_CARD_ERROR_ACMD41);
+	jse	.L200		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1006:       error(SD_CARD_ERROR_ACMD41);
 	mov.w	r1, sp	# tmp101,
 	mov.w	r0, 8	# tmp102,
 	st.w	[r1], r0	#, tmp102
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:928:       goto fail;
-	j	.L184		#
-.L193:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:924:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1007:       goto fail;
+	j	.L191		#
+.L200:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1003:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
 	mov.w	r0, sp	# tmp103,
 	ld.w	r1, [r13 + (-12)]	# tmp104, arg
 	st.w	[r0 + (4)], r1	#, tmp104
 	mov.w	r1, 41	# tmp105,
 	st.w	[r0], r1	#, tmp105
 	call	cardAcmd		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:924:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1003:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
 	st.b	[status_], r0	# status_, _25
-	ld.b	r0, [status_]	# status_.78_26, status_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:924:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
-	zex.b	r1, r0	# tmp106, status_.78_26
+	ld.b	r0, [status_]	# status_.81_26, status_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1003:   while ((status_ = cardAcmd(ACMD41, arg)) != R1_READY_STATE) {
+	zex.b	r1, r0	# tmp106, status_.81_26
 	xor.w	r0, r0	# tmp107
 	cmp.w	r1, r0	# tmp106, tmp107
-	jnz	.L194		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:932:   if (get_type() == SD_CARD_TYPE_SD2) {
+	jnz	.L201		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1011:   if (get_type() == SD_CARD_TYPE_SD2) {
 	call	get_type		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:932:   if (get_type() == SD_CARD_TYPE_SD2) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1011:   if (get_type() == SD_CARD_TYPE_SD2) {
 	zex.b	r1, r0	# tmp108, _27
 	mov.w	r0, 2	# tmp109,
 	cmp.w	r1, r0	# tmp108, tmp109
-	jnz	.L195		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:933:     if (cardCommand(CMD58, 0)) {
+	jnz	.L202		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1012:     if (cardCommand(CMD58, 0)) {
 	mov.w	r0, sp	# tmp110,
 	xor.w	r1, r1	# tmp111
 	st.w	[r0 + (4)], r1	#, tmp111
 	mov.w	r1, 58	# tmp112,
 	st.w	[r0], r1	#, tmp112
 	call	cardCommand		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:933:     if (cardCommand(CMD58, 0)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1012:     if (cardCommand(CMD58, 0)) {
 	zex.b	r1, r0	# tmp113, _28
 	xor.w	r0, r0	# tmp114
 	cmp.w	r1, r0	# tmp113, tmp114
-	jz	.L196		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:934:       error(SD_CARD_ERROR_CMD58);
+	jz	.L203		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1013:       error(SD_CARD_ERROR_CMD58);
 	mov.w	r1, sp	# tmp115,
 	mov.w	r0, 6	# tmp116,
 	st.w	[r1], r0	#, tmp116
 	call	error		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:935:       goto fail;
-	j	.L184		#
-.L196:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:937:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1014:       goto fail;
+	j	.L191		#
+.L203:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:937:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
 	zex.b	r1, r0	# _30, _29
 	mov.w	r0, 192	# tmp117,
 	and.w	r1, r0	# _31, tmp117
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:937:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
 	mov.w	r0, 192	# tmp118,
 	cmp.w	r1, r0	# _31, tmp118
-	jnz	.L197		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:937:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
+	jnz	.L204		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if ((spiRec() & 0XC0) == 0XC0) type(SD_CARD_TYPE_SDHC);
 	mov.w	r1, sp	# tmp119,
 	mov.w	r0, 3	# tmp120,
 	st.w	[r1], r0	#, tmp120
 	call	type		#
-.L197:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:939:     for (uint8_t i = 0; i < 3; i++) spiRec();
+.L204:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:     for (uint8_t i = 0; i < 3; i++) spiRec();
 	xor.w	r0, r0	# tmp121
 	st.b	[r13 + (-3)], r0	# i, tmp121
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:939:     for (uint8_t i = 0; i < 3; i++) spiRec();
-	j	.L198		#
-.L199:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:939:     for (uint8_t i = 0; i < 3; i++) spiRec();
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:     for (uint8_t i = 0; i < 3; i++) spiRec();
+	j	.L205		#
+.L206:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:     for (uint8_t i = 0; i < 3; i++) spiRec();
 	call	spiRec		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:939:     for (uint8_t i = 0; i < 3; i++) spiRec();
-	ld.b	r0, [r13 + (-3)]	# i.79_32, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:     for (uint8_t i = 0; i < 3; i++) spiRec();
+	ld.b	r0, [r13 + (-3)]	# i.82_32, i
 	add.w	r0, 1 #111	# tmp122,
 	st.b	[r13 + (-3)], r0	# i, tmp123
-.L198:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:939:     for (uint8_t i = 0; i < 3; i++) spiRec();
+.L205:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:     for (uint8_t i = 0; i < 3; i++) spiRec();
 	ld.b	r1, [r13 + (-3)]	# tmp124, i
 	mov.w	r0, 2	# tmp125,
 	cmp.w	r1, r0	# tmp124, tmp125
-	jse	.L199		#
-.L195:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:941:   chipSelectHigh();
+	jse	.L206		#
+.L202:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1020:   chipSelectHigh();
 	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:943:   return true;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1022:   return true;
 	mov.b	r0, 1	# _37,
-	j	.L200		#
-.L184:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:946:   chipSelectHigh();
+	j	.L207		#
+.L191:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1025:   chipSelectHigh();
 	call	chipSelectHigh		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:950:   return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1029:   return false;
 	xor.w	r0, r0	# _37
-.L200:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:951: }
+.L207:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1030: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -3285,493 +3680,493 @@ volume_init:
 	sub.w	sp, 40 #111	#,
 	ld.w	r0, [r13 + (8)]	# tmp174, part
 	st.b	[r13 + (-16)], r0	# part, tmp175
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:955:   uint32_t volumeStartBlock = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1034:   uint32_t volumeStartBlock = 0;
 	xor.w	r0, r0	# tmp176
 	st.w	[r13 + (-4)], r0	# volumeStartBlock, tmp176
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:958:   if (part) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1037:   if (part) {
 	ld.b	r1, [r13 + (-16)]	# tmp177, part
 	xor.w	r0, r0	# tmp178
 	cmp.w	r1, r0	# tmp177, tmp178
-	jz	.L202		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:959:     if (part > 4)return false;
+	jz	.L209		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1038:     if (part > 4)return false;
 	ld.b	r1, [r13 + (-16)]	# tmp179, part
 	mov.w	r0, 4	# tmp180,
 	cmp.w	r1, r0	# tmp179, tmp180
-	jse	.L203		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:959:     if (part > 4)return false;
+	jse	.L210		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1038:     if (part > 4)return false;
 	xor.w	r0, r0	# _147
-	j	.L204		#
-.L203:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:960:     if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+	j	.L211		#
+.L210:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1039:     if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
 	mov.w	r0, sp	# tmp181,
 	mov.w	r1, cacheBuffer_	# tmp182,
 	st.w	[r0 + (4)], r1	#, tmp182
 	ld.w	r1, [r13 + (-4)]	# tmp183, volumeStartBlock
 	st.w	[r0], r1	#, tmp183
 	call	readBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:960:     if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1039:     if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
 	zex.b	r1, r0	# tmp184, _1
 	xor.w	r0, r0	# tmp185
 	cmp.w	r1, r0	# tmp184, tmp185
-	jnz	.L205		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:960:     if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+	jnz	.L212		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1039:     if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
 	xor.w	r0, r0	# _147
-	j	.L204		#
-.L205:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:962:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
+	j	.L211		#
+.L212:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1041:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
 	ld.b	r0, [r13 + (-16)]	# _2, part
 	add.w	r0, -1 #111	# _3,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:962:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1041:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
 	mov.w	r1, 4	# tmp186,
 	shl.w	r0, r1	# _5, tmp186
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:962:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1041:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
 	mov.w	r1, 446	# tmp187,
 	add.w	r0, r1 #222	# _6, tmp187
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:962:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1041:     part_t* p = (part_t *)&cacheBuffer_.data[446 + ((part - 1)*sizeof(part_t))];
 	mov.w	r1, cacheBuffer_	# tmp189,
 	add.w	r0, r1 #222	# tmp188, tmp189
 	st.w	[r13 + (-8)], r0	# p, tmp188
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:967:     p->totalSectors = reverse32(p->totalSectors);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1046:     p->totalSectors = reverse32(p->totalSectors);
 	ld.w	r0, [r13 + (-8)]	# tmp190, p
 	ld.w	r0, [r0 + (12)]	# _7, p_158->totalSectors
 	mov.w	r1, sp	# tmp191,
 	st.w	[r1], r0	#, _7
 	call	reverse32		#
 	mov.w	r1, r0	# _8,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:967:     p->totalSectors = reverse32(p->totalSectors);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1046:     p->totalSectors = reverse32(p->totalSectors);
 	ld.w	r0, [r13 + (-8)]	# tmp192, p
 	st.w	[r0 + (12)], r1	# p_158->totalSectors, _8
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:968:     p->firstSector = reverse32(p->firstSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1047:     p->firstSector = reverse32(p->firstSector);
 	ld.w	r0, [r13 + (-8)]	# tmp193, p
 	ld.w	r0, [r0 + (8)]	# _9, p_158->firstSector
 	mov.w	r1, sp	# tmp194,
 	st.w	[r1], r0	#, _9
 	call	reverse32		#
 	mov.w	r1, r0	# _10,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:968:     p->firstSector = reverse32(p->firstSector);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1047:     p->firstSector = reverse32(p->firstSector);
 	ld.w	r0, [r13 + (-8)]	# tmp195, p
 	st.w	[r0 + (8)], r1	# p_158->firstSector, _10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:972:     if ((p->boot & 0X7F) !=0  ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1051:     if ((p->boot & 0X7F) !=0  ||
 	ld.w	r0, [r13 + (-8)]	# tmp196, p
 	ld.b	r0, [r0]	# _11, p_158->boot
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:972:     if ((p->boot & 0X7F) !=0  ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1051:     if ((p->boot & 0X7F) !=0  ||
 	zex.b	r1, r0	# _12, _11
 	mov.w	r0, 127	# tmp197,
 	and.w	r1, r0	# _13, tmp197
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:972:     if ((p->boot & 0X7F) !=0  ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1051:     if ((p->boot & 0X7F) !=0  ||
 	xor.w	r0, r0	# tmp198
 	cmp.w	r1, r0	# _13, tmp198
-	jnz	.L206		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:973:       p->totalSectors < 100 ||
+	jnz	.L213		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1052:       p->totalSectors < 100 ||
 	ld.w	r0, [r13 + (-8)]	# tmp199, p
 	ld.w	r1, [r0 + (12)]	# _14, p_158->totalSectors
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:972:     if ((p->boot & 0X7F) !=0  ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1051:     if ((p->boot & 0X7F) !=0  ||
 	mov.w	r0, 99	# tmp200,
 	cmp.w	r1, r0	# _14, tmp200
-	jse	.L206		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:974:       p->firstSector == 0) {
+	jse	.L213		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1053:       p->firstSector == 0) {
 	ld.w	r0, [r13 + (-8)]	# tmp201, p
 	ld.w	r1, [r0 + (8)]	# _15, p_158->firstSector
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:973:       p->totalSectors < 100 ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1052:       p->totalSectors < 100 ||
 	xor.w	r0, r0	# tmp202
 	cmp.w	r1, r0	# _15, tmp202
-	jnz	.L207		#
-.L206:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:976:       return false;
+	jnz	.L214		#
+.L213:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1055:       return false;
 	xor.w	r0, r0	# _147
-	j	.L204		#
-.L207:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:978:     volumeStartBlock = p->firstSector;
+	j	.L211		#
+.L214:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1057:     volumeStartBlock = p->firstSector;
 	ld.w	r0, [r13 + (-8)]	# tmp203, p
 	ld.w	r0, [r0 + (8)]	# tmp204, p_158->firstSector
 	st.w	[r13 + (-4)], r0	# volumeStartBlock, tmp204
-.L202:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:985:   if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+.L209:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1064:   if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
 	mov.w	r0, sp	# tmp205,
 	mov.w	r1, cacheBuffer_	# tmp206,
 	st.w	[r0 + (4)], r1	#, tmp206
 	ld.w	r1, [r13 + (-4)]	# tmp207, volumeStartBlock
 	st.w	[r0], r1	#, tmp207
 	call	readBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:985:   if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1064:   if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
 	zex.b	r1, r0	# tmp208, _16
 	xor.w	r0, r0	# tmp209
 	cmp.w	r1, r0	# tmp208, tmp209
-	jnz	.L208		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:985:   if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
+	jnz	.L215		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1064:   if (!readBlock(volumeStartBlock, cacheBuffer_.data)) return false;
 	xor.w	r0, r0	# _147
-	j	.L204		#
-.L208:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:987:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
+	j	.L211		#
+.L215:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1066:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
 	ld.b	r0, [cacheBuffer_+12]	# _17, cacheBuffer_
 	zex.b	r0, r0	# tmp210, _17
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:987:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1066:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
 	mov.w	r1, 8	# tmp212,
 	shl.w	r0, r1	# tmp211, tmp212
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:987:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1066:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
 	ld.b	r1, [cacheBuffer_+11]	# _20, cacheBuffer_
 	zex.b	r1, r1	# tmp213, _20
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:987:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1066:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
 	add.w	r0, r1 #222	# tmp214, tmp215
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:987:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1066:   bpb.bytesPerSector = (cacheBuffer_.data[12]<<8) + cacheBuffer_.data[11];
 	st.s	[bpb], r0	# bpb.bytesPerSector, _22
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:988:   bpb.sectorsPerCluster = cacheBuffer_.data[13];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1067:   bpb.sectorsPerCluster = cacheBuffer_.data[13];
 	ld.b	r0, [cacheBuffer_+13]	# _23, cacheBuffer_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:988:   bpb.sectorsPerCluster = cacheBuffer_.data[13];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1067:   bpb.sectorsPerCluster = cacheBuffer_.data[13];
 	st.b	[bpb+2], r0	# bpb.sectorsPerCluster, _23
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1068:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
 	ld.b	r0, [cacheBuffer_+15]	# _24, cacheBuffer_
 	zex.b	r0, r0	# tmp216, _24
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1068:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
 	mov.w	r1, 8	# tmp218,
 	shl.w	r0, r1	# tmp217, tmp218
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1068:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
 	ld.b	r1, [cacheBuffer_+14]	# _27, cacheBuffer_
 	zex.b	r1, r1	# tmp219, _27
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1068:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
 	add.w	r0, r1 #222	# tmp220, tmp221
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:989:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1068:   bpb.reservedSectorCount = (cacheBuffer_.data[15]<<8) + cacheBuffer_.data[14];
 	st.s	[bpb+4], r0	# bpb.reservedSectorCount, _29
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:990:   bpb.fatCount = cacheBuffer_.data[16];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1069:   bpb.fatCount = cacheBuffer_.data[16];
 	ld.b	r0, [cacheBuffer_+16]	# _30, cacheBuffer_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:990:   bpb.fatCount = cacheBuffer_.data[16];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1069:   bpb.fatCount = cacheBuffer_.data[16];
 	st.b	[bpb+6], r0	# bpb.fatCount, _30
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:991:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1070:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
 	ld.b	r0, [cacheBuffer_+23]	# _31, cacheBuffer_
 	zex.b	r0, r0	# tmp222, _31
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:991:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1070:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
 	mov.w	r1, 8	# tmp224,
 	shl.w	r0, r1	# tmp223, tmp224
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:991:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1070:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
 	ld.b	r1, [cacheBuffer_+22]	# _34, cacheBuffer_
 	zex.b	r1, r1	# tmp225, _34
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:991:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1070:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
 	add.w	r0, r1 #222	# tmp226, tmp227
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:991:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1070:   bpb.sectorsPerFat16 = (cacheBuffer_.data[23]<<8) + cacheBuffer_.data[22];
 	st.s	[bpb+14], r0	# bpb.sectorsPerFat16, _36
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	ld.b	r0, [cacheBuffer_+39]	# _37, cacheBuffer_
 	zex.b	r0, r0	# _38, _37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	mov.w	r1, 24	# tmp228,
 	shl.w	r0, r1	# _39, tmp228
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	ld.b	r1, [cacheBuffer_+38]	# _40, cacheBuffer_
 	zex.b	r1, r1	# _41, _40
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	mov.w	r2, 16	# tmp229,
 	shl.w	r1, r2	# _42, tmp229
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	add.w	r0, r1 #222	# _43, _42
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	ld.b	r1, [cacheBuffer_+37]	# _44, cacheBuffer_
 	zex.b	r1, r1	# _45, _44
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	mov.w	r2, 8	# tmp230,
 	shl.w	r1, r2	# _46, tmp230
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	add.w	r0, r1 #222	# _47, _46
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	ld.b	r1, [cacheBuffer_+36]	# _48, cacheBuffer_
 	zex.b	r1, r1	# _49, _48
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	add.w	r0, r1 #222	# _50, _49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:992:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1071:   bpb.sectorsPerFat32 = (cacheBuffer_.data[39]<<24) + (cacheBuffer_.data[38]<<16) + (cacheBuffer_.data[37]<<8) + cacheBuffer_.data[36];
 	st.w	[bpb+28], r0	# bpb.sectorsPerFat32, _51
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1072:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
 	ld.b	r0, [cacheBuffer_+18]	# _52, cacheBuffer_
 	zex.b	r0, r0	# tmp231, _52
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1072:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
 	mov.w	r1, 8	# tmp233,
 	shl.w	r0, r1	# tmp232, tmp233
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1072:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
 	ld.b	r1, [cacheBuffer_+17]	# _55, cacheBuffer_
 	zex.b	r1, r1	# tmp234, _55
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1072:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
 	add.w	r0, r1 #222	# tmp235, tmp236
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:993:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1072:   bpb.rootDirEntryCount = (cacheBuffer_.data[18]<<8) + cacheBuffer_.data[17];
 	st.s	[bpb+8], r0	# bpb.rootDirEntryCount, _57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1073:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
 	ld.b	r0, [cacheBuffer_+20]	# _58, cacheBuffer_
 	zex.b	r0, r0	# tmp237, _58
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1073:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
 	mov.w	r1, 8	# tmp239,
 	shl.w	r0, r1	# tmp238, tmp239
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1073:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
 	ld.b	r1, [cacheBuffer_+19]	# _61, cacheBuffer_
 	zex.b	r1, r1	# tmp240, _61
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1073:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
 	add.w	r0, r1 #222	# tmp241, tmp242
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:994:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1073:   bpb.totalSectors16 = (cacheBuffer_.data[20]<<8) + cacheBuffer_.data[19];
 	st.s	[bpb+10], r0	# bpb.totalSectors16, _63
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	ld.b	r0, [cacheBuffer_+35]	# _64, cacheBuffer_
 	zex.b	r0, r0	# _65, _64
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	mov.w	r1, 24	# tmp243,
 	shl.w	r0, r1	# _66, tmp243
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	ld.b	r1, [cacheBuffer_+34]	# _67, cacheBuffer_
 	zex.b	r1, r1	# _68, _67
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	mov.w	r2, 16	# tmp244,
 	shl.w	r1, r2	# _69, tmp244
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	add.w	r0, r1 #222	# _70, _69
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	ld.b	r1, [cacheBuffer_+33]	# _71, cacheBuffer_
 	zex.b	r1, r1	# _72, _71
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	mov.w	r2, 8	# tmp245,
 	shl.w	r1, r2	# _73, tmp245
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	add.w	r0, r1 #222	# _74, _73
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	ld.b	r1, [cacheBuffer_+32]	# _75, cacheBuffer_
 	zex.b	r1, r1	# _76, _75
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	add.w	r0, r1 #222	# _77, _76
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:995:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1074:   bpb.totalSectors32 = (cacheBuffer_.data[35]<<24) + (cacheBuffer_.data[34]<<16) + (cacheBuffer_.data[33]<<8) + cacheBuffer_.data[32];
 	st.w	[bpb+24], r0	# bpb.totalSectors32, _78
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	ld.b	r0, [cacheBuffer_+47]	# _79, cacheBuffer_
 	zex.b	r0, r0	# _80, _79
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	mov.w	r1, 24	# tmp246,
 	shl.w	r0, r1	# _81, tmp246
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	ld.b	r1, [cacheBuffer_+46]	# _82, cacheBuffer_
 	zex.b	r1, r1	# _83, _82
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	mov.w	r2, 16	# tmp247,
 	shl.w	r1, r2	# _84, tmp247
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	add.w	r0, r1 #222	# _85, _84
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	ld.b	r1, [cacheBuffer_+45]	# _86, cacheBuffer_
 	zex.b	r1, r1	# _87, _86
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	mov.w	r2, 8	# tmp248,
 	shl.w	r1, r2	# _88, tmp248
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	add.w	r0, r1 #222	# _89, _88
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	ld.b	r1, [cacheBuffer_+44]	# _90, cacheBuffer_
 	zex.b	r1, r1	# _91, _90
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	add.w	r0, r1 #222	# _92, _91
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:996:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1075:   bpb.fat32RootCluster = (cacheBuffer_.data[47]<<24) + (cacheBuffer_.data[46]<<16) + (cacheBuffer_.data[45]<<8) + cacheBuffer_.data[44];
 	st.w	[bpb+36], r0	# bpb.fat32RootCluster, _93
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1002:   if (bpb.bytesPerSector != 512 ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1081:   if (bpb.bytesPerSector != 512 ||
 	ld.s	r0, [bpb]	# _94, bpb.bytesPerSector
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1002:   if (bpb.bytesPerSector != 512 ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1081:   if (bpb.bytesPerSector != 512 ||
 	zex.s	r1, r0	# tmp249, _94
 	mov.w	r0, 512	# tmp250,
 	cmp.w	r1, r0	# tmp249, tmp250
-	jnz	.L209		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1003:     bpb.fatCount == 0 ||
+	jnz	.L216		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1082:     bpb.fatCount == 0 ||
 	ld.b	r0, [bpb+6]	# _95, bpb.fatCount
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1002:   if (bpb.bytesPerSector != 512 ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1081:   if (bpb.bytesPerSector != 512 ||
 	zex.b	r1, r0	# tmp251, _95
 	xor.w	r0, r0	# tmp252
 	cmp.w	r1, r0	# tmp251, tmp252
-	jz	.L209		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1004:     bpb.reservedSectorCount == 0 ||
+	jz	.L216		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1083:     bpb.reservedSectorCount == 0 ||
 	ld.s	r0, [bpb+4]	# _96, bpb.reservedSectorCount
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1003:     bpb.fatCount == 0 ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1082:     bpb.fatCount == 0 ||
 	zex.s	r1, r0	# tmp253, _96
 	xor.w	r0, r0	# tmp254
 	cmp.w	r1, r0	# tmp253, tmp254
-	jz	.L209		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1005:     bpb.sectorsPerCluster == 0) {
+	jz	.L216		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1084:     bpb.sectorsPerCluster == 0) {
 	ld.b	r0, [bpb+2]	# _97, bpb.sectorsPerCluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1004:     bpb.reservedSectorCount == 0 ||
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1083:     bpb.reservedSectorCount == 0 ||
 	zex.b	r1, r0	# tmp255, _97
 	xor.w	r0, r0	# tmp256
 	cmp.w	r1, r0	# tmp255, tmp256
-	jnz	.L210		#
-.L209:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1007:       return false;
+	jnz	.L217		#
+.L216:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1086:       return false;
 	xor.w	r0, r0	# _147
-	j	.L204		#
-.L210:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1009:   fatCount_ = bpb.fatCount;
+	j	.L211		#
+.L217:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1088:   fatCount_ = bpb.fatCount;
 	ld.b	r0, [bpb+6]	# _98, bpb.fatCount
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1009:   fatCount_ = bpb.fatCount;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1088:   fatCount_ = bpb.fatCount;
 	st.b	[fatCount_], r0	# fatCount_, _98
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1010:   blocksPerCluster_ = bpb.sectorsPerCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1089:   blocksPerCluster_ = bpb.sectorsPerCluster;
 	ld.b	r0, [bpb+2]	# _99, bpb.sectorsPerCluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1010:   blocksPerCluster_ = bpb.sectorsPerCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1089:   blocksPerCluster_ = bpb.sectorsPerCluster;
 	st.b	[blocksPerCluster_], r0	# blocksPerCluster_, _99
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1013:   clusterSizeShift_ = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1092:   clusterSizeShift_ = 0;
 	xor.w	r0, r0	# tmp257
 	st.b	[clusterSizeShift_], r0	# clusterSizeShift_, tmp257
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1014:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
-	j	.L211		#
-.L212:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if (clusterSizeShift_++ > 7) return false;
-	ld.b	r0, [clusterSizeShift_]	# clusterSizeShift_.80_100, clusterSizeShift_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1093:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
+	j	.L218		#
+.L219:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1095:     if (clusterSizeShift_++ > 7) return false;
+	ld.b	r0, [clusterSizeShift_]	# clusterSizeShift_.83_100, clusterSizeShift_
 	mov.w	r1, r0	# tmp258,
 	add.w	r1, 1 #111	# tmp258,
 	st.b	[clusterSizeShift_], r1	# clusterSizeShift_, _102
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if (clusterSizeShift_++ > 7) return false;
-	zex.b	r1, r0	# tmp259, clusterSizeShift_.80_100
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1095:     if (clusterSizeShift_++ > 7) return false;
+	zex.b	r1, r0	# tmp259, clusterSizeShift_.83_100
 	mov.w	r0, 7	# tmp260,
 	cmp.w	r1, r0	# tmp259, tmp260
-	jse	.L211		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1016:     if (clusterSizeShift_++ > 7) return false;
+	jse	.L218		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1095:     if (clusterSizeShift_++ > 7) return false;
 	xor.w	r0, r0	# _147
-	j	.L204		#
-.L211:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1014:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
-	ld.b	r0, [blocksPerCluster_]	# blocksPerCluster_.82_103, blocksPerCluster_
-	zex.b	r1, r0	# _104, blocksPerCluster_.82_103
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1014:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
-	ld.b	r0, [clusterSizeShift_]	# clusterSizeShift_.83_105, clusterSizeShift_
-	zex.b	r2, r0	# _106, clusterSizeShift_.83_105
+	j	.L211		#
+.L218:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1093:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
+	ld.b	r0, [blocksPerCluster_]	# blocksPerCluster_.85_103, blocksPerCluster_
+	zex.b	r1, r0	# _104, blocksPerCluster_.85_103
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1093:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
+	ld.b	r0, [clusterSizeShift_]	# clusterSizeShift_.86_105, clusterSizeShift_
+	zex.b	r2, r0	# _106, clusterSizeShift_.86_105
 	mov.w	r0, 1	# tmp261,
 	shl.w	r0, r2	# _107, _106
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1014:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1093:   while (blocksPerCluster_ != (1 << clusterSizeShift_)) {
 	cmp.w	r1, r0	# _104, _107
-	jnz	.L212		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:   blocksPerFat_ = bpb.sectorsPerFat16 ?
+	jnz	.L219		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1097:   blocksPerFat_ = bpb.sectorsPerFat16 ?
 	ld.s	r0, [bpb+14]	# _108, bpb.sectorsPerFat16
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1019:                     bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1098:                     bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
 	zex.s	r1, r0	# tmp262, _108
 	xor.w	r0, r0	# tmp263
 	cmp.w	r1, r0	# tmp262, tmp263
-	jz	.L213		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1019:                     bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
+	jz	.L220		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1098:                     bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
 	ld.s	r0, [bpb+14]	# _109, bpb.sectorsPerFat16
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1019:                     bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
-	zex.s	r0, r0	# iftmp.84_148, _109
-	j	.L214		#
-.L213:
-	ld.w	r0, [bpb+28]	# iftmp.84_148, bpb.sectorsPerFat32
-.L214:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1018:   blocksPerFat_ = bpb.sectorsPerFat16 ?
-	st.w	[blocksPerFat_], r0	# blocksPerFat_, iftmp.84_148
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1021:   fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1098:                     bpb.sectorsPerFat16 : bpb.sectorsPerFat32;
+	zex.s	r0, r0	# iftmp.87_148, _109
+	j	.L221		#
+.L220:
+	ld.w	r0, [bpb+28]	# iftmp.87_148, bpb.sectorsPerFat32
+.L221:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1097:   blocksPerFat_ = bpb.sectorsPerFat16 ?
+	st.w	[blocksPerFat_], r0	# blocksPerFat_, iftmp.87_148
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1100:   fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
 	ld.s	r0, [bpb+4]	# _110, bpb.reservedSectorCount
 	zex.s	r0, r0	# _111, _110
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1021:   fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1100:   fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
 	ld.w	r1, [r13 + (-4)]	# tmp264, volumeStartBlock
 	add.w	r0, r1 #222	# _112, tmp264
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1021:   fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1100:   fatStartBlock_ = volumeStartBlock + bpb.reservedSectorCount;
 	st.w	[fatStartBlock_], r0	# fatStartBlock_, _112
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1022:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1101:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
 	ld.s	r0, [bpb]	# _113, bpb.bytesPerSector
 	zex.s	r0, r0	# _114, _113
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1022:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1101:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
 	ld.b	r1, [bpb+2]	# _115, bpb.sectorsPerCluster
 	zex.b	r1, r1	# _116, _115
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1022:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1101:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
 	mul.w	r0, r1	# _117, _116
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1022:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1101:   clusterSize_ = bpb.bytesPerSector * bpb.sectorsPerCluster;
 	st.w	[clusterSize_], r0	# clusterSize_, _118
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1029:   rootDirEntryCount_ = bpb.rootDirEntryCount;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1108:   rootDirEntryCount_ = bpb.rootDirEntryCount;
 	ld.s	r0, [bpb+8]	# _119, bpb.rootDirEntryCount
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1029:   rootDirEntryCount_ = bpb.rootDirEntryCount;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1108:   rootDirEntryCount_ = bpb.rootDirEntryCount;
 	st.s	[rootDirEntryCount_], r0	# rootDirEntryCount_, _119
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1032:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1111:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
 	ld.b	r0, [bpb+6]	# _120, bpb.fatCount
 	zex.b	r0, r0	# _121, _120
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1032:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
-	ld.w	r1, [blocksPerFat_]	# blocksPerFat_.85_122, blocksPerFat_
-	mul.w	r0, r1	# _123, blocksPerFat_.85_122
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1032:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
-	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.86_124, fatStartBlock_
-	add.w	r0, r1 #222	# _125, fatStartBlock_.86_124
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1032:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1111:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
+	ld.w	r1, [blocksPerFat_]	# blocksPerFat_.88_122, blocksPerFat_
+	mul.w	r0, r1	# _123, blocksPerFat_.88_122
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1111:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
+	ld.w	r1, [fatStartBlock_]	# fatStartBlock_.89_124, fatStartBlock_
+	add.w	r0, r1 #222	# _125, fatStartBlock_.89_124
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1111:   rootDirStart_ = fatStartBlock_ + bpb.fatCount * blocksPerFat_;
 	st.w	[rootDirStart_], r0	# rootDirStart_, _125
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1035:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1114:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
 	ld.s	r0, [bpb+8]	# _126, bpb.rootDirEntryCount
 	zex.s	r0, r0	# _127, _126
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1035:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1114:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
 	mov.w	r1, 5	# tmp265,
 	shl.w	r0, r1	# _128, tmp265
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1035:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1114:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
 	mov.w	r1, 511	# tmp266,
 	add.w	r0, r1 #222	# _129, tmp266
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1035:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1114:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
 	xor.w	r1, r1	# tmp268
 	cmp.w	r0, r1	# tmp267, tmp268
-	jges	.L215		#
+	jges	.L222		#
 	mov.w	r1, 511	# tmp269,
 	add.w	r0, r1 #222	# tmp267, tmp269
-.L215:
+.L222:
 	mov.w	r1, 9	# tmp271,
 	shr.w	r0, r1	# tmp270, tmp271
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1035:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
-	ld.w	r1, [rootDirStart_]	# rootDirStart_.87_132, rootDirStart_
-	add.w	r0, r1 #222	# _133, rootDirStart_.87_132
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1035:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1114:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
+	ld.w	r1, [rootDirStart_]	# rootDirStart_.90_132, rootDirStart_
+	add.w	r0, r1 #222	# _133, rootDirStart_.90_132
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1114:   dataStartBlock_ = rootDirStart_ + ((32 * bpb.rootDirEntryCount + 511)/512);
 	st.w	[dataStartBlock_], r0	# dataStartBlock_, _133
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1042:   uint32_t totalBlocks = bpb.totalSectors16 ?
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1121:   uint32_t totalBlocks = bpb.totalSectors16 ?
 	ld.s	r0, [bpb+10]	# _134, bpb.totalSectors16
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1043:                            bpb.totalSectors16 : bpb.totalSectors32;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1122:                            bpb.totalSectors16 : bpb.totalSectors32;
 	zex.s	r1, r0	# tmp272, _134
 	xor.w	r0, r0	# tmp273
 	cmp.w	r1, r0	# tmp272, tmp273
-	jz	.L216		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1043:                            bpb.totalSectors16 : bpb.totalSectors32;
+	jz	.L223		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1122:                            bpb.totalSectors16 : bpb.totalSectors32;
 	ld.s	r0, [bpb+10]	# _135, bpb.totalSectors16
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1043:                            bpb.totalSectors16 : bpb.totalSectors32;
-	zex.s	r0, r0	# iftmp.88_149, _135
-	j	.L217		#
-.L216:
-	ld.w	r0, [bpb+24]	# iftmp.88_149, bpb.totalSectors32
-.L217:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1042:   uint32_t totalBlocks = bpb.totalSectors16 ?
-	st.w	[r13 + (-12)], r0	# totalBlocks, iftmp.88_149
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1045:   clusterCount_ = totalBlocks - (dataStartBlock_ - volumeStartBlock);
-	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.89_136, dataStartBlock_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1122:                            bpb.totalSectors16 : bpb.totalSectors32;
+	zex.s	r0, r0	# iftmp.91_149, _135
+	j	.L224		#
+.L223:
+	ld.w	r0, [bpb+24]	# iftmp.91_149, bpb.totalSectors32
+.L224:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1121:   uint32_t totalBlocks = bpb.totalSectors16 ?
+	st.w	[r13 + (-12)], r0	# totalBlocks, iftmp.91_149
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1124:   clusterCount_ = totalBlocks - (dataStartBlock_ - volumeStartBlock);
+	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.92_136, dataStartBlock_
 	ld.w	r0, [r13 + (-4)]	# tmp274, volumeStartBlock
-	sub.w	r0, r1 #222	# _137, dataStartBlock_.89_136
+	sub.w	r0, r1 #222	# _137, dataStartBlock_.92_136
 	ld.w	r1, [r13 + (-12)]	# tmp275, totalBlocks
 	add.w	r0, r1 #222	# _138, tmp275
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1045:   clusterCount_ = totalBlocks - (dataStartBlock_ - volumeStartBlock);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1124:   clusterCount_ = totalBlocks - (dataStartBlock_ - volumeStartBlock);
 	st.w	[clusterCount_], r0	# clusterCount_, _138
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1048:   clusterCount_ >>= clusterSizeShift_;
-	ld.w	r0, [clusterCount_]	# clusterCount_.90_139, clusterCount_
-	ld.b	r1, [clusterSizeShift_]	# clusterSizeShift_.91_140, clusterSizeShift_
-	zex.b	r1, r1	# _141, clusterSizeShift_.91_140
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1127:   clusterCount_ >>= clusterSizeShift_;
+	ld.w	r0, [clusterCount_]	# clusterCount_.93_139, clusterCount_
+	ld.b	r1, [clusterSizeShift_]	# clusterSizeShift_.94_140, clusterSizeShift_
+	zex.b	r1, r1	# _141, clusterSizeShift_.94_140
 	shr.w	r0, r1	# _142, _141
 	st.w	[clusterCount_], r0	# clusterCount_, _142
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1051:   if (clusterCount_ < 4085) {
-	ld.w	r1, [clusterCount_]	# clusterCount_.92_143, clusterCount_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1051:   if (clusterCount_ < 4085) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1130:   if (clusterCount_ < 4085) {
+	ld.w	r1, [clusterCount_]	# clusterCount_.95_143, clusterCount_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1130:   if (clusterCount_ < 4085) {
 	mov.w	r0, 4084	# tmp276,
-	cmp.w	r1, r0	# clusterCount_.92_143, tmp276
-	jg	.L218		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1052:     fatType_ = 12;
+	cmp.w	r1, r0	# clusterCount_.95_143, tmp276
+	jg	.L225		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1131:     fatType_ = 12;
 	mov.b	r0, 12	# tmp277,
 	st.b	[fatType_], r0	# fatType_, tmp277
-	j	.L219		#
-.L218:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1053:   } else if (clusterCount_ < 65525) {
-	ld.w	r1, [clusterCount_]	# clusterCount_.93_144, clusterCount_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1053:   } else if (clusterCount_ < 65525) {
+	j	.L226		#
+.L225:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1132:   } else if (clusterCount_ < 65525) {
+	ld.w	r1, [clusterCount_]	# clusterCount_.96_144, clusterCount_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1132:   } else if (clusterCount_ < 65525) {
 	mov.w	r0, 65524	# tmp278,
-	cmp.w	r1, r0	# clusterCount_.93_144, tmp278
-	jg	.L220		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1054:     fatType_ = 16;
+	cmp.w	r1, r0	# clusterCount_.96_144, tmp278
+	jg	.L227		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1133:     fatType_ = 16;
 	mov.b	r0, 16	# tmp279,
 	st.b	[fatType_], r0	# fatType_, tmp279
-	j	.L219		#
-.L220:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1056:     rootDirStart_ = bpb.fat32RootCluster;
+	j	.L226		#
+.L227:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1135:     rootDirStart_ = bpb.fat32RootCluster;
 	ld.w	r0, [bpb+36]	# _145, bpb.fat32RootCluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1056:     rootDirStart_ = bpb.fat32RootCluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1135:     rootDirStart_ = bpb.fat32RootCluster;
 	st.w	[rootDirStart_], r0	# rootDirStart_, _145
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1057:     fatType_ = 32;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1136:     fatType_ = 32;
 	mov.b	r0, 32	# tmp280,
 	st.b	[fatType_], r0	# fatType_, tmp280
-.L219:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1063:   return true;
+.L226:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1142:   return true;
 	mov.b	r0, 1	# _147,
-.L204:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1064: }
+.L211:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1143: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -3790,39 +4185,39 @@ file_open:
 	sub.w	sp, 48 #111	#,
 	ld.w	r0, [r13 + (16)]	# tmp35, mode
 	st.b	[r13 + (-24)], r0	# mode, tmp36
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1077:   int fail_counter = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1156:   int fail_counter = 0;
 	xor.w	r0, r0	# tmp37
 	st.w	[r13 + (-8)], r0	# fail_counter, tmp37
-.L222:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1081:   if (mode != O_READ && mode != O_WRITE)
+.L229:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1160:   if (mode != O_READ && mode != O_WRITE)
 	ld.b	r1, [r13 + (-24)]	# tmp38, mode
 	xor.w	r0, r0	# tmp39
 	cmp.w	r1, r0	# tmp38, tmp39
-	jz	.L223		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1081:   if (mode != O_READ && mode != O_WRITE)
+	jz	.L230		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1160:   if (mode != O_READ && mode != O_WRITE)
 	ld.b	r1, [r13 + (-24)]	# tmp40, mode
 	mov.w	r0, 1	# tmp41,
 	cmp.w	r1, r0	# tmp40, tmp41
-	jz	.L223		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1086:     return 0;
+	jz	.L230		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1165:     return 0;
 	xor.w	r0, r0	# _10
-	j	.L221		#
-.L223:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1088:   if (strlen(filename) > 12)
+	j	.L228		#
+.L230:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1167:   if (strlen(filename) > 12)
 	mov.w	r1, sp	# tmp42,
 	ld.w	r0, [r13 + (8)]	# tmp43, filename
 	st.w	[r1], r0	#, tmp43
 	call	strlen		#
 	mov.w	r1, r0	# _1,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1088:   if (strlen(filename) > 12)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1167:   if (strlen(filename) > 12)
 	mov.w	r0, 12	# tmp44,
 	cmp.w	r1, r0	# _1, tmp44
-	jses	.L225		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1093:     return 0;
+	jses	.L232		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1172:     return 0;
 	xor.w	r0, r0	# _10
-	j	.L221		#
-.L225:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1095:   make83Name(filename, FAT16_filename);
+	j	.L228		#
+.L232:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1174:   make83Name(filename, FAT16_filename);
 	mov.w	r0, sp	# tmp45,
 	mov.w	r1, r13	# tmp46,
 	add.w	r1, -20 #111	# tmp46,
@@ -3830,7 +4225,7 @@ file_open:
 	ld.w	r1, [r13 + (8)]	# tmp47, filename
 	st.w	[r0], r1	#, tmp47
 	call	make83Name		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1102:   file_exists = getFile(&(fd->dir_entry), g_block_buf, FAT16_filename, 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1181:   file_exists = getFile(&(fd->dir_entry), g_block_buf, FAT16_filename, 11);
 	ld.w	r1, [r13 + (12)]	# _2, fd
 	mov.w	r0, sp	# tmp48,
 	mov.w	r2, 11	# tmp49,
@@ -3843,28 +4238,28 @@ file_open:
 	st.w	[r0], r1	#, _2
 	call	getFile		#
 	st.b	[r13 + (-1)], r0	# file_exists,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1103:   if (mode == O_WRITE) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1182:   if (mode == O_WRITE) 
 	ld.b	r1, [r13 + (-24)]	# tmp52, mode
 	mov.w	r0, 1	# tmp53,
 	cmp.w	r1, r0	# tmp52, tmp53
-	jnz	.L226		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1105:     if (file_exists)
+	jnz	.L233		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1184:     if (file_exists)
 	ld.b	r1, [r13 + (-1)]	# tmp54, file_exists
 	xor.w	r0, r0	# tmp55
 	cmp.w	r1, r0	# tmp54, tmp55
-	jz	.L227		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1107:       if (!file_delete(fd))
+	jz	.L234		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1186:       if (!file_delete(fd))
 	mov.w	r1, sp	# tmp56,
 	ld.w	r0, [r13 + (12)]	# tmp57, fd
 	st.w	[r1], r0	#, tmp57
 	call	file_delete		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1107:       if (!file_delete(fd))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1186:       if (!file_delete(fd))
 	zex.b	r1, r0	# tmp58, _3
 	xor.w	r0, r0	# tmp59
 	cmp.w	r1, r0	# tmp58, tmp59
-	jz	.L232		#
-.L227:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1116:     if (!create_file(&(fd->dir_entry), FAT16_filename, 11, g_block_buf))
+	jz	.L239		#
+.L234:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1195:     if (!create_file(&(fd->dir_entry), FAT16_filename, 11, g_block_buf))
 	ld.w	r1, [r13 + (12)]	# _4, fd
 	mov.w	r0, sp	# tmp60,
 	mov.w	r2, g_block_buf	# tmp61,
@@ -3876,59 +4271,59 @@ file_open:
 	st.w	[r0 + (4)], r2	#, tmp63
 	st.w	[r0], r1	#, _4
 	call	create_file		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1116:     if (!create_file(&(fd->dir_entry), FAT16_filename, 11, g_block_buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1195:     if (!create_file(&(fd->dir_entry), FAT16_filename, 11, g_block_buf))
 	zex.b	r1, r0	# tmp64, _5
 	xor.w	r0, r0	# tmp65
 	cmp.w	r1, r0	# tmp64, tmp65
-	jnz	.L229		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1118:       printf("create_file failed.\n");
+	jnz	.L236		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1197:       printf("create_file failed.\n");
 	mov.w	r1, sp	# tmp66,
 	mov.w	r0, .LC0	# tmp67,
 	st.w	[r1], r0	#, tmp67
 	call	puts		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1119:       goto fail_open;
-	j	.L228		#
-.L229:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1121:     file_exists = 1;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1198:       goto fail_open;
+	j	.L235		#
+.L236:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1200:     file_exists = 1;
 	mov.b	r0, 1	# tmp68,
 	st.b	[r13 + (-1)], r0	# file_exists, tmp68
-.L226:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1124:   fd->curr_cluster = fd->dir_entry.first_cluster;
+.L233:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1203:   fd->curr_cluster = fd->dir_entry.first_cluster;
 	ld.w	r0, [r13 + (12)]	# tmp69, fd
 	ld.s	r1, [r0 + (28)]	# _6, fd_22(D)->dir_entry.first_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1124:   fd->curr_cluster = fd->dir_entry.first_cluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1203:   fd->curr_cluster = fd->dir_entry.first_cluster;
 	ld.w	r0, [r13 + (12)]	# tmp70, fd
 	st.s	[r0 + (48)], r1	# fd_22(D)->curr_cluster, _6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1125:   fd->position = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1204:   fd->position = 0;
 	ld.w	r0, [r13 + (12)]	# tmp71, fd
 	xor.w	r1, r1	# tmp72
 	st.w	[r0 + (44)], r1	# fd_22(D)->position, tmp72
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1127:   return file_exists;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1206:   return file_exists;
 	ld.b	r0, [r13 + (-1)]	# _10, file_exists
-	j	.L221		#
-.L232:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1112:         goto fail_open;
+	j	.L228		#
+.L239:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1191:         goto fail_open;
 	nop	
-.L228:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1129:   if (++fail_counter < FAIL_COUNTER_MAX)
+.L235:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1208:   if (++fail_counter < FAIL_COUNTER_MAX)
 	ld.w	r0, [r13 + (-8)]	# tmp74, fail_counter
 	add.w	r0, 1 #111	# tmp73,
 	st.w	[r13 + (-8)], r0	# fail_counter, tmp73
 	ld.w	r1, [r13 + (-8)]	# tmp75, fail_counter
 	mov.w	r0, 1	# tmp76,
 	cmp.w	r1, r0	# tmp75, tmp76
-	jgs	.L230		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1131:     delay(fail_counter*2);
+	jgs	.L237		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1210:     delay(fail_counter*2);
 	ld.w	r0, [r13 + (-8)]	# tmp77, fail_counter
 	add.w	r0, r0 #222	# tmp78, tmp77
 	mov.w	r1, sp	# tmp79,
 	st.w	[r1], r0	#, _7
 	call	delay		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1132:     goto open_again;
-	j	.L222		#
-.L230:
-.L221:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1134: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1211:     goto open_again;
+	j	.L229		#
+.L237:
+.L228:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1213: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -3942,109 +4337,109 @@ file_read:
 	sub.w	sp, 76 #111	#,
 	ld.w	r0, [r13 + (16)]	# tmp63, length
 	st.s	[r13 + (-52)], r0	# length, tmp64
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1157:   uint32_t fd_position = fd->position;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1236:   uint32_t fd_position = fd->position;
 	ld.w	r0, [r13 + (8)]	# tmp65, fd
 	ld.w	r0, [r0 + (44)]	# tmp66, fd_52(D)->position
 	st.w	[r13 + (-24)], r0	# fd_position, tmp66
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1158:   uint16_t fd_curr_cluster = fd->curr_cluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1237:   uint16_t fd_curr_cluster = fd->curr_cluster;
 	ld.w	r0, [r13 + (8)]	# tmp67, fd
 	ld.s	r0, [r0 + (48)]	# tmp68, fd_52(D)->curr_cluster
 	st.s	[r13 + (-26)], r0	# fd_curr_cluster, tmp68
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1159:   uint32_t fd_dsect = fd->dsect;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1238:   uint32_t fd_dsect = fd->dsect;
 	ld.w	r0, [r13 + (8)]	# tmp69, fd
 	ld.w	r0, [r0 + (52)]	# tmp70, fd_52(D)->dsect
 	st.w	[r13 + (-32)], r0	# fd_dsect, tmp70
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1160: 	int fail_counter = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1239: 	int fail_counter = 0;
 	xor.w	r0, r0	# tmp71
 	st.w	[r13 + (-20)], r0	# fail_counter, tmp71
-.L234:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1163:   rbuff = buf;
+.L241:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1242:   rbuff = buf;
 	ld.w	r0, [r13 + (12)]	# tmp72, buf
 	st.w	[r13 + (-12)], r0	# rbuff, tmp72
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1164:   rlen = length;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1243:   rlen = length;
 	ld.s	r0, [r13 + (-52)]	# tmp73, length
 	st.s	[r13 + (-14)], r0	# rlen, tmp73
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1165:   fd->position = fd_position;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1244:   fd->position = fd_position;
 	ld.w	r0, [r13 + (8)]	# tmp74, fd
 	ld.w	r1, [r13 + (-24)]	# tmp75, fd_position
 	st.w	[r0 + (44)], r1	# fd_52(D)->position, tmp75
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1166:   fd->curr_cluster = fd_curr_cluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   fd->curr_cluster = fd_curr_cluster;
 	ld.w	r0, [r13 + (8)]	# tmp76, fd
 	ld.s	r1, [r13 + (-26)]	# tmp77, fd_curr_cluster
 	st.s	[r0 + (48)], r1	# fd_52(D)->curr_cluster, tmp77
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1167:   fd->dsect = fd_dsect;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1246:   fd->dsect = fd_dsect;
 	ld.w	r0, [r13 + (8)]	# tmp78, fd
 	ld.w	r1, [r13 + (-32)]	# tmp79, fd_dsect
 	st.w	[r0 + (52)], r1	# fd_52(D)->dsect, tmp79
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1168: 	br = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1247: 	br = 0;
 	xor.w	r0, r0	# tmp80
 	st.s	[r13 + (-2)], r0	# br, tmp80
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1173: 	remain = fd->dir_entry.filesize - fd->position;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1252: 	remain = fd->dir_entry.filesize - fd->position;
 	ld.w	r0, [r13 + (8)]	# tmp81, fd
 	ld.w	r0, [r0 + (32)]	# _1, fd_52(D)->dir_entry.filesize
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1173: 	remain = fd->dir_entry.filesize - fd->position;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1252: 	remain = fd->dir_entry.filesize - fd->position;
 	ld.w	r1, [r13 + (8)]	# tmp82, fd
 	ld.w	r1, [r1 + (44)]	# _2, fd_52(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1173: 	remain = fd->dir_entry.filesize - fd->position;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1252: 	remain = fd->dir_entry.filesize - fd->position;
 	sub.w	r0, r1 #222	# tmp83, _2
 	st.w	[r13 + (-36)], r0	# remain, tmp83
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1174: 	if (rlen > remain) rlen = (uint16_t)remain;			/* Truncate btr by remaining bytes */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1253: 	if (rlen > remain) rlen = (uint16_t)remain;			/* Truncate btr by remaining bytes */
 	ld.s	r0, [r13 + (-14)]	# _3, rlen
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1174: 	if (rlen > remain) rlen = (uint16_t)remain;			/* Truncate btr by remaining bytes */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1253: 	if (rlen > remain) rlen = (uint16_t)remain;			/* Truncate btr by remaining bytes */
 	ld.w	r1, [r13 + (-36)]	# tmp84, remain
 	cmp.w	r1, r0	# tmp84, _3
-	jge	.L236		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1174: 	if (rlen > remain) rlen = (uint16_t)remain;			/* Truncate btr by remaining bytes */
+	jge	.L243		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1253: 	if (rlen > remain) rlen = (uint16_t)remain;			/* Truncate btr by remaining bytes */
 	ld.w	r0, [r13 + (-36)]	# tmp85, remain
 	st.s	[r13 + (-14)], r0	# rlen, tmp86
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1176: 	while (rlen)	{									/* Repeat until all data transferred */
-	j	.L236		#
-.L247:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1178: 		if ((fd->position % 512) == 0) {				/* On the sector boundary? */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1255: 	while (rlen)	{									/* Repeat until all data transferred */
+	j	.L243		#
+.L254:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1257: 		if ((fd->position % 512) == 0) {				/* On the sector boundary? */
 	ld.w	r0, [r13 + (8)]	# tmp87, fd
 	ld.w	r1, [r0 + (44)]	# _4, fd_52(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1178: 		if ((fd->position % 512) == 0) {				/* On the sector boundary? */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1257: 		if ((fd->position % 512) == 0) {				/* On the sector boundary? */
 	mov.w	r0, 511	# tmp88,
 	and.w	r1, r0	# _5, tmp88
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1178: 		if ((fd->position % 512) == 0) {				/* On the sector boundary? */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1257: 		if ((fd->position % 512) == 0) {				/* On the sector boundary? */
 	xor.w	r0, r0	# tmp89
 	cmp.w	r1, r0	# _5, tmp89
-	jnz	.L237		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1179: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
+	jnz	.L244		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
 	ld.w	r0, [r13 + (8)]	# tmp90, fd
 	ld.w	r0, [r0 + (44)]	# _6, fd_52(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1179: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
 	mov.w	r1, 9	# tmp91,
 	shr.w	r0, r1	# _7, tmp91
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1179: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
 	ld.b	r1, [bpb+2]	# _9, bpb.sectorsPerCluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1179: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
 	add.w	r1, -1 #111	# tmp92,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1179: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258: 			cs = (uint8_t)(fd->position / 512 & (bpb.sectorsPerCluster - 1));	/* Sector offset in the cluster */
 	and.w	r0, r1	# tmp93, _10
 	st.b	[r13 + (-37)], r0	# cs, tmp94
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1180: 			if (!cs) {								/* On the cluster boundary? */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1259: 			if (!cs) {								/* On the cluster boundary? */
 	ld.b	r1, [r13 + (-37)]	# tmp95, cs
 	xor.w	r0, r0	# tmp96
 	cmp.w	r1, r0	# tmp95, tmp96
-	jnz	.L238		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1181: 				if (fd->position == 0) {				/* On the top of the file? */
+	jnz	.L245		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1260: 				if (fd->position == 0) {				/* On the top of the file? */
 	ld.w	r0, [r13 + (8)]	# tmp97, fd
 	ld.w	r1, [r0 + (44)]	# _11, fd_52(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1181: 				if (fd->position == 0) {				/* On the top of the file? */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1260: 				if (fd->position == 0) {				/* On the top of the file? */
 	xor.w	r0, r0	# tmp98
 	cmp.w	r1, r0	# _11, tmp98
-	jnz	.L239		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1182: 					clst = fd->dir_entry.first_cluster;
+	jnz	.L246		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1261: 					clst = fd->dir_entry.first_cluster;
 	ld.w	r0, [r13 + (8)]	# tmp99, fd
 	ld.s	r0, [r0 + (28)]	# tmp100, fd_52(D)->dir_entry.first_cluster
 	st.s	[r13 + (-4)], r0	# clst, tmp100
-	j	.L240		#
-.L239:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1184: 					clst = get_next_from_fat(fd, fd->curr_cluster);
+	j	.L247		#
+.L246:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1263: 					clst = get_next_from_fat(fd, fd->curr_cluster);
 	ld.w	r0, [r13 + (8)]	# tmp101, fd
 	ld.s	r0, [r0 + (48)]	# _12, fd_52(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1184: 					clst = get_next_from_fat(fd, fd->curr_cluster);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1263: 					clst = get_next_from_fat(fd, fd->curr_cluster);
 	zex.s	r1, r0	# _13, _12
 	mov.w	r0, sp	# tmp102,
 	st.w	[r0 + (4)], r1	#, _13
@@ -4052,26 +4447,26 @@ file_read:
 	st.w	[r0], r1	#, tmp103
 	call	get_next_from_fat		#
 	st.s	[r13 + (-4)], r0	# clst,
-.L240:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1187: 				if ((clst <= 1) || (clst > 30000)) { 
+.L247:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1266: 				if ((clst <= 1) || (clst > 30000)) { 
 	ld.s	r1, [r13 + (-4)]	# tmp104, clst
 	mov.w	r0, 1	# tmp105,
 	cmp.w	r1, r0	# tmp104, tmp105
-	jse	.L250		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1187: 				if ((clst <= 1) || (clst > 30000)) { 
+	jse	.L257		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1266: 				if ((clst <= 1) || (clst > 30000)) { 
 	ld.s	r1, [r13 + (-4)]	# tmp106, clst
 	mov.w	r0, 30000	# tmp107,
 	cmp.w	r1, r0	# tmp106, tmp107
-	jg	.L250		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1193: 				fd->curr_cluster = clst;				/* Update current cluster */
+	jg	.L257		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1272: 				fd->curr_cluster = clst;				/* Update current cluster */
 	ld.w	r0, [r13 + (8)]	# tmp108, fd
 	ld.s	r1, [r13 + (-4)]	# tmp109, clst
 	st.s	[r0 + (48)], r1	# fd_52(D)->curr_cluster, tmp109
-.L238:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1197: 			sect = clust2sect(fd, fd->curr_cluster);		/* Get current sector */
+.L245:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276: 			sect = clust2sect(fd, fd->curr_cluster);		/* Get current sector */
 	ld.w	r0, [r13 + (8)]	# tmp110, fd
 	ld.s	r0, [r0 + (48)]	# _14, fd_52(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1197: 			sect = clust2sect(fd, fd->curr_cluster);		/* Get current sector */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276: 			sect = clust2sect(fd, fd->curr_cluster);		/* Get current sector */
 	zex.s	r1, r0	# _15, _14
 	mov.w	r0, sp	# tmp111,
 	st.w	[r0 + (4)], r1	#, _15
@@ -4079,48 +4474,48 @@ file_read:
 	st.w	[r0], r1	#, tmp112
 	call	clust2sect		#
 	st.w	[r13 + (-44)], r0	# sect,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1198: 			if (!sect) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1277: 			if (!sect) {
 	ld.w	r1, [r13 + (-44)]	# tmp113, sect
 	xor.w	r0, r0	# tmp114
 	cmp.w	r1, r0	# tmp113, tmp114
-	jz	.L251		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1204: 			fd->dsect = sect + cs;
+	jz	.L258		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1283: 			fd->dsect = sect + cs;
 	ld.b	r1, [r13 + (-37)]	# _16, cs
 	ld.w	r0, [r13 + (-44)]	# tmp115, sect
 	add.w	r1, r0 #222	# _17, tmp115
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1204: 			fd->dsect = sect + cs;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1283: 			fd->dsect = sect + cs;
 	ld.w	r0, [r13 + (8)]	# tmp116, fd
 	st.w	[r0 + (52)], r1	# fd_52(D)->dsect, _17
-.L237:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1207: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
+.L244:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1286: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
 	ld.w	r0, [r13 + (8)]	# tmp117, fd
 	ld.w	r0, [r0 + (44)]	# _18, fd_52(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1207: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1286: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
 	zex.b	r1, r0	# _20, _19
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1207: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1286: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
 	mov.w	r0, 512	# tmp118,
 	sub.w	r0, r1 #222	# _21, _20
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1207: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1286: 		rcnt = 512 - (uint8_t)fd->position % 512;			/* Get partial sector data from sector buffer */
 	st.w	[r13 + (-8)], r0	# rcnt, _21
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1208: 		if (rcnt > rlen) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1287: 		if (rcnt > rlen) 
 	ld.s	r0, [r13 + (-14)]	# _22, rlen
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1208: 		if (rcnt > rlen) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1287: 		if (rcnt > rlen) 
 	ld.w	r1, [r13 + (-8)]	# tmp119, rcnt
 	cmp.w	r1, r0	# tmp119, _22
-	jse	.L245		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1209:       rcnt = rlen;
+	jse	.L252		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1288:       rcnt = rlen;
 	ld.s	r0, [r13 + (-14)]	# tmp120, rlen
 	st.w	[r13 + (-8)], r0	# rcnt, tmp120
-.L245:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1210: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
+.L252:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
 	ld.w	r0, [r13 + (8)]	# tmp121, fd
 	ld.w	r1, [r0 + (52)]	# _23, fd_52(D)->dsect
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1210: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
 	ld.w	r0, [r13 + (8)]	# tmp122, fd
 	ld.w	r0, [r0 + (44)]	# _24, fd_52(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1210: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
 	zex.s	r2, r0	# _26, _25
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1210: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
 	mov.w	r0, 511	# tmp123,
 	and.w	r2, r0	# _27, tmp123
 	ld.w	r0, [r13 + (-8)]	# tmp124, rcnt
@@ -4132,85 +4527,85 @@ file_read:
 	st.w	[r0 + (4)], r2	#, _27
 	st.w	[r0], r1	#, _23
 	call	readData		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1210: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289: 		dr = readData(fd->dsect, fd->position % 512, rcnt, rbuff);//, (UINT)fs->fptr % 512, rcnt);
 	zex.b	r0, r0	# tmp127, _30
 	st.w	[r13 + (-48)], r0	# dr, tmp127
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1211: 		if (dr == 0) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1290: 		if (dr == 0) {
 	ld.w	r1, [r13 + (-48)]	# tmp128, dr
 	xor.w	r0, r0	# tmp129
 	cmp.w	r1, r0	# tmp128, tmp129
-	jz	.L252		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1217: 		fd->position += rcnt;							/* Advances file read pointer */
+	jz	.L259		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1296: 		fd->position += rcnt;							/* Advances file read pointer */
 	ld.w	r0, [r13 + (8)]	# tmp130, fd
 	ld.w	r1, [r0 + (44)]	# _31, fd_52(D)->position
 	ld.w	r0, [r13 + (-8)]	# tmp131, rcnt
 	add.w	r1, r0 #222	# _32, tmp131
 	ld.w	r0, [r13 + (8)]	# tmp132, fd
 	st.w	[r0 + (44)], r1	# fd_52(D)->position, _32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1218: 		rlen -= rcnt; 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1297: 		rlen -= rcnt; 
 	ld.w	r0, [r13 + (-8)]	# tmp133, rcnt
 	mov.w	r1, r0	# _33, tmp133
 	ld.s	r0, [r13 + (-14)]	# tmp134, rlen
 	sub.w	r0, r1 #222	# tmp135, tmp136
 	st.s	[r13 + (-14)], r0	# rlen, tmp137
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1219:     br += rcnt;					/* Update read counter */
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1298:     br += rcnt;					/* Update read counter */
 	ld.w	r0, [r13 + (-8)]	# tmp138, rcnt
 	mov.w	r1, r0	# _34, tmp138
 	ld.s	r0, [r13 + (-2)]	# tmp139, br
 	add.w	r0, r1 #222	# tmp140, tmp141
 	st.s	[r13 + (-2)], r0	# br, tmp142
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1220: 		if (rbuff) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1299: 		if (rbuff) 
 	ld.w	r1, [r13 + (-12)]	# tmp143, rbuff
 	xor.w	r0, r0	# tmp144
 	cmp.w	r1, r0	# tmp143, tmp144
-	jz	.L236		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1221:       rbuff += rcnt;					/* Advances the data pointer if destination is memory */
+	jz	.L243		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1300:       rbuff += rcnt;					/* Advances the data pointer if destination is memory */
 	ld.w	r0, [r13 + (-12)]	# tmp146, rbuff
 	ld.w	r1, [r13 + (-8)]	# tmp147, rcnt
 	add.w	r0, r1 #222	# tmp145, tmp147
 	st.w	[r13 + (-12)], r0	# rbuff, tmp145
-.L236:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1176: 	while (rlen)	{									/* Repeat until all data transferred */
+.L243:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1255: 	while (rlen)	{									/* Repeat until all data transferred */
 	ld.s	r1, [r13 + (-14)]	# tmp148, rlen
 	xor.w	r0, r0	# tmp149
 	cmp.w	r1, r0	# tmp148, tmp149
-	jnz	.L247		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1225: 	return br;
+	jnz	.L254		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1304: 	return br;
 	ld.s	r0, [r13 + (-2)]	# _43, br
-	j	.L248		#
+	j	.L255		#
+.L257:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1270:           goto fail_read;
+	nop	
+	j	.L250		#
+.L258:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1281:         goto fail_read;
+	nop	
+	j	.L250		#
+.L259:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1294:       goto fail_read;
+	nop	
 .L250:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1191:           goto fail_read;
-	nop	
-	j	.L243		#
-.L251:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1202:         goto fail_read;
-	nop	
-	j	.L243		#
-.L252:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1215:       goto fail_read;
-	nop	
-.L243:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1228:   if (++fail_counter < FAIL_COUNTER_MAX) {
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1307:   if (++fail_counter < FAIL_COUNTER_MAX) {
 	ld.w	r0, [r13 + (-20)]	# tmp151, fail_counter
 	add.w	r0, 1 #111	# tmp150,
 	st.w	[r13 + (-20)], r0	# fail_counter, tmp150
 	ld.w	r1, [r13 + (-20)]	# tmp152, fail_counter
 	mov.w	r0, 1	# tmp153,
 	cmp.w	r1, r0	# tmp152, tmp153
-	jgs	.L249		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1229:     delay(fail_counter * 2);
+	jgs	.L256		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1308:     delay(fail_counter * 2);
 	ld.w	r0, [r13 + (-20)]	# tmp154, fail_counter
 	add.w	r0, r0 #222	# tmp155, tmp154
 	mov.w	r1, sp	# tmp156,
 	st.w	[r1], r0	#, _35
 	call	delay		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1230:     goto read_again;
-	j	.L234		#
-.L249:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1232:   return 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1309:     goto read_again;
+	j	.L241		#
+.L256:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1311:   return 0;
 	xor.w	r0, r0	# _43
-.L248:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1233: }
+.L255:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1312: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -4222,216 +4617,216 @@ getDirEntry:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 64 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1241:   uint8_t *buf = g_block_buf;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1320:   uint8_t *buf = g_block_buf;
 	mov.w	r0, g_block_buf	# tmp111,
 	st.w	[r13 + (-16)], r0	# buf, tmp111
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1243:   uint32_t counter = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1322:   uint32_t counter = 0;
 	xor.w	r0, r0	# tmp112
 	st.w	[r13 + (-12)], r0	# counter, tmp112
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	xor.w	r0, r0	# tmp113
 	st.w	[r13 + (-4)], r0	# i, tmp113
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	j	.L254		#
-.L265:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1252:     b = readBlock(rootDirStart_ + i, g_block_buf);
-	ld.w	r1, [rootDirStart_]	# rootDirStart_.94_1, rootDirStart_
-	ld.w	r0, [r13 + (-4)]	# i.95_2, i
-	add.w	r1, r0 #222	# _3, i.95_2
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	j	.L261		#
+.L272:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1331:     b = readBlock(rootDirStart_ + i, g_block_buf);
+	ld.w	r1, [rootDirStart_]	# rootDirStart_.97_1, rootDirStart_
+	ld.w	r0, [r13 + (-4)]	# i.98_2, i
+	add.w	r1, r0 #222	# _3, i.98_2
 	mov.w	r0, sp	# tmp114,
 	mov.w	r2, g_block_buf	# tmp115,
 	st.w	[r0 + (4)], r2	#, tmp115
 	st.w	[r0], r1	#, _3
 	call	readBlock		#
 	st.b	[r13 + (-17)], r0	# b,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258:     for(j = 0; j < 16; j++)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1337:     for(j = 0; j < 16; j++)
 	xor.w	r0, r0	# tmp116
 	st.w	[r13 + (-8)], r0	# j, tmp116
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258:     for(j = 0; j < 16; j++)
-	j	.L255		#
-.L264:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1337:     for(j = 0; j < 16; j++)
+	j	.L262		#
+.L271:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp117, j
 	mov.w	r1, 5	# tmp118,
 	shl.w	r0, r1	# _4, tmp118
 	mov.w	r1, r0	# _5, _4
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-16)]	# tmp119, buf
 	add.w	r0, r1 #222	# _6, _5
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _7, *_6
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp120, _7
 	xor.w	r0, r0	# tmp121
 	cmp.w	r1, r0	# tmp120, tmp121
-	jz	.L267		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+	jz	.L274		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp122, j
 	mov.w	r1, 5	# tmp123,
 	shl.w	r0, r1	# _8, tmp123
 	mov.w	r1, r0	# _9, _8
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-16)]	# tmp124, buf
 	add.w	r0, r1 #222	# _10, _9
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _11, *_10
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp125, _11
 	mov.w	r0, 46	# tmp126,
 	cmp.w	r1, r0	# tmp125, tmp126
-	jz	.L267		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+	jz	.L274		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp127, j
 	mov.w	r1, 5	# tmp128,
 	shl.w	r0, r1	# _12, tmp128
 	mov.w	r1, r0	# _13, _12
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-16)]	# tmp129, buf
 	add.w	r0, r1 #222	# _14, _13
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _15, *_14
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp130, _15
 	mov.w	r0, 229	# tmp131,
 	cmp.w	r1, r0	# tmp130, tmp131
-	jz	.L267		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+	jz	.L274		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.w	r0, [r13 + (-8)]	# tmp132, j
 	mov.w	r1, 5	# tmp133,
 	shl.w	r0, r1	# _16, tmp133
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	mov.w	r1, r0	# _18, _17
 	add.w	r1, 11 #111	# _18,
 	ld.w	r0, [r13 + (-16)]	# tmp134, buf
 	add.w	r0, r1 #222	# _19, _18
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	ld.b	r0, [r0]	# _20, *_19
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1265:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       if (*(buf + j*32)==0 || *(buf + j*32)==0x2e || *(buf + j*32)==0xe5 || *(buf + j*32 + 0x0b) == 0xf)
 	zex.b	r1, r0	# tmp135, _20
 	mov.w	r0, 15	# tmp136,
 	cmp.w	r1, r0	# tmp135, tmp136
-	jz	.L267		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1272:       if(counter == index)
+	jz	.L274		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1351:       if(counter == index)
 	ld.w	r1, [r13 + (-12)]	# tmp137, counter
 	ld.w	r0, [r13 + (12)]	# tmp138, index
 	cmp.w	r1, r0	# tmp137, tmp138
-	jnz	.L259		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1274:         file_size = *(buf + j*32 + 0x1c);
+	jnz	.L266		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1353:         file_size = *(buf + j*32 + 0x1c);
 	ld.w	r0, [r13 + (-8)]	# tmp139, j
 	mov.w	r1, 5	# tmp140,
 	shl.w	r0, r1	# _21, tmp140
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1274:         file_size = *(buf + j*32 + 0x1c);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1353:         file_size = *(buf + j*32 + 0x1c);
 	mov.w	r1, r0	# _23, _22
 	add.w	r1, 28 #111	# _23,
 	ld.w	r0, [r13 + (-16)]	# tmp141, buf
 	add.w	r0, r1 #222	# _24, _23
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1274:         file_size = *(buf + j*32 + 0x1c);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1353:         file_size = *(buf + j*32 + 0x1c);
 	ld.b	r0, [r0]	# _25, *_24
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1274:         file_size = *(buf + j*32 + 0x1c);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1353:         file_size = *(buf + j*32 + 0x1c);
 	zex.b	r0, r0	# tmp142, _25
 	st.w	[r13 + (-24)], r0	# file_size, tmp142
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1275:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1354:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	ld.w	r0, [r13 + (-8)]	# tmp143, j
 	mov.w	r1, 5	# tmp144,
 	shl.w	r0, r1	# _26, tmp144
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1275:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1354:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	mov.w	r1, r0	# _28, _27
 	add.w	r1, 29 #111	# _28,
 	ld.w	r0, [r13 + (-16)]	# tmp145, buf
 	add.w	r0, r1 #222	# _29, _28
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1275:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1354:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	ld.b	r0, [r0]	# _30, *_29
 	zex.b	r0, r0	# _31, _30
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1275:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1354:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	mov.w	r1, 8	# tmp146,
 	shl.w	r0, r1	# _32, tmp146
 	mov.w	r1, r0	# _33, _32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1275:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1354:         file_size += *(buf + j*32 + 0x1c + 1)<<8;
 	ld.w	r0, [r13 + (-24)]	# tmp148, file_size
 	add.w	r0, r1 #222	# tmp147, _33
 	st.w	[r13 + (-24)], r0	# file_size, tmp147
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1355:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	ld.w	r0, [r13 + (-8)]	# tmp149, j
 	mov.w	r1, 5	# tmp150,
 	shl.w	r0, r1	# _34, tmp150
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1355:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	mov.w	r1, r0	# _36, _35
 	add.w	r1, 30 #111	# _36,
 	ld.w	r0, [r13 + (-16)]	# tmp151, buf
 	add.w	r0, r1 #222	# _37, _36
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1355:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	ld.b	r0, [r0]	# _38, *_37
 	zex.b	r0, r0	# _39, _38
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1355:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	mov.w	r1, 16	# tmp152,
 	shl.w	r0, r1	# _40, tmp152
 	mov.w	r1, r0	# _41, _40
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1276:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1355:         file_size += *(buf + j*32 + 0x1c + 2)<<16;
 	ld.w	r0, [r13 + (-24)]	# tmp154, file_size
 	add.w	r0, r1 #222	# tmp153, _41
 	st.w	[r13 + (-24)], r0	# file_size, tmp153
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1277:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1356:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	ld.w	r0, [r13 + (-8)]	# tmp155, j
 	mov.w	r1, 5	# tmp156,
 	shl.w	r0, r1	# _42, tmp156
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1277:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1356:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	mov.w	r1, r0	# _44, _43
 	add.w	r1, 31 #111	# _44,
 	ld.w	r0, [r13 + (-16)]	# tmp157, buf
 	add.w	r0, r1 #222	# _45, _44
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1277:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1356:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	ld.b	r0, [r0]	# _46, *_45
 	zex.b	r0, r0	# _47, _46
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1277:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1356:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	mov.w	r1, 24	# tmp158,
 	shl.w	r0, r1	# _48, tmp158
 	mov.w	r1, r0	# _49, _48
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1277:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1356:         file_size += *(buf + j*32 + 0x1c + 3)<<24;
 	ld.w	r0, [r13 + (-24)]	# tmp160, file_size
 	add.w	r0, r1 #222	# tmp159, _49
 	st.w	[r13 + (-24)], r0	# file_size, tmp159
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1278:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1357:         cluster = *(buf + j*32 + 0x1a);
 	ld.w	r0, [r13 + (-8)]	# tmp161, j
 	mov.w	r1, 5	# tmp162,
 	shl.w	r0, r1	# _50, tmp162
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1278:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1357:         cluster = *(buf + j*32 + 0x1a);
 	mov.w	r1, r0	# _52, _51
 	add.w	r1, 26 #111	# _52,
 	ld.w	r0, [r13 + (-16)]	# tmp163, buf
 	add.w	r0, r1 #222	# _53, _52
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1278:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1357:         cluster = *(buf + j*32 + 0x1a);
 	ld.b	r0, [r0]	# _54, *_53
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1278:         cluster = *(buf + j*32 + 0x1a);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1357:         cluster = *(buf + j*32 + 0x1a);
 	zex.b	r0, r0	# tmp164, _54
 	st.s	[r13 + (-26)], r0	# cluster, tmp165
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1279:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1358:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	ld.w	r0, [r13 + (-8)]	# tmp166, j
 	mov.w	r1, 5	# tmp167,
 	shl.w	r0, r1	# _55, tmp167
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1279:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1358:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	mov.w	r1, r0	# _57, _56
 	add.w	r1, 27 #111	# _57,
 	ld.w	r0, [r13 + (-16)]	# tmp168, buf
 	add.w	r0, r1 #222	# _58, _57
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1279:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1358:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	ld.b	r0, [r0]	# _59, *_58
 	zex.b	r0, r0	# tmp169, _59
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1279:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1358:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	mov.w	r1, 8	# tmp171,
 	shl.w	r0, r1	# tmp170, tmp171
 	mov.w	r1, r0	# _61, tmp170
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1279:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1358:         cluster += *(buf + j*32 + 0x1a + 1) << 8;
 	ld.s	r0, [r13 + (-26)]	# tmp172, cluster
 	add.w	r0, r1 #222	# tmp173, tmp174
 	st.s	[r13 + (-26)], r0	# cluster, tmp175
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1283:         strncpy(filename_upper, (char*)(buf+j*32), 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1362:         strncpy(filename_upper, (char*)(buf+j*32), 11);
 	ld.w	r0, [r13 + (-8)]	# tmp176, j
 	mov.w	r1, 5	# tmp177,
 	shl.w	r0, r1	# _62, tmp177
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1283:         strncpy(filename_upper, (char*)(buf+j*32), 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1362:         strncpy(filename_upper, (char*)(buf+j*32), 11);
 	ld.w	r1, [r13 + (-16)]	# tmp178, buf
 	add.w	r1, r0 #222	# _64, _63
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1283:         strncpy(filename_upper, (char*)(buf+j*32), 11);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1362:         strncpy(filename_upper, (char*)(buf+j*32), 11);
 	mov.w	r0, sp	# tmp179,
 	mov.w	r2, 11	# tmp180,
 	st.w	[r0 + (8)], r2	#, tmp180
@@ -4440,12 +4835,12 @@ getDirEntry:
 	add.w	r1, -38 #111	# tmp181,
 	st.w	[r0], r1	#, tmp181
 	call	strncpy		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1284:         filename_upper[11] = '\0';
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1363:         filename_upper[11] = '\0';
 	xor.w	r0, r0	# tmp182
 	st.b	[r13 + (-27)], r0	# filename_upper, tmp182
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1287:         memmove(fd->dir_entry.filename, filename_upper, 12);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1366:         memmove(fd->dir_entry.filename, filename_upper, 12);
 	ld.w	r1, [r13 + (8)]	# _65, fd
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1287:         memmove(fd->dir_entry.filename, filename_upper, 12);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1366:         memmove(fd->dir_entry.filename, filename_upper, 12);
 	mov.w	r0, sp	# tmp183,
 	mov.w	r2, 12	# tmp184,
 	st.w	[r0 + (8)], r2	#, tmp184
@@ -4454,128 +4849,128 @@ getDirEntry:
 	st.w	[r0 + (4)], r2	#, tmp185
 	st.w	[r0], r1	#, _65
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1288:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1367:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
 	ld.w	r0, [r13 + (-8)]	# tmp186, j
 	mov.w	r1, 5	# tmp187,
 	shl.w	r0, r1	# _66, tmp187
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1288:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1367:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
 	mov.w	r1, r0	# _68, _67
 	add.w	r1, 11 #111	# _68,
 	ld.w	r0, [r13 + (-16)]	# tmp188, buf
 	add.w	r0, r1 #222	# _69, _68
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1288:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1367:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
 	ld.b	r1, [r0]	# _70, *_69
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1288:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1367:         fd->dir_entry.attributes = *(buf + j*32 + 0x0b);
 	ld.w	r0, [r13 + (8)]	# tmp189, fd
 	st.b	[r0 + (12)], r1	# fd_114(D)->dir_entry.attributes, _70
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1368:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
 	ld.w	r0, [r13 + (8)]	# tmp190, fd
 	mov.w	r1, r0	# _71, tmp190
 	add.w	r1, 13 #111	# _71,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1368:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
 	ld.w	r0, [r13 + (-8)]	# tmp191, j
 	mov.w	r2, 5	# tmp192,
 	shl.w	r0, r2	# _72, tmp192
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1368:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
 	add.w	r0, 12 #111	# _74,
 	ld.w	r2, [r13 + (-16)]	# tmp193, buf
 	add.w	r2, r0 #222	# _75, _74
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1289:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1368:         memmove(fd->dir_entry.unused_attr, buf + j*32 + 0x0c, 14);
 	mov.w	r0, sp	# tmp194,
 	mov.w	r3, 14	# tmp195,
 	st.w	[r0 + (8)], r3	#, tmp195
 	st.w	[r0 + (4)], r2	#, _75
 	st.w	[r0], r1	#, _71
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1290:         fd->dir_entry.filesize = file_size;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1369:         fd->dir_entry.filesize = file_size;
 	ld.w	r0, [r13 + (8)]	# tmp196, fd
 	ld.w	r1, [r13 + (-24)]	# tmp197, file_size
 	st.w	[r0 + (32)], r1	# fd_114(D)->dir_entry.filesize, tmp197
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1291:         fd->dir_entry.block = rootDirStart_ + i;
-	ld.w	r1, [rootDirStart_]	# rootDirStart_.96_76, rootDirStart_
-	ld.w	r0, [r13 + (-4)]	# i.97_77, i
-	add.w	r1, r0 #222	# _78, i.97_77
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1291:         fd->dir_entry.block = rootDirStart_ + i;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1370:         fd->dir_entry.block = rootDirStart_ + i;
+	ld.w	r1, [rootDirStart_]	# rootDirStart_.99_76, rootDirStart_
+	ld.w	r0, [r13 + (-4)]	# i.100_77, i
+	add.w	r1, r0 #222	# _78, i.100_77
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1370:         fd->dir_entry.block = rootDirStart_ + i;
 	ld.w	r0, [r13 + (8)]	# tmp198, fd
 	st.w	[r0 + (36)], r1	# fd_114(D)->dir_entry.block, _78
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1292:         fd->dir_entry.slot = j;
-	ld.w	r1, [r13 + (-8)]	# j.98_79, j
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1371:         fd->dir_entry.slot = j;
+	ld.w	r1, [r13 + (-8)]	# j.101_79, j
 	ld.w	r0, [r13 + (8)]	# tmp199, fd
-	st.w	[r0 + (40)], r1	# fd_114(D)->dir_entry.slot, j.98_79
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1293:         fd->dir_entry.first_cluster = cluster;
+	st.w	[r0 + (40)], r1	# fd_114(D)->dir_entry.slot, j.101_79
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1372:         fd->dir_entry.first_cluster = cluster;
 	ld.w	r0, [r13 + (8)]	# tmp200, fd
 	ld.s	r1, [r13 + (-26)]	# tmp201, cluster
 	st.s	[r0 + (28)], r1	# fd_114(D)->dir_entry.first_cluster, tmp201
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1294:         fd->curr_cluster = cluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1373:         fd->curr_cluster = cluster;
 	ld.w	r0, [r13 + (8)]	# tmp202, fd
 	ld.s	r1, [r13 + (-26)]	# tmp203, cluster
 	st.s	[r0 + (48)], r1	# fd_114(D)->curr_cluster, tmp203
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1295:         if ((file_size > 2000000000) || (cluster > 65534))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1374:         if ((file_size > 2000000000) || (cluster > 65534))
 	ld.w	r1, [r13 + (-24)]	# tmp204, file_size
 	mov.w	r0, 2000000000	# tmp205,
 	cmp.w	r1, r0	# tmp204, tmp205
-	jg	.L260		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1295:         if ((file_size > 2000000000) || (cluster > 65534))
+	jg	.L267		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1374:         if ((file_size > 2000000000) || (cluster > 65534))
 	ld.s	r1, [r13 + (-26)]	# tmp206, cluster
 	mov.w	r0, 65535	# tmp207,
 	cmp.w	r1, r0	# tmp206, tmp207
-	jnz	.L261		#
-.L260:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1296:           return 0;
+	jnz	.L268		#
+.L267:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1375:           return 0;
 	xor.w	r0, r0	# _89
-	j	.L266		#
-.L261:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1297:         return counter + 1;
+	j	.L273		#
+.L268:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1376:         return counter + 1;
 	ld.w	r0, [r13 + (-12)]	# tmp208, counter
 	add.w	r0, 1 #111	# _89,
-	j	.L266		#
-.L259:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1298:       } else if (counter > index) {
+	j	.L273		#
+.L266:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1377:       } else if (counter > index) {
 	ld.w	r1, [r13 + (-12)]	# tmp209, counter
 	ld.w	r0, [r13 + (12)]	# tmp210, index
 	cmp.w	r1, r0	# tmp209, tmp210
-	jse	.L263		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1299:         return 0;
+	jse	.L270		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1378:         return 0;
 	xor.w	r0, r0	# _89
-	j	.L266		#
-.L263:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1301:       counter++;
+	j	.L273		#
+.L270:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1380:       counter++;
 	ld.w	r0, [r13 + (-12)]	# tmp212, counter
 	add.w	r0, 1 #111	# tmp211,
 	st.w	[r13 + (-12)], r0	# counter, tmp211
-	j	.L258		#
-.L267:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1267:         continue; // free, or deleted file/folder, or phantom entry for long names?
+	j	.L265		#
+.L274:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1346:         continue; // free, or deleted file/folder, or phantom entry for long names?
 	nop	
-.L258:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258:     for(j = 0; j < 16; j++)
+.L265:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1337:     for(j = 0; j < 16; j++)
 	ld.w	r0, [r13 + (-8)]	# tmp214, j
 	add.w	r0, 1 #111	# tmp213,
 	st.w	[r13 + (-8)], r0	# j, tmp213
-.L255:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1258:     for(j = 0; j < 16; j++)
+.L262:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1337:     for(j = 0; j < 16; j++)
 	ld.w	r1, [r13 + (-8)]	# tmp215, j
 	mov.w	r0, 15	# tmp216,
 	cmp.w	r1, r0	# tmp215, tmp216
-	jses	.L264		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	jses	.L271		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
 	ld.w	r0, [r13 + (-4)]	# tmp218, i
 	add.w	r0, 1 #111	# tmp217,
 	st.w	[r13 + (-4)], r0	# i, tmp217
-.L254:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.99_80, dataStartBlock_
-	ld.w	r0, [rootDirStart_]	# rootDirStart_.100_81, rootDirStart_
-	sub.w	r1, r0 #222	# _82, rootDirStart_.100_81
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	ld.w	r0, [r13 + (-4)]	# i.101_83, i
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1245:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
-	cmp.w	r1, r0	# _82, i.101_83
-	jg	.L265		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1304:   return 0;
+.L261:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	ld.w	r1, [dataStartBlock_]	# dataStartBlock_.102_80, dataStartBlock_
+	ld.w	r0, [rootDirStart_]	# rootDirStart_.103_81, rootDirStart_
+	sub.w	r1, r0 #222	# _82, rootDirStart_.103_81
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	ld.w	r0, [r13 + (-4)]	# i.104_83, i
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:   for (i = 0; i < (dataStartBlock_ - rootDirStart_); i++)
+	cmp.w	r1, r0	# _82, i.104_83
+	jg	.L272		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1383:   return 0;
 	xor.w	r0, r0	# _89
-.L266:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1305: }
+.L273:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1384: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -4587,51 +4982,51 @@ file_seek:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1314:   if (offset > fd->dir_entry.filesize)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1393:   if (offset > fd->dir_entry.filesize)
 	ld.w	r0, [r13 + (8)]	# tmp49, fd
 	ld.w	r0, [r0 + (32)]	# _1, fd_26(D)->dir_entry.filesize
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1314:   if (offset > fd->dir_entry.filesize)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1393:   if (offset > fd->dir_entry.filesize)
 	ld.w	r1, [r13 + (12)]	# tmp50, offset
 	cmp.w	r1, r0	# tmp50, _1
-	jse	.L271		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1319:     return 0;
+	jse	.L278		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1398:     return 0;
 	xor.w	r0, r0	# _22
-	j	.L270		#
-.L274:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:     if (offset - fd->position < clusterSize_)
+	j	.L277		#
+.L281:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1403:     if (offset - fd->position < clusterSize_)
 	ld.w	r0, [r13 + (8)]	# tmp51, fd
 	ld.w	r0, [r0 + (44)]	# _2, fd_26(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:     if (offset - fd->position < clusterSize_)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1403:     if (offset - fd->position < clusterSize_)
 	ld.w	r1, [r13 + (12)]	# tmp52, offset
 	sub.w	r1, r0 #222	# _3, _2
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:     if (offset - fd->position < clusterSize_)
-	ld.w	r0, [clusterSize_]	# clusterSize_.102_4, clusterSize_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1324:     if (offset - fd->position < clusterSize_)
-	cmp.w	r1, r0	# _3, clusterSize_.102_4
-	jge	.L272		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1326:       fd->position = offset;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1403:     if (offset - fd->position < clusterSize_)
+	ld.w	r0, [clusterSize_]	# clusterSize_.105_4, clusterSize_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1403:     if (offset - fd->position < clusterSize_)
+	cmp.w	r1, r0	# _3, clusterSize_.105_4
+	jge	.L279		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1405:       fd->position = offset;
 	ld.w	r0, [r13 + (8)]	# tmp53, fd
 	ld.w	r1, [r13 + (12)]	# tmp54, offset
 	st.w	[r0 + (44)], r1	# fd_26(D)->position, tmp54
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1331:       if (fd->position%clusterSize_ + offset >= clusterSize_)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:       if (fd->position%clusterSize_ + offset >= clusterSize_)
 	ld.w	r0, [r13 + (8)]	# tmp55, fd
 	ld.w	r1, [r0 + (44)]	# _5, fd_26(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1331:       if (fd->position%clusterSize_ + offset >= clusterSize_)
-	ld.w	r0, [clusterSize_]	# clusterSize_.103_6, clusterSize_
-	div.w	r1, r0	# _7, clusterSize_.103_6
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:       if (fd->position%clusterSize_ + offset >= clusterSize_)
+	ld.w	r0, [clusterSize_]	# clusterSize_.106_6, clusterSize_
+	div.w	r1, r0	# _7, clusterSize_.106_6
 mov.w	r1, r14	# _7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1331:       if (fd->position%clusterSize_ + offset >= clusterSize_)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:       if (fd->position%clusterSize_ + offset >= clusterSize_)
 	ld.w	r0, [r13 + (12)]	# tmp56, offset
 	add.w	r1, r0 #222	# _8, tmp56
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1331:       if (fd->position%clusterSize_ + offset >= clusterSize_)
-	ld.w	r0, [clusterSize_]	# clusterSize_.104_9, clusterSize_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1331:       if (fd->position%clusterSize_ + offset >= clusterSize_)
-	cmp.w	r1, r0	# _8, clusterSize_.104_9
-	js	.L271		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1333:         clus = next_cluster(fd->curr_cluster, g_block_buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:       if (fd->position%clusterSize_ + offset >= clusterSize_)
+	ld.w	r0, [clusterSize_]	# clusterSize_.107_9, clusterSize_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:       if (fd->position%clusterSize_ + offset >= clusterSize_)
+	cmp.w	r1, r0	# _8, clusterSize_.107_9
+	js	.L278		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1412:         clus = next_cluster(fd->curr_cluster, g_block_buf);
 	ld.w	r0, [r13 + (8)]	# tmp57, fd
 	ld.s	r0, [r0 + (48)]	# _10, fd_26(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1333:         clus = next_cluster(fd->curr_cluster, g_block_buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1412:         clus = next_cluster(fd->curr_cluster, g_block_buf);
 	zex.s	r1, r0	# _11, _10
 	mov.w	r0, sp	# tmp58,
 	mov.w	r2, g_block_buf	# tmp59,
@@ -4639,39 +5034,39 @@ mov.w	r1, r14	# _7
 	st.w	[r0], r1	#, _11
 	call	next_cluster		#
 	st.s	[r13 + (-2)], r0	# clus,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1337:         if (clus != 0xFFFF) 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1416:         if (clus != 0xFFFF) 
 	ld.s	r1, [r13 + (-2)]	# tmp60, clus
 	mov.w	r0, 65535	# tmp61,
 	cmp.w	r1, r0	# tmp60, tmp61
-	jz	.L271		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1338:           fd->curr_cluster = clus;
+	jz	.L278		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1417:           fd->curr_cluster = clus;
 	ld.w	r0, [r13 + (8)]	# tmp62, fd
 	ld.s	r1, [r13 + (-2)]	# tmp63, clus
 	st.s	[r0 + (48)], r1	# fd_26(D)->curr_cluster, tmp63
-	j	.L271		#
-.L272:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       fd->position += clusterSize_ - fd->position%clusterSize_;
+	j	.L278		#
+.L279:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:       fd->position += clusterSize_ - fd->position%clusterSize_;
 	ld.w	r0, [r13 + (8)]	# tmp64, fd
 	ld.w	r1, [r0 + (44)]	# _12, fd_26(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       fd->position += clusterSize_ - fd->position%clusterSize_;
-	ld.w	r0, [clusterSize_]	# clusterSize_.105_13, clusterSize_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       fd->position += clusterSize_ - fd->position%clusterSize_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:       fd->position += clusterSize_ - fd->position%clusterSize_;
+	ld.w	r0, [clusterSize_]	# clusterSize_.108_13, clusterSize_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:       fd->position += clusterSize_ - fd->position%clusterSize_;
 	ld.w	r2, [r13 + (8)]	# tmp65, fd
 	ld.w	r2, [r2 + (44)]	# _14, fd_26(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       fd->position += clusterSize_ - fd->position%clusterSize_;
-	ld.w	r3, [clusterSize_]	# clusterSize_.106_15, clusterSize_
-	div.w	r2, r3	# _16, clusterSize_.106_15
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:       fd->position += clusterSize_ - fd->position%clusterSize_;
+	ld.w	r3, [clusterSize_]	# clusterSize_.109_15, clusterSize_
+	div.w	r2, r3	# _16, clusterSize_.109_15
 mov.w	r2, r14	# _16
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       fd->position += clusterSize_ - fd->position%clusterSize_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:       fd->position += clusterSize_ - fd->position%clusterSize_;
 	sub.w	r0, r2 #222	# _17, _16
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1344:       fd->position += clusterSize_ - fd->position%clusterSize_;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:       fd->position += clusterSize_ - fd->position%clusterSize_;
 	add.w	r1, r0 #222	# _18, _17
 	ld.w	r0, [r13 + (8)]	# tmp66, fd
 	st.w	[r0 + (44)], r1	# fd_26(D)->position, _18
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1345:       clus = next_cluster(fd->curr_cluster, g_block_buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:       clus = next_cluster(fd->curr_cluster, g_block_buf);
 	ld.w	r0, [r13 + (8)]	# tmp67, fd
 	ld.s	r0, [r0 + (48)]	# _19, fd_26(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1345:       clus = next_cluster(fd->curr_cluster, g_block_buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:       clus = next_cluster(fd->curr_cluster, g_block_buf);
 	zex.s	r1, r0	# _20, _19
 	mov.w	r0, sp	# tmp68,
 	mov.w	r2, g_block_buf	# tmp69,
@@ -4679,31 +5074,31 @@ mov.w	r2, r14	# _16
 	st.w	[r0], r1	#, _20
 	call	next_cluster		#
 	st.s	[r13 + (-2)], r0	# clus,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1346:       if (!clus)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1425:       if (!clus)
 	ld.s	r1, [r13 + (-2)]	# tmp70, clus
 	xor.w	r0, r0	# tmp71
 	cmp.w	r1, r0	# tmp70, tmp71
-	jnz	.L273		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1351:         return 0;
+	jnz	.L280		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1430:         return 0;
 	xor.w	r0, r0	# _22
-	j	.L270		#
-.L273:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1353:       fd->curr_cluster = clus;
+	j	.L277		#
+.L280:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1432:       fd->curr_cluster = clus;
 	ld.w	r0, [r13 + (8)]	# tmp72, fd
 	ld.s	r1, [r13 + (-2)]	# tmp73, clus
 	st.s	[r0 + (48)], r1	# fd_26(D)->curr_cluster, tmp73
-.L271:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1322:   while (fd->position != offset)
+.L278:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1401:   while (fd->position != offset)
 	ld.w	r0, [r13 + (8)]	# tmp74, fd
 	ld.w	r0, [r0 + (44)]	# _21, fd_26(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1322:   while (fd->position != offset)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1401:   while (fd->position != offset)
 	ld.w	r1, [r13 + (12)]	# tmp75, offset
 	cmp.w	r1, r0	# tmp75, _21
-	jnz	.L274		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1360:   return 1;
+	jnz	.L281		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1439:   return 1;
 	mov.b	r0, 1	# _22,
-.L270:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1361: }
+.L277:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1440: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -4717,48 +5112,48 @@ file_write:
 	sub.w	sp, 44 #111	#,
 	ld.w	r0, [r13 + (16)]	# tmp83, length
 	st.s	[r13 + (-20)], r0	# length, tmp84
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1373:   uint16_t bytes_written = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1452:   uint16_t bytes_written = 0;
 	xor.w	r0, r0	# tmp85
 	st.s	[r13 + (-4)], r0	# bytes_written, tmp85
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1377:   if (fd->dir_entry.first_cluster == 0x0000)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1456:   if (fd->dir_entry.first_cluster == 0x0000)
 	ld.w	r0, [r13 + (8)]	# tmp86, fd
 	ld.s	r0, [r0 + (28)]	# _1, fd_66(D)->dir_entry.first_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1377:   if (fd->dir_entry.first_cluster == 0x0000)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1456:   if (fd->dir_entry.first_cluster == 0x0000)
 	zex.s	r1, r0	# tmp87, _1
 	xor.w	r0, r0	# tmp88
 	cmp.w	r1, r0	# tmp87, tmp88
-	jnz	.L276		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1379:     clus = get_unused_cluster(g_block_buf);
+	jnz	.L283		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1458:     clus = get_unused_cluster(g_block_buf);
 	mov.w	r1, sp	# tmp89,
 	mov.w	r0, g_block_buf	# tmp90,
 	st.w	[r1], r0	#, tmp90
 	call	get_unused_cluster		#
 	st.s	[r13 + (-6)], r0	# clus,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1383:     if (!clus) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1462:     if (!clus) { return 0; }
 	ld.s	r1, [r13 + (-6)]	# tmp91, clus
 	xor.w	r0, r0	# tmp92
 	cmp.w	r1, r0	# tmp91, tmp92
-	jnz	.L277		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1383:     if (!clus) { return 0; }
+	jnz	.L284		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1462:     if (!clus) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L277:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1384:     fd->dir_entry.first_cluster = clus;
+	j	.L285		#
+.L284:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1463:     fd->dir_entry.first_cluster = clus;
 	ld.w	r0, [r13 + (8)]	# tmp93, fd
 	ld.s	r1, [r13 + (-6)]	# tmp94, clus
 	st.s	[r0 + (28)], r1	# fd_66(D)->dir_entry.first_cluster, tmp94
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1385:     fd->curr_cluster = clus;    
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1464:     fd->curr_cluster = clus;    
 	ld.w	r0, [r13 + (8)]	# tmp95, fd
 	ld.s	r1, [r13 + (-6)]	# tmp96, clus
 	st.s	[r0 + (48)], r1	# fd_66(D)->curr_cluster, tmp96
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1386:     fd->position = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1465:     fd->position = 0;
 	ld.w	r0, [r13 + (8)]	# tmp97, fd
 	xor.w	r1, r1	# tmp98
 	st.w	[r0 + (44)], r1	# fd_66(D)->position, tmp98
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1387:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1466:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
 	ld.w	r0, [r13 + (8)]	# tmp99, fd
 	ld.s	r0, [r0 + (48)]	# _2, fd_66(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1387:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1466:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
 	zex.s	r1, r0	# _3, _2
 	mov.w	r0, sp	# tmp100,
 	mov.w	r2, 65535	# tmp101,
@@ -4767,75 +5162,75 @@ file_write:
 	mov.w	r1, g_block_buf	# tmp102,
 	st.w	[r0], r1	#, tmp102
 	call	update_FAT		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1387:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1466:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
 	zex.b	r1, r0	# tmp103, _4
 	xor.w	r0, r0	# tmp104
 	cmp.w	r1, r0	# tmp103, tmp104
-	jnz	.L276		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1387:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
+	jnz	.L283		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1466:     if (!update_FAT(g_block_buf, fd->curr_cluster, 0xffff)) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L276:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1390:   sec_offset = fd->position % 512;
+	j	.L285		#
+.L283:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1469:   sec_offset = fd->position % 512;
 	ld.w	r0, [r13 + (8)]	# tmp105, fd
 	ld.w	r0, [r0 + (44)]	# _5, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1390:   sec_offset = fd->position % 512;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1469:   sec_offset = fd->position % 512;
 	mov.w	r1, 511	# tmp107,
 	and.w	r0, r1	# tmp106, tmp107
 	st.s	[r13 + (-8)], r0	# sec_offset, tmp108
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1391:   sec_bytes_left = 512 - sec_offset;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1470:   sec_bytes_left = 512 - sec_offset;
 	ld.s	r1, [r13 + (-8)]	# tmp109, sec_offset
 	mov.w	r0, 512	# tmp111,
 	sub.w	r0, r1 #222	# tmp110, tmp112
 	st.s	[r13 + (-10)], r0	# sec_bytes_left, tmp113
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1392:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1471:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
 	ld.w	r0, [r13 + (8)]	# tmp114, fd
 	ld.s	r0, [r0 + (48)]	# _7, fd_66(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1392:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1471:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
 	zex.s	r1, r0	# _8, _7
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1392:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1471:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
 	ld.w	r0, [r13 + (8)]	# tmp115, fd
 	ld.w	r2, [r0 + (44)]	# _9, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1392:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
-	ld.w	r0, [clusterSize_]	# clusterSize_.107_10, clusterSize_
-	div.w	r2, r0	# _11, clusterSize_.107_10
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1471:   sec_addr = get_sec_addr(fd->curr_cluster, fd->position % clusterSize_);
+	ld.w	r0, [clusterSize_]	# clusterSize_.110_10, clusterSize_
+	div.w	r2, r0	# _11, clusterSize_.110_10
 mov.w	r2, r14	# _11
 	mov.w	r0, sp	# tmp116,
 	st.w	[r0 + (4)], r2	#, _11
 	st.w	[r0], r1	#, _8
 	call	get_sec_addr		#
 	st.w	[r13 + (-16)], r0	# sec_addr,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1393:   if(!readBlock(sec_addr, g_block_buf)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1472:   if(!readBlock(sec_addr, g_block_buf)) { return 0; }
 	mov.w	r0, sp	# tmp117,
 	mov.w	r1, g_block_buf	# tmp118,
 	st.w	[r0 + (4)], r1	#, tmp118
 	ld.w	r1, [r13 + (-16)]	# tmp119, sec_addr
 	st.w	[r0], r1	#, tmp119
 	call	readBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1393:   if(!readBlock(sec_addr, g_block_buf)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1472:   if(!readBlock(sec_addr, g_block_buf)) { return 0; }
 	zex.b	r1, r0	# tmp120, _12
 	xor.w	r0, r0	# tmp121
 	cmp.w	r1, r0	# tmp120, tmp121
-	jnz	.L279		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1393:   if(!readBlock(sec_addr, g_block_buf)) { return 0; }
+	jnz	.L286		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1472:   if(!readBlock(sec_addr, g_block_buf)) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L279:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1395:   if (length <= sec_bytes_left)
+	j	.L285		#
+.L286:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1474:   if (length <= sec_bytes_left)
 	ld.s	r1, [r13 + (-20)]	# tmp122, length
 	ld.s	r0, [r13 + (-10)]	# tmp123, sec_bytes_left
 	cmp.w	r1, r0	# tmp122, tmp123
-	jg	.L280		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1397:     write_length = length;
+	jg	.L287		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1476:     write_length = length;
 	ld.s	r0, [r13 + (-20)]	# tmp124, length
 	st.s	[r13 + (-2)], r0	# write_length, tmp124
-	j	.L281		#
-.L280:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1401:     write_length = sec_bytes_left;
+	j	.L288		#
+.L287:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1480:     write_length = sec_bytes_left;
 	ld.s	r0, [r13 + (-10)]	# tmp125, sec_bytes_left
 	st.s	[r13 + (-2)], r0	# write_length, tmp125
-.L281:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1403:   memmove(g_block_buf + sec_offset, write_str, write_length);
+.L288:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1482:   memmove(g_block_buf + sec_offset, write_str, write_length);
 	ld.s	r1, [r13 + (-8)]	# _13, sec_offset
 	mov.w	r0, g_block_buf	# tmp126,
 	add.w	r1, r0 #222	# _14, tmp126
@@ -4846,7 +5241,7 @@ mov.w	r2, r14	# _11
 	st.w	[r0 + (4)], r2	#, tmp128
 	st.w	[r0], r1	#, _14
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1404:   if (!writeBlock(sec_addr, g_block_buf, 1)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1483:   if (!writeBlock(sec_addr, g_block_buf, 1)) { return 0; }
 	mov.w	r0, sp	# tmp129,
 	mov.w	r1, 1	# tmp130,
 	st.w	[r0 + (8)], r1	#, tmp130
@@ -4855,49 +5250,49 @@ mov.w	r2, r14	# _11
 	ld.w	r1, [r13 + (-16)]	# tmp132, sec_addr
 	st.w	[r0], r1	#, tmp132
 	call	writeBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1404:   if (!writeBlock(sec_addr, g_block_buf, 1)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1483:   if (!writeBlock(sec_addr, g_block_buf, 1)) { return 0; }
 	zex.b	r1, r0	# tmp133, _16
 	xor.w	r0, r0	# tmp134
 	cmp.w	r1, r0	# tmp133, tmp134
-	jnz	.L282		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1404:   if (!writeBlock(sec_addr, g_block_buf, 1)) { return 0; }
+	jnz	.L289		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1483:   if (!writeBlock(sec_addr, g_block_buf, 1)) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L282:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1407:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
+	j	.L285		#
+.L289:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1486:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
 	ld.w	r0, [r13 + (8)]	# tmp135, fd
 	ld.w	r1, [r0 + (44)]	# _17, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1407:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
-	ld.w	r0, [clusterSize_]	# clusterSize_.108_18, clusterSize_
-	div.w	r1, r0	# _19, clusterSize_.108_18
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1486:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
+	ld.w	r0, [clusterSize_]	# clusterSize_.111_18, clusterSize_
+	div.w	r1, r0	# _19, clusterSize_.111_18
 mov.w	r1, r14	# _19
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1407:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1486:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
 	ld.s	r0, [r13 + (-2)]	# _20, write_length
 	add.w	r1, r0 #222	# _21, _20
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1407:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
-	ld.w	r0, [clusterSize_]	# clusterSize_.109_22, clusterSize_
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1407:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
-	cmp.w	r1, r0	# _21, clusterSize_.109_22
-	js	.L283		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1409:     clus = get_unused_cluster(g_block_buf);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1486:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
+	ld.w	r0, [clusterSize_]	# clusterSize_.112_22, clusterSize_
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1486:   if (fd->position % clusterSize_ + write_length >= clusterSize_)
+	cmp.w	r1, r0	# _21, clusterSize_.112_22
+	js	.L290		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1488:     clus = get_unused_cluster(g_block_buf);
 	mov.w	r1, sp	# tmp136,
 	mov.w	r0, g_block_buf	# tmp137,
 	st.w	[r1], r0	#, tmp137
 	call	get_unused_cluster		#
 	st.s	[r13 + (-6)], r0	# clus,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:     if (!clus) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1489:     if (!clus) { return 0; }
 	ld.s	r1, [r13 + (-6)]	# tmp138, clus
 	xor.w	r0, r0	# tmp139
 	cmp.w	r1, r0	# tmp138, tmp139
-	jnz	.L284		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1410:     if (!clus) { return 0; }
+	jnz	.L291		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1489:     if (!clus) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L284:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1411:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
+	j	.L285		#
+.L291:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1490:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
 	ld.w	r0, [r13 + (8)]	# tmp140, fd
 	ld.s	r0, [r0 + (48)]	# _23, fd_66(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1411:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1490:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
 	zex.s	r1, r0	# _24, _23
 	ld.s	r2, [r13 + (-6)]	# _25, clus
 	mov.w	r0, sp	# tmp141,
@@ -4906,20 +5301,20 @@ mov.w	r1, r14	# _19
 	mov.w	r1, g_block_buf	# tmp142,
 	st.w	[r0], r1	#, tmp142
 	call	update_FAT		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1411:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1490:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
 	zex.b	r1, r0	# tmp143, _26
 	xor.w	r0, r0	# tmp144
 	cmp.w	r1, r0	# tmp143, tmp144
-	jnz	.L285		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1411:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
+	jnz	.L292		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1490:     if (!update_FAT(g_block_buf, fd->curr_cluster, clus)) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L285:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1412:     fd->curr_cluster = clus;
+	j	.L285		#
+.L292:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1491:     fd->curr_cluster = clus;
 	ld.w	r0, [r13 + (8)]	# tmp145, fd
 	ld.s	r1, [r13 + (-6)]	# tmp146, clus
 	st.s	[r0 + (48)], r1	# fd_66(D)->curr_cluster, tmp146
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1414:     if (!update_FAT(g_block_buf, clus, 0xffff)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1493:     if (!update_FAT(g_block_buf, clus, 0xffff)) { return 0; }
 	ld.s	r1, [r13 + (-6)]	# _27, clus
 	mov.w	r0, sp	# tmp147,
 	mov.w	r2, 65535	# tmp148,
@@ -4928,33 +5323,33 @@ mov.w	r1, r14	# _19
 	mov.w	r1, g_block_buf	# tmp149,
 	st.w	[r0], r1	#, tmp149
 	call	update_FAT		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1414:     if (!update_FAT(g_block_buf, clus, 0xffff)) { return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1493:     if (!update_FAT(g_block_buf, clus, 0xffff)) { return 0; }
 	zex.b	r1, r0	# tmp150, _28
 	xor.w	r0, r0	# tmp151
 	cmp.w	r1, r0	# tmp150, tmp151
-	jnz	.L283		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1414:     if (!update_FAT(g_block_buf, clus, 0xffff)) { return 0; }
+	jnz	.L290		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1493:     if (!update_FAT(g_block_buf, clus, 0xffff)) { return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L283:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1416:   fd->position += write_length;
+	j	.L285		#
+.L290:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1495:   fd->position += write_length;
 	ld.w	r0, [r13 + (8)]	# tmp152, fd
 	ld.w	r1, [r0 + (44)]	# _29, fd_66(D)->position
 	ld.s	r0, [r13 + (-2)]	# _30, write_length
 	add.w	r1, r0 #222	# _31, _30
 	ld.w	r0, [r13 + (8)]	# tmp153, fd
 	st.w	[r0 + (44)], r1	# fd_66(D)->position, _31
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1417:   bytes_written += write_length;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1496:   bytes_written += write_length;
 	ld.s	r0, [r13 + (-4)]	# tmp154, bytes_written
 	ld.s	r1, [r13 + (-2)]	# tmp155, write_length
 	add.w	r0, r1 #222	# tmp156, tmp157
 	st.s	[r13 + (-4)], r0	# bytes_written, tmp158
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1420:   if (length > sec_bytes_left)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1499:   if (length > sec_bytes_left)
 	ld.s	r1, [r13 + (-20)]	# tmp159, length
 	ld.s	r0, [r13 + (-10)]	# tmp160, sec_bytes_left
 	cmp.w	r1, r0	# tmp159, tmp160
-	jse	.L286		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1422:     memset(g_block_buf, '\0', 512);
+	jse	.L293		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1501:     memset(g_block_buf, '\0', 512);
 	mov.w	r0, sp	# tmp161,
 	mov.w	r1, 512	# tmp162,
 	st.w	[r0 + (8)], r1	#, tmp162
@@ -4963,12 +5358,12 @@ mov.w	r1, r14	# _19
 	mov.w	r1, g_block_buf	# tmp164,
 	st.w	[r0], r1	#, tmp164
 	call	memset		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:     memmove(g_block_buf, write_str + sec_bytes_left, length - sec_bytes_left);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1502:     memmove(g_block_buf, write_str + sec_bytes_left, length - sec_bytes_left);
 	ld.s	r0, [r13 + (-10)]	# _32, sec_bytes_left
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:     memmove(g_block_buf, write_str + sec_bytes_left, length - sec_bytes_left);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1502:     memmove(g_block_buf, write_str + sec_bytes_left, length - sec_bytes_left);
 	ld.w	r1, [r13 + (12)]	# tmp165, write_str
 	add.w	r1, r0 #222	# _33, _32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1423:     memmove(g_block_buf, write_str + sec_bytes_left, length - sec_bytes_left);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1502:     memmove(g_block_buf, write_str + sec_bytes_left, length - sec_bytes_left);
 	ld.s	r2, [r13 + (-20)]	# _34, length
 	ld.s	r0, [r13 + (-10)]	# _35, sec_bytes_left
 	sub.w	r2, r0 #222	# _36, _35
@@ -4978,17 +5373,17 @@ mov.w	r1, r14	# _19
 	mov.w	r1, g_block_buf	# tmp167,
 	st.w	[r0], r1	#, tmp167
 	call	memmove		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1503:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
 	ld.w	r0, [r13 + (8)]	# tmp168, fd
 	ld.s	r0, [r0 + (48)]	# _37, fd_66(D)->curr_cluster
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1503:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
 	zex.s	r1, r0	# _38, _37
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1503:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
 	ld.w	r0, [r13 + (8)]	# tmp169, fd
 	ld.w	r2, [r0 + (44)]	# _39, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
-	ld.w	r0, [clusterSize_]	# clusterSize_.110_40, clusterSize_
-	div.w	r2, r0	# _41, clusterSize_.110_40
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1503:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
+	ld.w	r0, [clusterSize_]	# clusterSize_.113_40, clusterSize_
+	div.w	r2, r0	# _41, clusterSize_.113_40
 mov.w	r2, r14	# _41
 	mov.w	r0, sp	# tmp170,
 	st.w	[r0 + (4)], r2	#, _41
@@ -5002,71 +5397,71 @@ mov.w	r2, r14	# _41
 	st.w	[r0 + (4)], r1	#, tmp173
 	st.w	[r0], r2	#, _42
 	call	writeBlock		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1424:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1503:     if (!writeBlock(get_sec_addr(fd->curr_cluster, fd->position % clusterSize_), g_block_buf, 1))
 	zex.b	r1, r0	# tmp174, _43
 	xor.w	r0, r0	# tmp175
 	cmp.w	r1, r0	# tmp174, tmp175
-	jnz	.L287		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1426:       return 0; 
+	jnz	.L294		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1505:       return 0; 
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L287:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1429:     fd->position += length - sec_bytes_left;
+	j	.L285		#
+.L294:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1508:     fd->position += length - sec_bytes_left;
 	ld.w	r0, [r13 + (8)]	# tmp176, fd
 	ld.w	r1, [r0 + (44)]	# _44, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1429:     fd->position += length - sec_bytes_left;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1508:     fd->position += length - sec_bytes_left;
 	ld.s	r0, [r13 + (-20)]	# _45, length
 	ld.s	r2, [r13 + (-10)]	# _46, sec_bytes_left
 	sub.w	r0, r2 #222	# _47, _46
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1429:     fd->position += length - sec_bytes_left;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1508:     fd->position += length - sec_bytes_left;
 	add.w	r1, r0 #222	# _49, _48
 	ld.w	r0, [r13 + (8)]	# tmp177, fd
 	st.w	[r0 + (44)], r1	# fd_66(D)->position, _49
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1430:     bytes_written += length - sec_bytes_left;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1509:     bytes_written += length - sec_bytes_left;
 	ld.s	r0, [r13 + (-20)]	# tmp178, length
 	ld.s	r1, [r13 + (-10)]	# tmp179, sec_bytes_left
 	sub.w	r0, r1 #222	# tmp180, tmp181
 	mov.w	r1, r0	# _50, tmp180
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1430:     bytes_written += length - sec_bytes_left;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1509:     bytes_written += length - sec_bytes_left;
 	ld.s	r0, [r13 + (-4)]	# tmp182, bytes_written
 	add.w	r0, r1 #222	# tmp183, tmp184
 	st.s	[r13 + (-4)], r0	# bytes_written, tmp185
-.L286:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1434:   if (fd->position > fd->dir_entry.filesize)
+.L293:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1513:   if (fd->position > fd->dir_entry.filesize)
 	ld.w	r0, [r13 + (8)]	# tmp186, fd
 	ld.w	r1, [r0 + (44)]	# _51, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1434:   if (fd->position > fd->dir_entry.filesize)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1513:   if (fd->position > fd->dir_entry.filesize)
 	ld.w	r0, [r13 + (8)]	# tmp187, fd
 	ld.w	r0, [r0 + (32)]	# _52, fd_66(D)->dir_entry.filesize
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1434:   if (fd->position > fd->dir_entry.filesize)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1513:   if (fd->position > fd->dir_entry.filesize)
 	cmp.w	r1, r0	# _51, _52
-	jse	.L288		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1436:     fd->dir_entry.filesize = fd->position;
+	jse	.L295		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1515:     fd->dir_entry.filesize = fd->position;
 	ld.w	r0, [r13 + (8)]	# tmp188, fd
 	ld.w	r1, [r0 + (44)]	# _53, fd_66(D)->position
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1436:     fd->dir_entry.filesize = fd->position;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1515:     fd->dir_entry.filesize = fd->position;
 	ld.w	r0, [r13 + (8)]	# tmp189, fd
 	st.w	[r0 + (32)], r1	# fd_66(D)->dir_entry.filesize, _53
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1437:     if (!write_dir_entry(&(fd->dir_entry), g_block_buf)){ return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1516:     if (!write_dir_entry(&(fd->dir_entry), g_block_buf)){ return 0; }
 	ld.w	r1, [r13 + (8)]	# _54, fd
 	mov.w	r0, sp	# tmp190,
 	mov.w	r2, g_block_buf	# tmp191,
 	st.w	[r0 + (4)], r2	#, tmp191
 	st.w	[r0], r1	#, _54
 	call	write_dir_entry		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1437:     if (!write_dir_entry(&(fd->dir_entry), g_block_buf)){ return 0; }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1516:     if (!write_dir_entry(&(fd->dir_entry), g_block_buf)){ return 0; }
 	zex.b	r1, r0	# tmp192, _55
 	xor.w	r0, r0	# tmp193
 	cmp.w	r1, r0	# tmp192, tmp193
-	jnz	.L288		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1437:     if (!write_dir_entry(&(fd->dir_entry), g_block_buf)){ return 0; }
+	jnz	.L295		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1516:     if (!write_dir_entry(&(fd->dir_entry), g_block_buf)){ return 0; }
 	xor.w	r0, r0	# _58
-	j	.L278		#
-.L288:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1440:   return bytes_written;
+	j	.L285		#
+.L295:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1519:   return bytes_written;
 	ld.s	r0, [r13 + (-4)]	# _58, bytes_written
-.L278:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1441: }
+.L285:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1520: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -5078,12 +5473,12 @@ file_delete:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1448:   uint16_t clus = fd->dir_entry.first_cluster;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1527:   uint16_t clus = fd->dir_entry.first_cluster;
 	ld.w	r0, [r13 + (8)]	# tmp31, fd
 	ld.s	r0, [r0 + (28)]	# tmp32, fd_9(D)->dir_entry.first_cluster
 	st.s	[r13 + (-2)], r0	# clus, tmp32
-.L292:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1452:     clus = clear_FAT(g_block_buf, clus);
+.L299:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1531:     clus = clear_FAT(g_block_buf, clus);
 	ld.s	r1, [r13 + (-2)]	# _1, clus
 	mov.w	r0, sp	# tmp33,
 	st.w	[r0 + (4)], r1	#, _1
@@ -5091,40 +5486,40 @@ file_delete:
 	st.w	[r0], r1	#, tmp34
 	call	clear_FAT		#
 	st.s	[r13 + (-2)], r0	# clus,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1453:     if (!clus)
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1532:     if (!clus)
 	ld.s	r1, [r13 + (-2)]	# tmp35, clus
 	xor.w	r0, r0	# tmp36
 	cmp.w	r1, r0	# tmp35, tmp36
-	jnz	.L290		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1458:       return 0;
+	jnz	.L297		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1537:       return 0;
 	xor.w	r0, r0	# _5
-	j	.L291		#
-.L290:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1460:   } while (clus < 0xfff8);
+	j	.L298		#
+.L297:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1539:   } while (clus < 0xfff8);
 	ld.s	r1, [r13 + (-2)]	# tmp37, clus
 	mov.w	r0, 65527	# tmp38,
 	cmp.w	r1, r0	# tmp37, tmp38
-	jse	.L292		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1462:   if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
+	jse	.L299		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1541:   if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
 	ld.w	r1, [r13 + (8)]	# _2, fd
 	mov.w	r0, sp	# tmp39,
 	mov.w	r2, g_block_buf	# tmp40,
 	st.w	[r0 + (4)], r2	#, tmp40
 	st.w	[r0], r1	#, _2
 	call	invalidate_dir_entry		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1462:   if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1541:   if (!invalidate_dir_entry(&(fd->dir_entry), g_block_buf))
 	zex.b	r1, r0	# tmp41, _3
 	xor.w	r0, r0	# tmp42
 	cmp.w	r1, r0	# tmp41, tmp42
-	jnz	.L293		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1467:     return 0;
+	jnz	.L300		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1546:     return 0;
 	xor.w	r0, r0	# _5
-	j	.L291		#
-.L293:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1470:   return 1;
+	j	.L298		#
+.L300:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1549:   return 1;
 	mov.b	r0, 1	# _5,
-.L291:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1471: }
+.L298:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/fat.c:1550: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	

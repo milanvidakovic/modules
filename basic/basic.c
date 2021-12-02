@@ -1494,31 +1494,6 @@ load_load_again:
 				sum += buffer[j];
 			}
 			printf("\nSum: %d\n", sum);
-
-			for (int j = 0; j < strlen(fileName); j++) 
-			{
-				if (fileName[j] == '.') 
-				{
-					fileName[j] = 0;
-					printf("fileName: [%s], len: %d, j: %d\n", fileName, strlen(fileName), j);
-					strcpy(fileName + j, ".sum");
-					printf("Checksum file: [%s]\n", fileName);
-					if(file_open(fileName, &fd, O_READ))
-					{
-						char buffer2[512];
-						if (file_read(&fd, buffer2, 4))
-						{
-							int checksum = *((int *)buffer2);
-							printf("Checksum: %d\n", checksum);
-							if (checksum != sum)
-								goto load_load_again;
-						}
-					}
-					break;
-				}
-			}	
-
-
 		} else 
 		{
 			printf("SD card file open failed\n");
@@ -1532,13 +1507,6 @@ load_load_again:
 	
 	if (i > 0)
 	{
-
-		int sum = 0;
-		for (int j = 0; j < i; j++) {
-			sum += buffer[j];
-		}
-		printf("sum: %d\n", sum);
-
 		printf("File size: %d\n", i);
 		if (strstr(s, ".BIN") != (char *)0) 
 		{
@@ -2241,30 +2209,6 @@ load_again:
 				sum += buffer[j];
 			}
 			printf("\nSum: %d\n", sum);
-
-			for (int j = 0; j < strlen(fileName); j++) 
-			{
-				if (fileName[j] == '.') 
-				{
-					fileName[j] = 0;
-					printf("fileName: [%s], len: %d, j: %d\n", fileName, strlen(fileName), j);
-					strcpy(fileName + j, ".sum");
-					printf("Checksum file: [%s]\n", fileName);
-					if(file_open(fileName, &fd, O_READ))
-					{
-						char buffer2[512];
-						if (file_read(&fd, buffer2, 4))
-						{
-							int checksum = *((int *)buffer2);
-							printf("Checksum: %d\n", checksum);
-							if (checksum != sum)
-								goto load_again;
-						}
-					}
-					break;
-				}
-			}	
-
 		} 
 		else 
 		{

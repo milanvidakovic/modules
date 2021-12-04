@@ -236,11 +236,13 @@ uint8_t dma_receive(uint8_t *dst, uint16_t count)
     *PORT_DMA_COUNT_1 = count;
     *PORT_DMA_START_RCV_1 = 1;
     while (!finished_dma_read_1) {
+      /*
       if (counter++ == 5535) {
         *PORT_DMA_COUNT_1 = 0;
         *PORT_DMA_START_RCV_1 = 0;
         return false;
       }
+      */
     }
     return true;
 }
@@ -359,7 +361,7 @@ spi_read_again:
     crc = readEnd();
   }
 
-  if (crc != 0xFFFF)
+  //if (crc != 0xFFFF)
   { 
    
     if((crc != crc16(dst, count)) && (fail_counter == 0))
@@ -411,6 +413,7 @@ uint8_t readBlock(uint32_t block, uint8_t* dst) {
 
 // send one block of data for write block or write multiple blocks
 uint8_t writeData(uint8_t token, const uint8_t* src) {
+
   spiSend(token);
   for (uint16_t i = 0; i < 512; i++) {
     spiSend(src[i]);
@@ -437,6 +440,9 @@ uint8_t writeData(uint8_t token, const uint8_t* src) {
    the value zero, false, is returned for failure.
 */
 uint8_t writeBlock(uint32_t blockNumber, const uint8_t* src, uint8_t blocking) {
+
+  asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+
   #if FAT_DEBUG
   printf("Write block number: %d\n", blockNumber);
   #endif
@@ -471,10 +477,12 @@ uint8_t writeBlock(uint32_t blockNumber, const uint8_t* src, uint8_t blocking) {
     }
   }
   chipSelectHigh();
+  asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
   return true;
 
 fail:
   chipSelectHigh();
+  asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
   return false;
 }
 //------------------------------------------------------------------------------
@@ -1210,6 +1218,7 @@ fail_open:
     delay(fail_counter*2);
     goto open_again;
   }  
+  return 0;
 }
 
 /*

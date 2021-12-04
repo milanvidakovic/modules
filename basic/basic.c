@@ -9,11 +9,10 @@
 #include <keyboard.h>
 #include <spi.h>
 #include <fat.h>
-//#include <enc28j60.h>
 #include <tcpip.h>
 #include <kernel.h>
 
-#define kVersion "v0.41"
+#define kVersion "v0.42"
 
 // size of our program ram
 #define kRamSize   64*1024 
@@ -2238,9 +2237,12 @@ load_again:
 		cls(color);
 		//current_video_mode = 0;
 		uart_init_files();
-		init_spi();
-		init_tcpip();
-		init_sd();
+		if (eth)
+		{
+			init_spi();
+			init_tcpip();
+			init_sd();
+		}
 	} 
 	else 
 	{
@@ -2271,9 +2273,12 @@ void exec_sys()
 	cls(color);
 	//current_video_mode = 0;
 	uart_init_files();
-	init_spi();
-	init_tcpip();
-	init_sd();
+	if (eth)
+	{
+		init_spi();
+		init_tcpip();
+		init_sd();
+	}
 }
 
 void exec_drive()
@@ -2317,10 +2322,15 @@ void exec_eth()
 	{
 		printf("ETHERNET: %d\n", eth);
 		// #######################################################################################
-		if (eth == 1)
+		if (eth == 1) 
+		{
 			asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-		else
+			init_tcpip();
+		}
+		else 
+		{
 			asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+		}
 		// #######################################################################################
 
 	} 

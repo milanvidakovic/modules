@@ -2,8 +2,8 @@
 # GNU C17 (GCC) version 10.0.0 20200111 (experimental) (moxiebox)
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
-# options passed:  -D KERNEL sprites.c -mel -auxbase-strip sprites.s
-# -fsigned-char -fverbose-asm
+# options passed:  sprites.c -mel -auxbase-strip sprites.s -fsigned-char
+# -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
 # -fauto-inc-dec -fdelete-null-pointer-checks -fearly-inlining
 # -feliminate-unused-debug-symbols -feliminate-unused-debug-types
@@ -60,65 +60,65 @@ plane:
 	.short	0
 	.short	0
 	.short	0
-	.short	4
-	.short	16384
+	.short	2
+	.short	8192
 	.short	0
 	.short	0
-	.short	4
-	.short	16384
+	.short	2
+	.short	8192
 	.short	0
 	.short	0
-	.short	4
-	.short	16384
+	.short	2
+	.short	8192
 	.short	0
 	.short	0
-	.short	68
-	.short	17408
+	.short	34
+	.short	8704
 	.short	0
 	.short	0
-	.short	68
-	.short	17408
+	.short	34
+	.short	8704
 	.short	0
 	.short	0
-	.short	1092
-	.short	17472
+	.short	546
+	.short	8736
 	.short	0
 	.short	0
-	.short	17476
-	.short	17476
+	.short	8738
+	.short	8738
 	.short	0
-	.short	4
-	.short	17476
-	.short	17476
-	.short	16384
-	.short	68
-	.short	17476
-	.short	17476
-	.short	17408
-	.short	1024
-	.short	68
-	.short	17408
-	.short	64
+	.short	2
+	.short	8738
+	.short	8738
+	.short	8192
+	.short	34
+	.short	8738
+	.short	8738
+	.short	8704
+	.short	512
+	.short	34
+	.short	8704
+	.short	32
 	.short	0
-	.short	68
-	.short	17408
-	.short	0
-	.short	0
-	.short	68
-	.short	17408
+	.short	34
+	.short	8704
 	.short	0
 	.short	0
-	.short	1092
-	.short	17472
+	.short	34
+	.short	8704
 	.short	0
 	.short	0
-	.short	17472
-	.short	1092
+	.short	546
+	.short	8736
 	.short	0
-	.short	4
-	.short	17408
-	.short	68
-	.short	16384
+	.short	0
+	.short	8736
+	.short	546
+	.short	0
+	.short	2
+	.short	8704
+	.short	34
+	.short	8192
 	.global	plane2
 	.p2align	1
 	.type	plane2, @object

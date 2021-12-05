@@ -236,13 +236,13 @@ uint8_t dma_receive(uint8_t *dst, uint16_t count)
     *PORT_DMA_COUNT_1 = count;
     *PORT_DMA_START_RCV_1 = 1;
     while (!finished_dma_read_1) {
-      /*
-      if (counter++ == 5535) {
+      if (counter++ == 10000) {
+        // if the sector read hangs
+        // we reset everything and report error
         *PORT_DMA_COUNT_1 = 0;
         *PORT_DMA_START_RCV_1 = 0;
         return false;
       }
-      */
     }
     return true;
 }

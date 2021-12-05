@@ -1,5 +1,6 @@
 #include <floatimpl.h>
 
+/* Returns the number of leading 0-bits in a, starting at the most significant bit position. If a is zero, the result is undefined. */
 int __clzsi2(unsigned x)
 {
   // This uses a binary search (counting down) algorithm from Hacker's Delight.
@@ -18,20 +19,14 @@ int rep_clz(rep_t a)
     return __clzsi2(a);
 }
 
-// 32x32 --> 64 bit multiply
-// void wideMultiply(rep_t a, rep_t b, rep_t *hi, rep_t *lo)
-// {
-//     const uint64_t product = (uint64_t)a*b;
-//     *hi = product >> 32;
-//     *lo = product;
-// }
-
+/* Returns four bytes of a given float number */
 rep_t toRep(fp_t x)
 {
     const union { fp_t f; rep_t i; } rep = {.f = x};
     return rep.i;
 }
 
+/* Returns float number from four bytes */
 fp_t fromRep(rep_t x)
 {
     const union { fp_t f; rep_t i; } rep = {.i = x};
@@ -104,8 +99,7 @@ enum LE_RESULT {
     LE_UNORDERED =  1
 };
 
-enum LE_RESULT
-__lesf2(fp_t a, fp_t b)
+enum LE_RESULT __lesf2(fp_t a, fp_t b)
 {
     const srep_t aInt = toRep(a);
     const srep_t bInt = toRep(b);
@@ -144,8 +138,7 @@ enum GE_RESULT {
     GE_UNORDERED = -1   // Note: different from LE_UNORDERED
 };
 
-enum GE_RESULT
-__gesf2(fp_t a, fp_t b)
+enum GE_RESULT __gesf2(fp_t a, fp_t b)
 {
     const srep_t aInt = toRep(a);
     const srep_t bInt = toRep(b);
@@ -165,8 +158,7 @@ __gesf2(fp_t a, fp_t b)
     }
 }
 
-int
-__unordsf2(fp_t a, fp_t b)
+int __unordsf2(fp_t a, fp_t b)
 {
     const rep_t aAbs = toRep(a) & absMask;
     const rep_t bAbs = toRep(b) & absMask;
@@ -199,6 +191,7 @@ __gtsf2(fp_t a, fp_t b)
     return __gesf2(a, b);
 }
 
+/* Converts float to double. Used in printf("%f", f) because compiler expects a double number as a argument for a float */
 int __extendsfdf2(float f) 
 {
 	asm(
@@ -207,6 +200,7 @@ int __extendsfdf2(float f)
 	);
 }
 
+/* Converts int to float. */
 fp_t __floatsisf(int a)
 {
     const int aWidth = sizeof a * 8;
@@ -245,6 +239,7 @@ fp_t __floatsisf(int a)
 } 
 float one = 1.0f;
 
+/* Returns fraction part of x, and returns x's integral part in *iptr. */
 float __modf(float x, float *iptr)
 {
         int32_t i0;
@@ -278,6 +273,7 @@ float __modf(float x, float *iptr)
         }
 }
 
+/*  Truncates a to the int, rounding toward zero. */
 int __fixsfsi(float a)
 {
     union { fp_t f; rep_t u; } fb;

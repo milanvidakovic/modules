@@ -53,6 +53,7 @@ void video_mode(int m)
 	*PORT_VIDEO_MODE = m;
 	current_video_mode = m;
 }
+/*
 int swap(int c) {
 	switch (c) {
 		case 1: return 4;
@@ -66,6 +67,7 @@ int swap(int c) {
 		default: return c;
 	}
 }
+*/
 void cls(int c) 
 {
 	int i;
@@ -79,7 +81,7 @@ void cls(int c)
 		// text mode 80x60x8
 		for (i = 0; i < 9600*2; i++)
 		{
-			v[i] = swap(color)<<8;
+			v[i] = color << 8;  // swap
 		}
 	} else if (current_video_mode == 1) 
 	{
@@ -117,7 +119,7 @@ void blank_line(int v)
 		j = 160 - i - 2;
 	for (; i < j; i++)
 	{
-		vid[i] = swap(color);
+		vid[i] = color;  // swap
 	}
 }
 
@@ -140,7 +142,7 @@ void scroll_up()
 	asm("mov.w r1, 1024\nmov.w r2, 1184\nmov.w r3, 9440\nblit\n");
 	for (j = 0; j < 40*2; j++)
 	{
-		v[59*40*2 + j] = swap(color)<<8;
+		v[59*40*2 + j] = color << 8;  // swap
 	}
 }
 
@@ -318,7 +320,7 @@ void put_char(int c)
 	}
 //	*VIDEO = c + 0xFF00;
 	*VIDEO = c;
-	*(VIDEO - 1) = swap(color);
+	*(VIDEO - 1) = color;  // swap
 	VIDEO += 2;
 }
 int putchar(int c)

@@ -715,8 +715,9 @@ push r13
 	ld.w	r0, [r13 + (-12)]	# tmp89, inst
 	mov.w	r1, 39424	# tmp90,
 	st.w	[r0], r1	# *inst_25, tmp90
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:208: 					reset();
-	call	reset		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:208: 					asm("j 0"); //reset();
+# 208 "/mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c" 1
+	j 0
 .L31:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:210: 				gets_finished = 1;
 	mov.w	r0, 1	# tmp91,

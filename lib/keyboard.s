@@ -229,15 +229,6 @@ irq_triggered:
 	.size	irq_triggered, .-irq_triggered 	
 	
 ###################################################################
-# function reset()
-# soft reset by jumping to the address 0
-###################################################################
-	.global	reset
-	.type	cls, @function
-reset:
-	j 0
-	.size	reset, .-reset 	
-###################################################################
 # function make_code(r0)
 # parses the virtual key code of the pressed key
 ###################################################################

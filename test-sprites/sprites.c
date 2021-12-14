@@ -124,7 +124,7 @@ int main()
 {
 	char str[500];
 
-	//init_stdio();
+	init_stdio();
 
 	video_mode(1);
 

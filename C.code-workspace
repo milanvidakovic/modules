@@ -9,7 +9,7 @@
 	],
 	"settings": {
 		"C_Cpp.default.includePath": [
-			"c:\\Prj\\Altera\\C\\moxiebox\\contrib\\root\\usr\\lib\\gcc\\moxiebox\\10.0.0\\include-fixed\\"
+			"c:\\Prj\\Altera\\C\\moxiebox\\modules\\include\\"
 		],
 		"files.associations": {
 			"kernel.h": "c",

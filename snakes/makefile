@@ -1,20 +1,8 @@
 TARGET=snakes
 
-LIB=/mnt/c/Prj/Altera/C/moxiebox/modules/lib
-INCLUDE=/mnt/c/Prj/Altera/C/moxiebox/modules/include
+include ../makefile
+# $(LIB)/graphics
+FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio $(LIB)/floatimpl
 
-FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio  $(LIB)/graphics $(LIB)/floatimpl
-
-ASM_LIST := $(foreach file,$(FILES), $(file).s) $(LIB)/consts.s $(LIB)/keyboard.s $(LIB)/graphics320.s $(LIB)/graphics640.s $(LIB)/fonts.s 
-
-all: compile assemble
-
-compile:
-	@for file in $(FILES); do \
-    moxiebox-gcc -I$(INCLUDE) -DKERNEL -fsigned-char -S $${file}.c -o $${file}.s -fverbose-asm; \
-	done
-	
-assemble:
-	java -jar ../FPGA_Assembler.jar -s -f $(ASM_LIST)
-
-
+# $(LIB)/graphics320.s $(LIB)/graphics640.s 
+ASM_LIST := $(foreach file,$(FILES), $(file).s) $(LIB)/consts.s $(LIB)/keyboard.s

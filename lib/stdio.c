@@ -205,7 +205,7 @@ void key_pressed()
 					*p = 1;
 					int *inst = (int *)2;
 					*inst = 39424;
-					reset();
+					asm("j 0"); //reset();
 				}
 				gets_finished = 1;
 				break;

@@ -3,7 +3,8 @@
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
 # options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
-# sprites.c -mel -auxbase-strip sprites.s -fsigned-char -fverbose-asm
+# -D KERNEL sprites.c -mel -auxbase-strip sprites.s -fsigned-char
+# -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
 # -fauto-inc-dec -fdelete-null-pointer-checks -fearly-inlining
 # -feliminate-unused-debug-symbols -feliminate-unused-debug-types
@@ -677,6 +678,8 @@ main:
 	mov.w	r13, sp	#,
 	mov.w	r12, 564	#,
 	sub.w	sp, r12 #222	#,
+# sprites.c:127: 	init_stdio();
+	call	init_stdio		#
 # sprites.c:129: 	video_mode(1);
 	mov.w	r1, sp	# tmp95,
 	mov.w	r0, 1	# tmp96,
@@ -1178,7 +1181,7 @@ blit
 # sprites.c:219: 			de_init_mouse();
 	call	de_init_mouse		#
 # sprites.c:220: 			return (0);
-	xor.w	r0, r0	# _137
+	xor.w	r0, r0	# _138
 	j	.L41		#
 .L43:
 # sprites.c:200: 			break;

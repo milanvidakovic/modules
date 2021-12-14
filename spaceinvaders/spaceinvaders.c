@@ -1,3 +1,4 @@
+#include <types.h>
 #include <stdio.h>
 #include <string.h>
 #include <sprintf.h>
@@ -5,13 +6,13 @@
 #include <graphics.h>
 
 #define BLACK  0x0
-#define BLUE   0x1
-#define GREEN  0x2
+#define BLUE   0x9
+#define GREEN  0xA
 #define CYAN   0x3
 #define RED    0x4
 #define PURPLE 0x5
-#define YELLOW 0x6
-#define WHITE  0x7
+#define YELLOW 0xE
+#define WHITE  0xF
 
 
 // BASE_Y je Y pozicija na kojoj se crtaju 4 baze koje sluze kao stit od metaka
@@ -100,24 +101,24 @@
    (u trenutku pisanja ovog komentara, max 4 sprite-a, adrese 128 do 152)
  */
 typedef struct {
-	short addr;
-	short x;
-	short y;
-	short transparent;
+	uint16_t addr;
+	uint16_t x;
+	uint16_t y;
+	uint16_t transparent;
 } hw_sprite;
 
 /*
  * Struct-ovi za alien-e i baze.
  * Komplikovaniji za koriscenje:
- * - crtanje zahteva menjanje boje short-ova koji odgovaraju pozicijama na ekranu
+ * - crtanje zahteva menjanje boje uint16_t-ova koji odgovaraju pozicijama na ekranu
  * - Pomeranje zahteva clear-ovanje prethodnog sprite-a i crtanje novog
  * Prednost u odnosu na player i player_bullet: limit je nepoznat
  */
 typedef struct {
-	short addr;
-	short x;
-	short y;
-	short alive;
+	uint16_t addr;
+	uint16_t x;
+	uint16_t y;
+	uint16_t alive;
 } sw_sprite;
 
 /*
@@ -251,13 +252,13 @@ int game_state = PLAY;
 
 
 /*
- * Svaki short predstavlja cetiri "tacke" na ekranu (jedna pored druge).
+ * Svaki uint16_t predstavlja cetiri "tacke" na ekranu (jedna pored druge).
  * 0 (0x0) je crna boja, a 7 (0x7) je bela.
  */
 
 // Svaki tip alien-a ima dva sprite-a.
 
-short squid0[] = {
+uint16_t squid0[] = {
    0x0007, 0x7000  , //0
    0x0077, 0x7700  , //1
    0x0777, 0x7770  , //2
@@ -268,7 +269,7 @@ short squid0[] = {
    0x7070, 0x0707    //7
 };
 
-short squid1[] = {
+uint16_t squid1[] = {
    0x0007, 0x7000  , //0
    0x0077, 0x7700  , //1
    0x0777, 0x7770  , //2
@@ -279,7 +280,7 @@ short squid1[] = {
    0x0700, 0x0070    //7
 };
 
-short crab0[] = {
+uint16_t crab0[] = {
    0x0070, 0x0000, 0x7000  , //0
    0x7007, 0x0007, 0x0070  , //1
    0x7077, 0x7777, 0x7070  , //2
@@ -290,7 +291,7 @@ short crab0[] = {
    0x0700, 0x0000, 0x0700    //7
 };
 
-short crab1[] = {
+uint16_t crab1[] = {
    0x0070, 0x0000, 0x7000  , //0
    0x0007, 0x0007, 0x0000  , //1
    0x0077, 0x7777, 0x7000  , //2
@@ -301,7 +302,7 @@ short crab1[] = {
    0x0007, 0x7077, 0x0000    //7
 };
 
-short octopus0[] = {
+uint16_t octopus0[] = {
    0x0000, 0x7777, 0x0000  , //0
    0x0777, 0x7777, 0x7770  , //1
    0x7777, 0x7777, 0x7777  , //2
@@ -312,7 +313,7 @@ short octopus0[] = {
    0x7700, 0x0000, 0x0077    //7
 };
 
-short octopus1[] = {
+uint16_t octopus1[] = {
    0x0000, 0x7777, 0x0000  , //0
    0x0777, 0x7777, 0x7770  , //1
    0x7777, 0x7777, 0x7777  , //2
@@ -323,7 +324,7 @@ short octopus1[] = {
    0x0077, 0x0000, 0x7700    //7
 };
 
-short ufo[] = {
+uint16_t ufo[] = {
    0x0000, 0x0777, 0x7770, 0x0000  , //0
    0x0007, 0x7777, 0x7777, 0x7000  , //1
    0x0077, 0x7777, 0x7777, 0x7700  , //2
@@ -334,7 +335,7 @@ short ufo[] = {
    0x0000, 0x0000, 0x0000, 0x0000    //7
 };
 
-short base[] = {
+uint16_t base[] = {
    0x0000, 0x7777, 0x7777, 0x7777, 0x7777, 0x0000  , //0
    0x0007, 0x7777, 0x7777, 0x7777, 0x7777, 0x7000  , //1
    0x0077, 0x7777, 0x7777, 0x7777, 0x7777, 0x7700  , //2
@@ -353,7 +354,7 @@ short base[] = {
    0x7777, 0x7000, 0x0000, 0x0000, 0x0007, 0x7777  , //15
 };
 
-short ship[] = {
+uint16_t ship[] = {
    0x0000, 0x0070, 0x0000, 0x0000  , //0
    0x0000, 0x0777, 0x0000, 0x0000  , //1
    0x0000, 0x0777, 0x0000, 0x0000  , //2
@@ -374,7 +375,7 @@ short ship[] = {
 
 // Player eksplozija ima 2 sprite-a.
 
-short ship_explosion0[] = {
+uint16_t ship_explosion0[] = {
 	0x0007, 0x0000, 0x0000, 0x0700 , //0
 	0x7000, 0x0070, 0x0007, 0x7007 , //1
 	0x0007, 0x0000, 0x7700, 0x0000 , //2
@@ -385,7 +386,7 @@ short ship_explosion0[] = {
 	0x0077, 0x0777, 0x7777, 0x0070   //7
 };
 
-short ship_explosion1[] = {
+uint16_t ship_explosion1[] = {
 	0x0000, 0x0070, 0x0000, 0x0000 , //0
 	0x0000, 0x0000, 0x0007, 0x0000 , //1
 	0x0000, 0x0070, 0x7070, 0x0000 , //2
@@ -396,20 +397,20 @@ short ship_explosion1[] = {
 	0x0077, 0x7777, 0x7777, 0x0707   //7
 };
 
-short player_bullet[] = {
+uint16_t player_bullet[] = {
 	0x7000, 0x0000  , //0
 	0x7000, 0x0000  , //1
 	0x7000, 0x0000  , //2
 	0x0000, 0x0000    //3
 };
 
-short bottom_line[] = {
+uint16_t bottom_line[] = {
 	0x7777, 0x7777, 0x7777, 0x7777  //0
 };
 
 // Svaki tip alien bullet-a ima cetiri sprite-a (osim alien_bullet1 koji ima 3).
 
-short alien_death[] = {
+uint16_t alien_death[] = {
 	0x0000, 0x7000, 0x7000, 0x0000  , //0
 	0x0700, 0x0707, 0x0007, 0x0000  , //1
 	0x0070, 0x0000, 0x0070, 0x0000  , //2
@@ -420,7 +421,7 @@ short alien_death[] = {
 	0x0700, 0x7000, 0x7007, 0x0000  , //7
 };
 
-short player_bullet_explosion[] = {
+uint16_t player_bullet_explosion[] = {
 	0x7000, 0x7007  , //0
 	0x0070, 0x0070  , //1
 	0x0777, 0x7770  , //2
@@ -431,7 +432,7 @@ short player_bullet_explosion[] = {
 	0x7007, 0x0007    //7
 };
 
-short alien_bullet_explosion[] = {
+uint16_t alien_bullet_explosion[] = {
 	0x0070, 0x0000  , //0
 	0x7000, 0x7000  , //1
 	0x0077, 0x0700  , //2
@@ -443,7 +444,7 @@ short alien_bullet_explosion[] = {
 };
 
 
-short alien_bullet0_sprite0[] = {
+uint16_t alien_bullet0_sprite0[] = {
 	0x7000, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x0070, 0x0000  , //2
@@ -454,7 +455,7 @@ short alien_bullet0_sprite0[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet0_sprite1[] = {
+uint16_t alien_bullet0_sprite1[] = {
 	0x0700, 0x0000  , //0
 	0x0070, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -465,7 +466,7 @@ short alien_bullet0_sprite1[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet0_sprite2[] = {
+uint16_t alien_bullet0_sprite2[] = {
 	0x0070, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x7000, 0x0000  , //2
@@ -476,7 +477,7 @@ short alien_bullet0_sprite2[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet0_sprite3[] = {
+uint16_t alien_bullet0_sprite3[] = {
 	0x0700, 0x0000  , //0
 	0x7000, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -487,7 +488,7 @@ short alien_bullet0_sprite3[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet1_sprite0[] = {
+uint16_t alien_bullet1_sprite0[] = {
 	0x0700, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x7700, 0x0000  , //2
@@ -498,7 +499,7 @@ short alien_bullet1_sprite0[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet1_sprite1[] = {
+uint16_t alien_bullet1_sprite1[] = {
 	0x0700, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -509,7 +510,7 @@ short alien_bullet1_sprite1[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet1_sprite2[] = {
+uint16_t alien_bullet1_sprite2[] = {
 	0x0770, 0x0000  , //0
 	0x7700, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -520,7 +521,7 @@ short alien_bullet1_sprite2[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet2_sprite0[] = {
+uint16_t alien_bullet2_sprite0[] = {
 	0x0700, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -531,7 +532,7 @@ short alien_bullet2_sprite0[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet2_sprite1[] = {
+uint16_t alien_bullet2_sprite1[] = {
 	0x0700, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x7770, 0x0000  , //2
@@ -542,7 +543,7 @@ short alien_bullet2_sprite1[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet2_sprite2[] = {
+uint16_t alien_bullet2_sprite2[] = {
 	0x7770, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -553,7 +554,7 @@ short alien_bullet2_sprite2[] = {
 	0x0000, 0x0000    //7
 };
 
-short alien_bullet2_sprite3[] = {
+uint16_t alien_bullet2_sprite3[] = {
 	0x0700, 0x0000  , //0
 	0x0700, 0x0000  , //1
 	0x0700, 0x0000  , //2
@@ -564,7 +565,7 @@ short alien_bullet2_sprite3[] = {
 	0x0000, 0x0000    //7
 };
 
-short ufo_explosion[] = {
+uint16_t ufo_explosion[] = {
 	0x0070, 0x0707, 0x0000, 0x0070, 0x7007, 0x0000  , //0
 	0x0007, 0x0000, 0x0000, 0x7700, 0x0070, 0x0000  , //1
 	0x7070, 0x0077, 0x7700, 0x0770, 0x0000, 0x0000  , //2
@@ -587,7 +588,7 @@ void delay_millis(int d)
 // Kopira vrednosti iz player_bullet sprite-a u player_bullet adresu.
 void copy_player_bullet_def()
 {	
-	short * p = (short *)player_bullet_addr;
+	uint16_t * p = (uint16_t *)player_bullet_addr;
 
 	for (int i = 0; i < 4*2; i++)
 	{
@@ -599,7 +600,7 @@ void copy_player_bullet_def()
 // Kopira vrednosti iz player sprite-a u player sprite adresu.
 void copy_player_ship()
 {
-	short * p = (short *)sprite_addr;
+	uint16_t * p = (uint16_t *)sprite_addr;
 	
 	for (int i = 0; i < 8*4*2; i++)
 	{
@@ -608,18 +609,18 @@ void copy_player_ship()
 	}
 }
 
-// Boji "short s" bojom "short color".
-short set_short_color(short s, short color)
+// Boji "uint16_t s" bojom "uint16_t color".
+uint16_t set_uint16_t_color(uint16_t s, uint16_t color)
 {
 	// Boja se pretvara u oblik 0x0000
-	short new_color = 0x0000;
+	uint16_t new_color = 0x0000;
 	switch(color)
 	{
 		case BLUE:
-			new_color = 0x1000;
+			new_color = 0x9000;
 			break;
 		case GREEN:
-			new_color = 0x2000;
+			new_color = 0xA000;
 			break;
 		case CYAN:
 			new_color = 0x3000;
@@ -631,10 +632,10 @@ short set_short_color(short s, short color)
 			new_color = 0x5000;
 			break;
 		case YELLOW:
-			new_color = 0x6000;
+			new_color = 0xE000;
 			break;
 		case WHITE:
-			new_color = 0x7000;
+			new_color = 0xF000;
 			break;
 		default:
 			new_color = 0x0000;
@@ -654,78 +655,78 @@ short set_short_color(short s, short color)
 	 * Ako je "(s & 0x0FFF) != s", onda je na prvoj poziciji
 	 * sigurno bio broj koji nije 0. to znaci da se na prvoj poziciji
 	 * nalazi tacka kojoj treba promeniti boju.
-	 * Ovo se radi za sve tacke u short-u.
+	 * Ovo se radi za sve tacke u uint16_t-u.
 	 */
-	short s_new = 0x0000;
+	uint16_t s_new = 0x0000;
 	if((s & 0x0FFF) != s)
 	{
-		s_new += new_color;		
+		s_new |= new_color;		
 	}
 	if((s & 0xF0FF) != s)
 	{
-		s_new += new_color >> 4;		
+		s_new |= new_color >> 4;		
 	}
 	if((s & 0xFF0F) != s)
 	{
-		s_new += new_color >> 8;		
+		s_new |= new_color >> 8;		
 	}
 	if((s & 0xFFF0) != s)
 	{
-		s_new += new_color >> 12;		
+		s_new |= new_color >> 12;		
 	}
 	return s_new;
 }
 
-short change_short_color_depending_on_threshold(
-	short s, 
-	int s_y) // Y koordinata short-a.
+uint16_t change_uint16_t_color_depending_on_threshold(
+	uint16_t s, 
+	int s_y) // Y koordinata uint16_t-a.
 {
 	/*
-	 * Y koordinata short-a se prosledjuje da bi moglo da
-	 * se proceni kojoj "zoni" short pripada.
+	 * Y koordinata uint16_t-a se prosledjuje da bi moglo da
+	 * se proceni kojoj "zoni" uint16_t pripada.
 	 * Ako pripada zoni izmedju CYAN_THRESHOLD_2 i RED_THRESHOLD_2,
-	 * short ce se obojiti u CYAN.
+	 * uint16_t ce se obojiti u CYAN.
 	 */
 	if(s_y >= CYAN_THRESHOLD_2)
-		return set_short_color(s, CYAN);
+		return set_uint16_t_color(s, CYAN);
 	else if(s_y >= RED_THRESHOLD_2)
-		return set_short_color(s, RED);
+		return set_uint16_t_color(s, RED);
 	else if(s_y >= CYAN_THRESHOLD_1)
-		return set_short_color(s, CYAN);
+		return set_uint16_t_color(s, CYAN);
 	else if(s_y >= RED_THRESHOLD_1)
-		return set_short_color(s, RED);
+		return set_uint16_t_color(s, RED);
 	else if(s_y >= YELLOW_THRESHOLD_0)
-		return set_short_color(s, YELLOW);
+		return set_uint16_t_color(s, YELLOW);
 	else if(s_y >= PURPLE_THRESHOLD_1)
-		return set_short_color(s, PURPLE);
+		return set_uint16_t_color(s, PURPLE);
 	else if(s_y >= CYAN_THRESHOLD_0)
-		return set_short_color(s, CYAN);
+		return set_uint16_t_color(s, CYAN);
 	else if(s_y >= GREEN_THRESHOLD_0)
-		return set_short_color(s, GREEN);
+		return set_uint16_t_color(s, GREEN);
 	else if(s_y >= PURPLE_THRESHOLD_0)
-		return set_short_color(s, PURPLE);
+		return set_uint16_t_color(s, PURPLE);
 	else if(s_y >= RED_THRESHOLD_0)
-		return set_short_color(s, RED);
+		return set_uint16_t_color(s, RED);
 	else
-		return set_short_color(s, WHITE); 
+		return set_uint16_t_color(s, WHITE); 
 }
 
-// Svakom short-u u sprite-u menja boju u zavisnosti od threshold-a na kom se nalazi.
-void change_sprite_color(int y, int width, int height, short *bitmap)
+// Svakom uint16_t-u u sprite-u menja boju u zavisnosti od threshold-a na kom se nalazi.
+void change_sprite_color(int y, int width, int height, uint16_t *bitmap)
 {
-	int shorts_per_row = width / 4;
+	int uint16_ts_per_row = width / 4;
 	for (int i = 0; i < height; i++)
-		for (int j = 0; j < shorts_per_row; j++) 
-			bitmap[i*shorts_per_row + j] = change_short_color_depending_on_threshold(bitmap[i*shorts_per_row + j], y + i);	
+		for (int j = 0; j < uint16_ts_per_row; j++) 
+			bitmap[i*uint16_ts_per_row + j] = change_uint16_t_color_depending_on_threshold(bitmap[i*uint16_ts_per_row + j], y + i);	
 }
 
 /*
  * Funkcija za iscrtavanje sprite-ova.
- * "Clear background" znaci da nece uzimati u obzir vrednosti unutar short-ova koje imaju u sebi 0.
+ * "Clear background" znaci da nece uzimati u obzir vrednosti unutar uint16_t-ova koje imaju u sebi 0.
  * Ovo je najvise potrebno prilikom crtanja eksplozija metka unutar baze.
  * Da pozadina nije "prozirna", ne bi se samo iscrtala eksplozija, nego i kompletan cetvorougao, sa sve crnom pozadinom.
  */
-short draw_bitmap_with_clear_background(int x, int y, int width, int height, short *bitmap)
+uint16_t draw_bitmap_with_clear_background(int x, int y, int width, int height, uint16_t *bitmap)
 {
 	/*
 	 * Odnos koordinata kod:ekran je 1:2.
@@ -735,7 +736,7 @@ short draw_bitmap_with_clear_background(int x, int y, int width, int height, sho
 	 * Znaci, point u kodu (30, 60) ce se na ekranu iscrtati
 	 * na poziciji (60, 120).
 	 *
-	 * Rezolucija ekrana je 320 x 240. short-ovi se redom crtaju,
+	 * Rezolucija ekrana je 320 x 240. uint16_t-ovi se redom crtaju,
 	 * sto znaci da prelazak u novi red podrazumeva da sledeca pozicija
 	 * za crtanje bude y + duzina reda.
 	 * Posto se svaka koordinata iz koda mnozi sa 2 i crta na ekran,
@@ -744,39 +745,39 @@ short draw_bitmap_with_clear_background(int x, int y, int width, int height, sho
 	 */
 
 	// Pozicije od 1024 nadalje se koriste za iscrtavanje na ekran.
-	short *p1 = (short *)(1024 + y * 160 + x/2);
+	uint16_t *p1 = (uint16_t *)(1024 + y * 160 + x/2);
 
 	for (int i = 0; i < height; i++)
 	{
-		short first, second;
+		uint16_t first, second;
 
 		/*
-		 * Svaki short predstavlja 4 tacke na ekranu.
-		 * To znaci da, u jednom row-u, moze biti najvise 320/4 = 80 short-ova.
+		 * Svaki uint16_t predstavlja 4 tacke na ekranu.
+		 * To znaci da, u jednom row-u, moze biti najvise 320/4 = 80 uint16_t-ova.
 		 * Zato, da bi se preslo u i-ti red, pozicija gde se sprite crta
 		 * treba da se sabere sa (i * 80).
 		 * NAPOMENA: ovde nema deljenja i prilagodjavanja koordinata jer 
 		 * se ne gleda "na kojoj koordinati treba da se nacrta",
-		 * nego vec "koliko short-ova na ekranu treba da se preskoci da bi se 
-		 * doslo do zeljenog short-a". 
+		 * nego vec "koliko uint16_t-ova na ekranu treba da se preskoci da bi se 
+		 * doslo do zeljenog uint16_t-a". 
 		 */
-		short *p2 = p1 + (i * 80);
+		uint16_t *p2 = p1 + (i * 80);
 
 		/*
-		 * width koji se prosledjuje je sirina sprite-a u "tackama", ne u short-ovima.
-		 * Ako ocemo width u short-ovima, izracunamo width / 4.
-		 * Posto je bitmap-a samo array short-ova, treba nam ovo kako bi znali
-		 * na kom short-u pocinje novi red i koji short trenutno menjamo i crtamo.
+		 * width koji se prosledjuje je sirina sprite-a u "tackama", ne u uint16_t-ovima.
+		 * Ako ocemo width u uint16_t-ovima, izracunamo width / 4.
+		 * Posto je bitmap-a samo array uint16_t-ova, treba nam ovo kako bi znali
+		 * na kom uint16_t-u pocinje novi red i koji uint16_t trenutno menjamo i crtamo.
 		 */
-		int shorts_per_row = width / 4;
+		int uint16_ts_per_row = width / 4;
 
-		for (int j = 0; j < shorts_per_row; j++) 
+		for (int j = 0; j < uint16_ts_per_row; j++) 
 		{
-			bitmap[i*shorts_per_row + j] = change_short_color_depending_on_threshold(bitmap[i*shorts_per_row + j], y + i);
+			bitmap[i*uint16_ts_per_row + j] = change_uint16_t_color_depending_on_threshold(bitmap[i*uint16_ts_per_row + j], y + i);
 
 		    /* 
 			 * (REMINDER: vrednost crne boje je 0)
-			 * Da bi se iscrtao samo objekat bez pozadine, vec iscrtani short OR-ujemo sa short-om koji zelimo da nacrtamo.
+			 * Da bi se iscrtao samo objekat bez pozadine, vec iscrtani uint16_t OR-ujemo sa uint16_t-om koji zelimo da nacrtamo.
 			 * 0 | 0 = 0
 			 * 0 | 1 = 1
 			 * 1 | 0 = 1
@@ -786,42 +787,42 @@ short draw_bitmap_with_clear_background(int x, int y, int width, int height, sho
 			 */
 
 			/*
-			 * ako je npr. x = 20, onda ce short bitmape zameniti short na ekranu koji je na poziciji 20.
+			 * ako je npr. x = 20, onda ce uint16_t bitmape zameniti uint16_t na ekranu koji je na poziciji 20.
 			 * Medjutim, x nece uvek biti deljiv sa 4. Ako nije, onda 
-			 * Zato racunamo (x % 4), da vidimo gde treba da stavimo short.
-			 * Recimo da je short koji hocemo da stavimo 0x1234
-			 * Postoje dve situacije, short "legne" na short na ekranu ili short jednim delom prelazi na jedan short,
-			 * a drugim delom na short pored njega.
-			 * Shift-ovanjem bita u desno za 4 pomeramo short za jednu poziciju u levo. Dobijamo 0x0123
-			 * Shift-ovanjem bita u levo za 4 pomeramo short za jednu poziciju u desno. Dobijamo 0x2340
-			 * x % 4 = 0 - ceo short ulazi u short na ekranu   (short na ekranu i susedni: 1234 ????).
-			 * x % 4 = 1 - 3/4 short-a ulaze u short na ekranu (short na ekranu i susedni: ?123 4???).
-			 * x % 4 = 2 - 2/4 short-a ulazi u short na ekranu (short na ekranu i susedni: ??12 34??).
-			 * x % 4 = 3 - 1/4 short-a ulazi u short na ekranu (short na ekranu i susedni: ???1 234?).
+			 * Zato racunamo (x % 4), da vidimo gde treba da stavimo uint16_t.
+			 * Recimo da je uint16_t koji hocemo da stavimo 0x1234
+			 * Postoje dve situacije, uint16_t "legne" na uint16_t na ekranu ili uint16_t jednim delom prelazi na jedan uint16_t,
+			 * a drugim delom na uint16_t pored njega.
+			 * Shift-ovanjem bita u desno za 4 pomeramo uint16_t za jednu poziciju u levo. Dobijamo 0x0123
+			 * Shift-ovanjem bita u levo za 4 pomeramo uint16_t za jednu poziciju u desno. Dobijamo 0x2340
+			 * x % 4 = 0 - ceo uint16_t ulazi u uint16_t na ekranu   (uint16_t na ekranu i susedni: 1234 ????).
+			 * x % 4 = 1 - 3/4 uint16_t-a ulaze u uint16_t na ekranu (uint16_t na ekranu i susedni: ?123 4???).
+			 * x % 4 = 2 - 2/4 uint16_t-a ulazi u uint16_t na ekranu (uint16_t na ekranu i susedni: ??12 34??).
+			 * x % 4 = 3 - 1/4 uint16_t-a ulazi u uint16_t na ekranu (uint16_t na ekranu i susedni: ???1 234?).
 			 */
 			switch (x % 4)
 			{
 				case 0:
-					*p2 = (*p2) | bitmap[i*shorts_per_row + j];
+					*p2 = (*p2) | bitmap[i*uint16_ts_per_row + j];
 					p2++;
 					break;
 				case 1: 
-					first = (*p2)      | (bitmap[i*shorts_per_row + j] >> 4);
-					second = (*(p2+1)) | (bitmap[i*shorts_per_row + j] << 12);
+					first = (*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 4);
+					second = (*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 12);
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
 					break;
 				case 2: 
-					first = (*p2)      | (bitmap[i*shorts_per_row + j] >> 8);
-					second = (*(p2+1)) | (bitmap[i*shorts_per_row + j] << 8);
+					first = (*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 8);
+					second = (*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 8);
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
 					break;
 				case 3: 
-					first = (*p2)      | (bitmap[i*shorts_per_row + j] >> 12);
-					second = (*(p2+1)) | (bitmap[i*shorts_per_row + j] << 4);
+					first = (*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 12);
+					second = (*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 4);
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
@@ -833,13 +834,13 @@ short draw_bitmap_with_clear_background(int x, int y, int width, int height, sho
 }
 
 // Funkcija za pomeranje sprite-a.
-short move_bitmap_test(int x, int y, int width, int height, short *bitmap, int direction, int distance)
+uint16_t move_bitmap_test(int x, int y, int width, int height, uint16_t *bitmap, int direction, int distance)
 {
 	// x2 i y2 su prethodne pozicije.
 	int x2;
 	int y2;
 
-	int shorts_per_row = width / 4;
+	int uint16_ts_per_row = width / 4;
 	switch (direction)
 	{
 		case 3: // Ako alien/ufo/itd. trenutno ide desno, prethodna pozicija mu je bila za "distance" levo.
@@ -855,16 +856,16 @@ short move_bitmap_test(int x, int y, int width, int height, short *bitmap, int d
 			y2 = y-8;
 			break;
 	}
-	short *p1 = (short *)(1024 + y * 160 + x/2);
-	short *p1_previous = (short *)(1024 + y2 * 160 + x2/2);
+	uint16_t *p1 = (uint16_t *)(1024 + y * 160 + x/2);
+	uint16_t *p1_previous = (uint16_t *)(1024 + y2 * 160 + x2/2);
 
 	// Ako alien/ufo/itd. ide dole, clear-uj prethodni SPRITE.
 	if(direction == 6 || direction == 18)
 	{
 		for (int i = 0; i < height; i++)
 		{
-			short *p2_previous = p1_previous + (i * 80);
-			for (int j = 0; j < shorts_per_row; j++) 
+			uint16_t *p2_previous = p1_previous + (i * 80);
+			for (int j = 0; j < uint16_ts_per_row; j++) 
 			{
 				switch (x2 % 4)
 				{
@@ -884,19 +885,19 @@ short move_bitmap_test(int x, int y, int width, int height, short *bitmap, int d
 
 	for (int i = 0; i < height; i++)
 	{
-		short first, second;
-		short *p2 = p1 + (i * 80);
+		uint16_t first, second;
+		uint16_t *p2 = p1 + (i * 80);
 
 		/*
-		 * Ako alien/ufo/itd. ide levo ili desno, clear-uj prethodni SHORT.
+		 * Ako alien/ufo/itd. ide levo ili desno, clear-uj prethodni uint16_t.
 		 * Ako se clear-uje ceo sprite, i to se dovoljno brzo desava, ponekad izgleda kao da trepce sprite.
-		 * Ako se clear-uje prethodni short, pa nacrta novi i to sve ponovi za ceo sprite, treptanje se redje desava
+		 * Ako se clear-uje prethodni uint16_t, pa nacrta novi i to sve ponovi za ceo sprite, treptanje se redje desava
 		 * i, kada se desi, ne bude na nivou celog sprite-a i manje se primecuje.
 		 */
 		if(direction == 3 || direction == 9)
 		{
-			short *p2_previous = p1_previous + (i * 80);
-			for (int j = 0; j < shorts_per_row; j++) 
+			uint16_t *p2_previous = p1_previous + (i * 80);
+			for (int j = 0; j < uint16_ts_per_row; j++) 
 			{
 				switch (x2 % 4)
 				{
@@ -913,32 +914,32 @@ short move_bitmap_test(int x, int y, int width, int height, short *bitmap, int d
 			}
 		}
 
-		for (int j = 0; j < shorts_per_row; j++) 
+		for (int j = 0; j < uint16_ts_per_row; j++) 
 		{
-			bitmap[i*shorts_per_row + j] = change_short_color_depending_on_threshold(bitmap[i*shorts_per_row + j], y + i);
+			bitmap[i*uint16_ts_per_row + j] = change_uint16_t_color_depending_on_threshold(bitmap[i*uint16_ts_per_row + j], y + i);
 			switch (x % 4)
 			{
 				case 0:
-					*p2 = (*p2) | bitmap[i*shorts_per_row + j];
+					*p2 = (*p2) | bitmap[i*uint16_ts_per_row + j];
 					p2++;
 					break;
 				case 1: 
-					first = (*p2)      | (bitmap[i*shorts_per_row + j] >> 4);
-					second = (*(p2+1)) | (bitmap[i*shorts_per_row + j] << 12);
+					first = (*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 4);
+					second = (*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 12);
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
 					break;
 				case 2: 
-					first = (*p2)      | (bitmap[i*shorts_per_row + j] >> 8);
-					second = (*(p2+1)) | (bitmap[i*shorts_per_row + j] << 8);
+					first = (*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 8);
+					second = (*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 8);
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
 					break;
 				case 3: 
-					first = (*p2)      | (bitmap[i*shorts_per_row + j] >> 12);
-					second = (*(p2+1)) | (bitmap[i*shorts_per_row + j] << 4);
+					first = (*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 12);
+					second = (*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 4);
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
@@ -950,15 +951,15 @@ short move_bitmap_test(int x, int y, int width, int height, short *bitmap, int d
 }
 
 // Funkcija za clear-ovanje sprite-a.
-short clear_bitmap_test(int x, int y, int width, int height)
+uint16_t clear_bitmap_test(int x, int y, int width, int height)
 {
-	short *p1 = (short *)(1024 + y * 160 + x/2);
+	uint16_t *p1 = (uint16_t *)(1024 + y * 160 + x/2);
 	for (int i = 0; i < height; i++)
 	{
-		short first, second;
-		short *p2 = p1 + (i * 80);
-		int shorts_per_row = width / 4;
-		for (int j = 0; j < shorts_per_row; j++) 
+		uint16_t first, second;
+		uint16_t *p2 = p1 + (i * 80);
+		int uint16_ts_per_row = width / 4;
+		for (int j = 0; j < uint16_ts_per_row; j++) 
 		{
 			switch (x % 4)
 			{
@@ -979,9 +980,9 @@ short clear_bitmap_test(int x, int y, int width, int height)
 
 
 // Funkcija vraca x vrednost zivog alien-a sa najmanjom x vrednoscu (odnosno, x vrednost alien-a koji je najblizi LEVOJ ivici)
-short leftmost_alien_X()
+uint16_t leftmost_alien_X()
 {
-	short leftmost = 300;
+	uint16_t leftmost = 300;
 	for(int i = 0; i < 11; i++)
 	{
 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x < leftmost)
@@ -1008,9 +1009,9 @@ short leftmost_alien_X()
 }
 
 // Funkcija vraca x vrednost zivog alien-a sa najvecom x vrednoscu (odnosno, x vrednost alien-a koji je najblizi DESNOJ ivici)
-short rightmost_alien_X()
+uint16_t rightmost_alien_X()
 {
-	short rightmost = 0;
+	uint16_t rightmost = 0;
 	for(int i = 10; i >= 0; i--)
 	{
 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x + 12 > rightmost)
@@ -1037,9 +1038,9 @@ short rightmost_alien_X()
 }
 
 // Funkcija vraca y vrednost zivog alien-a sa najvecom y vrednoscu (odnosno, y vrednost alien-a koji je najblizi DONJOJ ivici)
-short lowest_alien_Y()
+uint16_t lowest_alien_Y()
 {
-	short lowest = 0;
+	uint16_t lowest = 0;
 	for(int i = 10; i >= 0; i--)
 	{
 		if(row_5_octopus[i].alive == 2 && row_5_octopus[i].y > lowest)
@@ -1296,7 +1297,7 @@ int position_is_not_clear(int x, int y)
 {
 	/*
 	 * (REMINDER: F = 1111)
-	 * Sa (x % 4) se procenjuje gde se u trenutno ispitivanom short-u nalazi prosledjena x koordinata.
+	 * Sa (x % 4) se procenjuje gde se u trenutno ispitivanom uint16_t-u nalazi prosledjena x koordinata.
 	 * Zatim se na tom mestu & funkcijom proverava vrednost point-a.
 	 * 0 & 0 = 0
 	 * 1 & 0 = 0
@@ -1307,7 +1308,7 @@ int position_is_not_clear(int x, int y)
 	 * Npr. ako je (*p1 & 0FFF) = *p1, to jedino moze da bude moguce ako je na prvoj poziciji *p1 bila 0.
 	 * Jer ce 0 bilo koji broj na prvoj poziciji staviti na 0, a F-ovi ce samo prekopirati brojeve u novi broj. 
 	 */
-	short *p1 = (short *)(1024 + y * 160 + x/2);
+	uint16_t *p1 = (uint16_t *)(1024 + y * 160 + x/2);
 	switch (x % 4)
 	{
 		case 0:
@@ -1345,46 +1346,46 @@ int position_is_not_clear(int x, int y)
  * 0 ^ 1 = 1
  * 1 ^ 0 = 1
  * 1 ^ 1 = 0
- * Sprite koji ocemo da iskoristimo kao "rupu" XOR-ujemo sa rezultatom OR operacije postojeceg short-a i tog istog sprite-a.
+ * Sprite koji ocemo da iskoristimo kao "rupu" XOR-ujemo sa rezultatom OR operacije postojeceg uint16_t-a i tog istog sprite-a.
  * Odnosno, s ^ (s_na_ekranu | s)
  * (s_na_ekranu | s) predstavlja uniju sprite-a NA EKRANU i svega sto se nalazi oko tog sprite-a.
  * s ^ (s_na_ekranu | s) predstavlja razliku sprite-a IZ BITMAPE i te unije.
  * Rezultat operacije je samo sve sto se nalazi oko sprite-a na ekranu.
  */
-void clear_bitmap_with_specific_shape(int x, int y, int width, int height, short *bitmap)
+void clear_bitmap_with_specific_shape(int x, int y, int width, int height, uint16_t *bitmap)
 {
-	short *p1 = (short *)(1024 + y * 160 + x/2);
+	uint16_t *p1 = (uint16_t *)(1024 + y * 160 + x/2);
 	for (int i = 0; i < height; i++)
 	{
-		short first, second;
-		short *p2 = p1 + (i * 80);
-		int shorts_per_row = width / 4;
-		for (int j = 0; j < shorts_per_row; j++) 
+		uint16_t first, second;
+		uint16_t *p2 = p1 + (i * 80);
+		int uint16_ts_per_row = width / 4;
+		for (int j = 0; j < uint16_ts_per_row; j++) 
 		{
-			bitmap[i*shorts_per_row + j] = change_short_color_depending_on_threshold(bitmap[i*shorts_per_row + j], y + i);
+			bitmap[i*uint16_ts_per_row + j] = change_uint16_t_color_depending_on_threshold(bitmap[i*uint16_ts_per_row + j], y + i);
 			switch (x % 4)
 			{
 				case 0:
-					*p2 = bitmap[i*shorts_per_row + j] ^ ((*p2) | bitmap[i*shorts_per_row + j]);
+					*p2 = bitmap[i*uint16_ts_per_row + j] ^ ((*p2) | bitmap[i*uint16_ts_per_row + j]);
 					p2++;
 					break;
 				case 1: 
-					first = (bitmap[i*shorts_per_row + j] >> 4) ^ ((*p2)      | (bitmap[i*shorts_per_row + j] >> 4));
-					second = (bitmap[i*shorts_per_row + j] << 12) ^ ((*(p2+1)) | (bitmap[i*shorts_per_row + j] << 12));
+					first = (bitmap[i*uint16_ts_per_row + j] >> 4) ^ ((*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 4));
+					second = (bitmap[i*uint16_ts_per_row + j] << 12) ^ ((*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 12));
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
 					break;
 				case 2: 
-					first = (bitmap[i*shorts_per_row + j] >> 8) ^ ((*p2)      | (bitmap[i*shorts_per_row + j] >> 8));
-					second = (bitmap[i*shorts_per_row + j] << 8) ^ ((*(p2+1)) | (bitmap[i*shorts_per_row + j] << 8));
+					first = (bitmap[i*uint16_ts_per_row + j] >> 8) ^ ((*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 8));
+					second = (bitmap[i*uint16_ts_per_row + j] << 8) ^ ((*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 8));
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
 					break;
 				case 3: 
-					first = (bitmap[i*shorts_per_row + j] >> 12) ^ ((*p2)      | (bitmap[i*shorts_per_row + j] >> 12));
-					second = (bitmap[i*shorts_per_row + j] << 4) ^ ((*(p2+1)) | (bitmap[i*shorts_per_row + j] << 4));
+					first = (bitmap[i*uint16_ts_per_row + j] >> 12) ^ ((*p2)      | (bitmap[i*uint16_ts_per_row + j] >> 12));
+					second = (bitmap[i*uint16_ts_per_row + j] << 4) ^ ((*(p2+1)) | (bitmap[i*uint16_ts_per_row + j] << 4));
 					*p2 = first;
 					*(p2+1) = second;
 					p2++;
@@ -1883,7 +1884,7 @@ void clear_player_and_redraw_lives()
 
 void spawn_player()
 {
-	player_ship->addr = (short)sprite_addr;
+	player_ship->addr = (uint16_t)sprite_addr;
 	player_ship->x = 40;
 	player_ship->y = PLAYER_SPAWN_Y;
 	player_ship->transparent = 0;
@@ -2000,12 +2001,12 @@ void draw_table_entry(
 	int entry_y,
 	int bitmap_width,
 	int bitmap_height,
-	short *bitmap,
+	uint16_t *bitmap,
 	int text_color,
 	char *label_text)
 {
 	draw_bitmap_with_clear_background(
-		entry_x,
+		entry_x - (bitmap == ufo?4:0),
 		entry_y,
 		bitmap_width,
 		bitmap_height,
@@ -2184,12 +2185,12 @@ int switch_to_get_ready_screen()
 // Funkcija koja spawn-uje alien-a na pocetku svakog wave-a.
 void initialize_alien(
 	sw_sprite *alien,
-	short x,
-	short y,
-	short width,
-	short height,
-	short* bitmap,
-	short status)
+	uint16_t x,
+	uint16_t y,
+	uint16_t width,
+	uint16_t height,
+	uint16_t* bitmap,
+	uint16_t status)
 {
 	alien->x = x;
 	alien->y = y;
@@ -2201,7 +2202,7 @@ void fire_bullet_if_ready()
 {
 	if(player_bullet_status == READY) 
 	{
-		player_bullet_def->addr = (short)player_bullet_addr;
+		player_bullet_def->addr = (uint16_t)player_bullet_addr;
 		player_bullet_def->x = player_ship->x + 6;
 		player_bullet_def->y = 204;
 		player_bullet_def->transparent = 0;
@@ -2242,12 +2243,12 @@ int switch_to_play_screen()
 	direction = 3;
 	distance = 2;
 	int sprite_version = 1;
-	short *alien_sprite = 0;
+	uint16_t *alien_sprite = 0;
 	/*
 	 * Alien index sam dodao zbog octopus-a.
-	 * Nacin na koji se pomeraju svi alien-i je da se prvo clear-uje prethodni short, pa se onda iscrta sledeci short na ekran.
+	 * Nacin na koji se pomeraju svi alien-i je da se prvo clear-uje prethodni uint16_t, pa se onda iscrta sledeci uint16_t na ekran.
 	 * Problem kod octopus-a je da je prevelik. 
-	 * Posto se iscrtavaju od levo ka desno, brisanjem prethodnog short-a od i-tog octopus-a ce se clear-ovati deo sprite-a (i-1)-tog octopus-a.
+	 * Posto se iscrtavaju od levo ka desno, brisanjem prethodnog uint16_t-a od i-tog octopus-a ce se clear-ovati deo sprite-a (i-1)-tog octopus-a.
 	 * Problem sam resio tako sto sam namestio da iscrtavanje ide obrnutim redosledom.
 	 * Ako alien-i idu ka desno, prvo ce iscrtati skroz desnog, pa onda ce ici ka levo. U svim ostalim situacijama crta levo ka desno.
 	 * Odnosno, ako aliens idu ka desno, iscrtace "alien_index = 10 - i"-tog aliena. U suprotnom ce iscrtati "alien_index = i"-tog alien-a.
@@ -2304,7 +2305,7 @@ int switch_to_play_screen()
 	int alien_spawn_x =  41;
 	int alien_spawn_y = get_alien_spawn_y_for_current_wave();
 	
-	short* alien_bitmap;
+	uint16_t* alien_bitmap;
 	sw_sprite* alien_row;
 	int alien_sprite_width = 0;
 

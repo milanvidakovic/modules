@@ -2,8 +2,8 @@
 # GNU C17 (GCC) version 10.0.0 20200111 (experimental) (moxiebox)
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
-# options passed:  -D KERNEL
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/enc28j60.c -mel
+# options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
+# -D KERNEL /mnt/c/Prj/Altera/C/moxiebox/modules/lib/enc28j60.c -mel
 # -auxbase-strip /mnt/c/Prj/Altera/C/moxiebox/modules/lib/enc28j60.s
 # -fsigned-char -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce

@@ -2,8 +2,8 @@
 # GNU C17 (GCC) version 10.0.0 20200111 (experimental) (moxiebox)
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
-# options passed:  -D KERNEL
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c -mel
+# options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
+# -D KERNEL /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c -mel
 # -auxbase-strip /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.s
 # -fsigned-char -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
@@ -1771,17 +1771,17 @@ toggle_cursor:
 	ld.w	r0, [VIDEO]	# VIDEO.65_1, VIDEO
 	ld.b	r0, [r0 + (-1)]	# tmp29, MEM[(char *)VIDEO.65_1 + 4294967295B]
 	st.b	[r13 + (-1)], r0	# i, tmp29
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:397: 	i = i ^ 0x77; 
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:397: 	i = i ^ 0xFF; 
 	ld.b	r0, [r13 + (-1)]	# tmp30, i
-	mov.w	r1, 119	# tmp32,
-	xor.w	r0, r1	# tmp31, tmp32
-	st.b	[r13 + (-1)], r0	# i, tmp33
+	mov.w	r0, r0	# tmp31, tmp30
+inv.w	r0	# tmp31
+	st.b	[r13 + (-1)], r0	# i, tmp32
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:398: 	*(VIDEO - 1) = i;
 	ld.w	r0, [VIDEO]	# VIDEO.66_2, VIDEO
 	add.w	r0, -1 #111	# _3,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:398: 	*(VIDEO - 1) = i;
-	ld.b	r1, [r13 + (-1)]	# tmp34, i
-	st.b	[r0], r1	# *_3, tmp34
+	ld.b	r1, [r13 + (-1)]	# tmp33, i
+	st.b	[r0], r1	# *_3, tmp33
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/stdio.c:399: }
 	nop	
 	mov.w	sp, r13	#,

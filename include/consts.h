@@ -1,0 +1,114 @@
+#define VK_0								 48
+#define VK_1								 49
+#define VK_2								 50
+#define VK_3								 51
+#define VK_4								 52
+#define VK_5								 53
+#define VK_6								 54
+#define VK_7								 55
+#define VK_8								 56
+#define VK_9								 57
+
+#define VK_SPACE						     32
+#define VK_A								 65
+#define VK_B								 66
+#define VK_C								 67
+#define VK_D								 68
+#define VK_E								 69
+#define VK_F								 70
+#define VK_G								 71
+#define VK_H								 72
+#define VK_I								 73
+#define VK_J								 74
+#define VK_K								 75
+#define VK_L								 76
+#define VK_M								 77
+#define VK_N								 78
+#define VK_O								 79
+#define VK_P								 80
+#define VK_Q								 81
+#define VK_R								 82
+#define VK_S								 83
+#define VK_T								 84
+#define VK_U								 85
+#define VK_V								 86
+#define VK_W								 87
+#define VK_X								 88
+#define VK_Y								 89
+#define VK_Z								 90
+
+#define VK_BACK_QUOTE				         96
+#define VK_SLASH						     47
+#define VK_BACK_SLASH				         92
+#define VK_BRACE_LEFT				         91
+#define VK_BRACE_RIGHT			             93
+#define VK_EQUALS						     61
+#define VK_QUOTE						     39
+#define VK_MINUS						     45
+#define VK_SEMICOLON				         59
+#define VK_FULL_STOP				         46
+#define VK_COMMA						     44
+#define VK_LESS_THAN				         60
+
+#define VK_F1								 301
+#define VK_F2								 302
+#define VK_F3								 303
+#define VK_F4								 304
+#define VK_F5								 305
+#define VK_F6								 306
+#define VK_F7								 307
+#define VK_F8								 308
+#define VK_F9								 309
+#define VK_F10							     310
+#define VK_F11							     311
+#define VK_F12							     312
+
+#define VK_CAPS_LOCK				         800
+#define VK_NUM_LOCK					         801
+#define VK_SCROLL_LOCK			             802
+
+#define VK_LEFT_SHIFT				         501
+#define VK_RIGHT_SHIFT			             502
+#define VK_LEFT_ALT					         401
+#define VK_RIGHT_ALT				         402
+#define VK_LEFT_CONTROL			             601
+#define VK_RIGHT_CONTROL		             602
+#define VK_LEFT_WINDOWS			             1001
+#define VK_RIGHT_WINDOWS		             1002
+#define VK_MENU							     2000
+
+#define VK_TAB 							     9
+#define VK_ENTER 						     13
+#define VK_ESC							     27
+#define VK_BACKSPACE				         8
+
+#define VK_RIGHT_ARROW 			             4003
+#define VK_LEFT_ARROW 			             4001
+#define VK_UP_ARROW 				         4000
+#define VK_DOWN_ARROW 			             4002
+
+#define VK_PAGE_UP 					         3002
+#define VK_PAGE_DOWN				         3005
+#define VK_HOME 						     3001
+#define VK_END							     3004
+#define VK_INSERT 					         3000
+#define VK_DELETE 					         3003
+
+#define VK_NUMPAD0					         5048
+#define VK_NUMPAD1					         5049
+#define VK_NUMPAD2					         5050
+#define VK_NUMPAD3					         5051
+#define VK_NUMPAD4					         5052
+#define VK_NUMPAD5					         5053
+#define VK_NUMPAD6					         5054
+#define VK_NUMPAD7					         5055
+#define VK_NUMPAD8					         5056
+#define VK_NUMPAD9					         5057
+#define VK_NUMPAD_PLUS			             5043
+#define VK_NUMPAD_SUBTRACT	                 5045
+#define VK_NUMPAD_DIVIDE 		             5047
+#define VK_NUMPAD_MULTIPLY	                 5042
+#define VK_NUMPAD_DECIMAL		             5046
+#define VK_NUMPAD_ENTER 		             5013
+
+#define VK_PRINT_SCREEN			             10000

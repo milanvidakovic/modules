@@ -1,5 +1,6 @@
 TARGET=mxbx_mirage
 LIB=/mnt/c/Prj/Altera/C/moxiebox/modules/lib
+INCLUDE=/mnt/c/Prj/Altera/C/moxiebox/modules/include
 
 FILES = $(TARGET) $(LIB)/mouse $(LIB)/sprintf $(LIB)/string $(LIB)/stdio $(LIB)/graphics $(LIB)/floatimpl
 
@@ -9,7 +10,7 @@ all: compile assemble
 
 compile:
 	@for file in $(FILES); do \
-    moxiebox-gcc -DKERNEL -fsigned-char -S $${file}.c -o $${file}.s -fverbose-asm; \
+    moxiebox-gcc -I$(INCLUDE) -DKERNEL -fsigned-char -S $${file}.c -o $${file}.s -fverbose-asm; \
 	done
 	
 # NOTE(Jovan): Maybe an -o flag for outputting .bin files to a specific dir

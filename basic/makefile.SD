@@ -1,7 +1,7 @@
 TARGET=basic
-#TARGET=test
-#TARGET=snakes
 LIB=/mnt/c/Prj/Altera/C/moxiebox/modules/lib
+INCLUDE=/mnt/c/Prj/Altera/C/moxiebox/modules/include
+
 CFLAGS=-fsigned-char -S -fverbose-asm 
 #-fdump-rtl-expand
 
@@ -13,7 +13,7 @@ all: compile assemble copy
 
 compile:
 	@for file in $(FILES); do \
-    moxiebox-gcc -DKERNEL $(CFLAGS) $${file}.c -o $${file}.s; \
+    moxiebox-gcc -I$(INCLUDE) -DKERNEL $(CFLAGS) $${file}.c -o $${file}.s; \
 	done
 	
 assemble:

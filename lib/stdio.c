@@ -394,7 +394,7 @@ void toggle_cursor()
 {
 	char i;
 	i = *(VIDEO - 1);
-	i = i ^ 0x77; 
+	i = i ^ 0xFF; 
 	*(VIDEO - 1) = i;
 }
 char * gets(char *s) 

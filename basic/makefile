@@ -2,6 +2,7 @@
 TARGET=basic
 
 LIB=/mnt/c/Prj/Altera/C/moxiebox/modules/lib
+INCLUDE=/mnt/c/Prj/Altera/C/moxiebox/modules/include
 
 FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio $(LIB)/graphics $(LIB)/spi $(LIB)/fat $(LIB)/enc28j60 $(LIB)/tcpip $(LIB)/floatimpl
 
@@ -11,7 +12,7 @@ all: compile assemble
 
 compile:
 	@for file in $(FILES); do \
-    moxiebox-gcc -DKERNEL -fsigned-char -S $${file}.c -o $${file}.s -fverbose-asm; \
+    moxiebox-gcc -I$(INCLUDE) -DKERNEL -fsigned-char -S $${file}.c -o $${file}.s -fverbose-asm; \
 	done
 	
 assemble:

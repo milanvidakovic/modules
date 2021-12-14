@@ -1,6 +1,7 @@
 TARGET=snakes
 
 LIB=/mnt/c/Prj/Altera/C/moxiebox/modules/lib
+INCLUDE=/mnt/c/Prj/Altera/C/moxiebox/modules/include
 
 FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio  $(LIB)/floatimpl
 
@@ -10,7 +11,7 @@ all: compile assemble copy
 
 compile:
 	@for file in $(FILES); do \
-    moxiebox-gcc -S $${file}.c -o $${file}.s -fverbose-asm; \
+    moxiebox-gcc -I$(INCLUDE) -S $${file}.c -o $${file}.s -fverbose-asm; \
 	done
 	
 assemble:

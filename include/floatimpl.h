@@ -62,11 +62,15 @@ float __divsf3(float a, float b);
 
 int __lesf2(fp_t a, fp_t b);
 int __gesf2(fp_t a, fp_t b);
+
+/* Returns a nonzero value if either argument is NaN, otherwise 0.*/
 int __unordsf2(fp_t a, fp_t b);
+
 int __eqsf2(fp_t a, fp_t b);
 int __nesf2(fp_t a, fp_t b);
 int __ltsf2(float a, float b);
 int __gtsf2(fp_t a, fp_t b);
+
 /* Returns four bytes of the given floating point number. */
 int __extendsfdf2(float f);
 /* Converts int to float. */

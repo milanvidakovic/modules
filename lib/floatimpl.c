@@ -157,7 +157,7 @@ enum GE_RESULT __gesf2(fp_t a, fp_t b)
         else return GE_GREATER;
     }
 }
-
+/* Returns a nonzero value if either argument is NaN, otherwise 0.*/
 int __unordsf2(fp_t a, fp_t b)
 {
     const rep_t aAbs = toRep(a) & absMask;

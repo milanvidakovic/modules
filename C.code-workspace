@@ -28,7 +28,8 @@
 			"fat.h": "c",
 			"mouse.h": "c",
 			"floatimpl.h": "c",
-			"net.h": "c"
+			"net.h": "c",
+			"types.h": "c"
 		}
 	}
 }

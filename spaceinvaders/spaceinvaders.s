@@ -3,8 +3,8 @@
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
 # options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
-# -D KERNEL spaceinvaders.c -mel -auxbase-strip spaceinvaders.s
-# -fsigned-char -fverbose-asm
+# spaceinvaders.c -mel -auxbase-strip spaceinvaders.s -fsigned-char
+# -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
 # -fauto-inc-dec -fdelete-null-pointer-checks -fearly-inlining
 # -feliminate-unused-debug-symbols -feliminate-unused-debug-types
@@ -2958,188 +2958,193 @@ leftmost_alien_X:
 	mov.w	r13, sp	#,
 	sub.w	sp, 8 #111	#,
 # spaceinvaders.c:985: 	uint16_t leftmost = 300;
-	mov.s	r0, 300	# tmp38,
-	st.s	[r13 + (-6)], r0	# leftmost, tmp38
+	mov.s	r0, 300	# tmp53,
+	st.s	[r13 + (-6)], r0	# leftmost, tmp53
 # spaceinvaders.c:986: 	for(int i = 0; i < 11; i++)
-	xor.w	r0, r0	# tmp39
-	st.w	[r13 + (-4)], r0	# i, tmp39
+	xor.w	r0, r0	# tmp54
+	st.w	[r13 + (-4)], r0	# i, tmp54
 # spaceinvaders.c:986: 	for(int i = 0; i < 11; i++)
 	j	.L100		#
 .L107:
 # spaceinvaders.c:988: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp40, i
-	mov.w	r1, 3	# tmp42,
-	shl.w	r0, r1	# tmp41, tmp42
-	mov.w	r1, row_1_squid+6	# tmp44,
-	add.w	r0, r1 #222	# tmp43, tmp44
-	ld.s	r0, [r0]	# _1, row_1_squid[i_11].alive
+	ld.w	r0, [r13 + (-4)]	# tmp55, i
+	mov.w	r1, 3	# tmp57,
+	shl.w	r0, r1	# tmp56, tmp57
+	mov.w	r1, row_1_squid+6	# tmp59,
+	add.w	r0, r1 #222	# tmp58, tmp59
+	ld.s	r0, [r0]	# _1, row_1_squid[i_26].alive
 # spaceinvaders.c:988: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x < leftmost)
-	zex.s	r1, r0	# tmp45, _1
-	mov.w	r0, 2	# tmp46,
-	cmp.w	r1, r0	# tmp45, tmp46
+	zex.s	r1, r0	# tmp60, _1
+	mov.w	r0, 2	# tmp61,
+	cmp.w	r1, r0	# tmp60, tmp61
 	jnz	.L101		#
 # spaceinvaders.c:988: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp47, i
-	mov.w	r1, 3	# tmp49,
-	shl.w	r0, r1	# tmp48, tmp49
-	mov.w	r1, row_1_squid+2	# tmp51,
-	add.w	r0, r1 #222	# tmp50, tmp51
-	ld.s	r0, [r0]	# _2, row_1_squid[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp62, i
+	mov.w	r1, 3	# tmp64,
+	shl.w	r0, r1	# tmp63, tmp64
+	mov.w	r1, row_1_squid+2	# tmp66,
+	add.w	r0, r1 #222	# tmp65, tmp66
+	ld.s	r0, [r0]	# _2, row_1_squid[i_26].x
+	sex.s	r1, r0	# _3, _2
 # spaceinvaders.c:988: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x < leftmost)
-	ld.s	r1, [r13 + (-6)]	# tmp52, leftmost
-	zex.s	r0, r0	# tmp53, _2
-	cmp.w	r1, r0	# tmp52, tmp53
-	jse	.L101		#
+	ld.s	r0, [r13 + (-6)]	# _4, leftmost
+# spaceinvaders.c:988: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x < leftmost)
+	cmp.w	r1, r0	# _3, _4
+	jges	.L101		#
 # spaceinvaders.c:990: 			return row_1_squid[i].x;
-	ld.w	r0, [r13 + (-4)]	# tmp54, i
-	mov.w	r1, 3	# tmp56,
-	shl.w	r0, r1	# tmp55, tmp56
-	mov.w	r1, row_1_squid+2	# tmp58,
-	add.w	r0, r1 #222	# tmp57, tmp58
-	ld.s	r0, [r0]	# _12, row_1_squid[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp67, i
+	mov.w	r1, 3	# tmp69,
+	shl.w	r0, r1	# tmp68, tmp69
+	mov.w	r1, row_1_squid+2	# tmp71,
+	add.w	r0, r1 #222	# tmp70, tmp71
+	ld.s	r0, [r0]	# _5, row_1_squid[i_26].x
 	j	.L99		#
 .L101:
 # spaceinvaders.c:992: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp59, i
-	mov.w	r1, 3	# tmp61,
-	shl.w	r0, r1	# tmp60, tmp61
-	mov.w	r1, row_2_crab+6	# tmp63,
-	add.w	r0, r1 #222	# tmp62, tmp63
-	ld.s	r0, [r0]	# _3, row_2_crab[i_11].alive
+	ld.w	r0, [r13 + (-4)]	# tmp72, i
+	mov.w	r1, 3	# tmp74,
+	shl.w	r0, r1	# tmp73, tmp74
+	mov.w	r1, row_2_crab+6	# tmp76,
+	add.w	r0, r1 #222	# tmp75, tmp76
+	ld.s	r0, [r0]	# _6, row_2_crab[i_26].alive
 # spaceinvaders.c:992: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x < leftmost)
-	zex.s	r1, r0	# tmp64, _3
-	mov.w	r0, 2	# tmp65,
-	cmp.w	r1, r0	# tmp64, tmp65
+	zex.s	r1, r0	# tmp77, _6
+	mov.w	r0, 2	# tmp78,
+	cmp.w	r1, r0	# tmp77, tmp78
 	jnz	.L103		#
 # spaceinvaders.c:992: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp66, i
-	mov.w	r1, 3	# tmp68,
-	shl.w	r0, r1	# tmp67, tmp68
-	mov.w	r1, row_2_crab+2	# tmp70,
-	add.w	r0, r1 #222	# tmp69, tmp70
-	ld.s	r0, [r0]	# _4, row_2_crab[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp79, i
+	mov.w	r1, 3	# tmp81,
+	shl.w	r0, r1	# tmp80, tmp81
+	mov.w	r1, row_2_crab+2	# tmp83,
+	add.w	r0, r1 #222	# tmp82, tmp83
+	ld.s	r0, [r0]	# _7, row_2_crab[i_26].x
+	sex.s	r1, r0	# _8, _7
 # spaceinvaders.c:992: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x < leftmost)
-	ld.s	r1, [r13 + (-6)]	# tmp71, leftmost
-	zex.s	r0, r0	# tmp72, _4
-	cmp.w	r1, r0	# tmp71, tmp72
-	jse	.L103		#
+	ld.s	r0, [r13 + (-6)]	# _9, leftmost
+# spaceinvaders.c:992: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x < leftmost)
+	cmp.w	r1, r0	# _8, _9
+	jges	.L103		#
 # spaceinvaders.c:994: 			return row_2_crab[i].x;
-	ld.w	r0, [r13 + (-4)]	# tmp73, i
-	mov.w	r1, 3	# tmp75,
-	shl.w	r0, r1	# tmp74, tmp75
-	mov.w	r1, row_2_crab+2	# tmp77,
-	add.w	r0, r1 #222	# tmp76, tmp77
-	ld.s	r0, [r0]	# _12, row_2_crab[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp84, i
+	mov.w	r1, 3	# tmp86,
+	shl.w	r0, r1	# tmp85, tmp86
+	mov.w	r1, row_2_crab+2	# tmp88,
+	add.w	r0, r1 #222	# tmp87, tmp88
+	ld.s	r0, [r0]	# _10, row_2_crab[i_26].x
 	j	.L99		#
 .L103:
 # spaceinvaders.c:996: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp78, i
-	mov.w	r1, 3	# tmp80,
-	shl.w	r0, r1	# tmp79, tmp80
-	mov.w	r1, row_3_crab+6	# tmp82,
-	add.w	r0, r1 #222	# tmp81, tmp82
-	ld.s	r0, [r0]	# _5, row_3_crab[i_11].alive
+	ld.w	r0, [r13 + (-4)]	# tmp89, i
+	mov.w	r1, 3	# tmp91,
+	shl.w	r0, r1	# tmp90, tmp91
+	mov.w	r1, row_3_crab+6	# tmp93,
+	add.w	r0, r1 #222	# tmp92, tmp93
+	ld.s	r0, [r0]	# _11, row_3_crab[i_26].alive
 # spaceinvaders.c:996: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x < leftmost)
-	zex.s	r1, r0	# tmp83, _5
-	mov.w	r0, 2	# tmp84,
-	cmp.w	r1, r0	# tmp83, tmp84
+	zex.s	r1, r0	# tmp94, _11
+	mov.w	r0, 2	# tmp95,
+	cmp.w	r1, r0	# tmp94, tmp95
 	jnz	.L104		#
 # spaceinvaders.c:996: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp85, i
-	mov.w	r1, 3	# tmp87,
-	shl.w	r0, r1	# tmp86, tmp87
-	mov.w	r1, row_3_crab+2	# tmp89,
-	add.w	r0, r1 #222	# tmp88, tmp89
-	ld.s	r0, [r0]	# _6, row_3_crab[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp96, i
+	mov.w	r1, 3	# tmp98,
+	shl.w	r0, r1	# tmp97, tmp98
+	mov.w	r1, row_3_crab+2	# tmp100,
+	add.w	r0, r1 #222	# tmp99, tmp100
+	ld.s	r0, [r0]	# _12, row_3_crab[i_26].x
+	sex.s	r1, r0	# _13, _12
 # spaceinvaders.c:996: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x < leftmost)
-	ld.s	r1, [r13 + (-6)]	# tmp90, leftmost
-	zex.s	r0, r0	# tmp91, _6
-	cmp.w	r1, r0	# tmp90, tmp91
-	jse	.L104		#
+	ld.s	r0, [r13 + (-6)]	# _14, leftmost
+# spaceinvaders.c:996: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x < leftmost)
+	cmp.w	r1, r0	# _13, _14
+	jges	.L104		#
 # spaceinvaders.c:998: 			return row_3_crab[i].x;
-	ld.w	r0, [r13 + (-4)]	# tmp92, i
-	mov.w	r1, 3	# tmp94,
-	shl.w	r0, r1	# tmp93, tmp94
-	mov.w	r1, row_3_crab+2	# tmp96,
-	add.w	r0, r1 #222	# tmp95, tmp96
-	ld.s	r0, [r0]	# _12, row_3_crab[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp101, i
+	mov.w	r1, 3	# tmp103,
+	shl.w	r0, r1	# tmp102, tmp103
+	mov.w	r1, row_3_crab+2	# tmp105,
+	add.w	r0, r1 #222	# tmp104, tmp105
+	ld.s	r0, [r0]	# _15, row_3_crab[i_26].x
 	j	.L99		#
 .L104:
 # spaceinvaders.c:1000: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp97, i
-	mov.w	r1, 3	# tmp99,
-	shl.w	r0, r1	# tmp98, tmp99
-	mov.w	r1, row_4_octopus+6	# tmp101,
-	add.w	r0, r1 #222	# tmp100, tmp101
-	ld.s	r0, [r0]	# _7, row_4_octopus[i_11].alive
+	ld.w	r0, [r13 + (-4)]	# tmp106, i
+	mov.w	r1, 3	# tmp108,
+	shl.w	r0, r1	# tmp107, tmp108
+	mov.w	r1, row_4_octopus+6	# tmp110,
+	add.w	r0, r1 #222	# tmp109, tmp110
+	ld.s	r0, [r0]	# _16, row_4_octopus[i_26].alive
 # spaceinvaders.c:1000: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x < leftmost)
-	zex.s	r1, r0	# tmp102, _7
-	mov.w	r0, 2	# tmp103,
-	cmp.w	r1, r0	# tmp102, tmp103
+	zex.s	r1, r0	# tmp111, _16
+	mov.w	r0, 2	# tmp112,
+	cmp.w	r1, r0	# tmp111, tmp112
 	jnz	.L105		#
 # spaceinvaders.c:1000: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp104, i
-	mov.w	r1, 3	# tmp106,
-	shl.w	r0, r1	# tmp105, tmp106
-	mov.w	r1, row_4_octopus+2	# tmp108,
-	add.w	r0, r1 #222	# tmp107, tmp108
-	ld.s	r0, [r0]	# _8, row_4_octopus[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp113, i
+	mov.w	r1, 3	# tmp115,
+	shl.w	r0, r1	# tmp114, tmp115
+	mov.w	r1, row_4_octopus+2	# tmp117,
+	add.w	r0, r1 #222	# tmp116, tmp117
+	ld.s	r0, [r0]	# _17, row_4_octopus[i_26].x
+	sex.s	r1, r0	# _18, _17
 # spaceinvaders.c:1000: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x < leftmost)
-	ld.s	r1, [r13 + (-6)]	# tmp109, leftmost
-	zex.s	r0, r0	# tmp110, _8
-	cmp.w	r1, r0	# tmp109, tmp110
-	jse	.L105		#
+	ld.s	r0, [r13 + (-6)]	# _19, leftmost
+# spaceinvaders.c:1000: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x < leftmost)
+	cmp.w	r1, r0	# _18, _19
+	jges	.L105		#
 # spaceinvaders.c:1002: 			return row_4_octopus[i].x;
-	ld.w	r0, [r13 + (-4)]	# tmp111, i
-	mov.w	r1, 3	# tmp113,
-	shl.w	r0, r1	# tmp112, tmp113
-	mov.w	r1, row_4_octopus+2	# tmp115,
-	add.w	r0, r1 #222	# tmp114, tmp115
-	ld.s	r0, [r0]	# _12, row_4_octopus[i_11].x
+	ld.w	r0, [r13 + (-4)]	# tmp118, i
+	mov.w	r1, 3	# tmp120,
+	shl.w	r0, r1	# tmp119, tmp120
+	mov.w	r1, row_4_octopus+2	# tmp122,
+	add.w	r0, r1 #222	# tmp121, tmp122
+	ld.s	r0, [r0]	# _20, row_4_octopus[i_26].x
 	j	.L99		#
 .L105:
-# spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
-	ld.w	r0, [r13 + (-4)]	# tmp116, i
-	mov.w	r1, 3	# tmp118,
-	shl.w	r0, r1	# tmp117, tmp118
-	mov.w	r1, row_5_octopus+6	# tmp120,
-	add.w	r0, r1 #222	# tmp119, tmp120
-	ld.s	r0, [r0]	# _9, row_5_octopus[i_11].alive
-# spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
-	zex.s	r1, r0	# tmp121, _9
-	mov.w	r0, 2	# tmp122,
-	cmp.w	r1, r0	# tmp121, tmp122
-	jnz	.L106		#
 # spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
 	ld.w	r0, [r13 + (-4)]	# tmp123, i
 	mov.w	r1, 3	# tmp125,
 	shl.w	r0, r1	# tmp124, tmp125
-	mov.w	r1, row_5_octopus+2	# tmp127,
+	mov.w	r1, row_5_octopus+6	# tmp127,
 	add.w	r0, r1 #222	# tmp126, tmp127
-	ld.s	r0, [r0]	# _10, row_5_octopus[i_11].x
+	ld.s	r0, [r0]	# _21, row_5_octopus[i_26].alive
 # spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
-	ld.s	r1, [r13 + (-6)]	# tmp128, leftmost
-	zex.s	r0, r0	# tmp129, _10
+	zex.s	r1, r0	# tmp128, _21
+	mov.w	r0, 2	# tmp129,
 	cmp.w	r1, r0	# tmp128, tmp129
-	jse	.L106		#
-# spaceinvaders.c:1006: 			return row_5_octopus[i].x;
+	jnz	.L106		#
+# spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
 	ld.w	r0, [r13 + (-4)]	# tmp130, i
 	mov.w	r1, 3	# tmp132,
 	shl.w	r0, r1	# tmp131, tmp132
 	mov.w	r1, row_5_octopus+2	# tmp134,
 	add.w	r0, r1 #222	# tmp133, tmp134
-	ld.s	r0, [r0]	# _12, row_5_octopus[i_11].x
+	ld.s	r0, [r0]	# _22, row_5_octopus[i_26].x
+	sex.s	r1, r0	# _23, _22
+# spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
+	ld.s	r0, [r13 + (-6)]	# _24, leftmost
+# spaceinvaders.c:1004: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x < leftmost)
+	cmp.w	r1, r0	# _23, _24
+	jges	.L106		#
+# spaceinvaders.c:1006: 			return row_5_octopus[i].x;
+	ld.w	r0, [r13 + (-4)]	# tmp135, i
+	mov.w	r1, 3	# tmp137,
+	shl.w	r0, r1	# tmp136, tmp137
+	mov.w	r1, row_5_octopus+2	# tmp139,
+	add.w	r0, r1 #222	# tmp138, tmp139
+	ld.s	r0, [r0]	# _25, row_5_octopus[i_26].x
 	j	.L99		#
 .L106:
 # spaceinvaders.c:986: 	for(int i = 0; i < 11; i++)
-	ld.w	r0, [r13 + (-4)]	# tmp136, i
-	add.w	r0, 1 #111	# tmp135,
-	st.w	[r13 + (-4)], r0	# i, tmp135
+	ld.w	r0, [r13 + (-4)]	# tmp141, i
+	add.w	r0, 1 #111	# tmp140,
+	st.w	[r13 + (-4)], r0	# i, tmp140
 .L100:
 # spaceinvaders.c:986: 	for(int i = 0; i < 11; i++)
-	ld.w	r1, [r13 + (-4)]	# tmp137, i
-	mov.w	r0, 10	# tmp138,
-	cmp.w	r1, r0	# tmp137, tmp138
+	ld.w	r1, [r13 + (-4)]	# tmp142, i
+	mov.w	r0, 10	# tmp143,
+	cmp.w	r1, r0	# tmp142, tmp143
 	jses	.L107		#
 .L99:
 # spaceinvaders.c:1009: }
@@ -3155,34 +3160,34 @@ rightmost_alien_X:
 	mov.w	r13, sp	#,
 	sub.w	sp, 8 #111	#,
 # spaceinvaders.c:1014: 	uint16_t rightmost = 0;
-	xor.w	r0, r0	# tmp53
-	st.s	[r13 + (-6)], r0	# rightmost, tmp53
+	xor.w	r0, r0	# tmp58
+	st.s	[r13 + (-6)], r0	# rightmost, tmp58
 # spaceinvaders.c:1015: 	for(int i = 10; i >= 0; i--)
-	mov.w	r0, 10	# tmp54,
-	st.w	[r13 + (-4)], r0	# i, tmp54
+	mov.w	r0, 10	# tmp59,
+	st.w	[r13 + (-4)], r0	# i, tmp59
 # spaceinvaders.c:1015: 	for(int i = 10; i >= 0; i--)
 	j	.L109		#
 .L116:
 # spaceinvaders.c:1017: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x + 12 > rightmost)
-	ld.w	r0, [r13 + (-4)]	# tmp55, i
-	mov.w	r1, 3	# tmp57,
-	shl.w	r0, r1	# tmp56, tmp57
-	mov.w	r1, row_1_squid+6	# tmp59,
-	add.w	r0, r1 #222	# tmp58, tmp59
-	ld.s	r0, [r0]	# _1, row_1_squid[i_26].alive
+	ld.w	r0, [r13 + (-4)]	# tmp60, i
+	mov.w	r1, 3	# tmp62,
+	shl.w	r0, r1	# tmp61, tmp62
+	mov.w	r1, row_1_squid+6	# tmp64,
+	add.w	r0, r1 #222	# tmp63, tmp64
+	ld.s	r0, [r0]	# _1, row_1_squid[i_31].alive
 # spaceinvaders.c:1017: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x + 12 > rightmost)
-	zex.s	r1, r0	# tmp60, _1
-	mov.w	r0, 2	# tmp61,
-	cmp.w	r1, r0	# tmp60, tmp61
+	zex.s	r1, r0	# tmp65, _1
+	mov.w	r0, 2	# tmp66,
+	cmp.w	r1, r0	# tmp65, tmp66
 	jnz	.L110		#
 # spaceinvaders.c:1017: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x + 12 > rightmost)
-	ld.w	r0, [r13 + (-4)]	# tmp62, i
-	mov.w	r1, 3	# tmp64,
-	shl.w	r0, r1	# tmp63, tmp64
-	mov.w	r1, row_1_squid+2	# tmp66,
-	add.w	r0, r1 #222	# tmp65, tmp66
-	ld.s	r0, [r0]	# _2, row_1_squid[i_26].x
-	zex.s	r0, r0	# _3, _2
+	ld.w	r0, [r13 + (-4)]	# tmp67, i
+	mov.w	r1, 3	# tmp69,
+	shl.w	r0, r1	# tmp68, tmp69
+	mov.w	r1, row_1_squid+2	# tmp71,
+	add.w	r0, r1 #222	# tmp70, tmp71
+	ld.s	r0, [r0]	# _2, row_1_squid[i_31].x
+	sex.s	r0, r0	# _3, _2
 # spaceinvaders.c:1017: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].x + 12 > rightmost)
 	mov.w	r1, r0	# _4, _3
 	add.w	r1, 11 #111	# _4,
@@ -3191,167 +3196,167 @@ rightmost_alien_X:
 	cmp.w	r1, r0	# _4, _5
 	jss	.L110		#
 # spaceinvaders.c:1019: 			return row_1_squid[i].x;
-	ld.w	r0, [r13 + (-4)]	# tmp67, i
-	mov.w	r1, 3	# tmp69,
-	shl.w	r0, r1	# tmp68, tmp69
-	mov.w	r1, row_1_squid+2	# tmp71,
-	add.w	r0, r1 #222	# tmp70, tmp71
-	ld.s	r0, [r0]	# _27, row_1_squid[i_26].x
-	j	.L108		#
-.L110:
-# spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
 	ld.w	r0, [r13 + (-4)]	# tmp72, i
 	mov.w	r1, 3	# tmp74,
 	shl.w	r0, r1	# tmp73, tmp74
-	mov.w	r1, row_2_crab+6	# tmp76,
+	mov.w	r1, row_1_squid+2	# tmp76,
 	add.w	r0, r1 #222	# tmp75, tmp76
-	ld.s	r0, [r0]	# _6, row_2_crab[i_26].alive
+	ld.s	r0, [r0]	# _6, row_1_squid[i_31].x
+	j	.L108		#
+.L110:
 # spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
-	zex.s	r1, r0	# tmp77, _6
-	mov.w	r0, 2	# tmp78,
-	cmp.w	r1, r0	# tmp77, tmp78
+	ld.w	r0, [r13 + (-4)]	# tmp77, i
+	mov.w	r1, 3	# tmp79,
+	shl.w	r0, r1	# tmp78, tmp79
+	mov.w	r1, row_2_crab+6	# tmp81,
+	add.w	r0, r1 #222	# tmp80, tmp81
+	ld.s	r0, [r0]	# _7, row_2_crab[i_31].alive
+# spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
+	zex.s	r1, r0	# tmp82, _7
+	mov.w	r0, 2	# tmp83,
+	cmp.w	r1, r0	# tmp82, tmp83
 	jnz	.L112		#
 # spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
-	ld.w	r0, [r13 + (-4)]	# tmp79, i
-	mov.w	r1, 3	# tmp81,
-	shl.w	r0, r1	# tmp80, tmp81
-	mov.w	r1, row_2_crab+2	# tmp83,
-	add.w	r0, r1 #222	# tmp82, tmp83
-	ld.s	r0, [r0]	# _7, row_2_crab[i_26].x
-	zex.s	r0, r0	# _8, _7
-# spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
-	mov.w	r1, r0	# _9, _8
-	add.w	r1, 11 #111	# _9,
-	ld.s	r0, [r13 + (-6)]	# _10, rightmost
-# spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
-	cmp.w	r1, r0	# _9, _10
-	jss	.L112		#
-# spaceinvaders.c:1023: 			return row_2_crab[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp84, i
 	mov.w	r1, 3	# tmp86,
 	shl.w	r0, r1	# tmp85, tmp86
 	mov.w	r1, row_2_crab+2	# tmp88,
 	add.w	r0, r1 #222	# tmp87, tmp88
-	ld.s	r0, [r0]	# _27, row_2_crab[i_26].x
-	j	.L108		#
-.L112:
-# spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
+	ld.s	r0, [r0]	# _8, row_2_crab[i_31].x
+	sex.s	r0, r0	# _9, _8
+# spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
+	mov.w	r1, r0	# _10, _9
+	add.w	r1, 11 #111	# _10,
+	ld.s	r0, [r13 + (-6)]	# _11, rightmost
+# spaceinvaders.c:1021: 		else if(row_2_crab[i].alive == 2 && row_2_crab[i].x + 12 > rightmost)
+	cmp.w	r1, r0	# _10, _11
+	jss	.L112		#
+# spaceinvaders.c:1023: 			return row_2_crab[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp89, i
 	mov.w	r1, 3	# tmp91,
 	shl.w	r0, r1	# tmp90, tmp91
-	mov.w	r1, row_3_crab+6	# tmp93,
+	mov.w	r1, row_2_crab+2	# tmp93,
 	add.w	r0, r1 #222	# tmp92, tmp93
-	ld.s	r0, [r0]	# _11, row_3_crab[i_26].alive
+	ld.s	r0, [r0]	# _12, row_2_crab[i_31].x
+	j	.L108		#
+.L112:
 # spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
-	zex.s	r1, r0	# tmp94, _11
-	mov.w	r0, 2	# tmp95,
-	cmp.w	r1, r0	# tmp94, tmp95
+	ld.w	r0, [r13 + (-4)]	# tmp94, i
+	mov.w	r1, 3	# tmp96,
+	shl.w	r0, r1	# tmp95, tmp96
+	mov.w	r1, row_3_crab+6	# tmp98,
+	add.w	r0, r1 #222	# tmp97, tmp98
+	ld.s	r0, [r0]	# _13, row_3_crab[i_31].alive
+# spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
+	zex.s	r1, r0	# tmp99, _13
+	mov.w	r0, 2	# tmp100,
+	cmp.w	r1, r0	# tmp99, tmp100
 	jnz	.L113		#
 # spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
-	ld.w	r0, [r13 + (-4)]	# tmp96, i
-	mov.w	r1, 3	# tmp98,
-	shl.w	r0, r1	# tmp97, tmp98
-	mov.w	r1, row_3_crab+2	# tmp100,
-	add.w	r0, r1 #222	# tmp99, tmp100
-	ld.s	r0, [r0]	# _12, row_3_crab[i_26].x
-	zex.s	r0, r0	# _13, _12
-# spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
-	mov.w	r1, r0	# _14, _13
-	add.w	r1, 11 #111	# _14,
-	ld.s	r0, [r13 + (-6)]	# _15, rightmost
-# spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
-	cmp.w	r1, r0	# _14, _15
-	jss	.L113		#
-# spaceinvaders.c:1027: 			return row_3_crab[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp101, i
 	mov.w	r1, 3	# tmp103,
 	shl.w	r0, r1	# tmp102, tmp103
 	mov.w	r1, row_3_crab+2	# tmp105,
 	add.w	r0, r1 #222	# tmp104, tmp105
-	ld.s	r0, [r0]	# _27, row_3_crab[i_26].x
-	j	.L108		#
-.L113:
-# spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
+	ld.s	r0, [r0]	# _14, row_3_crab[i_31].x
+	sex.s	r0, r0	# _15, _14
+# spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
+	mov.w	r1, r0	# _16, _15
+	add.w	r1, 11 #111	# _16,
+	ld.s	r0, [r13 + (-6)]	# _17, rightmost
+# spaceinvaders.c:1025: 		else if(row_3_crab[i].alive == 2 && row_3_crab[i].x + 12 > rightmost)
+	cmp.w	r1, r0	# _16, _17
+	jss	.L113		#
+# spaceinvaders.c:1027: 			return row_3_crab[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp106, i
 	mov.w	r1, 3	# tmp108,
 	shl.w	r0, r1	# tmp107, tmp108
-	mov.w	r1, row_4_octopus+6	# tmp110,
+	mov.w	r1, row_3_crab+2	# tmp110,
 	add.w	r0, r1 #222	# tmp109, tmp110
-	ld.s	r0, [r0]	# _16, row_4_octopus[i_26].alive
+	ld.s	r0, [r0]	# _18, row_3_crab[i_31].x
+	j	.L108		#
+.L113:
 # spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
-	zex.s	r1, r0	# tmp111, _16
-	mov.w	r0, 2	# tmp112,
-	cmp.w	r1, r0	# tmp111, tmp112
+	ld.w	r0, [r13 + (-4)]	# tmp111, i
+	mov.w	r1, 3	# tmp113,
+	shl.w	r0, r1	# tmp112, tmp113
+	mov.w	r1, row_4_octopus+6	# tmp115,
+	add.w	r0, r1 #222	# tmp114, tmp115
+	ld.s	r0, [r0]	# _19, row_4_octopus[i_31].alive
+# spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
+	zex.s	r1, r0	# tmp116, _19
+	mov.w	r0, 2	# tmp117,
+	cmp.w	r1, r0	# tmp116, tmp117
 	jnz	.L114		#
 # spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
-	ld.w	r0, [r13 + (-4)]	# tmp113, i
-	mov.w	r1, 3	# tmp115,
-	shl.w	r0, r1	# tmp114, tmp115
-	mov.w	r1, row_4_octopus+2	# tmp117,
-	add.w	r0, r1 #222	# tmp116, tmp117
-	ld.s	r0, [r0]	# _17, row_4_octopus[i_26].x
-	zex.s	r0, r0	# _18, _17
-# spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
-	mov.w	r1, r0	# _19, _18
-	add.w	r1, 11 #111	# _19,
-	ld.s	r0, [r13 + (-6)]	# _20, rightmost
-# spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
-	cmp.w	r1, r0	# _19, _20
-	jss	.L114		#
-# spaceinvaders.c:1031: 			return row_4_octopus[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp118, i
 	mov.w	r1, 3	# tmp120,
 	shl.w	r0, r1	# tmp119, tmp120
 	mov.w	r1, row_4_octopus+2	# tmp122,
 	add.w	r0, r1 #222	# tmp121, tmp122
-	ld.s	r0, [r0]	# _27, row_4_octopus[i_26].x
-	j	.L108		#
-.L114:
-# spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
+	ld.s	r0, [r0]	# _20, row_4_octopus[i_31].x
+	sex.s	r0, r0	# _21, _20
+# spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
+	mov.w	r1, r0	# _22, _21
+	add.w	r1, 11 #111	# _22,
+	ld.s	r0, [r13 + (-6)]	# _23, rightmost
+# spaceinvaders.c:1029: 		else if(row_4_octopus[i].alive == 2 && row_4_octopus[i].x + 12 > rightmost)
+	cmp.w	r1, r0	# _22, _23
+	jss	.L114		#
+# spaceinvaders.c:1031: 			return row_4_octopus[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp123, i
 	mov.w	r1, 3	# tmp125,
 	shl.w	r0, r1	# tmp124, tmp125
-	mov.w	r1, row_5_octopus+6	# tmp127,
+	mov.w	r1, row_4_octopus+2	# tmp127,
 	add.w	r0, r1 #222	# tmp126, tmp127
-	ld.s	r0, [r0]	# _21, row_5_octopus[i_26].alive
+	ld.s	r0, [r0]	# _24, row_4_octopus[i_31].x
+	j	.L108		#
+.L114:
 # spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
-	zex.s	r1, r0	# tmp128, _21
-	mov.w	r0, 2	# tmp129,
-	cmp.w	r1, r0	# tmp128, tmp129
+	ld.w	r0, [r13 + (-4)]	# tmp128, i
+	mov.w	r1, 3	# tmp130,
+	shl.w	r0, r1	# tmp129, tmp130
+	mov.w	r1, row_5_octopus+6	# tmp132,
+	add.w	r0, r1 #222	# tmp131, tmp132
+	ld.s	r0, [r0]	# _25, row_5_octopus[i_31].alive
+# spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
+	zex.s	r1, r0	# tmp133, _25
+	mov.w	r0, 2	# tmp134,
+	cmp.w	r1, r0	# tmp133, tmp134
 	jnz	.L115		#
 # spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
-	ld.w	r0, [r13 + (-4)]	# tmp130, i
-	mov.w	r1, 3	# tmp132,
-	shl.w	r0, r1	# tmp131, tmp132
-	mov.w	r1, row_5_octopus+2	# tmp134,
-	add.w	r0, r1 #222	# tmp133, tmp134
-	ld.s	r0, [r0]	# _22, row_5_octopus[i_26].x
-	zex.s	r0, r0	# _23, _22
-# spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
-	mov.w	r1, r0	# _24, _23
-	add.w	r1, 11 #111	# _24,
-	ld.s	r0, [r13 + (-6)]	# _25, rightmost
-# spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
-	cmp.w	r1, r0	# _24, _25
-	jss	.L115		#
-# spaceinvaders.c:1035: 			return row_5_octopus[i].x;
 	ld.w	r0, [r13 + (-4)]	# tmp135, i
 	mov.w	r1, 3	# tmp137,
 	shl.w	r0, r1	# tmp136, tmp137
 	mov.w	r1, row_5_octopus+2	# tmp139,
 	add.w	r0, r1 #222	# tmp138, tmp139
-	ld.s	r0, [r0]	# _27, row_5_octopus[i_26].x
+	ld.s	r0, [r0]	# _26, row_5_octopus[i_31].x
+	sex.s	r0, r0	# _27, _26
+# spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
+	mov.w	r1, r0	# _28, _27
+	add.w	r1, 11 #111	# _28,
+	ld.s	r0, [r13 + (-6)]	# _29, rightmost
+# spaceinvaders.c:1033: 		else if(row_5_octopus[i].alive == 2 && row_5_octopus[i].x + 12 > rightmost)
+	cmp.w	r1, r0	# _28, _29
+	jss	.L115		#
+# spaceinvaders.c:1035: 			return row_5_octopus[i].x;
+	ld.w	r0, [r13 + (-4)]	# tmp140, i
+	mov.w	r1, 3	# tmp142,
+	shl.w	r0, r1	# tmp141, tmp142
+	mov.w	r1, row_5_octopus+2	# tmp144,
+	add.w	r0, r1 #222	# tmp143, tmp144
+	ld.s	r0, [r0]	# _30, row_5_octopus[i_31].x
 	j	.L108		#
 .L115:
 # spaceinvaders.c:1015: 	for(int i = 10; i >= 0; i--)
-	ld.w	r0, [r13 + (-4)]	# tmp141, i
-	add.w	r0, -1 #111	# tmp140,
-	st.w	[r13 + (-4)], r0	# i, tmp140
+	ld.w	r0, [r13 + (-4)]	# tmp146, i
+	add.w	r0, -1 #111	# tmp145,
+	st.w	[r13 + (-4)], r0	# i, tmp145
 .L109:
 # spaceinvaders.c:1015: 	for(int i = 10; i >= 0; i--)
-	ld.w	r1, [r13 + (-4)]	# tmp142, i
-	xor.w	r0, r0	# tmp143
-	cmp.w	r1, r0	# tmp142, tmp143
+	ld.w	r1, [r13 + (-4)]	# tmp147, i
+	xor.w	r0, r0	# tmp148
+	cmp.w	r1, r0	# tmp147, tmp148
 	jges	.L116		#
 .L108:
 # spaceinvaders.c:1038: }
@@ -3367,252 +3372,257 @@ lowest_alien_Y:
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
 # spaceinvaders.c:1043: 	uint16_t lowest = 0;
-	xor.w	r0, r0	# tmp38
-	st.s	[r13 + (-22)], r0	# lowest, tmp38
+	xor.w	r0, r0	# tmp53
+	st.s	[r13 + (-22)], r0	# lowest, tmp53
 # spaceinvaders.c:1044: 	for(int i = 10; i >= 0; i--)
-	mov.w	r0, 10	# tmp39,
-	st.w	[r13 + (-4)], r0	# i, tmp39
+	mov.w	r0, 10	# tmp54,
+	st.w	[r13 + (-4)], r0	# i, tmp54
 # spaceinvaders.c:1044: 	for(int i = 10; i >= 0; i--)
 	j	.L118		#
 .L121:
 # spaceinvaders.c:1046: 		if(row_5_octopus[i].alive == 2 && row_5_octopus[i].y > lowest)
-	ld.w	r0, [r13 + (-4)]	# tmp40, i
-	mov.w	r1, 3	# tmp42,
-	shl.w	r0, r1	# tmp41, tmp42
-	mov.w	r1, row_5_octopus+6	# tmp44,
-	add.w	r0, r1 #222	# tmp43, tmp44
-	ld.s	r0, [r0]	# _1, row_5_octopus[i_11].alive
+	ld.w	r0, [r13 + (-4)]	# tmp55, i
+	mov.w	r1, 3	# tmp57,
+	shl.w	r0, r1	# tmp56, tmp57
+	mov.w	r1, row_5_octopus+6	# tmp59,
+	add.w	r0, r1 #222	# tmp58, tmp59
+	ld.s	r0, [r0]	# _1, row_5_octopus[i_26].alive
 # spaceinvaders.c:1046: 		if(row_5_octopus[i].alive == 2 && row_5_octopus[i].y > lowest)
-	zex.s	r1, r0	# tmp45, _1
-	mov.w	r0, 2	# tmp46,
-	cmp.w	r1, r0	# tmp45, tmp46
+	zex.s	r1, r0	# tmp60, _1
+	mov.w	r0, 2	# tmp61,
+	cmp.w	r1, r0	# tmp60, tmp61
 	jnz	.L119		#
 # spaceinvaders.c:1046: 		if(row_5_octopus[i].alive == 2 && row_5_octopus[i].y > lowest)
-	ld.w	r0, [r13 + (-4)]	# tmp47, i
-	mov.w	r1, 3	# tmp49,
-	shl.w	r0, r1	# tmp48, tmp49
-	mov.w	r1, row_5_octopus+4	# tmp51,
-	add.w	r0, r1 #222	# tmp50, tmp51
-	ld.s	r0, [r0]	# _2, row_5_octopus[i_11].y
+	ld.w	r0, [r13 + (-4)]	# tmp62, i
+	mov.w	r1, 3	# tmp64,
+	shl.w	r0, r1	# tmp63, tmp64
+	mov.w	r1, row_5_octopus+4	# tmp66,
+	add.w	r0, r1 #222	# tmp65, tmp66
+	ld.s	r0, [r0]	# _2, row_5_octopus[i_26].y
+	sex.s	r1, r0	# _3, _2
 # spaceinvaders.c:1046: 		if(row_5_octopus[i].alive == 2 && row_5_octopus[i].y > lowest)
-	ld.s	r1, [r13 + (-22)]	# tmp52, lowest
-	zex.s	r0, r0	# tmp53, _2
-	cmp.w	r1, r0	# tmp52, tmp53
-	jge	.L119		#
+	ld.s	r0, [r13 + (-22)]	# _4, lowest
+# spaceinvaders.c:1046: 		if(row_5_octopus[i].alive == 2 && row_5_octopus[i].y > lowest)
+	cmp.w	r1, r0	# _3, _4
+	jses	.L119		#
 # spaceinvaders.c:1048: 			return row_5_octopus[i].y;
-	ld.w	r0, [r13 + (-4)]	# tmp54, i
-	mov.w	r1, 3	# tmp56,
-	shl.w	r0, r1	# tmp55, tmp56
-	mov.w	r1, row_5_octopus+4	# tmp58,
-	add.w	r0, r1 #222	# tmp57, tmp58
-	ld.s	r0, [r0]	# _16, row_5_octopus[i_11].y
+	ld.w	r0, [r13 + (-4)]	# tmp67, i
+	mov.w	r1, 3	# tmp69,
+	shl.w	r0, r1	# tmp68, tmp69
+	mov.w	r1, row_5_octopus+4	# tmp71,
+	add.w	r0, r1 #222	# tmp70, tmp71
+	ld.s	r0, [r0]	# _5, row_5_octopus[i_26].y
 	j	.L117		#
 .L119:
 # spaceinvaders.c:1044: 	for(int i = 10; i >= 0; i--)
-	ld.w	r0, [r13 + (-4)]	# tmp60, i
-	add.w	r0, -1 #111	# tmp59,
-	st.w	[r13 + (-4)], r0	# i, tmp59
+	ld.w	r0, [r13 + (-4)]	# tmp73, i
+	add.w	r0, -1 #111	# tmp72,
+	st.w	[r13 + (-4)], r0	# i, tmp72
 .L118:
 # spaceinvaders.c:1044: 	for(int i = 10; i >= 0; i--)
-	ld.w	r1, [r13 + (-4)]	# tmp61, i
-	xor.w	r0, r0	# tmp62
-	cmp.w	r1, r0	# tmp61, tmp62
+	ld.w	r1, [r13 + (-4)]	# tmp74, i
+	xor.w	r0, r0	# tmp75
+	cmp.w	r1, r0	# tmp74, tmp75
 	jges	.L121		#
 # spaceinvaders.c:1051: 	for(int i = 10; i >= 0; i--)
-	mov.w	r0, 10	# tmp63,
-	st.w	[r13 + (-8)], r0	# i, tmp63
+	mov.w	r0, 10	# tmp76,
+	st.w	[r13 + (-8)], r0	# i, tmp76
 # spaceinvaders.c:1051: 	for(int i = 10; i >= 0; i--)
 	j	.L122		#
 .L124:
 # spaceinvaders.c:1053: 		if(row_4_octopus[i].alive == 2 && row_4_octopus[i].y > lowest)
-	ld.w	r0, [r13 + (-8)]	# tmp64, i
-	mov.w	r1, 3	# tmp66,
-	shl.w	r0, r1	# tmp65, tmp66
-	mov.w	r1, row_4_octopus+6	# tmp68,
-	add.w	r0, r1 #222	# tmp67, tmp68
-	ld.s	r0, [r0]	# _3, row_4_octopus[i_12].alive
+	ld.w	r0, [r13 + (-8)]	# tmp77, i
+	mov.w	r1, 3	# tmp79,
+	shl.w	r0, r1	# tmp78, tmp79
+	mov.w	r1, row_4_octopus+6	# tmp81,
+	add.w	r0, r1 #222	# tmp80, tmp81
+	ld.s	r0, [r0]	# _6, row_4_octopus[i_27].alive
 # spaceinvaders.c:1053: 		if(row_4_octopus[i].alive == 2 && row_4_octopus[i].y > lowest)
-	zex.s	r1, r0	# tmp69, _3
-	mov.w	r0, 2	# tmp70,
-	cmp.w	r1, r0	# tmp69, tmp70
+	zex.s	r1, r0	# tmp82, _6
+	mov.w	r0, 2	# tmp83,
+	cmp.w	r1, r0	# tmp82, tmp83
 	jnz	.L123		#
 # spaceinvaders.c:1053: 		if(row_4_octopus[i].alive == 2 && row_4_octopus[i].y > lowest)
-	ld.w	r0, [r13 + (-8)]	# tmp71, i
-	mov.w	r1, 3	# tmp73,
-	shl.w	r0, r1	# tmp72, tmp73
-	mov.w	r1, row_4_octopus+4	# tmp75,
-	add.w	r0, r1 #222	# tmp74, tmp75
-	ld.s	r0, [r0]	# _4, row_4_octopus[i_12].y
+	ld.w	r0, [r13 + (-8)]	# tmp84, i
+	mov.w	r1, 3	# tmp86,
+	shl.w	r0, r1	# tmp85, tmp86
+	mov.w	r1, row_4_octopus+4	# tmp88,
+	add.w	r0, r1 #222	# tmp87, tmp88
+	ld.s	r0, [r0]	# _7, row_4_octopus[i_27].y
+	sex.s	r1, r0	# _8, _7
 # spaceinvaders.c:1053: 		if(row_4_octopus[i].alive == 2 && row_4_octopus[i].y > lowest)
-	ld.s	r1, [r13 + (-22)]	# tmp76, lowest
-	zex.s	r0, r0	# tmp77, _4
-	cmp.w	r1, r0	# tmp76, tmp77
-	jge	.L123		#
+	ld.s	r0, [r13 + (-22)]	# _9, lowest
+# spaceinvaders.c:1053: 		if(row_4_octopus[i].alive == 2 && row_4_octopus[i].y > lowest)
+	cmp.w	r1, r0	# _8, _9
+	jses	.L123		#
 # spaceinvaders.c:1055: 			return row_4_octopus[i].y;
-	ld.w	r0, [r13 + (-8)]	# tmp78, i
-	mov.w	r1, 3	# tmp80,
-	shl.w	r0, r1	# tmp79, tmp80
-	mov.w	r1, row_4_octopus+4	# tmp82,
-	add.w	r0, r1 #222	# tmp81, tmp82
-	ld.s	r0, [r0]	# _16, row_4_octopus[i_12].y
+	ld.w	r0, [r13 + (-8)]	# tmp89, i
+	mov.w	r1, 3	# tmp91,
+	shl.w	r0, r1	# tmp90, tmp91
+	mov.w	r1, row_4_octopus+4	# tmp93,
+	add.w	r0, r1 #222	# tmp92, tmp93
+	ld.s	r0, [r0]	# _10, row_4_octopus[i_27].y
 	j	.L117		#
 .L123:
 # spaceinvaders.c:1051: 	for(int i = 10; i >= 0; i--)
-	ld.w	r0, [r13 + (-8)]	# tmp84, i
-	add.w	r0, -1 #111	# tmp83,
-	st.w	[r13 + (-8)], r0	# i, tmp83
+	ld.w	r0, [r13 + (-8)]	# tmp95, i
+	add.w	r0, -1 #111	# tmp94,
+	st.w	[r13 + (-8)], r0	# i, tmp94
 .L122:
 # spaceinvaders.c:1051: 	for(int i = 10; i >= 0; i--)
-	ld.w	r1, [r13 + (-8)]	# tmp85, i
-	xor.w	r0, r0	# tmp86
-	cmp.w	r1, r0	# tmp85, tmp86
+	ld.w	r1, [r13 + (-8)]	# tmp96, i
+	xor.w	r0, r0	# tmp97
+	cmp.w	r1, r0	# tmp96, tmp97
 	jges	.L124		#
 # spaceinvaders.c:1058: 	for(int i = 10; i >= 0; i--)
-	mov.w	r0, 10	# tmp87,
-	st.w	[r13 + (-12)], r0	# i, tmp87
+	mov.w	r0, 10	# tmp98,
+	st.w	[r13 + (-12)], r0	# i, tmp98
 # spaceinvaders.c:1058: 	for(int i = 10; i >= 0; i--)
 	j	.L125		#
 .L127:
 # spaceinvaders.c:1060: 		if(row_3_crab[i].alive == 2 && row_3_crab[i].y > lowest)
-	ld.w	r0, [r13 + (-12)]	# tmp88, i
-	mov.w	r1, 3	# tmp90,
-	shl.w	r0, r1	# tmp89, tmp90
-	mov.w	r1, row_3_crab+6	# tmp92,
-	add.w	r0, r1 #222	# tmp91, tmp92
-	ld.s	r0, [r0]	# _5, row_3_crab[i_13].alive
+	ld.w	r0, [r13 + (-12)]	# tmp99, i
+	mov.w	r1, 3	# tmp101,
+	shl.w	r0, r1	# tmp100, tmp101
+	mov.w	r1, row_3_crab+6	# tmp103,
+	add.w	r0, r1 #222	# tmp102, tmp103
+	ld.s	r0, [r0]	# _11, row_3_crab[i_28].alive
 # spaceinvaders.c:1060: 		if(row_3_crab[i].alive == 2 && row_3_crab[i].y > lowest)
-	zex.s	r1, r0	# tmp93, _5
-	mov.w	r0, 2	# tmp94,
-	cmp.w	r1, r0	# tmp93, tmp94
+	zex.s	r1, r0	# tmp104, _11
+	mov.w	r0, 2	# tmp105,
+	cmp.w	r1, r0	# tmp104, tmp105
 	jnz	.L126		#
 # spaceinvaders.c:1060: 		if(row_3_crab[i].alive == 2 && row_3_crab[i].y > lowest)
-	ld.w	r0, [r13 + (-12)]	# tmp95, i
-	mov.w	r1, 3	# tmp97,
-	shl.w	r0, r1	# tmp96, tmp97
-	mov.w	r1, row_3_crab+4	# tmp99,
-	add.w	r0, r1 #222	# tmp98, tmp99
-	ld.s	r0, [r0]	# _6, row_3_crab[i_13].y
+	ld.w	r0, [r13 + (-12)]	# tmp106, i
+	mov.w	r1, 3	# tmp108,
+	shl.w	r0, r1	# tmp107, tmp108
+	mov.w	r1, row_3_crab+4	# tmp110,
+	add.w	r0, r1 #222	# tmp109, tmp110
+	ld.s	r0, [r0]	# _12, row_3_crab[i_28].y
+	sex.s	r1, r0	# _13, _12
 # spaceinvaders.c:1060: 		if(row_3_crab[i].alive == 2 && row_3_crab[i].y > lowest)
-	ld.s	r1, [r13 + (-22)]	# tmp100, lowest
-	zex.s	r0, r0	# tmp101, _6
-	cmp.w	r1, r0	# tmp100, tmp101
-	jge	.L126		#
+	ld.s	r0, [r13 + (-22)]	# _14, lowest
+# spaceinvaders.c:1060: 		if(row_3_crab[i].alive == 2 && row_3_crab[i].y > lowest)
+	cmp.w	r1, r0	# _13, _14
+	jses	.L126		#
 # spaceinvaders.c:1062: 			return row_3_crab[i].y;
-	ld.w	r0, [r13 + (-12)]	# tmp102, i
-	mov.w	r1, 3	# tmp104,
-	shl.w	r0, r1	# tmp103, tmp104
-	mov.w	r1, row_3_crab+4	# tmp106,
-	add.w	r0, r1 #222	# tmp105, tmp106
-	ld.s	r0, [r0]	# _16, row_3_crab[i_13].y
+	ld.w	r0, [r13 + (-12)]	# tmp111, i
+	mov.w	r1, 3	# tmp113,
+	shl.w	r0, r1	# tmp112, tmp113
+	mov.w	r1, row_3_crab+4	# tmp115,
+	add.w	r0, r1 #222	# tmp114, tmp115
+	ld.s	r0, [r0]	# _15, row_3_crab[i_28].y
 	j	.L117		#
 .L126:
 # spaceinvaders.c:1058: 	for(int i = 10; i >= 0; i--)
-	ld.w	r0, [r13 + (-12)]	# tmp108, i
-	add.w	r0, -1 #111	# tmp107,
-	st.w	[r13 + (-12)], r0	# i, tmp107
+	ld.w	r0, [r13 + (-12)]	# tmp117, i
+	add.w	r0, -1 #111	# tmp116,
+	st.w	[r13 + (-12)], r0	# i, tmp116
 .L125:
 # spaceinvaders.c:1058: 	for(int i = 10; i >= 0; i--)
-	ld.w	r1, [r13 + (-12)]	# tmp109, i
-	xor.w	r0, r0	# tmp110
-	cmp.w	r1, r0	# tmp109, tmp110
+	ld.w	r1, [r13 + (-12)]	# tmp118, i
+	xor.w	r0, r0	# tmp119
+	cmp.w	r1, r0	# tmp118, tmp119
 	jges	.L127		#
 # spaceinvaders.c:1065: 	for(int i = 10; i >= 0; i--)
-	mov.w	r0, 10	# tmp111,
-	st.w	[r13 + (-16)], r0	# i, tmp111
+	mov.w	r0, 10	# tmp120,
+	st.w	[r13 + (-16)], r0	# i, tmp120
 # spaceinvaders.c:1065: 	for(int i = 10; i >= 0; i--)
 	j	.L128		#
 .L130:
 # spaceinvaders.c:1067: 		if(row_2_crab[i].alive == 2 && row_2_crab[i].y > lowest)
-	ld.w	r0, [r13 + (-16)]	# tmp112, i
-	mov.w	r1, 3	# tmp114,
-	shl.w	r0, r1	# tmp113, tmp114
-	mov.w	r1, row_2_crab+6	# tmp116,
-	add.w	r0, r1 #222	# tmp115, tmp116
-	ld.s	r0, [r0]	# _7, row_2_crab[i_14].alive
+	ld.w	r0, [r13 + (-16)]	# tmp121, i
+	mov.w	r1, 3	# tmp123,
+	shl.w	r0, r1	# tmp122, tmp123
+	mov.w	r1, row_2_crab+6	# tmp125,
+	add.w	r0, r1 #222	# tmp124, tmp125
+	ld.s	r0, [r0]	# _16, row_2_crab[i_29].alive
 # spaceinvaders.c:1067: 		if(row_2_crab[i].alive == 2 && row_2_crab[i].y > lowest)
-	zex.s	r1, r0	# tmp117, _7
-	mov.w	r0, 2	# tmp118,
-	cmp.w	r1, r0	# tmp117, tmp118
+	zex.s	r1, r0	# tmp126, _16
+	mov.w	r0, 2	# tmp127,
+	cmp.w	r1, r0	# tmp126, tmp127
 	jnz	.L129		#
 # spaceinvaders.c:1067: 		if(row_2_crab[i].alive == 2 && row_2_crab[i].y > lowest)
-	ld.w	r0, [r13 + (-16)]	# tmp119, i
-	mov.w	r1, 3	# tmp121,
-	shl.w	r0, r1	# tmp120, tmp121
-	mov.w	r1, row_2_crab+4	# tmp123,
-	add.w	r0, r1 #222	# tmp122, tmp123
-	ld.s	r0, [r0]	# _8, row_2_crab[i_14].y
+	ld.w	r0, [r13 + (-16)]	# tmp128, i
+	mov.w	r1, 3	# tmp130,
+	shl.w	r0, r1	# tmp129, tmp130
+	mov.w	r1, row_2_crab+4	# tmp132,
+	add.w	r0, r1 #222	# tmp131, tmp132
+	ld.s	r0, [r0]	# _17, row_2_crab[i_29].y
+	sex.s	r1, r0	# _18, _17
 # spaceinvaders.c:1067: 		if(row_2_crab[i].alive == 2 && row_2_crab[i].y > lowest)
-	ld.s	r1, [r13 + (-22)]	# tmp124, lowest
-	zex.s	r0, r0	# tmp125, _8
-	cmp.w	r1, r0	# tmp124, tmp125
-	jge	.L129		#
+	ld.s	r0, [r13 + (-22)]	# _19, lowest
+# spaceinvaders.c:1067: 		if(row_2_crab[i].alive == 2 && row_2_crab[i].y > lowest)
+	cmp.w	r1, r0	# _18, _19
+	jses	.L129		#
 # spaceinvaders.c:1069: 			return row_2_crab[i].y;
-	ld.w	r0, [r13 + (-16)]	# tmp126, i
-	mov.w	r1, 3	# tmp128,
-	shl.w	r0, r1	# tmp127, tmp128
-	mov.w	r1, row_2_crab+4	# tmp130,
-	add.w	r0, r1 #222	# tmp129, tmp130
-	ld.s	r0, [r0]	# _16, row_2_crab[i_14].y
+	ld.w	r0, [r13 + (-16)]	# tmp133, i
+	mov.w	r1, 3	# tmp135,
+	shl.w	r0, r1	# tmp134, tmp135
+	mov.w	r1, row_2_crab+4	# tmp137,
+	add.w	r0, r1 #222	# tmp136, tmp137
+	ld.s	r0, [r0]	# _20, row_2_crab[i_29].y
 	j	.L117		#
 .L129:
 # spaceinvaders.c:1065: 	for(int i = 10; i >= 0; i--)
-	ld.w	r0, [r13 + (-16)]	# tmp132, i
-	add.w	r0, -1 #111	# tmp131,
-	st.w	[r13 + (-16)], r0	# i, tmp131
+	ld.w	r0, [r13 + (-16)]	# tmp139, i
+	add.w	r0, -1 #111	# tmp138,
+	st.w	[r13 + (-16)], r0	# i, tmp138
 .L128:
 # spaceinvaders.c:1065: 	for(int i = 10; i >= 0; i--)
-	ld.w	r1, [r13 + (-16)]	# tmp133, i
-	xor.w	r0, r0	# tmp134
-	cmp.w	r1, r0	# tmp133, tmp134
+	ld.w	r1, [r13 + (-16)]	# tmp140, i
+	xor.w	r0, r0	# tmp141
+	cmp.w	r1, r0	# tmp140, tmp141
 	jges	.L130		#
 # spaceinvaders.c:1072: 	for(int i = 10; i >= 0; i--)
-	mov.w	r0, 10	# tmp135,
-	st.w	[r13 + (-20)], r0	# i, tmp135
+	mov.w	r0, 10	# tmp142,
+	st.w	[r13 + (-20)], r0	# i, tmp142
 # spaceinvaders.c:1072: 	for(int i = 10; i >= 0; i--)
 	j	.L131		#
 .L133:
 # spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
-	ld.w	r0, [r13 + (-20)]	# tmp136, i
-	mov.w	r1, 3	# tmp138,
-	shl.w	r0, r1	# tmp137, tmp138
-	mov.w	r1, row_1_squid+6	# tmp140,
-	add.w	r0, r1 #222	# tmp139, tmp140
-	ld.s	r0, [r0]	# _9, row_1_squid[i_15].alive
-# spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
-	zex.s	r1, r0	# tmp141, _9
-	mov.w	r0, 2	# tmp142,
-	cmp.w	r1, r0	# tmp141, tmp142
-	jnz	.L132		#
-# spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
 	ld.w	r0, [r13 + (-20)]	# tmp143, i
 	mov.w	r1, 3	# tmp145,
 	shl.w	r0, r1	# tmp144, tmp145
-	mov.w	r1, row_1_squid+4	# tmp147,
+	mov.w	r1, row_1_squid+6	# tmp147,
 	add.w	r0, r1 #222	# tmp146, tmp147
-	ld.s	r0, [r0]	# _10, row_1_squid[i_15].y
+	ld.s	r0, [r0]	# _21, row_1_squid[i_30].alive
 # spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
-	ld.s	r1, [r13 + (-22)]	# tmp148, lowest
-	zex.s	r0, r0	# tmp149, _10
+	zex.s	r1, r0	# tmp148, _21
+	mov.w	r0, 2	# tmp149,
 	cmp.w	r1, r0	# tmp148, tmp149
-	jge	.L132		#
-# spaceinvaders.c:1076: 			return row_1_squid[i].y;
+	jnz	.L132		#
+# spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
 	ld.w	r0, [r13 + (-20)]	# tmp150, i
 	mov.w	r1, 3	# tmp152,
 	shl.w	r0, r1	# tmp151, tmp152
 	mov.w	r1, row_1_squid+4	# tmp154,
 	add.w	r0, r1 #222	# tmp153, tmp154
-	ld.s	r0, [r0]	# _16, row_1_squid[i_15].y
+	ld.s	r0, [r0]	# _22, row_1_squid[i_30].y
+	sex.s	r1, r0	# _23, _22
+# spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
+	ld.s	r0, [r13 + (-22)]	# _24, lowest
+# spaceinvaders.c:1074: 		if(row_1_squid[i].alive == 2 && row_1_squid[i].y > lowest)
+	cmp.w	r1, r0	# _23, _24
+	jses	.L132		#
+# spaceinvaders.c:1076: 			return row_1_squid[i].y;
+	ld.w	r0, [r13 + (-20)]	# tmp155, i
+	mov.w	r1, 3	# tmp157,
+	shl.w	r0, r1	# tmp156, tmp157
+	mov.w	r1, row_1_squid+4	# tmp159,
+	add.w	r0, r1 #222	# tmp158, tmp159
+	ld.s	r0, [r0]	# _25, row_1_squid[i_30].y
 	j	.L117		#
 .L132:
 # spaceinvaders.c:1072: 	for(int i = 10; i >= 0; i--)
-	ld.w	r0, [r13 + (-20)]	# tmp156, i
-	add.w	r0, -1 #111	# tmp155,
-	st.w	[r13 + (-20)], r0	# i, tmp155
+	ld.w	r0, [r13 + (-20)]	# tmp161, i
+	add.w	r0, -1 #111	# tmp160,
+	st.w	[r13 + (-20)], r0	# i, tmp160
 .L131:
 # spaceinvaders.c:1072: 	for(int i = 10; i >= 0; i--)
-	ld.w	r1, [r13 + (-20)]	# tmp157, i
-	xor.w	r0, r0	# tmp158
-	cmp.w	r1, r0	# tmp157, tmp158
+	ld.w	r1, [r13 + (-20)]	# tmp162, i
+	xor.w	r0, r0	# tmp163
+	cmp.w	r1, r0	# tmp162, tmp163
 	jges	.L133		#
 .L117:
 # spaceinvaders.c:1079: }
@@ -4137,7 +4147,7 @@ ufo_is_alive_and_collided_with_player_bullet:
 # spaceinvaders.c:1193: 			&& (player_bullet_def->x >= ufo_position_X 
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.47_2, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _3, player_bullet_def.47_2->x
-	zex.s	r1, r0	# _4, _3
+	sex.s	r1, r0	# _4, _3
 # spaceinvaders.c:1193: 			&& (player_bullet_def->x >= ufo_position_X 
 	ld.w	r0, [ufo_position_X]	# ufo_position_X.48_5, ufo_position_X
 # spaceinvaders.c:1193: 			&& (player_bullet_def->x >= ufo_position_X 
@@ -4146,7 +4156,7 @@ ufo_is_alive_and_collided_with_player_bullet:
 # spaceinvaders.c:1194: 				&& player_bullet_def->x <= ufo_position_X + 15)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.49_6, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _7, player_bullet_def.49_6->x
-	zex.s	r1, r0	# _8, _7
+	sex.s	r1, r0	# _8, _7
 # spaceinvaders.c:1194: 				&& player_bullet_def->x <= ufo_position_X + 15)
 	ld.w	r0, [ufo_position_X]	# ufo_position_X.50_9, ufo_position_X
 	add.w	r0, 15 #111	# _10,
@@ -4157,18 +4167,18 @@ ufo_is_alive_and_collided_with_player_bullet:
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.51_11, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _12, player_bullet_def.51_11->y
 # spaceinvaders.c:1195: 			&& (player_bullet_def->y <= 35 + 7 
-	zex.s	r1, r0	# tmp43, _12
+	sex.s	r1, r0	# tmp43, _12
 	mov.w	r0, 42	# tmp44,
 	cmp.w	r1, r0	# tmp43, tmp44
-	jg	.L166		#
+	jgs	.L166		#
 # spaceinvaders.c:1196: 				&& player_bullet_def->y >= 35 - 2));
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.52_13, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _14, player_bullet_def.52_13->y
 # spaceinvaders.c:1196: 				&& player_bullet_def->y >= 35 - 2));
-	zex.s	r1, r0	# tmp45, _14
+	sex.s	r1, r0	# tmp45, _14
 	mov.w	r0, 32	# tmp46,
 	cmp.w	r1, r0	# tmp45, tmp46
-	jse	.L166		#
+	jses	.L166		#
 # spaceinvaders.c:1195: 			&& (player_bullet_def->y <= 35 + 7 
 	mov.w	r0, 1	# iftmp.45_15,
 	j	.L168		#
@@ -4291,14 +4301,14 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp202, tmp203
 	ld.s	r0, [r0]	# _5, row_5_octopus[i_163].x
 # spaceinvaders.c:1238: 		&& (player_bullet_def->x >= row_5_octopus[i].x && player_bullet_def->x <= row_5_octopus[i].x + 11)
-	zex.s	r1, r1	# tmp204, _4
-	zex.s	r0, r0	# tmp205, _5
+	sex.s	r1, r1	# tmp204, _4
+	sex.s	r0, r0	# tmp205, _5
 	cmp.w	r1, r0	# tmp204, tmp205
-	js	.L176		#
+	jss	.L176		#
 # spaceinvaders.c:1238: 		&& (player_bullet_def->x >= row_5_octopus[i].x && player_bullet_def->x <= row_5_octopus[i].x + 11)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.55_6, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _7, player_bullet_def.55_6->x
-	zex.s	r1, r0	# _8, _7
+	sex.s	r1, r0	# _8, _7
 # spaceinvaders.c:1238: 		&& (player_bullet_def->x >= row_5_octopus[i].x && player_bullet_def->x <= row_5_octopus[i].x + 11)
 	ld.w	r0, [r13 + (-4)]	# tmp206, i
 	mov.w	r2, 3	# tmp208,
@@ -4306,7 +4316,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_5_octopus+2	# tmp210,
 	add.w	r0, r2 #222	# tmp209, tmp210
 	ld.s	r0, [r0]	# _9, row_5_octopus[i_163].x
-	zex.s	r0, r0	# _10, _9
+	sex.s	r0, r0	# _10, _9
 # spaceinvaders.c:1238: 		&& (player_bullet_def->x >= row_5_octopus[i].x && player_bullet_def->x <= row_5_octopus[i].x + 11)
 	add.w	r0, 11 #111	# _11,
 # spaceinvaders.c:1238: 		&& (player_bullet_def->x >= row_5_octopus[i].x && player_bullet_def->x <= row_5_octopus[i].x + 11)
@@ -4315,7 +4325,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.56_12, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _13, player_bullet_def.56_12->y
-	zex.s	r1, r0	# _14, _13
+	sex.s	r1, r0	# _14, _13
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp211, i
 	mov.w	r2, 3	# tmp213,
@@ -4323,7 +4333,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_5_octopus+4	# tmp215,
 	add.w	r0, r2 #222	# tmp214, tmp215
 	ld.s	r0, [r0]	# _15, row_5_octopus[i_163].y
-	zex.s	r0, r0	# _16, _15
+	sex.s	r0, r0	# _16, _15
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
 	add.w	r0, 7 #111	# _17,
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
@@ -4332,7 +4342,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.57_18, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _19, player_bullet_def.57_18->y
-	zex.s	r1, r0	# _20, _19
+	sex.s	r1, r0	# _20, _19
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp216, i
 	mov.w	r2, 3	# tmp218,
@@ -4340,7 +4350,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_5_octopus+4	# tmp220,
 	add.w	r0, r2 #222	# tmp219, tmp220
 	ld.s	r0, [r0]	# _21, row_5_octopus[i_163].y
-	zex.s	r0, r0	# _22, _21
+	sex.s	r0, r0	# _22, _21
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
 	add.w	r0, -2 #111	# _23,
 # spaceinvaders.c:1239: 		&& (player_bullet_def->y <= row_5_octopus[i].y + 7 && player_bullet_def->y >= row_5_octopus[i].y - 2))
@@ -4354,7 +4364,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp224, tmp225
 	ld.s	r0, [r0]	# _24, row_5_octopus[i_163].x
 # spaceinvaders.c:1241: 			clear_bitmap_test(row_5_octopus[i].x, row_5_octopus[i].y, 12, 8);
-	zex.s	r1, r0	# _25, _24
+	sex.s	r1, r0	# _25, _24
 # spaceinvaders.c:1241: 			clear_bitmap_test(row_5_octopus[i].x, row_5_octopus[i].y, 12, 8);
 	ld.w	r0, [r13 + (-4)]	# tmp226, i
 	mov.w	r2, 3	# tmp228,
@@ -4363,7 +4373,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp229, tmp230
 	ld.s	r0, [r0]	# _26, row_5_octopus[i_163].y
 # spaceinvaders.c:1241: 			clear_bitmap_test(row_5_octopus[i].x, row_5_octopus[i].y, 12, 8);
-	zex.s	r2, r0	# _27, _26
+	sex.s	r2, r0	# _27, _26
 	mov.w	r0, sp	# tmp231,
 	mov.w	r3, 8	# tmp232,
 	st.w	[r0 + (12)], r3	#, tmp232
@@ -4380,7 +4390,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp237, tmp238
 	ld.s	r0, [r0]	# _28, row_5_octopus[i_163].x
 # spaceinvaders.c:1242: 			draw_bitmap_with_clear_background(row_5_octopus[i].x, row_5_octopus[i].y, 16, 8, alien_death);
-	zex.s	r1, r0	# _29, _28
+	sex.s	r1, r0	# _29, _28
 # spaceinvaders.c:1242: 			draw_bitmap_with_clear_background(row_5_octopus[i].x, row_5_octopus[i].y, 16, 8, alien_death);
 	ld.w	r0, [r13 + (-4)]	# tmp239, i
 	mov.w	r2, 3	# tmp241,
@@ -4389,7 +4399,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp242, tmp243
 	ld.s	r0, [r0]	# _30, row_5_octopus[i_163].y
 # spaceinvaders.c:1242: 			draw_bitmap_with_clear_background(row_5_octopus[i].x, row_5_octopus[i].y, 16, 8, alien_death);
-	zex.s	r2, r0	# _31, _30
+	sex.s	r2, r0	# _31, _30
 	mov.w	r0, sp	# tmp244,
 	mov.w	r3, alien_death	# tmp245,
 	st.w	[r0 + (16)], r3	#, tmp245
@@ -4443,14 +4453,14 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp266, tmp267
 	ld.s	r0, [r0]	# _37, row_4_octopus[i_163].x
 # spaceinvaders.c:1249: 		&& (player_bullet_def->x >= row_4_octopus[i].x && player_bullet_def->x <= row_4_octopus[i].x + 11)
-	zex.s	r1, r1	# tmp268, _36
-	zex.s	r0, r0	# tmp269, _37
+	sex.s	r1, r1	# tmp268, _36
+	sex.s	r0, r0	# tmp269, _37
 	cmp.w	r1, r0	# tmp268, tmp269
-	js	.L177		#
+	jss	.L177		#
 # spaceinvaders.c:1249: 		&& (player_bullet_def->x >= row_4_octopus[i].x && player_bullet_def->x <= row_4_octopus[i].x + 11)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.60_38, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _39, player_bullet_def.60_38->x
-	zex.s	r1, r0	# _40, _39
+	sex.s	r1, r0	# _40, _39
 # spaceinvaders.c:1249: 		&& (player_bullet_def->x >= row_4_octopus[i].x && player_bullet_def->x <= row_4_octopus[i].x + 11)
 	ld.w	r0, [r13 + (-4)]	# tmp270, i
 	mov.w	r2, 3	# tmp272,
@@ -4458,7 +4468,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_4_octopus+2	# tmp274,
 	add.w	r0, r2 #222	# tmp273, tmp274
 	ld.s	r0, [r0]	# _41, row_4_octopus[i_163].x
-	zex.s	r0, r0	# _42, _41
+	sex.s	r0, r0	# _42, _41
 # spaceinvaders.c:1249: 		&& (player_bullet_def->x >= row_4_octopus[i].x && player_bullet_def->x <= row_4_octopus[i].x + 11)
 	add.w	r0, 11 #111	# _43,
 # spaceinvaders.c:1249: 		&& (player_bullet_def->x >= row_4_octopus[i].x && player_bullet_def->x <= row_4_octopus[i].x + 11)
@@ -4467,7 +4477,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.61_44, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _45, player_bullet_def.61_44->y
-	zex.s	r1, r0	# _46, _45
+	sex.s	r1, r0	# _46, _45
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp275, i
 	mov.w	r2, 3	# tmp277,
@@ -4475,7 +4485,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_4_octopus+4	# tmp279,
 	add.w	r0, r2 #222	# tmp278, tmp279
 	ld.s	r0, [r0]	# _47, row_4_octopus[i_163].y
-	zex.s	r0, r0	# _48, _47
+	sex.s	r0, r0	# _48, _47
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
 	add.w	r0, 7 #111	# _49,
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
@@ -4484,7 +4494,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.62_50, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _51, player_bullet_def.62_50->y
-	zex.s	r1, r0	# _52, _51
+	sex.s	r1, r0	# _52, _51
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp280, i
 	mov.w	r2, 3	# tmp282,
@@ -4492,7 +4502,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_4_octopus+4	# tmp284,
 	add.w	r0, r2 #222	# tmp283, tmp284
 	ld.s	r0, [r0]	# _53, row_4_octopus[i_163].y
-	zex.s	r0, r0	# _54, _53
+	sex.s	r0, r0	# _54, _53
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
 	add.w	r0, -2 #111	# _55,
 # spaceinvaders.c:1250: 		&& (player_bullet_def->y <= row_4_octopus[i].y + 7 && player_bullet_def->y >= row_4_octopus[i].y - 2))
@@ -4506,7 +4516,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp288, tmp289
 	ld.s	r0, [r0]	# _56, row_4_octopus[i_163].x
 # spaceinvaders.c:1252: 			clear_bitmap_test(row_4_octopus[i].x, row_4_octopus[i].y, 12, 8);
-	zex.s	r1, r0	# _57, _56
+	sex.s	r1, r0	# _57, _56
 # spaceinvaders.c:1252: 			clear_bitmap_test(row_4_octopus[i].x, row_4_octopus[i].y, 12, 8);
 	ld.w	r0, [r13 + (-4)]	# tmp290, i
 	mov.w	r2, 3	# tmp292,
@@ -4515,7 +4525,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp293, tmp294
 	ld.s	r0, [r0]	# _58, row_4_octopus[i_163].y
 # spaceinvaders.c:1252: 			clear_bitmap_test(row_4_octopus[i].x, row_4_octopus[i].y, 12, 8);
-	zex.s	r2, r0	# _59, _58
+	sex.s	r2, r0	# _59, _58
 	mov.w	r0, sp	# tmp295,
 	mov.w	r3, 8	# tmp296,
 	st.w	[r0 + (12)], r3	#, tmp296
@@ -4532,7 +4542,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp301, tmp302
 	ld.s	r0, [r0]	# _60, row_4_octopus[i_163].x
 # spaceinvaders.c:1253: 			draw_bitmap_with_clear_background(row_4_octopus[i].x, row_4_octopus[i].y, 16, 8, alien_death);
-	zex.s	r1, r0	# _61, _60
+	sex.s	r1, r0	# _61, _60
 # spaceinvaders.c:1253: 			draw_bitmap_with_clear_background(row_4_octopus[i].x, row_4_octopus[i].y, 16, 8, alien_death);
 	ld.w	r0, [r13 + (-4)]	# tmp303, i
 	mov.w	r2, 3	# tmp305,
@@ -4541,7 +4551,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp306, tmp307
 	ld.s	r0, [r0]	# _62, row_4_octopus[i_163].y
 # spaceinvaders.c:1253: 			draw_bitmap_with_clear_background(row_4_octopus[i].x, row_4_octopus[i].y, 16, 8, alien_death);
-	zex.s	r2, r0	# _63, _62
+	sex.s	r2, r0	# _63, _62
 	mov.w	r0, sp	# tmp308,
 	mov.w	r3, alien_death	# tmp309,
 	st.w	[r0 + (16)], r3	#, tmp309
@@ -4595,14 +4605,14 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp330, tmp331
 	ld.s	r0, [r0]	# _69, row_3_crab[i_163].x
 # spaceinvaders.c:1260: 		&& (player_bullet_def->x >= row_3_crab[i].x && player_bullet_def->x <= row_3_crab[i].x + 11)
-	zex.s	r1, r1	# tmp332, _68
-	zex.s	r0, r0	# tmp333, _69
+	sex.s	r1, r1	# tmp332, _68
+	sex.s	r0, r0	# tmp333, _69
 	cmp.w	r1, r0	# tmp332, tmp333
-	js	.L178		#
+	jss	.L178		#
 # spaceinvaders.c:1260: 		&& (player_bullet_def->x >= row_3_crab[i].x && player_bullet_def->x <= row_3_crab[i].x + 11)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.65_70, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _71, player_bullet_def.65_70->x
-	zex.s	r1, r0	# _72, _71
+	sex.s	r1, r0	# _72, _71
 # spaceinvaders.c:1260: 		&& (player_bullet_def->x >= row_3_crab[i].x && player_bullet_def->x <= row_3_crab[i].x + 11)
 	ld.w	r0, [r13 + (-4)]	# tmp334, i
 	mov.w	r2, 3	# tmp336,
@@ -4610,7 +4620,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_3_crab+2	# tmp338,
 	add.w	r0, r2 #222	# tmp337, tmp338
 	ld.s	r0, [r0]	# _73, row_3_crab[i_163].x
-	zex.s	r0, r0	# _74, _73
+	sex.s	r0, r0	# _74, _73
 # spaceinvaders.c:1260: 		&& (player_bullet_def->x >= row_3_crab[i].x && player_bullet_def->x <= row_3_crab[i].x + 11)
 	add.w	r0, 11 #111	# _75,
 # spaceinvaders.c:1260: 		&& (player_bullet_def->x >= row_3_crab[i].x && player_bullet_def->x <= row_3_crab[i].x + 11)
@@ -4619,7 +4629,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.66_76, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _77, player_bullet_def.66_76->y
-	zex.s	r1, r0	# _78, _77
+	sex.s	r1, r0	# _78, _77
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp339, i
 	mov.w	r2, 3	# tmp341,
@@ -4627,7 +4637,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_3_crab+4	# tmp343,
 	add.w	r0, r2 #222	# tmp342, tmp343
 	ld.s	r0, [r0]	# _79, row_3_crab[i_163].y
-	zex.s	r0, r0	# _80, _79
+	sex.s	r0, r0	# _80, _79
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
 	add.w	r0, 7 #111	# _81,
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
@@ -4636,7 +4646,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.67_82, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _83, player_bullet_def.67_82->y
-	zex.s	r1, r0	# _84, _83
+	sex.s	r1, r0	# _84, _83
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp344, i
 	mov.w	r2, 3	# tmp346,
@@ -4644,7 +4654,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_3_crab+4	# tmp348,
 	add.w	r0, r2 #222	# tmp347, tmp348
 	ld.s	r0, [r0]	# _85, row_3_crab[i_163].y
-	zex.s	r0, r0	# _86, _85
+	sex.s	r0, r0	# _86, _85
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
 	add.w	r0, -2 #111	# _87,
 # spaceinvaders.c:1261: 		&& (player_bullet_def->y <= row_3_crab[i].y + 7 && player_bullet_def->y >= row_3_crab[i].y - 2))
@@ -4658,7 +4668,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp352, tmp353
 	ld.s	r0, [r0]	# _88, row_3_crab[i_163].x
 # spaceinvaders.c:1263: 			clear_bitmap_test(row_3_crab[i].x, row_3_crab[i].y, 12, 8);
-	zex.s	r1, r0	# _89, _88
+	sex.s	r1, r0	# _89, _88
 # spaceinvaders.c:1263: 			clear_bitmap_test(row_3_crab[i].x, row_3_crab[i].y, 12, 8);
 	ld.w	r0, [r13 + (-4)]	# tmp354, i
 	mov.w	r2, 3	# tmp356,
@@ -4667,7 +4677,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp357, tmp358
 	ld.s	r0, [r0]	# _90, row_3_crab[i_163].y
 # spaceinvaders.c:1263: 			clear_bitmap_test(row_3_crab[i].x, row_3_crab[i].y, 12, 8);
-	zex.s	r2, r0	# _91, _90
+	sex.s	r2, r0	# _91, _90
 	mov.w	r0, sp	# tmp359,
 	mov.w	r3, 8	# tmp360,
 	st.w	[r0 + (12)], r3	#, tmp360
@@ -4684,7 +4694,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp365, tmp366
 	ld.s	r0, [r0]	# _92, row_3_crab[i_163].x
 # spaceinvaders.c:1264: 			draw_bitmap_with_clear_background(row_3_crab[i].x, row_3_crab[i].y, 16, 8, alien_death);
-	zex.s	r1, r0	# _93, _92
+	sex.s	r1, r0	# _93, _92
 # spaceinvaders.c:1264: 			draw_bitmap_with_clear_background(row_3_crab[i].x, row_3_crab[i].y, 16, 8, alien_death);
 	ld.w	r0, [r13 + (-4)]	# tmp367, i
 	mov.w	r2, 3	# tmp369,
@@ -4693,7 +4703,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp370, tmp371
 	ld.s	r0, [r0]	# _94, row_3_crab[i_163].y
 # spaceinvaders.c:1264: 			draw_bitmap_with_clear_background(row_3_crab[i].x, row_3_crab[i].y, 16, 8, alien_death);
-	zex.s	r2, r0	# _95, _94
+	sex.s	r2, r0	# _95, _94
 	mov.w	r0, sp	# tmp372,
 	mov.w	r3, alien_death	# tmp373,
 	st.w	[r0 + (16)], r3	#, tmp373
@@ -4747,14 +4757,14 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp394, tmp395
 	ld.s	r0, [r0]	# _101, row_2_crab[i_163].x
 # spaceinvaders.c:1271: 		&& (player_bullet_def->x >= row_2_crab[i].x && player_bullet_def->x <= row_2_crab[i].x + 11)
-	zex.s	r1, r1	# tmp396, _100
-	zex.s	r0, r0	# tmp397, _101
+	sex.s	r1, r1	# tmp396, _100
+	sex.s	r0, r0	# tmp397, _101
 	cmp.w	r1, r0	# tmp396, tmp397
-	js	.L179		#
+	jss	.L179		#
 # spaceinvaders.c:1271: 		&& (player_bullet_def->x >= row_2_crab[i].x && player_bullet_def->x <= row_2_crab[i].x + 11)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.70_102, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _103, player_bullet_def.70_102->x
-	zex.s	r1, r0	# _104, _103
+	sex.s	r1, r0	# _104, _103
 # spaceinvaders.c:1271: 		&& (player_bullet_def->x >= row_2_crab[i].x && player_bullet_def->x <= row_2_crab[i].x + 11)
 	ld.w	r0, [r13 + (-4)]	# tmp398, i
 	mov.w	r2, 3	# tmp400,
@@ -4762,7 +4772,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_2_crab+2	# tmp402,
 	add.w	r0, r2 #222	# tmp401, tmp402
 	ld.s	r0, [r0]	# _105, row_2_crab[i_163].x
-	zex.s	r0, r0	# _106, _105
+	sex.s	r0, r0	# _106, _105
 # spaceinvaders.c:1271: 		&& (player_bullet_def->x >= row_2_crab[i].x && player_bullet_def->x <= row_2_crab[i].x + 11)
 	add.w	r0, 11 #111	# _107,
 # spaceinvaders.c:1271: 		&& (player_bullet_def->x >= row_2_crab[i].x && player_bullet_def->x <= row_2_crab[i].x + 11)
@@ -4771,7 +4781,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.71_108, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _109, player_bullet_def.71_108->y
-	zex.s	r1, r0	# _110, _109
+	sex.s	r1, r0	# _110, _109
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp403, i
 	mov.w	r2, 3	# tmp405,
@@ -4779,7 +4789,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_2_crab+4	# tmp407,
 	add.w	r0, r2 #222	# tmp406, tmp407
 	ld.s	r0, [r0]	# _111, row_2_crab[i_163].y
-	zex.s	r0, r0	# _112, _111
+	sex.s	r0, r0	# _112, _111
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
 	add.w	r0, 7 #111	# _113,
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
@@ -4788,7 +4798,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.72_114, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _115, player_bullet_def.72_114->y
-	zex.s	r1, r0	# _116, _115
+	sex.s	r1, r0	# _116, _115
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp408, i
 	mov.w	r2, 3	# tmp410,
@@ -4796,7 +4806,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_2_crab+4	# tmp412,
 	add.w	r0, r2 #222	# tmp411, tmp412
 	ld.s	r0, [r0]	# _117, row_2_crab[i_163].y
-	zex.s	r0, r0	# _118, _117
+	sex.s	r0, r0	# _118, _117
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
 	add.w	r0, -2 #111	# _119,
 # spaceinvaders.c:1272: 		&& (player_bullet_def->y <= row_2_crab[i].y + 7 && player_bullet_def->y >= row_2_crab[i].y - 2))
@@ -4810,7 +4820,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp416, tmp417
 	ld.s	r0, [r0]	# _120, row_2_crab[i_163].x
 # spaceinvaders.c:1274: 			clear_bitmap_test(row_2_crab[i].x, row_2_crab[i].y, 12, 8);
-	zex.s	r1, r0	# _121, _120
+	sex.s	r1, r0	# _121, _120
 # spaceinvaders.c:1274: 			clear_bitmap_test(row_2_crab[i].x, row_2_crab[i].y, 12, 8);
 	ld.w	r0, [r13 + (-4)]	# tmp418, i
 	mov.w	r2, 3	# tmp420,
@@ -4819,7 +4829,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp421, tmp422
 	ld.s	r0, [r0]	# _122, row_2_crab[i_163].y
 # spaceinvaders.c:1274: 			clear_bitmap_test(row_2_crab[i].x, row_2_crab[i].y, 12, 8);
-	zex.s	r2, r0	# _123, _122
+	sex.s	r2, r0	# _123, _122
 	mov.w	r0, sp	# tmp423,
 	mov.w	r3, 8	# tmp424,
 	st.w	[r0 + (12)], r3	#, tmp424
@@ -4836,7 +4846,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp429, tmp430
 	ld.s	r0, [r0]	# _124, row_2_crab[i_163].x
 # spaceinvaders.c:1275: 			draw_bitmap_with_clear_background(row_2_crab[i].x, row_2_crab[i].y, 16, 8, alien_death);
-	zex.s	r1, r0	# _125, _124
+	sex.s	r1, r0	# _125, _124
 # spaceinvaders.c:1275: 			draw_bitmap_with_clear_background(row_2_crab[i].x, row_2_crab[i].y, 16, 8, alien_death);
 	ld.w	r0, [r13 + (-4)]	# tmp431, i
 	mov.w	r2, 3	# tmp433,
@@ -4845,7 +4855,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp434, tmp435
 	ld.s	r0, [r0]	# _126, row_2_crab[i_163].y
 # spaceinvaders.c:1275: 			draw_bitmap_with_clear_background(row_2_crab[i].x, row_2_crab[i].y, 16, 8, alien_death);
-	zex.s	r2, r0	# _127, _126
+	sex.s	r2, r0	# _127, _126
 	mov.w	r0, sp	# tmp436,
 	mov.w	r3, alien_death	# tmp437,
 	st.w	[r0 + (16)], r3	#, tmp437
@@ -4899,14 +4909,14 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp458, tmp459
 	ld.s	r0, [r0]	# _133, row_1_squid[i_163].x
 # spaceinvaders.c:1282: 		&& (player_bullet_def->x >= row_1_squid[i].x && player_bullet_def->x <= row_1_squid[i].x + 11)
-	zex.s	r1, r1	# tmp460, _132
-	zex.s	r0, r0	# tmp461, _133
+	sex.s	r1, r1	# tmp460, _132
+	sex.s	r0, r0	# tmp461, _133
 	cmp.w	r1, r0	# tmp460, tmp461
-	js	.L180		#
+	jss	.L180		#
 # spaceinvaders.c:1282: 		&& (player_bullet_def->x >= row_1_squid[i].x && player_bullet_def->x <= row_1_squid[i].x + 11)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.75_134, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _135, player_bullet_def.75_134->x
-	zex.s	r1, r0	# _136, _135
+	sex.s	r1, r0	# _136, _135
 # spaceinvaders.c:1282: 		&& (player_bullet_def->x >= row_1_squid[i].x && player_bullet_def->x <= row_1_squid[i].x + 11)
 	ld.w	r0, [r13 + (-4)]	# tmp462, i
 	mov.w	r2, 3	# tmp464,
@@ -4914,7 +4924,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_1_squid+2	# tmp466,
 	add.w	r0, r2 #222	# tmp465, tmp466
 	ld.s	r0, [r0]	# _137, row_1_squid[i_163].x
-	zex.s	r0, r0	# _138, _137
+	sex.s	r0, r0	# _138, _137
 # spaceinvaders.c:1282: 		&& (player_bullet_def->x >= row_1_squid[i].x && player_bullet_def->x <= row_1_squid[i].x + 11)
 	add.w	r0, 11 #111	# _139,
 # spaceinvaders.c:1282: 		&& (player_bullet_def->x >= row_1_squid[i].x && player_bullet_def->x <= row_1_squid[i].x + 11)
@@ -4923,7 +4933,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.76_140, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _141, player_bullet_def.76_140->y
-	zex.s	r1, r0	# _142, _141
+	sex.s	r1, r0	# _142, _141
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp467, i
 	mov.w	r2, 3	# tmp469,
@@ -4931,7 +4941,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_1_squid+4	# tmp471,
 	add.w	r0, r2 #222	# tmp470, tmp471
 	ld.s	r0, [r0]	# _143, row_1_squid[i_163].y
-	zex.s	r0, r0	# _144, _143
+	sex.s	r0, r0	# _144, _143
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
 	add.w	r0, 7 #111	# _145,
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
@@ -4940,7 +4950,7 @@ check_player_bullet_collision_with_alien:
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.77_146, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _147, player_bullet_def.77_146->y
-	zex.s	r1, r0	# _148, _147
+	sex.s	r1, r0	# _148, _147
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
 	ld.w	r0, [r13 + (-4)]	# tmp472, i
 	mov.w	r2, 3	# tmp474,
@@ -4948,7 +4958,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r2, row_1_squid+4	# tmp476,
 	add.w	r0, r2 #222	# tmp475, tmp476
 	ld.s	r0, [r0]	# _149, row_1_squid[i_163].y
-	zex.s	r0, r0	# _150, _149
+	sex.s	r0, r0	# _150, _149
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
 	add.w	r0, -2 #111	# _151,
 # spaceinvaders.c:1283: 		&& (player_bullet_def->y <= row_1_squid[i].y + 7 && player_bullet_def->y >= row_1_squid[i].y - 2))
@@ -4962,7 +4972,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r1 #222	# tmp480, tmp481
 	ld.s	r0, [r0]	# _152, row_1_squid[i_163].x
 # spaceinvaders.c:1285: 			clear_bitmap_test(row_1_squid[i].x, row_1_squid[i].y, 8, 8);
-	zex.s	r1, r0	# _153, _152
+	sex.s	r1, r0	# _153, _152
 # spaceinvaders.c:1285: 			clear_bitmap_test(row_1_squid[i].x, row_1_squid[i].y, 8, 8);
 	ld.w	r0, [r13 + (-4)]	# tmp482, i
 	mov.w	r2, 3	# tmp484,
@@ -4971,7 +4981,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp485, tmp486
 	ld.s	r0, [r0]	# _154, row_1_squid[i_163].y
 # spaceinvaders.c:1285: 			clear_bitmap_test(row_1_squid[i].x, row_1_squid[i].y, 8, 8);
-	zex.s	r2, r0	# _155, _154
+	sex.s	r2, r0	# _155, _154
 	mov.w	r0, sp	# tmp487,
 	mov.w	r3, 8	# tmp488,
 	st.w	[r0 + (12)], r3	#, tmp488
@@ -4987,7 +4997,7 @@ check_player_bullet_collision_with_alien:
 	mov.w	r1, row_1_squid+2	# tmp494,
 	add.w	r0, r1 #222	# tmp493, tmp494
 	ld.s	r0, [r0]	# _156, row_1_squid[i_163].x
-	zex.s	r0, r0	# _157, _156
+	sex.s	r0, r0	# _157, _156
 # spaceinvaders.c:1286: 			draw_bitmap_with_clear_background(row_1_squid[i].x-2, row_1_squid[i].y, 16, 8, alien_death);
 	mov.w	r1, r0	# _158, _157
 	add.w	r1, -2 #111	# _158,
@@ -4999,7 +5009,7 @@ check_player_bullet_collision_with_alien:
 	add.w	r0, r2 #222	# tmp498, tmp499
 	ld.s	r0, [r0]	# _159, row_1_squid[i_163].y
 # spaceinvaders.c:1286: 			draw_bitmap_with_clear_background(row_1_squid[i].x-2, row_1_squid[i].y, 16, 8, alien_death);
-	zex.s	r2, r0	# _160, _159
+	sex.s	r2, r0	# _160, _159
 	mov.w	r0, sp	# tmp500,
 	mov.w	r3, alien_death	# tmp501,
 	st.w	[r0 + (16)], r3	#, tmp501
@@ -5644,12 +5654,12 @@ check_player_bullet_collision_with_base:
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.80_1, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _2, player_bullet_def.80_1->x
 # spaceinvaders.c:1410: 	if(position_is_not_clear(player_bullet_def->x, player_bullet_def->y)
-	zex.s	r1, r0	# _3, _2
+	sex.s	r1, r0	# _3, _2
 # spaceinvaders.c:1410: 	if(position_is_not_clear(player_bullet_def->x, player_bullet_def->y)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.81_4, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _5, player_bullet_def.81_4->y
 # spaceinvaders.c:1410: 	if(position_is_not_clear(player_bullet_def->x, player_bullet_def->y)
-	zex.s	r2, r0	# _6, _5
+	sex.s	r2, r0	# _6, _5
 	mov.w	r0, sp	# tmp49,
 	st.w	[r0 + (4)], r2	#, _6
 	st.w	[r0], r1	#, _3
@@ -5663,11 +5673,11 @@ check_player_bullet_collision_with_base:
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.82_8, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _9, player_bullet_def.82_8->x
 # spaceinvaders.c:1411: 	|| position_is_not_clear(player_bullet_def->x, player_bullet_def->y+1)
-	zex.s	r1, r0	# _10, _9
+	sex.s	r1, r0	# _10, _9
 # spaceinvaders.c:1411: 	|| position_is_not_clear(player_bullet_def->x, player_bullet_def->y+1)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.83_11, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _12, player_bullet_def.83_11->y
-	zex.s	r0, r0	# _13, _12
+	sex.s	r0, r0	# _13, _12
 # spaceinvaders.c:1411: 	|| position_is_not_clear(player_bullet_def->x, player_bullet_def->y+1)
 	mov.w	r2, r0	# _14, _13
 	add.w	r2, 1 #111	# _14,
@@ -5684,11 +5694,11 @@ check_player_bullet_collision_with_base:
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.84_16, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _17, player_bullet_def.84_16->x
 # spaceinvaders.c:1412: 	|| position_is_not_clear(player_bullet_def->x, player_bullet_def->y+2))
-	zex.s	r1, r0	# _18, _17
+	sex.s	r1, r0	# _18, _17
 # spaceinvaders.c:1412: 	|| position_is_not_clear(player_bullet_def->x, player_bullet_def->y+2))
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.85_19, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _20, player_bullet_def.85_19->y
-	zex.s	r0, r0	# _21, _20
+	sex.s	r0, r0	# _21, _20
 # spaceinvaders.c:1412: 	|| position_is_not_clear(player_bullet_def->x, player_bullet_def->y+2))
 	mov.w	r2, r0	# _22, _21
 	add.w	r2, 2 #111	# _22,
@@ -5769,12 +5779,12 @@ destroy_player:
 	ld.w	r0, [player_ship]	# player_ship.87_2, player_ship
 	ld.s	r0, [r0 + (2)]	# _3, player_ship.87_2->x
 # spaceinvaders.c:1429: 	draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion0);
-	zex.s	r1, r0	# _4, _3
+	sex.s	r1, r0	# _4, _3
 # spaceinvaders.c:1429: 	draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion0);
 	ld.w	r0, [player_ship]	# player_ship.88_5, player_ship
 	ld.s	r0, [r0 + (4)]	# _6, player_ship.88_5->y
 # spaceinvaders.c:1429: 	draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion0);
-	zex.s	r2, r0	# _7, _6
+	sex.s	r2, r0	# _7, _6
 	mov.w	r0, sp	# tmp36,
 	mov.w	r3, ship_explosion0	# tmp37,
 	st.w	[r0 + (16)], r3	#, tmp37
@@ -6330,7 +6340,7 @@ check_alien_bullet_collision_with_player:
 # spaceinvaders.c:1497: 	if(alien_bullet[alien_bullet_index].y > player_ship->y-6
 	ld.w	r0, [player_ship]	# player_ship.89_1, player_ship
 	ld.s	r0, [r0 + (4)]	# _2, player_ship.89_1->y
-	zex.s	r0, r0	# _3, _2
+	sex.s	r0, r0	# _3, _2
 # spaceinvaders.c:1497: 	if(alien_bullet[alien_bullet_index].y > player_ship->y-6
 	mov.w	r2, r0	# _4, _3
 	add.w	r2, -5 #111	# _4,
@@ -6365,7 +6375,7 @@ check_alien_bullet_collision_with_player:
 # spaceinvaders.c:1498: 	&& alien_bullet[alien_bullet_index].y-6 < player_ship->y+9
 	ld.w	r0, [player_ship]	# player_ship.90_8, player_ship
 	ld.s	r0, [r0 + (4)]	# _9, player_ship.90_8->y
-	zex.s	r0, r0	# _10, _9
+	sex.s	r0, r0	# _10, _9
 # spaceinvaders.c:1498: 	&& alien_bullet[alien_bullet_index].y-6 < player_ship->y+9
 	add.w	r0, 9 #111	# _11,
 # spaceinvaders.c:1498: 	&& alien_bullet[alien_bullet_index].y-6 < player_ship->y+9
@@ -6374,7 +6384,7 @@ check_alien_bullet_collision_with_player:
 # spaceinvaders.c:1499: 	&& alien_bullet[alien_bullet_index].x > player_ship->x-2
 	ld.w	r0, [player_ship]	# player_ship.91_12, player_ship
 	ld.s	r0, [r0 + (2)]	# _13, player_ship.91_12->x
-	zex.s	r0, r0	# _14, _13
+	sex.s	r0, r0	# _14, _13
 # spaceinvaders.c:1499: 	&& alien_bullet[alien_bullet_index].x > player_ship->x-2
 	mov.w	r2, r0	# _15, _14
 	add.w	r2, -1 #111	# _15,
@@ -6395,7 +6405,7 @@ check_alien_bullet_collision_with_player:
 # spaceinvaders.c:1500: 	&& alien_bullet[alien_bullet_index].x < player_ship->x+15)
 	ld.w	r0, [player_ship]	# player_ship.92_17, player_ship
 	ld.s	r0, [r0 + (2)]	# _18, player_ship.92_17->x
-	zex.s	r0, r0	# _19, _18
+	sex.s	r0, r0	# _19, _18
 # spaceinvaders.c:1500: 	&& alien_bullet[alien_bullet_index].x < player_ship->x+15)
 	mov.w	r2, r0	# _20, _19
 	add.w	r2, 14 #111	# _20,
@@ -6587,7 +6597,7 @@ check_player_bullet_collision_with_alien_bullet:
 # spaceinvaders.c:1536: 	if(player_bullet_def->x >= alien_bullet[alien_bullet_index].x
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.94_1, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _2, player_bullet_def.94_1->x
-	zex.s	r2, r0	# _3, _2
+	sex.s	r2, r0	# _3, _2
 # spaceinvaders.c:1536: 	if(player_bullet_def->x >= alien_bullet[alien_bullet_index].x
 	ld.w	r1, [r13 + (8)]	# tmp45, alien_bullet_index
 	mov.w	r0, r1	# tmp46, tmp45
@@ -6605,7 +6615,7 @@ check_player_bullet_collision_with_alien_bullet:
 # spaceinvaders.c:1537: 	&& player_bullet_def->x <= alien_bullet[alien_bullet_index].x+2
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.95_5, player_bullet_def
 	ld.s	r0, [r0 + (2)]	# _6, player_bullet_def.95_5->x
-	zex.s	r2, r0	# _7, _6
+	sex.s	r2, r0	# _7, _6
 # spaceinvaders.c:1537: 	&& player_bullet_def->x <= alien_bullet[alien_bullet_index].x+2
 	ld.w	r1, [r13 + (8)]	# tmp53, alien_bullet_index
 	mov.w	r0, r1	# tmp54, tmp53
@@ -6625,7 +6635,7 @@ check_player_bullet_collision_with_alien_bullet:
 # spaceinvaders.c:1538: 	&& player_bullet_def->y >= alien_bullet[alien_bullet_index].y-2
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.96_10, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _11, player_bullet_def.96_10->y
-	zex.s	r2, r0	# _12, _11
+	sex.s	r2, r0	# _12, _11
 # spaceinvaders.c:1538: 	&& player_bullet_def->y >= alien_bullet[alien_bullet_index].y-2
 	ld.w	r1, [r13 + (8)]	# tmp61, alien_bullet_index
 	mov.w	r0, r1	# tmp62, tmp61
@@ -6645,7 +6655,7 @@ check_player_bullet_collision_with_alien_bullet:
 # spaceinvaders.c:1539: 	&& player_bullet_def->y <= alien_bullet[alien_bullet_index].y+6)
 	ld.w	r0, [player_bullet_def]	# player_bullet_def.97_15, player_bullet_def
 	ld.s	r0, [r0 + (4)]	# _16, player_bullet_def.97_15->y
-	zex.s	r2, r0	# _17, _16
+	sex.s	r2, r0	# _17, _16
 # spaceinvaders.c:1539: 	&& player_bullet_def->y <= alien_bullet[alien_bullet_index].y+6)
 	ld.w	r1, [r13 + (8)]	# tmp69, alien_bullet_index
 	mov.w	r0, r1	# tmp70, tmp69
@@ -6728,7 +6738,7 @@ destroy_alien:
 	add.w	r0, r1 #222	# tmp91, tmp92
 	ld.s	r0, [r0]	# _2, row_5_octopus[i_47].x
 # spaceinvaders.c:1570: 			clear_bitmap_with_specific_shape(
-	zex.s	r1, r0	# _3, _2
+	sex.s	r1, r0	# _3, _2
 # spaceinvaders.c:1572: 				row_5_octopus[i].y,
 	ld.w	r0, [r13 + (-4)]	# tmp93, i
 	mov.w	r2, 3	# tmp95,
@@ -6737,7 +6747,7 @@ destroy_alien:
 	add.w	r0, r2 #222	# tmp96, tmp97
 	ld.s	r0, [r0]	# _4, row_5_octopus[i_47].y
 # spaceinvaders.c:1570: 			clear_bitmap_with_specific_shape(
-	zex.s	r2, r0	# _5, _4
+	sex.s	r2, r0	# _5, _4
 	mov.w	r0, sp	# tmp98,
 	mov.w	r3, alien_death	# tmp99,
 	st.w	[r0 + (16)], r3	#, tmp99
@@ -6793,7 +6803,7 @@ destroy_alien:
 	add.w	r0, r1 #222	# tmp118, tmp119
 	ld.s	r0, [r0]	# _11, row_4_octopus[i_47].x
 # spaceinvaders.c:1586: 			clear_bitmap_with_specific_shape(
-	zex.s	r1, r0	# _12, _11
+	sex.s	r1, r0	# _12, _11
 # spaceinvaders.c:1588: 				row_4_octopus[i].y,
 	ld.w	r0, [r13 + (-4)]	# tmp120, i
 	mov.w	r2, 3	# tmp122,
@@ -6802,7 +6812,7 @@ destroy_alien:
 	add.w	r0, r2 #222	# tmp123, tmp124
 	ld.s	r0, [r0]	# _13, row_4_octopus[i_47].y
 # spaceinvaders.c:1586: 			clear_bitmap_with_specific_shape(
-	zex.s	r2, r0	# _14, _13
+	sex.s	r2, r0	# _14, _13
 	mov.w	r0, sp	# tmp125,
 	mov.w	r3, alien_death	# tmp126,
 	st.w	[r0 + (16)], r3	#, tmp126
@@ -6858,7 +6868,7 @@ destroy_alien:
 	add.w	r0, r1 #222	# tmp145, tmp146
 	ld.s	r0, [r0]	# _20, row_3_crab[i_47].x
 # spaceinvaders.c:1602: 			clear_bitmap_with_specific_shape(
-	zex.s	r1, r0	# _21, _20
+	sex.s	r1, r0	# _21, _20
 # spaceinvaders.c:1604: 				row_3_crab[i].y,
 	ld.w	r0, [r13 + (-4)]	# tmp147, i
 	mov.w	r2, 3	# tmp149,
@@ -6867,7 +6877,7 @@ destroy_alien:
 	add.w	r0, r2 #222	# tmp150, tmp151
 	ld.s	r0, [r0]	# _22, row_3_crab[i_47].y
 # spaceinvaders.c:1602: 			clear_bitmap_with_specific_shape(
-	zex.s	r2, r0	# _23, _22
+	sex.s	r2, r0	# _23, _22
 	mov.w	r0, sp	# tmp152,
 	mov.w	r3, alien_death	# tmp153,
 	st.w	[r0 + (16)], r3	#, tmp153
@@ -6923,7 +6933,7 @@ destroy_alien:
 	add.w	r0, r1 #222	# tmp172, tmp173
 	ld.s	r0, [r0]	# _29, row_2_crab[i_47].x
 # spaceinvaders.c:1618: 			clear_bitmap_with_specific_shape(
-	zex.s	r1, r0	# _30, _29
+	sex.s	r1, r0	# _30, _29
 # spaceinvaders.c:1620: 				row_2_crab[i].y,
 	ld.w	r0, [r13 + (-4)]	# tmp174, i
 	mov.w	r2, 3	# tmp176,
@@ -6932,7 +6942,7 @@ destroy_alien:
 	add.w	r0, r2 #222	# tmp177, tmp178
 	ld.s	r0, [r0]	# _31, row_2_crab[i_47].y
 # spaceinvaders.c:1618: 			clear_bitmap_with_specific_shape(
-	zex.s	r2, r0	# _32, _31
+	sex.s	r2, r0	# _32, _31
 	mov.w	r0, sp	# tmp179,
 	mov.w	r3, alien_death	# tmp180,
 	st.w	[r0 + (16)], r3	#, tmp180
@@ -6985,7 +6995,7 @@ destroy_alien:
 	mov.w	r1, row_1_squid+2	# tmp200,
 	add.w	r0, r1 #222	# tmp199, tmp200
 	ld.s	r0, [r0]	# _38, row_1_squid[i_47].x
-	zex.s	r0, r0	# _39, _38
+	sex.s	r0, r0	# _39, _38
 # spaceinvaders.c:1633: 			clear_bitmap_with_specific_shape(
 	mov.w	r1, r0	# _40, _39
 	add.w	r1, -2 #111	# _40,
@@ -6997,7 +7007,7 @@ destroy_alien:
 	add.w	r0, r2 #222	# tmp204, tmp205
 	ld.s	r0, [r0]	# _41, row_1_squid[i_47].y
 # spaceinvaders.c:1633: 			clear_bitmap_with_specific_shape(
-	zex.s	r2, r0	# _42, _41
+	sex.s	r2, r0	# _42, _41
 	mov.w	r0, sp	# tmp206,
 	mov.w	r3, alien_death	# tmp207,
 	st.w	[r0 + (16)], r3	#, tmp207
@@ -7960,7 +7970,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_5_octopus+2	# tmp120,
 	add.w	r0, r1 #222	# tmp119, tmp120
 	ld.s	r0, [r0]	# _6, row_5_octopus[alien_column_75].x
-	zex.s	r0, r0	# _7, _6
+	sex.s	r0, r0	# _7, _6
 # spaceinvaders.c:1812: 				bullet_x = row_5_octopus[alien_column].x + 6;
 	add.w	r0, 6 #111	# tmp121,
 	st.w	[r13 + (-8)], r0	# bullet_x, tmp121
@@ -7971,7 +7981,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_5_octopus+4	# tmp126,
 	add.w	r0, r1 #222	# tmp125, tmp126
 	ld.s	r0, [r0]	# _8, row_5_octopus[alien_column_75].y
-	zex.s	r0, r0	# _9, _8
+	sex.s	r0, r0	# _9, _8
 # spaceinvaders.c:1813: 				bullet_y = row_5_octopus[alien_column].y + 10;
 	add.w	r0, 10 #111	# tmp127,
 	st.w	[r13 + (-4)], r0	# bullet_y, tmp127
@@ -7996,7 +8006,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_4_octopus+2	# tmp139,
 	add.w	r0, r1 #222	# tmp138, tmp139
 	ld.s	r0, [r0]	# _11, row_4_octopus[alien_column_75].x
-	zex.s	r0, r0	# _12, _11
+	sex.s	r0, r0	# _12, _11
 # spaceinvaders.c:1817: 				bullet_x = row_4_octopus[alien_column].x + 6;
 	add.w	r0, 6 #111	# tmp140,
 	st.w	[r13 + (-8)], r0	# bullet_x, tmp140
@@ -8007,7 +8017,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_4_octopus+4	# tmp145,
 	add.w	r0, r1 #222	# tmp144, tmp145
 	ld.s	r0, [r0]	# _13, row_4_octopus[alien_column_75].y
-	zex.s	r0, r0	# _14, _13
+	sex.s	r0, r0	# _14, _13
 # spaceinvaders.c:1818: 				bullet_y = row_4_octopus[alien_column].y + 10;
 	add.w	r0, 10 #111	# tmp146,
 	st.w	[r13 + (-4)], r0	# bullet_y, tmp146
@@ -8032,7 +8042,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_3_crab+2	# tmp158,
 	add.w	r0, r1 #222	# tmp157, tmp158
 	ld.s	r0, [r0]	# _16, row_3_crab[alien_column_75].x
-	zex.s	r0, r0	# _17, _16
+	sex.s	r0, r0	# _17, _16
 # spaceinvaders.c:1822: 				bullet_x = row_3_crab[alien_column].x + 5;
 	add.w	r0, 5 #111	# tmp159,
 	st.w	[r13 + (-8)], r0	# bullet_x, tmp159
@@ -8043,7 +8053,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_3_crab+4	# tmp164,
 	add.w	r0, r1 #222	# tmp163, tmp164
 	ld.s	r0, [r0]	# _18, row_3_crab[alien_column_75].y
-	zex.s	r0, r0	# _19, _18
+	sex.s	r0, r0	# _19, _18
 # spaceinvaders.c:1823: 				bullet_y = row_3_crab[alien_column].y + 10;
 	add.w	r0, 10 #111	# tmp165,
 	st.w	[r13 + (-4)], r0	# bullet_y, tmp165
@@ -8068,7 +8078,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_2_crab+2	# tmp177,
 	add.w	r0, r1 #222	# tmp176, tmp177
 	ld.s	r0, [r0]	# _21, row_2_crab[alien_column_75].x
-	zex.s	r0, r0	# _22, _21
+	sex.s	r0, r0	# _22, _21
 # spaceinvaders.c:1827: 				bullet_x = row_2_crab[alien_column].x + 5;
 	add.w	r0, 5 #111	# tmp178,
 	st.w	[r13 + (-8)], r0	# bullet_x, tmp178
@@ -8079,7 +8089,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_2_crab+4	# tmp183,
 	add.w	r0, r1 #222	# tmp182, tmp183
 	ld.s	r0, [r0]	# _23, row_2_crab[alien_column_75].y
-	zex.s	r0, r0	# _24, _23
+	sex.s	r0, r0	# _24, _23
 # spaceinvaders.c:1828: 				bullet_y = row_2_crab[alien_column].y + 10;
 	add.w	r0, 10 #111	# tmp184,
 	st.w	[r13 + (-4)], r0	# bullet_y, tmp184
@@ -8104,7 +8114,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_1_squid+2	# tmp196,
 	add.w	r0, r1 #222	# tmp195, tmp196
 	ld.s	r0, [r0]	# _26, row_1_squid[alien_column_75].x
-	zex.s	r0, r0	# _27, _26
+	sex.s	r0, r0	# _27, _26
 # spaceinvaders.c:1832: 				bullet_x = row_1_squid[alien_column].x + 4;
 	add.w	r0, 4 #111	# tmp197,
 	st.w	[r13 + (-8)], r0	# bullet_x, tmp197
@@ -8115,7 +8125,7 @@ mov.w	r0, r14	# tmp86
 	mov.w	r1, row_1_squid+4	# tmp202,
 	add.w	r0, r1 #222	# tmp201, tmp202
 	ld.s	r0, [r0]	# _28, row_1_squid[alien_column_75].y
-	zex.s	r0, r0	# _29, _28
+	sex.s	r0, r0	# _29, _28
 # spaceinvaders.c:1833: 				bullet_y = row_1_squid[alien_column].y + 10;
 	add.w	r0, 10 #111	# tmp203,
 	st.w	[r13 + (-4)], r0	# bullet_y, tmp203
@@ -8386,12 +8396,12 @@ change_player_explosion_sprite:
 	ld.w	r0, [player_ship]	# player_ship.121_3, player_ship
 	ld.s	r0, [r0 + (2)]	# _4, player_ship.121_3->x
 # spaceinvaders.c:1872: 	clear_bitmap_test(player_ship->x, player_ship->y, 16, 8);
-	zex.s	r1, r0	# _5, _4
+	sex.s	r1, r0	# _5, _4
 # spaceinvaders.c:1872: 	clear_bitmap_test(player_ship->x, player_ship->y, 16, 8);
 	ld.w	r0, [player_ship]	# player_ship.122_6, player_ship
 	ld.s	r0, [r0 + (4)]	# _7, player_ship.122_6->y
 # spaceinvaders.c:1872: 	clear_bitmap_test(player_ship->x, player_ship->y, 16, 8);
-	zex.s	r2, r0	# _8, _7
+	sex.s	r2, r0	# _8, _7
 	mov.w	r0, sp	# tmp48,
 	mov.w	r3, 8	# tmp49,
 	st.w	[r0 + (12)], r3	#, tmp49
@@ -8410,12 +8420,12 @@ change_player_explosion_sprite:
 	ld.w	r0, [player_ship]	# player_ship.124_10, player_ship
 	ld.s	r0, [r0 + (2)]	# _11, player_ship.124_10->x
 # spaceinvaders.c:1874: 		draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion1);
-	zex.s	r1, r0	# _12, _11
+	sex.s	r1, r0	# _12, _11
 # spaceinvaders.c:1874: 		draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion1);
 	ld.w	r0, [player_ship]	# player_ship.125_13, player_ship
 	ld.s	r0, [r0 + (4)]	# _14, player_ship.125_13->y
 # spaceinvaders.c:1874: 		draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion1);
-	zex.s	r2, r0	# _15, _14
+	sex.s	r2, r0	# _15, _14
 	mov.w	r0, sp	# tmp52,
 	mov.w	r3, ship_explosion1	# tmp53,
 	st.w	[r0 + (16)], r3	#, tmp53
@@ -8433,12 +8443,12 @@ change_player_explosion_sprite:
 	ld.w	r0, [player_ship]	# player_ship.126_16, player_ship
 	ld.s	r0, [r0 + (2)]	# _17, player_ship.126_16->x
 # spaceinvaders.c:1876: 		draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion0);
-	zex.s	r1, r0	# _18, _17
+	sex.s	r1, r0	# _18, _17
 # spaceinvaders.c:1876: 		draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion0);
 	ld.w	r0, [player_ship]	# player_ship.127_19, player_ship
 	ld.s	r0, [r0 + (4)]	# _20, player_ship.127_19->y
 # spaceinvaders.c:1876: 		draw_bitmap_with_clear_background(player_ship->x, player_ship->y, 16, 8, ship_explosion0);
-	zex.s	r2, r0	# _21, _20
+	sex.s	r2, r0	# _21, _20
 	mov.w	r0, sp	# tmp56,
 	mov.w	r3, ship_explosion0	# tmp57,
 	st.w	[r0 + (16)], r3	#, tmp57
@@ -8467,12 +8477,12 @@ clear_player_and_redraw_lives:
 	ld.w	r0, [player_ship]	# player_ship.128_1, player_ship
 	ld.s	r0, [r0 + (2)]	# _2, player_ship.128_1->x
 # spaceinvaders.c:1881: 	clear_bitmap_test(player_ship->x, player_ship->y, 16, 8);
-	zex.s	r1, r0	# _3, _2
+	sex.s	r1, r0	# _3, _2
 # spaceinvaders.c:1881: 	clear_bitmap_test(player_ship->x, player_ship->y, 16, 8);
 	ld.w	r0, [player_ship]	# player_ship.129_4, player_ship
 	ld.s	r0, [r0 + (4)]	# _5, player_ship.129_4->y
 # spaceinvaders.c:1881: 	clear_bitmap_test(player_ship->x, player_ship->y, 16, 8);
-	zex.s	r2, r0	# _6, _5
+	sex.s	r2, r0	# _6, _5
 	mov.w	r0, sp	# tmp32,
 	mov.w	r3, 8	# tmp33,
 	st.w	[r0 + (12)], r3	#, tmp33
@@ -9479,45 +9489,45 @@ initialize_alien:
 	mov.w	r13, sp	#,
 	push	r6		#
 	sub.w	sp, 44 #111	#,
-	ld.w	r4, [r13 + (12)]	# tmp31, x
-	ld.w	r3, [r13 + (16)]	# tmp33, y
-	ld.w	r2, [r13 + (20)]	# tmp35, width
-	ld.w	r1, [r13 + (24)]	# tmp37, height
-	ld.w	r0, [r13 + (32)]	# tmp39, status
-	st.s	[r13 + (-8)], r4	# x, tmp32
-	st.s	[r13 + (-12)], r3	# y, tmp34
-	st.s	[r13 + (-16)], r2	# width, tmp36
-	st.s	[r13 + (-20)], r1	# height, tmp38
-	st.s	[r13 + (-24)], r0	# status, tmp40
+	ld.w	r4, [r13 + (12)]	# tmp33, x
+	ld.w	r3, [r13 + (16)]	# tmp35, y
+	ld.w	r2, [r13 + (20)]	# tmp37, width
+	ld.w	r1, [r13 + (24)]	# tmp39, height
+	ld.w	r0, [r13 + (32)]	# tmp41, status
+	st.s	[r13 + (-8)], r4	# x, tmp34
+	st.s	[r13 + (-12)], r3	# y, tmp36
+	st.s	[r13 + (-16)], r2	# width, tmp38
+	st.s	[r13 + (-20)], r1	# height, tmp40
+	st.s	[r13 + (-24)], r0	# status, tmp42
 # spaceinvaders.c:2195: 	alien->x = x;
-	ld.w	r0, [r13 + (8)]	# tmp41, alien
-	ld.s	r1, [r13 + (-8)]	# tmp42, x
-	st.s	[r0 + (2)], r1	# alien_7(D)->x, tmp42
-# spaceinvaders.c:2196: 	alien->y = y;
+	ld.s	r1, [r13 + (-8)]	# x.144_1, x
 	ld.w	r0, [r13 + (8)]	# tmp43, alien
-	ld.s	r1, [r13 + (-12)]	# tmp44, y
-	st.s	[r0 + (4)], r1	# alien_7(D)->y, tmp44
+	st.s	[r0 + (2)], r1	# alien_10(D)->x, x.144_1
+# spaceinvaders.c:2196: 	alien->y = y;
+	ld.s	r1, [r13 + (-12)]	# y.145_2, y
+	ld.w	r0, [r13 + (8)]	# tmp44, alien
+	st.s	[r0 + (4)], r1	# alien_10(D)->y, y.145_2
 # spaceinvaders.c:2197: 	alien->addr = draw_bitmap_with_clear_background(x, y, width, height, bitmap);
-	ld.s	r1, [r13 + (-8)]	# _1, x
-	ld.s	r2, [r13 + (-12)]	# _2, y
-	ld.s	r3, [r13 + (-16)]	# _3, width
-	ld.s	r4, [r13 + (-20)]	# _4, height
+	ld.s	r1, [r13 + (-8)]	# _3, x
+	ld.s	r2, [r13 + (-12)]	# _4, y
+	ld.s	r3, [r13 + (-16)]	# _5, width
+	ld.s	r4, [r13 + (-20)]	# _6, height
 	mov.w	r0, sp	# tmp45,
 	ld.w	r6, [r13 + (28)]	# tmp46, bitmap
 	st.w	[r0 + (16)], r6	#, tmp46
-	st.w	[r0 + (12)], r4	#, _4
-	st.w	[r0 + (8)], r3	#, _3
-	st.w	[r0 + (4)], r2	#, _2
-	st.w	[r0], r1	#, _1
+	st.w	[r0 + (12)], r4	#, _6
+	st.w	[r0 + (8)], r3	#, _5
+	st.w	[r0 + (4)], r2	#, _4
+	st.w	[r0], r1	#, _3
 	call	draw_bitmap_with_clear_background		#
-	mov.w	r1, r0	# _5,
+	mov.w	r1, r0	# _7,
 # spaceinvaders.c:2197: 	alien->addr = draw_bitmap_with_clear_background(x, y, width, height, bitmap);
 	ld.w	r0, [r13 + (8)]	# tmp47, alien
-	st.s	[r0], r1	# alien_7(D)->addr, _5
+	st.s	[r0], r1	# alien_10(D)->addr, _7
 # spaceinvaders.c:2198: 	alien->alive = status;
 	ld.w	r0, [r13 + (8)]	# tmp48, alien
 	ld.s	r1, [r13 + (-24)]	# tmp49, status
-	st.s	[r0 + (6)], r1	# alien_7(D)->alive, tmp49
+	st.s	[r0 + (6)], r1	# alien_10(D)->alive, tmp49
 # spaceinvaders.c:2199: }
 	nop	
 	mov.w	r12, r13	#,
@@ -9535,43 +9545,44 @@ fire_bullet_if_ready:
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
 # spaceinvaders.c:2203: 	if(player_bullet_status == READY) 
-	ld.w	r1, [player_bullet_status]	# player_bullet_status.144_1, player_bullet_status
+	ld.w	r1, [player_bullet_status]	# player_bullet_status.146_1, player_bullet_status
 # spaceinvaders.c:2203: 	if(player_bullet_status == READY) 
-	xor.w	r0, r0	# tmp38
-	cmp.w	r1, r0	# player_bullet_status.144_1, tmp38
+	xor.w	r0, r0	# tmp40
+	cmp.w	r1, r0	# player_bullet_status.146_1, tmp40
 	jnz	.L364		#
 # spaceinvaders.c:2205: 		player_bullet_def->addr = (uint16_t)player_bullet_addr;
-	ld.w	r1, [player_bullet_addr]	# player_bullet_addr.145_2, player_bullet_addr
+	ld.w	r1, [player_bullet_addr]	# player_bullet_addr.147_2, player_bullet_addr
 # spaceinvaders.c:2205: 		player_bullet_def->addr = (uint16_t)player_bullet_addr;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.146_3, player_bullet_def
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.148_3, player_bullet_def
 # spaceinvaders.c:2205: 		player_bullet_def->addr = (uint16_t)player_bullet_addr;
-	st.s	[r0], r1	# player_bullet_def.146_3->addr, _4
+	st.s	[r0], r1	# player_bullet_def.148_3->addr, _4
 # spaceinvaders.c:2206: 		player_bullet_def->x = player_ship->x + 6;
-	ld.w	r0, [player_ship]	# player_ship.147_5, player_ship
-	ld.s	r1, [r0 + (2)]	# _6, player_ship.147_5->x
+	ld.w	r0, [player_ship]	# player_ship.149_5, player_ship
+	ld.s	r0, [r0 + (2)]	# _6, player_ship.149_5->x
 # spaceinvaders.c:2206: 		player_bullet_def->x = player_ship->x + 6;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.148_7, player_bullet_def
+	add.w	r0, 6 #111	# tmp41,
+	mov.w	r1, r0	# _8, tmp41
 # spaceinvaders.c:2206: 		player_bullet_def->x = player_ship->x + 6;
-	add.w	r1, 6 #111	# tmp39,
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.150_9, player_bullet_def
 # spaceinvaders.c:2206: 		player_bullet_def->x = player_ship->x + 6;
-	st.s	[r0 + (2)], r1	# player_bullet_def.148_7->x, _8
+	st.s	[r0 + (2)], r1	# player_bullet_def.150_9->x, _10
 # spaceinvaders.c:2207: 		player_bullet_def->y = 204;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.149_9, player_bullet_def
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.151_11, player_bullet_def
 # spaceinvaders.c:2207: 		player_bullet_def->y = 204;
-	mov.s	r1, 204	# tmp40,
-	st.s	[r0 + (4)], r1	# player_bullet_def.149_9->y, tmp40
+	mov.s	r1, 204	# tmp42,
+	st.s	[r0 + (4)], r1	# player_bullet_def.151_11->y, tmp42
 # spaceinvaders.c:2208: 		player_bullet_def->transparent = 0;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.150_10, player_bullet_def
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.152_12, player_bullet_def
 # spaceinvaders.c:2208: 		player_bullet_def->transparent = 0;
-	xor.w	r1, r1	# tmp41
-	st.s	[r0 + (6)], r1	# player_bullet_def.150_10->transparent, tmp41
+	xor.w	r1, r1	# tmp43
+	st.s	[r0 + (6)], r1	# player_bullet_def.152_12->transparent, tmp43
 # spaceinvaders.c:2209: 		player_bullet_status = MOVING;
-	mov.w	r0, 2	# tmp42,
-	st.w	[player_bullet_status], r0	# player_bullet_status, tmp42
+	mov.w	r0, 2	# tmp44,
+	st.w	[player_bullet_status], r0	# player_bullet_status, tmp44
 # spaceinvaders.c:2210: 		current_player_bullet++;
-	ld.w	r0, [current_player_bullet]	# current_player_bullet.151_11, current_player_bullet
-	add.w	r0, 1 #111	# _12,
-	st.w	[current_player_bullet], r0	# current_player_bullet, _12
+	ld.w	r0, [current_player_bullet]	# current_player_bullet.153_13, current_player_bullet
+	add.w	r0, 1 #111	# _14,
+	st.w	[current_player_bullet], r0	# current_player_bullet, _14
 # spaceinvaders.c:2212: 		set_current_and_special_bullets_if_current_is_higher_than_special();
 	call	set_current_and_special_bullets_if_current_is_higher_than_special		#
 .L364:
@@ -9589,339 +9600,339 @@ switch_to_play_screen:
 	mov.w	r13, sp	#,
 	sub.w	sp, 116 #111	#,
 # spaceinvaders.c:2219: 	player_movement_skip_frame = 3;
-	mov.w	r0, 3	# tmp345,
-	st.w	[player_movement_skip_frame], r0	# player_movement_skip_frame, tmp345
+	mov.w	r0, 3	# tmp385,
+	st.w	[player_movement_skip_frame], r0	# player_movement_skip_frame, tmp385
 # spaceinvaders.c:2220: 	player_alive = 3;
-	mov.w	r0, 3	# tmp346,
-	st.w	[player_alive], r0	# player_alive, tmp346
+	mov.w	r0, 3	# tmp386,
+	st.w	[player_alive], r0	# player_alive, tmp386
 # spaceinvaders.c:2221: 	player_death_timer = 0;
-	xor.w	r0, r0	# tmp347
-	st.w	[player_death_timer], r0	# player_death_timer, tmp347
+	xor.w	r0, r0	# tmp387
+	st.w	[player_death_timer], r0	# player_death_timer, tmp387
 # spaceinvaders.c:2222: 	player_spawn_current_time = 0;
-	xor.w	r0, r0	# tmp348
-	st.w	[player_spawn_current_time], r0	# player_spawn_current_time, tmp348
+	xor.w	r0, r0	# tmp388
+	st.w	[player_spawn_current_time], r0	# player_spawn_current_time, tmp388
 # spaceinvaders.c:2223: 	player_spawn_timer = 1500;
-	mov.w	r0, 1500	# tmp349,
-	st.w	[player_spawn_timer], r0	# player_spawn_timer, tmp349
+	mov.w	r0, 1500	# tmp389,
+	st.w	[player_spawn_timer], r0	# player_spawn_timer, tmp389
 # spaceinvaders.c:2224: 	current_pl_expl_sprite = 0;
-	xor.w	r0, r0	# tmp350
-	st.w	[current_pl_expl_sprite], r0	# current_pl_expl_sprite, tmp350
+	xor.w	r0, r0	# tmp390
+	st.w	[current_pl_expl_sprite], r0	# current_pl_expl_sprite, tmp390
 # spaceinvaders.c:2227: 	vkp = 0, vkr = 0, old = 0;
-	xor.w	r0, r0	# tmp351
-	st.w	[vkp], r0	# vkp, tmp351
+	xor.w	r0, r0	# tmp391
+	st.w	[vkp], r0	# vkp, tmp391
 # spaceinvaders.c:2227: 	vkp = 0, vkr = 0, old = 0;
-	xor.w	r0, r0	# tmp352
-	st.w	[vkr], r0	# vkr, tmp352
+	xor.w	r0, r0	# tmp392
+	st.w	[vkr], r0	# vkr, tmp392
 # spaceinvaders.c:2227: 	vkp = 0, vkr = 0, old = 0;
-	xor.w	r0, r0	# tmp353
-	st.w	[old], r0	# old, tmp353
+	xor.w	r0, r0	# tmp393
+	st.w	[old], r0	# old, tmp393
 # spaceinvaders.c:2231: 	timer_for_ufo_death = 0;
-	xor.w	r0, r0	# tmp354
-	st.w	[timer_for_ufo_death], r0	# timer_for_ufo_death, tmp354
+	xor.w	r0, r0	# tmp394
+	st.w	[timer_for_ufo_death], r0	# timer_for_ufo_death, tmp394
 # spaceinvaders.c:2232: 	ufo_status = DEAD;
-	xor.w	r0, r0	# tmp355
-	st.w	[ufo_status], r0	# ufo_status, tmp355
+	xor.w	r0, r0	# tmp395
+	st.w	[ufo_status], r0	# ufo_status, tmp395
 # spaceinvaders.c:2233: 	timer_for_ufo_move = 36;
-	mov.w	r0, 36	# tmp356,
-	st.w	[timer_for_ufo_move], r0	# timer_for_ufo_move, tmp356
+	mov.w	r0, 36	# tmp396,
+	st.w	[timer_for_ufo_move], r0	# timer_for_ufo_move, tmp396
 # spaceinvaders.c:2234: 	ufo_position_X = 0;
-	xor.w	r0, r0	# tmp357
-	st.w	[ufo_position_X], r0	# ufo_position_X, tmp357
+	xor.w	r0, r0	# tmp397
+	st.w	[ufo_position_X], r0	# ufo_position_X, tmp397
 # spaceinvaders.c:2235: 	ufo_direction = 3;
-	mov.w	r0, 3	# tmp358,
-	st.w	[ufo_direction], r0	# ufo_direction, tmp358
+	mov.w	r0, 3	# tmp398,
+	st.w	[ufo_direction], r0	# ufo_direction, tmp398
 # spaceinvaders.c:2236: 	ufo_score = 0;
-	xor.w	r0, r0	# tmp359
-	st.w	[ufo_score], r0	# ufo_score, tmp359
+	xor.w	r0, r0	# tmp399
+	st.w	[ufo_score], r0	# ufo_score, tmp399
 # spaceinvaders.c:2239: 	number_of_aliens = 55;
-	mov.w	r0, 55	# tmp360,
-	st.w	[number_of_aliens], r0	# number_of_aliens, tmp360
+	mov.w	r0, 55	# tmp400,
+	st.w	[number_of_aliens], r0	# number_of_aliens, tmp400
 # spaceinvaders.c:2240: 	death_timer = 0;
-	xor.w	r0, r0	# tmp361
-	st.w	[death_timer], r0	# death_timer, tmp361
+	xor.w	r0, r0	# tmp401
+	st.w	[death_timer], r0	# death_timer, tmp401
 # spaceinvaders.c:2241: 	movement_step = 96;
-	mov.w	r0, 96	# tmp362,
-	st.w	[movement_step], r0	# movement_step, tmp362
+	mov.w	r0, 96	# tmp402,
+	st.w	[movement_step], r0	# movement_step, tmp402
 # spaceinvaders.c:2242: 	current_step = 0;
-	xor.w	r0, r0	# tmp363
-	st.w	[current_step], r0	# current_step, tmp363
+	xor.w	r0, r0	# tmp403
+	st.w	[current_step], r0	# current_step, tmp403
 # spaceinvaders.c:2243: 	direction = 3;
-	mov.b	r0, 3	# tmp364,
-	st.b	[direction], r0	# direction, tmp364
+	mov.b	r0, 3	# tmp404,
+	st.b	[direction], r0	# direction, tmp404
 # spaceinvaders.c:2244: 	distance = 2;
-	mov.w	r0, 2	# tmp365,
-	st.w	[distance], r0	# distance, tmp365
+	mov.w	r0, 2	# tmp405,
+	st.w	[distance], r0	# distance, tmp405
 # spaceinvaders.c:2245: 	int sprite_version = 1;
-	mov.w	r0, 1	# tmp366,
-	st.w	[r13 + (-4)], r0	# sprite_version, tmp366
+	mov.w	r0, 1	# tmp406,
+	st.w	[r13 + (-4)], r0	# sprite_version, tmp406
 # spaceinvaders.c:2246: 	uint16_t *alien_sprite = 0;
-	xor.w	r0, r0	# tmp367
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp367
+	xor.w	r0, r0	# tmp407
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp407
 # spaceinvaders.c:2256: 	int alien_index = 0;
-	xor.w	r0, r0	# tmp368
-	st.w	[r13 + (-12)], r0	# alien_index, tmp368
+	xor.w	r0, r0	# tmp408
+	st.w	[r13 + (-12)], r0	# alien_index, tmp408
 # spaceinvaders.c:2259: 	player_bullet_status = READY;
-	xor.w	r0, r0	# tmp369
-	st.w	[player_bullet_status], r0	# player_bullet_status, tmp369
+	xor.w	r0, r0	# tmp409
+	st.w	[player_bullet_status], r0	# player_bullet_status, tmp409
 # spaceinvaders.c:2260: 	timer_for_player_bullet_destroy = 0;
-	xor.w	r0, r0	# tmp370
-	st.w	[timer_for_player_bullet_destroy], r0	# timer_for_player_bullet_destroy, tmp370
+	xor.w	r0, r0	# tmp410
+	st.w	[timer_for_player_bullet_destroy], r0	# timer_for_player_bullet_destroy, tmp410
 # spaceinvaders.c:2261: 	special_player_bullet = 23;
-	mov.w	r0, 23	# tmp371,
-	st.w	[special_player_bullet], r0	# special_player_bullet, tmp371
+	mov.w	r0, 23	# tmp411,
+	st.w	[special_player_bullet], r0	# special_player_bullet, tmp411
 # spaceinvaders.c:2262: 	current_player_bullet = 0;
-	xor.w	r0, r0	# tmp372
-	st.w	[current_player_bullet], r0	# current_player_bullet, tmp372
+	xor.w	r0, r0	# tmp412
+	st.w	[current_player_bullet], r0	# current_player_bullet, tmp412
 # spaceinvaders.c:2265: 	timer_for_alien_bullet_spawn = 1150;
-	mov.w	r0, 1150	# tmp373,
-	st.w	[timer_for_alien_bullet_spawn], r0	# timer_for_alien_bullet_spawn, tmp373
+	mov.w	r0, 1150	# tmp413,
+	st.w	[timer_for_alien_bullet_spawn], r0	# timer_for_alien_bullet_spawn, tmp413
 # spaceinvaders.c:2266: 	alien_bullet_spawn_time = 1150;
-	mov.w	r0, 1150	# tmp374,
-	st.w	[alien_bullet_spawn_time], r0	# alien_bullet_spawn_time, tmp374
+	mov.w	r0, 1150	# tmp414,
+	st.w	[alien_bullet_spawn_time], r0	# alien_bullet_spawn_time, tmp414
 # spaceinvaders.c:2268: 	delay_ms = 2;
-	mov.w	r0, 2	# tmp375,
-	st.w	[delay_ms], r0	# delay_ms, tmp375
+	mov.w	r0, 2	# tmp415,
+	st.w	[delay_ms], r0	# delay_ms, tmp415
 # spaceinvaders.c:2271: 	calculate_timer_for_ufo_spawn();
 	call	calculate_timer_for_ufo_spawn		#
 # spaceinvaders.c:2273: 	change_sprite_color(PLAYER_SPAWN_Y, 16, 8, ship);
-	mov.w	r0, sp	# tmp376,
-	mov.w	r1, ship	# tmp377,
-	st.w	[r0 + (12)], r1	#, tmp377
-	mov.w	r1, 8	# tmp378,
-	st.w	[r0 + (8)], r1	#, tmp378
-	mov.w	r1, 16	# tmp379,
-	st.w	[r0 + (4)], r1	#, tmp379
-	mov.w	r1, 212	# tmp380,
-	st.w	[r0], r1	#, tmp380
+	mov.w	r0, sp	# tmp416,
+	mov.w	r1, ship	# tmp417,
+	st.w	[r0 + (12)], r1	#, tmp417
+	mov.w	r1, 8	# tmp418,
+	st.w	[r0 + (8)], r1	#, tmp418
+	mov.w	r1, 16	# tmp419,
+	st.w	[r0 + (4)], r1	#, tmp419
+	mov.w	r1, 212	# tmp420,
+	st.w	[r0], r1	#, tmp420
 	call	change_sprite_color		#
 # spaceinvaders.c:2274: 	copy_player_ship();
 	call	copy_player_ship		#
 # spaceinvaders.c:2275: 	player_ship->addr = 0;
-	ld.w	r0, [player_ship]	# player_ship.152_1, player_ship
+	ld.w	r0, [player_ship]	# player_ship.154_1, player_ship
 # spaceinvaders.c:2275: 	player_ship->addr = 0;
-	xor.w	r1, r1	# tmp381
-	st.s	[r0], r1	# player_ship.152_1->addr, tmp381
+	xor.w	r1, r1	# tmp421
+	st.s	[r0], r1	# player_ship.154_1->addr, tmp421
 # spaceinvaders.c:2277: 	for(int i = 0; i < 5; i++)
-	xor.w	r0, r0	# tmp382
-	st.w	[r13 + (-16)], r0	# i, tmp382
+	xor.w	r0, r0	# tmp422
+	st.w	[r13 + (-16)], r0	# i, tmp422
 # spaceinvaders.c:2277: 	for(int i = 0; i < 5; i++)
 	j	.L366		#
 .L367:
 # spaceinvaders.c:2279: 		alien_bullet[i].x = 0;
-	ld.w	r1, [r13 + (-16)]	# tmp383, i
-	mov.w	r0, r1	# tmp384, tmp383
-	mov.w	r2, 3	# tmp386,
-	shl.w	r0, r2	# tmp385, tmp386
-	add.w	r0, r1 #222	# tmp384, tmp383
-	mov.w	r1, 2	# tmp388,
-	shl.w	r0, r1	# tmp387, tmp388
-	mov.w	r1, alien_bullet	# tmp390,
-	add.w	r0, r1 #222	# tmp389, tmp390
-	xor.w	r1, r1	# tmp391
-	st.w	[r0], r1	# alien_bullet[i_333].x, tmp391
+	ld.w	r1, [r13 + (-16)]	# tmp423, i
+	mov.w	r0, r1	# tmp424, tmp423
+	mov.w	r2, 3	# tmp426,
+	shl.w	r0, r2	# tmp425, tmp426
+	add.w	r0, r1 #222	# tmp424, tmp423
+	mov.w	r1, 2	# tmp428,
+	shl.w	r0, r1	# tmp427, tmp428
+	mov.w	r1, alien_bullet	# tmp430,
+	add.w	r0, r1 #222	# tmp429, tmp430
+	xor.w	r1, r1	# tmp431
+	st.w	[r0], r1	# alien_bullet[i_373].x, tmp431
 # spaceinvaders.c:2280: 		alien_bullet[i].y = 0;
-	ld.w	r1, [r13 + (-16)]	# tmp392, i
-	mov.w	r0, r1	# tmp393, tmp392
-	mov.w	r2, 3	# tmp395,
-	shl.w	r0, r2	# tmp394, tmp395
-	add.w	r0, r1 #222	# tmp393, tmp392
-	mov.w	r1, 2	# tmp397,
-	shl.w	r0, r1	# tmp396, tmp397
-	mov.w	r1, alien_bullet+4	# tmp399,
-	add.w	r0, r1 #222	# tmp398, tmp399
-	xor.w	r1, r1	# tmp400
-	st.w	[r0], r1	# alien_bullet[i_333].y, tmp400
+	ld.w	r1, [r13 + (-16)]	# tmp432, i
+	mov.w	r0, r1	# tmp433, tmp432
+	mov.w	r2, 3	# tmp435,
+	shl.w	r0, r2	# tmp434, tmp435
+	add.w	r0, r1 #222	# tmp433, tmp432
+	mov.w	r1, 2	# tmp437,
+	shl.w	r0, r1	# tmp436, tmp437
+	mov.w	r1, alien_bullet+4	# tmp439,
+	add.w	r0, r1 #222	# tmp438, tmp439
+	xor.w	r1, r1	# tmp440
+	st.w	[r0], r1	# alien_bullet[i_373].y, tmp440
 # spaceinvaders.c:2281: 		alien_bullet[i].type = 2;
-	ld.w	r1, [r13 + (-16)]	# tmp401, i
-	mov.w	r0, r1	# tmp402, tmp401
-	mov.w	r2, 3	# tmp404,
-	shl.w	r0, r2	# tmp403, tmp404
-	add.w	r0, r1 #222	# tmp402, tmp401
-	mov.w	r1, 2	# tmp406,
-	shl.w	r0, r1	# tmp405, tmp406
-	mov.w	r1, alien_bullet+12	# tmp408,
-	add.w	r0, r1 #222	# tmp407, tmp408
-	mov.w	r1, 2	# tmp409,
-	st.w	[r0], r1	# alien_bullet[i_333].type, tmp409
+	ld.w	r1, [r13 + (-16)]	# tmp441, i
+	mov.w	r0, r1	# tmp442, tmp441
+	mov.w	r2, 3	# tmp444,
+	shl.w	r0, r2	# tmp443, tmp444
+	add.w	r0, r1 #222	# tmp442, tmp441
+	mov.w	r1, 2	# tmp446,
+	shl.w	r0, r1	# tmp445, tmp446
+	mov.w	r1, alien_bullet+12	# tmp448,
+	add.w	r0, r1 #222	# tmp447, tmp448
+	mov.w	r1, 2	# tmp449,
+	st.w	[r0], r1	# alien_bullet[i_373].type, tmp449
 # spaceinvaders.c:2282: 		alien_bullet[i].sprite = 0;
-	ld.w	r1, [r13 + (-16)]	# tmp410, i
-	mov.w	r0, r1	# tmp411, tmp410
-	mov.w	r2, 3	# tmp413,
-	shl.w	r0, r2	# tmp412, tmp413
-	add.w	r0, r1 #222	# tmp411, tmp410
-	mov.w	r1, 2	# tmp415,
-	shl.w	r0, r1	# tmp414, tmp415
-	mov.w	r1, alien_bullet+16	# tmp417,
-	add.w	r0, r1 #222	# tmp416, tmp417
-	xor.w	r1, r1	# tmp418
-	st.w	[r0], r1	# alien_bullet[i_333].sprite, tmp418
+	ld.w	r1, [r13 + (-16)]	# tmp450, i
+	mov.w	r0, r1	# tmp451, tmp450
+	mov.w	r2, 3	# tmp453,
+	shl.w	r0, r2	# tmp452, tmp453
+	add.w	r0, r1 #222	# tmp451, tmp450
+	mov.w	r1, 2	# tmp455,
+	shl.w	r0, r1	# tmp454, tmp455
+	mov.w	r1, alien_bullet+16	# tmp457,
+	add.w	r0, r1 #222	# tmp456, tmp457
+	xor.w	r1, r1	# tmp458
+	st.w	[r0], r1	# alien_bullet[i_373].sprite, tmp458
 # spaceinvaders.c:2283: 		alien_bullet[i].status = READY;
-	ld.w	r1, [r13 + (-16)]	# tmp419, i
-	mov.w	r0, r1	# tmp420, tmp419
-	mov.w	r2, 3	# tmp422,
-	shl.w	r0, r2	# tmp421, tmp422
-	add.w	r0, r1 #222	# tmp420, tmp419
-	mov.w	r1, 2	# tmp424,
-	shl.w	r0, r1	# tmp423, tmp424
-	mov.w	r1, alien_bullet+20	# tmp426,
-	add.w	r0, r1 #222	# tmp425, tmp426
-	xor.w	r1, r1	# tmp427
-	st.w	[r0], r1	# alien_bullet[i_333].status, tmp427
+	ld.w	r1, [r13 + (-16)]	# tmp459, i
+	mov.w	r0, r1	# tmp460, tmp459
+	mov.w	r2, 3	# tmp462,
+	shl.w	r0, r2	# tmp461, tmp462
+	add.w	r0, r1 #222	# tmp460, tmp459
+	mov.w	r1, 2	# tmp464,
+	shl.w	r0, r1	# tmp463, tmp464
+	mov.w	r1, alien_bullet+20	# tmp466,
+	add.w	r0, r1 #222	# tmp465, tmp466
+	xor.w	r1, r1	# tmp467
+	st.w	[r0], r1	# alien_bullet[i_373].status, tmp467
 # spaceinvaders.c:2284: 		alien_bullet[i].timer_for_move = 0;
-	ld.w	r1, [r13 + (-16)]	# tmp428, i
-	mov.w	r0, r1	# tmp429, tmp428
-	mov.w	r2, 3	# tmp431,
-	shl.w	r0, r2	# tmp430, tmp431
-	add.w	r0, r1 #222	# tmp429, tmp428
-	mov.w	r1, 2	# tmp433,
-	shl.w	r0, r1	# tmp432, tmp433
-	mov.w	r1, alien_bullet+24	# tmp435,
-	add.w	r0, r1 #222	# tmp434, tmp435
-	xor.w	r1, r1	# tmp436
-	st.w	[r0], r1	# alien_bullet[i_333].timer_for_move, tmp436
+	ld.w	r1, [r13 + (-16)]	# tmp468, i
+	mov.w	r0, r1	# tmp469, tmp468
+	mov.w	r2, 3	# tmp471,
+	shl.w	r0, r2	# tmp470, tmp471
+	add.w	r0, r1 #222	# tmp469, tmp468
+	mov.w	r1, 2	# tmp473,
+	shl.w	r0, r1	# tmp472, tmp473
+	mov.w	r1, alien_bullet+24	# tmp475,
+	add.w	r0, r1 #222	# tmp474, tmp475
+	xor.w	r1, r1	# tmp476
+	st.w	[r0], r1	# alien_bullet[i_373].timer_for_move, tmp476
 # spaceinvaders.c:2285: 		alien_bullet[i].timer_for_sprite_change = 0;
-	ld.w	r1, [r13 + (-16)]	# tmp437, i
-	mov.w	r0, r1	# tmp438, tmp437
-	mov.w	r2, 3	# tmp440,
-	shl.w	r0, r2	# tmp439, tmp440
-	add.w	r0, r1 #222	# tmp438, tmp437
-	mov.w	r1, 2	# tmp442,
-	shl.w	r0, r1	# tmp441, tmp442
-	mov.w	r1, alien_bullet+28	# tmp444,
-	add.w	r0, r1 #222	# tmp443, tmp444
-	xor.w	r1, r1	# tmp445
-	st.w	[r0], r1	# alien_bullet[i_333].timer_for_sprite_change, tmp445
+	ld.w	r1, [r13 + (-16)]	# tmp477, i
+	mov.w	r0, r1	# tmp478, tmp477
+	mov.w	r2, 3	# tmp480,
+	shl.w	r0, r2	# tmp479, tmp480
+	add.w	r0, r1 #222	# tmp478, tmp477
+	mov.w	r1, 2	# tmp482,
+	shl.w	r0, r1	# tmp481, tmp482
+	mov.w	r1, alien_bullet+28	# tmp484,
+	add.w	r0, r1 #222	# tmp483, tmp484
+	xor.w	r1, r1	# tmp485
+	st.w	[r0], r1	# alien_bullet[i_373].timer_for_sprite_change, tmp485
 # spaceinvaders.c:2286: 		alien_bullet[i].timer_for_destroy = 0;
-	ld.w	r1, [r13 + (-16)]	# tmp446, i
-	mov.w	r0, r1	# tmp447, tmp446
-	mov.w	r2, 3	# tmp449,
-	shl.w	r0, r2	# tmp448, tmp449
-	add.w	r0, r1 #222	# tmp447, tmp446
-	mov.w	r1, 2	# tmp451,
-	shl.w	r0, r1	# tmp450, tmp451
-	mov.w	r1, alien_bullet+32	# tmp453,
-	add.w	r0, r1 #222	# tmp452, tmp453
-	xor.w	r1, r1	# tmp454
-	st.w	[r0], r1	# alien_bullet[i_333].timer_for_destroy, tmp454
+	ld.w	r1, [r13 + (-16)]	# tmp486, i
+	mov.w	r0, r1	# tmp487, tmp486
+	mov.w	r2, 3	# tmp489,
+	shl.w	r0, r2	# tmp488, tmp489
+	add.w	r0, r1 #222	# tmp487, tmp486
+	mov.w	r1, 2	# tmp491,
+	shl.w	r0, r1	# tmp490, tmp491
+	mov.w	r1, alien_bullet+32	# tmp493,
+	add.w	r0, r1 #222	# tmp492, tmp493
+	xor.w	r1, r1	# tmp494
+	st.w	[r0], r1	# alien_bullet[i_373].timer_for_destroy, tmp494
 # spaceinvaders.c:2277: 	for(int i = 0; i < 5; i++)
-	ld.w	r0, [r13 + (-16)]	# tmp456, i
-	add.w	r0, 1 #111	# tmp455,
-	st.w	[r13 + (-16)], r0	# i, tmp455
+	ld.w	r0, [r13 + (-16)]	# tmp496, i
+	add.w	r0, 1 #111	# tmp495,
+	st.w	[r13 + (-16)], r0	# i, tmp495
 .L366:
 # spaceinvaders.c:2277: 	for(int i = 0; i < 5; i++)
-	ld.w	r1, [r13 + (-16)]	# tmp457, i
-	mov.w	r0, 4	# tmp458,
-	cmp.w	r1, r0	# tmp457, tmp458
+	ld.w	r1, [r13 + (-16)]	# tmp497, i
+	mov.w	r0, 4	# tmp498,
+	cmp.w	r1, r0	# tmp497, tmp498
 	jses	.L367		#
 # spaceinvaders.c:2289: 	for(int i = 0; i < 4; i++)
-	xor.w	r0, r0	# tmp459
-	st.w	[r13 + (-20)], r0	# i, tmp459
+	xor.w	r0, r0	# tmp499
+	st.w	[r13 + (-20)], r0	# i, tmp499
 # spaceinvaders.c:2289: 	for(int i = 0; i < 4; i++)
 	j	.L368		#
 .L369:
 # spaceinvaders.c:2291: 		row_base[i].x = 40 + 48 * i;
-	ld.w	r0, [r13 + (-20)]	# tmp460, i
-	mov.w	r1, r0	# _2, tmp460
-	mov.w	r0, r1	# tmp461, _2
-	mov.w	r2, r0	# tmp463, tmp461
-	add.w	r0, r2 #222	# tmp462, tmp463
-	add.w	r0, r1 #222	# tmp464, tmp465
-	mov.w	r1, 4	# tmp468,
-	shl.w	r0, r1	# tmp467, tmp468
-	add.w	r0, 40 #111	# tmp469,
-	mov.w	r1, r0	# _4, tmp469
+	ld.w	r0, [r13 + (-20)]	# tmp500, i
+	mov.w	r1, r0	# _2, tmp500
+	mov.w	r0, r1	# tmp501, _2
+	mov.w	r2, r0	# tmp503, tmp501
+	add.w	r0, r2 #222	# tmp502, tmp503
+	add.w	r0, r1 #222	# tmp504, tmp505
+	mov.w	r1, 4	# tmp508,
+	shl.w	r0, r1	# tmp507, tmp508
+	add.w	r0, 40 #111	# tmp509,
+	mov.w	r1, r0	# _5, _4
 # spaceinvaders.c:2291: 		row_base[i].x = 40 + 48 * i;
-	ld.w	r0, [r13 + (-20)]	# tmp470, i
-	mov.w	r2, 3	# tmp472,
-	shl.w	r0, r2	# tmp471, tmp472
-	mov.w	r2, row_base+2	# tmp474,
-	add.w	r0, r2 #222	# tmp473, tmp474
-	st.s	[r0], r1	# row_base[i_334].x, _4
+	ld.w	r0, [r13 + (-20)]	# tmp510, i
+	mov.w	r2, 3	# tmp512,
+	shl.w	r0, r2	# tmp511, tmp512
+	mov.w	r2, row_base+2	# tmp514,
+	add.w	r0, r2 #222	# tmp513, tmp514
+	st.s	[r0], r1	# row_base[i_374].x, _5
 # spaceinvaders.c:2292: 		row_base[i].y = BASE_Y;
-	ld.w	r0, [r13 + (-20)]	# tmp475, i
-	mov.w	r1, 3	# tmp477,
-	shl.w	r0, r1	# tmp476, tmp477
-	mov.w	r1, row_base+4	# tmp479,
-	add.w	r0, r1 #222	# tmp478, tmp479
-	mov.s	r1, 188	# tmp480,
-	st.s	[r0], r1	# row_base[i_334].y, tmp480
+	ld.w	r0, [r13 + (-20)]	# tmp515, i
+	mov.w	r1, 3	# tmp517,
+	shl.w	r0, r1	# tmp516, tmp517
+	mov.w	r1, row_base+4	# tmp519,
+	add.w	r0, r1 #222	# tmp518, tmp519
+	mov.s	r1, 188	# tmp520,
+	st.s	[r0], r1	# row_base[i_374].y, tmp520
 # spaceinvaders.c:2293: 		row_base[i].addr = draw_bitmap_with_clear_background(40 + 48 * i, BASE_Y, 24, 16, base);
-	ld.w	r1, [r13 + (-20)]	# tmp481, i
-	mov.w	r0, r1	# tmp482, tmp481
-	add.w	r0, r0 #222	# tmp483, tmp482
-	add.w	r0, r1 #222	# tmp482, tmp481
-	mov.w	r1, 4	# tmp485,
-	shl.w	r0, r1	# tmp484, tmp485
+	ld.w	r1, [r13 + (-20)]	# tmp521, i
+	mov.w	r0, r1	# tmp522, tmp521
+	add.w	r0, r0 #222	# tmp523, tmp522
+	add.w	r0, r1 #222	# tmp522, tmp521
+	mov.w	r1, 4	# tmp525,
+	shl.w	r0, r1	# tmp524, tmp525
 # spaceinvaders.c:2293: 		row_base[i].addr = draw_bitmap_with_clear_background(40 + 48 * i, BASE_Y, 24, 16, base);
-	mov.w	r1, r0	# _6, _5
-	add.w	r1, 40 #111	# _6,
-	mov.w	r0, sp	# tmp486,
-	mov.w	r2, base	# tmp487,
-	st.w	[r0 + (16)], r2	#, tmp487
-	mov.w	r2, 16	# tmp488,
-	st.w	[r0 + (12)], r2	#, tmp488
-	mov.w	r2, 24	# tmp489,
-	st.w	[r0 + (8)], r2	#, tmp489
-	mov.w	r2, 188	# tmp490,
-	st.w	[r0 + (4)], r2	#, tmp490
-	st.w	[r0], r1	#, _6
+	mov.w	r1, r0	# _7, _6
+	add.w	r1, 40 #111	# _7,
+	mov.w	r0, sp	# tmp526,
+	mov.w	r2, base	# tmp527,
+	st.w	[r0 + (16)], r2	#, tmp527
+	mov.w	r2, 16	# tmp528,
+	st.w	[r0 + (12)], r2	#, tmp528
+	mov.w	r2, 24	# tmp529,
+	st.w	[r0 + (8)], r2	#, tmp529
+	mov.w	r2, 188	# tmp530,
+	st.w	[r0 + (4)], r2	#, tmp530
+	st.w	[r0], r1	#, _7
 	call	draw_bitmap_with_clear_background		#
-	mov.w	r2, r0	# _7,
+	mov.w	r2, r0	# _8,
 # spaceinvaders.c:2293: 		row_base[i].addr = draw_bitmap_with_clear_background(40 + 48 * i, BASE_Y, 24, 16, base);
-	ld.w	r0, [r13 + (-20)]	# tmp491, i
-	mov.w	r1, 3	# tmp493,
-	shl.w	r0, r1	# tmp492, tmp493
-	mov.w	r1, row_base	# tmp495,
-	add.w	r0, r1 #222	# tmp494, tmp495
-	st.s	[r0], r2	# row_base[i_334].addr, _7
+	ld.w	r0, [r13 + (-20)]	# tmp531, i
+	mov.w	r1, 3	# tmp533,
+	shl.w	r0, r1	# tmp532, tmp533
+	mov.w	r1, row_base	# tmp535,
+	add.w	r0, r1 #222	# tmp534, tmp535
+	st.s	[r0], r2	# row_base[i_374].addr, _8
 # spaceinvaders.c:2294: 		row_base[i].alive = 2;
-	ld.w	r0, [r13 + (-20)]	# tmp496, i
-	mov.w	r1, 3	# tmp498,
-	shl.w	r0, r1	# tmp497, tmp498
-	mov.w	r1, row_base+6	# tmp500,
-	add.w	r0, r1 #222	# tmp499, tmp500
-	mov.s	r1, 2	# tmp501,
-	st.s	[r0], r1	# row_base[i_334].alive, tmp501
+	ld.w	r0, [r13 + (-20)]	# tmp536, i
+	mov.w	r1, 3	# tmp538,
+	shl.w	r0, r1	# tmp537, tmp538
+	mov.w	r1, row_base+6	# tmp540,
+	add.w	r0, r1 #222	# tmp539, tmp540
+	mov.s	r1, 2	# tmp541,
+	st.s	[r0], r1	# row_base[i_374].alive, tmp541
 # spaceinvaders.c:2289: 	for(int i = 0; i < 4; i++)
-	ld.w	r0, [r13 + (-20)]	# tmp503, i
-	add.w	r0, 1 #111	# tmp502,
-	st.w	[r13 + (-20)], r0	# i, tmp502
+	ld.w	r0, [r13 + (-20)]	# tmp543, i
+	add.w	r0, 1 #111	# tmp542,
+	st.w	[r13 + (-20)], r0	# i, tmp542
 .L368:
 # spaceinvaders.c:2289: 	for(int i = 0; i < 4; i++)
-	ld.w	r1, [r13 + (-20)]	# tmp504, i
-	mov.w	r0, 3	# tmp505,
-	cmp.w	r1, r0	# tmp504, tmp505
+	ld.w	r1, [r13 + (-20)]	# tmp544, i
+	mov.w	r0, 3	# tmp545,
+	cmp.w	r1, r0	# tmp544, tmp545
 	jses	.L369		#
 # spaceinvaders.c:2297: 	for(int i = 0; i < 15; i++)
-	xor.w	r0, r0	# tmp506
-	st.w	[r13 + (-24)], r0	# i, tmp506
+	xor.w	r0, r0	# tmp546
+	st.w	[r13 + (-24)], r0	# i, tmp546
 # spaceinvaders.c:2297: 	for(int i = 0; i < 15; i++)
 	j	.L370		#
 .L371:
 # spaceinvaders.c:2298: 		draw_bitmap_with_clear_background(16 * i, BOTTOM_LINE_Y, 16, 1, bottom_line);
-	ld.w	r1, [r13 + (-24)]	# tmp507, i
-	mov.w	r0, 4	# tmp508,
-	shl.w	r1, r0	# _8, tmp508
-	mov.w	r0, sp	# tmp509,
-	mov.w	r2, bottom_line	# tmp510,
-	st.w	[r0 + (16)], r2	#, tmp510
-	mov.w	r2, 1	# tmp511,
-	st.w	[r0 + (12)], r2	#, tmp511
-	mov.w	r2, 16	# tmp512,
-	st.w	[r0 + (8)], r2	#, tmp512
-	mov.w	r2, 228	# tmp513,
-	st.w	[r0 + (4)], r2	#, tmp513
-	st.w	[r0], r1	#, _8
+	ld.w	r1, [r13 + (-24)]	# tmp547, i
+	mov.w	r0, 4	# tmp548,
+	shl.w	r1, r0	# _9, tmp548
+	mov.w	r0, sp	# tmp549,
+	mov.w	r2, bottom_line	# tmp550,
+	st.w	[r0 + (16)], r2	#, tmp550
+	mov.w	r2, 1	# tmp551,
+	st.w	[r0 + (12)], r2	#, tmp551
+	mov.w	r2, 16	# tmp552,
+	st.w	[r0 + (8)], r2	#, tmp552
+	mov.w	r2, 228	# tmp553,
+	st.w	[r0 + (4)], r2	#, tmp553
+	st.w	[r0], r1	#, _9
 	call	draw_bitmap_with_clear_background		#
 # spaceinvaders.c:2297: 	for(int i = 0; i < 15; i++)
-	ld.w	r0, [r13 + (-24)]	# tmp515, i
-	add.w	r0, 1 #111	# tmp514,
-	st.w	[r13 + (-24)], r0	# i, tmp514
+	ld.w	r0, [r13 + (-24)]	# tmp555, i
+	add.w	r0, 1 #111	# tmp554,
+	st.w	[r13 + (-24)], r0	# i, tmp554
 .L370:
 # spaceinvaders.c:2297: 	for(int i = 0; i < 15; i++)
-	ld.w	r1, [r13 + (-24)]	# tmp516, i
-	mov.w	r0, 14	# tmp517,
-	cmp.w	r1, r0	# tmp516, tmp517
+	ld.w	r1, [r13 + (-24)]	# tmp556, i
+	mov.w	r0, 14	# tmp557,
+	cmp.w	r1, r0	# tmp556, tmp557
 	jses	.L371		#
 # spaceinvaders.c:2300: 	draw_score_labels();
 	call	draw_score_labels		#
@@ -9932,195 +9943,195 @@ switch_to_play_screen:
 # spaceinvaders.c:2303: 	draw_lives();
 	call	draw_lives		#
 # spaceinvaders.c:2305: 	int alien_spawn_x =  41;
-	mov.w	r0, 41	# tmp518,
-	st.w	[r13 + (-88)], r0	# alien_spawn_x, tmp518
+	mov.w	r0, 41	# tmp558,
+	st.w	[r13 + (-88)], r0	# alien_spawn_x, tmp558
 # spaceinvaders.c:2306: 	int alien_spawn_y = get_alien_spawn_y_for_current_wave();
 	call	get_alien_spawn_y_for_current_wave		#
 	st.w	[r13 + (-28)], r0	# alien_spawn_y,
 # spaceinvaders.c:2310: 	int alien_sprite_width = 0;
-	xor.w	r0, r0	# tmp519
-	st.w	[r13 + (-40)], r0	# alien_sprite_width, tmp519
+	xor.w	r0, r0	# tmp559
+	st.w	[r13 + (-40)], r0	# alien_sprite_width, tmp559
 # spaceinvaders.c:2313: 	for(int j = ROW_5_OCTOPUS; j >= ROW_1_SQUID; j--)
-	mov.w	r0, 4	# tmp520,
-	st.w	[r13 + (-44)], r0	# j, tmp520
+	mov.w	r0, 4	# tmp560,
+	st.w	[r13 + (-44)], r0	# j, tmp560
 # spaceinvaders.c:2313: 	for(int j = ROW_5_OCTOPUS; j >= ROW_1_SQUID; j--)
 	j	.L372		#
 .L381:
 # spaceinvaders.c:2316: 		switch(j)
-	ld.w	r1, [r13 + (-44)]	# tmp521, j
-	mov.w	r0, 4	# tmp522,
-	cmp.w	r1, r0	# tmp521, tmp522
+	ld.w	r1, [r13 + (-44)]	# tmp561, j
+	mov.w	r0, 4	# tmp562,
+	cmp.w	r1, r0	# tmp561, tmp562
 	jz	.L373		#
-	ld.w	r1, [r13 + (-44)]	# tmp523, j
-	mov.w	r0, 4	# tmp524,
-	cmp.w	r1, r0	# tmp523, tmp524
+	ld.w	r1, [r13 + (-44)]	# tmp563, j
+	mov.w	r0, 4	# tmp564,
+	cmp.w	r1, r0	# tmp563, tmp564
 	jgs	.L374		#
-	ld.w	r1, [r13 + (-44)]	# tmp525, j
-	mov.w	r0, 3	# tmp526,
-	cmp.w	r1, r0	# tmp525, tmp526
+	ld.w	r1, [r13 + (-44)]	# tmp565, j
+	mov.w	r0, 3	# tmp566,
+	cmp.w	r1, r0	# tmp565, tmp566
 	jz	.L375		#
-	ld.w	r1, [r13 + (-44)]	# tmp527, j
-	mov.w	r0, 3	# tmp528,
-	cmp.w	r1, r0	# tmp527, tmp528
+	ld.w	r1, [r13 + (-44)]	# tmp567, j
+	mov.w	r0, 3	# tmp568,
+	cmp.w	r1, r0	# tmp567, tmp568
 	jgs	.L374		#
-	ld.w	r1, [r13 + (-44)]	# tmp529, j
-	mov.w	r0, 2	# tmp530,
-	cmp.w	r1, r0	# tmp529, tmp530
+	ld.w	r1, [r13 + (-44)]	# tmp569, j
+	mov.w	r0, 2	# tmp570,
+	cmp.w	r1, r0	# tmp569, tmp570
 	jz	.L376		#
-	ld.w	r1, [r13 + (-44)]	# tmp531, j
-	mov.w	r0, 2	# tmp532,
-	cmp.w	r1, r0	# tmp531, tmp532
+	ld.w	r1, [r13 + (-44)]	# tmp571, j
+	mov.w	r0, 2	# tmp572,
+	cmp.w	r1, r0	# tmp571, tmp572
 	jgs	.L374		#
-	ld.w	r1, [r13 + (-44)]	# tmp533, j
-	xor.w	r0, r0	# tmp534
-	cmp.w	r1, r0	# tmp533, tmp534
+	ld.w	r1, [r13 + (-44)]	# tmp573, j
+	xor.w	r0, r0	# tmp574
+	cmp.w	r1, r0	# tmp573, tmp574
 	jz	.L377		#
-	ld.w	r1, [r13 + (-44)]	# tmp535, j
-	mov.w	r0, 1	# tmp536,
-	cmp.w	r1, r0	# tmp535, tmp536
+	ld.w	r1, [r13 + (-44)]	# tmp575, j
+	mov.w	r0, 1	# tmp576,
+	cmp.w	r1, r0	# tmp575, tmp576
 	jz	.L378		#
 	j	.L374		#
 .L373:
 # spaceinvaders.c:2319: 				alien_row = row_5_octopus;
-	mov.w	r0, row_5_octopus	# tmp537,
-	st.w	[r13 + (-36)], r0	# alien_row, tmp537
+	mov.w	r0, row_5_octopus	# tmp577,
+	st.w	[r13 + (-36)], r0	# alien_row, tmp577
 # spaceinvaders.c:2320: 				alien_bitmap = octopus0;
-	mov.w	r0, octopus0	# tmp538,
-	st.w	[r13 + (-32)], r0	# alien_bitmap, tmp538
+	mov.w	r0, octopus0	# tmp578,
+	st.w	[r13 + (-32)], r0	# alien_bitmap, tmp578
 # spaceinvaders.c:2321: 				alien_sprite_width = 12;
-	mov.w	r0, 12	# tmp539,
-	st.w	[r13 + (-40)], r0	# alien_sprite_width, tmp539
+	mov.w	r0, 12	# tmp579,
+	st.w	[r13 + (-40)], r0	# alien_sprite_width, tmp579
 # spaceinvaders.c:2322: 				break;
 	j	.L374		#
 .L375:
 # spaceinvaders.c:2324: 				alien_row = row_4_octopus;
-	mov.w	r0, row_4_octopus	# tmp540,
-	st.w	[r13 + (-36)], r0	# alien_row, tmp540
+	mov.w	r0, row_4_octopus	# tmp580,
+	st.w	[r13 + (-36)], r0	# alien_row, tmp580
 # spaceinvaders.c:2325: 				break;
 	j	.L374		#
 .L376:
 # spaceinvaders.c:2327: 				alien_row = row_3_crab;
-	mov.w	r0, row_3_crab	# tmp541,
-	st.w	[r13 + (-36)], r0	# alien_row, tmp541
+	mov.w	r0, row_3_crab	# tmp581,
+	st.w	[r13 + (-36)], r0	# alien_row, tmp581
 # spaceinvaders.c:2328: 				alien_bitmap = crab0;
-	mov.w	r0, crab0	# tmp542,
-	st.w	[r13 + (-32)], r0	# alien_bitmap, tmp542
+	mov.w	r0, crab0	# tmp582,
+	st.w	[r13 + (-32)], r0	# alien_bitmap, tmp582
 # spaceinvaders.c:2329: 				break;
 	j	.L374		#
 .L378:
 # spaceinvaders.c:2331: 				alien_row = row_2_crab;
-	mov.w	r0, row_2_crab	# tmp543,
-	st.w	[r13 + (-36)], r0	# alien_row, tmp543
+	mov.w	r0, row_2_crab	# tmp583,
+	st.w	[r13 + (-36)], r0	# alien_row, tmp583
 # spaceinvaders.c:2332: 				break;
 	j	.L374		#
 .L377:
 # spaceinvaders.c:2334: 				alien_row = row_1_squid;
-	mov.w	r0, row_1_squid	# tmp544,
-	st.w	[r13 + (-36)], r0	# alien_row, tmp544
+	mov.w	r0, row_1_squid	# tmp584,
+	st.w	[r13 + (-36)], r0	# alien_row, tmp584
 # spaceinvaders.c:2335: 				alien_bitmap = squid0;
-	mov.w	r0, squid0	# tmp545,
-	st.w	[r13 + (-32)], r0	# alien_bitmap, tmp545
+	mov.w	r0, squid0	# tmp585,
+	st.w	[r13 + (-32)], r0	# alien_bitmap, tmp585
 # spaceinvaders.c:2336: 				alien_sprite_width = 8;
-	mov.w	r0, 8	# tmp546,
-	st.w	[r13 + (-40)], r0	# alien_sprite_width, tmp546
+	mov.w	r0, 8	# tmp586,
+	st.w	[r13 + (-40)], r0	# alien_sprite_width, tmp586
 # spaceinvaders.c:2337: 				break;
 	nop	
 .L374:
 # spaceinvaders.c:2340: 		for(int i = 0; i < 11; i++)
-	xor.w	r0, r0	# tmp547
-	st.w	[r13 + (-48)], r0	# i, tmp547
+	xor.w	r0, r0	# tmp587
+	st.w	[r13 + (-48)], r0	# i, tmp587
 # spaceinvaders.c:2340: 		for(int i = 0; i < 11; i++)
 	j	.L379		#
 .L380:
 # spaceinvaders.c:2342: 			delay_millis(16);
-	mov.w	r1, sp	# tmp548,
-	mov.w	r0, 16	# tmp549,
-	st.w	[r1], r0	#, tmp549
+	mov.w	r1, sp	# tmp588,
+	mov.w	r0, 16	# tmp589,
+	st.w	[r1], r0	#, tmp589
 	call	delay_millis		#
 # spaceinvaders.c:2344: 				&alien_row[i],
-	ld.w	r0, [r13 + (-48)]	# i.153_9, i
-	mov.w	r1, 3	# tmp550,
-	shl.w	r0, r1	# _10, tmp550
+	ld.w	r0, [r13 + (-48)]	# i.155_10, i
+	mov.w	r1, 3	# tmp590,
+	shl.w	r0, r1	# _11, tmp590
 # spaceinvaders.c:2343: 			initialize_alien(
-	ld.w	r1, [r13 + (-36)]	# tmp551, alien_row
-	add.w	r1, r0 #222	# _11, _10
+	ld.w	r1, [r13 + (-36)]	# tmp591, alien_row
+	add.w	r1, r0 #222	# _12, _11
 # spaceinvaders.c:2345: 				alien_spawn_x + 16 * i,
-	ld.w	r0, [r13 + (-48)]	# tmp552, i
-	mov.w	r2, 4	# tmp554,
-	shl.w	r0, r2	# tmp553, tmp554
-	ld.w	r2, [r13 + (-88)]	# tmp555, alien_spawn_x
-	add.w	r0, r2 #222	# tmp556, tmp557
+	ld.w	r0, [r13 + (-48)]	# tmp592, i
+	mov.w	r2, 4	# tmp594,
+	shl.w	r0, r2	# tmp593, tmp594
+	ld.w	r2, [r13 + (-88)]	# tmp595, alien_spawn_x
+	add.w	r0, r2 #222	# tmp596, tmp597
 # spaceinvaders.c:2343: 			initialize_alien(
-	zex.s	r2, r0	# _16, _15
-	ld.w	r0, [r13 + (-28)]	# tmp558, alien_spawn_y
-	zex.s	r3, r0	# _18, _17
-	ld.w	r0, [r13 + (-40)]	# tmp559, alien_sprite_width
-	zex.s	r4, r0	# _20, _19
-	mov.w	r0, sp	# tmp560,
-	mov.w	r5, 2	# tmp561,
-	st.w	[r0 + (24)], r5	#, tmp561
-	ld.w	r5, [r13 + (-32)]	# tmp562, alien_bitmap
-	st.w	[r0 + (20)], r5	#, tmp562
-	mov.w	r5, 8	# tmp563,
-	st.w	[r0 + (16)], r5	#, tmp563
-	st.w	[r0 + (12)], r4	#, _20
-	st.w	[r0 + (8)], r3	#, _18
-	st.w	[r0 + (4)], r2	#, _16
-	st.w	[r0], r1	#, _11
+	zex.s	r2, r0	# _17, _16
+	ld.w	r0, [r13 + (-28)]	# tmp598, alien_spawn_y
+	zex.s	r3, r0	# _19, _18
+	ld.w	r0, [r13 + (-40)]	# tmp599, alien_sprite_width
+	zex.s	r4, r0	# _21, _20
+	mov.w	r0, sp	# tmp600,
+	mov.w	r5, 2	# tmp601,
+	st.w	[r0 + (24)], r5	#, tmp601
+	ld.w	r5, [r13 + (-32)]	# tmp602, alien_bitmap
+	st.w	[r0 + (20)], r5	#, tmp602
+	mov.w	r5, 8	# tmp603,
+	st.w	[r0 + (16)], r5	#, tmp603
+	st.w	[r0 + (12)], r4	#, _21
+	st.w	[r0 + (8)], r3	#, _19
+	st.w	[r0 + (4)], r2	#, _17
+	st.w	[r0], r1	#, _12
 	call	initialize_alien		#
 # spaceinvaders.c:2340: 		for(int i = 0; i < 11; i++)
-	ld.w	r0, [r13 + (-48)]	# tmp565, i
-	add.w	r0, 1 #111	# tmp564,
-	st.w	[r13 + (-48)], r0	# i, tmp564
+	ld.w	r0, [r13 + (-48)]	# tmp605, i
+	add.w	r0, 1 #111	# tmp604,
+	st.w	[r13 + (-48)], r0	# i, tmp604
 .L379:
 # spaceinvaders.c:2340: 		for(int i = 0; i < 11; i++)
-	ld.w	r1, [r13 + (-48)]	# tmp566, i
-	mov.w	r0, 10	# tmp567,
-	cmp.w	r1, r0	# tmp566, tmp567
+	ld.w	r1, [r13 + (-48)]	# tmp606, i
+	mov.w	r0, 10	# tmp607,
+	cmp.w	r1, r0	# tmp606, tmp607
 	jses	.L380		#
 # spaceinvaders.c:2353: 		alien_spawn_y -= 16;
-	ld.w	r0, [r13 + (-28)]	# tmp569, alien_spawn_y
-	add.w	r0, -16 #111	# tmp568,
-	st.w	[r13 + (-28)], r0	# alien_spawn_y, tmp568
+	ld.w	r0, [r13 + (-28)]	# tmp609, alien_spawn_y
+	add.w	r0, -16 #111	# tmp608,
+	st.w	[r13 + (-28)], r0	# alien_spawn_y, tmp608
 # spaceinvaders.c:2313: 	for(int j = ROW_5_OCTOPUS; j >= ROW_1_SQUID; j--)
-	ld.w	r0, [r13 + (-44)]	# tmp571, j
-	add.w	r0, -1 #111	# tmp570,
-	st.w	[r13 + (-44)], r0	# j, tmp570
+	ld.w	r0, [r13 + (-44)]	# tmp611, j
+	add.w	r0, -1 #111	# tmp610,
+	st.w	[r13 + (-44)], r0	# j, tmp610
 .L372:
 # spaceinvaders.c:2313: 	for(int j = ROW_5_OCTOPUS; j >= ROW_1_SQUID; j--)
-	ld.w	r1, [r13 + (-44)]	# tmp572, j
-	xor.w	r0, r0	# tmp573
-	cmp.w	r1, r0	# tmp572, tmp573
+	ld.w	r1, [r13 + (-44)]	# tmp612, j
+	xor.w	r0, r0	# tmp613
+	cmp.w	r1, r0	# tmp612, tmp613
 	jges	.L381		#
 # spaceinvaders.c:2355: 	delay_millis(16);
-	mov.w	r1, sp	# tmp574,
-	mov.w	r0, 16	# tmp575,
-	st.w	[r1], r0	#, tmp575
+	mov.w	r1, sp	# tmp614,
+	mov.w	r0, 16	# tmp615,
+	st.w	[r1], r0	#, tmp615
 	call	delay_millis		#
 .L516:
 # spaceinvaders.c:2360: 		if(game_state == PLAY)
-	ld.w	r1, [game_state]	# game_state.154_21, game_state
+	ld.w	r1, [game_state]	# game_state.156_22, game_state
 # spaceinvaders.c:2360: 		if(game_state == PLAY)
-	mov.w	r0, 1	# tmp576,
-	cmp.w	r1, r0	# game_state.154_21, tmp576
+	mov.w	r0, 1	# tmp616,
+	cmp.w	r1, r0	# game_state.156_22, tmp616
 	jnz	.L382		#
 # spaceinvaders.c:2364: 			if(ufo_status == DEAD
-	ld.w	r1, [ufo_status]	# ufo_status.155_22, ufo_status
+	ld.w	r1, [ufo_status]	# ufo_status.157_23, ufo_status
 # spaceinvaders.c:2364: 			if(ufo_status == DEAD
-	xor.w	r0, r0	# tmp577
-	cmp.w	r1, r0	# ufo_status.155_22, tmp577
+	xor.w	r0, r0	# tmp617
+	cmp.w	r1, r0	# ufo_status.157_23, tmp617
 	jnz	.L383		#
 # spaceinvaders.c:2365: 			   && number_of_aliens >= 8)
-	ld.w	r1, [number_of_aliens]	# number_of_aliens.156_23, number_of_aliens
+	ld.w	r1, [number_of_aliens]	# number_of_aliens.158_24, number_of_aliens
 # spaceinvaders.c:2365: 			   && number_of_aliens >= 8)
-	mov.w	r0, 7	# tmp578,
-	cmp.w	r1, r0	# number_of_aliens.156_23, tmp578
+	mov.w	r0, 7	# tmp618,
+	cmp.w	r1, r0	# number_of_aliens.158_24, tmp618
 	jses	.L383		#
 # spaceinvaders.c:2367: 				if(timer_for_ufo_spawn <= 0)
-	ld.w	r1, [timer_for_ufo_spawn]	# timer_for_ufo_spawn.157_24, timer_for_ufo_spawn
+	ld.w	r1, [timer_for_ufo_spawn]	# timer_for_ufo_spawn.159_25, timer_for_ufo_spawn
 # spaceinvaders.c:2367: 				if(timer_for_ufo_spawn <= 0)
-	xor.w	r0, r0	# tmp579
-	cmp.w	r1, r0	# timer_for_ufo_spawn.157_24, tmp579
+	xor.w	r0, r0	# tmp619
+	cmp.w	r1, r0	# timer_for_ufo_spawn.159_25, tmp619
 	jgs	.L384		#
 # spaceinvaders.c:2369: 					spawn_ufo();
 	call	spawn_ufo		#
@@ -10128,439 +10139,371 @@ switch_to_play_screen:
 	call	calculate_timer_for_ufo_spawn		#
 .L384:
 # spaceinvaders.c:2372: 				timer_for_ufo_spawn -= 2;
-	ld.w	r0, [timer_for_ufo_spawn]	# timer_for_ufo_spawn.158_25, timer_for_ufo_spawn
-	add.w	r0, -2 #111	# _26,
-	st.w	[timer_for_ufo_spawn], r0	# timer_for_ufo_spawn, _26
+	ld.w	r0, [timer_for_ufo_spawn]	# timer_for_ufo_spawn.160_26, timer_for_ufo_spawn
+	add.w	r0, -2 #111	# _27,
+	st.w	[timer_for_ufo_spawn], r0	# timer_for_ufo_spawn, _27
 	j	.L385		#
 .L383:
 # spaceinvaders.c:2374: 			else if(ufo_status == ALIVE)
-	ld.w	r1, [ufo_status]	# ufo_status.159_27, ufo_status
+	ld.w	r1, [ufo_status]	# ufo_status.161_28, ufo_status
 # spaceinvaders.c:2374: 			else if(ufo_status == ALIVE)
-	mov.w	r0, 2	# tmp580,
-	cmp.w	r1, r0	# ufo_status.159_27, tmp580
+	mov.w	r0, 2	# tmp620,
+	cmp.w	r1, r0	# ufo_status.161_28, tmp620
 	jnz	.L386		#
 # spaceinvaders.c:2376: 				if(timer_for_ufo_move <= 0)
-	ld.w	r1, [timer_for_ufo_move]	# timer_for_ufo_move.160_28, timer_for_ufo_move
+	ld.w	r1, [timer_for_ufo_move]	# timer_for_ufo_move.162_29, timer_for_ufo_move
 # spaceinvaders.c:2376: 				if(timer_for_ufo_move <= 0)
-	xor.w	r0, r0	# tmp581
-	cmp.w	r1, r0	# timer_for_ufo_move.160_28, tmp581
+	xor.w	r0, r0	# tmp621
+	cmp.w	r1, r0	# timer_for_ufo_move.162_29, tmp621
 	jgs	.L387		#
 # spaceinvaders.c:2378: 					move_ufo();
 	call	move_ufo		#
 # spaceinvaders.c:2379: 					timer_for_ufo_move = 36;
-	mov.w	r0, 36	# tmp582,
-	st.w	[timer_for_ufo_move], r0	# timer_for_ufo_move, tmp582
+	mov.w	r0, 36	# tmp622,
+	st.w	[timer_for_ufo_move], r0	# timer_for_ufo_move, tmp622
 .L387:
 # spaceinvaders.c:2381: 				timer_for_ufo_move -= 2;
-	ld.w	r0, [timer_for_ufo_move]	# timer_for_ufo_move.161_29, timer_for_ufo_move
-	add.w	r0, -2 #111	# _30,
-	st.w	[timer_for_ufo_move], r0	# timer_for_ufo_move, _30
+	ld.w	r0, [timer_for_ufo_move]	# timer_for_ufo_move.163_30, timer_for_ufo_move
+	add.w	r0, -2 #111	# _31,
+	st.w	[timer_for_ufo_move], r0	# timer_for_ufo_move, _31
 	j	.L385		#
 .L386:
 # spaceinvaders.c:2383: 			else if(ufo_status == EXPLODING)
-	ld.w	r1, [ufo_status]	# ufo_status.162_31, ufo_status
+	ld.w	r1, [ufo_status]	# ufo_status.164_32, ufo_status
 # spaceinvaders.c:2383: 			else if(ufo_status == EXPLODING)
-	mov.w	r0, 1	# tmp583,
-	cmp.w	r1, r0	# ufo_status.162_31, tmp583
+	mov.w	r0, 1	# tmp623,
+	cmp.w	r1, r0	# ufo_status.164_32, tmp623
 	jnz	.L385		#
 # spaceinvaders.c:2385: 				if(timer_for_ufo_death == 1200)
-	ld.w	r1, [timer_for_ufo_death]	# timer_for_ufo_death.163_32, timer_for_ufo_death
+	ld.w	r1, [timer_for_ufo_death]	# timer_for_ufo_death.165_33, timer_for_ufo_death
 # spaceinvaders.c:2385: 				if(timer_for_ufo_death == 1200)
-	mov.w	r0, 1200	# tmp584,
-	cmp.w	r1, r0	# timer_for_ufo_death.163_32, tmp584
+	mov.w	r0, 1200	# tmp624,
+	cmp.w	r1, r0	# timer_for_ufo_death.165_33, tmp624
 	jnz	.L388		#
 # spaceinvaders.c:2387: 					clear_bitmap_test(ufo_position_X, 35, 16, 8);
-	ld.w	r1, [ufo_position_X]	# ufo_position_X.164_33, ufo_position_X
-	mov.w	r0, sp	# tmp585,
-	mov.w	r2, 8	# tmp586,
-	st.w	[r0 + (12)], r2	#, tmp586
-	mov.w	r2, 16	# tmp587,
-	st.w	[r0 + (8)], r2	#, tmp587
-	mov.w	r2, 35	# tmp588,
-	st.w	[r0 + (4)], r2	#, tmp588
-	st.w	[r0], r1	#, ufo_position_X.164_33
+	ld.w	r1, [ufo_position_X]	# ufo_position_X.166_34, ufo_position_X
+	mov.w	r0, sp	# tmp625,
+	mov.w	r2, 8	# tmp626,
+	st.w	[r0 + (12)], r2	#, tmp626
+	mov.w	r2, 16	# tmp627,
+	st.w	[r0 + (8)], r2	#, tmp627
+	mov.w	r2, 35	# tmp628,
+	st.w	[r0 + (4)], r2	#, tmp628
+	st.w	[r0], r1	#, ufo_position_X.166_34
 	call	clear_bitmap_test		#
 # spaceinvaders.c:2388: 					draw_bitmap_with_clear_background(ufo_position_X, 35, 24, 8, ufo_explosion);
-	ld.w	r1, [ufo_position_X]	# ufo_position_X.165_34, ufo_position_X
-	mov.w	r0, sp	# tmp589,
-	mov.w	r2, ufo_explosion	# tmp590,
-	st.w	[r0 + (16)], r2	#, tmp590
-	mov.w	r2, 8	# tmp591,
-	st.w	[r0 + (12)], r2	#, tmp591
-	mov.w	r2, 24	# tmp592,
-	st.w	[r0 + (8)], r2	#, tmp592
-	mov.w	r2, 35	# tmp593,
-	st.w	[r0 + (4)], r2	#, tmp593
-	st.w	[r0], r1	#, ufo_position_X.165_34
+	ld.w	r1, [ufo_position_X]	# ufo_position_X.167_35, ufo_position_X
+	mov.w	r0, sp	# tmp629,
+	mov.w	r2, ufo_explosion	# tmp630,
+	st.w	[r0 + (16)], r2	#, tmp630
+	mov.w	r2, 8	# tmp631,
+	st.w	[r0 + (12)], r2	#, tmp631
+	mov.w	r2, 24	# tmp632,
+	st.w	[r0 + (8)], r2	#, tmp632
+	mov.w	r2, 35	# tmp633,
+	st.w	[r0 + (4)], r2	#, tmp633
+	st.w	[r0], r1	#, ufo_position_X.167_35
 	call	draw_bitmap_with_clear_background		#
 	j	.L389		#
 .L388:
 # spaceinvaders.c:2391: 				else if(timer_for_ufo_death == 600)
-	ld.w	r1, [timer_for_ufo_death]	# timer_for_ufo_death.166_35, timer_for_ufo_death
+	ld.w	r1, [timer_for_ufo_death]	# timer_for_ufo_death.168_36, timer_for_ufo_death
 # spaceinvaders.c:2391: 				else if(timer_for_ufo_death == 600)
-	mov.w	r0, 600	# tmp594,
-	cmp.w	r1, r0	# timer_for_ufo_death.166_35, tmp594
+	mov.w	r0, 600	# tmp634,
+	cmp.w	r1, r0	# timer_for_ufo_death.168_36, tmp634
 	jnz	.L390		#
 # spaceinvaders.c:2393: 					clear_bitmap_test(ufo_position_X, 35, 24, 8);
-	ld.w	r1, [ufo_position_X]	# ufo_position_X.167_36, ufo_position_X
-	mov.w	r0, sp	# tmp595,
-	mov.w	r2, 8	# tmp596,
-	st.w	[r0 + (12)], r2	#, tmp596
-	mov.w	r2, 24	# tmp597,
-	st.w	[r0 + (8)], r2	#, tmp597
-	mov.w	r2, 35	# tmp598,
-	st.w	[r0 + (4)], r2	#, tmp598
-	st.w	[r0], r1	#, ufo_position_X.167_36
+	ld.w	r1, [ufo_position_X]	# ufo_position_X.169_37, ufo_position_X
+	mov.w	r0, sp	# tmp635,
+	mov.w	r2, 8	# tmp636,
+	st.w	[r0 + (12)], r2	#, tmp636
+	mov.w	r2, 24	# tmp637,
+	st.w	[r0 + (8)], r2	#, tmp637
+	mov.w	r2, 35	# tmp638,
+	st.w	[r0 + (4)], r2	#, tmp638
+	st.w	[r0], r1	#, ufo_position_X.169_37
 	call	clear_bitmap_test		#
 # spaceinvaders.c:2394: 					sprintf(str, "%d", ufo_score);
-	ld.w	r1, [ufo_score]	# ufo_score.168_37, ufo_score
-	mov.w	r0, sp	# tmp599,
-	st.w	[r0 + (8)], r1	#, ufo_score.168_37
-	mov.w	r1, .LC4	# tmp600,
-	st.w	[r0 + (4)], r1	#, tmp600
-	mov.w	r1, str	# tmp601,
-	st.w	[r0], r1	#, tmp601
+	ld.w	r1, [ufo_score]	# ufo_score.170_38, ufo_score
+	mov.w	r0, sp	# tmp639,
+	st.w	[r0 + (8)], r1	#, ufo_score.170_38
+	mov.w	r1, .LC4	# tmp640,
+	st.w	[r0 + (4)], r1	#, tmp640
+	mov.w	r1, str	# tmp641,
+	st.w	[r0], r1	#, tmp641
 	call	sprintf		#
 # spaceinvaders.c:2395: 					draw(ufo_position_X, 35, PURPLE, str);
-	ld.w	r1, [ufo_position_X]	# ufo_position_X.169_38, ufo_position_X
-	mov.w	r0, sp	# tmp602,
-	mov.w	r2, str	# tmp603,
-	st.w	[r0 + (12)], r2	#, tmp603
-	mov.w	r2, 5	# tmp604,
-	st.w	[r0 + (8)], r2	#, tmp604
-	mov.w	r2, 35	# tmp605,
-	st.w	[r0 + (4)], r2	#, tmp605
-	st.w	[r0], r1	#, ufo_position_X.169_38
+	ld.w	r1, [ufo_position_X]	# ufo_position_X.171_39, ufo_position_X
+	mov.w	r0, sp	# tmp642,
+	mov.w	r2, str	# tmp643,
+	st.w	[r0 + (12)], r2	#, tmp643
+	mov.w	r2, 5	# tmp644,
+	st.w	[r0 + (8)], r2	#, tmp644
+	mov.w	r2, 35	# tmp645,
+	st.w	[r0 + (4)], r2	#, tmp645
+	st.w	[r0], r1	#, ufo_position_X.171_39
 	call	draw		#
 	j	.L389		#
 .L390:
 # spaceinvaders.c:2397: 				else if(timer_for_ufo_death <= 0)
-	ld.w	r1, [timer_for_ufo_death]	# timer_for_ufo_death.170_39, timer_for_ufo_death
+	ld.w	r1, [timer_for_ufo_death]	# timer_for_ufo_death.172_40, timer_for_ufo_death
 # spaceinvaders.c:2397: 				else if(timer_for_ufo_death <= 0)
-	xor.w	r0, r0	# tmp606
-	cmp.w	r1, r0	# timer_for_ufo_death.170_39, tmp606
+	xor.w	r0, r0	# tmp646
+	cmp.w	r1, r0	# timer_for_ufo_death.172_40, tmp646
 	jgs	.L389		#
 # spaceinvaders.c:2399: 					ufo_status = DEAD;
-	xor.w	r0, r0	# tmp607
-	st.w	[ufo_status], r0	# ufo_status, tmp607
+	xor.w	r0, r0	# tmp647
+	st.w	[ufo_status], r0	# ufo_status, tmp647
 # spaceinvaders.c:2400: 					clear_bitmap_test(ufo_position_X, 35, 24, 8);
-	ld.w	r1, [ufo_position_X]	# ufo_position_X.171_40, ufo_position_X
-	mov.w	r0, sp	# tmp608,
-	mov.w	r2, 8	# tmp609,
-	st.w	[r0 + (12)], r2	#, tmp609
-	mov.w	r2, 24	# tmp610,
-	st.w	[r0 + (8)], r2	#, tmp610
-	mov.w	r2, 35	# tmp611,
-	st.w	[r0 + (4)], r2	#, tmp611
-	st.w	[r0], r1	#, ufo_position_X.171_40
+	ld.w	r1, [ufo_position_X]	# ufo_position_X.173_41, ufo_position_X
+	mov.w	r0, sp	# tmp648,
+	mov.w	r2, 8	# tmp649,
+	st.w	[r0 + (12)], r2	#, tmp649
+	mov.w	r2, 24	# tmp650,
+	st.w	[r0 + (8)], r2	#, tmp650
+	mov.w	r2, 35	# tmp651,
+	st.w	[r0 + (4)], r2	#, tmp651
+	st.w	[r0], r1	#, ufo_position_X.173_41
 	call	clear_bitmap_test		#
 # spaceinvaders.c:2401: 					ufo_position_X = 0;
-	xor.w	r0, r0	# tmp612
-	st.w	[ufo_position_X], r0	# ufo_position_X, tmp612
+	xor.w	r0, r0	# tmp652
+	st.w	[ufo_position_X], r0	# ufo_position_X, tmp652
 # spaceinvaders.c:2402: 					score += ufo_score;
-	ld.w	r0, [score]	# score.172_41, score
-	ld.w	r1, [ufo_score]	# ufo_score.173_42, ufo_score
-	add.w	r0, r1 #222	# _43, ufo_score.173_42
-	st.w	[score], r0	# score, _43
+	ld.w	r0, [score]	# score.174_42, score
+	ld.w	r1, [ufo_score]	# ufo_score.175_43, ufo_score
+	add.w	r0, r1 #222	# _44, ufo_score.175_43
+	st.w	[score], r0	# score, _44
 # spaceinvaders.c:2403: 					check_and_draw_current_score();
 	call	check_and_draw_current_score		#
 .L389:
 # spaceinvaders.c:2405: 				timer_for_ufo_death -= 2;
-	ld.w	r0, [timer_for_ufo_death]	# timer_for_ufo_death.174_44, timer_for_ufo_death
-	add.w	r0, -2 #111	# _45,
-	st.w	[timer_for_ufo_death], r0	# timer_for_ufo_death, _45
+	ld.w	r0, [timer_for_ufo_death]	# timer_for_ufo_death.176_45, timer_for_ufo_death
+	add.w	r0, -2 #111	# _46,
+	st.w	[timer_for_ufo_death], r0	# timer_for_ufo_death, _46
 .L385:
 # spaceinvaders.c:2411: 			if(player_bullet_status == EXPLODING)
-	ld.w	r1, [player_bullet_status]	# player_bullet_status.175_46, player_bullet_status
+	ld.w	r1, [player_bullet_status]	# player_bullet_status.177_47, player_bullet_status
 # spaceinvaders.c:2411: 			if(player_bullet_status == EXPLODING)
-	mov.w	r0, 1	# tmp613,
-	cmp.w	r1, r0	# player_bullet_status.175_46, tmp613
+	mov.w	r0, 1	# tmp653,
+	cmp.w	r1, r0	# player_bullet_status.177_47, tmp653
 	jnz	.L391		#
 # spaceinvaders.c:2413: 				if(timer_for_player_bullet_destroy == 150)
-	ld.w	r1, [timer_for_player_bullet_destroy]	# timer_for_player_bullet_destroy.176_47, timer_for_player_bullet_destroy
+	ld.w	r1, [timer_for_player_bullet_destroy]	# timer_for_player_bullet_destroy.178_48, timer_for_player_bullet_destroy
 # spaceinvaders.c:2413: 				if(timer_for_player_bullet_destroy == 150)
-	mov.w	r0, 150	# tmp614,
-	cmp.w	r1, r0	# timer_for_player_bullet_destroy.176_47, tmp614
+	mov.w	r0, 150	# tmp654,
+	cmp.w	r1, r0	# timer_for_player_bullet_destroy.178_48, tmp654
 	jnz	.L392		#
 # spaceinvaders.c:2415: 					player_bullet_def -> addr = 0;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.177_48, player_bullet_def
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.179_49, player_bullet_def
 # spaceinvaders.c:2415: 					player_bullet_def -> addr = 0;
-	xor.w	r1, r1	# tmp615
-	st.s	[r0], r1	# player_bullet_def.177_48->addr, tmp615
+	xor.w	r1, r1	# tmp655
+	st.s	[r0], r1	# player_bullet_def.179_49->addr, tmp655
 # spaceinvaders.c:2417: 						player_bullet_def->x - 3, 
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.178_49, player_bullet_def
-	ld.s	r0, [r0 + (2)]	# _50, player_bullet_def.178_49->x
-	zex.s	r0, r0	# _51, _50
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.180_50, player_bullet_def
+	ld.s	r0, [r0 + (2)]	# _51, player_bullet_def.180_50->x
+	sex.s	r0, r0	# _52, _51
 # spaceinvaders.c:2416: 					draw_bitmap_with_clear_background(
-	mov.w	r1, r0	# _52, _51
-	add.w	r1, -3 #111	# _52,
+	mov.w	r1, r0	# _53, _52
+	add.w	r1, -3 #111	# _53,
 # spaceinvaders.c:2418: 						player_bullet_def->y - 3, 
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.179_53, player_bullet_def
-	ld.s	r0, [r0 + (4)]	# _54, player_bullet_def.179_53->y
-	zex.s	r0, r0	# _55, _54
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.181_54, player_bullet_def
+	ld.s	r0, [r0 + (4)]	# _55, player_bullet_def.181_54->y
+	sex.s	r0, r0	# _56, _55
 # spaceinvaders.c:2416: 					draw_bitmap_with_clear_background(
-	mov.w	r2, r0	# _56, _55
-	add.w	r2, -3 #111	# _56,
-	mov.w	r0, sp	# tmp616,
-	mov.w	r3, player_bullet_explosion	# tmp617,
-	st.w	[r0 + (16)], r3	#, tmp617
-	mov.w	r3, 8	# tmp618,
-	st.w	[r0 + (12)], r3	#, tmp618
-	mov.w	r3, 8	# tmp619,
-	st.w	[r0 + (8)], r3	#, tmp619
-	st.w	[r0 + (4)], r2	#, _56
-	st.w	[r0], r1	#, _52
+	mov.w	r2, r0	# _57, _56
+	add.w	r2, -3 #111	# _57,
+	mov.w	r0, sp	# tmp656,
+	mov.w	r3, player_bullet_explosion	# tmp657,
+	st.w	[r0 + (16)], r3	#, tmp657
+	mov.w	r3, 8	# tmp658,
+	st.w	[r0 + (12)], r3	#, tmp658
+	mov.w	r3, 8	# tmp659,
+	st.w	[r0 + (8)], r3	#, tmp659
+	st.w	[r0 + (4)], r2	#, _57
+	st.w	[r0], r1	#, _53
 	call	draw_bitmap_with_clear_background		#
 	j	.L393		#
 .L392:
 # spaceinvaders.c:2423: 				else if(timer_for_player_bullet_destroy <= 0)
-	ld.w	r1, [timer_for_player_bullet_destroy]	# timer_for_player_bullet_destroy.180_57, timer_for_player_bullet_destroy
+	ld.w	r1, [timer_for_player_bullet_destroy]	# timer_for_player_bullet_destroy.182_58, timer_for_player_bullet_destroy
 # spaceinvaders.c:2423: 				else if(timer_for_player_bullet_destroy <= 0)
-	xor.w	r0, r0	# tmp620
-	cmp.w	r1, r0	# timer_for_player_bullet_destroy.180_57, tmp620
+	xor.w	r0, r0	# tmp660
+	cmp.w	r1, r0	# timer_for_player_bullet_destroy.182_58, tmp660
 	jgs	.L393		#
 # spaceinvaders.c:2425: 					player_bullet_status = READY;
-	xor.w	r0, r0	# tmp621
-	st.w	[player_bullet_status], r0	# player_bullet_status, tmp621
+	xor.w	r0, r0	# tmp661
+	st.w	[player_bullet_status], r0	# player_bullet_status, tmp661
 # spaceinvaders.c:2427: 						player_bullet_def->x - 3, 
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.181_58, player_bullet_def
-	ld.s	r0, [r0 + (2)]	# _59, player_bullet_def.181_58->x
-	zex.s	r0, r0	# _60, _59
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.183_59, player_bullet_def
+	ld.s	r0, [r0 + (2)]	# _60, player_bullet_def.183_59->x
+	sex.s	r0, r0	# _61, _60
 # spaceinvaders.c:2426: 					clear_bitmap_with_specific_shape(
-	mov.w	r1, r0	# _61, _60
-	add.w	r1, -3 #111	# _61,
+	mov.w	r1, r0	# _62, _61
+	add.w	r1, -3 #111	# _62,
 # spaceinvaders.c:2428: 						player_bullet_def->y - 3, 
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.182_62, player_bullet_def
-	ld.s	r0, [r0 + (4)]	# _63, player_bullet_def.182_62->y
-	zex.s	r0, r0	# _64, _63
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.184_63, player_bullet_def
+	ld.s	r0, [r0 + (4)]	# _64, player_bullet_def.184_63->y
+	sex.s	r0, r0	# _65, _64
 # spaceinvaders.c:2426: 					clear_bitmap_with_specific_shape(
-	mov.w	r2, r0	# _65, _64
-	add.w	r2, -3 #111	# _65,
-	mov.w	r0, sp	# tmp622,
-	mov.w	r3, player_bullet_explosion	# tmp623,
-	st.w	[r0 + (16)], r3	#, tmp623
-	mov.w	r3, 8	# tmp624,
-	st.w	[r0 + (12)], r3	#, tmp624
-	mov.w	r3, 8	# tmp625,
-	st.w	[r0 + (8)], r3	#, tmp625
-	st.w	[r0 + (4)], r2	#, _65
-	st.w	[r0], r1	#, _61
+	mov.w	r2, r0	# _66, _65
+	add.w	r2, -3 #111	# _66,
+	mov.w	r0, sp	# tmp662,
+	mov.w	r3, player_bullet_explosion	# tmp663,
+	st.w	[r0 + (16)], r3	#, tmp663
+	mov.w	r3, 8	# tmp664,
+	st.w	[r0 + (12)], r3	#, tmp664
+	mov.w	r3, 8	# tmp665,
+	st.w	[r0 + (8)], r3	#, tmp665
+	st.w	[r0 + (4)], r2	#, _66
+	st.w	[r0], r1	#, _62
 	call	clear_bitmap_with_specific_shape		#
 .L393:
 # spaceinvaders.c:2433: 				timer_for_player_bullet_destroy -= 2;
-	ld.w	r0, [timer_for_player_bullet_destroy]	# timer_for_player_bullet_destroy.183_66, timer_for_player_bullet_destroy
-	add.w	r0, -2 #111	# _67,
-	st.w	[timer_for_player_bullet_destroy], r0	# timer_for_player_bullet_destroy, _67
+	ld.w	r0, [timer_for_player_bullet_destroy]	# timer_for_player_bullet_destroy.185_67, timer_for_player_bullet_destroy
+	add.w	r0, -2 #111	# _68,
+	st.w	[timer_for_player_bullet_destroy], r0	# timer_for_player_bullet_destroy, _68
 .L391:
 # spaceinvaders.c:2436: 			if(player_bullet_status == MOVING)
-	ld.w	r1, [player_bullet_status]	# player_bullet_status.184_68, player_bullet_status
+	ld.w	r1, [player_bullet_status]	# player_bullet_status.186_69, player_bullet_status
 # spaceinvaders.c:2436: 			if(player_bullet_status == MOVING)
-	mov.w	r0, 2	# tmp626,
-	cmp.w	r1, r0	# player_bullet_status.184_68, tmp626
+	mov.w	r0, 2	# tmp666,
+	cmp.w	r1, r0	# player_bullet_status.186_69, tmp666
 	jnz	.L394		#
 # spaceinvaders.c:2438: 				for(int i = 0; i < 5; i++)
-	xor.w	r0, r0	# tmp627
-	st.w	[r13 + (-52)], r0	# i, tmp627
+	xor.w	r0, r0	# tmp667
+	st.w	[r13 + (-52)], r0	# i, tmp667
 # spaceinvaders.c:2438: 				for(int i = 0; i < 5; i++)
 	j	.L395		#
 .L397:
 # spaceinvaders.c:2440: 					if(alien_bullet[i].status > 0 && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	ld.w	r1, [r13 + (-52)]	# tmp628, i
-	mov.w	r0, r1	# tmp629, tmp628
-	mov.w	r2, 3	# tmp631,
-	shl.w	r0, r2	# tmp630, tmp631
-	add.w	r0, r1 #222	# tmp629, tmp628
-	mov.w	r1, 2	# tmp633,
-	shl.w	r0, r1	# tmp632, tmp633
-	mov.w	r1, alien_bullet+20	# tmp635,
-	add.w	r0, r1 #222	# tmp634, tmp635
-	ld.w	r1, [r0]	# _69, alien_bullet[i_345].status
+	ld.w	r1, [r13 + (-52)]	# tmp668, i
+	mov.w	r0, r1	# tmp669, tmp668
+	mov.w	r2, 3	# tmp671,
+	shl.w	r0, r2	# tmp670, tmp671
+	add.w	r0, r1 #222	# tmp669, tmp668
+	mov.w	r1, 2	# tmp673,
+	shl.w	r0, r1	# tmp672, tmp673
+	mov.w	r1, alien_bullet+20	# tmp675,
+	add.w	r0, r1 #222	# tmp674, tmp675
+	ld.w	r1, [r0]	# _70, alien_bullet[i_385].status
 # spaceinvaders.c:2440: 					if(alien_bullet[i].status > 0 && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	xor.w	r0, r0	# tmp636
-	cmp.w	r1, r0	# _69, tmp636
+	xor.w	r0, r0	# tmp676
+	cmp.w	r1, r0	# _70, tmp676
 	jses	.L396		#
 # spaceinvaders.c:2440: 					if(alien_bullet[i].status > 0 && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	ld.w	r1, [r13 + (-52)]	# tmp637, i
-	mov.w	r0, r1	# tmp638, tmp637
-	mov.w	r2, 3	# tmp640,
-	shl.w	r0, r2	# tmp639, tmp640
-	add.w	r0, r1 #222	# tmp638, tmp637
-	mov.w	r1, 2	# tmp642,
-	shl.w	r0, r1	# tmp641, tmp642
-	mov.w	r1, alien_bullet+8	# tmp644,
-	add.w	r0, r1 #222	# tmp643, tmp644
-	ld.w	r1, [r0]	# _70, alien_bullet[i_345].spawn_y
+	ld.w	r1, [r13 + (-52)]	# tmp677, i
+	mov.w	r0, r1	# tmp678, tmp677
+	mov.w	r2, 3	# tmp680,
+	shl.w	r0, r2	# tmp679, tmp680
+	add.w	r0, r1 #222	# tmp678, tmp677
+	mov.w	r1, 2	# tmp682,
+	shl.w	r0, r1	# tmp681, tmp682
+	mov.w	r1, alien_bullet+8	# tmp684,
+	add.w	r0, r1 #222	# tmp683, tmp684
+	ld.w	r1, [r0]	# _71, alien_bullet[i_385].spawn_y
 # spaceinvaders.c:2440: 					if(alien_bullet[i].status > 0 && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	mov.w	r0, 212	# tmp645,
-	cmp.w	r1, r0	# _70, tmp645
+	mov.w	r0, 212	# tmp685,
+	cmp.w	r1, r0	# _71, tmp685
 	jgs	.L396		#
 # spaceinvaders.c:2441: 						check_player_bullet_collision_with_alien_bullet(i);
-	mov.w	r1, sp	# tmp646,
-	ld.w	r0, [r13 + (-52)]	# tmp647, i
-	st.w	[r1], r0	#, tmp647
+	mov.w	r1, sp	# tmp686,
+	ld.w	r0, [r13 + (-52)]	# tmp687, i
+	st.w	[r1], r0	#, tmp687
 	call	check_player_bullet_collision_with_alien_bullet		#
 .L396:
 # spaceinvaders.c:2438: 				for(int i = 0; i < 5; i++)
-	ld.w	r0, [r13 + (-52)]	# tmp649, i
-	add.w	r0, 1 #111	# tmp648,
-	st.w	[r13 + (-52)], r0	# i, tmp648
+	ld.w	r0, [r13 + (-52)]	# tmp689, i
+	add.w	r0, 1 #111	# tmp688,
+	st.w	[r13 + (-52)], r0	# i, tmp688
 .L395:
 # spaceinvaders.c:2438: 				for(int i = 0; i < 5; i++)
-	ld.w	r1, [r13 + (-52)]	# tmp650, i
-	mov.w	r0, 4	# tmp651,
-	cmp.w	r1, r0	# tmp650, tmp651
+	ld.w	r1, [r13 + (-52)]	# tmp690, i
+	mov.w	r0, 4	# tmp691,
+	cmp.w	r1, r0	# tmp690, tmp691
 	jses	.L397		#
 .L394:
 # spaceinvaders.c:2444: 			if(player_bullet_status == MOVING)
-	ld.w	r1, [player_bullet_status]	# player_bullet_status.185_71, player_bullet_status
+	ld.w	r1, [player_bullet_status]	# player_bullet_status.187_72, player_bullet_status
 # spaceinvaders.c:2444: 			if(player_bullet_status == MOVING)
-	mov.w	r0, 2	# tmp652,
-	cmp.w	r1, r0	# player_bullet_status.185_71, tmp652
+	mov.w	r0, 2	# tmp692,
+	cmp.w	r1, r0	# player_bullet_status.187_72, tmp692
 	jnz	.L398		#
 # spaceinvaders.c:2446: 				check_player_bullet_collision_with_alien();
 	call	check_player_bullet_collision_with_alien		#
 .L398:
 # spaceinvaders.c:2448: 			if(player_bullet_status == MOVING)
-	ld.w	r1, [player_bullet_status]	# player_bullet_status.186_72, player_bullet_status
+	ld.w	r1, [player_bullet_status]	# player_bullet_status.188_73, player_bullet_status
 # spaceinvaders.c:2448: 			if(player_bullet_status == MOVING)
-	mov.w	r0, 2	# tmp653,
-	cmp.w	r1, r0	# player_bullet_status.186_72, tmp653
+	mov.w	r0, 2	# tmp693,
+	cmp.w	r1, r0	# player_bullet_status.188_73, tmp693
 	jnz	.L399		#
 # spaceinvaders.c:2450: 				check_player_bullet_collision_with_base();
 	call	check_player_bullet_collision_with_base		#
 .L399:
 # spaceinvaders.c:2452: 			if(player_bullet_status == MOVING)
-	ld.w	r1, [player_bullet_status]	# player_bullet_status.187_73, player_bullet_status
+	ld.w	r1, [player_bullet_status]	# player_bullet_status.189_74, player_bullet_status
 # spaceinvaders.c:2452: 			if(player_bullet_status == MOVING)
-	mov.w	r0, 2	# tmp654,
-	cmp.w	r1, r0	# player_bullet_status.187_73, tmp654
+	mov.w	r0, 2	# tmp694,
+	cmp.w	r1, r0	# player_bullet_status.189_74, tmp694
 	jnz	.L400		#
 # spaceinvaders.c:2454: 				if(player_bullet_def -> y <= 30)
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.188_74, player_bullet_def
-	ld.s	r0, [r0 + (4)]	# _75, player_bullet_def.188_74->y
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.190_75, player_bullet_def
+	ld.s	r0, [r0 + (4)]	# _76, player_bullet_def.190_75->y
 # spaceinvaders.c:2454: 				if(player_bullet_def -> y <= 30)
-	zex.s	r1, r0	# tmp655, _75
-	mov.w	r0, 30	# tmp656,
-	cmp.w	r1, r0	# tmp655, tmp656
-	jg	.L401		#
+	sex.s	r1, r0	# tmp695, _76
+	mov.w	r0, 30	# tmp696,
+	cmp.w	r1, r0	# tmp695, tmp696
+	jgs	.L401		#
 # spaceinvaders.c:2456: 					set_player_bullet_to_explode();
 	call	set_player_bullet_to_explode		#
 	j	.L400		#
 .L401:
 # spaceinvaders.c:2460: 					player_bullet_def->y -= 1;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.189_76, player_bullet_def
-	ld.s	r1, [r0 + (4)]	# _77, player_bullet_def.189_76->y
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.190_78, player_bullet_def
-	add.w	r1, -1 #111	# tmp657,
-	st.s	[r0 + (4)], r1	# player_bullet_def.190_78->y, _79
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.191_77, player_bullet_def
+	ld.s	r0, [r0 + (4)]	# _78, player_bullet_def.191_77->y
+	add.w	r0, -1 #111	# tmp697,
+	mov.w	r1, r0	# _80, tmp697
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.192_81, player_bullet_def
+	st.s	[r0 + (4)], r1	# player_bullet_def.192_81->y, _82
 # spaceinvaders.c:2461: 					change_sprite_color(player_bullet_def->y, 8, 4, player_bullet);
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.191_80, player_bullet_def
-	ld.s	r0, [r0 + (4)]	# _81, player_bullet_def.191_80->y
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.193_83, player_bullet_def
+	ld.s	r0, [r0 + (4)]	# _84, player_bullet_def.193_83->y
 # spaceinvaders.c:2461: 					change_sprite_color(player_bullet_def->y, 8, 4, player_bullet);
-	zex.s	r1, r0	# _82, _81
-	mov.w	r0, sp	# tmp658,
-	mov.w	r2, player_bullet	# tmp659,
-	st.w	[r0 + (12)], r2	#, tmp659
-	mov.w	r2, 4	# tmp660,
-	st.w	[r0 + (8)], r2	#, tmp660
-	mov.w	r2, 8	# tmp661,
-	st.w	[r0 + (4)], r2	#, tmp661
-	st.w	[r0], r1	#, _82
+	sex.s	r1, r0	# _85, _84
+	mov.w	r0, sp	# tmp698,
+	mov.w	r2, player_bullet	# tmp699,
+	st.w	[r0 + (12)], r2	#, tmp699
+	mov.w	r2, 4	# tmp700,
+	st.w	[r0 + (8)], r2	#, tmp700
+	mov.w	r2, 8	# tmp701,
+	st.w	[r0 + (4)], r2	#, tmp701
+	st.w	[r0], r1	#, _85
 	call	change_sprite_color		#
 # spaceinvaders.c:2462: 					copy_player_bullet_def();
 	call	copy_player_bullet_def		#
 .L400:
 # spaceinvaders.c:2468: 			for(int i = 0; i < 5; i++)
-	xor.w	r0, r0	# tmp662
-	st.w	[r13 + (-56)], r0	# i, tmp662
+	xor.w	r0, r0	# tmp702
+	st.w	[r13 + (-56)], r0	# i, tmp702
 # spaceinvaders.c:2468: 			for(int i = 0; i < 5; i++)
 	j	.L402		#
 .L410:
 # spaceinvaders.c:2470: 				if(alien_bullet[i].status == MOVING)
-	ld.w	r1, [r13 + (-56)]	# tmp663, i
-	mov.w	r0, r1	# tmp664, tmp663
-	mov.w	r2, 3	# tmp666,
-	shl.w	r0, r2	# tmp665, tmp666
-	add.w	r0, r1 #222	# tmp664, tmp663
-	mov.w	r1, 2	# tmp668,
-	shl.w	r0, r1	# tmp667, tmp668
-	mov.w	r1, alien_bullet+20	# tmp670,
-	add.w	r0, r1 #222	# tmp669, tmp670
-	ld.w	r1, [r0]	# _83, alien_bullet[i_346].status
+	ld.w	r1, [r13 + (-56)]	# tmp703, i
+	mov.w	r0, r1	# tmp704, tmp703
+	mov.w	r2, 3	# tmp706,
+	shl.w	r0, r2	# tmp705, tmp706
+	add.w	r0, r1 #222	# tmp704, tmp703
+	mov.w	r1, 2	# tmp708,
+	shl.w	r0, r1	# tmp707, tmp708
+	mov.w	r1, alien_bullet+20	# tmp710,
+	add.w	r0, r1 #222	# tmp709, tmp710
+	ld.w	r1, [r0]	# _86, alien_bullet[i_386].status
 # spaceinvaders.c:2470: 				if(alien_bullet[i].status == MOVING)
-	mov.w	r0, 2	# tmp671,
-	cmp.w	r1, r0	# _83, tmp671
+	mov.w	r0, 2	# tmp711,
+	cmp.w	r1, r0	# _86, tmp711
 	jnz	.L403		#
 # spaceinvaders.c:2472: 					if(alien_bullet[i].timer_for_move <= 0)
-	ld.w	r1, [r13 + (-56)]	# tmp672, i
-	mov.w	r0, r1	# tmp673, tmp672
-	mov.w	r2, 3	# tmp675,
-	shl.w	r0, r2	# tmp674, tmp675
-	add.w	r0, r1 #222	# tmp673, tmp672
-	mov.w	r1, 2	# tmp677,
-	shl.w	r0, r1	# tmp676, tmp677
-	mov.w	r1, alien_bullet+24	# tmp679,
-	add.w	r0, r1 #222	# tmp678, tmp679
-	ld.w	r1, [r0]	# _84, alien_bullet[i_346].timer_for_move
-# spaceinvaders.c:2472: 					if(alien_bullet[i].timer_for_move <= 0)
-	xor.w	r0, r0	# tmp680
-	cmp.w	r1, r0	# _84, tmp680
-	jgs	.L404		#
-# spaceinvaders.c:2474: 						clear_current_alien_bullet_sprite(i);
-	mov.w	r1, sp	# tmp681,
-	ld.w	r0, [r13 + (-56)]	# tmp682, i
-	st.w	[r1], r0	#, tmp682
-	call	clear_current_alien_bullet_sprite		#
-# spaceinvaders.c:2475: 						alien_bullet[i].y += 5;
-	ld.w	r1, [r13 + (-56)]	# tmp683, i
-	mov.w	r0, r1	# tmp684, tmp683
-	mov.w	r2, 3	# tmp686,
-	shl.w	r0, r2	# tmp685, tmp686
-	add.w	r0, r1 #222	# tmp684, tmp683
-	mov.w	r1, 2	# tmp688,
-	shl.w	r0, r1	# tmp687, tmp688
-	mov.w	r1, alien_bullet+4	# tmp690,
-	add.w	r0, r1 #222	# tmp689, tmp690
-	ld.w	r0, [r0]	# _85, alien_bullet[i_346].y
-	mov.w	r2, r0	# _86, _85
-	add.w	r2, 5 #111	# _86,
-	ld.w	r1, [r13 + (-56)]	# tmp691, i
-	mov.w	r0, r1	# tmp692, tmp691
-	mov.w	r3, 3	# tmp694,
-	shl.w	r0, r3	# tmp693, tmp694
-	add.w	r0, r1 #222	# tmp692, tmp691
-	mov.w	r1, 2	# tmp696,
-	shl.w	r0, r1	# tmp695, tmp696
-	mov.w	r1, alien_bullet+4	# tmp698,
-	add.w	r0, r1 #222	# tmp697, tmp698
-	st.w	[r0], r2	# alien_bullet[i_346].y, _86
-# spaceinvaders.c:2476: 						check_alien_bullet_collision_with_environment(i);
-	mov.w	r1, sp	# tmp699,
-	ld.w	r0, [r13 + (-56)]	# tmp700, i
-	st.w	[r1], r0	#, tmp700
-	call	check_alien_bullet_collision_with_environment		#
-# spaceinvaders.c:2477: 						if(alien_bullet[i].status == MOVING)
-	ld.w	r1, [r13 + (-56)]	# tmp701, i
-	mov.w	r0, r1	# tmp702, tmp701
-	mov.w	r2, 3	# tmp704,
-	shl.w	r0, r2	# tmp703, tmp704
-	add.w	r0, r1 #222	# tmp702, tmp701
-	mov.w	r1, 2	# tmp706,
-	shl.w	r0, r1	# tmp705, tmp706
-	mov.w	r1, alien_bullet+20	# tmp708,
-	add.w	r0, r1 #222	# tmp707, tmp708
-	ld.w	r1, [r0]	# _87, alien_bullet[i_346].status
-# spaceinvaders.c:2477: 						if(alien_bullet[i].status == MOVING)
-	mov.w	r0, 2	# tmp709,
-	cmp.w	r1, r0	# _87, tmp709
-	jnz	.L405		#
-# spaceinvaders.c:2478: 							draw_alien_bullet_sprite(i);
-	mov.w	r1, sp	# tmp710,
-	ld.w	r0, [r13 + (-56)]	# tmp711, i
-	st.w	[r1], r0	#, tmp711
-	call	draw_alien_bullet_sprite		#
-.L405:
-# spaceinvaders.c:2479: 						alien_bullet[i].timer_for_move = 64;
 	ld.w	r1, [r13 + (-56)]	# tmp712, i
 	mov.w	r0, r1	# tmp713, tmp712
 	mov.w	r2, 3	# tmp715,
@@ -10570,1584 +10513,1653 @@ switch_to_play_screen:
 	shl.w	r0, r1	# tmp716, tmp717
 	mov.w	r1, alien_bullet+24	# tmp719,
 	add.w	r0, r1 #222	# tmp718, tmp719
-	mov.w	r1, 64	# tmp720,
-	st.w	[r0], r1	# alien_bullet[i_346].timer_for_move, tmp720
+	ld.w	r1, [r0]	# _87, alien_bullet[i_386].timer_for_move
+# spaceinvaders.c:2472: 					if(alien_bullet[i].timer_for_move <= 0)
+	xor.w	r0, r0	# tmp720
+	cmp.w	r1, r0	# _87, tmp720
+	jgs	.L404		#
+# spaceinvaders.c:2474: 						clear_current_alien_bullet_sprite(i);
+	mov.w	r1, sp	# tmp721,
+	ld.w	r0, [r13 + (-56)]	# tmp722, i
+	st.w	[r1], r0	#, tmp722
+	call	clear_current_alien_bullet_sprite		#
+# spaceinvaders.c:2475: 						alien_bullet[i].y += 5;
+	ld.w	r1, [r13 + (-56)]	# tmp723, i
+	mov.w	r0, r1	# tmp724, tmp723
+	mov.w	r2, 3	# tmp726,
+	shl.w	r0, r2	# tmp725, tmp726
+	add.w	r0, r1 #222	# tmp724, tmp723
+	mov.w	r1, 2	# tmp728,
+	shl.w	r0, r1	# tmp727, tmp728
+	mov.w	r1, alien_bullet+4	# tmp730,
+	add.w	r0, r1 #222	# tmp729, tmp730
+	ld.w	r0, [r0]	# _88, alien_bullet[i_386].y
+	mov.w	r2, r0	# _89, _88
+	add.w	r2, 5 #111	# _89,
+	ld.w	r1, [r13 + (-56)]	# tmp731, i
+	mov.w	r0, r1	# tmp732, tmp731
+	mov.w	r3, 3	# tmp734,
+	shl.w	r0, r3	# tmp733, tmp734
+	add.w	r0, r1 #222	# tmp732, tmp731
+	mov.w	r1, 2	# tmp736,
+	shl.w	r0, r1	# tmp735, tmp736
+	mov.w	r1, alien_bullet+4	# tmp738,
+	add.w	r0, r1 #222	# tmp737, tmp738
+	st.w	[r0], r2	# alien_bullet[i_386].y, _89
+# spaceinvaders.c:2476: 						check_alien_bullet_collision_with_environment(i);
+	mov.w	r1, sp	# tmp739,
+	ld.w	r0, [r13 + (-56)]	# tmp740, i
+	st.w	[r1], r0	#, tmp740
+	call	check_alien_bullet_collision_with_environment		#
+# spaceinvaders.c:2477: 						if(alien_bullet[i].status == MOVING)
+	ld.w	r1, [r13 + (-56)]	# tmp741, i
+	mov.w	r0, r1	# tmp742, tmp741
+	mov.w	r2, 3	# tmp744,
+	shl.w	r0, r2	# tmp743, tmp744
+	add.w	r0, r1 #222	# tmp742, tmp741
+	mov.w	r1, 2	# tmp746,
+	shl.w	r0, r1	# tmp745, tmp746
+	mov.w	r1, alien_bullet+20	# tmp748,
+	add.w	r0, r1 #222	# tmp747, tmp748
+	ld.w	r1, [r0]	# _90, alien_bullet[i_386].status
+# spaceinvaders.c:2477: 						if(alien_bullet[i].status == MOVING)
+	mov.w	r0, 2	# tmp749,
+	cmp.w	r1, r0	# _90, tmp749
+	jnz	.L405		#
+# spaceinvaders.c:2478: 							draw_alien_bullet_sprite(i);
+	mov.w	r1, sp	# tmp750,
+	ld.w	r0, [r13 + (-56)]	# tmp751, i
+	st.w	[r1], r0	#, tmp751
+	call	draw_alien_bullet_sprite		#
+.L405:
+# spaceinvaders.c:2479: 						alien_bullet[i].timer_for_move = 64;
+	ld.w	r1, [r13 + (-56)]	# tmp752, i
+	mov.w	r0, r1	# tmp753, tmp752
+	mov.w	r2, 3	# tmp755,
+	shl.w	r0, r2	# tmp754, tmp755
+	add.w	r0, r1 #222	# tmp753, tmp752
+	mov.w	r1, 2	# tmp757,
+	shl.w	r0, r1	# tmp756, tmp757
+	mov.w	r1, alien_bullet+24	# tmp759,
+	add.w	r0, r1 #222	# tmp758, tmp759
+	mov.w	r1, 64	# tmp760,
+	st.w	[r0], r1	# alien_bullet[i_386].timer_for_move, tmp760
 .L404:
 # spaceinvaders.c:2481: 					alien_bullet[i].timer_for_move -= 2;
-	ld.w	r1, [r13 + (-56)]	# tmp721, i
-	mov.w	r0, r1	# tmp722, tmp721
-	mov.w	r2, 3	# tmp724,
-	shl.w	r0, r2	# tmp723, tmp724
-	add.w	r0, r1 #222	# tmp722, tmp721
-	mov.w	r1, 2	# tmp726,
-	shl.w	r0, r1	# tmp725, tmp726
-	mov.w	r1, alien_bullet+24	# tmp728,
-	add.w	r0, r1 #222	# tmp727, tmp728
-	ld.w	r0, [r0]	# _88, alien_bullet[i_346].timer_for_move
-	mov.w	r2, r0	# _89, _88
-	add.w	r2, -2 #111	# _89,
-	ld.w	r1, [r13 + (-56)]	# tmp729, i
-	mov.w	r0, r1	# tmp730, tmp729
-	mov.w	r3, 3	# tmp732,
-	shl.w	r0, r3	# tmp731, tmp732
-	add.w	r0, r1 #222	# tmp730, tmp729
-	mov.w	r1, 2	# tmp734,
-	shl.w	r0, r1	# tmp733, tmp734
-	mov.w	r1, alien_bullet+24	# tmp736,
-	add.w	r0, r1 #222	# tmp735, tmp736
-	st.w	[r0], r2	# alien_bullet[i_346].timer_for_move, _89
+	ld.w	r1, [r13 + (-56)]	# tmp761, i
+	mov.w	r0, r1	# tmp762, tmp761
+	mov.w	r2, 3	# tmp764,
+	shl.w	r0, r2	# tmp763, tmp764
+	add.w	r0, r1 #222	# tmp762, tmp761
+	mov.w	r1, 2	# tmp766,
+	shl.w	r0, r1	# tmp765, tmp766
+	mov.w	r1, alien_bullet+24	# tmp768,
+	add.w	r0, r1 #222	# tmp767, tmp768
+	ld.w	r0, [r0]	# _91, alien_bullet[i_386].timer_for_move
+	mov.w	r2, r0	# _92, _91
+	add.w	r2, -2 #111	# _92,
+	ld.w	r1, [r13 + (-56)]	# tmp769, i
+	mov.w	r0, r1	# tmp770, tmp769
+	mov.w	r3, 3	# tmp772,
+	shl.w	r0, r3	# tmp771, tmp772
+	add.w	r0, r1 #222	# tmp770, tmp769
+	mov.w	r1, 2	# tmp774,
+	shl.w	r0, r1	# tmp773, tmp774
+	mov.w	r1, alien_bullet+24	# tmp776,
+	add.w	r0, r1 #222	# tmp775, tmp776
+	st.w	[r0], r2	# alien_bullet[i_386].timer_for_move, _92
 	j	.L406		#
 .L403:
 # spaceinvaders.c:2483: 				else if(alien_bullet[i].status == EXPLODING)
-	ld.w	r1, [r13 + (-56)]	# tmp737, i
-	mov.w	r0, r1	# tmp738, tmp737
-	mov.w	r2, 3	# tmp740,
-	shl.w	r0, r2	# tmp739, tmp740
-	add.w	r0, r1 #222	# tmp738, tmp737
-	mov.w	r1, 2	# tmp742,
-	shl.w	r0, r1	# tmp741, tmp742
-	mov.w	r1, alien_bullet+20	# tmp744,
-	add.w	r0, r1 #222	# tmp743, tmp744
-	ld.w	r1, [r0]	# _90, alien_bullet[i_346].status
+	ld.w	r1, [r13 + (-56)]	# tmp777, i
+	mov.w	r0, r1	# tmp778, tmp777
+	mov.w	r2, 3	# tmp780,
+	shl.w	r0, r2	# tmp779, tmp780
+	add.w	r0, r1 #222	# tmp778, tmp777
+	mov.w	r1, 2	# tmp782,
+	shl.w	r0, r1	# tmp781, tmp782
+	mov.w	r1, alien_bullet+20	# tmp784,
+	add.w	r0, r1 #222	# tmp783, tmp784
+	ld.w	r1, [r0]	# _93, alien_bullet[i_386].status
 # spaceinvaders.c:2483: 				else if(alien_bullet[i].status == EXPLODING)
-	mov.w	r0, 1	# tmp745,
-	cmp.w	r1, r0	# _90, tmp745
+	mov.w	r0, 1	# tmp785,
+	cmp.w	r1, r0	# _93, tmp785
 	jnz	.L406		#
 # spaceinvaders.c:2485: 					if(alien_bullet[i].timer_for_destroy == 150)
-	ld.w	r1, [r13 + (-56)]	# tmp746, i
-	mov.w	r0, r1	# tmp747, tmp746
-	mov.w	r2, 3	# tmp749,
-	shl.w	r0, r2	# tmp748, tmp749
-	add.w	r0, r1 #222	# tmp747, tmp746
-	mov.w	r1, 2	# tmp751,
-	shl.w	r0, r1	# tmp750, tmp751
-	mov.w	r1, alien_bullet+32	# tmp753,
-	add.w	r0, r1 #222	# tmp752, tmp753
-	ld.w	r1, [r0]	# _91, alien_bullet[i_346].timer_for_destroy
+	ld.w	r1, [r13 + (-56)]	# tmp786, i
+	mov.w	r0, r1	# tmp787, tmp786
+	mov.w	r2, 3	# tmp789,
+	shl.w	r0, r2	# tmp788, tmp789
+	add.w	r0, r1 #222	# tmp787, tmp786
+	mov.w	r1, 2	# tmp791,
+	shl.w	r0, r1	# tmp790, tmp791
+	mov.w	r1, alien_bullet+32	# tmp793,
+	add.w	r0, r1 #222	# tmp792, tmp793
+	ld.w	r1, [r0]	# _94, alien_bullet[i_386].timer_for_destroy
 # spaceinvaders.c:2485: 					if(alien_bullet[i].timer_for_destroy == 150)
-	mov.w	r0, 150	# tmp754,
-	cmp.w	r1, r0	# _91, tmp754
+	mov.w	r0, 150	# tmp794,
+	cmp.w	r1, r0	# _94, tmp794
 	jnz	.L407		#
 # spaceinvaders.c:2488: 							alien_bullet[i].x-2, 
-	ld.w	r1, [r13 + (-56)]	# tmp755, i
-	mov.w	r0, r1	# tmp756, tmp755
-	mov.w	r2, 3	# tmp758,
-	shl.w	r0, r2	# tmp757, tmp758
-	add.w	r0, r1 #222	# tmp756, tmp755
-	mov.w	r1, 2	# tmp760,
-	shl.w	r0, r1	# tmp759, tmp760
-	mov.w	r1, alien_bullet	# tmp762,
-	add.w	r0, r1 #222	# tmp761, tmp762
-	ld.w	r0, [r0]	# _92, alien_bullet[i_346].x
+	ld.w	r1, [r13 + (-56)]	# tmp795, i
+	mov.w	r0, r1	# tmp796, tmp795
+	mov.w	r2, 3	# tmp798,
+	shl.w	r0, r2	# tmp797, tmp798
+	add.w	r0, r1 #222	# tmp796, tmp795
+	mov.w	r1, 2	# tmp800,
+	shl.w	r0, r1	# tmp799, tmp800
+	mov.w	r1, alien_bullet	# tmp802,
+	add.w	r0, r1 #222	# tmp801, tmp802
+	ld.w	r0, [r0]	# _95, alien_bullet[i_386].x
 # spaceinvaders.c:2487: 						draw_bitmap_with_clear_background(
-	mov.w	r2, r0	# _93, _92
-	add.w	r2, -2 #111	# _93,
-	ld.w	r1, [r13 + (-56)]	# tmp763, i
-	mov.w	r0, r1	# tmp764, tmp763
-	mov.w	r3, 3	# tmp766,
-	shl.w	r0, r3	# tmp765, tmp766
-	add.w	r0, r1 #222	# tmp764, tmp763
-	mov.w	r1, 2	# tmp768,
-	shl.w	r0, r1	# tmp767, tmp768
-	mov.w	r1, alien_bullet+4	# tmp770,
-	add.w	r0, r1 #222	# tmp769, tmp770
-	ld.w	r1, [r0]	# _94, alien_bullet[i_346].y
-	mov.w	r0, sp	# tmp771,
-	mov.w	r3, alien_bullet_explosion	# tmp772,
-	st.w	[r0 + (16)], r3	#, tmp772
-	mov.w	r3, 8	# tmp773,
-	st.w	[r0 + (12)], r3	#, tmp773
-	mov.w	r3, 8	# tmp774,
-	st.w	[r0 + (8)], r3	#, tmp774
-	st.w	[r0 + (4)], r1	#, _94
-	st.w	[r0], r2	#, _93
+	mov.w	r2, r0	# _96, _95
+	add.w	r2, -2 #111	# _96,
+	ld.w	r1, [r13 + (-56)]	# tmp803, i
+	mov.w	r0, r1	# tmp804, tmp803
+	mov.w	r3, 3	# tmp806,
+	shl.w	r0, r3	# tmp805, tmp806
+	add.w	r0, r1 #222	# tmp804, tmp803
+	mov.w	r1, 2	# tmp808,
+	shl.w	r0, r1	# tmp807, tmp808
+	mov.w	r1, alien_bullet+4	# tmp810,
+	add.w	r0, r1 #222	# tmp809, tmp810
+	ld.w	r1, [r0]	# _97, alien_bullet[i_386].y
+	mov.w	r0, sp	# tmp811,
+	mov.w	r3, alien_bullet_explosion	# tmp812,
+	st.w	[r0 + (16)], r3	#, tmp812
+	mov.w	r3, 8	# tmp813,
+	st.w	[r0 + (12)], r3	#, tmp813
+	mov.w	r3, 8	# tmp814,
+	st.w	[r0 + (8)], r3	#, tmp814
+	st.w	[r0 + (4)], r1	#, _97
+	st.w	[r0], r2	#, _96
 	call	draw_bitmap_with_clear_background		#
 	j	.L408		#
 .L407:
 # spaceinvaders.c:2494: 					else if(alien_bullet[i].timer_for_destroy <= 0)
-	ld.w	r1, [r13 + (-56)]	# tmp775, i
-	mov.w	r0, r1	# tmp776, tmp775
-	mov.w	r2, 3	# tmp778,
-	shl.w	r0, r2	# tmp777, tmp778
-	add.w	r0, r1 #222	# tmp776, tmp775
-	mov.w	r1, 2	# tmp780,
-	shl.w	r0, r1	# tmp779, tmp780
-	mov.w	r1, alien_bullet+32	# tmp782,
-	add.w	r0, r1 #222	# tmp781, tmp782
-	ld.w	r1, [r0]	# _95, alien_bullet[i_346].timer_for_destroy
+	ld.w	r1, [r13 + (-56)]	# tmp815, i
+	mov.w	r0, r1	# tmp816, tmp815
+	mov.w	r2, 3	# tmp818,
+	shl.w	r0, r2	# tmp817, tmp818
+	add.w	r0, r1 #222	# tmp816, tmp815
+	mov.w	r1, 2	# tmp820,
+	shl.w	r0, r1	# tmp819, tmp820
+	mov.w	r1, alien_bullet+32	# tmp822,
+	add.w	r0, r1 #222	# tmp821, tmp822
+	ld.w	r1, [r0]	# _98, alien_bullet[i_386].timer_for_destroy
 # spaceinvaders.c:2494: 					else if(alien_bullet[i].timer_for_destroy <= 0)
-	xor.w	r0, r0	# tmp783
-	cmp.w	r1, r0	# _95, tmp783
+	xor.w	r0, r0	# tmp823
+	cmp.w	r1, r0	# _98, tmp823
 	jgs	.L408		#
 # spaceinvaders.c:2497: 							alien_bullet[i].x-2, 
-	ld.w	r1, [r13 + (-56)]	# tmp784, i
-	mov.w	r0, r1	# tmp785, tmp784
-	mov.w	r2, 3	# tmp787,
-	shl.w	r0, r2	# tmp786, tmp787
-	add.w	r0, r1 #222	# tmp785, tmp784
-	mov.w	r1, 2	# tmp789,
-	shl.w	r0, r1	# tmp788, tmp789
-	mov.w	r1, alien_bullet	# tmp791,
-	add.w	r0, r1 #222	# tmp790, tmp791
-	ld.w	r0, [r0]	# _96, alien_bullet[i_346].x
+	ld.w	r1, [r13 + (-56)]	# tmp824, i
+	mov.w	r0, r1	# tmp825, tmp824
+	mov.w	r2, 3	# tmp827,
+	shl.w	r0, r2	# tmp826, tmp827
+	add.w	r0, r1 #222	# tmp825, tmp824
+	mov.w	r1, 2	# tmp829,
+	shl.w	r0, r1	# tmp828, tmp829
+	mov.w	r1, alien_bullet	# tmp831,
+	add.w	r0, r1 #222	# tmp830, tmp831
+	ld.w	r0, [r0]	# _99, alien_bullet[i_386].x
 # spaceinvaders.c:2496: 						clear_bitmap_with_specific_shape(
-	mov.w	r2, r0	# _97, _96
-	add.w	r2, -2 #111	# _97,
-	ld.w	r1, [r13 + (-56)]	# tmp792, i
-	mov.w	r0, r1	# tmp793, tmp792
-	mov.w	r3, 3	# tmp795,
-	shl.w	r0, r3	# tmp794, tmp795
-	add.w	r0, r1 #222	# tmp793, tmp792
-	mov.w	r1, 2	# tmp797,
-	shl.w	r0, r1	# tmp796, tmp797
-	mov.w	r1, alien_bullet+4	# tmp799,
-	add.w	r0, r1 #222	# tmp798, tmp799
-	ld.w	r1, [r0]	# _98, alien_bullet[i_346].y
-	mov.w	r0, sp	# tmp800,
-	mov.w	r3, alien_bullet_explosion	# tmp801,
-	st.w	[r0 + (16)], r3	#, tmp801
-	mov.w	r3, 8	# tmp802,
-	st.w	[r0 + (12)], r3	#, tmp802
-	mov.w	r3, 8	# tmp803,
-	st.w	[r0 + (8)], r3	#, tmp803
-	st.w	[r0 + (4)], r1	#, _98
-	st.w	[r0], r2	#, _97
+	mov.w	r2, r0	# _100, _99
+	add.w	r2, -2 #111	# _100,
+	ld.w	r1, [r13 + (-56)]	# tmp832, i
+	mov.w	r0, r1	# tmp833, tmp832
+	mov.w	r3, 3	# tmp835,
+	shl.w	r0, r3	# tmp834, tmp835
+	add.w	r0, r1 #222	# tmp833, tmp832
+	mov.w	r1, 2	# tmp837,
+	shl.w	r0, r1	# tmp836, tmp837
+	mov.w	r1, alien_bullet+4	# tmp839,
+	add.w	r0, r1 #222	# tmp838, tmp839
+	ld.w	r1, [r0]	# _101, alien_bullet[i_386].y
+	mov.w	r0, sp	# tmp840,
+	mov.w	r3, alien_bullet_explosion	# tmp841,
+	st.w	[r0 + (16)], r3	#, tmp841
+	mov.w	r3, 8	# tmp842,
+	st.w	[r0 + (12)], r3	#, tmp842
+	mov.w	r3, 8	# tmp843,
+	st.w	[r0 + (8)], r3	#, tmp843
+	st.w	[r0 + (4)], r1	#, _101
+	st.w	[r0], r2	#, _100
 	call	clear_bitmap_with_specific_shape		#
 # spaceinvaders.c:2502: 						if(alien_bullet[i].x-2 <= 32 + 16 * (lives-1))
-	ld.w	r1, [r13 + (-56)]	# tmp804, i
-	mov.w	r0, r1	# tmp805, tmp804
-	mov.w	r2, 3	# tmp807,
-	shl.w	r0, r2	# tmp806, tmp807
-	add.w	r0, r1 #222	# tmp805, tmp804
-	mov.w	r1, 2	# tmp809,
-	shl.w	r0, r1	# tmp808, tmp809
-	mov.w	r1, alien_bullet	# tmp811,
-	add.w	r0, r1 #222	# tmp810, tmp811
-	ld.w	r0, [r0]	# _99, alien_bullet[i_346].x
+	ld.w	r1, [r13 + (-56)]	# tmp844, i
+	mov.w	r0, r1	# tmp845, tmp844
+	mov.w	r2, 3	# tmp847,
+	shl.w	r0, r2	# tmp846, tmp847
+	add.w	r0, r1 #222	# tmp845, tmp844
+	mov.w	r1, 2	# tmp849,
+	shl.w	r0, r1	# tmp848, tmp849
+	mov.w	r1, alien_bullet	# tmp851,
+	add.w	r0, r1 #222	# tmp850, tmp851
+	ld.w	r0, [r0]	# _102, alien_bullet[i_386].x
 # spaceinvaders.c:2502: 						if(alien_bullet[i].x-2 <= 32 + 16 * (lives-1))
-	mov.w	r1, r0	# _100, _99
-	add.w	r1, -2 #111	# _100,
+	mov.w	r1, r0	# _103, _102
+	add.w	r1, -2 #111	# _103,
 # spaceinvaders.c:2502: 						if(alien_bullet[i].x-2 <= 32 + 16 * (lives-1))
-	ld.w	r0, [lives]	# lives.192_101, lives
-	add.w	r0, 1 #111	# _102,
-	mov.w	r2, 4	# tmp812,
-	shl.w	r0, r2	# _103, tmp812
+	ld.w	r0, [lives]	# lives.194_104, lives
+	add.w	r0, 1 #111	# _105,
+	mov.w	r2, 4	# tmp852,
+	shl.w	r0, r2	# _106, tmp852
 # spaceinvaders.c:2502: 						if(alien_bullet[i].x-2 <= 32 + 16 * (lives-1))
-	cmp.w	r1, r0	# _100, _103
+	cmp.w	r1, r0	# _103, _106
 	jgs	.L409		#
 # spaceinvaders.c:2503: 							draw_lives();
 	call	draw_lives		#
 .L409:
 # spaceinvaders.c:2505: 						alien_bullet[i].sprite = 0;
-	ld.w	r1, [r13 + (-56)]	# tmp813, i
-	mov.w	r0, r1	# tmp814, tmp813
-	mov.w	r2, 3	# tmp816,
-	shl.w	r0, r2	# tmp815, tmp816
-	add.w	r0, r1 #222	# tmp814, tmp813
-	mov.w	r1, 2	# tmp818,
-	shl.w	r0, r1	# tmp817, tmp818
-	mov.w	r1, alien_bullet+16	# tmp820,
-	add.w	r0, r1 #222	# tmp819, tmp820
-	xor.w	r1, r1	# tmp821
-	st.w	[r0], r1	# alien_bullet[i_346].sprite, tmp821
+	ld.w	r1, [r13 + (-56)]	# tmp853, i
+	mov.w	r0, r1	# tmp854, tmp853
+	mov.w	r2, 3	# tmp856,
+	shl.w	r0, r2	# tmp855, tmp856
+	add.w	r0, r1 #222	# tmp854, tmp853
+	mov.w	r1, 2	# tmp858,
+	shl.w	r0, r1	# tmp857, tmp858
+	mov.w	r1, alien_bullet+16	# tmp860,
+	add.w	r0, r1 #222	# tmp859, tmp860
+	xor.w	r1, r1	# tmp861
+	st.w	[r0], r1	# alien_bullet[i_386].sprite, tmp861
 # spaceinvaders.c:2506: 						alien_bullet[i].status = READY;
-	ld.w	r1, [r13 + (-56)]	# tmp822, i
-	mov.w	r0, r1	# tmp823, tmp822
-	mov.w	r2, 3	# tmp825,
-	shl.w	r0, r2	# tmp824, tmp825
-	add.w	r0, r1 #222	# tmp823, tmp822
-	mov.w	r1, 2	# tmp827,
-	shl.w	r0, r1	# tmp826, tmp827
-	mov.w	r1, alien_bullet+20	# tmp829,
-	add.w	r0, r1 #222	# tmp828, tmp829
-	xor.w	r1, r1	# tmp830
-	st.w	[r0], r1	# alien_bullet[i_346].status, tmp830
+	ld.w	r1, [r13 + (-56)]	# tmp862, i
+	mov.w	r0, r1	# tmp863, tmp862
+	mov.w	r2, 3	# tmp865,
+	shl.w	r0, r2	# tmp864, tmp865
+	add.w	r0, r1 #222	# tmp863, tmp862
+	mov.w	r1, 2	# tmp867,
+	shl.w	r0, r1	# tmp866, tmp867
+	mov.w	r1, alien_bullet+20	# tmp869,
+	add.w	r0, r1 #222	# tmp868, tmp869
+	xor.w	r1, r1	# tmp870
+	st.w	[r0], r1	# alien_bullet[i_386].status, tmp870
 .L408:
 # spaceinvaders.c:2508: 					alien_bullet[i].timer_for_destroy -= 2;
-	ld.w	r1, [r13 + (-56)]	# tmp831, i
-	mov.w	r0, r1	# tmp832, tmp831
-	mov.w	r2, 3	# tmp834,
-	shl.w	r0, r2	# tmp833, tmp834
-	add.w	r0, r1 #222	# tmp832, tmp831
-	mov.w	r1, 2	# tmp836,
-	shl.w	r0, r1	# tmp835, tmp836
-	mov.w	r1, alien_bullet+32	# tmp838,
-	add.w	r0, r1 #222	# tmp837, tmp838
-	ld.w	r0, [r0]	# _104, alien_bullet[i_346].timer_for_destroy
-	mov.w	r2, r0	# _105, _104
-	add.w	r2, -2 #111	# _105,
-	ld.w	r1, [r13 + (-56)]	# tmp839, i
-	mov.w	r0, r1	# tmp840, tmp839
-	mov.w	r3, 3	# tmp842,
-	shl.w	r0, r3	# tmp841, tmp842
-	add.w	r0, r1 #222	# tmp840, tmp839
-	mov.w	r1, 2	# tmp844,
-	shl.w	r0, r1	# tmp843, tmp844
-	mov.w	r1, alien_bullet+32	# tmp846,
-	add.w	r0, r1 #222	# tmp845, tmp846
-	st.w	[r0], r2	# alien_bullet[i_346].timer_for_destroy, _105
+	ld.w	r1, [r13 + (-56)]	# tmp871, i
+	mov.w	r0, r1	# tmp872, tmp871
+	mov.w	r2, 3	# tmp874,
+	shl.w	r0, r2	# tmp873, tmp874
+	add.w	r0, r1 #222	# tmp872, tmp871
+	mov.w	r1, 2	# tmp876,
+	shl.w	r0, r1	# tmp875, tmp876
+	mov.w	r1, alien_bullet+32	# tmp878,
+	add.w	r0, r1 #222	# tmp877, tmp878
+	ld.w	r0, [r0]	# _107, alien_bullet[i_386].timer_for_destroy
+	mov.w	r2, r0	# _108, _107
+	add.w	r2, -2 #111	# _108,
+	ld.w	r1, [r13 + (-56)]	# tmp879, i
+	mov.w	r0, r1	# tmp880, tmp879
+	mov.w	r3, 3	# tmp882,
+	shl.w	r0, r3	# tmp881, tmp882
+	add.w	r0, r1 #222	# tmp880, tmp879
+	mov.w	r1, 2	# tmp884,
+	shl.w	r0, r1	# tmp883, tmp884
+	mov.w	r1, alien_bullet+32	# tmp886,
+	add.w	r0, r1 #222	# tmp885, tmp886
+	st.w	[r0], r2	# alien_bullet[i_386].timer_for_destroy, _108
 .L406:
 # spaceinvaders.c:2468: 			for(int i = 0; i < 5; i++)
-	ld.w	r0, [r13 + (-56)]	# tmp848, i
-	add.w	r0, 1 #111	# tmp847,
-	st.w	[r13 + (-56)], r0	# i, tmp847
+	ld.w	r0, [r13 + (-56)]	# tmp888, i
+	add.w	r0, 1 #111	# tmp887,
+	st.w	[r13 + (-56)], r0	# i, tmp887
 .L402:
 # spaceinvaders.c:2468: 			for(int i = 0; i < 5; i++)
-	ld.w	r1, [r13 + (-56)]	# tmp849, i
-	mov.w	r0, 4	# tmp850,
-	cmp.w	r1, r0	# tmp849, tmp850
+	ld.w	r1, [r13 + (-56)]	# tmp889, i
+	mov.w	r0, 4	# tmp890,
+	cmp.w	r1, r0	# tmp889, tmp890
 	jses	.L410		#
 # spaceinvaders.c:2514: 			if(player_alive == 3 && player_spawn_current_time == player_spawn_timer)
-	ld.w	r1, [player_alive]	# player_alive.193_106, player_alive
+	ld.w	r1, [player_alive]	# player_alive.195_109, player_alive
 # spaceinvaders.c:2514: 			if(player_alive == 3 && player_spawn_current_time == player_spawn_timer)
-	mov.w	r0, 3	# tmp851,
-	cmp.w	r1, r0	# player_alive.193_106, tmp851
+	mov.w	r0, 3	# tmp891,
+	cmp.w	r1, r0	# player_alive.195_109, tmp891
 	jnz	.L411		#
 # spaceinvaders.c:2514: 			if(player_alive == 3 && player_spawn_current_time == player_spawn_timer)
-	ld.w	r1, [player_spawn_current_time]	# player_spawn_current_time.194_107, player_spawn_current_time
-	ld.w	r0, [player_spawn_timer]	# player_spawn_timer.195_108, player_spawn_timer
+	ld.w	r1, [player_spawn_current_time]	# player_spawn_current_time.196_110, player_spawn_current_time
+	ld.w	r0, [player_spawn_timer]	# player_spawn_timer.197_111, player_spawn_timer
 # spaceinvaders.c:2514: 			if(player_alive == 3 && player_spawn_current_time == player_spawn_timer)
-	cmp.w	r1, r0	# player_spawn_current_time.194_107, player_spawn_timer.195_108
+	cmp.w	r1, r0	# player_spawn_current_time.196_110, player_spawn_timer.197_111
 	jnz	.L411		#
 # spaceinvaders.c:2515: 				spawn_player();
 	call	spawn_player		#
 	j	.L412		#
 .L411:
 # spaceinvaders.c:2517: 				player_spawn_current_time+=2;
-	ld.w	r0, [player_spawn_current_time]	# player_spawn_current_time.196_109, player_spawn_current_time
-	add.w	r0, 2 #111	# _110,
-	st.w	[player_spawn_current_time], r0	# player_spawn_current_time, _110
+	ld.w	r0, [player_spawn_current_time]	# player_spawn_current_time.198_112, player_spawn_current_time
+	add.w	r0, 2 #111	# _113,
+	st.w	[player_spawn_current_time], r0	# player_spawn_current_time, _113
 .L412:
 # spaceinvaders.c:2519: 			if(player_alive == 2 || player_alive == 3)
-	ld.w	r1, [player_alive]	# player_alive.197_111, player_alive
+	ld.w	r1, [player_alive]	# player_alive.199_114, player_alive
 # spaceinvaders.c:2519: 			if(player_alive == 2 || player_alive == 3)
-	mov.w	r0, 2	# tmp852,
-	cmp.w	r1, r0	# player_alive.197_111, tmp852
+	mov.w	r0, 2	# tmp892,
+	cmp.w	r1, r0	# player_alive.199_114, tmp892
 	jz	.L413		#
 # spaceinvaders.c:2519: 			if(player_alive == 2 || player_alive == 3)
-	ld.w	r1, [player_alive]	# player_alive.198_112, player_alive
+	ld.w	r1, [player_alive]	# player_alive.200_115, player_alive
 # spaceinvaders.c:2519: 			if(player_alive == 2 || player_alive == 3)
-	mov.w	r0, 3	# tmp853,
-	cmp.w	r1, r0	# player_alive.198_112, tmp853
+	mov.w	r0, 3	# tmp893,
+	cmp.w	r1, r0	# player_alive.200_115, tmp893
 	jnz	.L414		#
 .L413:
 # spaceinvaders.c:2521: 				if(number_of_aliens == 0)
-	ld.w	r1, [number_of_aliens]	# number_of_aliens.199_113, number_of_aliens
+	ld.w	r1, [number_of_aliens]	# number_of_aliens.201_116, number_of_aliens
 # spaceinvaders.c:2521: 				if(number_of_aliens == 0)
-	xor.w	r0, r0	# tmp854
-	cmp.w	r1, r0	# number_of_aliens.199_113, tmp854
+	xor.w	r0, r0	# tmp894
+	cmp.w	r1, r0	# number_of_aliens.201_116, tmp894
 	jnz	.L415		#
 # spaceinvaders.c:2523: 					delay_millis(1000);
-	mov.w	r1, sp	# tmp855,
-	mov.w	r0, 1000	# tmp856,
-	st.w	[r1], r0	#, tmp856
+	mov.w	r1, sp	# tmp895,
+	mov.w	r0, 1000	# tmp896,
+	st.w	[r1], r0	#, tmp896
 	call	delay_millis		#
 # spaceinvaders.c:2524: 					change_current_wave();
 	call	change_current_wave		#
 # spaceinvaders.c:2525: 					cls(0);
-	mov.w	r1, sp	# tmp857,
-	xor.w	r0, r0	# tmp858
-	st.w	[r1], r0	#, tmp858
+	mov.w	r1, sp	# tmp897,
+	xor.w	r0, r0	# tmp898
+	st.w	[r1], r0	#, tmp898
 	call	cls		#
 # spaceinvaders.c:2526: 					return 0;
-	xor.w	r0, r0	# _354
+	xor.w	r0, r0	# _394
 	j	.L416		#
 .L415:
 # spaceinvaders.c:2529: 				if(death_timer >= 600)
-	ld.w	r1, [death_timer]	# death_timer.200_114, death_timer
+	ld.w	r1, [death_timer]	# death_timer.202_117, death_timer
 # spaceinvaders.c:2529: 				if(death_timer >= 600)
-	mov.w	r0, 599	# tmp859,
-	cmp.w	r1, r0	# death_timer.200_114, tmp859
+	mov.w	r0, 599	# tmp899,
+	cmp.w	r1, r0	# death_timer.202_117, tmp899
 	jses	.L417		#
 # spaceinvaders.c:2531: 					destroy_alien();
 	call	destroy_alien		#
 	j	.L418		#
 .L417:
 # spaceinvaders.c:2533: 				else if(death_timer == 0)
-	ld.w	r1, [death_timer]	# death_timer.201_115, death_timer
+	ld.w	r1, [death_timer]	# death_timer.203_118, death_timer
 # spaceinvaders.c:2533: 				else if(death_timer == 0)
-	xor.w	r0, r0	# tmp860
-	cmp.w	r1, r0	# death_timer.201_115, tmp860
+	xor.w	r0, r0	# tmp900
+	cmp.w	r1, r0	# death_timer.203_118, tmp900
 	jnz	.L419		#
 # spaceinvaders.c:2542: 					if(current_step == movement_step)
-	ld.w	r1, [current_step]	# current_step.202_116, current_step
-	ld.w	r0, [movement_step]	# movement_step.203_117, movement_step
+	ld.w	r1, [current_step]	# current_step.204_119, current_step
+	ld.w	r0, [movement_step]	# movement_step.205_120, movement_step
 # spaceinvaders.c:2542: 					if(current_step == movement_step)
-	cmp.w	r1, r0	# current_step.202_116, movement_step.203_117
+	cmp.w	r1, r0	# current_step.204_119, movement_step.205_120
 	jnz	.L420		#
 # spaceinvaders.c:2549: 						if(number_of_aliens == 1 
-	ld.w	r1, [number_of_aliens]	# number_of_aliens.204_118, number_of_aliens
+	ld.w	r1, [number_of_aliens]	# number_of_aliens.206_121, number_of_aliens
 # spaceinvaders.c:2549: 						if(number_of_aliens == 1 
-	mov.w	r0, 1	# tmp861,
-	cmp.w	r1, r0	# number_of_aliens.204_118, tmp861
+	mov.w	r0, 1	# tmp901,
+	cmp.w	r1, r0	# number_of_aliens.206_121, tmp901
 	jnz	.L421		#
 # spaceinvaders.c:2550: 						&& direction == 9
-	ld.b	r0, [direction]	# direction.205_119, direction
+	ld.b	r0, [direction]	# direction.207_122, direction
 # spaceinvaders.c:2550: 						&& direction == 9
-	sex.b	r1, r0	# tmp862, direction.205_119
-	mov.w	r0, 9	# tmp863,
-	cmp.w	r1, r0	# tmp862, tmp863
+	sex.b	r1, r0	# tmp902, direction.207_122
+	mov.w	r0, 9	# tmp903,
+	cmp.w	r1, r0	# tmp902, tmp903
 	jnz	.L421		#
 # spaceinvaders.c:2551: 						&& distance != 1)
-	ld.w	r1, [distance]	# distance.206_120, distance
+	ld.w	r1, [distance]	# distance.208_123, distance
 # spaceinvaders.c:2551: 						&& distance != 1)
-	mov.w	r0, 1	# tmp864,
-	cmp.w	r1, r0	# distance.206_120, tmp864
+	mov.w	r0, 1	# tmp904,
+	cmp.w	r1, r0	# distance.208_123, tmp904
 	jz	.L421		#
 # spaceinvaders.c:2553: 							distance = 1;
-	mov.w	r0, 1	# tmp865,
-	st.w	[distance], r0	# distance, tmp865
+	mov.w	r0, 1	# tmp905,
+	st.w	[distance], r0	# distance, tmp905
 	j	.L422		#
 .L421:
 # spaceinvaders.c:2555: 						else if(number_of_aliens == 1 
-	ld.w	r1, [number_of_aliens]	# number_of_aliens.207_121, number_of_aliens
+	ld.w	r1, [number_of_aliens]	# number_of_aliens.209_124, number_of_aliens
 # spaceinvaders.c:2555: 						else if(number_of_aliens == 1 
-	mov.w	r0, 1	# tmp866,
-	cmp.w	r1, r0	# number_of_aliens.207_121, tmp866
+	mov.w	r0, 1	# tmp906,
+	cmp.w	r1, r0	# number_of_aliens.209_124, tmp906
 	jnz	.L423		#
 # spaceinvaders.c:2556: 						&& direction == 3  
-	ld.b	r0, [direction]	# direction.208_122, direction
+	ld.b	r0, [direction]	# direction.210_125, direction
 # spaceinvaders.c:2556: 						&& direction == 3  
-	sex.b	r1, r0	# tmp867, direction.208_122
-	mov.w	r0, 3	# tmp868,
-	cmp.w	r1, r0	# tmp867, tmp868
+	sex.b	r1, r0	# tmp907, direction.210_125
+	mov.w	r0, 3	# tmp908,
+	cmp.w	r1, r0	# tmp907, tmp908
 	jnz	.L423		#
 # spaceinvaders.c:2557: 						&& distance != 2 
-	ld.w	r1, [distance]	# distance.209_123, distance
+	ld.w	r1, [distance]	# distance.211_126, distance
 # spaceinvaders.c:2557: 						&& distance != 2 
-	mov.w	r0, 2	# tmp869,
-	cmp.w	r1, r0	# distance.209_123, tmp869
+	mov.w	r0, 2	# tmp909,
+	cmp.w	r1, r0	# distance.211_126, tmp909
 	jz	.L423		#
 # spaceinvaders.c:2558: 						&& leftmost_alien_X() % 2 == 0)
 	call	leftmost_alien_X		#
 # spaceinvaders.c:2558: 						&& leftmost_alien_X() % 2 == 0)
-	mov.w	r1, 1	# tmp871,
-	and.w	r0, r1	# tmp870, tmp871
+	mov.w	r1, 1	# tmp911,
+	and.w	r0, r1	# tmp910, tmp911
 # spaceinvaders.c:2558: 						&& leftmost_alien_X() % 2 == 0)
-	zex.s	r1, r0	# tmp872, _125
-	xor.w	r0, r0	# tmp873
-	cmp.w	r1, r0	# tmp872, tmp873
+	zex.s	r1, r0	# tmp912, _128
+	xor.w	r0, r0	# tmp913
+	cmp.w	r1, r0	# tmp912, tmp913
 	jnz	.L423		#
 # spaceinvaders.c:2560: 							distance = 2;
-	mov.w	r0, 2	# tmp874,
-	st.w	[distance], r0	# distance, tmp874
+	mov.w	r0, 2	# tmp914,
+	st.w	[distance], r0	# distance, tmp914
 	j	.L422		#
 .L423:
 # spaceinvaders.c:2562: 						else if(number_of_aliens < 32 
-	ld.w	r1, [number_of_aliens]	# number_of_aliens.210_126, number_of_aliens
+	ld.w	r1, [number_of_aliens]	# number_of_aliens.212_129, number_of_aliens
 # spaceinvaders.c:2562: 						else if(number_of_aliens < 32 
-	mov.w	r0, 31	# tmp875,
-	cmp.w	r1, r0	# number_of_aliens.210_126, tmp875
+	mov.w	r0, 31	# tmp915,
+	cmp.w	r1, r0	# number_of_aliens.212_129, tmp915
 	jgs	.L422		#
 # spaceinvaders.c:2563: 						&& distance != 2 
-	ld.w	r1, [distance]	# distance.211_127, distance
+	ld.w	r1, [distance]	# distance.213_130, distance
 # spaceinvaders.c:2563: 						&& distance != 2 
-	mov.w	r0, 2	# tmp876,
-	cmp.w	r1, r0	# distance.211_127, tmp876
+	mov.w	r0, 2	# tmp916,
+	cmp.w	r1, r0	# distance.213_130, tmp916
 	jz	.L422		#
 # spaceinvaders.c:2564: 						&& leftmost_alien_X() % 2 == 0)
 	call	leftmost_alien_X		#
 # spaceinvaders.c:2564: 						&& leftmost_alien_X() % 2 == 0)
-	mov.w	r1, 1	# tmp878,
-	and.w	r0, r1	# tmp877, tmp878
+	mov.w	r1, 1	# tmp918,
+	and.w	r0, r1	# tmp917, tmp918
 # spaceinvaders.c:2564: 						&& leftmost_alien_X() % 2 == 0)
-	zex.s	r1, r0	# tmp879, _129
-	xor.w	r0, r0	# tmp880
-	cmp.w	r1, r0	# tmp879, tmp880
+	zex.s	r1, r0	# tmp919, _132
+	xor.w	r0, r0	# tmp920
+	cmp.w	r1, r0	# tmp919, tmp920
 	jnz	.L422		#
 # spaceinvaders.c:2566: 							distance = 2;
-	mov.w	r0, 2	# tmp881,
-	st.w	[distance], r0	# distance, tmp881
+	mov.w	r0, 2	# tmp921,
+	st.w	[distance], r0	# distance, tmp921
 .L422:
 # spaceinvaders.c:2569: 						if(sprite_version == 0)
-	ld.w	r1, [r13 + (-4)]	# tmp882, sprite_version
-	xor.w	r0, r0	# tmp883
-	cmp.w	r1, r0	# tmp882, tmp883
+	ld.w	r1, [r13 + (-4)]	# tmp922, sprite_version
+	xor.w	r0, r0	# tmp923
+	cmp.w	r1, r0	# tmp922, tmp923
 	jnz	.L424		#
 # spaceinvaders.c:2570: 							alien_sprite = octopus0;
-	mov.w	r0, octopus0	# tmp884,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp884
+	mov.w	r0, octopus0	# tmp924,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp924
 	j	.L425		#
 .L424:
 # spaceinvaders.c:2572: 							alien_sprite = octopus1;
-	mov.w	r0, octopus1	# tmp885,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp885
+	mov.w	r0, octopus1	# tmp925,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp925
 .L425:
 # spaceinvaders.c:2574: 						for(int i = 0; i < 11; i++) {
-	xor.w	r0, r0	# tmp886
-	st.w	[r13 + (-60)], r0	# i, tmp886
+	xor.w	r0, r0	# tmp926
+	st.w	[r13 + (-60)], r0	# i, tmp926
 # spaceinvaders.c:2574: 						for(int i = 0; i < 11; i++) {
 	j	.L426		#
 .L435:
 # spaceinvaders.c:2576: 							if(direction == 3)
-	ld.b	r0, [direction]	# direction.212_130, direction
+	ld.b	r0, [direction]	# direction.214_133, direction
 # spaceinvaders.c:2576: 							if(direction == 3)
-	sex.b	r1, r0	# tmp887, direction.212_130
-	mov.w	r0, 3	# tmp888,
-	cmp.w	r1, r0	# tmp887, tmp888
+	sex.b	r1, r0	# tmp927, direction.214_133
+	mov.w	r0, 3	# tmp928,
+	cmp.w	r1, r0	# tmp927, tmp928
 	jnz	.L427		#
 # spaceinvaders.c:2577: 								alien_index = 10-i;
-	mov.w	r0, 10	# tmp890,
-	ld.w	r1, [r13 + (-60)]	# tmp891, i
-	sub.w	r0, r1 #222	# tmp889, tmp891
-	st.w	[r13 + (-12)], r0	# alien_index, tmp889
+	mov.w	r0, 10	# tmp930,
+	ld.w	r1, [r13 + (-60)]	# tmp931, i
+	sub.w	r0, r1 #222	# tmp929, tmp931
+	st.w	[r13 + (-12)], r0	# alien_index, tmp929
 	j	.L428		#
 .L427:
 # spaceinvaders.c:2579: 								alien_index = i;
-	ld.w	r0, [r13 + (-60)]	# tmp892, i
-	st.w	[r13 + (-12)], r0	# alien_index, tmp892
+	ld.w	r0, [r13 + (-60)]	# tmp932, i
+	st.w	[r13 + (-12)], r0	# alien_index, tmp932
 .L428:
 # spaceinvaders.c:2581: 							if(row_5_octopus[alien_index].alive == 0)
-	ld.w	r0, [r13 + (-12)]	# tmp893, alien_index
-	mov.w	r1, 3	# tmp895,
-	shl.w	r0, r1	# tmp894, tmp895
-	mov.w	r1, row_5_octopus+6	# tmp897,
-	add.w	r0, r1 #222	# tmp896, tmp897
-	ld.s	r0, [r0]	# _131, row_5_octopus[alien_index_328].alive
+	ld.w	r0, [r13 + (-12)]	# tmp933, alien_index
+	mov.w	r1, 3	# tmp935,
+	shl.w	r0, r1	# tmp934, tmp935
+	mov.w	r1, row_5_octopus+6	# tmp937,
+	add.w	r0, r1 #222	# tmp936, tmp937
+	ld.s	r0, [r0]	# _134, row_5_octopus[alien_index_368].alive
 # spaceinvaders.c:2581: 							if(row_5_octopus[alien_index].alive == 0)
-	zex.s	r1, r0	# tmp898, _131
-	xor.w	r0, r0	# tmp899
-	cmp.w	r1, r0	# tmp898, tmp899
+	zex.s	r1, r0	# tmp938, _134
+	xor.w	r0, r0	# tmp939
+	cmp.w	r1, r0	# tmp938, tmp939
 	jz	.L522		#
 # spaceinvaders.c:2587: 								switch(direction)
-	ld.b	r0, [direction]	# direction.213_132, direction
-	sex.b	r0, r0	# _133, direction.213_132
-	mov.w	r1, 3	# tmp900,
-	cmp.w	r0, r1	# _133, tmp900
+	ld.b	r0, [direction]	# direction.215_135, direction
+	sex.b	r0, r0	# _136, direction.215_135
+	mov.w	r1, 3	# tmp940,
+	cmp.w	r0, r1	# _136, tmp940
 	jz	.L431		#
-	mov.w	r1, 9	# tmp901,
-	cmp.w	r0, r1	# _133, tmp901
+	mov.w	r1, 9	# tmp941,
+	cmp.w	r0, r1	# _136, tmp941
 	jz	.L432		#
 	j	.L517		#
 .L431:
 # spaceinvaders.c:2590: 										row_5_octopus[alien_index].x += distance;
-	ld.w	r0, [r13 + (-12)]	# tmp902, alien_index
-	mov.w	r1, 3	# tmp904,
-	shl.w	r0, r1	# tmp903, tmp904
-	mov.w	r1, row_5_octopus+2	# tmp906,
-	add.w	r0, r1 #222	# tmp905, tmp906
-	ld.s	r0, [r0]	# _134, row_5_octopus[alien_index_328].x
-	ld.w	r1, [distance]	# distance.214_135, distance
-	add.w	r0, r1 #222	# tmp907, tmp908
-	mov.w	r1, r0	# _137, tmp907
-	ld.w	r0, [r13 + (-12)]	# tmp909, alien_index
-	mov.w	r2, 3	# tmp911,
-	shl.w	r0, r2	# tmp910, tmp911
-	mov.w	r2, row_5_octopus+2	# tmp913,
-	add.w	r0, r2 #222	# tmp912, tmp913
-	st.s	[r0], r1	# row_5_octopus[alien_index_328].x, _137
+	ld.w	r0, [r13 + (-12)]	# tmp942, alien_index
+	mov.w	r1, 3	# tmp944,
+	shl.w	r0, r1	# tmp943, tmp944
+	mov.w	r1, row_5_octopus+2	# tmp946,
+	add.w	r0, r1 #222	# tmp945, tmp946
+	ld.s	r0, [r0]	# _137, row_5_octopus[alien_index_368].x
+	ld.w	r1, [distance]	# distance.216_139, distance
+	add.w	r0, r1 #222	# tmp947, tmp948
+	mov.w	r1, r0	# _142, _141
+	ld.w	r0, [r13 + (-12)]	# tmp949, alien_index
+	mov.w	r2, 3	# tmp951,
+	shl.w	r0, r2	# tmp950, tmp951
+	mov.w	r2, row_5_octopus+2	# tmp953,
+	add.w	r0, r2 #222	# tmp952, tmp953
+	st.s	[r0], r1	# row_5_octopus[alien_index_368].x, _142
 # spaceinvaders.c:2591: 										break;
 	j	.L434		#
 .L432:
 # spaceinvaders.c:2593: 										row_5_octopus[alien_index].x -= distance;
-	ld.w	r0, [r13 + (-12)]	# tmp914, alien_index
-	mov.w	r1, 3	# tmp916,
-	shl.w	r0, r1	# tmp915, tmp916
-	mov.w	r1, row_5_octopus+2	# tmp918,
-	add.w	r0, r1 #222	# tmp917, tmp918
-	ld.s	r0, [r0]	# _138, row_5_octopus[alien_index_328].x
-	ld.w	r1, [distance]	# distance.215_139, distance
-	sub.w	r0, r1 #222	# tmp919, tmp920
-	mov.w	r1, r0	# _141, tmp919
-	ld.w	r0, [r13 + (-12)]	# tmp921, alien_index
-	mov.w	r2, 3	# tmp923,
-	shl.w	r0, r2	# tmp922, tmp923
-	mov.w	r2, row_5_octopus+2	# tmp925,
-	add.w	r0, r2 #222	# tmp924, tmp925
-	st.s	[r0], r1	# row_5_octopus[alien_index_328].x, _141
+	ld.w	r0, [r13 + (-12)]	# tmp954, alien_index
+	mov.w	r1, 3	# tmp956,
+	shl.w	r0, r1	# tmp955, tmp956
+	mov.w	r1, row_5_octopus+2	# tmp958,
+	add.w	r0, r1 #222	# tmp957, tmp958
+	ld.s	r0, [r0]	# _143, row_5_octopus[alien_index_368].x
+	ld.w	r1, [distance]	# distance.217_145, distance
+	sub.w	r0, r1 #222	# tmp959, tmp960
+	mov.w	r1, r0	# _148, _147
+	ld.w	r0, [r13 + (-12)]	# tmp961, alien_index
+	mov.w	r2, 3	# tmp963,
+	shl.w	r0, r2	# tmp962, tmp963
+	mov.w	r2, row_5_octopus+2	# tmp965,
+	add.w	r0, r2 #222	# tmp964, tmp965
+	st.s	[r0], r1	# row_5_octopus[alien_index_368].x, _148
 # spaceinvaders.c:2594: 										break;
 	j	.L434		#
 .L517:
 # spaceinvaders.c:2596: 										row_5_octopus[alien_index].y += 8;
-	ld.w	r0, [r13 + (-12)]	# tmp926, alien_index
-	mov.w	r1, 3	# tmp928,
-	shl.w	r0, r1	# tmp927, tmp928
-	mov.w	r1, row_5_octopus+4	# tmp930,
-	add.w	r0, r1 #222	# tmp929, tmp930
-	ld.s	r0, [r0]	# _142, row_5_octopus[alien_index_328].y
-	add.w	r0, 8 #111	# tmp931,
-	mov.w	r1, r0	# _143, tmp931
-	ld.w	r0, [r13 + (-12)]	# tmp932, alien_index
-	mov.w	r2, 3	# tmp934,
-	shl.w	r0, r2	# tmp933, tmp934
-	mov.w	r2, row_5_octopus+4	# tmp936,
-	add.w	r0, r2 #222	# tmp935, tmp936
-	st.s	[r0], r1	# row_5_octopus[alien_index_328].y, _143
+	ld.w	r0, [r13 + (-12)]	# tmp966, alien_index
+	mov.w	r1, 3	# tmp968,
+	shl.w	r0, r1	# tmp967, tmp968
+	mov.w	r1, row_5_octopus+4	# tmp970,
+	add.w	r0, r1 #222	# tmp969, tmp970
+	ld.s	r0, [r0]	# _149, row_5_octopus[alien_index_368].y
+	add.w	r0, 8 #111	# tmp971,
+	mov.w	r1, r0	# _152, _151
+	ld.w	r0, [r13 + (-12)]	# tmp972, alien_index
+	mov.w	r2, 3	# tmp974,
+	shl.w	r0, r2	# tmp973, tmp974
+	mov.w	r2, row_5_octopus+4	# tmp976,
+	add.w	r0, r2 #222	# tmp975, tmp976
+	st.s	[r0], r1	# row_5_octopus[alien_index_368].y, _152
 .L434:
 # spaceinvaders.c:2599: 								row_5_octopus[alien_index].addr = move_bitmap_test(row_5_octopus[alien_index].x, row_5_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp937, alien_index
-	mov.w	r1, 3	# tmp939,
-	shl.w	r0, r1	# tmp938, tmp939
-	mov.w	r1, row_5_octopus+2	# tmp941,
-	add.w	r0, r1 #222	# tmp940, tmp941
-	ld.s	r0, [r0]	# _144, row_5_octopus[alien_index_328].x
+	ld.w	r0, [r13 + (-12)]	# tmp977, alien_index
+	mov.w	r1, 3	# tmp979,
+	shl.w	r0, r1	# tmp978, tmp979
+	mov.w	r1, row_5_octopus+2	# tmp981,
+	add.w	r0, r1 #222	# tmp980, tmp981
+	ld.s	r0, [r0]	# _153, row_5_octopus[alien_index_368].x
 # spaceinvaders.c:2599: 								row_5_octopus[alien_index].addr = move_bitmap_test(row_5_octopus[alien_index].x, row_5_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r1, r0	# _145, _144
+	sex.s	r1, r0	# _154, _153
 # spaceinvaders.c:2599: 								row_5_octopus[alien_index].addr = move_bitmap_test(row_5_octopus[alien_index].x, row_5_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp942, alien_index
-	mov.w	r2, 3	# tmp944,
-	shl.w	r0, r2	# tmp943, tmp944
-	mov.w	r2, row_5_octopus+4	# tmp946,
-	add.w	r0, r2 #222	# tmp945, tmp946
-	ld.s	r0, [r0]	# _146, row_5_octopus[alien_index_328].y
+	ld.w	r0, [r13 + (-12)]	# tmp982, alien_index
+	mov.w	r2, 3	# tmp984,
+	shl.w	r0, r2	# tmp983, tmp984
+	mov.w	r2, row_5_octopus+4	# tmp986,
+	add.w	r0, r2 #222	# tmp985, tmp986
+	ld.s	r0, [r0]	# _155, row_5_octopus[alien_index_368].y
 # spaceinvaders.c:2599: 								row_5_octopus[alien_index].addr = move_bitmap_test(row_5_octopus[alien_index].x, row_5_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r2, r0	# _147, _146
-	ld.b	r0, [direction]	# direction.216_148, direction
-	sex.b	r3, r0	# _149, direction.216_148
-	ld.w	r4, [distance]	# distance.217_150, distance
-	mov.w	r0, sp	# tmp947,
-	st.w	[r0 + (24)], r4	#, distance.217_150
-	st.w	[r0 + (20)], r3	#, _149
-	ld.w	r3, [r13 + (-8)]	# tmp948, alien_sprite
-	st.w	[r0 + (16)], r3	#, tmp948
-	mov.w	r3, 8	# tmp949,
-	st.w	[r0 + (12)], r3	#, tmp949
-	mov.w	r3, 12	# tmp950,
-	st.w	[r0 + (8)], r3	#, tmp950
-	st.w	[r0 + (4)], r2	#, _147
-	st.w	[r0], r1	#, _145
+	sex.s	r2, r0	# _156, _155
+	ld.b	r0, [direction]	# direction.218_157, direction
+	sex.b	r3, r0	# _158, direction.218_157
+	ld.w	r4, [distance]	# distance.219_159, distance
+	mov.w	r0, sp	# tmp987,
+	st.w	[r0 + (24)], r4	#, distance.219_159
+	st.w	[r0 + (20)], r3	#, _158
+	ld.w	r3, [r13 + (-8)]	# tmp988, alien_sprite
+	st.w	[r0 + (16)], r3	#, tmp988
+	mov.w	r3, 8	# tmp989,
+	st.w	[r0 + (12)], r3	#, tmp989
+	mov.w	r3, 12	# tmp990,
+	st.w	[r0 + (8)], r3	#, tmp990
+	st.w	[r0 + (4)], r2	#, _156
+	st.w	[r0], r1	#, _154
 	call	move_bitmap_test		#
-	mov.w	r2, r0	# _151,
+	mov.w	r2, r0	# _160,
 # spaceinvaders.c:2599: 								row_5_octopus[alien_index].addr = move_bitmap_test(row_5_octopus[alien_index].x, row_5_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp951, alien_index
-	mov.w	r1, 3	# tmp953,
-	shl.w	r0, r1	# tmp952, tmp953
-	mov.w	r1, row_5_octopus	# tmp955,
-	add.w	r0, r1 #222	# tmp954, tmp955
-	st.s	[r0], r2	# row_5_octopus[alien_index_328].addr, _151
+	ld.w	r0, [r13 + (-12)]	# tmp991, alien_index
+	mov.w	r1, 3	# tmp993,
+	shl.w	r0, r1	# tmp992, tmp993
+	mov.w	r1, row_5_octopus	# tmp995,
+	add.w	r0, r1 #222	# tmp994, tmp995
+	st.s	[r0], r2	# row_5_octopus[alien_index_368].addr, _160
 	j	.L430		#
 .L522:
 # spaceinvaders.c:2583: 								continue;
 	nop	
 .L430:
 # spaceinvaders.c:2574: 						for(int i = 0; i < 11; i++) {
-	ld.w	r0, [r13 + (-60)]	# tmp957, i
-	add.w	r0, 1 #111	# tmp956,
-	st.w	[r13 + (-60)], r0	# i, tmp956
+	ld.w	r0, [r13 + (-60)]	# tmp997, i
+	add.w	r0, 1 #111	# tmp996,
+	st.w	[r13 + (-60)], r0	# i, tmp996
 .L426:
 # spaceinvaders.c:2574: 						for(int i = 0; i < 11; i++) {
-	ld.w	r1, [r13 + (-60)]	# tmp958, i
-	mov.w	r0, 10	# tmp959,
-	cmp.w	r1, r0	# tmp958, tmp959
+	ld.w	r1, [r13 + (-60)]	# tmp998, i
+	mov.w	r0, 10	# tmp999,
+	cmp.w	r1, r0	# tmp998, tmp999
 	jses	.L435		#
 	j	.L436		#
 .L420:
 # spaceinvaders.c:2603: 					else if(current_step == movement_step * 2)
-	ld.w	r0, [movement_step]	# movement_step.218_152, movement_step
-	add.w	r0, r0 #222	# tmp960, movement_step.218_152
-	mov.w	r1, r0	# _153, tmp960
+	ld.w	r0, [movement_step]	# movement_step.220_161, movement_step
+	add.w	r0, r0 #222	# tmp1000, movement_step.220_161
+	mov.w	r1, r0	# _162, tmp1000
 # spaceinvaders.c:2603: 					else if(current_step == movement_step * 2)
-	ld.w	r0, [current_step]	# current_step.219_154, current_step
+	ld.w	r0, [current_step]	# current_step.221_163, current_step
 # spaceinvaders.c:2603: 					else if(current_step == movement_step * 2)
-	cmp.w	r1, r0	# _153, current_step.219_154
+	cmp.w	r1, r0	# _162, current_step.221_163
 	jnz	.L437		#
 # spaceinvaders.c:2605: 						if(sprite_version == 0)
-	ld.w	r1, [r13 + (-4)]	# tmp961, sprite_version
-	xor.w	r0, r0	# tmp962
-	cmp.w	r1, r0	# tmp961, tmp962
+	ld.w	r1, [r13 + (-4)]	# tmp1001, sprite_version
+	xor.w	r0, r0	# tmp1002
+	cmp.w	r1, r0	# tmp1001, tmp1002
 	jnz	.L438		#
 # spaceinvaders.c:2606: 							alien_sprite = octopus0;
-	mov.w	r0, octopus0	# tmp963,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp963
+	mov.w	r0, octopus0	# tmp1003,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1003
 	j	.L439		#
 .L438:
 # spaceinvaders.c:2608: 							alien_sprite = octopus1;
-	mov.w	r0, octopus1	# tmp964,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp964
+	mov.w	r0, octopus1	# tmp1004,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1004
 .L439:
 # spaceinvaders.c:2610: 						for(int i = 0; i < 11; i++) {
-	xor.w	r0, r0	# tmp965
-	st.w	[r13 + (-64)], r0	# i, tmp965
+	xor.w	r0, r0	# tmp1005
+	st.w	[r13 + (-64)], r0	# i, tmp1005
 # spaceinvaders.c:2610: 						for(int i = 0; i < 11; i++) {
 	j	.L440		#
 .L449:
 # spaceinvaders.c:2612: 							if(direction == 3)
-	ld.b	r0, [direction]	# direction.220_155, direction
+	ld.b	r0, [direction]	# direction.222_164, direction
 # spaceinvaders.c:2612: 							if(direction == 3)
-	sex.b	r1, r0	# tmp966, direction.220_155
-	mov.w	r0, 3	# tmp967,
-	cmp.w	r1, r0	# tmp966, tmp967
+	sex.b	r1, r0	# tmp1006, direction.222_164
+	mov.w	r0, 3	# tmp1007,
+	cmp.w	r1, r0	# tmp1006, tmp1007
 	jnz	.L441		#
 # spaceinvaders.c:2613: 								alien_index = 10-i;
-	mov.w	r0, 10	# tmp969,
-	ld.w	r1, [r13 + (-64)]	# tmp970, i
-	sub.w	r0, r1 #222	# tmp968, tmp970
-	st.w	[r13 + (-12)], r0	# alien_index, tmp968
+	mov.w	r0, 10	# tmp1009,
+	ld.w	r1, [r13 + (-64)]	# tmp1010, i
+	sub.w	r0, r1 #222	# tmp1008, tmp1010
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1008
 	j	.L442		#
 .L441:
 # spaceinvaders.c:2615: 								alien_index = i;
-	ld.w	r0, [r13 + (-64)]	# tmp971, i
-	st.w	[r13 + (-12)], r0	# alien_index, tmp971
+	ld.w	r0, [r13 + (-64)]	# tmp1011, i
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1011
 .L442:
 # spaceinvaders.c:2617: 							if(row_4_octopus[alien_index].alive == 0)
-	ld.w	r0, [r13 + (-12)]	# tmp972, alien_index
-	mov.w	r1, 3	# tmp974,
-	shl.w	r0, r1	# tmp973, tmp974
-	mov.w	r1, row_4_octopus+6	# tmp976,
-	add.w	r0, r1 #222	# tmp975, tmp976
-	ld.s	r0, [r0]	# _156, row_4_octopus[alien_index_329].alive
+	ld.w	r0, [r13 + (-12)]	# tmp1012, alien_index
+	mov.w	r1, 3	# tmp1014,
+	shl.w	r0, r1	# tmp1013, tmp1014
+	mov.w	r1, row_4_octopus+6	# tmp1016,
+	add.w	r0, r1 #222	# tmp1015, tmp1016
+	ld.s	r0, [r0]	# _165, row_4_octopus[alien_index_369].alive
 # spaceinvaders.c:2617: 							if(row_4_octopus[alien_index].alive == 0)
-	zex.s	r1, r0	# tmp977, _156
-	xor.w	r0, r0	# tmp978
-	cmp.w	r1, r0	# tmp977, tmp978
+	zex.s	r1, r0	# tmp1017, _165
+	xor.w	r0, r0	# tmp1018
+	cmp.w	r1, r0	# tmp1017, tmp1018
 	jz	.L523		#
 # spaceinvaders.c:2623: 								switch(direction)
-	ld.b	r0, [direction]	# direction.221_157, direction
-	sex.b	r0, r0	# _158, direction.221_157
-	mov.w	r1, 3	# tmp979,
-	cmp.w	r0, r1	# _158, tmp979
+	ld.b	r0, [direction]	# direction.223_166, direction
+	sex.b	r0, r0	# _167, direction.223_166
+	mov.w	r1, 3	# tmp1019,
+	cmp.w	r0, r1	# _167, tmp1019
 	jz	.L445		#
-	mov.w	r1, 9	# tmp980,
-	cmp.w	r0, r1	# _158, tmp980
+	mov.w	r1, 9	# tmp1020,
+	cmp.w	r0, r1	# _167, tmp1020
 	jz	.L446		#
 	j	.L518		#
 .L445:
 # spaceinvaders.c:2626: 										row_4_octopus[alien_index].x += distance;
-	ld.w	r0, [r13 + (-12)]	# tmp981, alien_index
-	mov.w	r1, 3	# tmp983,
-	shl.w	r0, r1	# tmp982, tmp983
-	mov.w	r1, row_4_octopus+2	# tmp985,
-	add.w	r0, r1 #222	# tmp984, tmp985
-	ld.s	r0, [r0]	# _159, row_4_octopus[alien_index_329].x
-	ld.w	r1, [distance]	# distance.222_160, distance
-	add.w	r0, r1 #222	# tmp986, tmp987
-	mov.w	r1, r0	# _162, tmp986
-	ld.w	r0, [r13 + (-12)]	# tmp988, alien_index
-	mov.w	r2, 3	# tmp990,
-	shl.w	r0, r2	# tmp989, tmp990
-	mov.w	r2, row_4_octopus+2	# tmp992,
-	add.w	r0, r2 #222	# tmp991, tmp992
-	st.s	[r0], r1	# row_4_octopus[alien_index_329].x, _162
+	ld.w	r0, [r13 + (-12)]	# tmp1021, alien_index
+	mov.w	r1, 3	# tmp1023,
+	shl.w	r0, r1	# tmp1022, tmp1023
+	mov.w	r1, row_4_octopus+2	# tmp1025,
+	add.w	r0, r1 #222	# tmp1024, tmp1025
+	ld.s	r0, [r0]	# _168, row_4_octopus[alien_index_369].x
+	ld.w	r1, [distance]	# distance.224_170, distance
+	add.w	r0, r1 #222	# tmp1026, tmp1027
+	mov.w	r1, r0	# _173, _172
+	ld.w	r0, [r13 + (-12)]	# tmp1028, alien_index
+	mov.w	r2, 3	# tmp1030,
+	shl.w	r0, r2	# tmp1029, tmp1030
+	mov.w	r2, row_4_octopus+2	# tmp1032,
+	add.w	r0, r2 #222	# tmp1031, tmp1032
+	st.s	[r0], r1	# row_4_octopus[alien_index_369].x, _173
 # spaceinvaders.c:2627: 										break;
 	j	.L448		#
 .L446:
 # spaceinvaders.c:2629: 										row_4_octopus[alien_index].x -= distance;
-	ld.w	r0, [r13 + (-12)]	# tmp993, alien_index
-	mov.w	r1, 3	# tmp995,
-	shl.w	r0, r1	# tmp994, tmp995
-	mov.w	r1, row_4_octopus+2	# tmp997,
-	add.w	r0, r1 #222	# tmp996, tmp997
-	ld.s	r0, [r0]	# _163, row_4_octopus[alien_index_329].x
-	ld.w	r1, [distance]	# distance.223_164, distance
-	sub.w	r0, r1 #222	# tmp998, tmp999
-	mov.w	r1, r0	# _166, tmp998
-	ld.w	r0, [r13 + (-12)]	# tmp1000, alien_index
-	mov.w	r2, 3	# tmp1002,
-	shl.w	r0, r2	# tmp1001, tmp1002
-	mov.w	r2, row_4_octopus+2	# tmp1004,
-	add.w	r0, r2 #222	# tmp1003, tmp1004
-	st.s	[r0], r1	# row_4_octopus[alien_index_329].x, _166
+	ld.w	r0, [r13 + (-12)]	# tmp1033, alien_index
+	mov.w	r1, 3	# tmp1035,
+	shl.w	r0, r1	# tmp1034, tmp1035
+	mov.w	r1, row_4_octopus+2	# tmp1037,
+	add.w	r0, r1 #222	# tmp1036, tmp1037
+	ld.s	r0, [r0]	# _174, row_4_octopus[alien_index_369].x
+	ld.w	r1, [distance]	# distance.225_176, distance
+	sub.w	r0, r1 #222	# tmp1038, tmp1039
+	mov.w	r1, r0	# _179, _178
+	ld.w	r0, [r13 + (-12)]	# tmp1040, alien_index
+	mov.w	r2, 3	# tmp1042,
+	shl.w	r0, r2	# tmp1041, tmp1042
+	mov.w	r2, row_4_octopus+2	# tmp1044,
+	add.w	r0, r2 #222	# tmp1043, tmp1044
+	st.s	[r0], r1	# row_4_octopus[alien_index_369].x, _179
 # spaceinvaders.c:2630: 										break;
 	j	.L448		#
 .L518:
 # spaceinvaders.c:2632: 										row_4_octopus[alien_index].y += 8;
-	ld.w	r0, [r13 + (-12)]	# tmp1005, alien_index
-	mov.w	r1, 3	# tmp1007,
-	shl.w	r0, r1	# tmp1006, tmp1007
-	mov.w	r1, row_4_octopus+4	# tmp1009,
-	add.w	r0, r1 #222	# tmp1008, tmp1009
-	ld.s	r0, [r0]	# _167, row_4_octopus[alien_index_329].y
-	add.w	r0, 8 #111	# tmp1010,
-	mov.w	r1, r0	# _168, tmp1010
-	ld.w	r0, [r13 + (-12)]	# tmp1011, alien_index
-	mov.w	r2, 3	# tmp1013,
-	shl.w	r0, r2	# tmp1012, tmp1013
-	mov.w	r2, row_4_octopus+4	# tmp1015,
-	add.w	r0, r2 #222	# tmp1014, tmp1015
-	st.s	[r0], r1	# row_4_octopus[alien_index_329].y, _168
+	ld.w	r0, [r13 + (-12)]	# tmp1045, alien_index
+	mov.w	r1, 3	# tmp1047,
+	shl.w	r0, r1	# tmp1046, tmp1047
+	mov.w	r1, row_4_octopus+4	# tmp1049,
+	add.w	r0, r1 #222	# tmp1048, tmp1049
+	ld.s	r0, [r0]	# _180, row_4_octopus[alien_index_369].y
+	add.w	r0, 8 #111	# tmp1050,
+	mov.w	r1, r0	# _183, _182
+	ld.w	r0, [r13 + (-12)]	# tmp1051, alien_index
+	mov.w	r2, 3	# tmp1053,
+	shl.w	r0, r2	# tmp1052, tmp1053
+	mov.w	r2, row_4_octopus+4	# tmp1055,
+	add.w	r0, r2 #222	# tmp1054, tmp1055
+	st.s	[r0], r1	# row_4_octopus[alien_index_369].y, _183
 .L448:
 # spaceinvaders.c:2635: 								row_4_octopus[alien_index].addr = move_bitmap_test(row_4_octopus[alien_index].x, row_4_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1016, alien_index
-	mov.w	r1, 3	# tmp1018,
-	shl.w	r0, r1	# tmp1017, tmp1018
-	mov.w	r1, row_4_octopus+2	# tmp1020,
-	add.w	r0, r1 #222	# tmp1019, tmp1020
-	ld.s	r0, [r0]	# _169, row_4_octopus[alien_index_329].x
+	ld.w	r0, [r13 + (-12)]	# tmp1056, alien_index
+	mov.w	r1, 3	# tmp1058,
+	shl.w	r0, r1	# tmp1057, tmp1058
+	mov.w	r1, row_4_octopus+2	# tmp1060,
+	add.w	r0, r1 #222	# tmp1059, tmp1060
+	ld.s	r0, [r0]	# _184, row_4_octopus[alien_index_369].x
 # spaceinvaders.c:2635: 								row_4_octopus[alien_index].addr = move_bitmap_test(row_4_octopus[alien_index].x, row_4_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r1, r0	# _170, _169
+	sex.s	r1, r0	# _185, _184
 # spaceinvaders.c:2635: 								row_4_octopus[alien_index].addr = move_bitmap_test(row_4_octopus[alien_index].x, row_4_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1021, alien_index
-	mov.w	r2, 3	# tmp1023,
-	shl.w	r0, r2	# tmp1022, tmp1023
-	mov.w	r2, row_4_octopus+4	# tmp1025,
-	add.w	r0, r2 #222	# tmp1024, tmp1025
-	ld.s	r0, [r0]	# _171, row_4_octopus[alien_index_329].y
+	ld.w	r0, [r13 + (-12)]	# tmp1061, alien_index
+	mov.w	r2, 3	# tmp1063,
+	shl.w	r0, r2	# tmp1062, tmp1063
+	mov.w	r2, row_4_octopus+4	# tmp1065,
+	add.w	r0, r2 #222	# tmp1064, tmp1065
+	ld.s	r0, [r0]	# _186, row_4_octopus[alien_index_369].y
 # spaceinvaders.c:2635: 								row_4_octopus[alien_index].addr = move_bitmap_test(row_4_octopus[alien_index].x, row_4_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r2, r0	# _172, _171
-	ld.b	r0, [direction]	# direction.224_173, direction
-	sex.b	r3, r0	# _174, direction.224_173
-	ld.w	r4, [distance]	# distance.225_175, distance
-	mov.w	r0, sp	# tmp1026,
-	st.w	[r0 + (24)], r4	#, distance.225_175
-	st.w	[r0 + (20)], r3	#, _174
-	ld.w	r3, [r13 + (-8)]	# tmp1027, alien_sprite
-	st.w	[r0 + (16)], r3	#, tmp1027
-	mov.w	r3, 8	# tmp1028,
-	st.w	[r0 + (12)], r3	#, tmp1028
-	mov.w	r3, 12	# tmp1029,
-	st.w	[r0 + (8)], r3	#, tmp1029
-	st.w	[r0 + (4)], r2	#, _172
-	st.w	[r0], r1	#, _170
+	sex.s	r2, r0	# _187, _186
+	ld.b	r0, [direction]	# direction.226_188, direction
+	sex.b	r3, r0	# _189, direction.226_188
+	ld.w	r4, [distance]	# distance.227_190, distance
+	mov.w	r0, sp	# tmp1066,
+	st.w	[r0 + (24)], r4	#, distance.227_190
+	st.w	[r0 + (20)], r3	#, _189
+	ld.w	r3, [r13 + (-8)]	# tmp1067, alien_sprite
+	st.w	[r0 + (16)], r3	#, tmp1067
+	mov.w	r3, 8	# tmp1068,
+	st.w	[r0 + (12)], r3	#, tmp1068
+	mov.w	r3, 12	# tmp1069,
+	st.w	[r0 + (8)], r3	#, tmp1069
+	st.w	[r0 + (4)], r2	#, _187
+	st.w	[r0], r1	#, _185
 	call	move_bitmap_test		#
-	mov.w	r2, r0	# _176,
+	mov.w	r2, r0	# _191,
 # spaceinvaders.c:2635: 								row_4_octopus[alien_index].addr = move_bitmap_test(row_4_octopus[alien_index].x, row_4_octopus[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1030, alien_index
-	mov.w	r1, 3	# tmp1032,
-	shl.w	r0, r1	# tmp1031, tmp1032
-	mov.w	r1, row_4_octopus	# tmp1034,
-	add.w	r0, r1 #222	# tmp1033, tmp1034
-	st.s	[r0], r2	# row_4_octopus[alien_index_329].addr, _176
+	ld.w	r0, [r13 + (-12)]	# tmp1070, alien_index
+	mov.w	r1, 3	# tmp1072,
+	shl.w	r0, r1	# tmp1071, tmp1072
+	mov.w	r1, row_4_octopus	# tmp1074,
+	add.w	r0, r1 #222	# tmp1073, tmp1074
+	st.s	[r0], r2	# row_4_octopus[alien_index_369].addr, _191
 	j	.L444		#
 .L523:
 # spaceinvaders.c:2619: 								continue;
 	nop	
 .L444:
 # spaceinvaders.c:2610: 						for(int i = 0; i < 11; i++) {
-	ld.w	r0, [r13 + (-64)]	# tmp1036, i
-	add.w	r0, 1 #111	# tmp1035,
-	st.w	[r13 + (-64)], r0	# i, tmp1035
+	ld.w	r0, [r13 + (-64)]	# tmp1076, i
+	add.w	r0, 1 #111	# tmp1075,
+	st.w	[r13 + (-64)], r0	# i, tmp1075
 .L440:
 # spaceinvaders.c:2610: 						for(int i = 0; i < 11; i++) {
-	ld.w	r1, [r13 + (-64)]	# tmp1037, i
-	mov.w	r0, 10	# tmp1038,
-	cmp.w	r1, r0	# tmp1037, tmp1038
+	ld.w	r1, [r13 + (-64)]	# tmp1077, i
+	mov.w	r0, 10	# tmp1078,
+	cmp.w	r1, r0	# tmp1077, tmp1078
 	jses	.L449		#
 	j	.L436		#
 .L437:
 # spaceinvaders.c:2639: 					else if(current_step == movement_step * 3)
-	ld.w	r1, [movement_step]	# movement_step.226_177, movement_step
-	mov.w	r0, r1	# tmp1039, movement_step.226_177
-	add.w	r0, r0 #222	# tmp1040, tmp1039
-	mov.w	r2, r0	# _178, tmp1039
-	add.w	r2, r1 #222	# _178, movement_step.226_177
+	ld.w	r1, [movement_step]	# movement_step.228_192, movement_step
+	mov.w	r0, r1	# tmp1079, movement_step.228_192
+	add.w	r0, r0 #222	# tmp1080, tmp1079
+	mov.w	r2, r0	# _193, tmp1079
+	add.w	r2, r1 #222	# _193, movement_step.228_192
 # spaceinvaders.c:2639: 					else if(current_step == movement_step * 3)
-	ld.w	r0, [current_step]	# current_step.227_179, current_step
+	ld.w	r0, [current_step]	# current_step.229_194, current_step
 # spaceinvaders.c:2639: 					else if(current_step == movement_step * 3)
-	cmp.w	r2, r0	# _178, current_step.227_179
+	cmp.w	r2, r0	# _193, current_step.229_194
 	jnz	.L450		#
 # spaceinvaders.c:2641: 						if(sprite_version == 0)
-	ld.w	r1, [r13 + (-4)]	# tmp1041, sprite_version
-	xor.w	r0, r0	# tmp1042
-	cmp.w	r1, r0	# tmp1041, tmp1042
+	ld.w	r1, [r13 + (-4)]	# tmp1081, sprite_version
+	xor.w	r0, r0	# tmp1082
+	cmp.w	r1, r0	# tmp1081, tmp1082
 	jnz	.L451		#
 # spaceinvaders.c:2642: 							alien_sprite = crab0;
-	mov.w	r0, crab0	# tmp1043,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1043
+	mov.w	r0, crab0	# tmp1083,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1083
 	j	.L452		#
 .L451:
 # spaceinvaders.c:2644: 							alien_sprite = crab1;
-	mov.w	r0, crab1	# tmp1044,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1044
+	mov.w	r0, crab1	# tmp1084,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1084
 .L452:
 # spaceinvaders.c:2646: 						for(int i = 0; i < 11; i++) {
-	xor.w	r0, r0	# tmp1045
-	st.w	[r13 + (-68)], r0	# i, tmp1045
+	xor.w	r0, r0	# tmp1085
+	st.w	[r13 + (-68)], r0	# i, tmp1085
 # spaceinvaders.c:2646: 						for(int i = 0; i < 11; i++) {
 	j	.L453		#
 .L462:
 # spaceinvaders.c:2648: 							if(direction == 3)
-	ld.b	r0, [direction]	# direction.228_180, direction
+	ld.b	r0, [direction]	# direction.230_195, direction
 # spaceinvaders.c:2648: 							if(direction == 3)
-	sex.b	r1, r0	# tmp1046, direction.228_180
-	mov.w	r0, 3	# tmp1047,
-	cmp.w	r1, r0	# tmp1046, tmp1047
+	sex.b	r1, r0	# tmp1086, direction.230_195
+	mov.w	r0, 3	# tmp1087,
+	cmp.w	r1, r0	# tmp1086, tmp1087
 	jnz	.L454		#
 # spaceinvaders.c:2649: 								alien_index = 10-i;
-	mov.w	r0, 10	# tmp1049,
-	ld.w	r1, [r13 + (-68)]	# tmp1050, i
-	sub.w	r0, r1 #222	# tmp1048, tmp1050
-	st.w	[r13 + (-12)], r0	# alien_index, tmp1048
+	mov.w	r0, 10	# tmp1089,
+	ld.w	r1, [r13 + (-68)]	# tmp1090, i
+	sub.w	r0, r1 #222	# tmp1088, tmp1090
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1088
 	j	.L455		#
 .L454:
 # spaceinvaders.c:2651: 								alien_index = i;
-	ld.w	r0, [r13 + (-68)]	# tmp1051, i
-	st.w	[r13 + (-12)], r0	# alien_index, tmp1051
+	ld.w	r0, [r13 + (-68)]	# tmp1091, i
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1091
 .L455:
 # spaceinvaders.c:2653: 							if(row_3_crab[alien_index].alive == 0)
-	ld.w	r0, [r13 + (-12)]	# tmp1052, alien_index
-	mov.w	r1, 3	# tmp1054,
-	shl.w	r0, r1	# tmp1053, tmp1054
-	mov.w	r1, row_3_crab+6	# tmp1056,
-	add.w	r0, r1 #222	# tmp1055, tmp1056
-	ld.s	r0, [r0]	# _181, row_3_crab[alien_index_330].alive
+	ld.w	r0, [r13 + (-12)]	# tmp1092, alien_index
+	mov.w	r1, 3	# tmp1094,
+	shl.w	r0, r1	# tmp1093, tmp1094
+	mov.w	r1, row_3_crab+6	# tmp1096,
+	add.w	r0, r1 #222	# tmp1095, tmp1096
+	ld.s	r0, [r0]	# _196, row_3_crab[alien_index_370].alive
 # spaceinvaders.c:2653: 							if(row_3_crab[alien_index].alive == 0)
-	zex.s	r1, r0	# tmp1057, _181
-	xor.w	r0, r0	# tmp1058
-	cmp.w	r1, r0	# tmp1057, tmp1058
+	zex.s	r1, r0	# tmp1097, _196
+	xor.w	r0, r0	# tmp1098
+	cmp.w	r1, r0	# tmp1097, tmp1098
 	jz	.L524		#
 # spaceinvaders.c:2659: 								switch(direction)
-	ld.b	r0, [direction]	# direction.229_182, direction
-	sex.b	r0, r0	# _183, direction.229_182
-	mov.w	r1, 3	# tmp1059,
-	cmp.w	r0, r1	# _183, tmp1059
+	ld.b	r0, [direction]	# direction.231_197, direction
+	sex.b	r0, r0	# _198, direction.231_197
+	mov.w	r1, 3	# tmp1099,
+	cmp.w	r0, r1	# _198, tmp1099
 	jz	.L458		#
-	mov.w	r1, 9	# tmp1060,
-	cmp.w	r0, r1	# _183, tmp1060
+	mov.w	r1, 9	# tmp1100,
+	cmp.w	r0, r1	# _198, tmp1100
 	jz	.L459		#
 	j	.L519		#
 .L458:
 # spaceinvaders.c:2662: 										row_3_crab[alien_index].x += distance;
-	ld.w	r0, [r13 + (-12)]	# tmp1061, alien_index
-	mov.w	r1, 3	# tmp1063,
-	shl.w	r0, r1	# tmp1062, tmp1063
-	mov.w	r1, row_3_crab+2	# tmp1065,
-	add.w	r0, r1 #222	# tmp1064, tmp1065
-	ld.s	r0, [r0]	# _184, row_3_crab[alien_index_330].x
-	ld.w	r1, [distance]	# distance.230_185, distance
-	add.w	r0, r1 #222	# tmp1066, tmp1067
-	mov.w	r1, r0	# _187, tmp1066
-	ld.w	r0, [r13 + (-12)]	# tmp1068, alien_index
-	mov.w	r2, 3	# tmp1070,
-	shl.w	r0, r2	# tmp1069, tmp1070
-	mov.w	r2, row_3_crab+2	# tmp1072,
-	add.w	r0, r2 #222	# tmp1071, tmp1072
-	st.s	[r0], r1	# row_3_crab[alien_index_330].x, _187
+	ld.w	r0, [r13 + (-12)]	# tmp1101, alien_index
+	mov.w	r1, 3	# tmp1103,
+	shl.w	r0, r1	# tmp1102, tmp1103
+	mov.w	r1, row_3_crab+2	# tmp1105,
+	add.w	r0, r1 #222	# tmp1104, tmp1105
+	ld.s	r0, [r0]	# _199, row_3_crab[alien_index_370].x
+	ld.w	r1, [distance]	# distance.232_201, distance
+	add.w	r0, r1 #222	# tmp1106, tmp1107
+	mov.w	r1, r0	# _204, _203
+	ld.w	r0, [r13 + (-12)]	# tmp1108, alien_index
+	mov.w	r2, 3	# tmp1110,
+	shl.w	r0, r2	# tmp1109, tmp1110
+	mov.w	r2, row_3_crab+2	# tmp1112,
+	add.w	r0, r2 #222	# tmp1111, tmp1112
+	st.s	[r0], r1	# row_3_crab[alien_index_370].x, _204
 # spaceinvaders.c:2663: 										break;
 	j	.L461		#
 .L459:
 # spaceinvaders.c:2665: 										row_3_crab[alien_index].x -= distance;
-	ld.w	r0, [r13 + (-12)]	# tmp1073, alien_index
-	mov.w	r1, 3	# tmp1075,
-	shl.w	r0, r1	# tmp1074, tmp1075
-	mov.w	r1, row_3_crab+2	# tmp1077,
-	add.w	r0, r1 #222	# tmp1076, tmp1077
-	ld.s	r0, [r0]	# _188, row_3_crab[alien_index_330].x
-	ld.w	r1, [distance]	# distance.231_189, distance
-	sub.w	r0, r1 #222	# tmp1078, tmp1079
-	mov.w	r1, r0	# _191, tmp1078
-	ld.w	r0, [r13 + (-12)]	# tmp1080, alien_index
-	mov.w	r2, 3	# tmp1082,
-	shl.w	r0, r2	# tmp1081, tmp1082
-	mov.w	r2, row_3_crab+2	# tmp1084,
-	add.w	r0, r2 #222	# tmp1083, tmp1084
-	st.s	[r0], r1	# row_3_crab[alien_index_330].x, _191
+	ld.w	r0, [r13 + (-12)]	# tmp1113, alien_index
+	mov.w	r1, 3	# tmp1115,
+	shl.w	r0, r1	# tmp1114, tmp1115
+	mov.w	r1, row_3_crab+2	# tmp1117,
+	add.w	r0, r1 #222	# tmp1116, tmp1117
+	ld.s	r0, [r0]	# _205, row_3_crab[alien_index_370].x
+	ld.w	r1, [distance]	# distance.233_207, distance
+	sub.w	r0, r1 #222	# tmp1118, tmp1119
+	mov.w	r1, r0	# _210, _209
+	ld.w	r0, [r13 + (-12)]	# tmp1120, alien_index
+	mov.w	r2, 3	# tmp1122,
+	shl.w	r0, r2	# tmp1121, tmp1122
+	mov.w	r2, row_3_crab+2	# tmp1124,
+	add.w	r0, r2 #222	# tmp1123, tmp1124
+	st.s	[r0], r1	# row_3_crab[alien_index_370].x, _210
 # spaceinvaders.c:2666: 										break;
 	j	.L461		#
 .L519:
 # spaceinvaders.c:2668: 										row_3_crab[alien_index].y += 8;
-	ld.w	r0, [r13 + (-12)]	# tmp1085, alien_index
-	mov.w	r1, 3	# tmp1087,
-	shl.w	r0, r1	# tmp1086, tmp1087
-	mov.w	r1, row_3_crab+4	# tmp1089,
-	add.w	r0, r1 #222	# tmp1088, tmp1089
-	ld.s	r0, [r0]	# _192, row_3_crab[alien_index_330].y
-	add.w	r0, 8 #111	# tmp1090,
-	mov.w	r1, r0	# _193, tmp1090
-	ld.w	r0, [r13 + (-12)]	# tmp1091, alien_index
-	mov.w	r2, 3	# tmp1093,
-	shl.w	r0, r2	# tmp1092, tmp1093
-	mov.w	r2, row_3_crab+4	# tmp1095,
-	add.w	r0, r2 #222	# tmp1094, tmp1095
-	st.s	[r0], r1	# row_3_crab[alien_index_330].y, _193
+	ld.w	r0, [r13 + (-12)]	# tmp1125, alien_index
+	mov.w	r1, 3	# tmp1127,
+	shl.w	r0, r1	# tmp1126, tmp1127
+	mov.w	r1, row_3_crab+4	# tmp1129,
+	add.w	r0, r1 #222	# tmp1128, tmp1129
+	ld.s	r0, [r0]	# _211, row_3_crab[alien_index_370].y
+	add.w	r0, 8 #111	# tmp1130,
+	mov.w	r1, r0	# _214, _213
+	ld.w	r0, [r13 + (-12)]	# tmp1131, alien_index
+	mov.w	r2, 3	# tmp1133,
+	shl.w	r0, r2	# tmp1132, tmp1133
+	mov.w	r2, row_3_crab+4	# tmp1135,
+	add.w	r0, r2 #222	# tmp1134, tmp1135
+	st.s	[r0], r1	# row_3_crab[alien_index_370].y, _214
 .L461:
 # spaceinvaders.c:2671: 								row_3_crab[alien_index].addr = move_bitmap_test(row_3_crab[alien_index].x, row_3_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1096, alien_index
-	mov.w	r1, 3	# tmp1098,
-	shl.w	r0, r1	# tmp1097, tmp1098
-	mov.w	r1, row_3_crab+2	# tmp1100,
-	add.w	r0, r1 #222	# tmp1099, tmp1100
-	ld.s	r0, [r0]	# _194, row_3_crab[alien_index_330].x
+	ld.w	r0, [r13 + (-12)]	# tmp1136, alien_index
+	mov.w	r1, 3	# tmp1138,
+	shl.w	r0, r1	# tmp1137, tmp1138
+	mov.w	r1, row_3_crab+2	# tmp1140,
+	add.w	r0, r1 #222	# tmp1139, tmp1140
+	ld.s	r0, [r0]	# _215, row_3_crab[alien_index_370].x
 # spaceinvaders.c:2671: 								row_3_crab[alien_index].addr = move_bitmap_test(row_3_crab[alien_index].x, row_3_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r1, r0	# _195, _194
+	sex.s	r1, r0	# _216, _215
 # spaceinvaders.c:2671: 								row_3_crab[alien_index].addr = move_bitmap_test(row_3_crab[alien_index].x, row_3_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1101, alien_index
-	mov.w	r2, 3	# tmp1103,
-	shl.w	r0, r2	# tmp1102, tmp1103
-	mov.w	r2, row_3_crab+4	# tmp1105,
-	add.w	r0, r2 #222	# tmp1104, tmp1105
-	ld.s	r0, [r0]	# _196, row_3_crab[alien_index_330].y
+	ld.w	r0, [r13 + (-12)]	# tmp1141, alien_index
+	mov.w	r2, 3	# tmp1143,
+	shl.w	r0, r2	# tmp1142, tmp1143
+	mov.w	r2, row_3_crab+4	# tmp1145,
+	add.w	r0, r2 #222	# tmp1144, tmp1145
+	ld.s	r0, [r0]	# _217, row_3_crab[alien_index_370].y
 # spaceinvaders.c:2671: 								row_3_crab[alien_index].addr = move_bitmap_test(row_3_crab[alien_index].x, row_3_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r2, r0	# _197, _196
-	ld.b	r0, [direction]	# direction.232_198, direction
-	sex.b	r3, r0	# _199, direction.232_198
-	ld.w	r4, [distance]	# distance.233_200, distance
-	mov.w	r0, sp	# tmp1106,
-	st.w	[r0 + (24)], r4	#, distance.233_200
-	st.w	[r0 + (20)], r3	#, _199
-	ld.w	r3, [r13 + (-8)]	# tmp1107, alien_sprite
-	st.w	[r0 + (16)], r3	#, tmp1107
-	mov.w	r3, 8	# tmp1108,
-	st.w	[r0 + (12)], r3	#, tmp1108
-	mov.w	r3, 12	# tmp1109,
-	st.w	[r0 + (8)], r3	#, tmp1109
-	st.w	[r0 + (4)], r2	#, _197
-	st.w	[r0], r1	#, _195
+	sex.s	r2, r0	# _218, _217
+	ld.b	r0, [direction]	# direction.234_219, direction
+	sex.b	r3, r0	# _220, direction.234_219
+	ld.w	r4, [distance]	# distance.235_221, distance
+	mov.w	r0, sp	# tmp1146,
+	st.w	[r0 + (24)], r4	#, distance.235_221
+	st.w	[r0 + (20)], r3	#, _220
+	ld.w	r3, [r13 + (-8)]	# tmp1147, alien_sprite
+	st.w	[r0 + (16)], r3	#, tmp1147
+	mov.w	r3, 8	# tmp1148,
+	st.w	[r0 + (12)], r3	#, tmp1148
+	mov.w	r3, 12	# tmp1149,
+	st.w	[r0 + (8)], r3	#, tmp1149
+	st.w	[r0 + (4)], r2	#, _218
+	st.w	[r0], r1	#, _216
 	call	move_bitmap_test		#
-	mov.w	r2, r0	# _201,
+	mov.w	r2, r0	# _222,
 # spaceinvaders.c:2671: 								row_3_crab[alien_index].addr = move_bitmap_test(row_3_crab[alien_index].x, row_3_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1110, alien_index
-	mov.w	r1, 3	# tmp1112,
-	shl.w	r0, r1	# tmp1111, tmp1112
-	mov.w	r1, row_3_crab	# tmp1114,
-	add.w	r0, r1 #222	# tmp1113, tmp1114
-	st.s	[r0], r2	# row_3_crab[alien_index_330].addr, _201
+	ld.w	r0, [r13 + (-12)]	# tmp1150, alien_index
+	mov.w	r1, 3	# tmp1152,
+	shl.w	r0, r1	# tmp1151, tmp1152
+	mov.w	r1, row_3_crab	# tmp1154,
+	add.w	r0, r1 #222	# tmp1153, tmp1154
+	st.s	[r0], r2	# row_3_crab[alien_index_370].addr, _222
 	j	.L457		#
 .L524:
 # spaceinvaders.c:2655: 								continue;
 	nop	
 .L457:
 # spaceinvaders.c:2646: 						for(int i = 0; i < 11; i++) {
-	ld.w	r0, [r13 + (-68)]	# tmp1116, i
-	add.w	r0, 1 #111	# tmp1115,
-	st.w	[r13 + (-68)], r0	# i, tmp1115
+	ld.w	r0, [r13 + (-68)]	# tmp1156, i
+	add.w	r0, 1 #111	# tmp1155,
+	st.w	[r13 + (-68)], r0	# i, tmp1155
 .L453:
 # spaceinvaders.c:2646: 						for(int i = 0; i < 11; i++) {
-	ld.w	r1, [r13 + (-68)]	# tmp1117, i
-	mov.w	r0, 10	# tmp1118,
-	cmp.w	r1, r0	# tmp1117, tmp1118
+	ld.w	r1, [r13 + (-68)]	# tmp1157, i
+	mov.w	r0, 10	# tmp1158,
+	cmp.w	r1, r0	# tmp1157, tmp1158
 	jses	.L462		#
 	j	.L436		#
 .L450:
 # spaceinvaders.c:2675: 					else if(current_step == movement_step * 4)
-	ld.w	r1, [movement_step]	# movement_step.234_202, movement_step
-	mov.w	r0, 2	# tmp1119,
-	shl.w	r1, r0	# _203, tmp1119
+	ld.w	r1, [movement_step]	# movement_step.236_223, movement_step
+	mov.w	r0, 2	# tmp1159,
+	shl.w	r1, r0	# _224, tmp1159
 # spaceinvaders.c:2675: 					else if(current_step == movement_step * 4)
-	ld.w	r0, [current_step]	# current_step.235_204, current_step
+	ld.w	r0, [current_step]	# current_step.237_225, current_step
 # spaceinvaders.c:2675: 					else if(current_step == movement_step * 4)
-	cmp.w	r1, r0	# _203, current_step.235_204
+	cmp.w	r1, r0	# _224, current_step.237_225
 	jnz	.L463		#
 # spaceinvaders.c:2677: 						if(sprite_version == 0)
-	ld.w	r1, [r13 + (-4)]	# tmp1120, sprite_version
-	xor.w	r0, r0	# tmp1121
-	cmp.w	r1, r0	# tmp1120, tmp1121
+	ld.w	r1, [r13 + (-4)]	# tmp1160, sprite_version
+	xor.w	r0, r0	# tmp1161
+	cmp.w	r1, r0	# tmp1160, tmp1161
 	jnz	.L464		#
 # spaceinvaders.c:2678: 							alien_sprite = crab0;
-	mov.w	r0, crab0	# tmp1122,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1122
+	mov.w	r0, crab0	# tmp1162,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1162
 	j	.L465		#
 .L464:
 # spaceinvaders.c:2680: 							alien_sprite = crab1;
-	mov.w	r0, crab1	# tmp1123,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1123
+	mov.w	r0, crab1	# tmp1163,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1163
 .L465:
 # spaceinvaders.c:2682: 						for(int i = 0; i < 11; i++) {
-	xor.w	r0, r0	# tmp1124
-	st.w	[r13 + (-72)], r0	# i, tmp1124
+	xor.w	r0, r0	# tmp1164
+	st.w	[r13 + (-72)], r0	# i, tmp1164
 # spaceinvaders.c:2682: 						for(int i = 0; i < 11; i++) {
 	j	.L466		#
 .L475:
 # spaceinvaders.c:2684: 							if(direction == 3)
-	ld.b	r0, [direction]	# direction.236_205, direction
+	ld.b	r0, [direction]	# direction.238_226, direction
 # spaceinvaders.c:2684: 							if(direction == 3)
-	sex.b	r1, r0	# tmp1125, direction.236_205
-	mov.w	r0, 3	# tmp1126,
-	cmp.w	r1, r0	# tmp1125, tmp1126
+	sex.b	r1, r0	# tmp1165, direction.238_226
+	mov.w	r0, 3	# tmp1166,
+	cmp.w	r1, r0	# tmp1165, tmp1166
 	jnz	.L467		#
 # spaceinvaders.c:2685: 								alien_index = 10-i;
-	mov.w	r0, 10	# tmp1128,
-	ld.w	r1, [r13 + (-72)]	# tmp1129, i
-	sub.w	r0, r1 #222	# tmp1127, tmp1129
-	st.w	[r13 + (-12)], r0	# alien_index, tmp1127
+	mov.w	r0, 10	# tmp1168,
+	ld.w	r1, [r13 + (-72)]	# tmp1169, i
+	sub.w	r0, r1 #222	# tmp1167, tmp1169
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1167
 	j	.L468		#
 .L467:
 # spaceinvaders.c:2687: 								alien_index = i;
-	ld.w	r0, [r13 + (-72)]	# tmp1130, i
-	st.w	[r13 + (-12)], r0	# alien_index, tmp1130
+	ld.w	r0, [r13 + (-72)]	# tmp1170, i
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1170
 .L468:
 # spaceinvaders.c:2689: 							if(row_2_crab[alien_index].alive == 0)
-	ld.w	r0, [r13 + (-12)]	# tmp1131, alien_index
-	mov.w	r1, 3	# tmp1133,
-	shl.w	r0, r1	# tmp1132, tmp1133
-	mov.w	r1, row_2_crab+6	# tmp1135,
-	add.w	r0, r1 #222	# tmp1134, tmp1135
-	ld.s	r0, [r0]	# _206, row_2_crab[alien_index_331].alive
+	ld.w	r0, [r13 + (-12)]	# tmp1171, alien_index
+	mov.w	r1, 3	# tmp1173,
+	shl.w	r0, r1	# tmp1172, tmp1173
+	mov.w	r1, row_2_crab+6	# tmp1175,
+	add.w	r0, r1 #222	# tmp1174, tmp1175
+	ld.s	r0, [r0]	# _227, row_2_crab[alien_index_371].alive
 # spaceinvaders.c:2689: 							if(row_2_crab[alien_index].alive == 0)
-	zex.s	r1, r0	# tmp1136, _206
-	xor.w	r0, r0	# tmp1137
-	cmp.w	r1, r0	# tmp1136, tmp1137
+	zex.s	r1, r0	# tmp1176, _227
+	xor.w	r0, r0	# tmp1177
+	cmp.w	r1, r0	# tmp1176, tmp1177
 	jz	.L525		#
 # spaceinvaders.c:2695: 								switch(direction)
-	ld.b	r0, [direction]	# direction.237_207, direction
-	sex.b	r0, r0	# _208, direction.237_207
-	mov.w	r1, 3	# tmp1138,
-	cmp.w	r0, r1	# _208, tmp1138
+	ld.b	r0, [direction]	# direction.239_228, direction
+	sex.b	r0, r0	# _229, direction.239_228
+	mov.w	r1, 3	# tmp1178,
+	cmp.w	r0, r1	# _229, tmp1178
 	jz	.L471		#
-	mov.w	r1, 9	# tmp1139,
-	cmp.w	r0, r1	# _208, tmp1139
+	mov.w	r1, 9	# tmp1179,
+	cmp.w	r0, r1	# _229, tmp1179
 	jz	.L472		#
 	j	.L520		#
 .L471:
 # spaceinvaders.c:2698: 										row_2_crab[alien_index].x += distance;
-	ld.w	r0, [r13 + (-12)]	# tmp1140, alien_index
-	mov.w	r1, 3	# tmp1142,
-	shl.w	r0, r1	# tmp1141, tmp1142
-	mov.w	r1, row_2_crab+2	# tmp1144,
-	add.w	r0, r1 #222	# tmp1143, tmp1144
-	ld.s	r0, [r0]	# _209, row_2_crab[alien_index_331].x
-	ld.w	r1, [distance]	# distance.238_210, distance
-	add.w	r0, r1 #222	# tmp1145, tmp1146
-	mov.w	r1, r0	# _212, tmp1145
-	ld.w	r0, [r13 + (-12)]	# tmp1147, alien_index
-	mov.w	r2, 3	# tmp1149,
-	shl.w	r0, r2	# tmp1148, tmp1149
-	mov.w	r2, row_2_crab+2	# tmp1151,
-	add.w	r0, r2 #222	# tmp1150, tmp1151
-	st.s	[r0], r1	# row_2_crab[alien_index_331].x, _212
+	ld.w	r0, [r13 + (-12)]	# tmp1180, alien_index
+	mov.w	r1, 3	# tmp1182,
+	shl.w	r0, r1	# tmp1181, tmp1182
+	mov.w	r1, row_2_crab+2	# tmp1184,
+	add.w	r0, r1 #222	# tmp1183, tmp1184
+	ld.s	r0, [r0]	# _230, row_2_crab[alien_index_371].x
+	ld.w	r1, [distance]	# distance.240_232, distance
+	add.w	r0, r1 #222	# tmp1185, tmp1186
+	mov.w	r1, r0	# _235, _234
+	ld.w	r0, [r13 + (-12)]	# tmp1187, alien_index
+	mov.w	r2, 3	# tmp1189,
+	shl.w	r0, r2	# tmp1188, tmp1189
+	mov.w	r2, row_2_crab+2	# tmp1191,
+	add.w	r0, r2 #222	# tmp1190, tmp1191
+	st.s	[r0], r1	# row_2_crab[alien_index_371].x, _235
 # spaceinvaders.c:2699: 										break;
 	j	.L474		#
 .L472:
 # spaceinvaders.c:2701: 										row_2_crab[alien_index].x -= distance;
-	ld.w	r0, [r13 + (-12)]	# tmp1152, alien_index
-	mov.w	r1, 3	# tmp1154,
-	shl.w	r0, r1	# tmp1153, tmp1154
-	mov.w	r1, row_2_crab+2	# tmp1156,
-	add.w	r0, r1 #222	# tmp1155, tmp1156
-	ld.s	r0, [r0]	# _213, row_2_crab[alien_index_331].x
-	ld.w	r1, [distance]	# distance.239_214, distance
-	sub.w	r0, r1 #222	# tmp1157, tmp1158
-	mov.w	r1, r0	# _216, tmp1157
-	ld.w	r0, [r13 + (-12)]	# tmp1159, alien_index
-	mov.w	r2, 3	# tmp1161,
-	shl.w	r0, r2	# tmp1160, tmp1161
-	mov.w	r2, row_2_crab+2	# tmp1163,
-	add.w	r0, r2 #222	# tmp1162, tmp1163
-	st.s	[r0], r1	# row_2_crab[alien_index_331].x, _216
+	ld.w	r0, [r13 + (-12)]	# tmp1192, alien_index
+	mov.w	r1, 3	# tmp1194,
+	shl.w	r0, r1	# tmp1193, tmp1194
+	mov.w	r1, row_2_crab+2	# tmp1196,
+	add.w	r0, r1 #222	# tmp1195, tmp1196
+	ld.s	r0, [r0]	# _236, row_2_crab[alien_index_371].x
+	ld.w	r1, [distance]	# distance.241_238, distance
+	sub.w	r0, r1 #222	# tmp1197, tmp1198
+	mov.w	r1, r0	# _241, _240
+	ld.w	r0, [r13 + (-12)]	# tmp1199, alien_index
+	mov.w	r2, 3	# tmp1201,
+	shl.w	r0, r2	# tmp1200, tmp1201
+	mov.w	r2, row_2_crab+2	# tmp1203,
+	add.w	r0, r2 #222	# tmp1202, tmp1203
+	st.s	[r0], r1	# row_2_crab[alien_index_371].x, _241
 # spaceinvaders.c:2702: 										break;
 	j	.L474		#
 .L520:
 # spaceinvaders.c:2704: 										row_2_crab[alien_index].y += 8;
-	ld.w	r0, [r13 + (-12)]	# tmp1164, alien_index
-	mov.w	r1, 3	# tmp1166,
-	shl.w	r0, r1	# tmp1165, tmp1166
-	mov.w	r1, row_2_crab+4	# tmp1168,
-	add.w	r0, r1 #222	# tmp1167, tmp1168
-	ld.s	r0, [r0]	# _217, row_2_crab[alien_index_331].y
-	add.w	r0, 8 #111	# tmp1169,
-	mov.w	r1, r0	# _218, tmp1169
-	ld.w	r0, [r13 + (-12)]	# tmp1170, alien_index
-	mov.w	r2, 3	# tmp1172,
-	shl.w	r0, r2	# tmp1171, tmp1172
-	mov.w	r2, row_2_crab+4	# tmp1174,
-	add.w	r0, r2 #222	# tmp1173, tmp1174
-	st.s	[r0], r1	# row_2_crab[alien_index_331].y, _218
+	ld.w	r0, [r13 + (-12)]	# tmp1204, alien_index
+	mov.w	r1, 3	# tmp1206,
+	shl.w	r0, r1	# tmp1205, tmp1206
+	mov.w	r1, row_2_crab+4	# tmp1208,
+	add.w	r0, r1 #222	# tmp1207, tmp1208
+	ld.s	r0, [r0]	# _242, row_2_crab[alien_index_371].y
+	add.w	r0, 8 #111	# tmp1209,
+	mov.w	r1, r0	# _245, _244
+	ld.w	r0, [r13 + (-12)]	# tmp1210, alien_index
+	mov.w	r2, 3	# tmp1212,
+	shl.w	r0, r2	# tmp1211, tmp1212
+	mov.w	r2, row_2_crab+4	# tmp1214,
+	add.w	r0, r2 #222	# tmp1213, tmp1214
+	st.s	[r0], r1	# row_2_crab[alien_index_371].y, _245
 .L474:
 # spaceinvaders.c:2707: 								row_2_crab[alien_index].addr = move_bitmap_test(row_2_crab[alien_index].x, row_2_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1175, alien_index
-	mov.w	r1, 3	# tmp1177,
-	shl.w	r0, r1	# tmp1176, tmp1177
-	mov.w	r1, row_2_crab+2	# tmp1179,
-	add.w	r0, r1 #222	# tmp1178, tmp1179
-	ld.s	r0, [r0]	# _219, row_2_crab[alien_index_331].x
+	ld.w	r0, [r13 + (-12)]	# tmp1215, alien_index
+	mov.w	r1, 3	# tmp1217,
+	shl.w	r0, r1	# tmp1216, tmp1217
+	mov.w	r1, row_2_crab+2	# tmp1219,
+	add.w	r0, r1 #222	# tmp1218, tmp1219
+	ld.s	r0, [r0]	# _246, row_2_crab[alien_index_371].x
 # spaceinvaders.c:2707: 								row_2_crab[alien_index].addr = move_bitmap_test(row_2_crab[alien_index].x, row_2_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r1, r0	# _220, _219
+	sex.s	r1, r0	# _247, _246
 # spaceinvaders.c:2707: 								row_2_crab[alien_index].addr = move_bitmap_test(row_2_crab[alien_index].x, row_2_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1180, alien_index
-	mov.w	r2, 3	# tmp1182,
-	shl.w	r0, r2	# tmp1181, tmp1182
-	mov.w	r2, row_2_crab+4	# tmp1184,
-	add.w	r0, r2 #222	# tmp1183, tmp1184
-	ld.s	r0, [r0]	# _221, row_2_crab[alien_index_331].y
+	ld.w	r0, [r13 + (-12)]	# tmp1220, alien_index
+	mov.w	r2, 3	# tmp1222,
+	shl.w	r0, r2	# tmp1221, tmp1222
+	mov.w	r2, row_2_crab+4	# tmp1224,
+	add.w	r0, r2 #222	# tmp1223, tmp1224
+	ld.s	r0, [r0]	# _248, row_2_crab[alien_index_371].y
 # spaceinvaders.c:2707: 								row_2_crab[alien_index].addr = move_bitmap_test(row_2_crab[alien_index].x, row_2_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	zex.s	r2, r0	# _222, _221
-	ld.b	r0, [direction]	# direction.240_223, direction
-	sex.b	r3, r0	# _224, direction.240_223
-	ld.w	r4, [distance]	# distance.241_225, distance
-	mov.w	r0, sp	# tmp1185,
-	st.w	[r0 + (24)], r4	#, distance.241_225
-	st.w	[r0 + (20)], r3	#, _224
-	ld.w	r3, [r13 + (-8)]	# tmp1186, alien_sprite
-	st.w	[r0 + (16)], r3	#, tmp1186
-	mov.w	r3, 8	# tmp1187,
-	st.w	[r0 + (12)], r3	#, tmp1187
-	mov.w	r3, 12	# tmp1188,
-	st.w	[r0 + (8)], r3	#, tmp1188
-	st.w	[r0 + (4)], r2	#, _222
-	st.w	[r0], r1	#, _220
+	sex.s	r2, r0	# _249, _248
+	ld.b	r0, [direction]	# direction.242_250, direction
+	sex.b	r3, r0	# _251, direction.242_250
+	ld.w	r4, [distance]	# distance.243_252, distance
+	mov.w	r0, sp	# tmp1225,
+	st.w	[r0 + (24)], r4	#, distance.243_252
+	st.w	[r0 + (20)], r3	#, _251
+	ld.w	r3, [r13 + (-8)]	# tmp1226, alien_sprite
+	st.w	[r0 + (16)], r3	#, tmp1226
+	mov.w	r3, 8	# tmp1227,
+	st.w	[r0 + (12)], r3	#, tmp1227
+	mov.w	r3, 12	# tmp1228,
+	st.w	[r0 + (8)], r3	#, tmp1228
+	st.w	[r0 + (4)], r2	#, _249
+	st.w	[r0], r1	#, _247
 	call	move_bitmap_test		#
-	mov.w	r2, r0	# _226,
+	mov.w	r2, r0	# _253,
 # spaceinvaders.c:2707: 								row_2_crab[alien_index].addr = move_bitmap_test(row_2_crab[alien_index].x, row_2_crab[alien_index].y, 12, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1189, alien_index
-	mov.w	r1, 3	# tmp1191,
-	shl.w	r0, r1	# tmp1190, tmp1191
-	mov.w	r1, row_2_crab	# tmp1193,
-	add.w	r0, r1 #222	# tmp1192, tmp1193
-	st.s	[r0], r2	# row_2_crab[alien_index_331].addr, _226
+	ld.w	r0, [r13 + (-12)]	# tmp1229, alien_index
+	mov.w	r1, 3	# tmp1231,
+	shl.w	r0, r1	# tmp1230, tmp1231
+	mov.w	r1, row_2_crab	# tmp1233,
+	add.w	r0, r1 #222	# tmp1232, tmp1233
+	st.s	[r0], r2	# row_2_crab[alien_index_371].addr, _253
 	j	.L470		#
 .L525:
 # spaceinvaders.c:2691: 								continue;
 	nop	
 .L470:
 # spaceinvaders.c:2682: 						for(int i = 0; i < 11; i++) {
-	ld.w	r0, [r13 + (-72)]	# tmp1195, i
-	add.w	r0, 1 #111	# tmp1194,
-	st.w	[r13 + (-72)], r0	# i, tmp1194
+	ld.w	r0, [r13 + (-72)]	# tmp1235, i
+	add.w	r0, 1 #111	# tmp1234,
+	st.w	[r13 + (-72)], r0	# i, tmp1234
 .L466:
 # spaceinvaders.c:2682: 						for(int i = 0; i < 11; i++) {
-	ld.w	r1, [r13 + (-72)]	# tmp1196, i
-	mov.w	r0, 10	# tmp1197,
-	cmp.w	r1, r0	# tmp1196, tmp1197
+	ld.w	r1, [r13 + (-72)]	# tmp1236, i
+	mov.w	r0, 10	# tmp1237,
+	cmp.w	r1, r0	# tmp1236, tmp1237
 	jses	.L475		#
 	j	.L436		#
 .L463:
 # spaceinvaders.c:2712: 					else if(current_step >= movement_step * 5)
-	ld.w	r1, [movement_step]	# movement_step.242_227, movement_step
-	mov.w	r0, r1	# tmp1198, movement_step.242_227
-	mov.w	r2, 2	# tmp1200,
-	shl.w	r0, r2	# tmp1199, tmp1200
-	mov.w	r2, r0	# _228, tmp1198
-	add.w	r2, r1 #222	# _228, movement_step.242_227
+	ld.w	r1, [movement_step]	# movement_step.244_254, movement_step
+	mov.w	r0, r1	# tmp1238, movement_step.244_254
+	mov.w	r2, 2	# tmp1240,
+	shl.w	r0, r2	# tmp1239, tmp1240
+	mov.w	r2, r0	# _255, tmp1238
+	add.w	r2, r1 #222	# _255, movement_step.244_254
 # spaceinvaders.c:2712: 					else if(current_step >= movement_step * 5)
-	ld.w	r0, [current_step]	# current_step.243_229, current_step
+	ld.w	r0, [current_step]	# current_step.245_256, current_step
 # spaceinvaders.c:2712: 					else if(current_step >= movement_step * 5)
-	cmp.w	r2, r0	# _228, current_step.243_229
+	cmp.w	r2, r0	# _255, current_step.245_256
 	jgs	.L436		#
 # spaceinvaders.c:2714: 						if(sprite_version == 0)
-	ld.w	r1, [r13 + (-4)]	# tmp1201, sprite_version
-	xor.w	r0, r0	# tmp1202
-	cmp.w	r1, r0	# tmp1201, tmp1202
+	ld.w	r1, [r13 + (-4)]	# tmp1241, sprite_version
+	xor.w	r0, r0	# tmp1242
+	cmp.w	r1, r0	# tmp1241, tmp1242
 	jnz	.L476		#
 # spaceinvaders.c:2715: 							alien_sprite = squid0;
-	mov.w	r0, squid0	# tmp1203,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1203
+	mov.w	r0, squid0	# tmp1243,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1243
 	j	.L477		#
 .L476:
 # spaceinvaders.c:2717: 							alien_sprite = squid1;
-	mov.w	r0, squid1	# tmp1204,
-	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1204
+	mov.w	r0, squid1	# tmp1244,
+	st.w	[r13 + (-8)], r0	# alien_sprite, tmp1244
 .L477:
 # spaceinvaders.c:2719: 						for(int i = 0; i < 11; i++) {
-	xor.w	r0, r0	# tmp1205
-	st.w	[r13 + (-76)], r0	# i, tmp1205
+	xor.w	r0, r0	# tmp1245
+	st.w	[r13 + (-76)], r0	# i, tmp1245
 # spaceinvaders.c:2719: 						for(int i = 0; i < 11; i++) {
 	j	.L478		#
 .L487:
 # spaceinvaders.c:2721: 							if(direction == 3)
-	ld.b	r0, [direction]	# direction.244_230, direction
+	ld.b	r0, [direction]	# direction.246_257, direction
 # spaceinvaders.c:2721: 							if(direction == 3)
-	sex.b	r1, r0	# tmp1206, direction.244_230
-	mov.w	r0, 3	# tmp1207,
-	cmp.w	r1, r0	# tmp1206, tmp1207
+	sex.b	r1, r0	# tmp1246, direction.246_257
+	mov.w	r0, 3	# tmp1247,
+	cmp.w	r1, r0	# tmp1246, tmp1247
 	jnz	.L479		#
 # spaceinvaders.c:2722: 								alien_index = 10-i;
-	mov.w	r0, 10	# tmp1209,
-	ld.w	r1, [r13 + (-76)]	# tmp1210, i
-	sub.w	r0, r1 #222	# tmp1208, tmp1210
-	st.w	[r13 + (-12)], r0	# alien_index, tmp1208
+	mov.w	r0, 10	# tmp1249,
+	ld.w	r1, [r13 + (-76)]	# tmp1250, i
+	sub.w	r0, r1 #222	# tmp1248, tmp1250
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1248
 	j	.L480		#
 .L479:
 # spaceinvaders.c:2724: 								alien_index = i;
-	ld.w	r0, [r13 + (-76)]	# tmp1211, i
-	st.w	[r13 + (-12)], r0	# alien_index, tmp1211
+	ld.w	r0, [r13 + (-76)]	# tmp1251, i
+	st.w	[r13 + (-12)], r0	# alien_index, tmp1251
 .L480:
 # spaceinvaders.c:2726: 							if(row_1_squid[alien_index].alive == 0)
-	ld.w	r0, [r13 + (-12)]	# tmp1212, alien_index
-	mov.w	r1, 3	# tmp1214,
-	shl.w	r0, r1	# tmp1213, tmp1214
-	mov.w	r1, row_1_squid+6	# tmp1216,
-	add.w	r0, r1 #222	# tmp1215, tmp1216
-	ld.s	r0, [r0]	# _231, row_1_squid[alien_index_332].alive
+	ld.w	r0, [r13 + (-12)]	# tmp1252, alien_index
+	mov.w	r1, 3	# tmp1254,
+	shl.w	r0, r1	# tmp1253, tmp1254
+	mov.w	r1, row_1_squid+6	# tmp1256,
+	add.w	r0, r1 #222	# tmp1255, tmp1256
+	ld.s	r0, [r0]	# _258, row_1_squid[alien_index_372].alive
 # spaceinvaders.c:2726: 							if(row_1_squid[alien_index].alive == 0)
-	zex.s	r1, r0	# tmp1217, _231
-	xor.w	r0, r0	# tmp1218
-	cmp.w	r1, r0	# tmp1217, tmp1218
+	zex.s	r1, r0	# tmp1257, _258
+	xor.w	r0, r0	# tmp1258
+	cmp.w	r1, r0	# tmp1257, tmp1258
 	jz	.L526		#
 # spaceinvaders.c:2732: 								switch(direction)
-	ld.b	r0, [direction]	# direction.245_232, direction
-	sex.b	r0, r0	# _233, direction.245_232
-	mov.w	r1, 3	# tmp1219,
-	cmp.w	r0, r1	# _233, tmp1219
+	ld.b	r0, [direction]	# direction.247_259, direction
+	sex.b	r0, r0	# _260, direction.247_259
+	mov.w	r1, 3	# tmp1259,
+	cmp.w	r0, r1	# _260, tmp1259
 	jz	.L483		#
-	mov.w	r1, 9	# tmp1220,
-	cmp.w	r0, r1	# _233, tmp1220
+	mov.w	r1, 9	# tmp1260,
+	cmp.w	r0, r1	# _260, tmp1260
 	jz	.L484		#
 	j	.L521		#
 .L483:
 # spaceinvaders.c:2735: 										row_1_squid[alien_index].x += distance;
-	ld.w	r0, [r13 + (-12)]	# tmp1221, alien_index
-	mov.w	r1, 3	# tmp1223,
-	shl.w	r0, r1	# tmp1222, tmp1223
-	mov.w	r1, row_1_squid+2	# tmp1225,
-	add.w	r0, r1 #222	# tmp1224, tmp1225
-	ld.s	r0, [r0]	# _234, row_1_squid[alien_index_332].x
-	ld.w	r1, [distance]	# distance.246_235, distance
-	add.w	r0, r1 #222	# tmp1226, tmp1227
-	mov.w	r1, r0	# _237, tmp1226
-	ld.w	r0, [r13 + (-12)]	# tmp1228, alien_index
-	mov.w	r2, 3	# tmp1230,
-	shl.w	r0, r2	# tmp1229, tmp1230
-	mov.w	r2, row_1_squid+2	# tmp1232,
-	add.w	r0, r2 #222	# tmp1231, tmp1232
-	st.s	[r0], r1	# row_1_squid[alien_index_332].x, _237
+	ld.w	r0, [r13 + (-12)]	# tmp1261, alien_index
+	mov.w	r1, 3	# tmp1263,
+	shl.w	r0, r1	# tmp1262, tmp1263
+	mov.w	r1, row_1_squid+2	# tmp1265,
+	add.w	r0, r1 #222	# tmp1264, tmp1265
+	ld.s	r0, [r0]	# _261, row_1_squid[alien_index_372].x
+	ld.w	r1, [distance]	# distance.248_263, distance
+	add.w	r0, r1 #222	# tmp1266, tmp1267
+	mov.w	r1, r0	# _266, _265
+	ld.w	r0, [r13 + (-12)]	# tmp1268, alien_index
+	mov.w	r2, 3	# tmp1270,
+	shl.w	r0, r2	# tmp1269, tmp1270
+	mov.w	r2, row_1_squid+2	# tmp1272,
+	add.w	r0, r2 #222	# tmp1271, tmp1272
+	st.s	[r0], r1	# row_1_squid[alien_index_372].x, _266
 # spaceinvaders.c:2736: 										break;
 	j	.L486		#
 .L484:
 # spaceinvaders.c:2738: 										row_1_squid[alien_index].x -= distance;
-	ld.w	r0, [r13 + (-12)]	# tmp1233, alien_index
-	mov.w	r1, 3	# tmp1235,
-	shl.w	r0, r1	# tmp1234, tmp1235
-	mov.w	r1, row_1_squid+2	# tmp1237,
-	add.w	r0, r1 #222	# tmp1236, tmp1237
-	ld.s	r0, [r0]	# _238, row_1_squid[alien_index_332].x
-	ld.w	r1, [distance]	# distance.247_239, distance
-	sub.w	r0, r1 #222	# tmp1238, tmp1239
-	mov.w	r1, r0	# _241, tmp1238
-	ld.w	r0, [r13 + (-12)]	# tmp1240, alien_index
-	mov.w	r2, 3	# tmp1242,
-	shl.w	r0, r2	# tmp1241, tmp1242
-	mov.w	r2, row_1_squid+2	# tmp1244,
-	add.w	r0, r2 #222	# tmp1243, tmp1244
-	st.s	[r0], r1	# row_1_squid[alien_index_332].x, _241
+	ld.w	r0, [r13 + (-12)]	# tmp1273, alien_index
+	mov.w	r1, 3	# tmp1275,
+	shl.w	r0, r1	# tmp1274, tmp1275
+	mov.w	r1, row_1_squid+2	# tmp1277,
+	add.w	r0, r1 #222	# tmp1276, tmp1277
+	ld.s	r0, [r0]	# _267, row_1_squid[alien_index_372].x
+	ld.w	r1, [distance]	# distance.249_269, distance
+	sub.w	r0, r1 #222	# tmp1278, tmp1279
+	mov.w	r1, r0	# _272, _271
+	ld.w	r0, [r13 + (-12)]	# tmp1280, alien_index
+	mov.w	r2, 3	# tmp1282,
+	shl.w	r0, r2	# tmp1281, tmp1282
+	mov.w	r2, row_1_squid+2	# tmp1284,
+	add.w	r0, r2 #222	# tmp1283, tmp1284
+	st.s	[r0], r1	# row_1_squid[alien_index_372].x, _272
 # spaceinvaders.c:2739: 										break;
 	j	.L486		#
 .L521:
 # spaceinvaders.c:2741: 										row_1_squid[alien_index].y += 8;
-	ld.w	r0, [r13 + (-12)]	# tmp1245, alien_index
-	mov.w	r1, 3	# tmp1247,
-	shl.w	r0, r1	# tmp1246, tmp1247
-	mov.w	r1, row_1_squid+4	# tmp1249,
-	add.w	r0, r1 #222	# tmp1248, tmp1249
-	ld.s	r0, [r0]	# _242, row_1_squid[alien_index_332].y
-	add.w	r0, 8 #111	# tmp1250,
-	mov.w	r1, r0	# _243, tmp1250
-	ld.w	r0, [r13 + (-12)]	# tmp1251, alien_index
-	mov.w	r2, 3	# tmp1253,
-	shl.w	r0, r2	# tmp1252, tmp1253
-	mov.w	r2, row_1_squid+4	# tmp1255,
-	add.w	r0, r2 #222	# tmp1254, tmp1255
-	st.s	[r0], r1	# row_1_squid[alien_index_332].y, _243
+	ld.w	r0, [r13 + (-12)]	# tmp1285, alien_index
+	mov.w	r1, 3	# tmp1287,
+	shl.w	r0, r1	# tmp1286, tmp1287
+	mov.w	r1, row_1_squid+4	# tmp1289,
+	add.w	r0, r1 #222	# tmp1288, tmp1289
+	ld.s	r0, [r0]	# _273, row_1_squid[alien_index_372].y
+	add.w	r0, 8 #111	# tmp1290,
+	mov.w	r1, r0	# _276, _275
+	ld.w	r0, [r13 + (-12)]	# tmp1291, alien_index
+	mov.w	r2, 3	# tmp1293,
+	shl.w	r0, r2	# tmp1292, tmp1293
+	mov.w	r2, row_1_squid+4	# tmp1295,
+	add.w	r0, r2 #222	# tmp1294, tmp1295
+	st.s	[r0], r1	# row_1_squid[alien_index_372].y, _276
 .L486:
 # spaceinvaders.c:2744: 								row_1_squid[alien_index].addr = move_bitmap_test(row_1_squid[alien_index].x, row_1_squid[alien_index].y, 8, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1256, alien_index
-	mov.w	r1, 3	# tmp1258,
-	shl.w	r0, r1	# tmp1257, tmp1258
-	mov.w	r1, row_1_squid+2	# tmp1260,
-	add.w	r0, r1 #222	# tmp1259, tmp1260
-	ld.s	r0, [r0]	# _244, row_1_squid[alien_index_332].x
+	ld.w	r0, [r13 + (-12)]	# tmp1296, alien_index
+	mov.w	r1, 3	# tmp1298,
+	shl.w	r0, r1	# tmp1297, tmp1298
+	mov.w	r1, row_1_squid+2	# tmp1300,
+	add.w	r0, r1 #222	# tmp1299, tmp1300
+	ld.s	r0, [r0]	# _277, row_1_squid[alien_index_372].x
 # spaceinvaders.c:2744: 								row_1_squid[alien_index].addr = move_bitmap_test(row_1_squid[alien_index].x, row_1_squid[alien_index].y, 8, 8, alien_sprite, direction, distance);
-	zex.s	r1, r0	# _245, _244
+	sex.s	r1, r0	# _278, _277
 # spaceinvaders.c:2744: 								row_1_squid[alien_index].addr = move_bitmap_test(row_1_squid[alien_index].x, row_1_squid[alien_index].y, 8, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1261, alien_index
-	mov.w	r2, 3	# tmp1263,
-	shl.w	r0, r2	# tmp1262, tmp1263
-	mov.w	r2, row_1_squid+4	# tmp1265,
-	add.w	r0, r2 #222	# tmp1264, tmp1265
-	ld.s	r0, [r0]	# _246, row_1_squid[alien_index_332].y
+	ld.w	r0, [r13 + (-12)]	# tmp1301, alien_index
+	mov.w	r2, 3	# tmp1303,
+	shl.w	r0, r2	# tmp1302, tmp1303
+	mov.w	r2, row_1_squid+4	# tmp1305,
+	add.w	r0, r2 #222	# tmp1304, tmp1305
+	ld.s	r0, [r0]	# _279, row_1_squid[alien_index_372].y
 # spaceinvaders.c:2744: 								row_1_squid[alien_index].addr = move_bitmap_test(row_1_squid[alien_index].x, row_1_squid[alien_index].y, 8, 8, alien_sprite, direction, distance);
-	zex.s	r2, r0	# _247, _246
-	ld.b	r0, [direction]	# direction.248_248, direction
-	sex.b	r3, r0	# _249, direction.248_248
-	ld.w	r4, [distance]	# distance.249_250, distance
-	mov.w	r0, sp	# tmp1266,
-	st.w	[r0 + (24)], r4	#, distance.249_250
-	st.w	[r0 + (20)], r3	#, _249
-	ld.w	r3, [r13 + (-8)]	# tmp1267, alien_sprite
-	st.w	[r0 + (16)], r3	#, tmp1267
-	mov.w	r3, 8	# tmp1268,
-	st.w	[r0 + (12)], r3	#, tmp1268
-	mov.w	r3, 8	# tmp1269,
-	st.w	[r0 + (8)], r3	#, tmp1269
-	st.w	[r0 + (4)], r2	#, _247
-	st.w	[r0], r1	#, _245
+	sex.s	r2, r0	# _280, _279
+	ld.b	r0, [direction]	# direction.250_281, direction
+	sex.b	r3, r0	# _282, direction.250_281
+	ld.w	r4, [distance]	# distance.251_283, distance
+	mov.w	r0, sp	# tmp1306,
+	st.w	[r0 + (24)], r4	#, distance.251_283
+	st.w	[r0 + (20)], r3	#, _282
+	ld.w	r3, [r13 + (-8)]	# tmp1307, alien_sprite
+	st.w	[r0 + (16)], r3	#, tmp1307
+	mov.w	r3, 8	# tmp1308,
+	st.w	[r0 + (12)], r3	#, tmp1308
+	mov.w	r3, 8	# tmp1309,
+	st.w	[r0 + (8)], r3	#, tmp1309
+	st.w	[r0 + (4)], r2	#, _280
+	st.w	[r0], r1	#, _278
 	call	move_bitmap_test		#
-	mov.w	r2, r0	# _251,
+	mov.w	r2, r0	# _284,
 # spaceinvaders.c:2744: 								row_1_squid[alien_index].addr = move_bitmap_test(row_1_squid[alien_index].x, row_1_squid[alien_index].y, 8, 8, alien_sprite, direction, distance);
-	ld.w	r0, [r13 + (-12)]	# tmp1270, alien_index
-	mov.w	r1, 3	# tmp1272,
-	shl.w	r0, r1	# tmp1271, tmp1272
-	mov.w	r1, row_1_squid	# tmp1274,
-	add.w	r0, r1 #222	# tmp1273, tmp1274
-	st.s	[r0], r2	# row_1_squid[alien_index_332].addr, _251
+	ld.w	r0, [r13 + (-12)]	# tmp1310, alien_index
+	mov.w	r1, 3	# tmp1312,
+	shl.w	r0, r1	# tmp1311, tmp1312
+	mov.w	r1, row_1_squid	# tmp1314,
+	add.w	r0, r1 #222	# tmp1313, tmp1314
+	st.s	[r0], r2	# row_1_squid[alien_index_372].addr, _284
 	j	.L482		#
 .L526:
 # spaceinvaders.c:2728: 								continue;
 	nop	
 .L482:
 # spaceinvaders.c:2719: 						for(int i = 0; i < 11; i++) {
-	ld.w	r0, [r13 + (-76)]	# tmp1276, i
-	add.w	r0, 1 #111	# tmp1275,
-	st.w	[r13 + (-76)], r0	# i, tmp1275
+	ld.w	r0, [r13 + (-76)]	# tmp1316, i
+	add.w	r0, 1 #111	# tmp1315,
+	st.w	[r13 + (-76)], r0	# i, tmp1315
 .L478:
 # spaceinvaders.c:2719: 						for(int i = 0; i < 11; i++) {
-	ld.w	r1, [r13 + (-76)]	# tmp1277, i
-	mov.w	r0, 10	# tmp1278,
-	cmp.w	r1, r0	# tmp1277, tmp1278
+	ld.w	r1, [r13 + (-76)]	# tmp1317, i
+	mov.w	r0, 10	# tmp1318,
+	cmp.w	r1, r0	# tmp1317, tmp1318
 	jses	.L487		#
 # spaceinvaders.c:2755: 						sprite_version ^= 1;
-	ld.w	r0, [r13 + (-4)]	# tmp1280, sprite_version
-	mov.w	r1, 1	# tmp1281,
-	xor.w	r0, r1	# tmp1279, tmp1281
-	st.w	[r13 + (-4)], r0	# sprite_version, tmp1279
+	ld.w	r0, [r13 + (-4)]	# tmp1320, sprite_version
+	mov.w	r1, 1	# tmp1321,
+	xor.w	r0, r1	# tmp1319, tmp1321
+	st.w	[r13 + (-4)], r0	# sprite_version, tmp1319
 # spaceinvaders.c:2757: 						current_step=0;
-	xor.w	r0, r0	# tmp1282
-	st.w	[current_step], r0	# current_step, tmp1282
+	xor.w	r0, r0	# tmp1322
+	st.w	[current_step], r0	# current_step, tmp1322
 # spaceinvaders.c:2758: 						if(direction == 18) {
-	ld.b	r0, [direction]	# direction.250_252, direction
+	ld.b	r0, [direction]	# direction.252_285, direction
 # spaceinvaders.c:2758: 						if(direction == 18) {
-	sex.b	r1, r0	# tmp1283, direction.250_252
-	mov.w	r0, 18	# tmp1284,
-	cmp.w	r1, r0	# tmp1283, tmp1284
+	sex.b	r1, r0	# tmp1323, direction.252_285
+	mov.w	r0, 18	# tmp1324,
+	cmp.w	r1, r0	# tmp1323, tmp1324
 	jnz	.L488		#
 # spaceinvaders.c:2759: 							direction = 3;
-	mov.b	r0, 3	# tmp1285,
-	st.b	[direction], r0	# direction, tmp1285
+	mov.b	r0, 3	# tmp1325,
+	st.b	[direction], r0	# direction, tmp1325
 	j	.L436		#
 .L488:
 # spaceinvaders.c:2760: 						} else if(leftmost_alien_X() <= 12 && direction != 18) {
 	call	leftmost_alien_X		#
 # spaceinvaders.c:2760: 						} else if(leftmost_alien_X() <= 12 && direction != 18) {
-	zex.s	r1, r0	# tmp1286, _253
-	mov.w	r0, 12	# tmp1287,
-	cmp.w	r1, r0	# tmp1286, tmp1287
+	zex.s	r1, r0	# tmp1326, _286
+	mov.w	r0, 12	# tmp1327,
+	cmp.w	r1, r0	# tmp1326, tmp1327
 	jg	.L489		#
 # spaceinvaders.c:2760: 						} else if(leftmost_alien_X() <= 12 && direction != 18) {
-	ld.b	r0, [direction]	# direction.251_254, direction
+	ld.b	r0, [direction]	# direction.253_287, direction
 # spaceinvaders.c:2760: 						} else if(leftmost_alien_X() <= 12 && direction != 18) {
-	sex.b	r1, r0	# tmp1288, direction.251_254
-	mov.w	r0, 18	# tmp1289,
-	cmp.w	r1, r0	# tmp1288, tmp1289
+	sex.b	r1, r0	# tmp1328, direction.253_287
+	mov.w	r0, 18	# tmp1329,
+	cmp.w	r1, r0	# tmp1328, tmp1329
 	jz	.L489		#
 # spaceinvaders.c:2761: 							direction = 18;
-	mov.b	r0, 18	# tmp1290,
-	st.b	[direction], r0	# direction, tmp1290
+	mov.b	r0, 18	# tmp1330,
+	st.b	[direction], r0	# direction, tmp1330
 	j	.L436		#
 .L489:
 # spaceinvaders.c:2762: 						} else if(direction == 6) {
-	ld.b	r0, [direction]	# direction.252_255, direction
+	ld.b	r0, [direction]	# direction.254_288, direction
 # spaceinvaders.c:2762: 						} else if(direction == 6) {
-	sex.b	r1, r0	# tmp1291, direction.252_255
-	mov.w	r0, 6	# tmp1292,
-	cmp.w	r1, r0	# tmp1291, tmp1292
+	sex.b	r1, r0	# tmp1331, direction.254_288
+	mov.w	r0, 6	# tmp1332,
+	cmp.w	r1, r0	# tmp1331, tmp1332
 	jnz	.L490		#
 # spaceinvaders.c:2763: 							direction = 9;
-	mov.b	r0, 9	# tmp1293,
-	st.b	[direction], r0	# direction, tmp1293
+	mov.b	r0, 9	# tmp1333,
+	st.b	[direction], r0	# direction, tmp1333
 	j	.L436		#
 .L490:
 # spaceinvaders.c:2764: 						} else if(rightmost_alien_X() >= 224 && direction != 6) {
 	call	rightmost_alien_X		#
 # spaceinvaders.c:2764: 						} else if(rightmost_alien_X() >= 224 && direction != 6) {
-	zex.s	r1, r0	# tmp1294, _256
-	mov.w	r0, 223	# tmp1295,
-	cmp.w	r1, r0	# tmp1294, tmp1295
+	zex.s	r1, r0	# tmp1334, _289
+	mov.w	r0, 223	# tmp1335,
+	cmp.w	r1, r0	# tmp1334, tmp1335
 	jse	.L436		#
 # spaceinvaders.c:2764: 						} else if(rightmost_alien_X() >= 224 && direction != 6) {
-	ld.b	r0, [direction]	# direction.253_257, direction
+	ld.b	r0, [direction]	# direction.255_290, direction
 # spaceinvaders.c:2764: 						} else if(rightmost_alien_X() >= 224 && direction != 6) {
-	sex.b	r1, r0	# tmp1296, direction.253_257
-	mov.w	r0, 6	# tmp1297,
-	cmp.w	r1, r0	# tmp1296, tmp1297
+	sex.b	r1, r0	# tmp1336, direction.255_290
+	mov.w	r0, 6	# tmp1337,
+	cmp.w	r1, r0	# tmp1336, tmp1337
 	jz	.L436		#
 # spaceinvaders.c:2765: 							direction = 6;
-	mov.b	r0, 6	# tmp1298,
-	st.b	[direction], r0	# direction, tmp1298
+	mov.b	r0, 6	# tmp1338,
+	st.b	[direction], r0	# direction, tmp1338
 .L436:
 # spaceinvaders.c:2771: 					current_step++;
-	ld.w	r0, [current_step]	# current_step.254_258, current_step
-	add.w	r0, 1 #111	# _259,
-	st.w	[current_step], r0	# current_step, _259
+	ld.w	r0, [current_step]	# current_step.256_291, current_step
+	add.w	r0, 1 #111	# _292,
+	st.w	[current_step], r0	# current_step, _292
 # spaceinvaders.c:2773: 					if(lowest_alien_Y() >= PLAYER_SPAWN_Y)
 	call	lowest_alien_Y		#
 # spaceinvaders.c:2773: 					if(lowest_alien_Y() >= PLAYER_SPAWN_Y)
-	zex.s	r1, r0	# tmp1299, _260
-	mov.w	r0, 211	# tmp1300,
-	cmp.w	r1, r0	# tmp1299, tmp1300
+	zex.s	r1, r0	# tmp1339, _293
+	mov.w	r0, 211	# tmp1340,
+	cmp.w	r1, r0	# tmp1339, tmp1340
 	jse	.L418		#
 # spaceinvaders.c:2775: 						lives = 0;
-	xor.w	r0, r0	# tmp1301
-	st.w	[lives], r0	# lives, tmp1301
+	xor.w	r0, r0	# tmp1341
+	st.w	[lives], r0	# lives, tmp1341
 # spaceinvaders.c:2776: 						destroy_player();
 	call	destroy_player		#
 	j	.L418		#
 .L419:
 # spaceinvaders.c:2781: 					death_timer+=4;
-	ld.w	r0, [death_timer]	# death_timer.255_261, death_timer
-	add.w	r0, 4 #111	# _262,
-	st.w	[death_timer], r0	# death_timer, _262
+	ld.w	r0, [death_timer]	# death_timer.257_294, death_timer
+	add.w	r0, 4 #111	# _295,
+	st.w	[death_timer], r0	# death_timer, _295
 .L418:
 # spaceinvaders.c:2788: 				if(player_movement_skip_frame == 0)
-	ld.w	r1, [player_movement_skip_frame]	# player_movement_skip_frame.256_263, player_movement_skip_frame
+	ld.w	r1, [player_movement_skip_frame]	# player_movement_skip_frame.258_296, player_movement_skip_frame
 # spaceinvaders.c:2788: 				if(player_movement_skip_frame == 0)
-	xor.w	r0, r0	# tmp1302
-	cmp.w	r1, r0	# player_movement_skip_frame.256_263, tmp1302
+	xor.w	r0, r0	# tmp1342
+	cmp.w	r1, r0	# player_movement_skip_frame.258_296, tmp1342
 	jnz	.L491		#
 # spaceinvaders.c:2789: 					player_movement_skip_frame = 3;
-	mov.w	r0, 3	# tmp1303,
-	st.w	[player_movement_skip_frame], r0	# player_movement_skip_frame, tmp1303
+	mov.w	r0, 3	# tmp1343,
+	st.w	[player_movement_skip_frame], r0	# player_movement_skip_frame, tmp1343
 	j	.L492		#
 .L491:
 # spaceinvaders.c:2791: 					player_movement_skip_frame--;
-	ld.w	r0, [player_movement_skip_frame]	# player_movement_skip_frame.257_264, player_movement_skip_frame
-	add.w	r0, -1 #111	# _265,
-	st.w	[player_movement_skip_frame], r0	# player_movement_skip_frame, _265
+	ld.w	r0, [player_movement_skip_frame]	# player_movement_skip_frame.259_297, player_movement_skip_frame
+	add.w	r0, -1 #111	# _298,
+	st.w	[player_movement_skip_frame], r0	# player_movement_skip_frame, _298
 .L492:
 # spaceinvaders.c:2793: 				for(int i = 0; i < 5; i++)
-	xor.w	r0, r0	# tmp1304
-	st.w	[r13 + (-80)], r0	# i, tmp1304
+	xor.w	r0, r0	# tmp1344
+	st.w	[r13 + (-80)], r0	# i, tmp1344
 # spaceinvaders.c:2793: 				for(int i = 0; i < 5; i++)
 	j	.L493		#
 .L495:
 # spaceinvaders.c:2794: 					if(alien_bullet[i].status == MOVING && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	ld.w	r1, [r13 + (-80)]	# tmp1305, i
-	mov.w	r0, r1	# tmp1306, tmp1305
-	mov.w	r2, 3	# tmp1308,
-	shl.w	r0, r2	# tmp1307, tmp1308
-	add.w	r0, r1 #222	# tmp1306, tmp1305
-	mov.w	r1, 2	# tmp1310,
-	shl.w	r0, r1	# tmp1309, tmp1310
-	mov.w	r1, alien_bullet+20	# tmp1312,
-	add.w	r0, r1 #222	# tmp1311, tmp1312
-	ld.w	r1, [r0]	# _266, alien_bullet[i_352].status
+	ld.w	r1, [r13 + (-80)]	# tmp1345, i
+	mov.w	r0, r1	# tmp1346, tmp1345
+	mov.w	r2, 3	# tmp1348,
+	shl.w	r0, r2	# tmp1347, tmp1348
+	add.w	r0, r1 #222	# tmp1346, tmp1345
+	mov.w	r1, 2	# tmp1350,
+	shl.w	r0, r1	# tmp1349, tmp1350
+	mov.w	r1, alien_bullet+20	# tmp1352,
+	add.w	r0, r1 #222	# tmp1351, tmp1352
+	ld.w	r1, [r0]	# _299, alien_bullet[i_392].status
 # spaceinvaders.c:2794: 					if(alien_bullet[i].status == MOVING && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	mov.w	r0, 2	# tmp1313,
-	cmp.w	r1, r0	# _266, tmp1313
+	mov.w	r0, 2	# tmp1353,
+	cmp.w	r1, r0	# _299, tmp1353
 	jnz	.L494		#
 # spaceinvaders.c:2794: 					if(alien_bullet[i].status == MOVING && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	ld.w	r1, [r13 + (-80)]	# tmp1314, i
-	mov.w	r0, r1	# tmp1315, tmp1314
-	mov.w	r2, 3	# tmp1317,
-	shl.w	r0, r2	# tmp1316, tmp1317
-	add.w	r0, r1 #222	# tmp1315, tmp1314
-	mov.w	r1, 2	# tmp1319,
-	shl.w	r0, r1	# tmp1318, tmp1319
-	mov.w	r1, alien_bullet+8	# tmp1321,
-	add.w	r0, r1 #222	# tmp1320, tmp1321
-	ld.w	r1, [r0]	# _267, alien_bullet[i_352].spawn_y
+	ld.w	r1, [r13 + (-80)]	# tmp1354, i
+	mov.w	r0, r1	# tmp1355, tmp1354
+	mov.w	r2, 3	# tmp1357,
+	shl.w	r0, r2	# tmp1356, tmp1357
+	add.w	r0, r1 #222	# tmp1355, tmp1354
+	mov.w	r1, 2	# tmp1359,
+	shl.w	r0, r1	# tmp1358, tmp1359
+	mov.w	r1, alien_bullet+8	# tmp1361,
+	add.w	r0, r1 #222	# tmp1360, tmp1361
+	ld.w	r1, [r0]	# _300, alien_bullet[i_392].spawn_y
 # spaceinvaders.c:2794: 					if(alien_bullet[i].status == MOVING && alien_bullet[i].spawn_y <= PLAYER_SPAWN_Y)
-	mov.w	r0, 212	# tmp1322,
-	cmp.w	r1, r0	# _267, tmp1322
+	mov.w	r0, 212	# tmp1362,
+	cmp.w	r1, r0	# _300, tmp1362
 	jgs	.L494		#
 # spaceinvaders.c:2795: 						check_alien_bullet_collision_with_player(i);
-	mov.w	r1, sp	# tmp1323,
-	ld.w	r0, [r13 + (-80)]	# tmp1324, i
-	st.w	[r1], r0	#, tmp1324
+	mov.w	r1, sp	# tmp1363,
+	ld.w	r0, [r13 + (-80)]	# tmp1364, i
+	st.w	[r1], r0	#, tmp1364
 	call	check_alien_bullet_collision_with_player		#
 .L494:
 # spaceinvaders.c:2793: 				for(int i = 0; i < 5; i++)
-	ld.w	r0, [r13 + (-80)]	# tmp1326, i
-	add.w	r0, 1 #111	# tmp1325,
-	st.w	[r13 + (-80)], r0	# i, tmp1325
+	ld.w	r0, [r13 + (-80)]	# tmp1366, i
+	add.w	r0, 1 #111	# tmp1365,
+	st.w	[r13 + (-80)], r0	# i, tmp1365
 .L493:
 # spaceinvaders.c:2793: 				for(int i = 0; i < 5; i++)
-	ld.w	r1, [r13 + (-80)]	# tmp1327, i
-	mov.w	r0, 4	# tmp1328,
-	cmp.w	r1, r0	# tmp1327, tmp1328
+	ld.w	r1, [r13 + (-80)]	# tmp1367, i
+	mov.w	r0, 4	# tmp1368,
+	cmp.w	r1, r0	# tmp1367, tmp1368
 	jses	.L495		#
 # spaceinvaders.c:2798: 				if(timer_for_alien_bullet_spawn <= 0)
-	ld.w	r1, [timer_for_alien_bullet_spawn]	# timer_for_alien_bullet_spawn.258_268, timer_for_alien_bullet_spawn
+	ld.w	r1, [timer_for_alien_bullet_spawn]	# timer_for_alien_bullet_spawn.260_301, timer_for_alien_bullet_spawn
 # spaceinvaders.c:2798: 				if(timer_for_alien_bullet_spawn <= 0)
-	xor.w	r0, r0	# tmp1329
-	cmp.w	r1, r0	# timer_for_alien_bullet_spawn.258_268, tmp1329
+	xor.w	r0, r0	# tmp1369
+	cmp.w	r1, r0	# timer_for_alien_bullet_spawn.260_301, tmp1369
 	jgs	.L496		#
 # spaceinvaders.c:2800: 					for(int i = 0; i < 5; i++)
-	xor.w	r0, r0	# tmp1330
-	st.w	[r13 + (-84)], r0	# i, tmp1330
+	xor.w	r0, r0	# tmp1370
+	st.w	[r13 + (-84)], r0	# i, tmp1370
 # spaceinvaders.c:2800: 					for(int i = 0; i < 5; i++)
 	j	.L497		#
 .L499:
 # spaceinvaders.c:2802: 						if(alien_bullet[i].status == READY)
-	ld.w	r1, [r13 + (-84)]	# tmp1331, i
-	mov.w	r0, r1	# tmp1332, tmp1331
-	mov.w	r2, 3	# tmp1334,
-	shl.w	r0, r2	# tmp1333, tmp1334
-	add.w	r0, r1 #222	# tmp1332, tmp1331
-	mov.w	r1, 2	# tmp1336,
-	shl.w	r0, r1	# tmp1335, tmp1336
-	mov.w	r1, alien_bullet+20	# tmp1338,
-	add.w	r0, r1 #222	# tmp1337, tmp1338
-	ld.w	r1, [r0]	# _269, alien_bullet[i_353].status
+	ld.w	r1, [r13 + (-84)]	# tmp1371, i
+	mov.w	r0, r1	# tmp1372, tmp1371
+	mov.w	r2, 3	# tmp1374,
+	shl.w	r0, r2	# tmp1373, tmp1374
+	add.w	r0, r1 #222	# tmp1372, tmp1371
+	mov.w	r1, 2	# tmp1376,
+	shl.w	r0, r1	# tmp1375, tmp1376
+	mov.w	r1, alien_bullet+20	# tmp1378,
+	add.w	r0, r1 #222	# tmp1377, tmp1378
+	ld.w	r1, [r0]	# _302, alien_bullet[i_393].status
 # spaceinvaders.c:2802: 						if(alien_bullet[i].status == READY)
-	xor.w	r0, r0	# tmp1339
-	cmp.w	r1, r0	# _269, tmp1339
+	xor.w	r0, r0	# tmp1379
+	cmp.w	r1, r0	# _302, tmp1379
 	jnz	.L498		#
 # spaceinvaders.c:2804: 							spawn_alien_bullet(i);
-	mov.w	r1, sp	# tmp1340,
-	ld.w	r0, [r13 + (-84)]	# tmp1341, i
-	st.w	[r1], r0	#, tmp1341
+	mov.w	r1, sp	# tmp1380,
+	ld.w	r0, [r13 + (-84)]	# tmp1381, i
+	st.w	[r1], r0	#, tmp1381
 	call	spawn_alien_bullet		#
 # spaceinvaders.c:2805: 							timer_for_alien_bullet_spawn = alien_bullet_spawn_time;
-	ld.w	r0, [alien_bullet_spawn_time]	# alien_bullet_spawn_time.259_270, alien_bullet_spawn_time
-	st.w	[timer_for_alien_bullet_spawn], r0	# timer_for_alien_bullet_spawn, alien_bullet_spawn_time.259_270
+	ld.w	r0, [alien_bullet_spawn_time]	# alien_bullet_spawn_time.261_303, alien_bullet_spawn_time
+	st.w	[timer_for_alien_bullet_spawn], r0	# timer_for_alien_bullet_spawn, alien_bullet_spawn_time.261_303
 # spaceinvaders.c:2806: 							break;
 	j	.L496		#
 .L498:
 # spaceinvaders.c:2800: 					for(int i = 0; i < 5; i++)
-	ld.w	r0, [r13 + (-84)]	# tmp1343, i
-	add.w	r0, 1 #111	# tmp1342,
-	st.w	[r13 + (-84)], r0	# i, tmp1342
+	ld.w	r0, [r13 + (-84)]	# tmp1383, i
+	add.w	r0, 1 #111	# tmp1382,
+	st.w	[r13 + (-84)], r0	# i, tmp1382
 .L497:
 # spaceinvaders.c:2800: 					for(int i = 0; i < 5; i++)
-	ld.w	r1, [r13 + (-84)]	# tmp1344, i
-	mov.w	r0, 4	# tmp1345,
-	cmp.w	r1, r0	# tmp1344, tmp1345
+	ld.w	r1, [r13 + (-84)]	# tmp1384, i
+	mov.w	r0, 4	# tmp1385,
+	cmp.w	r1, r0	# tmp1384, tmp1385
 	jses	.L499		#
 .L496:
 # spaceinvaders.c:2810: 				timer_for_alien_bullet_spawn -= 2;
-	ld.w	r0, [timer_for_alien_bullet_spawn]	# timer_for_alien_bullet_spawn.260_271, timer_for_alien_bullet_spawn
-	add.w	r0, -2 #111	# _272,
-	st.w	[timer_for_alien_bullet_spawn], r0	# timer_for_alien_bullet_spawn, _272
+	ld.w	r0, [timer_for_alien_bullet_spawn]	# timer_for_alien_bullet_spawn.262_304, timer_for_alien_bullet_spawn
+	add.w	r0, -2 #111	# _305,
+	st.w	[timer_for_alien_bullet_spawn], r0	# timer_for_alien_bullet_spawn, _305
 	j	.L500		#
 .L414:
 # spaceinvaders.c:2812: 			else if(player_alive == 1)
-	ld.w	r1, [player_alive]	# player_alive.261_273, player_alive
+	ld.w	r1, [player_alive]	# player_alive.263_306, player_alive
 # spaceinvaders.c:2812: 			else if(player_alive == 1)
-	mov.w	r0, 1	# tmp1346,
-	cmp.w	r1, r0	# player_alive.261_273, tmp1346
+	mov.w	r0, 1	# tmp1386,
+	cmp.w	r1, r0	# player_alive.263_306, tmp1386
 	jnz	.L501		#
 # spaceinvaders.c:2814: 				player_death_timer+=2;
-	ld.w	r0, [player_death_timer]	# player_death_timer.262_274, player_death_timer
-	add.w	r0, 2 #111	# _275,
-	st.w	[player_death_timer], r0	# player_death_timer, _275
+	ld.w	r0, [player_death_timer]	# player_death_timer.264_307, player_death_timer
+	add.w	r0, 2 #111	# _308,
+	st.w	[player_death_timer], r0	# player_death_timer, _308
 # spaceinvaders.c:2815: 				if(player_death_timer < 990 && player_death_timer % 90 == 0)
-	ld.w	r1, [player_death_timer]	# player_death_timer.263_276, player_death_timer
+	ld.w	r1, [player_death_timer]	# player_death_timer.265_309, player_death_timer
 # spaceinvaders.c:2815: 				if(player_death_timer < 990 && player_death_timer % 90 == 0)
-	mov.w	r0, 989	# tmp1347,
-	cmp.w	r1, r0	# player_death_timer.263_276, tmp1347
+	mov.w	r0, 989	# tmp1387,
+	cmp.w	r1, r0	# player_death_timer.265_309, tmp1387
 	jgs	.L502		#
 # spaceinvaders.c:2815: 				if(player_death_timer < 990 && player_death_timer % 90 == 0)
-	ld.w	r1, [player_death_timer]	# player_death_timer.264_277, player_death_timer
-	mov.w	r0, 90	# tmp1348,
-	div.w	r1, r0	# _278, tmp1348
-mov.w	r1, r14	# _278
+	ld.w	r1, [player_death_timer]	# player_death_timer.266_310, player_death_timer
+	mov.w	r0, 90	# tmp1388,
+	div.w	r1, r0	# _311, tmp1388
+mov.w	r1, r14	# _311
 # spaceinvaders.c:2815: 				if(player_death_timer < 990 && player_death_timer % 90 == 0)
-	xor.w	r0, r0	# tmp1349
-	cmp.w	r1, r0	# _278, tmp1349
+	xor.w	r0, r0	# tmp1389
+	cmp.w	r1, r0	# _311, tmp1389
 	jnz	.L502		#
 # spaceinvaders.c:2817: 					change_player_explosion_sprite();
 	call	change_player_explosion_sprite		#
 	j	.L500		#
 .L502:
 # spaceinvaders.c:2819: 				else if(player_death_timer == 990)
-	ld.w	r1, [player_death_timer]	# player_death_timer.265_279, player_death_timer
+	ld.w	r1, [player_death_timer]	# player_death_timer.267_312, player_death_timer
 # spaceinvaders.c:2819: 				else if(player_death_timer == 990)
-	mov.w	r0, 990	# tmp1350,
-	cmp.w	r1, r0	# player_death_timer.265_279, tmp1350
+	mov.w	r0, 990	# tmp1390,
+	cmp.w	r1, r0	# player_death_timer.267_312, tmp1390
 	jnz	.L504		#
 # spaceinvaders.c:2821: 					clear_player_and_redraw_lives();
 	call	clear_player_and_redraw_lives		#
 # spaceinvaders.c:2822: 					if(lives <= 0)
-	ld.w	r1, [lives]	# lives.266_280, lives
+	ld.w	r1, [lives]	# lives.268_313, lives
 # spaceinvaders.c:2822: 					if(lives <= 0)
-	xor.w	r0, r0	# tmp1351
-	cmp.w	r1, r0	# lives.266_280, tmp1351
+	xor.w	r0, r0	# tmp1391
+	cmp.w	r1, r0	# lives.268_313, tmp1391
 	jgs	.L500		#
 # spaceinvaders.c:2824: 						player_alive = 0;
-	xor.w	r0, r0	# tmp1352
-	st.w	[player_alive], r0	# player_alive, tmp1352
+	xor.w	r0, r0	# tmp1392
+	st.w	[player_alive], r0	# player_alive, tmp1392
 	j	.L500		#
 .L504:
 # spaceinvaders.c:2828: 				else if(player_death_timer == 3000)
-	ld.w	r1, [player_death_timer]	# player_death_timer.267_281, player_death_timer
+	ld.w	r1, [player_death_timer]	# player_death_timer.269_314, player_death_timer
 # spaceinvaders.c:2828: 				else if(player_death_timer == 3000)
-	mov.w	r0, 3000	# tmp1353,
-	cmp.w	r1, r0	# player_death_timer.267_281, tmp1353
+	mov.w	r0, 3000	# tmp1393,
+	cmp.w	r1, r0	# player_death_timer.269_314, tmp1393
 	jnz	.L500		#
 # spaceinvaders.c:2830: 					player_alive = 0;
-	xor.w	r0, r0	# tmp1354
-	st.w	[player_alive], r0	# player_alive, tmp1354
+	xor.w	r0, r0	# tmp1394
+	st.w	[player_alive], r0	# player_alive, tmp1394
 	j	.L500		#
 .L501:
 # spaceinvaders.c:2833: 			else if(player_alive == 0)
-	ld.w	r1, [player_alive]	# player_alive.268_282, player_alive
+	ld.w	r1, [player_alive]	# player_alive.270_315, player_alive
 # spaceinvaders.c:2833: 			else if(player_alive == 0)
-	xor.w	r0, r0	# tmp1355
-	cmp.w	r1, r0	# player_alive.268_282, tmp1355
+	xor.w	r0, r0	# tmp1395
+	cmp.w	r1, r0	# player_alive.270_315, tmp1395
 	jnz	.L500		#
 # spaceinvaders.c:2835: 				if(lives > 0)
-	ld.w	r1, [lives]	# lives.269_283, lives
+	ld.w	r1, [lives]	# lives.271_316, lives
 # spaceinvaders.c:2835: 				if(lives > 0)
-	xor.w	r0, r0	# tmp1356
-	cmp.w	r1, r0	# lives.269_283, tmp1356
+	xor.w	r0, r0	# tmp1396
+	cmp.w	r1, r0	# lives.271_316, tmp1396
 	jses	.L505		#
 # spaceinvaders.c:2836: 					spawn_player();
 	call	spawn_player		#
@@ -12158,175 +12170,190 @@ mov.w	r1, r14	# _278
 # spaceinvaders.c:2840: 					display_game_over_text();
 	call	display_game_over_text		#
 # spaceinvaders.c:2841: 					delay_millis(3000);
-	mov.w	r1, sp	# tmp1357,
-	mov.w	r0, 3000	# tmp1358,
-	st.w	[r1], r0	#, tmp1358
+	mov.w	r1, sp	# tmp1397,
+	mov.w	r0, 3000	# tmp1398,
+	st.w	[r1], r0	#, tmp1398
 	call	delay_millis		#
 # spaceinvaders.c:2842: 					cls(0);
-	mov.w	r1, sp	# tmp1359,
-	xor.w	r0, r0	# tmp1360
-	st.w	[r1], r0	#, tmp1360
+	mov.w	r1, sp	# tmp1399,
+	xor.w	r0, r0	# tmp1400
+	st.w	[r1], r0	#, tmp1400
 	call	cls		#
 # spaceinvaders.c:2843: 					current_screen = MAIN_MENU_SCREEN;
-	xor.w	r0, r0	# tmp1361
-	st.w	[current_screen], r0	# current_screen, tmp1361
+	xor.w	r0, r0	# tmp1401
+	st.w	[current_screen], r0	# current_screen, tmp1401
 # spaceinvaders.c:2844: 					return 0;
-	xor.w	r0, r0	# _354
+	xor.w	r0, r0	# _394
 	j	.L416		#
 .L500:
 # spaceinvaders.c:2847: 			if(bonus_life_awarded == FALSE && score >= 1500)
-	ld.w	r1, [bonus_life_awarded]	# bonus_life_awarded.270_284, bonus_life_awarded
+	ld.w	r1, [bonus_life_awarded]	# bonus_life_awarded.272_317, bonus_life_awarded
 # spaceinvaders.c:2847: 			if(bonus_life_awarded == FALSE && score >= 1500)
-	xor.w	r0, r0	# tmp1362
-	cmp.w	r1, r0	# bonus_life_awarded.270_284, tmp1362
+	xor.w	r0, r0	# tmp1402
+	cmp.w	r1, r0	# bonus_life_awarded.272_317, tmp1402
 	jnz	.L382		#
 # spaceinvaders.c:2847: 			if(bonus_life_awarded == FALSE && score >= 1500)
-	ld.w	r1, [score]	# score.271_285, score
+	ld.w	r1, [score]	# score.273_318, score
 # spaceinvaders.c:2847: 			if(bonus_life_awarded == FALSE && score >= 1500)
-	mov.w	r0, 1499	# tmp1363,
-	cmp.w	r1, r0	# score.271_285, tmp1363
+	mov.w	r0, 1499	# tmp1403,
+	cmp.w	r1, r0	# score.273_318, tmp1403
 	jses	.L382		#
 # spaceinvaders.c:2849: 				lives++;
-	ld.w	r0, [lives]	# lives.272_286, lives
-	add.w	r0, 1 #111	# _287,
-	st.w	[lives], r0	# lives, _287
+	ld.w	r0, [lives]	# lives.274_319, lives
+	add.w	r0, 1 #111	# _320,
+	st.w	[lives], r0	# lives, _320
 # spaceinvaders.c:2850: 				bonus_life_awarded = TRUE;
-	mov.w	r0, 1	# tmp1364,
-	st.w	[bonus_life_awarded], r0	# bonus_life_awarded, tmp1364
+	mov.w	r0, 1	# tmp1404,
+	st.w	[bonus_life_awarded], r0	# bonus_life_awarded, tmp1404
 # spaceinvaders.c:2851: 				draw_lives();
 	call	draw_lives		#
 .L382:
 # spaceinvaders.c:2856: 		if(player_alive == 2)
-	ld.w	r1, [player_alive]	# player_alive.273_288, player_alive
+	ld.w	r1, [player_alive]	# player_alive.275_321, player_alive
 # spaceinvaders.c:2856: 		if(player_alive == 2)
-	mov.w	r0, 2	# tmp1365,
-	cmp.w	r1, r0	# player_alive.273_288, tmp1365
+	mov.w	r0, 2	# tmp1405,
+	cmp.w	r1, r0	# player_alive.275_321, tmp1405
 	jnz	.L527		#
 # spaceinvaders.c:2859: 			vkp = is_key_pressed();
 	call	is_key_pressed		#
 # spaceinvaders.c:2859: 			vkp = is_key_pressed();
-	st.w	[vkp], r0	# vkp, _289
+	st.w	[vkp], r0	# vkp, _322
 # spaceinvaders.c:2860: 			vkr = is_key_released();
 	call	is_key_released		#
 # spaceinvaders.c:2860: 			vkr = is_key_released();
-	st.w	[vkr], r0	# vkr, _290
+	st.w	[vkr], r0	# vkr, _323
 # spaceinvaders.c:2861: 			if ((vkp == 0) && (vkr == 0))
-	ld.w	r1, [vkp]	# vkp.274_291, vkp
+	ld.w	r1, [vkp]	# vkp.276_324, vkp
 # spaceinvaders.c:2861: 			if ((vkp == 0) && (vkr == 0))
-	xor.w	r0, r0	# tmp1366
-	cmp.w	r1, r0	# vkp.274_291, tmp1366
+	xor.w	r0, r0	# tmp1406
+	cmp.w	r1, r0	# vkp.276_324, tmp1406
 	jnz	.L507		#
 # spaceinvaders.c:2861: 			if ((vkp == 0) && (vkr == 0))
-	ld.w	r1, [vkr]	# vkr.275_292, vkr
+	ld.w	r1, [vkr]	# vkr.277_325, vkr
 # spaceinvaders.c:2861: 			if ((vkp == 0) && (vkr == 0))
-	xor.w	r0, r0	# tmp1367
-	cmp.w	r1, r0	# vkr.275_292, tmp1367
+	xor.w	r0, r0	# tmp1407
+	cmp.w	r1, r0	# vkr.277_325, tmp1407
 	jnz	.L507		#
 # spaceinvaders.c:2863: 				vkp = old;
-	ld.w	r0, [old]	# old.276_293, old
-	st.w	[vkp], r0	# vkp, old.276_293
+	ld.w	r0, [old]	# old.278_326, old
+	st.w	[vkp], r0	# vkp, old.278_326
 .L507:
 # spaceinvaders.c:2865: 			if ((vkr != 0) && (vkr == old))
-	ld.w	r1, [vkr]	# vkr.277_294, vkr
+	ld.w	r1, [vkr]	# vkr.279_327, vkr
 # spaceinvaders.c:2865: 			if ((vkr != 0) && (vkr == old))
-	xor.w	r0, r0	# tmp1368
-	cmp.w	r1, r0	# vkr.277_294, tmp1368
+	xor.w	r0, r0	# tmp1408
+	cmp.w	r1, r0	# vkr.279_327, tmp1408
 	jz	.L508		#
 # spaceinvaders.c:2865: 			if ((vkr != 0) && (vkr == old))
-	ld.w	r1, [vkr]	# vkr.278_295, vkr
-	ld.w	r0, [old]	# old.279_296, old
+	ld.w	r1, [vkr]	# vkr.280_328, vkr
+	ld.w	r0, [old]	# old.281_329, old
 # spaceinvaders.c:2865: 			if ((vkr != 0) && (vkr == old))
-	cmp.w	r1, r0	# vkr.278_295, old.279_296
+	cmp.w	r1, r0	# vkr.280_328, old.281_329
 	jnz	.L508		#
 # spaceinvaders.c:2867: 				vkp = 0;
-	xor.w	r0, r0	# tmp1369
-	st.w	[vkp], r0	# vkp, tmp1369
+	xor.w	r0, r0	# tmp1409
+	st.w	[vkp], r0	# vkp, tmp1409
 # spaceinvaders.c:2868: 				old = 0;
-	xor.w	r0, r0	# tmp1370
-	st.w	[old], r0	# old, tmp1370
+	xor.w	r0, r0	# tmp1410
+	st.w	[old], r0	# old, tmp1410
 .L508:
 # spaceinvaders.c:2870: 			if (vkp != 0 && vkp != VK_SPACE && vkp != VK_ESC)
-	ld.w	r1, [vkp]	# vkp.280_297, vkp
+	ld.w	r1, [vkp]	# vkp.282_330, vkp
 # spaceinvaders.c:2870: 			if (vkp != 0 && vkp != VK_SPACE && vkp != VK_ESC)
-	xor.w	r0, r0	# tmp1371
-	cmp.w	r1, r0	# vkp.280_297, tmp1371
+	xor.w	r0, r0	# tmp1411
+	cmp.w	r1, r0	# vkp.282_330, tmp1411
 	jz	.L509		#
 # spaceinvaders.c:2870: 			if (vkp != 0 && vkp != VK_SPACE && vkp != VK_ESC)
-	ld.w	r1, [vkp]	# vkp.281_298, vkp
+	ld.w	r1, [vkp]	# vkp.283_331, vkp
 # spaceinvaders.c:2870: 			if (vkp != 0 && vkp != VK_SPACE && vkp != VK_ESC)
-	mov.w	r0, 32	# tmp1372,
-	cmp.w	r1, r0	# vkp.281_298, tmp1372
+	mov.w	r0, 32	# tmp1412,
+	cmp.w	r1, r0	# vkp.283_331, tmp1412
 	jz	.L509		#
 # spaceinvaders.c:2870: 			if (vkp != 0 && vkp != VK_SPACE && vkp != VK_ESC)
-	ld.w	r1, [vkp]	# vkp.282_299, vkp
+	ld.w	r1, [vkp]	# vkp.284_332, vkp
 # spaceinvaders.c:2870: 			if (vkp != 0 && vkp != VK_SPACE && vkp != VK_ESC)
-	mov.w	r0, 27	# tmp1373,
-	cmp.w	r1, r0	# vkp.282_299, tmp1373
+	mov.w	r0, 27	# tmp1413,
+	cmp.w	r1, r0	# vkp.284_332, tmp1413
 	jz	.L509		#
 # spaceinvaders.c:2871: 				old = vkp;
-	ld.w	r0, [vkp]	# vkp.283_300, vkp
-	st.w	[old], r0	# old, vkp.283_300
+	ld.w	r0, [vkp]	# vkp.285_333, vkp
+	st.w	[old], r0	# old, vkp.285_333
 .L509:
 # spaceinvaders.c:2873: 			if(game_state == PLAY)
-	ld.w	r1, [game_state]	# game_state.284_301, game_state
+	ld.w	r1, [game_state]	# game_state.286_334, game_state
 # spaceinvaders.c:2873: 			if(game_state == PLAY)
-	mov.w	r0, 1	# tmp1374,
-	cmp.w	r1, r0	# game_state.284_301, tmp1374
+	mov.w	r0, 1	# tmp1414,
+	cmp.w	r1, r0	# game_state.286_334, tmp1414
 	jnz	.L528		#
 # spaceinvaders.c:2875: 				switch (vkp)
-	ld.w	r0, [vkp]	# vkp.285_302, vkp
-	mov.w	r1, 4003	# tmp1375,
-	cmp.w	r0, r1	# vkp.285_302, tmp1375
+	ld.w	r0, [vkp]	# vkp.287_335, vkp
+	mov.w	r1, 4003	# tmp1415,
+	cmp.w	r0, r1	# vkp.287_335, tmp1415
 	jz	.L511		#
-	mov.w	r1, 4003	# tmp1376,
-	cmp.w	r0, r1	# vkp.285_302, tmp1376
+	mov.w	r1, 4003	# tmp1416,
+	cmp.w	r0, r1	# vkp.287_335, tmp1416
 	jgs	.L510		#
-	mov.w	r1, 32	# tmp1377,
-	cmp.w	r0, r1	# vkp.285_302, tmp1377
+	mov.w	r1, 32	# tmp1417,
+	cmp.w	r0, r1	# vkp.287_335, tmp1417
 	jz	.L512		#
-	mov.w	r1, 4001	# tmp1378,
-	cmp.w	r0, r1	# vkp.285_302, tmp1378
+	mov.w	r1, 4001	# tmp1418,
+	cmp.w	r0, r1	# vkp.287_335, tmp1418
 	jnz	.L510		#
 # spaceinvaders.c:2878: 						if(player_movement_skip_frame == 0)
-	ld.w	r1, [player_movement_skip_frame]	# player_movement_skip_frame.286_303, player_movement_skip_frame
+	ld.w	r1, [player_movement_skip_frame]	# player_movement_skip_frame.288_336, player_movement_skip_frame
 # spaceinvaders.c:2878: 						if(player_movement_skip_frame == 0)
-	xor.w	r0, r0	# tmp1379
-	cmp.w	r1, r0	# player_movement_skip_frame.286_303, tmp1379
+	xor.w	r0, r0	# tmp1419
+	cmp.w	r1, r0	# player_movement_skip_frame.288_336, tmp1419
 	jnz	.L529		#
 # spaceinvaders.c:2880: 							player_ship->x -= 1;
-	ld.w	r0, [player_ship]	# player_ship.287_304, player_ship
-	ld.s	r1, [r0 + (2)]	# _305, player_ship.287_304->x
-	ld.w	r0, [player_ship]	# player_ship.288_306, player_ship
-	add.w	r1, -1 #111	# tmp1380,
-	st.s	[r0 + (2)], r1	# player_ship.288_306->x, _307
+	ld.w	r0, [player_ship]	# player_ship.289_337, player_ship
+	ld.s	r0, [r0 + (2)]	# _338, player_ship.289_337->x
+	add.w	r0, -1 #111	# tmp1420,
+	mov.w	r1, r0	# _340, tmp1420
+	ld.w	r0, [player_ship]	# player_ship.290_341, player_ship
+	st.s	[r0 + (2)], r1	# player_ship.290_341->x, _342
+# spaceinvaders.c:2881: 							if (player_ship->x < 0)
+	ld.w	r0, [player_ship]	# player_ship.291_343, player_ship
+	ld.s	r0, [r0 + (2)]	# _344, player_ship.291_343->x
+# spaceinvaders.c:2881: 							if (player_ship->x < 0)
+	sex.s	r1, r0	# tmp1421, _344
+	xor.w	r0, r0	# tmp1422
+	cmp.w	r1, r0	# tmp1421, tmp1422
+	jges	.L529		#
+# spaceinvaders.c:2882: 								player_ship->x = 0;
+	ld.w	r0, [player_ship]	# player_ship.292_345, player_ship
+# spaceinvaders.c:2882: 								player_ship->x = 0;
+	xor.w	r1, r1	# tmp1423
+	st.s	[r0 + (2)], r1	# player_ship.292_345->x, tmp1423
 # spaceinvaders.c:2884: 						break;
 	j	.L529		#
 .L511:
 # spaceinvaders.c:2886: 						if(player_movement_skip_frame == 0)
-	ld.w	r1, [player_movement_skip_frame]	# player_movement_skip_frame.290_309, player_movement_skip_frame
+	ld.w	r1, [player_movement_skip_frame]	# player_movement_skip_frame.293_346, player_movement_skip_frame
 # spaceinvaders.c:2886: 						if(player_movement_skip_frame == 0)
-	xor.w	r0, r0	# tmp1381
-	cmp.w	r1, r0	# player_movement_skip_frame.290_309, tmp1381
+	xor.w	r0, r0	# tmp1424
+	cmp.w	r1, r0	# player_movement_skip_frame.293_346, tmp1424
 	jnz	.L530		#
 # spaceinvaders.c:2888: 							player_ship->x += 1;
-	ld.w	r0, [player_ship]	# player_ship.291_310, player_ship
-	ld.s	r1, [r0 + (2)]	# _311, player_ship.291_310->x
-	ld.w	r0, [player_ship]	# player_ship.292_312, player_ship
-	add.w	r1, 1 #111	# tmp1382,
-	st.s	[r0 + (2)], r1	# player_ship.292_312->x, _313
+	ld.w	r0, [player_ship]	# player_ship.294_347, player_ship
+	ld.s	r0, [r0 + (2)]	# _348, player_ship.294_347->x
+	add.w	r0, 1 #111	# tmp1425,
+	mov.w	r1, r0	# _350, tmp1425
+	ld.w	r0, [player_ship]	# player_ship.295_351, player_ship
+	st.s	[r0 + (2)], r1	# player_ship.295_351->x, _352
 # spaceinvaders.c:2889: 							if (player_ship->x > 224)
-	ld.w	r0, [player_ship]	# player_ship.293_314, player_ship
-	ld.s	r0, [r0 + (2)]	# _315, player_ship.293_314->x
+	ld.w	r0, [player_ship]	# player_ship.296_353, player_ship
+	ld.s	r0, [r0 + (2)]	# _354, player_ship.296_353->x
 # spaceinvaders.c:2889: 							if (player_ship->x > 224)
-	zex.s	r1, r0	# tmp1383, _315
-	mov.w	r0, 224	# tmp1384,
-	cmp.w	r1, r0	# tmp1383, tmp1384
-	jse	.L530		#
+	sex.s	r1, r0	# tmp1426, _354
+	mov.w	r0, 224	# tmp1427,
+	cmp.w	r1, r0	# tmp1426, tmp1427
+	jses	.L530		#
 # spaceinvaders.c:2890: 								player_ship->x = 224;
-	ld.w	r0, [player_ship]	# player_ship.294_316, player_ship
+	ld.w	r0, [player_ship]	# player_ship.297_355, player_ship
 # spaceinvaders.c:2890: 								player_ship->x = 224;
-	mov.s	r1, 224	# tmp1385,
-	st.s	[r0 + (2)], r1	# player_ship.294_316->x, tmp1385
+	mov.s	r1, 224	# tmp1428,
+	st.s	[r0 + (2)], r1	# player_ship.297_355->x, tmp1428
 # spaceinvaders.c:2892: 						break;
 	j	.L530		#
 .L512:
@@ -12347,12 +12374,12 @@ mov.w	r1, r14	# _278
 	nop	
 .L510:
 # spaceinvaders.c:2900: 			switch (vkp)
-	ld.w	r0, [vkp]	# vkp.295_317, vkp
-	mov.w	r1, 27	# tmp1386,
-	cmp.w	r0, r1	# vkp.295_317, tmp1386
+	ld.w	r0, [vkp]	# vkp.298_356, vkp
+	mov.w	r1, 27	# tmp1429,
+	cmp.w	r0, r1	# vkp.298_356, tmp1429
 	jz	.L515		#
-	mov.w	r1, 301	# tmp1387,
-	cmp.w	r0, r1	# vkp.295_317, tmp1387
+	mov.w	r1, 301	# tmp1430,
+	cmp.w	r0, r1	# vkp.298_356, tmp1430
 	jnz	.L506		#
 # spaceinvaders.c:2903: 					toggle_play_pause();
 	call	toggle_play_pause		#
@@ -12360,16 +12387,16 @@ mov.w	r1, r14	# _278
 	j	.L506		#
 .L515:
 # spaceinvaders.c:2906: 					return 1;
-	mov.w	r0, 1	# _354,
+	mov.w	r0, 1	# _394,
 	j	.L416		#
 .L527:
 # spaceinvaders.c:2909: 		}
 	nop	
 .L506:
 # spaceinvaders.c:2911: 		delay_millis(delay_ms);
-	ld.w	r0, [delay_ms]	# delay_ms.296_318, delay_ms
-	mov.w	r1, sp	# tmp1388,
-	st.w	[r1], r0	#, delay_ms.296_318
+	ld.w	r0, [delay_ms]	# delay_ms.299_357, delay_ms
+	mov.w	r1, sp	# tmp1431,
+	st.w	[r1], r0	#, delay_ms.299_357
 	call	delay_millis		#
 # spaceinvaders.c:2360: 		if(game_state == PLAY)
 	j	.L516		#
@@ -12409,18 +12436,18 @@ main:
 	st.w	[r13 + (-4)], r0	# shouldExit, tmp35
 .L538:
 # spaceinvaders.c:2927: 		switch(current_screen)
-	ld.w	r0, [current_screen]	# current_screen.297_1, current_screen
+	ld.w	r0, [current_screen]	# current_screen.300_1, current_screen
 	mov.w	r1, 2	# tmp36,
-	cmp.w	r0, r1	# current_screen.297_1, tmp36
+	cmp.w	r0, r1	# current_screen.300_1, tmp36
 	jz	.L532		#
 	mov.w	r1, 2	# tmp37,
-	cmp.w	r0, r1	# current_screen.297_1, tmp37
+	cmp.w	r0, r1	# current_screen.300_1, tmp37
 	jgs	.L533		#
 	xor.w	r1, r1	# tmp38
-	cmp.w	r0, r1	# current_screen.297_1, tmp38
+	cmp.w	r0, r1	# current_screen.300_1, tmp38
 	jz	.L534		#
 	mov.w	r1, 1	# tmp39,
-	cmp.w	r0, r1	# current_screen.297_1, tmp39
+	cmp.w	r0, r1	# current_screen.300_1, tmp39
 	jz	.L535		#
 	j	.L533		#
 .L534:
@@ -12453,15 +12480,15 @@ main:
 # spaceinvaders.c:2940: 			break;
 	nop	
 # spaceinvaders.c:2942: 	player_ship->addr = 0;
-	ld.w	r0, [player_ship]	# player_ship.298_2, player_ship
+	ld.w	r0, [player_ship]	# player_ship.301_2, player_ship
 # spaceinvaders.c:2942: 	player_ship->addr = 0;
 	xor.w	r1, r1	# tmp42
-	st.s	[r0], r1	# player_ship.298_2->addr, tmp42
+	st.s	[r0], r1	# player_ship.301_2->addr, tmp42
 # spaceinvaders.c:2943: 	player_bullet_def ->addr = 0;
-	ld.w	r0, [player_bullet_def]	# player_bullet_def.299_3, player_bullet_def
+	ld.w	r0, [player_bullet_def]	# player_bullet_def.302_3, player_bullet_def
 # spaceinvaders.c:2943: 	player_bullet_def ->addr = 0;
 	xor.w	r1, r1	# tmp43
-	st.s	[r0], r1	# player_bullet_def.299_3->addr, tmp43
+	st.s	[r0], r1	# player_bullet_def.302_3->addr, tmp43
 # spaceinvaders.c:2944: 	video_mode(0);
 	mov.w	r1, sp	# tmp44,
 	xor.w	r0, r0	# tmp45

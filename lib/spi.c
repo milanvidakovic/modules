@@ -34,14 +34,7 @@ void send_spi(int port, int b)
 		} while (busy);
 		
 		*PORT_SPI_OUT = b; //send the byte to the SPI
-		/*		
-		do 
-		{ 
-			if (counter++ == 65535)
-				return;
-			busy = *PORT_SPI_OUT_BUSY;
-		} while (busy);
-		*/
+
 	}
 	else if (port == SPI1) {
 		received_from_slave1 = 0;
@@ -53,14 +46,6 @@ void send_spi(int port, int b)
 			busy1 = *PORT_SPI1_OUT_BUSY;
 		} while (busy1);
 		*PORT_SPI1_OUT = b; //send the byte to the SPI
-		/*
-		do 
-		{ 
-			if (counter++ == 65535)
-				return;
-			busy1 = *PORT_SPI1_OUT_BUSY;
-		} while (busy1);
-		*/
 	}
 }
 

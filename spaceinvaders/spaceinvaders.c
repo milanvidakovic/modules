@@ -102,8 +102,8 @@
  */
 typedef struct {
 	uint16_t addr;
-	uint16_t x;
-	uint16_t y;
+	short int x;
+	short int y;
 	uint16_t transparent;
 } hw_sprite;
 
@@ -116,8 +116,8 @@ typedef struct {
  */
 typedef struct {
 	uint16_t addr;
-	uint16_t x;
-	uint16_t y;
+	short int x;
+	short int y;
 	uint16_t alive;
 } sw_sprite;
 

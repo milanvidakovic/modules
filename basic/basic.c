@@ -2234,7 +2234,7 @@ load_again:
 		init_stdio();
 		video_mode(0);
 		color = old_color;
-		cls(color);
+		//cls(color);
 		//current_video_mode = 0;
 		uart_init_files();
 		if (eth)
@@ -2270,7 +2270,7 @@ void exec_sys()
 	init_stdio();
 	video_mode(0);
 	color = old_color;
-	cls(color);
+	//cls(color);
 	//current_video_mode = 0;
 	uart_init_files();
 	if (eth)

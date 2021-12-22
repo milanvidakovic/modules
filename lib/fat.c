@@ -277,12 +277,8 @@ spi_read_again:
   }
 
   #if FAT_DEBUG
-  //printf("block: %d, offset: %d, count: %d\n", block, offset, count);
+    printf("block: %d, offset: %d, count: %d\n", block, offset, count);
   #endif
-
-  // irq_counter = 0;
-  // *PORT_LED = 0;
-
 
   if (!inBlock_ || block != block_ || offset < offset_) {
     #if FAT_DEBUG 
@@ -307,13 +303,14 @@ spi_read_again:
 
   int counter = 1;
 
-  // skip data before offset
+  // skip data before given offset
   if ((offset - offset_) > 0)
   {
     #if FAT_DEBUG 
     //printf("-2");
     #endif
 
+    //Skip the bytes if requested
     while(!dma_receive(dst, offset - offset_)) 
     {
       delay(2*counter);
@@ -322,17 +319,13 @@ spi_read_again:
         goto fail;
       }
     }
-
+    //Skip the bytes if requested, manually
     // for (;offset_ < offset; offset_++) {
     //   spiRec();
     // }
   }
 
-  // *PORT_LED = 0;
-
-  // transfer data
-  //printf(" -3, count: %d, addr: %d ", count, dst);
-
+  // Read the requested block of data
   counter = 1;
   while (!dma_receive(dst, count)) 
   {
@@ -343,34 +336,32 @@ spi_read_again:
     }
   }
 
+  // Read the requested block of data, manually
   // for (uint16_t i = 0; i < count; i++) {
   //   dst[i] = spiRec();
   // }
 
   #if FAT_DEBUG
-  // printf("\nDMA ADDR AFTER: %d \n",   *PORT_DMA_ADDR_1);    
-  // printf("DMA COUNT AFTER: %d \n",   *PORT_DMA_COUNT_1); 
-  // printf("BYTES TRANSFERRED: %d\n", (int)(*PORT_DMA_ADDR_1) - (int)dst);
-  //printf("DMA BUFFER CONTENT: {%s}\n", dst);
+    printf("\nDMA ADDR AFTER: %d \n",   *PORT_DMA_ADDR_1);    
+    printf("DMA COUNT AFTER: %d \n",   *PORT_DMA_COUNT_1); 
+    printf("BYTES TRANSFERRED: %d\n", (int)(*PORT_DMA_ADDR_1) - (int)dst);
+    printf("DMA BUFFER CONTENT: {%s}\n", dst);
   #endif
 
+  // ################ CRC16 check of the block ##################
   offset_ += count;
   uint16_t crc = 0;
   if (!partialBlockRead_ || offset_ >= 512) {
-    // read rest of data, checksum and set chip select high
+    // read the rest of the data, CRC16 checksum and set the chip select high
     crc = readEnd();
   }
 
-  //if (crc != 0xFFFF)
-  { 
-   
-    if((crc != crc16(dst, count)) && (fail_counter == 0))
-    {
-      //printf(" [%x]->[%x]", crc, crc16(dst, count));
-      goto fail;
-    }
-    
+  if((crc != crc16(dst, count)) && (fail_counter == 0))
+  {
+    //printf(" [%x]->[%x]", crc, crc16(dst, count));
+    goto fail;
   }
+  
 
 read_end:
   asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq

@@ -2914,7 +2914,6 @@ int switch_to_play_screen()
 
 int main()
 {
-	asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
 	init_stdio();
 	video_mode(1);
 
@@ -2943,7 +2942,6 @@ int main()
 	player_bullet_def ->addr = 0;
 	video_mode(0);
 	cls(0);
-	asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn on timer irq
 	return 0;
 }
 

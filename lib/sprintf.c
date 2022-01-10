@@ -55,12 +55,23 @@ unsigned int vsprintf(char *dst, char* fmt, va_list args)
                 float f = ts.value;
 
                 arg = (ts.value);
+
+                if (f == INF)
+                {
+                    p="(inf)";
+                    while(*p) {
+                        *dst++ = *p++;
+                    }
+                    fmt++;
+                    continue;
+                }
                 
                 // check input
                 sign=0;
-                if((int)arg<0) {
+                if(f<0) {
                     arg*=-1;
                     sign++;
+                    f = -f;
                 }
                 if(arg>1999999999L) {
                     arg=1999999999L;
@@ -91,37 +102,19 @@ unsigned int vsprintf(char *dst, char* fmt, va_list args)
                 // ################## now the decimals ############################
                 int int_f = f;
                 float rest = f - int_f;
-                rest *= 1000.0;
-                arg = (rest);
-               
-                // check input
-                sign=0;
-                if((int)arg<0) {
-                    arg*=-1;
-                }
-                if(arg>1999999999L) {
-                    arg=1999999999L;
-                }
+                rest *= 10000.0;
+                int_f = rest;
                 // convert to string
-                i=18;
-                tmpstr[i]=0;
+                i = 5;
+                tmpstr[i] = 0;
                 do {
-                    tmpstr[--i]='0'+(arg%10);
-                    arg/=10;
-                } while(arg!=0 && i>0);
-                // padding, only space
-                if(len>0 && len<18) {
-                    while(i>18-len) {
-                        tmpstr[--i]=' ';
-                    }
-                }
-                p=&tmpstr[i];
+                    tmpstr[--i]='0'+(int_f % 10);
+                    int_f /= 10;
+                } while(i > 0);
+                p=&tmpstr[1];
                 while(*p) {
                     *dst++ = *p++;
                 }
-
-
-
             } else 
             // decimal number
             if(*fmt=='d') {

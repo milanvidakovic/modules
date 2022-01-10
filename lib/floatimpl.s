@@ -226,6 +226,7 @@ normalize:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:41: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
+	mov.w	sp, r12	#,
 	pop	r6		#
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -1019,6 +1020,7 @@ neg.w	r0	# tmp52
 	mov.w	r0, r1	# <retval>, _20
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
+	mov.w	sp, r12	#,
 	pop	r6		#
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -1191,6 +1193,7 @@ inv.w	r0	# _11
 	mov.w	r0, r1	#, <retval>
 	mov.w	r12, r13	#,
 	sub.w	r12, 16 #111	#,
+	mov.w	sp, r12	#,
 	pop	r9		#
 	pop	r8		#
 	pop	r7		#
@@ -1284,4 +1287,212 @@ neg.w	r0	# _11
 	pop	r13		#
 	ret	
 	.size	__fixsfsi, .-__fixsfsi
+	.p2align	1
+	.global	__fixunssfsi
+	.type	__fixunssfsi, @function
+__fixunssfsi:
+	push	r13		#
+	mov.w	r13, sp	#,
+	sub.w	sp, 12 #111	#,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:299:     fb.f = a;
+	ld.w	r0, [r13 + (8)]	# tmp38, a
+	st.w	[r13 + (-12)], r0	# fb.f, tmp38
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:301:     int e = ((fb.u & 0x7F800000) >> 23) - 127;
+	ld.w	r0, [r13 + (-12)]	# _1, fb.u
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:301:     int e = ((fb.u & 0x7F800000) >> 23) - 127;
+	mov.w	r1, 23	# tmp39,
+	shr.w	r0, r1	# _2, tmp39
+	mov.w	r1, 255	# tmp40,
+	and.w	r0, r1	# _3, tmp40
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:301:     int e = ((fb.u & 0x7F800000) >> 23) - 127;
+	add.w	r0, -127 #111	# _4,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:301:     int e = ((fb.u & 0x7F800000) >> 23) - 127;
+	st.w	[r13 + (-8)], r0	# e, _4
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:302:     if (e < 0 || (fb.u & 0x80000000))
+	ld.w	r1, [r13 + (-8)]	# tmp41, e
+	xor.w	r0, r0	# tmp42
+	cmp.w	r1, r0	# tmp41, tmp42
+	jss	.L82		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:302:     if (e < 0 || (fb.u & 0x80000000))
+	ld.w	r0, [r13 + (-12)]	# _5, fb.u
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:302:     if (e < 0 || (fb.u & 0x80000000))
+	mov.w	r1, r0	# _6, _5
+	xor.w	r0, r0	# tmp43
+	cmp.w	r1, r0	# _6, tmp43
+	jges	.L83		#
+.L82:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:303:         return 0;
+	xor.w	r0, r0	# _12
+	j	.L87		#
+.L83:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:305:     rep_t r = (fb.u & 0x007FFFFF) | 0x00800000;
+	ld.w	r0, [r13 + (-12)]	# _7, fb.u
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:305:     rep_t r = (fb.u & 0x007FFFFF) | 0x00800000;
+	mov.w	r1, 8388607	# tmp44,
+	and.w	r0, r1	# _8, tmp44
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:305:     rep_t r = (fb.u & 0x007FFFFF) | 0x00800000;
+	mov.w	r1, 8388608	# tmp46,
+	or.w	r0, r1	# tmp45, tmp46
+	st.w	[r13 + (-4)], r0	# r, tmp45
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:306:     if (e > 23)
+	ld.w	r1, [r13 + (-8)]	# tmp47, e
+	mov.w	r0, 23	# tmp48,
+	cmp.w	r1, r0	# tmp47, tmp48
+	jses	.L85		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:307:         r <<= (e - 23);
+	ld.w	r0, [r13 + (-8)]	# tmp49, e
+	mov.w	r1, r0	# _9, tmp49
+	add.w	r1, -23 #111	# _9,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:307:         r <<= (e - 23);
+	ld.w	r0, [r13 + (-4)]	# tmp51, r
+	shl.w	r0, r1	# tmp50, _9
+	st.w	[r13 + (-4)], r0	# r, tmp50
+	j	.L86		#
+.L85:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:309:         r >>= (23 - e);
+	mov.w	r1, 23	# tmp52,
+	ld.w	r0, [r13 + (-8)]	# tmp53, e
+	sub.w	r1, r0 #222	# _10, tmp53
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:309:         r >>= (23 - e);
+	ld.w	r0, [r13 + (-4)]	# tmp55, r
+	shr.w	r0, r1	# tmp54, _10
+	st.w	[r13 + (-4)], r0	# r, tmp54
+.L86:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:310:     return r;
+	ld.w	r0, [r13 + (-4)]	# _12, r
+.L87:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:311: } 
+	mov.w	sp, r13	#,
+	pop	r13		#
+	ret	
+	.size	__fixunssfsi, .-__fixunssfsi
+	.global	__clzsi2
+	.p2align	1
+	.global	__floatunsisf
+	.type	__floatunsisf, @function
+__floatunsisf:
+	push	r13		#
+	mov.w	r13, sp	#,
+	push	r6		#
+	sub.w	sp, 48 #111	#,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:315:     const int aWidth = sizeof a * 8;
+	mov.w	r0, 32	# tmp38,
+	st.w	[r13 + (-12)], r0	# aWidth, tmp38
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:318:     if (a == 0)
+	ld.w	r1, [r13 + (8)]	# tmp39, a
+	xor.w	r0, r0	# tmp40
+	cmp.w	r1, r0	# tmp39, tmp40
+	jnz	.L89		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:319:         return fromRep(0);
+	mov.w	r1, sp	# tmp41,
+	xor.w	r0, r0	# tmp42
+	st.w	[r1], r0	#, tmp42
+	call	fromRep		#
+	mov.w	r1, r0	# _13,
+	j	.L90		#
+.L89:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:322:     const int exponent = (aWidth - 1) - __builtin_clz(a);
+	ld.w	r0, [r13 + (-12)]	# tmp43, aWidth
+	mov.w	r6, r0	# _1, tmp43
+	add.w	r6, -1 #111	# _1,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:322:     const int exponent = (aWidth - 1) - __builtin_clz(a);
+	ld.w	r0, [r13 + (8)]	# tmp44, a
+	st.w	[sp], r0	#, tmp44
+	call	__clzsi2		#
+	mov.w	r1, r0	# _2, tmp45
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:322:     const int exponent = (aWidth - 1) - __builtin_clz(a);
+	mov.w	r0, r6	# tmp46, _1
+	sub.w	r0, r1 #222	# tmp46, _2
+	st.w	[r13 + (-16)], r0	# exponent, tmp46
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:326:     if (exponent <= significandBits) {
+	ld.w	r1, [r13 + (-16)]	# tmp47, exponent
+	mov.w	r0, 23	# tmp48,
+	cmp.w	r1, r0	# tmp47, tmp48
+	jgs	.L91		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:327:         const int shift = significandBits - exponent;
+	mov.w	r0, 23	# tmp50,
+	ld.w	r1, [r13 + (-16)]	# tmp51, exponent
+	sub.w	r0, r1 #222	# tmp49, tmp51
+	st.w	[r13 + (-28)], r0	# shift, tmp49
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:328:         result = (rep_t)a << shift ^ implicitBit;
+	ld.w	r0, [r13 + (8)]	# tmp52, a
+	ld.w	r1, [r13 + (-28)]	# tmp53, shift
+	shl.w	r0, r1	# _3, tmp53
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:328:         result = (rep_t)a << shift ^ implicitBit;
+	mov.w	r1, 8388608	# tmp55,
+	xor.w	r0, r1	# tmp54, tmp55
+	st.w	[r13 + (-8)], r0	# result, tmp54
+	j	.L92		#
+.L91:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:330:         const int shift = exponent - significandBits;
+	ld.w	r0, [r13 + (-16)]	# tmp57, exponent
+	add.w	r0, -23 #111	# tmp56,
+	st.w	[r13 + (-20)], r0	# shift, tmp56
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:331:         result = (rep_t)a >> shift ^ implicitBit;
+	ld.w	r0, [r13 + (8)]	# tmp58, a
+	ld.w	r1, [r13 + (-20)]	# tmp59, shift
+	shr.w	r0, r1	# _4, tmp59
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:331:         result = (rep_t)a >> shift ^ implicitBit;
+	mov.w	r1, 8388608	# tmp61,
+	xor.w	r0, r1	# tmp60, tmp61
+	st.w	[r13 + (-8)], r0	# result, tmp60
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:332:         rep_t round = (rep_t)a << (typeWidth - shift);
+	ld.w	r0, [r13 + (-20)]	# shift.22_5, shift
+	mov.w	r1, 32	# tmp62,
+	sub.w	r1, r0 #222	# _6, shift.22_5
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:332:         rep_t round = (rep_t)a << (typeWidth - shift);
+	ld.w	r0, [r13 + (8)]	# tmp64, a
+	shl.w	r0, r1	# tmp63, _6
+	st.w	[r13 + (-24)], r0	# round, tmp63
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:333:         if (round > signBit) result++;
+	ld.w	r1, [r13 + (-24)]	# tmp65, round
+	mov.w	r0, -2147483648	# tmp66,
+	cmp.w	r1, r0	# tmp65, tmp66
+	jse	.L93		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:333:         if (round > signBit) result++;
+	ld.w	r0, [r13 + (-8)]	# tmp68, result
+	add.w	r0, 1 #111	# tmp67,
+	st.w	[r13 + (-8)], r0	# result, tmp67
+.L93:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:334:         if (round == signBit) result += result & 1;
+	ld.w	r1, [r13 + (-24)]	# tmp69, round
+	mov.w	r0, -2147483648	# tmp70,
+	cmp.w	r1, r0	# tmp69, tmp70
+	jnz	.L92		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:334:         if (round == signBit) result += result & 1;
+	ld.w	r0, [r13 + (-8)]	# tmp71, result
+	add.w	r0, 1 #111	# _7,
+	mov.w	r1, -2	# tmp73,
+	and.w	r0, r1	# tmp72, tmp73
+	st.w	[r13 + (-8)], r0	# result, tmp72
+.L92:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:338:     result += (rep_t)(exponent + exponentBias) << significandBits;
+	ld.w	r0, [r13 + (-16)]	# tmp74, exponent
+	add.w	r0, 127 #111	# _8,
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:338:     result += (rep_t)(exponent + exponentBias) << significandBits;
+	mov.w	r1, r0	# _9, _8
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:338:     result += (rep_t)(exponent + exponentBias) << significandBits;
+	mov.w	r0, 23	# tmp75,
+	shl.w	r1, r0	# _10, tmp75
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:338:     result += (rep_t)(exponent + exponentBias) << significandBits;
+	ld.w	r0, [r13 + (-8)]	# tmp77, result
+	add.w	r0, r1 #222	# tmp76, _10
+	st.w	[r13 + (-8)], r0	# result, tmp76
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:339:     return fromRep(result);
+	mov.w	r1, sp	# tmp78,
+	ld.w	r0, [r13 + (-8)]	# tmp79, result
+	st.w	[r1], r0	#, tmp79
+	call	fromRep		#
+	mov.w	r1, r0	# _13,
+.L90:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/floatimpl.c:340: } 
+	mov.w	r0, r1	# <retval>, _13
+	mov.w	r12, r13	#,
+	sub.w	r12, 4 #111	#,
+	mov.w	sp, r12	#,
+	pop	r6		#
+	mov.w	sp, r13	#,
+	pop	r13		#
+	ret	
+	.size	__floatunsisf, .-__floatunsisf
 	.ident	"GCC: (GNU) 10.0.0 20200111 (experimental)"

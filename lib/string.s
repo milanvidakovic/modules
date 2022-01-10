@@ -1474,6 +1474,7 @@ strncasecmp:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/string.c:337: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
+	mov.w	sp, r12	#,
 	pop	r6		#
 	mov.w	sp, r13	#,
 	pop	r13		#

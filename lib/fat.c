@@ -207,9 +207,6 @@ int finished_dma_read_1 = 0;
 short int *dma_video = (short int *)1024;
 char dma_buffer[512];
 
-
-unsigned short *PORT_LED = (unsigned short *)(0x80000000 + 670); // DMA channel 1 start receiving data
-
 int irq_counter = 0;
 
 void dma_1_irq_triggered()
@@ -220,7 +217,6 @@ void dma_1_irq_triggered()
 	);
 	
 	finished_dma_read_1 = 1;
-  // *PORT_LED = ++irq_counter;
 
   asm 
 	(

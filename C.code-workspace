@@ -29,7 +29,9 @@
 			"mouse.h": "c",
 			"floatimpl.h": "c",
 			"net.h": "c",
-			"types.h": "c"
+			"types.h": "c",
+			"float.h": "c",
+			"math.h": "c"
 		}
 	}
 }

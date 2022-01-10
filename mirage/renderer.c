@@ -260,3 +260,8 @@ ClearBackbuffer()
 		: /* No output */
 		: "i" (R_Backbuffer), "r" (__emptybackbuffer), "i" (BACKBUFFER_W * BACKBUFFER_H * 2));
 }
+
+void InitRenderer() 
+{
+	memset(__emptybackbuffer, 0, BACKBUFFER_W * BACKBUFFER_H * 2);
+}

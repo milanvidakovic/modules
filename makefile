@@ -6,7 +6,7 @@ INCLUDE=$(HOME)/include
 
 CFLAGS=-fsigned-char -S -fverbose-asm 
 
-FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio $(LIB)/floatimpl $(LIB)/graphics $(LIB)/mouse 
+FILES = $(TARGET) $(LIB)/sprintf $(LIB)/string $(LIB)/stdio $(LIB)/floatimpl $(LIB)/graphics $(LIB)/mouse $(LIB)/math
 #SPI_FILES = $(FILES) $(LIB)/spi $(LIB)/fat $(LIB)/enc28j60 $(LIB)/tcpip 
 
 # $(LIB)/files.s 

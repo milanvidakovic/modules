@@ -292,3 +292,49 @@ int __fixsfsi(float a)
         return -r;
     return r;
 }
+
+uint32_t __fixunssfsi(fp_t a)
+{
+    union { fp_t f; rep_t u; } fb;
+    fb.f = a;
+
+    int e = ((fb.u & 0x7F800000) >> 23) - 127;
+    if (e < 0 || (fb.u & 0x80000000))
+        return 0;
+
+    rep_t r = (fb.u & 0x007FFFFF) | 0x00800000;
+    if (e > 23)
+        r <<= (e - 23);
+    else
+        r >>= (23 - e);
+    return r;
+} 
+
+fp_t __floatunsisf(unsigned int a)
+{
+    const int aWidth = sizeof a * 8;
+
+    // Handle zero as a special case to protect clz
+    if (a == 0)
+        return fromRep(0);
+
+    // Exponent of (fp_t)a is the width of abs(a).
+    const int exponent = (aWidth - 1) - __builtin_clz(a);
+    rep_t result;
+
+    // Shift a into the significand field, rounding if it is a right-shift
+    if (exponent <= significandBits) {
+        const int shift = significandBits - exponent;
+        result = (rep_t)a << shift ^ implicitBit;
+    } else {
+        const int shift = exponent - significandBits;
+        result = (rep_t)a >> shift ^ implicitBit;
+        rep_t round = (rep_t)a << (typeWidth - shift);
+        if (round > signBit) result++;
+        if (round == signBit) result += result & 1;
+    }
+
+    // Insert the exponent
+    result += (rep_t)(exponent + exponentBias) << significandBits;
+    return fromRep(result);
+} 

@@ -77,12 +77,16 @@ MXBXBlitbackbuffer()
 int
 main()
 {
-    init_stdio();
-    video_mode(1);
-    cls(0);
     i8 str[256];
 
     LUTInit();
+    InitRenderer();
+
+    init_stdio();
+
+    video_mode(1);
+
+    cls(0);
 
     mxbx_input inputs[2];
     mxbx_input *newInput = &inputs[0];

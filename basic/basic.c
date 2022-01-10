@@ -11,15 +11,15 @@
 #include <fat.h>
 #include <tcpip.h>
 #include <kernel.h>
+#include <math.h>
 
-#define kVersion "v0.42"
+#define kVersion "v0.52"
 
 // size of our program ram
 #define kRamSize   64*1024 
-char *program = (char *)310000;
+// stack is at the address of 465563
+char *program = (char *)350000;
 char *buffer = (char *)197632;
-//char *program = (char *)1100000;
-//char *buffer = (char *)1976320;
 
 unsigned char *program_start;
 unsigned char *program_end;
@@ -44,11 +44,13 @@ int eth = 1;
 #define STACK_GOSUB_FLAG 'G'
 #define STACK_FOR_FLAG 'F'
 
+typedef unsigned LINENUM;
+typedef float VAR;
 struct stack_for_frame {
 	char frame_type;
 	char for_var;
-	int terminal;
-	int step;
+	VAR terminal;
+	VAR step;
 	char *current_line;
 	char *txtpos;
 };
@@ -58,9 +60,6 @@ struct stack_gosub_frame {
 	char *current_line;
 	char *txtpos;
 };
-
-typedef unsigned LINENUM;
-typedef int VAR;
 
 VAR expression(void);
 int direct();
@@ -179,6 +178,13 @@ const unsigned char func_tab[] = {
   'R','N','D'					, 0x01,
   'K','E','Y'			     	, 0x01,
   'I','S','K','E','Y'   		, 0x01,
+  'S','I','N' 			   		, 0x01,
+  'C','O','S' 			   		, 0x01,
+  'T','A','N' 			   		, 0x01,
+  'E','X','P' 			   		, 0x01,
+  'L','O','G' 			   		, 0x01,
+  'S','Q','R','T' 		   		, 0x01,
+  'P','O','W'	 		   		, 0x01,
   0
 };
 #define FUNC_PEEK    0
@@ -188,7 +194,14 @@ const unsigned char func_tab[] = {
 #define FUNC_RND     4
 #define FUNC_KEY     5
 #define FUNC_ISKEY	 6
-#define FUNC_UNKNOWN 10
+#define FUNC_SIN	 7
+#define FUNC_COS	 8
+#define FUNC_TAN	 9
+#define FUNC_EXP	 10
+#define FUNC_LOG	 11
+#define FUNC_SQRT	 12
+#define FUNC_POW	 13
+#define FUNC_UNKNOWN 20
 
 const char to_tab[] = {
   'T','O', 0x01,
@@ -563,11 +576,11 @@ char print_quoted_string()
 
 int check_no_arg_func() 
 {
-	ignore_blanks(txtpos);
+	ignore_blanks();
 	if (*txtpos != '(')
 		return 1;
 	txtpos++;
-	ignore_blanks(txtpos);
+	ignore_blanks();
 	if (*txtpos != ')')
 		return 1;
 	txtpos++;
@@ -591,19 +604,35 @@ VAR expr4(void)
 	}
 	// end fix
 
+/*
 	if (*txtpos == '0')
 	{
 		txtpos++;
 		return 0;
 	}
-
-	if (*txtpos >= '1' && *txtpos <= '9')
+*/
+	if (*txtpos >= '0' && *txtpos <= '9')
 	{
 		VAR a = 0;
+		int decimals = 0;
+		float dec = 0.1f;
 		do {
-			a = a * 10 + *txtpos - '0';
+			if (*txtpos == '.') 
+			{
+				decimals = 1;
+			} 
+			else 
+			{
+				if (decimals)
+				{
+					a = a + dec * (*txtpos - '0');
+					dec = dec * 0.1f;
+				} 
+				else
+					a = a * 10 + (*txtpos - '0');
+			}
 			txtpos++;
-		} while (*txtpos >= '0' && *txtpos <= '9');
+		} while ((*txtpos >= '0' && *txtpos <= '9') || (*txtpos == '.'));
 #if DEBUG == 1
 		printf("expr4, found value, and it is: %d\n", a);
 #endif
@@ -657,27 +686,56 @@ printf("expr4: table_index is: %d\n", table_index);
 			goto expr4_error;
 
 		txtpos++;
+		expression_error = 0;
 		val = expression();
-
-#if DEBUG == 2		
-		printf("expr4: val is: %d\n", val);
-#endif
-
-		if (*txtpos != ')')
+		if (expression_error)
 			goto expr4_error;
+
+		ignore_blanks();
+#if DEBUG == 2		
+		printf("expr4: val is: %f\n", val);
+		printf("expr4: txtpos is: %s\n", txtpos);
+#endif
+		VAR val2 = 0;
+		if (*txtpos != ')')
+		{
+			if (*txtpos == ',') 
+			{
+				txtpos++;
+				expression_error = 0;
+				val2 = expression();
+				if (expression_error)
+					goto expr4_error;
+			} else
+				goto expr4_error;
+		}
 
 		txtpos++;
 
 		switch (f)
 		{
 			case FUNC_PEEK:
-				return buffer[val];
+				return buffer[(int)val];
 			case FUNC_ABS:
 				if (val < 0)
 					return -val;
 				return val;
 			case FUNC_RND:
-				return(rand() % val);
+				return(rand() % (int)val);
+			case FUNC_SIN:
+				return(sinf(val));
+			case FUNC_COS:
+				return(cosf(val));
+			case FUNC_TAN:
+				return(tanf(val));
+			case FUNC_EXP:
+				return(expf(val));
+			case FUNC_LOG:
+				return(logf(val));
+			case FUNC_SQRT:
+				return(sqrtf(val));
+			case FUNC_POW:
+				return(powf(val, val2));
 		}
 	}
 
@@ -730,8 +788,10 @@ VAR expr3(void)
 			txtpos++;
 			b = expr4();
 			if (b != 0)
-				a %= b;
-			else
+			{
+				int x = (int)a % (int)b;
+				a = x;
+			} else
 				expression_error = 1;
 		}
 		else
@@ -917,7 +977,7 @@ void exec_print()
 				qwhat();
 				return;
 			}
-			printf("%d",e);
+			printf("%f", roundf(e*10000.0f) / 10000.0f);
 		}
 
 		// At this point we have three options, a comma or a new line
@@ -1035,7 +1095,8 @@ void exec_if()
 void exec_for()
 {
 	unsigned char var;
-	int initial, step, terminal;
+	VAR initial, terminal;
+	VAR step;
 	ignore_blanks();
 	if (*txtpos < 'A' || *txtpos > 'Z')
 	{
@@ -1248,7 +1309,7 @@ void exec_gosub()
 void exec_input()
 {
 	unsigned char var;
-	int value;
+	VAR value;
 	
 	ignore_blanks();
 
@@ -1707,7 +1768,7 @@ void exec_mode()
 		return;
 	}
 	
-	switch (value)
+	switch ((int)value)
 	{
 		case 0:
 			video_mode(0);
@@ -1777,7 +1838,7 @@ void exec_plot()
 		return;
 	}
 	
-	pixel(x, y, c);
+	pixel((int)x, (int)y, (int)c);
 }
 
 void exec_line()
@@ -1867,7 +1928,7 @@ void exec_line()
 		return;
 	}
 
-	line(x1, y1, x2, y2, c);
+	line((int)x1, (int)y1, (int)x2, (int)y2, (int)c);
 }
 
 void exec_circle()
@@ -1938,7 +1999,7 @@ void exec_circle()
 		return;
 	}
 	
-	circle(x, y, r, c);
+	circle((int)x, (int)y, (int)r, (int)c);
 }
 
 void exec_draw()
@@ -2020,7 +2081,7 @@ void exec_draw()
 		i++;
 		txtpos++;
 	}
-	draw(x, y, c, s);
+	draw((int)x, (int)y, (int)c, s);
 }
 
 void exec_help()
@@ -2068,7 +2129,7 @@ void exec_delay()
 		qwhat();
 		return;
 	}
-	delay(d);
+	delay((int)d);
 }
 
 void exec_cursor()
@@ -2102,7 +2163,7 @@ void exec_cursor()
 		return;
 	}
 	
-	xy(x, y);
+	xy((int)x, (int)y);
 }
 
 void exec_poke()
@@ -2136,7 +2197,7 @@ void exec_poke()
 		return;
 	}
 	
-	buffer[addr] = value & 0XFF;
+	buffer[(int)addr] = (int)value & 0XFF;
 }
 
 void init_sd()
@@ -2252,12 +2313,12 @@ load_again:
 
 void exec_sys()
 {
-	VAR addr;
+	int addr;
 	char s[32];
 	
 	ignore_blanks();
 	expression_error = 0;
-	addr = expression();	
+	addr = (int)expression();	
 	if (expression_error)
 	{
 		qwhat();
@@ -2351,12 +2412,13 @@ void exec_color()
 		return;
 	}
 	expression_error = 0;
+	int c = (int)expression();	
 	if (expression_error)
 	{
 		qwhat();
 		return;
 	}
-	color = expression();	
+	color = c;
 	//printf("COLOR SET TO: %d\n", color);
 }
 

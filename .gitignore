@@ -1,8 +1,9 @@
 /bios
 /bootloader
-/micro-basic
 /shell
-/test-dma
-/test-float
-/test-pix
 /test-post
+/test-float
+/test-dma
+/test-pix
+/test-hello
+/test-blit

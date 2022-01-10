@@ -18,13 +18,21 @@ typedef struct {
 } sprite;
 
 /* Sprite structure for the first sprite starts at the address of 128. */
-sprite *sprite_def = (sprite *)128;
+sprite *sprite_def;
 /* Sprite structure for the second sprite starts at the address of 128 + 8 == 136. */
-sprite *sprite_def2 = (sprite *)136;
+sprite *sprite_def1 = (sprite *)(128 + 0*8);
+sprite *sprite_def2 = (sprite *)(128 + 1*8);
+sprite *sprite_def3 = (sprite *)(128 + 2*8);
+sprite *sprite_def4 = (sprite *)(128 + 3*8);
+sprite *sprite_def5 = (sprite *)(128 + 4*8);
 /* Sprite bitmap must be below address 1024. Since we have four sprites, each one occupying 128 bytes, 
 it means that we can place all four of them from address of 512 up to 1024. */
-int sprite_addr = 512;
-int sprite_addr2 = 512 + 128;
+int sprite_addr1 = (384 + 0*2*4*16); //512 - 128;
+int sprite_addr2 = (384 + 1*2*4*16);
+int sprite_addr3 = (384 + 2*2*4*16);
+int sprite_addr4 = (384 + 3*2*4*16);
+int sprite_addr5 = (384 + 4*2*4*16);
+
 /* This is the sprite definition. Each sprite is 16x16 pixels, with a transparent color. */
 short plane[] = {
    0x0000, 0x0000, 0x0000, 0x0000  , //0
@@ -67,9 +75,9 @@ short plane2[] = {
 
 
 /* This function copies sprite bitmap from the code to the address below 1024, as needed by the GPU. */
-void copy_sprite_def()
+void copy_sprite_def(int spr_def)
 {
-	short * p = (short *)sprite_addr;
+	short *p = (short *)spr_def;
 	for (int i = 0; i < 16*4; i++)
 	{
 		*p = plane[i];
@@ -120,6 +128,29 @@ void draw_bitmap(int x, int y, int width, int height, short *bitmap)
 	}	
 }
 
+void init_sprite(sprite *spr, short addr, int x, int y) 
+{
+	spr->addr = addr;
+	spr->x = x;
+	spr->y = y;
+	spr->transparent = 0;
+}
+void de_init_sprite(sprite *spr) 
+{
+	int addr = spr->addr;
+	memset((short *)addr, 0, 2*4*16);
+	memset(spr, 0, sizeof(sprite));
+}
+
+void de_init_sprites() 
+{
+	de_init_sprite(sprite_def1);
+	de_init_sprite(sprite_def2);
+	de_init_sprite(sprite_def3);
+	de_init_sprite(sprite_def4);
+	de_init_sprite(sprite_def5);
+}
+
 int main()
 {
 	char str[500];
@@ -142,12 +173,10 @@ int main()
 	sprintf(str, "millis: %d", get_millis() - start);
 	draw(10, 10, GREEN, str);
 
-	copy_sprite_def();
-	sprite_def->addr = (short)sprite_addr;
-	sprite_def->x = 50;
-	sprite_def->y = 50;
-	sprite_def->transparent = 0;
-
+	copy_sprite_def(sprite_addr1);copy_sprite_def(sprite_addr2); copy_sprite_def(sprite_addr3);copy_sprite_def(sprite_addr4);copy_sprite_def(sprite_addr5);
+	init_sprite(sprite_def1, sprite_addr1, 50, 50);init_sprite(sprite_def2, sprite_addr2, 70, 50);init_sprite(sprite_def3, sprite_addr3, 90, 50);init_sprite(sprite_def4, sprite_addr4, 110, 50);init_sprite(sprite_def5, sprite_addr5, 130, 50);
+	
+	sprite_def = sprite_def1;
 	init_mouse(sprite_def->x, sprite_def->y);
 
 	for (int i = 0; i < 5; i++)
@@ -214,10 +243,25 @@ int main()
 				sprite_def->y = 0;
 			break;
 		case VK_ESC:
-			sprite_def->addr = 0;
+			de_init_sprites();
 			cls(0);	
 			de_init_mouse();
 			return (0);
+		case VK_F1:
+			sprite_def = sprite_def1;
+			break;
+		case VK_F2:
+			sprite_def = sprite_def2;
+			break;
+		case VK_F3:
+			sprite_def = sprite_def3;
+			break;
+		case VK_F4:
+			sprite_def = sprite_def4;
+			break;
+		case VK_F5:
+			sprite_def = sprite_def5;
+			break;
 		}
 		if (vkp != 0 && vkp != VK_SPACE)
 			old = vkp;

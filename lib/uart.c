@@ -26,8 +26,6 @@ void send_uart(unsigned char b)
         busy = *PORT_UART_TX_BUSY;
     } while (busy != 0);
     *PORT_UART_TX_SEND_BYTE = b; //send the byte to the SPI
-
-    //*PORT_LED = b;
 }
 
 int counter;

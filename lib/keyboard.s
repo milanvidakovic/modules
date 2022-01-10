@@ -209,8 +209,8 @@ irq_triggered:
 	push r1
 	push r2
 
-	# in r0, [IO_PORT_KEYBOARD] 	# r0 holds the keyboard scancode (2147484328)
-	ld.s r0, [2147484328]
+	# r0 holds the keyboard scancode (2147484328)
+	ld.s r0, [2147484328] 		# 2147484328 == 0x800002A8 (0x80000000 + 680)
 
 	mov.w r1, 0
 	ld.s r2, [state]

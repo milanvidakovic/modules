@@ -2,6 +2,16 @@
 
 typedef unsigned long long uint64_t;
 
+#define FLT_DIG		6
+#define FLT_EPSILON	1.19209289550781250000e-07
+#define FLT_MANT_DIG	24
+#define FLT_MAX		3.40282346638528860000e+38
+#define FLT_MAX_10_EXP	38
+#define FLT_MAX_EXP	128
+#define FLT_MIN		1.17549435082228750000e-38
+#define FLT_MIN_10_EXP	-37
+#define FLT_MIN_EXP	-125 
+#define INF 0x7f800000
 
 typedef union
 {
@@ -79,3 +89,11 @@ fp_t __floatsisf(int a);
 float __modf(float x, float *iptr);
 /* Converts float to int. */
 int __fixsfsi(float f);
+
+rep_t toRep(fp_t x);
+
+/* Returns float number from four bytes */
+fp_t fromRep(rep_t x);
+
+uint32_t __fixunssfsi(fp_t a);
+fp_t __floatunsisf(unsigned int a);

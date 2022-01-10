@@ -1000,6 +1000,7 @@ urlDecode:
 	nop	
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
+	mov.w	sp, r12	#,
 	pop	r6		#
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -5073,6 +5074,7 @@ www_client_internal_datafill_cb:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:908: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 16 #111	#,
+	mov.w	sp, r12	#,
 	pop	r9		#
 	pop	r8		#
 	pop	r7		#
@@ -6565,6 +6567,7 @@ dumpPacket:
 	nop	
 	mov.w	r12, r13	#,
 	sub.w	r12, 24 #111	#,
+	mov.w	sp, r12	#,
 	pop	r11		#
 	pop	r10		#
 	pop	r9		#

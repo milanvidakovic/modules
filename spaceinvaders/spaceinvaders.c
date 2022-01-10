@@ -5,16 +5,6 @@
 #include <consts.h>
 #include <graphics.h>
 
-#define BLACK  0x0
-#define BLUE   0x9
-#define GREEN  0xA
-#define CYAN   0x3
-#define RED    0x4
-#define PURPLE 0x5
-#define YELLOW 0xE
-#define WHITE  0xF
-
-
 // BASE_Y je Y pozicija na kojoj se crtaju 4 baze koje sluze kao stit od metaka
 #define BASE_Y 188
 

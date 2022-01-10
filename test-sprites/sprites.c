@@ -5,11 +5,6 @@
 #include <graphics.h>
 #include <mouse.h>
 
-#define RED 	0x4
-#define GREEN 	0x2
-#define BLUE 	0x1
-#define WHITE 	0x7
-
 typedef struct {
 	short addr; // address of the sprite bitmap
 	short x;	// x coordinate of the sprite

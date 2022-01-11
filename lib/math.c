@@ -1,6 +1,7 @@
 #include <types.h>
 #include<floatimpl.h>
 #include <math.h>
+#include <stdio.h>
 
 float roundf(float x)
 {
@@ -136,10 +137,13 @@ float cosf(float x)
 float tanf(float x)
 {
   float d = cosf(x);
+  float g = sinf(x);
   if (d == 0.0f) {
-    return INF;
+	if (g >= 0)
+    	return INF;
+	return -INF;
   }
-  return sinf(x) / d;
+  return g / d;
 }
 
 float floorf(float d)
@@ -186,12 +190,12 @@ float frexpf(float x, int *i)
 	if (x >= 1.0f)
 		while (x >= 1.0f) {
 			j = j+1;
-			x = x/2;
+			x = x/2.0f;
 		}
 	else if (x < 0.5f && x != 0.0f)
 		while (x < 0.5f) {
 			j = j-1;
-			x = 2*x;
+			x = 2.0f*x;
 		}
 	*i = j;
 	if (neg)
@@ -315,7 +319,6 @@ float sqrtf(float arg)
 	int i;
 
 	if(arg <= 0.) {
-		if(arg < 0.)
 		return(0.);
 	}
 	x = frexpf(arg,&exp);
@@ -374,3 +377,100 @@ float powf(float arg1, float arg2)
 domain:
 	return(0.);
 }
+
+float aspio2	= 1.570796326794896619f;
+
+float atsq2p1	 =2.414213562373095048802e0f;
+float atsq2m1	 = .414213562373095048802e0f;
+float atpio2	 =1.570796326794896619231e0f;
+float atpio4	 = .785398163397448309615e0f;
+float atp4	 = .161536412982230228262e2f;
+float atp3	 = .26842548195503973794141e3f;
+float atp2	 = .11530293515404850115428136e4f;
+float atp1	 = .178040631643319697105464587e4f;
+float atp0	 = .89678597403663861959987488e3f;
+float atq4	 = .5895697050844462222791e2f;
+float atq3	 = .536265374031215315104235e3f;
+float atq2	 = .16667838148816337184521798e4f;
+float atq1	 = .207933497444540981287275926e4f;
+float atq0	 = .89678597403663861962481162e3f;
+
+/*
+ * xatan evaluates a series valid in the
+ * range [-0.414...,+0.414...].
+ */
+float xatan(float arg)
+{
+	float argsq;
+	float value;
+
+	argsq = arg*arg;
+	value = ((((atp4*argsq + atp3)*argsq + atp2)*argsq + atp1)*argsq + atp0);
+	value = value/(((((argsq + atq4)*argsq + atq3)*argsq + atq2)*argsq + atq1)*argsq + atq0);
+	return(value*arg);
+}
+
+/*
+ * satan reduces its argument (known to be positive)
+ * to the range [0,0.414...] and calls xatan.
+ */
+float satan(float arg)
+{
+	if(arg < atsq2m1)
+		return(xatan(arg));
+	else if(arg > atsq2p1)
+		return(atpio2 - xatan(1.0f/arg));
+	else
+		return(atpio4 + xatan((arg-1.0f)/(arg+1.0f)));
+}
+
+/*
+ * atan makes its argument positive and
+ * calls the inner routine satan.
+ */
+float atanf(float arg)
+{
+	if(arg>=0.0f)
+		return(satan(arg));
+	else
+		return(-satan(-arg));
+} 
+
+float asinf(float arg)
+{
+	float sign, temp;
+	float t1;
+
+	sign = 1.;
+	if(arg < 0){
+		arg = -arg;
+		sign = -1.;
+	}
+
+	if(arg > 1.f){
+		return(0.f);
+	}
+
+	temp = sqrtf(1.f - arg*arg);
+	if(arg > 0.7f)
+	{
+		t1 = atanf(temp/arg);
+		temp = aspio2 - t1;
+	} else
+	{
+		temp = atanf(arg/temp);
+	}
+	return(sign*temp);
+}
+
+float acosf(float arg)
+{
+	if(arg < 0)
+		arg = -arg;
+
+	if(arg > 1.f){
+		return(0.);
+	}
+
+	return(aspio2 - asinf(arg));
+} 

@@ -56,9 +56,12 @@ unsigned int vsprintf(char *dst, char* fmt, va_list args)
 
                 arg = (ts.value);
 
-                if (f == INF)
+                if (f == INF || f == -INF)
                 {
-                    p="(inf)";
+                    if (f == INF)
+                        p ="(inf)";
+                    else    
+                        p = "(-inf)";
                     while(*p) {
                         *dst++ = *p++;
                     }

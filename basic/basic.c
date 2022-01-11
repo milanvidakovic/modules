@@ -185,6 +185,11 @@ const unsigned char func_tab[] = {
   'L','O','G' 			   		, 0x01,
   'S','Q','R','T' 		   		, 0x01,
   'P','O','W'	 		   		, 0x01,
+  'P','I'		 		   		, 0x01,
+  'E','X'		 		   		, 0x01,
+  'A','T','A','N' 		   		, 0x01,
+  'A','S','I','N' 		   		, 0x01,
+  'A','C','O','S' 		   		, 0x01,
   0
 };
 #define FUNC_PEEK    0
@@ -201,6 +206,11 @@ const unsigned char func_tab[] = {
 #define FUNC_LOG	 11
 #define FUNC_SQRT	 12
 #define FUNC_POW	 13
+#define CONST_PI	 14
+#define CONST_E		 15
+#define FUNC_ATAN	 16
+#define FUNC_ASIN	 17
+#define FUNC_ACOS	 18
 #define FUNC_UNKNOWN 20
 
 const char to_tab[] = {
@@ -658,7 +668,7 @@ VAR expr4(void)
 			return val;
 		}
 
-		// Is it a function with no parameters, or with a single parameter
+		// Is it a function with no parameters, or with a single parameter, or constants
 		scantable(func_tab);
 
 #if DEBUG == 1
@@ -667,7 +677,7 @@ printf("expr4: table_index is: %d\n", table_index);
 
 		if (table_index == FUNC_UNKNOWN)
 			goto expr4_error;
-		// functions with no parameters
+		// functions with no parameters, or consts
 		switch(table_index)
 		{
 		case FUNC_KEY:
@@ -678,6 +688,10 @@ printf("expr4: table_index is: %d\n", table_index);
 			if (check_no_arg_func())
 				goto expr4_error;
 			return is_key_pressed();
+		case CONST_PI:
+			return M_PI;
+		case CONST_E:
+			return M_E;
 		}
 		
 		f = table_index;
@@ -736,6 +750,12 @@ printf("expr4: table_index is: %d\n", table_index);
 				return(sqrtf(val));
 			case FUNC_POW:
 				return(powf(val, val2));
+			case FUNC_ATAN:
+				return(atanf(val));
+			case FUNC_ASIN:
+				return(asinf(val));
+			case FUNC_ACOS:
+				return(acosf(val));
 		}
 	}
 

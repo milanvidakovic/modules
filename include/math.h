@@ -126,3 +126,6 @@ float logf(float arg);
 float log10f(float arg);
 float sqrtf(float arg);
 float powf(float arg1, float arg2);
+float atanf(float arg);
+float asinf(float arg);
+float acosf(float arg);

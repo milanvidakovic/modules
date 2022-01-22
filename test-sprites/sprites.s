@@ -3,7 +3,8 @@
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
 # options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
-# sprites.c -mel -auxbase-strip sprites.s -fsigned-char -fverbose-asm
+# -D KERNEL sprites.c -mel -auxbase-strip sprites.s -fsigned-char
+# -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
 # -fauto-inc-dec -fdelete-null-pointer-checks -fearly-inlining
 # -feliminate-unused-debug-symbols -feliminate-unused-debug-types

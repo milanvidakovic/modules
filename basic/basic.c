@@ -687,7 +687,7 @@ printf("expr4: table_index is: %d\n", table_index);
 		case FUNC_ISKEY:
 			if (check_no_arg_func())
 				goto expr4_error;
-			return is_key_pressed();
+			return is_key_pressed() + is_key_released();
 		case CONST_PI:
 			return M_PI;
 		case CONST_E:

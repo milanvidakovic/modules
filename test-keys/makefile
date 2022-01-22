@@ -1,0 +1,5 @@
+TARGET=keys
+
+include ../makefile
+
+

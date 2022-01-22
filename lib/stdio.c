@@ -8,6 +8,9 @@
 //#include <tcpip.h>
 //#include <enc28j60.h>
 
+//#define US_LAYOUT
+#define SERBIAN_LAYOUT
+
 int current_video_mode;
 char *VIDEO = (char *)0x401;
 
@@ -24,6 +27,7 @@ short int *VIRTUAL_KEY_ADDR				= (short int*)48	; // address where the virtual k
 
 int gets_finished = 0;
 int shift_pressed = 0;
+int altgr_pressed = 0;
 int key_is_pressed = 0;
 int vk_pressed, vk_released;
 int key_is_released = 0;
@@ -176,8 +180,9 @@ void key_pressed()
 			case VK_RIGHT_CONTROL: 
 				ctrl_c = 1;
 				break;
-			case VK_LEFT_ALT:
 			case VK_RIGHT_ALT: 
+				altgr_pressed = 1;
+			case VK_LEFT_ALT:
 				if (ctrl_c == 1)
 					do_reset = 1;
 				break;
@@ -217,6 +222,8 @@ void key_pressed()
 	);
 }
 
+unsigned short int *PORT_LED	= (unsigned short int *)(0x80000000 + 670)	; // port for LED
+
 void key_released()
 {
 	int i;
@@ -233,11 +240,15 @@ void key_released()
 	{
 		shift_pressed = 0;
 	}
-	else if ((i == VK_LEFT_CONTROL) || (i == VK_RIGHT_CONTROL)) 
+	if ((i == VK_LEFT_CONTROL) || (i == VK_RIGHT_CONTROL)) 
 	{
 		ctrl_c = 0;
 		do_reset = 0;
+	} 
+	if ((i == VK_LEFT_ALT) || (i == VK_RIGHT_ALT)) {
+		altgr_pressed = 0;
 	}
+	//*PORT_LED = i;
 
 	asm 
 	(
@@ -245,6 +256,66 @@ void key_released()
 	);
 }
 
+#ifdef SERBIAN_LAYOUT
+int vk_to_char(int vk)
+{
+	if (vk == 32)
+		return vk;
+	if ((vk >= 'A') && (vk <= 'Z')) 
+	{
+
+		switch(vk) {
+			case VK_Q: if (altgr_pressed) return 92; else break;
+			case VK_W: if (altgr_pressed) return 124; else break;
+			case VK_F: if (altgr_pressed) return 91; else break;
+			case VK_G: if (altgr_pressed) return 93; else break;
+			case VK_B: if (altgr_pressed) return 123; else break;
+			case VK_N: if (altgr_pressed) return 125; else break;
+			case VK_V: if (altgr_pressed) return 64; else break;
+			case VK_Z: if (!shift_pressed) return 'y'; else return 'Y';
+			case VK_Y: if (!shift_pressed) return 'z'; else return 'Z';
+		}
+
+		if (shift_pressed)
+			return vk;
+		else
+			return vk + 32;
+	} else
+	{
+		switch (vk)
+		{
+			case VK_0: if (!shift_pressed) return 48; else return 61;// 0, =
+			case VK_1: if (!shift_pressed) return 49; else return 33;// 1, !
+			case VK_2: if (!shift_pressed) return 50; else return 34;// 2, "
+			case VK_3: if (!shift_pressed) return 51; else return 35;// 3, #
+			case VK_4: if (!shift_pressed) return 52; else return 36;// 4, $
+			case VK_5: if (!shift_pressed) return 53; else return 37;// 5, %
+			case VK_6: if (!shift_pressed) return 54; else return 38;// 6, &
+			case VK_7: if (!shift_pressed) return 55; else return 47;// 7, /
+			case VK_8: if (!shift_pressed) return 56; else return 40;// 8, (
+			case VK_9: if (!shift_pressed) return 57; else return 41;// 9, )
+		
+			case VK_BACK_QUOTE: if (!shift_pressed) return 96; else return 126;	// ‚ ~
+			case VK_MINUS:			if (!shift_pressed) return 39; else return 63;	// ', ?
+			case VK_EQUALS:	 		if (!shift_pressed) return  43; else return 42;	// +, *
+		
+			case VK_BRACE_LEFT: if (!shift_pressed) return 91; else return 123	;	// [, {
+			case VK_BRACE_RIGHT:if (!shift_pressed) return 93; else return 125  ;	// ], }
+			case VK_SEMICOLON: 	if (!shift_pressed) return 59; else return 58   ;	// ;, :
+			case VK_QUOTE: 			if (!shift_pressed) return 39; else return 63;	// ', "
+			case VK_BACK_SLASH:	if (!shift_pressed) return 92; else return 124;		// \, |
+			case VK_COMMA: 			if (!shift_pressed) return 44; else return 59;	// ,, ;
+			case VK_FULL_STOP: 	if (!shift_pressed) return 46; else return 58;		// ., :
+			case VK_LESS_THAN: 	if (!shift_pressed) return 60; else return 62;		// <, >
+			case VK_SLASH: 			if (!shift_pressed) return 45; else return 95;	// -, _
+			default:
+				return 0;
+
+		}
+	}
+}
+#else
+// US_LAYOUT
 int vk_to_char(int vk)
 {
 	if (vk == 32)
@@ -289,6 +360,8 @@ int vk_to_char(int vk)
 		}
 	}
 }
+#endif
+
 void put_char(int c)
 {
 	int i, j;
@@ -399,6 +472,7 @@ char * gets(char *s)
 	int len;
 	*VIRTUAL_KEY_ADDR = 0;
 	shift_pressed = 0;
+	altgr_pressed = 0;
 	
 	start_video = (int)VIDEO;
 	j = 0;

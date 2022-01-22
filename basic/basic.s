@@ -2075,9 +2075,9 @@ expr4:
 	ld.w	r0, [txtpos]	# txtpos.91_2, txtpos
 	ld.b	r0, [r0]	# _3, *txtpos.91_2
 # basic.c:611: 	if (*txtpos == '-') {
-	zex.b	r1, r0	# tmp118, _3
-	mov.w	r0, 45	# tmp119,
-	cmp.w	r1, r0	# tmp118, tmp119
+	zex.b	r1, r0	# tmp120, _3
+	mov.w	r0, 45	# tmp121,
+	cmp.w	r1, r0	# tmp120, tmp121
 	jnz	.L86		#
 # basic.c:612: 		txtpos++;
 	ld.w	r0, [txtpos]	# txtpos.92_4, txtpos
@@ -2087,53 +2087,53 @@ expr4:
 	call	expr4		#
 	mov.w	r1, r0	# _6,
 # basic.c:613: 		return -expr4();
-	mov.w	r0, -2147483648	# tmp120,
-	xor.w	r1, r0	# _98, tmp120
+	mov.w	r0, -2147483648	# tmp122,
+	xor.w	r1, r0	# _100, tmp122
 	j	.L87		#
 .L86:
 # basic.c:624: 	if (*txtpos >= '0' && *txtpos <= '9')
 	ld.w	r0, [txtpos]	# txtpos.93_7, txtpos
 	ld.b	r0, [r0]	# _8, *txtpos.93_7
 # basic.c:624: 	if (*txtpos >= '0' && *txtpos <= '9')
-	zex.b	r1, r0	# tmp121, _8
-	mov.w	r0, 47	# tmp122,
-	cmp.w	r1, r0	# tmp121, tmp122
+	zex.b	r1, r0	# tmp123, _8
+	mov.w	r0, 47	# tmp124,
+	cmp.w	r1, r0	# tmp123, tmp124
 	jse	.L88		#
 # basic.c:624: 	if (*txtpos >= '0' && *txtpos <= '9')
 	ld.w	r0, [txtpos]	# txtpos.94_9, txtpos
 	ld.b	r0, [r0]	# _10, *txtpos.94_9
 # basic.c:624: 	if (*txtpos >= '0' && *txtpos <= '9')
-	zex.b	r1, r0	# tmp123, _10
-	mov.w	r0, 57	# tmp124,
-	cmp.w	r1, r0	# tmp123, tmp124
+	zex.b	r1, r0	# tmp125, _10
+	mov.w	r0, 57	# tmp126,
+	cmp.w	r1, r0	# tmp125, tmp126
 	jg	.L88		#
 # basic.c:626: 		VAR a = 0;
-	xor.w	r0, r0	# tmp125
-	st.w	[r13 + (-8)], r0	# a, tmp125
+	xor.w	r0, r0	# tmp127
+	st.w	[r13 + (-8)], r0	# a, tmp127
 # basic.c:627: 		int decimals = 0;
-	xor.w	r0, r0	# tmp126
-	st.w	[r13 + (-12)], r0	# decimals, tmp126
+	xor.w	r0, r0	# tmp128
+	st.w	[r13 + (-12)], r0	# decimals, tmp128
 # basic.c:628: 		float dec = 0.1f;
-	mov.w	r0, 1036831949	# tmp127,
-	st.w	[r13 + (-16)], r0	# dec, tmp127
+	mov.w	r0, 1036831949	# tmp129,
+	st.w	[r13 + (-16)], r0	# dec, tmp129
 .L93:
 # basic.c:630: 			if (*txtpos == '.') 
 	ld.w	r0, [txtpos]	# txtpos.95_11, txtpos
 	ld.b	r0, [r0]	# _12, *txtpos.95_11
 # basic.c:630: 			if (*txtpos == '.') 
-	zex.b	r1, r0	# tmp128, _12
-	mov.w	r0, 46	# tmp129,
-	cmp.w	r1, r0	# tmp128, tmp129
+	zex.b	r1, r0	# tmp130, _12
+	mov.w	r0, 46	# tmp131,
+	cmp.w	r1, r0	# tmp130, tmp131
 	jnz	.L89		#
 # basic.c:632: 				decimals = 1;
-	mov.w	r0, 1	# tmp130,
-	st.w	[r13 + (-12)], r0	# decimals, tmp130
+	mov.w	r0, 1	# tmp132,
+	st.w	[r13 + (-12)], r0	# decimals, tmp132
 	j	.L90		#
 .L89:
 # basic.c:636: 				if (decimals)
-	ld.w	r1, [r13 + (-12)]	# tmp131, decimals
-	xor.w	r0, r0	# tmp132
-	cmp.w	r1, r0	# tmp131, tmp132
+	ld.w	r1, [r13 + (-12)]	# tmp133, decimals
+	xor.w	r0, r0	# tmp134
+	cmp.w	r1, r0	# tmp133, tmp134
 	jz	.L91		#
 # basic.c:638: 					a = a + dec * (*txtpos - '0');
 	ld.w	r0, [txtpos]	# txtpos.96_13, txtpos
@@ -2145,40 +2145,40 @@ expr4:
 	st.w	[sp], r0	#, _16
 	call	__floatsisf		#
 	mov.w	r2, r0	# _17,
-	ld.w	r1, [r13 + (-16)]	# tmp133, dec
-	mov.w	r0, r2	# tmp134, _17
-	st.w	[sp + (4)], r1	#, tmp133
-	st.w	[sp], r0	#, tmp134
+	ld.w	r1, [r13 + (-16)]	# tmp135, dec
+	mov.w	r0, r2	# tmp136, _17
+	st.w	[sp + (4)], r1	#, tmp135
+	st.w	[sp], r0	#, tmp136
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp135,
-	mov.w	r0, r1	# _18, tmp135
+	mov.w	r1, r0	# tmp137,
+	mov.w	r0, r1	# _18, tmp137
 # basic.c:638: 					a = a + dec * (*txtpos - '0');
-	st.w	[sp + (4)], r0	#, tmp136
-	ld.w	r0, [r13 + (-8)]	# tmp137, a
-	st.w	[sp], r0	#, tmp137
+	st.w	[sp + (4)], r0	#, tmp138
+	ld.w	r0, [r13 + (-8)]	# tmp139, a
+	st.w	[sp], r0	#, tmp139
 	call	__addsf3		#
-	mov.w	r1, r0	# tmp138,
-	mov.w	r0, r1	# tmp139, tmp138
-	st.w	[r13 + (-8)], r0	# a, tmp139
+	mov.w	r1, r0	# tmp140,
+	mov.w	r0, r1	# tmp141, tmp140
+	st.w	[r13 + (-8)], r0	# a, tmp141
 # basic.c:639: 					dec = dec * 0.1f;
-	mov.w	r0, 1036831949	# tmp140,
-	st.w	[sp + (4)], r0	#, tmp140
-	ld.w	r0, [r13 + (-16)]	# tmp141, dec
-	st.w	[sp], r0	#, tmp141
+	mov.w	r0, 1036831949	# tmp142,
+	st.w	[sp + (4)], r0	#, tmp142
+	ld.w	r0, [r13 + (-16)]	# tmp143, dec
+	st.w	[sp], r0	#, tmp143
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp142,
-	mov.w	r0, r1	# tmp143, tmp142
-	st.w	[r13 + (-16)], r0	# dec, tmp143
+	mov.w	r1, r0	# tmp144,
+	mov.w	r0, r1	# tmp145, tmp144
+	st.w	[r13 + (-16)], r0	# dec, tmp145
 	j	.L90		#
 .L91:
 # basic.c:642: 					a = a * 10 + (*txtpos - '0');
-	mov.w	r0, 1092616192	# tmp144,
-	st.w	[sp + (4)], r0	#, tmp144
-	ld.w	r0, [r13 + (-8)]	# tmp145, a
-	st.w	[sp], r0	#, tmp145
+	mov.w	r0, 1092616192	# tmp146,
+	st.w	[sp + (4)], r0	#, tmp146
+	ld.w	r0, [r13 + (-8)]	# tmp147, a
+	st.w	[sp], r0	#, tmp147
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp146,
-	mov.w	r6, r1	# _19, tmp146
+	mov.w	r1, r0	# tmp148,
+	mov.w	r6, r1	# _19, tmp148
 # basic.c:642: 					a = a * 10 + (*txtpos - '0');
 	ld.w	r0, [txtpos]	# txtpos.97_20, txtpos
 	ld.b	r0, [r0]	# _21, *txtpos.97_20
@@ -2190,13 +2190,13 @@ expr4:
 	call	__floatsisf		#
 	mov.w	r1, r0	# _24,
 # basic.c:642: 					a = a * 10 + (*txtpos - '0');
-	mov.w	r0, r6	# tmp148, _19
-	st.w	[sp + (4)], r1	#, tmp147
-	st.w	[sp], r0	#, tmp148
+	mov.w	r0, r6	# tmp150, _19
+	st.w	[sp + (4)], r1	#, tmp149
+	st.w	[sp], r0	#, tmp150
 	call	__addsf3		#
-	mov.w	r1, r0	# tmp149,
-	mov.w	r0, r1	# tmp150, tmp149
-	st.w	[r13 + (-8)], r0	# a, tmp150
+	mov.w	r1, r0	# tmp151,
+	mov.w	r0, r1	# tmp152, tmp151
+	st.w	[r13 + (-8)], r0	# a, tmp152
 .L90:
 # basic.c:644: 			txtpos++;
 	ld.w	r0, [txtpos]	# txtpos.98_25, txtpos
@@ -2206,64 +2206,64 @@ expr4:
 	ld.w	r0, [txtpos]	# txtpos.99_27, txtpos
 	ld.b	r0, [r0]	# _28, *txtpos.99_27
 # basic.c:645: 		} while ((*txtpos >= '0' && *txtpos <= '9') || (*txtpos == '.'));
-	zex.b	r1, r0	# tmp151, _28
-	mov.w	r0, 47	# tmp152,
-	cmp.w	r1, r0	# tmp151, tmp152
+	zex.b	r1, r0	# tmp153, _28
+	mov.w	r0, 47	# tmp154,
+	cmp.w	r1, r0	# tmp153, tmp154
 	jse	.L92		#
 # basic.c:645: 		} while ((*txtpos >= '0' && *txtpos <= '9') || (*txtpos == '.'));
 	ld.w	r0, [txtpos]	# txtpos.100_29, txtpos
 	ld.b	r0, [r0]	# _30, *txtpos.100_29
 # basic.c:645: 		} while ((*txtpos >= '0' && *txtpos <= '9') || (*txtpos == '.'));
-	zex.b	r1, r0	# tmp153, _30
-	mov.w	r0, 57	# tmp154,
-	cmp.w	r1, r0	# tmp153, tmp154
+	zex.b	r1, r0	# tmp155, _30
+	mov.w	r0, 57	# tmp156,
+	cmp.w	r1, r0	# tmp155, tmp156
 	jse	.L93		#
 .L92:
 # basic.c:645: 		} while ((*txtpos >= '0' && *txtpos <= '9') || (*txtpos == '.'));
 	ld.w	r0, [txtpos]	# txtpos.101_31, txtpos
 	ld.b	r0, [r0]	# _32, *txtpos.101_31
 # basic.c:645: 		} while ((*txtpos >= '0' && *txtpos <= '9') || (*txtpos == '.'));
-	zex.b	r1, r0	# tmp155, _32
-	mov.w	r0, 46	# tmp156,
-	cmp.w	r1, r0	# tmp155, tmp156
+	zex.b	r1, r0	# tmp157, _32
+	mov.w	r0, 46	# tmp158,
+	cmp.w	r1, r0	# tmp157, tmp158
 	jz	.L93		#
 # basic.c:649: 		return a;
-	ld.w	r1, [r13 + (-8)]	# _98, a
+	ld.w	r1, [r13 + (-8)]	# _100, a
 	j	.L87		#
 .L88:
 # basic.c:656: 	if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
 	ld.w	r0, [txtpos]	# txtpos.102_33, txtpos
 	ld.b	r0, [r0]	# _34, *txtpos.102_33
 # basic.c:656: 	if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
-	zex.b	r1, r0	# tmp157, _34
-	mov.w	r0, 64	# tmp158,
-	cmp.w	r1, r0	# tmp157, tmp158
+	zex.b	r1, r0	# tmp159, _34
+	mov.w	r0, 64	# tmp160,
+	cmp.w	r1, r0	# tmp159, tmp160
 	jse	.L94		#
 # basic.c:656: 	if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
 	ld.w	r0, [txtpos]	# txtpos.103_35, txtpos
 	ld.b	r0, [r0]	# _36, *txtpos.103_35
 # basic.c:656: 	if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
-	zex.b	r1, r0	# tmp159, _36
-	mov.w	r0, 90	# tmp160,
-	cmp.w	r1, r0	# tmp159, tmp160
+	zex.b	r1, r0	# tmp161, _36
+	mov.w	r0, 90	# tmp162,
+	cmp.w	r1, r0	# tmp161, tmp162
 	jg	.L94		#
 # basic.c:660: 		if (txtpos[1] < 'A' || txtpos[1] > 'Z')
 	ld.w	r0, [txtpos]	# txtpos.104_37, txtpos
 	add.w	r0, 1 #111	# _38,
 	ld.b	r0, [r0]	# _39, *_38
 # basic.c:660: 		if (txtpos[1] < 'A' || txtpos[1] > 'Z')
-	zex.b	r1, r0	# tmp161, _39
-	mov.w	r0, 64	# tmp162,
-	cmp.w	r1, r0	# tmp161, tmp162
+	zex.b	r1, r0	# tmp163, _39
+	mov.w	r0, 64	# tmp164,
+	cmp.w	r1, r0	# tmp163, tmp164
 	jse	.L95		#
 # basic.c:660: 		if (txtpos[1] < 'A' || txtpos[1] > 'Z')
 	ld.w	r0, [txtpos]	# txtpos.105_40, txtpos
 	add.w	r0, 1 #111	# _41,
 	ld.b	r0, [r0]	# _42, *_41
 # basic.c:660: 		if (txtpos[1] < 'A' || txtpos[1] > 'Z')
-	zex.b	r1, r0	# tmp163, _42
-	mov.w	r0, 90	# tmp164,
-	cmp.w	r1, r0	# tmp163, tmp164
+	zex.b	r1, r0	# tmp165, _42
+	mov.w	r0, 90	# tmp166,
+	cmp.w	r1, r0	# tmp165, tmp166
 	jse	.L96		#
 .L95:
 # basic.c:666: 			val = ((VAR *)variables_begin)[*txtpos - 'A'];
@@ -2273,54 +2273,54 @@ expr4:
 	ld.b	r1, [r1]	# _45, *txtpos.107_44
 # basic.c:666: 			val = ((VAR *)variables_begin)[*txtpos - 'A'];
 	zex.b	r1, r1	# _46, _45
-	mov.w	r2, 1073741759	# tmp165,
-	add.w	r1, r2 #222	# _47, tmp165
-	mov.w	r2, 2	# tmp166,
-	shl.w	r1, r2	# _48, tmp166
+	mov.w	r2, 1073741759	# tmp167,
+	add.w	r1, r2 #222	# _47, tmp167
+	mov.w	r2, 2	# tmp168,
+	shl.w	r1, r2	# _48, tmp168
 	add.w	r0, r1 #222	# _49, _48
 # basic.c:666: 			val = ((VAR *)variables_begin)[*txtpos - 'A'];
-	ld.w	r0, [r0]	# tmp167, *_49
-	st.w	[r13 + (-28)], r0	# val, tmp167
+	ld.w	r0, [r0]	# tmp169, *_49
+	st.w	[r13 + (-28)], r0	# val, tmp169
 # basic.c:667: 			txtpos++;
 	ld.w	r0, [txtpos]	# txtpos.108_50, txtpos
 	add.w	r0, 1 #111	# _51,
 	st.w	[txtpos], r0	# txtpos, _51
 # basic.c:668: 			return val;
-	ld.w	r1, [r13 + (-28)]	# _98, val
+	ld.w	r1, [r13 + (-28)]	# _100, val
 	j	.L87		#
 .L96:
 # basic.c:672: 		scantable(func_tab);
-	mov.w	r1, sp	# tmp168,
-	mov.w	r0, func_tab	# tmp169,
-	st.w	[r1], r0	#, tmp169
+	mov.w	r1, sp	# tmp170,
+	mov.w	r0, func_tab	# tmp171,
+	st.w	[r1], r0	#, tmp171
 	call	scantable		#
 # basic.c:678: 		if (table_index == FUNC_UNKNOWN)
 	ld.b	r0, [table_index]	# table_index.109_52, table_index
 # basic.c:678: 		if (table_index == FUNC_UNKNOWN)
-	sex.b	r1, r0	# tmp170, table_index.109_52
-	mov.w	r0, 20	# tmp171,
-	cmp.w	r1, r0	# tmp170, tmp171
+	sex.b	r1, r0	# tmp172, table_index.109_52
+	mov.w	r0, 20	# tmp173,
+	cmp.w	r1, r0	# tmp172, tmp173
 	jz	.L128		#
 # basic.c:681: 		switch(table_index)
 	ld.b	r0, [table_index]	# table_index.110_53, table_index
 	sex.b	r0, r0	# _54, table_index.110_53
-	mov.w	r1, 15	# tmp172,
-	cmp.w	r0, r1	# _54, tmp172
-	jz	.L99		#
-	mov.w	r1, 15	# tmp173,
-	cmp.w	r0, r1	# _54, tmp173
-	jgs	.L100		#
-	mov.w	r1, 14	# tmp174,
+	mov.w	r1, 15	# tmp174,
 	cmp.w	r0, r1	# _54, tmp174
-	jz	.L101		#
-	mov.w	r1, 14	# tmp175,
+	jz	.L99		#
+	mov.w	r1, 15	# tmp175,
 	cmp.w	r0, r1	# _54, tmp175
 	jgs	.L100		#
-	mov.w	r1, 5	# tmp176,
+	mov.w	r1, 14	# tmp176,
 	cmp.w	r0, r1	# _54, tmp176
-	jz	.L102		#
-	mov.w	r1, 6	# tmp177,
+	jz	.L101		#
+	mov.w	r1, 14	# tmp177,
 	cmp.w	r0, r1	# _54, tmp177
+	jgs	.L100		#
+	mov.w	r1, 5	# tmp178,
+	cmp.w	r0, r1	# _54, tmp178
+	jz	.L102		#
+	mov.w	r1, 6	# tmp179,
+	cmp.w	r0, r1	# _54, tmp179
 	jz	.L103		#
 	j	.L100		#
 .L102:
@@ -2328,350 +2328,357 @@ expr4:
 	call	check_no_arg_func		#
 	mov.w	r1, r0	# _55,
 # basic.c:684: 			if (check_no_arg_func())
-	xor.w	r0, r0	# tmp178
-	cmp.w	r1, r0	# _55, tmp178
+	xor.w	r0, r0	# tmp180
+	cmp.w	r1, r0	# _55, tmp180
 	jnz	.L129		#
 # basic.c:686: 			return getc();
 	call	getc		#
 	st.w	[sp], r0	#, _56
 	call	__floatsisf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L103:
 # basic.c:688: 			if (check_no_arg_func())
 	call	check_no_arg_func		#
 	mov.w	r1, r0	# _57,
 # basic.c:688: 			if (check_no_arg_func())
-	xor.w	r0, r0	# tmp179
-	cmp.w	r1, r0	# _57, tmp179
+	xor.w	r0, r0	# tmp181
+	cmp.w	r1, r0	# _57, tmp181
 	jnz	.L130		#
-# basic.c:690: 			return is_key_pressed();
+# basic.c:690: 			return is_key_pressed() + is_key_released();
 	call	is_key_pressed		#
-	st.w	[sp], r0	#, _58
+	mov.w	r6, r0	# _58,
+# basic.c:690: 			return is_key_pressed() + is_key_released();
+	call	is_key_released		#
+	mov.w	r1, r0	# _59,
+# basic.c:690: 			return is_key_pressed() + is_key_released();
+	mov.w	r0, r6	# _60, _58
+	add.w	r0, r1 #222	# _60, _59
+	st.w	[sp], r0	#, _60
 	call	__floatsisf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L101:
 # basic.c:692: 			return M_PI;
-	mov.w	r1, 1078530011	# _98,
+	mov.w	r1, 1078530011	# _100,
 	j	.L87		#
 .L99:
 # basic.c:694: 			return M_E;
-	mov.w	r1, 1076754516	# _98,
+	mov.w	r1, 1076754516	# _100,
 	j	.L87		#
 .L100:
 # basic.c:697: 		f = table_index;
-	ld.b	r0, [table_index]	# table_index.111_59, table_index
-	st.b	[r13 + (-21)], r0	# f, table_index.111_59
+	ld.b	r0, [table_index]	# table_index.111_61, table_index
+	st.b	[r13 + (-21)], r0	# f, table_index.111_61
 # basic.c:699: 		if (*txtpos != '(')
-	ld.w	r0, [txtpos]	# txtpos.112_60, txtpos
-	ld.b	r0, [r0]	# _61, *txtpos.112_60
+	ld.w	r0, [txtpos]	# txtpos.112_62, txtpos
+	ld.b	r0, [r0]	# _63, *txtpos.112_62
 # basic.c:699: 		if (*txtpos != '(')
-	zex.b	r1, r0	# tmp180, _61
-	mov.w	r0, 40	# tmp181,
-	cmp.w	r1, r0	# tmp180, tmp181
+	zex.b	r1, r0	# tmp182, _63
+	mov.w	r0, 40	# tmp183,
+	cmp.w	r1, r0	# tmp182, tmp183
 	jnz	.L131		#
 # basic.c:702: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.113_62, txtpos
-	add.w	r0, 1 #111	# _63,
-	st.w	[txtpos], r0	# txtpos, _63
+	ld.w	r0, [txtpos]	# txtpos.113_64, txtpos
+	add.w	r0, 1 #111	# _65,
+	st.w	[txtpos], r0	# txtpos, _65
 # basic.c:703: 		expression_error = 0;
-	xor.w	r0, r0	# tmp182
-	st.b	[expression_error], r0	# expression_error, tmp182
+	xor.w	r0, r0	# tmp184
+	st.b	[expression_error], r0	# expression_error, tmp184
 # basic.c:704: 		val = expression();
 	call	expression		#
 	st.w	[r13 + (-28)], r0	# val,
 # basic.c:705: 		if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.114_64, expression_error
+	ld.b	r0, [expression_error]	# expression_error.114_66, expression_error
 # basic.c:705: 		if (expression_error)
-	sex.b	r1, r0	# tmp183, expression_error.114_64
-	xor.w	r0, r0	# tmp184
-	cmp.w	r1, r0	# tmp183, tmp184
+	sex.b	r1, r0	# tmp185, expression_error.114_66
+	xor.w	r0, r0	# tmp186
+	cmp.w	r1, r0	# tmp185, tmp186
 	jnz	.L132		#
 # basic.c:708: 		ignore_blanks();
 	call	ignore_blanks		#
 # basic.c:713: 		VAR val2 = 0;
-	xor.w	r0, r0	# tmp185
-	st.w	[r13 + (-20)], r0	# val2, tmp185
+	xor.w	r0, r0	# tmp187
+	st.w	[r13 + (-20)], r0	# val2, tmp187
 # basic.c:714: 		if (*txtpos != ')')
-	ld.w	r0, [txtpos]	# txtpos.115_65, txtpos
-	ld.b	r0, [r0]	# _66, *txtpos.115_65
+	ld.w	r0, [txtpos]	# txtpos.115_67, txtpos
+	ld.b	r0, [r0]	# _68, *txtpos.115_67
 # basic.c:714: 		if (*txtpos != ')')
-	zex.b	r1, r0	# tmp186, _66
-	mov.w	r0, 41	# tmp187,
-	cmp.w	r1, r0	# tmp186, tmp187
+	zex.b	r1, r0	# tmp188, _68
+	mov.w	r0, 41	# tmp189,
+	cmp.w	r1, r0	# tmp188, tmp189
 	jz	.L108		#
 # basic.c:716: 			if (*txtpos == ',') 
-	ld.w	r0, [txtpos]	# txtpos.116_67, txtpos
-	ld.b	r0, [r0]	# _68, *txtpos.116_67
+	ld.w	r0, [txtpos]	# txtpos.116_69, txtpos
+	ld.b	r0, [r0]	# _70, *txtpos.116_69
 # basic.c:716: 			if (*txtpos == ',') 
-	zex.b	r1, r0	# tmp188, _68
-	mov.w	r0, 44	# tmp189,
-	cmp.w	r1, r0	# tmp188, tmp189
+	zex.b	r1, r0	# tmp190, _70
+	mov.w	r0, 44	# tmp191,
+	cmp.w	r1, r0	# tmp190, tmp191
 	jnz	.L133		#
 # basic.c:718: 				txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.117_69, txtpos
-	add.w	r0, 1 #111	# _70,
-	st.w	[txtpos], r0	# txtpos, _70
+	ld.w	r0, [txtpos]	# txtpos.117_71, txtpos
+	add.w	r0, 1 #111	# _72,
+	st.w	[txtpos], r0	# txtpos, _72
 # basic.c:719: 				expression_error = 0;
-	xor.w	r0, r0	# tmp190
-	st.b	[expression_error], r0	# expression_error, tmp190
+	xor.w	r0, r0	# tmp192
+	st.b	[expression_error], r0	# expression_error, tmp192
 # basic.c:720: 				val2 = expression();
 	call	expression		#
 	st.w	[r13 + (-20)], r0	# val2,
 # basic.c:721: 				if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.118_71, expression_error
+	ld.b	r0, [expression_error]	# expression_error.118_73, expression_error
 # basic.c:721: 				if (expression_error)
-	sex.b	r1, r0	# tmp191, expression_error.118_71
-	xor.w	r0, r0	# tmp192
-	cmp.w	r1, r0	# tmp191, tmp192
+	sex.b	r1, r0	# tmp193, expression_error.118_73
+	xor.w	r0, r0	# tmp194
+	cmp.w	r1, r0	# tmp193, tmp194
 	jnz	.L134		#
 .L108:
 # basic.c:727: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.119_72, txtpos
-	add.w	r0, 1 #111	# _73,
-	st.w	[txtpos], r0	# txtpos, _73
+	ld.w	r0, [txtpos]	# txtpos.119_74, txtpos
+	add.w	r0, 1 #111	# _75,
+	st.w	[txtpos], r0	# txtpos, _75
 # basic.c:729: 		switch (f)
-	ld.b	r0, [r13 + (-21)]	# _74, f
-	mov.w	r1, 18	# tmp193,
-	cmp.w	r0, r1	# _74, tmp193
+	ld.b	r0, [r13 + (-21)]	# _76, f
+	mov.w	r1, 18	# tmp195,
+	cmp.w	r0, r1	# _76, tmp195
 	jz	.L110		#
-	mov.w	r1, 18	# tmp194,
-	cmp.w	r0, r1	# _74, tmp194
+	mov.w	r1, 18	# tmp196,
+	cmp.w	r0, r1	# _76, tmp196
 	jgs	.L94		#
-	mov.w	r1, 17	# tmp195,
-	cmp.w	r0, r1	# _74, tmp195
+	mov.w	r1, 17	# tmp197,
+	cmp.w	r0, r1	# _76, tmp197
 	jz	.L111		#
-	mov.w	r1, 17	# tmp196,
-	cmp.w	r0, r1	# _74, tmp196
+	mov.w	r1, 17	# tmp198,
+	cmp.w	r0, r1	# _76, tmp198
 	jgs	.L94		#
-	mov.w	r1, 16	# tmp197,
-	cmp.w	r0, r1	# _74, tmp197
+	mov.w	r1, 16	# tmp199,
+	cmp.w	r0, r1	# _76, tmp199
 	jz	.L112		#
-	mov.w	r1, 16	# tmp198,
-	cmp.w	r0, r1	# _74, tmp198
+	mov.w	r1, 16	# tmp200,
+	cmp.w	r0, r1	# _76, tmp200
 	jgs	.L94		#
-	mov.w	r1, 13	# tmp199,
-	cmp.w	r0, r1	# _74, tmp199
+	mov.w	r1, 13	# tmp201,
+	cmp.w	r0, r1	# _76, tmp201
 	jz	.L113		#
-	mov.w	r1, 13	# tmp200,
-	cmp.w	r0, r1	# _74, tmp200
+	mov.w	r1, 13	# tmp202,
+	cmp.w	r0, r1	# _76, tmp202
 	jgs	.L94		#
-	mov.w	r1, 12	# tmp201,
-	cmp.w	r0, r1	# _74, tmp201
+	mov.w	r1, 12	# tmp203,
+	cmp.w	r0, r1	# _76, tmp203
 	jz	.L114		#
-	mov.w	r1, 12	# tmp202,
-	cmp.w	r0, r1	# _74, tmp202
+	mov.w	r1, 12	# tmp204,
+	cmp.w	r0, r1	# _76, tmp204
 	jgs	.L94		#
-	mov.w	r1, 11	# tmp203,
-	cmp.w	r0, r1	# _74, tmp203
+	mov.w	r1, 11	# tmp205,
+	cmp.w	r0, r1	# _76, tmp205
 	jz	.L115		#
-	mov.w	r1, 11	# tmp204,
-	cmp.w	r0, r1	# _74, tmp204
+	mov.w	r1, 11	# tmp206,
+	cmp.w	r0, r1	# _76, tmp206
 	jgs	.L94		#
-	mov.w	r1, 10	# tmp205,
-	cmp.w	r0, r1	# _74, tmp205
+	mov.w	r1, 10	# tmp207,
+	cmp.w	r0, r1	# _76, tmp207
 	jz	.L116		#
-	mov.w	r1, 10	# tmp206,
-	cmp.w	r0, r1	# _74, tmp206
+	mov.w	r1, 10	# tmp208,
+	cmp.w	r0, r1	# _76, tmp208
 	jgs	.L94		#
-	mov.w	r1, 9	# tmp207,
-	cmp.w	r0, r1	# _74, tmp207
+	mov.w	r1, 9	# tmp209,
+	cmp.w	r0, r1	# _76, tmp209
 	jz	.L117		#
-	mov.w	r1, 9	# tmp208,
-	cmp.w	r0, r1	# _74, tmp208
+	mov.w	r1, 9	# tmp210,
+	cmp.w	r0, r1	# _76, tmp210
 	jgs	.L94		#
-	mov.w	r1, 8	# tmp209,
-	cmp.w	r0, r1	# _74, tmp209
+	mov.w	r1, 8	# tmp211,
+	cmp.w	r0, r1	# _76, tmp211
 	jz	.L118		#
-	mov.w	r1, 8	# tmp210,
-	cmp.w	r0, r1	# _74, tmp210
+	mov.w	r1, 8	# tmp212,
+	cmp.w	r0, r1	# _76, tmp212
 	jgs	.L94		#
-	mov.w	r1, 7	# tmp211,
-	cmp.w	r0, r1	# _74, tmp211
+	mov.w	r1, 7	# tmp213,
+	cmp.w	r0, r1	# _76, tmp213
 	jz	.L119		#
-	mov.w	r1, 7	# tmp212,
-	cmp.w	r0, r1	# _74, tmp212
+	mov.w	r1, 7	# tmp214,
+	cmp.w	r0, r1	# _76, tmp214
 	jgs	.L94		#
-	mov.w	r1, 4	# tmp213,
-	cmp.w	r0, r1	# _74, tmp213
+	mov.w	r1, 4	# tmp215,
+	cmp.w	r0, r1	# _76, tmp215
 	jz	.L120		#
-	mov.w	r1, 4	# tmp214,
-	cmp.w	r0, r1	# _74, tmp214
+	mov.w	r1, 4	# tmp216,
+	cmp.w	r0, r1	# _76, tmp216
 	jgs	.L94		#
-	xor.w	r1, r1	# tmp215
-	cmp.w	r0, r1	# _74, tmp215
+	xor.w	r1, r1	# tmp217
+	cmp.w	r0, r1	# _76, tmp217
 	jz	.L121		#
-	mov.w	r1, 1	# tmp216,
-	cmp.w	r0, r1	# _74, tmp216
+	mov.w	r1, 1	# tmp218,
+	cmp.w	r0, r1	# _76, tmp218
 	jz	.L122		#
 	j	.L94		#
 .L121:
 # basic.c:732: 				return buffer[(int)val];
-	ld.w	r6, [buffer]	# buffer.120_75, buffer
+	ld.w	r6, [buffer]	# buffer.120_77, buffer
 # basic.c:732: 				return buffer[(int)val];
-	ld.w	r0, [r13 + (-28)]	# tmp217, val
-	st.w	[sp], r0	#, tmp217
+	ld.w	r0, [r13 + (-28)]	# tmp219, val
+	st.w	[sp], r0	#, tmp219
 	call	__fixsfsi		#
-	mov.w	r1, r0	# _77, _76
+	mov.w	r1, r0	# _79, _78
 # basic.c:732: 				return buffer[(int)val];
-	mov.w	r0, r6	# _78, buffer.120_75
-	add.w	r0, r1 #222	# _78, _77
-	ld.b	r0, [r0]	# _79, *_78
-	sex.b	r0, r0	# tmp218, _79
-	st.w	[sp], r0	#, tmp218
+	mov.w	r0, r6	# _80, buffer.120_77
+	add.w	r0, r1 #222	# _80, _79
+	ld.b	r0, [r0]	# _81, *_80
+	sex.b	r0, r0	# tmp220, _81
+	st.w	[sp], r0	#, tmp220
 	call	__floatsisf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L122:
 # basic.c:734: 				if (val < 0)
-	xor.w	r0, r0	# tmp219
-	st.w	[sp + (4)], r0	#, tmp219
-	ld.w	r0, [r13 + (-28)]	# tmp220, val
-	st.w	[sp], r0	#, tmp220
+	xor.w	r0, r0	# tmp221
+	st.w	[sp + (4)], r0	#, tmp221
+	ld.w	r0, [r13 + (-28)]	# tmp222, val
+	st.w	[sp], r0	#, tmp222
 	call	__ltsf2		#
-	mov.w	r1, r0	# tmp221,
-	xor.w	r0, r0	# tmp222
-	cmp.w	r1, r0	# tmp221, tmp222
+	mov.w	r1, r0	# tmp223,
+	xor.w	r0, r0	# tmp224
+	cmp.w	r1, r0	# tmp223, tmp224
 	jges	.L127		#
 # basic.c:735: 					return -val;
-	ld.w	r1, [r13 + (-28)]	# tmp223, val
-	mov.w	r0, -2147483648	# tmp224,
-	xor.w	r1, r0	# _98, tmp224
+	ld.w	r1, [r13 + (-28)]	# tmp225, val
+	mov.w	r0, -2147483648	# tmp226,
+	xor.w	r1, r0	# _100, tmp226
 	j	.L87		#
 .L127:
 # basic.c:736: 				return val;
-	ld.w	r1, [r13 + (-28)]	# _98, val
+	ld.w	r1, [r13 + (-28)]	# _100, val
 	j	.L87		#
 .L120:
 # basic.c:738: 				return(rand() % (int)val);
 	call	rand		#
-	mov.w	r6, r0	# _80,
+	mov.w	r6, r0	# _82,
 # basic.c:738: 				return(rand() % (int)val);
-	ld.w	r0, [r13 + (-28)]	# tmp225, val
-	st.w	[sp], r0	#, tmp225
+	ld.w	r0, [r13 + (-28)]	# tmp227, val
+	st.w	[sp], r0	#, tmp227
 	call	__fixsfsi		#
-	mov.w	r1, r0	# _81,
+	mov.w	r1, r0	# _83,
 # basic.c:738: 				return(rand() % (int)val);
-	mov.w	r0, r6	# _82, _80
-	div.w	r0, r1	# _82, _81
-mov.w	r0, r14	# _82
-	st.w	[sp], r0	#, _82
+	mov.w	r0, r6	# _84, _82
+	div.w	r0, r1	# _84, _83
+mov.w	r0, r14	# _84
+	st.w	[sp], r0	#, _84
 	call	__floatsisf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L119:
 # basic.c:740: 				return(sinf(val));
-	mov.w	r1, sp	# tmp226,
-	ld.w	r0, [r13 + (-28)]	# tmp227, val
-	st.w	[r1], r0	#, tmp227
-	call	sinf		#
-	mov.w	r1, r0	# _98,
-	j	.L87		#
-.L118:
-# basic.c:742: 				return(cosf(val));
 	mov.w	r1, sp	# tmp228,
 	ld.w	r0, [r13 + (-28)]	# tmp229, val
 	st.w	[r1], r0	#, tmp229
-	call	cosf		#
-	mov.w	r1, r0	# _98,
+	call	sinf		#
+	mov.w	r1, r0	# _100,
 	j	.L87		#
-.L117:
-# basic.c:744: 				return(tanf(val));
+.L118:
+# basic.c:742: 				return(cosf(val));
 	mov.w	r1, sp	# tmp230,
 	ld.w	r0, [r13 + (-28)]	# tmp231, val
 	st.w	[r1], r0	#, tmp231
-	call	tanf		#
-	mov.w	r1, r0	# _98,
+	call	cosf		#
+	mov.w	r1, r0	# _100,
 	j	.L87		#
-.L116:
-# basic.c:746: 				return(expf(val));
+.L117:
+# basic.c:744: 				return(tanf(val));
 	mov.w	r1, sp	# tmp232,
 	ld.w	r0, [r13 + (-28)]	# tmp233, val
 	st.w	[r1], r0	#, tmp233
-	call	expf		#
-	mov.w	r1, r0	# _98,
+	call	tanf		#
+	mov.w	r1, r0	# _100,
 	j	.L87		#
-.L115:
-# basic.c:748: 				return(logf(val));
+.L116:
+# basic.c:746: 				return(expf(val));
 	mov.w	r1, sp	# tmp234,
 	ld.w	r0, [r13 + (-28)]	# tmp235, val
 	st.w	[r1], r0	#, tmp235
-	call	logf		#
-	mov.w	r1, r0	# _98,
+	call	expf		#
+	mov.w	r1, r0	# _100,
 	j	.L87		#
-.L114:
-# basic.c:750: 				return(sqrtf(val));
+.L115:
+# basic.c:748: 				return(logf(val));
 	mov.w	r1, sp	# tmp236,
 	ld.w	r0, [r13 + (-28)]	# tmp237, val
 	st.w	[r1], r0	#, tmp237
+	call	logf		#
+	mov.w	r1, r0	# _100,
+	j	.L87		#
+.L114:
+# basic.c:750: 				return(sqrtf(val));
+	mov.w	r1, sp	# tmp238,
+	ld.w	r0, [r13 + (-28)]	# tmp239, val
+	st.w	[r1], r0	#, tmp239
 	call	sqrtf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L113:
 # basic.c:752: 				return(powf(val, val2));
-	mov.w	r0, sp	# tmp238,
-	ld.w	r1, [r13 + (-20)]	# tmp239, val2
-	st.w	[r0 + (4)], r1	#, tmp239
-	ld.w	r1, [r13 + (-28)]	# tmp240, val
-	st.w	[r0], r1	#, tmp240
+	mov.w	r0, sp	# tmp240,
+	ld.w	r1, [r13 + (-20)]	# tmp241, val2
+	st.w	[r0 + (4)], r1	#, tmp241
+	ld.w	r1, [r13 + (-28)]	# tmp242, val
+	st.w	[r0], r1	#, tmp242
 	call	powf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L112:
 # basic.c:754: 				return(atanf(val));
-	mov.w	r1, sp	# tmp241,
-	ld.w	r0, [r13 + (-28)]	# tmp242, val
-	st.w	[r1], r0	#, tmp242
-	call	atanf		#
-	mov.w	r1, r0	# _98,
-	j	.L87		#
-.L111:
-# basic.c:756: 				return(asinf(val));
 	mov.w	r1, sp	# tmp243,
 	ld.w	r0, [r13 + (-28)]	# tmp244, val
 	st.w	[r1], r0	#, tmp244
-	call	asinf		#
-	mov.w	r1, r0	# _98,
+	call	atanf		#
+	mov.w	r1, r0	# _100,
 	j	.L87		#
-.L110:
-# basic.c:758: 				return(acosf(val));
+.L111:
+# basic.c:756: 				return(asinf(val));
 	mov.w	r1, sp	# tmp245,
 	ld.w	r0, [r13 + (-28)]	# tmp246, val
 	st.w	[r1], r0	#, tmp246
+	call	asinf		#
+	mov.w	r1, r0	# _100,
+	j	.L87		#
+.L110:
+# basic.c:758: 				return(acosf(val));
+	mov.w	r1, sp	# tmp247,
+	ld.w	r0, [r13 + (-28)]	# tmp248, val
+	st.w	[r1], r0	#, tmp248
 	call	acosf		#
-	mov.w	r1, r0	# _98,
+	mov.w	r1, r0	# _100,
 	j	.L87		#
 .L94:
 # basic.c:762: 	if (*txtpos == '(')
-	ld.w	r0, [txtpos]	# txtpos.121_83, txtpos
-	ld.b	r0, [r0]	# _84, *txtpos.121_83
+	ld.w	r0, [txtpos]	# txtpos.121_85, txtpos
+	ld.b	r0, [r0]	# _86, *txtpos.121_85
 # basic.c:762: 	if (*txtpos == '(')
-	zex.b	r1, r0	# tmp247, _84
-	mov.w	r0, 40	# tmp248,
-	cmp.w	r1, r0	# tmp247, tmp248
+	zex.b	r1, r0	# tmp249, _86
+	mov.w	r0, 40	# tmp250,
+	cmp.w	r1, r0	# tmp249, tmp250
 	jnz	.L135		#
 # basic.c:765: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.122_85, txtpos
-	add.w	r0, 1 #111	# _86,
-	st.w	[txtpos], r0	# txtpos, _86
+	ld.w	r0, [txtpos]	# txtpos.122_87, txtpos
+	add.w	r0, 1 #111	# _88,
+	st.w	[txtpos], r0	# txtpos, _88
 # basic.c:766: 		a = expression();
 	call	expression		#
 	st.w	[r13 + (-32)], r0	# a,
 # basic.c:767: 		if (*txtpos != ')')
-	ld.w	r0, [txtpos]	# txtpos.123_87, txtpos
-	ld.b	r0, [r0]	# _88, *txtpos.123_87
+	ld.w	r0, [txtpos]	# txtpos.123_89, txtpos
+	ld.b	r0, [r0]	# _90, *txtpos.123_89
 # basic.c:767: 		if (*txtpos != ')')
-	zex.b	r1, r0	# tmp249, _88
-	mov.w	r0, 41	# tmp250,
-	cmp.w	r1, r0	# tmp249, tmp250
+	zex.b	r1, r0	# tmp251, _90
+	mov.w	r0, 41	# tmp252,
+	cmp.w	r1, r0	# tmp251, tmp252
 	jnz	.L136		#
 # basic.c:770: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.124_89, txtpos
-	add.w	r0, 1 #111	# _90,
-	st.w	[txtpos], r0	# txtpos, _90
+	ld.w	r0, [txtpos]	# txtpos.124_91, txtpos
+	add.w	r0, 1 #111	# _92,
+	st.w	[txtpos], r0	# txtpos, _92
 # basic.c:771: 		return a;
-	ld.w	r1, [r13 + (-32)]	# _98, a
+	ld.w	r1, [r13 + (-32)]	# _100, a
 	j	.L87		#
 .L128:
 # basic.c:679: 			goto expr4_error;
@@ -2710,13 +2717,13 @@ mov.w	r0, r14	# _82
 	nop	
 .L98:
 # basic.c:775: 	expression_error = 1;
-	mov.b	r0, 1	# tmp251,
-	st.b	[expression_error], r0	# expression_error, tmp251
+	mov.b	r0, 1	# tmp253,
+	st.b	[expression_error], r0	# expression_error, tmp253
 # basic.c:776: 	return 0;
-	xor.w	r1, r1	# _98
+	xor.w	r1, r1	# _100
 .L87:
 # basic.c:778: }
-	mov.w	r0, r1	# <retval>, _98
+	mov.w	r0, r1	# <retval>, _100
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
 	mov.w	sp, r12	#,

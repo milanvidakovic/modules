@@ -271,7 +271,7 @@ make_code:
 	j IRQ_KEY_PRESSED_HANDLER_ADDR
 	
 .extended0:
-	# Extended0 keys heve two make/break bytes# the first is E0, and the second determines the key
+	# Extended0 keys have two make/break bytes# the first is E0, and the second determines the key
 	mov.w r0, 1
 	st.s [substate], r0	# prepare for the second byte
 	j .skip
@@ -284,6 +284,10 @@ make_code:
 	# it is in the r0 register
 	# in r0, [IO_PORT_KEYBOARD]
 	ld.s r0, [2147484328]
+
+	cmp.w r0, 240  # break code for the extended key
+	jz .extended_break
+
 	
 	# first check for the Print Screen key
 	cmp.w r0, 12
@@ -314,6 +318,13 @@ make_code:
 	pop r1
 	pop r0
 	j IRQ_KEY_PRESSED_HANDLER_ADDR
+
+.extended_break:
+	mov.w r1, 1
+	st.s [state], r1    # state 1 - break code
+	mov.w r1, 3
+	st.s [substate], r1 # break code for the extended key
+	j .skip
 	
 .make2_end:
 	# second make code not found in the vk_table2# then it should be break code

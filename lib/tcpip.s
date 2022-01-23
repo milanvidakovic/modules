@@ -7364,11 +7364,6 @@ persistTcpConnection:
 	pop	r13		#
 	ret	
 	.size	persistTcpConnection, .-persistTcpConnection
-	.section	.rodata
-	.p2align	2
-.LC34:
-	.string	"No ethernet link available\n."
-	.text
 	.p2align	1
 	.global	init_tcpip
 	.type	init_tcpip, @function
@@ -7377,55 +7372,52 @@ init_tcpip:
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1256: 	enc28j60Init(MYMAC);
-	mov.w	r1, sp	# tmp27,
-	mov.w	r0, MYMAC	# tmp28,
-	st.w	[r1], r0	#, tmp28
+	mov.w	r1, sp	# tmp29,
+	mov.w	r0, MYMAC	# tmp30,
+	st.w	[r1], r0	#, tmp30
 	call	enc28j60Init		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1260: 	if (isLinkUp())
 	call	isLinkUp		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1260: 	if (isLinkUp())
-	zex.b	r1, r0	# tmp29, _1
-	xor.w	r0, r0	# tmp30
-	cmp.w	r1, r0	# tmp29, tmp30
+	zex.b	r1, r0	# tmp31, _1
+	xor.w	r0, r0	# tmp32
+	cmp.w	r1, r0	# tmp31, tmp32
 	jz	.L276		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1262: 		tcpipBegin(1500, eth_buffer, MYMAC);
-	mov.w	r0, sp	# tmp31,
-	mov.w	r1, MYMAC	# tmp32,
-	st.w	[r0 + (8)], r1	#, tmp32
-	mov.w	r1, eth_buffer	# tmp33,
-	st.w	[r0 + (4)], r1	#, tmp33
-	mov.w	r1, 1500	# tmp34,
-	st.w	[r0], r1	#, tmp34
+	mov.w	r0, sp	# tmp33,
+	mov.w	r1, MYMAC	# tmp34,
+	st.w	[r0 + (8)], r1	#, tmp34
+	mov.w	r1, eth_buffer	# tmp35,
+	st.w	[r0 + (4)], r1	#, tmp35
+	mov.w	r1, 1500	# tmp36,
+	st.w	[r0], r1	#, tmp36
 	call	tcpipBegin		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1263: 		staticSetup(MYIP, GWIP, DNSIP, MASK);
-	mov.w	r0, sp	# tmp35,
-	mov.w	r1, MASK	# tmp36,
-	st.w	[r0 + (12)], r1	#, tmp36
-	mov.w	r1, DNSIP	# tmp37,
-	st.w	[r0 + (8)], r1	#, tmp37
-	mov.w	r1, GWIP	# tmp38,
-	st.w	[r0 + (4)], r1	#, tmp38
-	mov.w	r1, MYIP	# tmp39,
-	st.w	[r0], r1	#, tmp39
+	mov.w	r0, sp	# tmp37,
+	mov.w	r1, MASK	# tmp38,
+	st.w	[r0 + (12)], r1	#, tmp38
+	mov.w	r1, DNSIP	# tmp39,
+	st.w	[r0 + (8)], r1	#, tmp39
+	mov.w	r1, GWIP	# tmp40,
+	st.w	[r0 + (4)], r1	#, tmp40
+	mov.w	r1, MYIP	# tmp41,
+	st.w	[r0], r1	#, tmp41
 	call	staticSetup		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1264: 		parseIp(hisip, server_ip);
-	mov.w	r0, sp	# tmp40,
-	mov.w	r1, server_ip	# tmp41,
-	st.w	[r0 + (4)], r1	#, tmp41
-	mov.w	r1, hisip	# tmp42,
-	st.w	[r0], r1	#, tmp42
+	mov.w	r0, sp	# tmp42,
+	mov.w	r1, server_ip	# tmp43,
+	st.w	[r0 + (4)], r1	#, tmp43
+	mov.w	r1, hisip	# tmp44,
+	st.w	[r0], r1	#, tmp44
 	call	parseIp		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1270: }
-	j	.L278		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1266:         return true;
+	mov.w	r0, 1	# _2,
+	j	.L277		#
 .L276:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1268: 		printf("No ethernet link available\n.");
-	mov.w	r1, sp	# tmp43,
-	mov.w	r0, .LC34	# tmp44,
-	st.w	[r1], r0	#, tmp44
-	call	printf		#
-.L278:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1270: }
-	nop	
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1269:         return false;
+	xor.w	r0, r0	# _2
+.L277:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1271: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -7437,25 +7429,25 @@ browseUrl:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1273:     client_urlbuf = urlbuf;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1274:     client_urlbuf = urlbuf;
 	ld.w	r0, [r13 + (8)]	# tmp29, urlbuf
 	st.w	[client_urlbuf], r0	# client_urlbuf, tmp29
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1274:     client_urlbuf_var = urlbuf_varpart;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1275:     client_urlbuf_var = urlbuf_varpart;
 	ld.w	r0, [r13 + (12)]	# tmp30, urlbuf_varpart
 	st.w	[client_urlbuf_var], r0	# client_urlbuf_var, tmp30
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1275:     client_hoststr = hoststr;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1276:     client_hoststr = hoststr;
 	ld.w	r0, [r13 + (16)]	# tmp31, hoststr
 	st.w	[client_hoststr], r0	# client_hoststr, tmp31
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1276:     client_additionalheaderline = additionalheaderline;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1277:     client_additionalheaderline = additionalheaderline;
 	ld.w	r0, [r13 + (20)]	# tmp32, additionalheaderline
 	st.w	[client_additionalheaderline], r0	# client_additionalheaderline, tmp32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1277:     client_postval = 0;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1278:     client_postval = 0;
 	xor.w	r0, r0	# tmp33
 	st.w	[client_postval], r0	# client_postval, tmp33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1278:     client_browser_cb = callback;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1279:     client_browser_cb = callback;
 	ld.w	r0, [r13 + (24)]	# tmp34, callback
 	st.w	[client_browser_cb], r0	# client_browser_cb, tmp34
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1279:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1280:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
 	ld.s	r0, [hisport]	# hisport.462_1, hisport
 	zex.s	r1, r0	# _2, hisport.462_1
 	mov.w	r0, sp	# tmp35,
@@ -7465,9 +7457,9 @@ browseUrl:
 	mov.w	r1, www_client_internal_result_cb	# tmp37,
 	st.w	[r0], r1	#, tmp37
 	call	clientTcpReq		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1279:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1280:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
 	st.b	[www_fd], r0	# www_fd, _3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1280: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1281: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -7480,22 +7472,22 @@ httpPost:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1283:     client_urlbuf = urlbuf;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1284:     client_urlbuf = urlbuf;
 	ld.w	r0, [r13 + (8)]	# tmp29, urlbuf
 	st.w	[client_urlbuf], r0	# client_urlbuf, tmp29
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1284:     client_hoststr = hoststr;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1285:     client_hoststr = hoststr;
 	ld.w	r0, [r13 + (12)]	# tmp30, hoststr
 	st.w	[client_hoststr], r0	# client_hoststr, tmp30
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1285:     client_additionalheaderline = additionalheaderline;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1286:     client_additionalheaderline = additionalheaderline;
 	ld.w	r0, [r13 + (16)]	# tmp31, additionalheaderline
 	st.w	[client_additionalheaderline], r0	# client_additionalheaderline, tmp31
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1286:     client_postval = postval;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1287:     client_postval = postval;
 	ld.w	r0, [r13 + (20)]	# tmp32, postval
 	st.w	[client_postval], r0	# client_postval, tmp32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1287:     client_browser_cb = callback;
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1288:     client_browser_cb = callback;
 	ld.w	r0, [r13 + (24)]	# tmp33, callback
 	st.w	[client_browser_cb], r0	# client_browser_cb, tmp33
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1288:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1289:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
 	ld.s	r0, [hisport]	# hisport.463_1, hisport
 	zex.s	r1, r0	# _2, hisport.463_1
 	mov.w	r0, sp	# tmp34,
@@ -7505,9 +7497,9 @@ httpPost:
 	mov.w	r1, www_client_internal_result_cb	# tmp36,
 	st.w	[r0], r1	#, tmp36
 	call	clientTcpReq		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1288:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1289:     www_fd = clientTcpReq(&www_client_internal_result_cb,&www_client_internal_datafill_cb,hisport);
 	st.b	[www_fd], r0	# www_fd, _3
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1289: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1290: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -7520,19 +7512,19 @@ mainLoop:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1293:     return packetLoop(enc28j60PacketReceive(1500, eth_buffer));
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1294:     return packetLoop(enc28j60PacketReceive(1500, eth_buffer));
 	mov.w	r0, sp	# tmp30,
 	ld.w	r1, [r13 + (8)]	# tmp31, eth_buffer
 	st.w	[r0 + (4)], r1	#, tmp31
 	mov.w	r1, 1500	# tmp32,
 	st.w	[r0], r1	#, tmp32
 	call	enc28j60PacketReceive		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1293:     return packetLoop(enc28j60PacketReceive(1500, eth_buffer));
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1294:     return packetLoop(enc28j60PacketReceive(1500, eth_buffer));
 	zex.s	r0, r0	# _2, _1
 	mov.w	r1, sp	# tmp33,
 	st.w	[r1], r0	#, _2
 	call	packetLoop		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1294: }
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/tcpip.c:1295: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	

@@ -390,7 +390,7 @@ char* wtoa(uint16_t value, char* ptr);
 
 /** @brief Initializes tcpip and ethernet stack
 */
-void init_tcpip();
+int init_tcpip();
 
 /**   @brief  Prepare HTTP request
 *     @param  urlbuf Pointer to c-string URL folder

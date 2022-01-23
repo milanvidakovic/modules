@@ -64,6 +64,7 @@ struct stack_gosub_frame {
 VAR expression(void);
 int direct();
 void init_K_API();
+int init_net();
 
 #define STACK_SIZE (sizeof(struct stack_for_frame)*10)
 #define VAR_SIZE sizeof(VAR) // Size of variables in bytes
@@ -687,7 +688,7 @@ printf("expr4: table_index is: %d\n", table_index);
 		case FUNC_ISKEY:
 			if (check_no_arg_func())
 				goto expr4_error;
-			return is_key_pressed() + is_key_released();
+			return is_key_pressed();
 		case CONST_PI:
 			return M_PI;
 		case CONST_E:
@@ -2225,6 +2226,7 @@ void init_sd()
 	if(!sdcard_init())
 	{
 		printf("SD card init failed!\n");
+		return;
 	}
 	if (!volume_init(1))
 	{
@@ -2321,7 +2323,7 @@ load_again:
 		if (eth)
 		{
 			init_spi();
-			init_tcpip();
+			init_net();
 			init_sd();
 		}
 	} 
@@ -2357,7 +2359,7 @@ void exec_sys()
 	if (eth)
 	{
 		init_spi();
-		init_tcpip();
+		init_net();
 		init_sd();
 	}
 }
@@ -2406,11 +2408,12 @@ void exec_eth()
 		if (eth == 1) 
 		{
 			asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-			init_tcpip();
+			init_net();
 		}
 		else 
 		{
 			asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+			de_init_timer();
 		}
 		// #######################################################################################
 
@@ -2442,6 +2445,18 @@ void exec_color()
 	//printf("COLOR SET TO: %d\n", color);
 }
 
+int init_net() 
+{
+	if (init_tcpip()) 
+	{
+		init_timer();
+		return true;
+	} else {
+		printf("No ethernet link available\n.");
+		eth = 0;
+		return false;
+	}
+}
 // #################################################################################################################################################
 int direct()
 {
@@ -2697,11 +2712,10 @@ int main()
 	uart_init_files();
 	init_spi();
 	init_sd();
-	init_tcpip();
+	init_net();
 
 	exec_mem();
 
-	init_timer();
 
 	res = 0;
 	while (1)

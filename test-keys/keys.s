@@ -31,7 +31,10 @@
 	.string	"\nKeys test"
 	.p2align	2
 .LC1:
-	.string	"Hello World %d\n"
+	.string	"pressed %d\n"
+	.p2align	2
+.LC2:
+	.string	"released %d\n"
 	.text
 	.p2align	1
 	.global	main
@@ -39,30 +42,53 @@
 main:
 	push	r13		#
 	mov.w	r13, sp	#,
-	sub.w	sp, 28 #111	#,
+	sub.w	sp, 32 #111	#,
 # keys.c:7: 	printf("\nKeys test\n");
 	mov.w	r1, sp	# tmp28,
 	mov.w	r0, .LC0	# tmp29,
 	st.w	[r1], r0	#, tmp29
 	call	puts		#
-.L2:
-# keys.c:9: 		vk = getc();
-	call	getc		#
-	st.w	[r13 + (-4)], r0	# vk,
-# keys.c:10: 		printf("Hello World %d\n", vk);
-	mov.w	r0, sp	# tmp30,
-	ld.w	r1, [r13 + (-4)]	# tmp31, vk
-	st.w	[r0 + (4)], r1	#, tmp31
-	mov.w	r1, .LC1	# tmp32,
-	st.w	[r0], r1	#, tmp32
+.L4:
+# keys.c:9: 		vkp = is_key_pressed();
+	call	is_key_pressed		#
+	st.w	[r13 + (-4)], r0	# vkp,
+# keys.c:10: 		vkr = is_key_released();
+	call	is_key_released		#
+	st.w	[r13 + (-8)], r0	# vkr,
+# keys.c:11: 		if (vkp != 0) 
+	ld.w	r1, [r13 + (-4)]	# tmp30, vkp
+	xor.w	r0, r0	# tmp31
+	cmp.w	r1, r0	# tmp30, tmp31
+	jz	.L2		#
+# keys.c:13: 			printf("pressed %d\n", vkp);
+	mov.w	r0, sp	# tmp32,
+	ld.w	r1, [r13 + (-4)]	# tmp33, vkp
+	st.w	[r0 + (4)], r1	#, tmp33
+	mov.w	r1, .LC1	# tmp34,
+	st.w	[r0], r1	#, tmp34
 	call	printf		#
-# keys.c:11: 	} while (vk != VK_ESC);
-	ld.w	r1, [r13 + (-4)]	# tmp33, vk
-	mov.w	r0, 27	# tmp34,
-	cmp.w	r1, r0	# tmp33, tmp34
-	jnz	.L2		#
-	xor.w	r0, r0	# _7
-# keys.c:12: }
+	j	.L3		#
+.L2:
+# keys.c:15: 		else if (vkr != 0)
+	ld.w	r1, [r13 + (-8)]	# tmp35, vkr
+	xor.w	r0, r0	# tmp36
+	cmp.w	r1, r0	# tmp35, tmp36
+	jz	.L3		#
+# keys.c:17: 			printf("released %d\n", vkr);
+	mov.w	r0, sp	# tmp37,
+	ld.w	r1, [r13 + (-8)]	# tmp38, vkr
+	st.w	[r0 + (4)], r1	#, tmp38
+	mov.w	r1, .LC2	# tmp39,
+	st.w	[r0], r1	#, tmp39
+	call	printf		#
+.L3:
+# keys.c:19: 	} while (vkp != VK_ESC);
+	ld.w	r1, [r13 + (-4)]	# tmp40, vkp
+	mov.w	r0, 27	# tmp41,
+	cmp.w	r1, r0	# tmp40, tmp41
+	jnz	.L4		#
+	xor.w	r0, r0	# _11
+# keys.c:20: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	

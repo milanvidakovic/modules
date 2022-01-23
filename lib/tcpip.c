@@ -1251,7 +1251,7 @@ void persistTcpConnection(uint8_t persist) {
 
 
 #ifdef KERNEL
-void init_tcpip()
+int init_tcpip()
 {
 	enc28j60Init(MYMAC);
 
@@ -1263,9 +1263,10 @@ void init_tcpip()
 		staticSetup(MYIP, GWIP, DNSIP, MASK);
 		parseIp(hisip, server_ip);
 		//printf("%d.%d.%d.%d\n", hisip[0], hisip[1], hisip[2], hisip[3]); 
+        return true;
 	} else 
 	{
-		printf("No ethernet link available\n.");
+        return false;
 	}
 }
 
@@ -1295,7 +1296,7 @@ uint16_t mainLoop(uint8_t * eth_buffer)
 
 #else
 
-void init_tcpip()
+int init_tcpip()
 {
 	asm("ld.w r0, [190600]\njr r0\n");
 }

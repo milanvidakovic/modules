@@ -256,7 +256,7 @@ float expf(float arg)
 		return(1.);
 	if(arg < -emaxf)
 		return(0.);
-	if(arg > emaxf) {
+	if((arg > 0.0f) && (arg > emaxf)) {
 		return(INF);
 	}
 	arg *= elog2e;

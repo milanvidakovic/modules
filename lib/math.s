@@ -3,7 +3,7 @@
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
 # options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
-# -D KERNEL /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c -mel
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c -mel
 # -auxbase-strip /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.s
 # -fsigned-char -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
@@ -1609,11 +1609,11 @@ expf:
 	mov.w	r1, r0	# tmp56,
 	xor.w	r0, r0	# tmp57
 	cmp.w	r1, r0	# tmp56, tmp57
-	jnz	.L95		#
+	jnz	.L97		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:256: 		return(1.);
 	mov.w	r1, 1065353216	# _27,
 	j	.L87		#
-.L95:
+.L97:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:257: 	if(arg < -emaxf)
 	ld.w	r0, [emaxf]	# emaxf.8_1, emaxf
 	mov.w	r1, -2147483648	# tmp58,
@@ -1626,14 +1626,13 @@ expf:
 	mov.w	r1, r0	# tmp61,
 	xor.w	r0, r0	# tmp62
 	cmp.w	r1, r0	# tmp61, tmp62
-	jges	.L96		#
+	jges	.L98		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:258: 		return(0.);
 	xor.w	r1, r1	# _27
 	j	.L87		#
-.L96:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:259: 	if(arg > emaxf) {
-	ld.w	r0, [emaxf]	# emaxf.9_3, emaxf
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:259: 	if(arg > emaxf) {
+.L98:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:259: 	if((arg > 0.0f) && (arg > emaxf)) {
+	xor.w	r0, r0	# tmp63
 	st.w	[sp + (4)], r0	#, tmp63
 	ld.w	r0, [r13 + (8)]	# tmp64, arg
 	st.w	[sp], r0	#, tmp64
@@ -1641,170 +1640,181 @@ expf:
 	mov.w	r1, r0	# tmp65,
 	xor.w	r0, r0	# tmp66
 	cmp.w	r1, r0	# tmp65, tmp66
-	jses	.L97		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:260: 		return(INF);
-	mov.w	r1, 1325334528	# _27,
-	j	.L87		#
-.L97:
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:262: 	arg *= elog2e;
-	ld.w	r0, [elog2e]	# elog2e.10_4, elog2e
+	jses	.L90		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:259: 	if((arg > 0.0f) && (arg > emaxf)) {
+	ld.w	r0, [emaxf]	# emaxf.9_3, emaxf
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:259: 	if((arg > 0.0f) && (arg > emaxf)) {
 	st.w	[sp + (4)], r0	#, tmp67
 	ld.w	r0, [r13 + (8)]	# tmp68, arg
 	st.w	[sp], r0	#, tmp68
-	call	__mulsf3		#
+	call	__gtsf2		#
 	mov.w	r1, r0	# tmp69,
-	mov.w	r0, r1	# tmp70, tmp69
-	st.w	[r13 + (8)], r0	# arg, tmp70
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:263: 	ent = floorf(arg);
-	mov.w	r1, sp	# tmp71,
+	xor.w	r0, r0	# tmp70
+	cmp.w	r1, r0	# tmp69, tmp70
+	jses	.L90		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:260: 		return(INF);
+	mov.w	r1, 1325334528	# _27,
+	j	.L87		#
+.L90:
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:262: 	arg *= elog2e;
+	ld.w	r0, [elog2e]	# elog2e.10_4, elog2e
+	st.w	[sp + (4)], r0	#, tmp71
 	ld.w	r0, [r13 + (8)]	# tmp72, arg
-	st.w	[r1], r0	#, tmp72
+	st.w	[sp], r0	#, tmp72
+	call	__mulsf3		#
+	mov.w	r1, r0	# tmp73,
+	mov.w	r0, r1	# tmp74, tmp73
+	st.w	[r13 + (8)], r0	# arg, tmp74
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:263: 	ent = floorf(arg);
+	mov.w	r1, sp	# tmp75,
+	ld.w	r0, [r13 + (8)]	# tmp76, arg
+	st.w	[r1], r0	#, tmp76
 	call	floorf		#
 	mov.w	r1, r0	# _5,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:263: 	ent = floorf(arg);
-	mov.w	r0, r1	# tmp73, _5
-	st.w	[sp], r0	#, tmp73
+	mov.w	r0, r1	# tmp77, _5
+	st.w	[sp], r0	#, tmp77
 	call	__fixsfsi		#
-	st.w	[r13 + (-8)], r0	# ent, tmp74
+	st.w	[r13 + (-8)], r0	# ent, tmp78
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:264: 	fract = (arg-ent) - 0.5f;
-	ld.w	r0, [r13 + (-8)]	# tmp75, ent
-	st.w	[sp], r0	#, tmp75
+	ld.w	r0, [r13 + (-8)]	# tmp79, ent
+	st.w	[sp], r0	#, tmp79
 	call	__floatsisf		#
 	mov.w	r1, r0	# _6,
-	mov.w	r0, r1	# tmp76, _6
-	st.w	[sp + (4)], r0	#, tmp76
-	ld.w	r0, [r13 + (8)]	# tmp77, arg
-	st.w	[sp], r0	#, tmp77
+	mov.w	r0, r1	# tmp80, _6
+	st.w	[sp + (4)], r0	#, tmp80
+	ld.w	r0, [r13 + (8)]	# tmp81, arg
+	st.w	[sp], r0	#, tmp81
 	call	__subsf3		#
-	mov.w	r1, r0	# tmp78,
-	mov.w	r0, r1	# _7, tmp78
+	mov.w	r1, r0	# tmp82,
+	mov.w	r0, r1	# _7, tmp82
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:264: 	fract = (arg-ent) - 0.5f;
-	mov.w	r1, 1056964608	# tmp79,
-	st.w	[sp + (4)], r1	#, tmp79
-	st.w	[sp], r0	#, tmp80
-	call	__subsf3		#
-	mov.w	r1, r0	# tmp81,
-	mov.w	r0, r1	# tmp82, tmp81
-	st.w	[r13 + (-12)], r0	# fract, tmp82
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:265: 	xsq = fract*fract;
-	ld.w	r0, [r13 + (-12)]	# tmp83, fract
-	st.w	[sp + (4)], r0	#, tmp83
-	ld.w	r0, [r13 + (-12)]	# tmp84, fract
+	mov.w	r1, 1056964608	# tmp83,
+	st.w	[sp + (4)], r1	#, tmp83
 	st.w	[sp], r0	#, tmp84
-	call	__mulsf3		#
+	call	__subsf3		#
 	mov.w	r1, r0	# tmp85,
 	mov.w	r0, r1	# tmp86, tmp85
-	st.w	[r13 + (-16)], r0	# xsq, tmp86
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:266: 	temp1 = ((ep2*xsq+ep1)*xsq+ep0)*fract;
-	ld.w	r0, [ep2]	# ep2.11_8, ep2
-	ld.w	r1, [r13 + (-16)]	# tmp87, xsq
-	st.w	[sp + (4)], r1	#, tmp87
+	st.w	[r13 + (-12)], r0	# fract, tmp86
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:265: 	xsq = fract*fract;
+	ld.w	r0, [r13 + (-12)]	# tmp87, fract
+	st.w	[sp + (4)], r0	#, tmp87
+	ld.w	r0, [r13 + (-12)]	# tmp88, fract
 	st.w	[sp], r0	#, tmp88
 	call	__mulsf3		#
 	mov.w	r1, r0	# tmp89,
-	mov.w	r0, r1	# _9, tmp89
+	mov.w	r0, r1	# tmp90, tmp89
+	st.w	[r13 + (-16)], r0	# xsq, tmp90
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:266: 	temp1 = ((ep2*xsq+ep1)*xsq+ep0)*fract;
+	ld.w	r0, [ep2]	# ep2.11_8, ep2
+	ld.w	r1, [r13 + (-16)]	# tmp91, xsq
+	st.w	[sp + (4)], r1	#, tmp91
+	st.w	[sp], r0	#, tmp92
+	call	__mulsf3		#
+	mov.w	r1, r0	# tmp93,
+	mov.w	r0, r1	# _9, tmp93
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:266: 	temp1 = ((ep2*xsq+ep1)*xsq+ep0)*fract;
 	ld.w	r1, [ep1]	# ep1.12_10, ep1
-	st.w	[sp + (4)], r1	#, tmp90
-	st.w	[sp], r0	#, tmp91
+	st.w	[sp + (4)], r1	#, tmp94
+	st.w	[sp], r0	#, tmp95
 	call	__addsf3		#
-	mov.w	r1, r0	# tmp92,
-	mov.w	r0, r1	# _11, tmp92
+	mov.w	r1, r0	# tmp96,
+	mov.w	r0, r1	# _11, tmp96
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:266: 	temp1 = ((ep2*xsq+ep1)*xsq+ep0)*fract;
-	ld.w	r1, [r13 + (-16)]	# tmp93, xsq
-	st.w	[sp + (4)], r1	#, tmp93
-	st.w	[sp], r0	#, tmp94
+	ld.w	r1, [r13 + (-16)]	# tmp97, xsq
+	st.w	[sp + (4)], r1	#, tmp97
+	st.w	[sp], r0	#, tmp98
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp95,
-	mov.w	r0, r1	# _12, tmp95
+	mov.w	r1, r0	# tmp99,
+	mov.w	r0, r1	# _12, tmp99
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:266: 	temp1 = ((ep2*xsq+ep1)*xsq+ep0)*fract;
 	ld.w	r1, [ep0]	# ep0.13_13, ep0
-	st.w	[sp + (4)], r1	#, tmp96
-	st.w	[sp], r0	#, tmp97
+	st.w	[sp + (4)], r1	#, tmp100
+	st.w	[sp], r0	#, tmp101
 	call	__addsf3		#
-	mov.w	r1, r0	# tmp98,
-	mov.w	r0, r1	# _14, tmp98
+	mov.w	r1, r0	# tmp102,
+	mov.w	r0, r1	# _14, tmp102
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:266: 	temp1 = ((ep2*xsq+ep1)*xsq+ep0)*fract;
-	st.w	[sp + (4)], r0	#, tmp99
-	ld.w	r0, [r13 + (-12)]	# tmp100, fract
-	st.w	[sp], r0	#, tmp100
+	st.w	[sp + (4)], r0	#, tmp103
+	ld.w	r0, [r13 + (-12)]	# tmp104, fract
+	st.w	[sp], r0	#, tmp104
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp101,
-	mov.w	r0, r1	# tmp102, tmp101
-	st.w	[r13 + (-20)], r0	# temp1, tmp102
+	mov.w	r1, r0	# tmp105,
+	mov.w	r0, r1	# tmp106, tmp105
+	st.w	[r13 + (-20)], r0	# temp1, tmp106
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:267: 	temp2 = ((1.0f*xsq+eq2)*xsq+eq1)*xsq + eq0;
 	ld.w	r0, [eq2]	# eq2.14_15, eq2
-	ld.w	r1, [r13 + (-16)]	# tmp103, xsq
-	st.w	[sp + (4)], r1	#, tmp103
-	st.w	[sp], r0	#, tmp104
+	ld.w	r1, [r13 + (-16)]	# tmp107, xsq
+	st.w	[sp + (4)], r1	#, tmp107
+	st.w	[sp], r0	#, tmp108
 	call	__addsf3		#
-	mov.w	r1, r0	# tmp105,
-	mov.w	r0, r1	# _16, tmp105
+	mov.w	r1, r0	# tmp109,
+	mov.w	r0, r1	# _16, tmp109
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:267: 	temp2 = ((1.0f*xsq+eq2)*xsq+eq1)*xsq + eq0;
-	ld.w	r1, [r13 + (-16)]	# tmp106, xsq
-	st.w	[sp + (4)], r1	#, tmp106
-	st.w	[sp], r0	#, tmp107
+	ld.w	r1, [r13 + (-16)]	# tmp110, xsq
+	st.w	[sp + (4)], r1	#, tmp110
+	st.w	[sp], r0	#, tmp111
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp108,
-	mov.w	r0, r1	# _17, tmp108
+	mov.w	r1, r0	# tmp112,
+	mov.w	r0, r1	# _17, tmp112
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:267: 	temp2 = ((1.0f*xsq+eq2)*xsq+eq1)*xsq + eq0;
 	ld.w	r1, [eq1]	# eq1.15_18, eq1
-	st.w	[sp + (4)], r1	#, tmp109
-	st.w	[sp], r0	#, tmp110
+	st.w	[sp + (4)], r1	#, tmp113
+	st.w	[sp], r0	#, tmp114
 	call	__addsf3		#
-	mov.w	r1, r0	# tmp111,
-	mov.w	r0, r1	# _19, tmp111
+	mov.w	r1, r0	# tmp115,
+	mov.w	r0, r1	# _19, tmp115
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:267: 	temp2 = ((1.0f*xsq+eq2)*xsq+eq1)*xsq + eq0;
-	ld.w	r1, [r13 + (-16)]	# tmp112, xsq
-	st.w	[sp + (4)], r1	#, tmp112
-	st.w	[sp], r0	#, tmp113
+	ld.w	r1, [r13 + (-16)]	# tmp116, xsq
+	st.w	[sp + (4)], r1	#, tmp116
+	st.w	[sp], r0	#, tmp117
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp114,
-	mov.w	r0, r1	# _20, tmp114
+	mov.w	r1, r0	# tmp118,
+	mov.w	r0, r1	# _20, tmp118
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:267: 	temp2 = ((1.0f*xsq+eq2)*xsq+eq1)*xsq + eq0;
 	ld.w	r1, [eq0]	# eq0.16_21, eq0
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:267: 	temp2 = ((1.0f*xsq+eq2)*xsq+eq1)*xsq + eq0;
-	st.w	[sp + (4)], r1	#, tmp115
-	st.w	[sp], r0	#, tmp116
-	call	__addsf3		#
-	mov.w	r1, r0	# tmp117,
-	mov.w	r0, r1	# tmp118, tmp117
-	st.w	[r13 + (-24)], r0	# temp2, tmp118
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:268: 	return(ldexpf(esqrt2*(temp2+temp1)/(temp2-temp1), ent));
-	ld.w	r0, [r13 + (-20)]	# tmp119, temp1
-	st.w	[sp + (4)], r0	#, tmp119
-	ld.w	r0, [r13 + (-24)]	# tmp120, temp2
+	st.w	[sp + (4)], r1	#, tmp119
 	st.w	[sp], r0	#, tmp120
 	call	__addsf3		#
 	mov.w	r1, r0	# tmp121,
-	mov.w	r0, r1	# _22, tmp121
+	mov.w	r0, r1	# tmp122, tmp121
+	st.w	[r13 + (-24)], r0	# temp2, tmp122
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:268: 	return(ldexpf(esqrt2*(temp2+temp1)/(temp2-temp1), ent));
+	ld.w	r0, [r13 + (-20)]	# tmp123, temp1
+	st.w	[sp + (4)], r0	#, tmp123
+	ld.w	r0, [r13 + (-24)]	# tmp124, temp2
+	st.w	[sp], r0	#, tmp124
+	call	__addsf3		#
+	mov.w	r1, r0	# tmp125,
+	mov.w	r0, r1	# _22, tmp125
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:268: 	return(ldexpf(esqrt2*(temp2+temp1)/(temp2-temp1), ent));
 	ld.w	r1, [esqrt2]	# esqrt2.17_23, esqrt2
-	st.w	[sp + (4)], r1	#, tmp122
-	st.w	[sp], r0	#, tmp123
+	st.w	[sp + (4)], r1	#, tmp126
+	st.w	[sp], r0	#, tmp127
 	call	__mulsf3		#
-	mov.w	r1, r0	# tmp124,
-	mov.w	r6, r1	# _24, tmp124
+	mov.w	r1, r0	# tmp128,
+	mov.w	r6, r1	# _24, tmp128
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:268: 	return(ldexpf(esqrt2*(temp2+temp1)/(temp2-temp1), ent));
-	ld.w	r0, [r13 + (-20)]	# tmp125, temp1
-	st.w	[sp + (4)], r0	#, tmp125
-	ld.w	r0, [r13 + (-24)]	# tmp126, temp2
-	st.w	[sp], r0	#, tmp126
+	ld.w	r0, [r13 + (-20)]	# tmp129, temp1
+	st.w	[sp + (4)], r0	#, tmp129
+	ld.w	r0, [r13 + (-24)]	# tmp130, temp2
+	st.w	[sp], r0	#, tmp130
 	call	__subsf3		#
-	mov.w	r1, r0	# tmp127,
-	mov.w	r0, r1	# _25, tmp127
+	mov.w	r1, r0	# tmp131,
+	mov.w	r0, r1	# _25, tmp131
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:268: 	return(ldexpf(esqrt2*(temp2+temp1)/(temp2-temp1), ent));
-	mov.w	r1, r0	# tmp128, _25
-	mov.w	r0, r6	# tmp129, _24
-	st.w	[sp + (4)], r1	#, tmp128
-	st.w	[sp], r0	#, tmp129
+	mov.w	r1, r0	# tmp132, _25
+	mov.w	r0, r6	# tmp133, _24
+	st.w	[sp + (4)], r1	#, tmp132
+	st.w	[sp], r0	#, tmp133
 	call	__divsf3		#
-	mov.w	r2, r0	# tmp130,
-	mov.w	r1, r2	# _26, tmp130
-	mov.w	r0, sp	# tmp131,
-	ld.w	r2, [r13 + (-8)]	# tmp132, ent
-	st.w	[r0 + (4)], r2	#, tmp132
-	st.w	[r0], r1	#, tmp133
+	mov.w	r2, r0	# tmp134,
+	mov.w	r1, r2	# _26, tmp134
+	mov.w	r0, sp	# tmp135,
+	ld.w	r2, [r13 + (-8)]	# tmp136, ent
+	st.w	[r0 + (4)], r2	#, tmp136
+	st.w	[r0], r1	#, tmp137
 	call	ldexpf		#
 	mov.w	r1, r0	# _27,
 .L87:
@@ -1898,11 +1908,11 @@ logf:
 	mov.w	r1, r0	# tmp59,
 	xor.w	r0, r0	# tmp60
 	cmp.w	r1, r0	# tmp59, tmp60
-	jgs	.L109		#
+	jgs	.L110		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:288: 		return(-INF);
 	mov.w	r0, -822149120	# _32,
-	j	.L106		#
-.L109:
+	j	.L107		#
+.L110:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:290: 	x = frexpf(arg,&exp);
 	mov.w	r0, sp	# tmp61,
 	mov.w	r1, r13	# tmp62,
@@ -1913,8 +1923,8 @@ logf:
 	call	frexpf		#
 	st.w	[r13 + (-8)], r0	# x,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:291: 	while(x<0.5f) {
-	j	.L102		#
-.L103:
+	j	.L103		#
+.L104:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:292: 		x = x*2;
 	ld.w	r0, [r13 + (-8)]	# tmp64, x
 	mov.w	r1, r0	# tmp65, tmp64
@@ -1929,7 +1939,7 @@ logf:
 	add.w	r0, -1 #111	# _2,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:293: 		exp = exp-1;
 	st.w	[r13 + (-24)], r0	# exp, _2
-.L102:
+.L103:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:291: 	while(x<0.5f) {
 	mov.w	r0, 1056964608	# tmp69,
 	st.w	[sp + (4)], r0	#, tmp69
@@ -1939,7 +1949,7 @@ logf:
 	mov.w	r1, r0	# tmp71,
 	xor.w	r0, r0	# tmp72
 	cmp.w	r1, r0	# tmp71, tmp72
-	jss	.L103		#
+	jss	.L104		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:295: 	if(x<sqrto2) {
 	ld.w	r0, [sqrto2]	# sqrto2.19_3, sqrto2
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:295: 	if(x<sqrto2) {
@@ -1950,7 +1960,7 @@ logf:
 	mov.w	r1, r0	# tmp75,
 	xor.w	r0, r0	# tmp76
 	cmp.w	r1, r0	# tmp75, tmp76
-	jges	.L104		#
+	jges	.L105		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:296: 		x = 2*x;
 	ld.w	r0, [r13 + (-8)]	# tmp77, x
 	mov.w	r1, r0	# tmp78, tmp77
@@ -1965,7 +1975,7 @@ logf:
 	add.w	r0, -1 #111	# _5,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:297: 		exp = exp-1;
 	st.w	[r13 + (-24)], r0	# exp, _5
-.L104:
+.L105:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:300: 	z = (x-1)/(x+1);
 	mov.w	r0, 1065353216	# tmp82,
 	st.w	[sp + (4)], r0	#, tmp82
@@ -2121,7 +2131,7 @@ logf:
 	st.w	[r13 + (-20)], r0	# temp, tmp143
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:306: 	return(temp);
 	ld.w	r0, [r13 + (-20)]	# _32, temp
-.L106:
+.L107:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:307: }
 	mov.w	r1, r0	# <retval>, _32
 	mov.w	r0, r1	#, <retval>
@@ -2178,11 +2188,11 @@ sqrtf:
 	mov.w	r1, r0	# tmp54,
 	xor.w	r0, r0	# tmp55
 	cmp.w	r1, r0	# tmp54, tmp55
-	jgs	.L129		#
+	jgs	.L130		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:322: 		return(0.);
 	xor.w	r0, r0	# _32
-	j	.L127		#
-.L129:
+	j	.L128		#
+.L130:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:324: 	x = frexpf(arg,&exp);
 	mov.w	r0, sp	# tmp56,
 	mov.w	r1, r13	# tmp57,
@@ -2193,8 +2203,8 @@ sqrtf:
 	call	frexpf		#
 	st.w	[r13 + (-4)], r0	# x,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:325: 	while(x < 0.5f) {
-	j	.L116		#
-.L117:
+	j	.L117		#
+.L118:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:326: 		x *= 2;
 	ld.w	r0, [r13 + (-4)]	# tmp59, x
 	mov.w	r1, r0	# tmp60, tmp59
@@ -2208,7 +2218,7 @@ sqrtf:
 	ld.w	r0, [r13 + (-16)]	# exp.31_1, exp
 	add.w	r0, -1 #111	# _2,
 	st.w	[r13 + (-16)], r0	# exp, _2
-.L116:
+.L117:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:325: 	while(x < 0.5f) {
 	mov.w	r0, 1056964608	# tmp64,
 	st.w	[sp + (4)], r0	#, tmp64
@@ -2218,7 +2228,7 @@ sqrtf:
 	mov.w	r1, r0	# tmp66,
 	xor.w	r0, r0	# tmp67
 	cmp.w	r1, r0	# tmp66, tmp67
-	jss	.L117		#
+	jss	.L118		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:333: 	if(exp & 1) {
 	ld.w	r1, [r13 + (-16)]	# exp.32_3, exp
 	mov.w	r0, 1	# tmp68,
@@ -2226,7 +2236,7 @@ sqrtf:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:333: 	if(exp & 1) {
 	xor.w	r0, r0	# tmp69
 	cmp.w	r1, r0	# _4, tmp69
-	jz	.L118		#
+	jz	.L119		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:334: 		x *= 2;
 	ld.w	r0, [r13 + (-4)]	# tmp70, x
 	mov.w	r1, r0	# tmp71, tmp70
@@ -2240,7 +2250,7 @@ sqrtf:
 	ld.w	r0, [r13 + (-16)]	# exp.33_5, exp
 	add.w	r0, -1 #111	# _6,
 	st.w	[r13 + (-16)], r0	# exp, _6
-.L118:
+.L119:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:337: 	temp = 0.5f*(1.0f+x);
 	mov.w	r0, 1065353216	# tmp75,
 	st.w	[sp + (4)], r0	#, tmp75
@@ -2258,8 +2268,8 @@ sqrtf:
 	mov.w	r0, r1	# tmp81, tmp80
 	st.w	[r13 + (-8)], r0	# temp, tmp81
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:339: 	while(exp > 60) {
-	j	.L119		#
-.L120:
+	j	.L120		#
+.L121:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:340: 		temp *= (1L<<30);
 	mov.w	r0, 1317011456	# tmp82,
 	st.w	[sp + (4)], r0	#, tmp82
@@ -2273,16 +2283,16 @@ sqrtf:
 	ld.w	r0, [r13 + (-16)]	# exp.34_8, exp
 	add.w	r0, -60 #111	# _9,
 	st.w	[r13 + (-16)], r0	# exp, _9
-.L119:
+.L120:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:339: 	while(exp > 60) {
 	ld.w	r1, [r13 + (-16)]	# exp.35_10, exp
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:339: 	while(exp > 60) {
 	mov.w	r0, 60	# tmp86,
 	cmp.w	r1, r0	# exp.35_10, tmp86
-	jgs	.L120		#
+	jgs	.L121		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:343: 	while(exp < -60) {
-	j	.L121		#
-.L122:
+	j	.L122		#
+.L123:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:344: 		temp /= (1L<<30);
 	mov.w	r0, 1317011456	# tmp87,
 	st.w	[sp + (4)], r0	#, tmp87
@@ -2296,19 +2306,19 @@ sqrtf:
 	ld.w	r0, [r13 + (-16)]	# exp.36_11, exp
 	add.w	r0, 60 #111	# _12,
 	st.w	[r13 + (-16)], r0	# exp, _12
-.L121:
+.L122:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:343: 	while(exp < -60) {
 	ld.w	r1, [r13 + (-16)]	# exp.37_13, exp
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:343: 	while(exp < -60) {
 	mov.w	r0, -60	# tmp91,
 	cmp.w	r1, r0	# exp.37_13, tmp91
-	jss	.L122		#
+	jss	.L123		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:347: 	if(exp >= 0)
 	ld.w	r1, [r13 + (-16)]	# exp.38_14, exp
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:347: 	if(exp >= 0)
 	xor.w	r0, r0	# tmp92
 	cmp.w	r1, r0	# exp.38_14, tmp92
-	jss	.L123		#
+	jss	.L124		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:348: 		temp *= 1L << (exp/2);
 	ld.w	r0, [r13 + (-16)]	# exp.39_15, exp
 	mov.w	r2, 31	# tmp94,
@@ -2335,8 +2345,8 @@ sqrtf:
 	mov.w	r1, r0	# tmp101,
 	mov.w	r0, r1	# tmp102, tmp101
 	st.w	[r13 + (-8)], r0	# temp, tmp102
-	j	.L124		#
-.L123:
+	j	.L125		#
+.L124:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:350: 		temp /= 1L << (-exp/2);
 	ld.w	r0, [r13 + (-16)]	# exp.40_19, exp
 	mov.w	r2, 31	# tmp104,
@@ -2365,13 +2375,13 @@ neg.w	r0	# tmp106
 	mov.w	r1, r0	# tmp111,
 	mov.w	r0, r1	# tmp112, tmp111
 	st.w	[r13 + (-8)], r0	# temp, tmp112
-.L124:
+.L125:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:351: 	for(i=0; i<=4; i++)
 	xor.w	r0, r0	# tmp113
 	st.w	[r13 + (-12)], r0	# i, tmp113
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:351: 	for(i=0; i<=4; i++)
-	j	.L125		#
-.L126:
+	j	.L126		#
+.L127:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:352: 		temp = 0.5f*(temp + arg/temp);
 	ld.w	r0, [r13 + (-8)]	# tmp114, temp
 	st.w	[sp + (4)], r0	#, tmp114
@@ -2399,15 +2409,15 @@ neg.w	r0	# tmp106
 	ld.w	r0, [r13 + (-12)]	# tmp125, i
 	add.w	r0, 1 #111	# tmp124,
 	st.w	[r13 + (-12)], r0	# i, tmp124
-.L125:
+.L126:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:351: 	for(i=0; i<=4; i++)
 	ld.w	r1, [r13 + (-12)]	# tmp126, i
 	mov.w	r0, 4	# tmp127,
 	cmp.w	r1, r0	# tmp126, tmp127
-	jses	.L126		#
+	jses	.L127		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:353: 	return(temp);
 	ld.w	r0, [r13 + (-8)]	# _32, temp
-.L127:
+.L128:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:354: } 
 	mov.w	r1, r0	# <retval>, _32
 	mov.w	r0, r1	#, <retval>
@@ -2431,7 +2441,7 @@ powf:
 	mov.w	r1, r0	# tmp37,
 	xor.w	r0, r0	# tmp38
 	cmp.w	r1, r0	# tmp37, tmp38
-	jgs	.L144		#
+	jgs	.L145		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:362: 		if(arg1 == 0.) {
 	xor.w	r0, r0	# tmp39
 	st.w	[sp + (4)], r0	#, tmp39
@@ -2441,7 +2451,7 @@ powf:
 	mov.w	r1, r0	# tmp41,
 	xor.w	r0, r0	# tmp42
 	cmp.w	r1, r0	# tmp41, tmp42
-	jnz	.L145		#
+	jnz	.L146		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:363: 			if(arg2 <= 0.)
 	xor.w	r0, r0	# tmp43
 	st.w	[sp + (4)], r0	#, tmp43
@@ -2451,11 +2461,11 @@ powf:
 	mov.w	r1, r0	# tmp45,
 	xor.w	r0, r0	# tmp46
 	cmp.w	r1, r0	# tmp45, tmp46
-	jses	.L146		#
+	jses	.L147		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:365: 			return(0.);
 	xor.w	r1, r1	# _9
-	j	.L138		#
-.L145:
+	j	.L139		#
+.L146:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:367: 		l = arg2;
 	ld.w	r0, [r13 + (12)]	# tmp47, arg2
 	st.w	[sp], r0	#, tmp47
@@ -2475,7 +2485,7 @@ powf:
 	mov.w	r1, r0	# tmp52,
 	xor.w	r0, r0	# tmp53
 	cmp.w	r1, r0	# tmp52, tmp53
-	jnz	.L147		#
+	jnz	.L148		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:370: 		temp = expf(arg2 * logf(-arg1));
 	ld.w	r0, [r13 + (8)]	# tmp54, arg1
 	mov.w	r1, -2147483648	# tmp55,
@@ -2503,17 +2513,17 @@ powf:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:371: 		if(l & 1)
 	xor.w	r0, r0	# tmp65
 	cmp.w	r1, r0	# _5, tmp65
-	jz	.L141		#
+	jz	.L142		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:372: 			temp = -temp;
 	ld.w	r0, [r13 + (-4)]	# tmp67, temp
 	mov.w	r1, -2147483648	# tmp68,
 	xor.w	r0, r1	# tmp66, tmp68
 	st.w	[r13 + (-4)], r0	# temp, tmp66
-.L141:
+.L142:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:373: 		return(temp);
 	ld.w	r1, [r13 + (-4)]	# _9, temp
-	j	.L138		#
-.L144:
+	j	.L139		#
+.L145:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:375: 	return(expf(arg2 * logf(arg1)));
 	mov.w	r1, sp	# tmp69,
 	ld.w	r0, [r13 + (8)]	# tmp70, arg1
@@ -2532,18 +2542,18 @@ powf:
 	st.w	[r1], r0	#, tmp75
 	call	expf		#
 	mov.w	r1, r0	# _9,
-	j	.L138		#
-.L146:
+	j	.L139		#
+.L147:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:364: 				goto domain;
 	nop	
-	j	.L137		#
-.L147:
+	j	.L138		#
+.L148:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:369: 			goto domain;
 	nop	
-.L137:
+.L138:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:378: 	return(0.);
 	xor.w	r1, r1	# _9
-.L138:
+.L139:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:379: }
 	mov.w	r0, r1	# <retval>, _9
 	mov.w	sp, r13	#,
@@ -2822,15 +2832,15 @@ satan:
 	mov.w	r1, r0	# tmp40,
 	xor.w	r0, r0	# tmp41
 	cmp.w	r1, r0	# tmp40, tmp41
-	jges	.L158		#
+	jges	.L159		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:420: 		return(xatan(arg));
 	mov.w	r1, sp	# tmp42,
 	ld.w	r0, [r13 + (8)]	# tmp43, arg
 	st.w	[r1], r0	#, tmp43
 	call	xatan		#
 	mov.w	r1, r0	# _11,
-	j	.L153		#
-.L158:
+	j	.L154		#
+.L159:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:421: 	else if(arg > atsq2p1)
 	ld.w	r0, [atsq2p1]	# atsq2p1.52_2, atsq2p1
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:421: 	else if(arg > atsq2p1)
@@ -2841,7 +2851,7 @@ satan:
 	mov.w	r1, r0	# tmp46,
 	xor.w	r0, r0	# tmp47
 	cmp.w	r1, r0	# tmp46, tmp47
-	jses	.L159		#
+	jses	.L160		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:422: 		return(atpio2 - xatan(1.0f/arg));
 	ld.w	r6, [atpio2]	# atpio2.53_3, atpio2
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:422: 		return(atpio2 - xatan(1.0f/arg));
@@ -2863,8 +2873,8 @@ satan:
 	call	__subsf3		#
 	mov.w	r2, r0	# tmp55,
 	mov.w	r1, r2	# _11, tmp55
-	j	.L153		#
-.L159:
+	j	.L154		#
+.L160:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:424: 		return(atpio4 + xatan((arg-1.0f)/(arg+1.0f)));
 	mov.w	r0, 1065353216	# tmp56,
 	st.w	[sp + (4)], r0	#, tmp56
@@ -2902,7 +2912,7 @@ satan:
 	call	__addsf3		#
 	mov.w	r2, r0	# tmp69,
 	mov.w	r1, r2	# _11, tmp69
-.L153:
+.L154:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:425: }
 	mov.w	r0, r1	# <retval>, _11
 	mov.w	r12, r13	#,
@@ -2929,15 +2939,15 @@ atanf:
 	mov.w	r1, r0	# tmp32,
 	xor.w	r0, r0	# tmp33
 	cmp.w	r1, r0	# tmp32, tmp33
-	jss	.L165		#
+	jss	.L166		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:434: 		return(satan(arg));
 	mov.w	r1, sp	# tmp34,
 	ld.w	r0, [r13 + (8)]	# tmp35, arg
 	st.w	[r1], r0	#, tmp35
 	call	satan		#
 	mov.w	r1, r0	# _3,
-	j	.L163		#
-.L165:
+	j	.L164		#
+.L166:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:436: 		return(-satan(-arg));
 	ld.w	r0, [r13 + (8)]	# tmp36, arg
 	mov.w	r1, -2147483648	# tmp37,
@@ -2949,7 +2959,7 @@ atanf:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:436: 		return(-satan(-arg));
 	mov.w	r0, -2147483648	# tmp40,
 	xor.w	r1, r0	# _3, tmp40
-.L163:
+.L164:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:437: } 
 	mov.w	r0, r1	# <retval>, _3
 	mov.w	sp, r13	#,
@@ -2975,7 +2985,7 @@ asinf:
 	mov.w	r1, r0	# tmp36,
 	xor.w	r0, r0	# tmp37
 	cmp.w	r1, r0	# tmp36, tmp37
-	jges	.L167		#
+	jges	.L168		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:446: 		arg = -arg;
 	ld.w	r0, [r13 + (8)]	# tmp39, arg
 	mov.w	r1, -2147483648	# tmp40,
@@ -2984,7 +2994,7 @@ asinf:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:447: 		sign = -1.;
 	mov.w	r0, -1082130432	# tmp41,
 	st.w	[r13 + (-4)], r0	# sign, tmp41
-.L167:
+.L168:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:450: 	if(arg > 1.f){
 	mov.w	r0, 1065353216	# tmp42,
 	st.w	[sp + (4)], r0	#, tmp42
@@ -2994,11 +3004,11 @@ asinf:
 	mov.w	r1, r0	# tmp44,
 	xor.w	r0, r0	# tmp45
 	cmp.w	r1, r0	# tmp44, tmp45
-	jses	.L178		#
+	jses	.L179		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:451: 		return(0.f);
 	xor.w	r0, r0	# _9
-	j	.L171		#
-.L178:
+	j	.L172		#
+.L179:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:454: 	temp = sqrtf(1.f - arg*arg);
 	ld.w	r0, [r13 + (8)]	# tmp46, arg
 	st.w	[sp + (4)], r0	#, tmp46
@@ -3028,7 +3038,7 @@ asinf:
 	mov.w	r1, r0	# tmp56,
 	xor.w	r0, r0	# tmp57
 	cmp.w	r1, r0	# tmp56, tmp57
-	jses	.L179		#
+	jses	.L180		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:457: 		t1 = atanf(temp/arg);
 	ld.w	r0, [r13 + (8)]	# tmp58, arg
 	st.w	[sp + (4)], r0	#, tmp58
@@ -3051,8 +3061,8 @@ asinf:
 	mov.w	r1, r0	# tmp65,
 	mov.w	r0, r1	# tmp66, tmp65
 	st.w	[r13 + (-8)], r0	# temp, tmp66
-	j	.L174		#
-.L179:
+	j	.L175		#
+.L180:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:461: 		temp = atanf(arg/temp);
 	ld.w	r0, [r13 + (-8)]	# tmp67, temp
 	st.w	[sp + (4)], r0	#, tmp67
@@ -3065,7 +3075,7 @@ asinf:
 	st.w	[r1], r0	#, tmp71
 	call	atanf		#
 	st.w	[r13 + (-8)], r0	# temp,
-.L174:
+.L175:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:463: 	return(sign*temp);
 	ld.w	r0, [r13 + (-8)]	# tmp72, temp
 	st.w	[sp + (4)], r0	#, tmp72
@@ -3074,7 +3084,7 @@ asinf:
 	call	__mulsf3		#
 	mov.w	r1, r0	# tmp74,
 	mov.w	r0, r1	# _9, tmp74
-.L171:
+.L172:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:464: }
 	mov.w	r1, r0	# <retval>, _9
 	mov.w	r0, r1	#, <retval>
@@ -3099,13 +3109,13 @@ acosf:
 	mov.w	r1, r0	# tmp32,
 	xor.w	r0, r0	# tmp33
 	cmp.w	r1, r0	# tmp32, tmp33
-	jges	.L181		#
+	jges	.L182		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:469: 		arg = -arg;
 	ld.w	r0, [r13 + (8)]	# tmp35, arg
 	mov.w	r1, -2147483648	# tmp36,
 	xor.w	r0, r1	# tmp34, tmp36
 	st.w	[r13 + (8)], r0	# arg, tmp34
-.L181:
+.L182:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:471: 	if(arg > 1.f){
 	mov.w	r0, 1065353216	# tmp37,
 	st.w	[sp + (4)], r0	#, tmp37
@@ -3115,11 +3125,11 @@ acosf:
 	mov.w	r1, r0	# tmp39,
 	xor.w	r0, r0	# tmp40
 	cmp.w	r1, r0	# tmp39, tmp40
-	jses	.L188		#
+	jses	.L189		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:472: 		return(0.);
 	xor.w	r0, r0	# _4
-	j	.L185		#
-.L188:
+	j	.L186		#
+.L189:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:475: 	return(aspio2 - asinf(arg));
 	ld.w	r6, [aspio2]	# aspio2.56_1, aspio2
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:475: 	return(aspio2 - asinf(arg));
@@ -3135,7 +3145,7 @@ acosf:
 	call	__subsf3		#
 	mov.w	r1, r0	# tmp45,
 	mov.w	r0, r1	# _4, tmp45
-.L185:
+.L186:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/math.c:476: } 
 	mov.w	r1, r0	# <retval>, _4
 	mov.w	r0, r1	#, <retval>

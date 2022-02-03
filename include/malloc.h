@@ -20,10 +20,10 @@ typedef unsigned char uint8_t;
 #define NULL 0
 
 extern void  umm_init( void );
-extern void *umm_malloc( size_t size );
-extern void *umm_calloc( size_t num, size_t size );
-extern void *umm_realloc( void *ptr, size_t size );
-extern void  umm_free( void *ptr );
+extern void *malloc( size_t size );
+extern void *calloc( size_t num, size_t size );
+extern void *realloc( void *ptr, size_t size );
+extern void  free( void *ptr );
 
 /* ------------------------------------------------------------------------ */
 

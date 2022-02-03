@@ -50,6 +50,7 @@ unsigned int vsprintf(char *dst, char* fmt, va_list args)
             if (*fmt=='f')
             {
                 arg = va_arg(args, int);
+                va_arg(args, int);
                 ieee_float_shape_type ts;
                 ts.word = arg;
                 float f = ts.value;

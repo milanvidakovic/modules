@@ -2,8 +2,9 @@
 # GNU C17 (GCC) version 10.0.0 20200111 (experimental) (moxiebox)
 #	compiled by GNU C version 7.4.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version none
 # GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
-# options passed:  /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c
-# -mel -auxbase-strip /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.s
+# options passed:  -I /mnt/c/Prj/Altera/C/moxiebox/modules/include
+# -D KERNEL /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c -mel
+# -auxbase-strip /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.s
 # -fsigned-char -fverbose-asm
 # options enabled:  -faggressive-loop-optimizations -fallocation-dce
 # -fauto-inc-dec -fdelete-null-pointer-checks -fearly-inlining
@@ -972,9 +973,9 @@ umm_free_core:
 	ret	
 	.size	umm_free_core, .-umm_free_core
 	.p2align	1
-	.global	umm_free
-	.type	umm_free, @function
-umm_free:
+	.global	free
+	.type	free, @function
+free:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
@@ -1006,7 +1007,7 @@ umm_free:
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
-	.size	umm_free, .-umm_free
+	.size	free, .-free
 	.p2align	1
 	.global	umm_malloc_core
 	.type	umm_malloc_core, @function
@@ -1335,9 +1336,9 @@ umm_malloc_core:
 	ret	
 	.size	umm_malloc_core, .-umm_malloc_core
 	.p2align	1
-	.global	umm_malloc
-	.type	umm_malloc, @function
-umm_malloc:
+	.global	malloc
+	.type	malloc, @function
+malloc:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
@@ -1375,11 +1376,11 @@ umm_malloc:
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
-	.size	umm_malloc, .-umm_malloc
+	.size	malloc, .-malloc
 	.p2align	1
-	.global	umm_realloc
-	.type	umm_realloc, @function
-umm_realloc:
+	.global	realloc
+	.type	realloc, @function
+realloc:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 44 #111	#,
@@ -1403,183 +1404,183 @@ umm_realloc:
 	xor.w	r0, r0	# tmp154
 	cmp.w	r1, r0	# tmp153, tmp154
 	jnz	.L37		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:515:     return( umm_malloc(size) );
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:515:     return( malloc(size) );
 	mov.w	r1, sp	# tmp155,
 	ld.w	r0, [r13 + (12)]	# tmp156, size
 	st.w	[r1], r0	#, tmp156
-	call	umm_malloc		#
+	call	malloc		#
 	j	.L38		#
 .L37:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:524:   if( 0 == size ) {
-	ld.w	r1, [r13 + (12)]	# tmp157, size
-	xor.w	r0, r0	# tmp158
-	cmp.w	r1, r0	# tmp157, tmp158
+	ld.w	r1, [r13 + (12)]	# tmp158, size
+	xor.w	r0, r0	# tmp159
+	cmp.w	r1, r0	# tmp158, tmp159
 	jnz	.L39		#
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:527:     umm_free( ptr );
-	mov.w	r1, sp	# tmp159,
-	ld.w	r0, [r13 + (8)]	# tmp160, ptr
-	st.w	[r1], r0	#, tmp160
-	call	umm_free		#
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:527:     free( ptr );
+	mov.w	r1, sp	# tmp160,
+	ld.w	r0, [r13 + (8)]	# tmp161, ptr
+	st.w	[r1], r0	#, tmp161
+	call	free		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:529:     return( (void *)NULL );
 	xor.w	r0, r0	# _128
 	j	.L38		#
 .L39:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:541:   blocks = umm_blocks( size );
-	mov.w	r1, sp	# tmp161,
-	ld.w	r0, [r13 + (12)]	# tmp162, size
-	st.w	[r1], r0	#, tmp162
+	mov.w	r1, sp	# tmp162,
+	ld.w	r0, [r13 + (12)]	# tmp163, size
+	st.w	[r1], r0	#, tmp163
 	call	umm_blocks		#
 	st.s	[r13 + (-10)], r0	# blocks,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:545:   c = (((void *)ptr)-(void *)(&(umm_heap[0])))/sizeof(umm_block);
 	ld.w	r1, [umm_heap]	# umm_heap.67_2, umm_heap
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:545:   c = (((void *)ptr)-(void *)(&(umm_heap[0])))/sizeof(umm_block);
-	ld.w	r0, [r13 + (8)]	# tmp163, ptr
+	ld.w	r0, [r13 + (8)]	# tmp164, ptr
 	sub.w	r0, r1 #222	# _3, umm_heap.67_2
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:545:   c = (((void *)ptr)-(void *)(&(umm_heap[0])))/sizeof(umm_block);
-	mov.w	r1, 3	# tmp164,
-	shr.w	r0, r1	# _5, tmp164
+	mov.w	r1, 3	# tmp165,
+	shr.w	r0, r1	# _5, tmp165
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:545:   c = (((void *)ptr)-(void *)(&(umm_heap[0])))/sizeof(umm_block);
-	st.s	[r13 + (-8)], r0	# c, tmp165
+	st.s	[r13 + (-8)], r0	# c, tmp166
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:549:   blockSize = (UMM_NBLOCK(c) - c);
 	ld.w	r0, [umm_heap]	# umm_heap.68_6, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _7, c
-	mov.w	r2, 3	# tmp166,
-	shl.w	r1, r2	# _8, tmp166
+	mov.w	r2, 3	# tmp167,
+	shl.w	r1, r2	# _8, tmp167
 	add.w	r0, r1 #222	# _9, _8
-	ld.b	r1, [r0]	# tmp167, *_9
-	mov.w	r2, 8	# tmp169,
-	shl.w	r1, r2	# tmp168, tmp169
-	ld.b	r0, [r0 + (1)]	# tmp170, *_9
-	or.w	r0, r1	# tmp171, tmp168
+	ld.b	r1, [r0]	# tmp168, *_9
+	mov.w	r2, 8	# tmp170,
+	shl.w	r1, r2	# tmp169, tmp170
+	ld.b	r0, [r0 + (1)]	# tmp171, *_9
+	or.w	r0, r1	# tmp172, tmp169
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:549:   blockSize = (UMM_NBLOCK(c) - c);
-	ld.s	r1, [r13 + (-8)]	# tmp172, c
-	sub.w	r0, r1 #222	# tmp173, tmp174
-	st.s	[r13 + (-2)], r0	# blockSize, tmp175
+	ld.s	r1, [r13 + (-8)]	# tmp173, c
+	sub.w	r0, r1 #222	# tmp174, tmp175
+	st.s	[r13 + (-2)], r0	# blockSize, tmp176
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:553:   curSize   = (blockSize*sizeof(umm_block))-(sizeof(((umm_block *)0)->header));
 	ld.s	r0, [r13 + (-2)]	# _11, blockSize
-	mov.w	r1, 3	# tmp176,
-	shl.w	r0, r1	# _12, tmp176
+	mov.w	r1, 3	# tmp177,
+	shl.w	r0, r1	# _12, tmp177
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:553:   curSize   = (blockSize*sizeof(umm_block))-(sizeof(((umm_block *)0)->header));
-	add.w	r0, -4 #111	# tmp177,
-	st.w	[r13 + (-16)], r0	# curSize, tmp177
+	add.w	r0, -4 #111	# tmp178,
+	st.w	[r13 + (-16)], r0	# curSize, tmp178
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:566:   if ((UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_FREELIST_MASK)) {
 	ld.w	r2, [umm_heap]	# umm_heap.69_13, umm_heap
 	ld.w	r0, [umm_heap]	# umm_heap.70_14, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _15, c
-	mov.w	r3, 3	# tmp178,
-	shl.w	r1, r3	# _16, tmp178
+	mov.w	r3, 3	# tmp179,
+	shl.w	r1, r3	# _16, tmp179
 	add.w	r0, r1 #222	# _17, _16
-	ld.b	r1, [r0]	# tmp179, *_17
-	mov.w	r3, 8	# tmp181,
-	shl.w	r1, r3	# tmp180, tmp181
-	ld.b	r0, [r0 + (1)]	# tmp182, *_17
-	or.w	r0, r1	# tmp183, tmp180
+	ld.b	r1, [r0]	# tmp180, *_17
+	mov.w	r3, 8	# tmp182,
+	shl.w	r1, r3	# tmp181, tmp182
+	ld.b	r0, [r0 + (1)]	# tmp183, *_17
+	or.w	r0, r1	# tmp184, tmp181
 	zex.s	r1, r0	# _19, _18
-	mov.w	r0, 3	# tmp184,
-	shl.w	r1, r0	# _20, tmp184
+	mov.w	r0, 3	# tmp185,
+	shl.w	r1, r0	# _20, tmp185
 	mov.w	r0, r2	# _21, umm_heap.69_13
 	add.w	r0, r1 #222	# _21, _20
-	ld.b	r1, [r0]	# tmp185, *_21
-	mov.w	r2, 8	# tmp187,
-	shl.w	r1, r2	# tmp186, tmp187
-	ld.b	r0, [r0 + (1)]	# tmp188, *_21
-	or.w	r0, r1	# tmp189, tmp186
+	ld.b	r1, [r0]	# tmp186, *_21
+	mov.w	r2, 8	# tmp188,
+	shl.w	r1, r2	# tmp187, tmp188
+	ld.b	r0, [r0 + (1)]	# tmp189, *_21
+	or.w	r0, r1	# tmp190, tmp187
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:566:   if ((UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_FREELIST_MASK)) {
-	sex.s	r1, r0	# tmp190, _23
-	xor.w	r0, r0	# tmp191
-	cmp.w	r1, r0	# tmp190, tmp191
+	sex.s	r1, r0	# tmp191, _23
+	xor.w	r0, r0	# tmp192
+	cmp.w	r1, r0	# tmp191, tmp192
 	jges	.L40		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:567:       nextBlockSize = (UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_BLOCKNO_MASK) - UMM_NBLOCK(c);
 	ld.w	r2, [umm_heap]	# umm_heap.71_24, umm_heap
 	ld.w	r0, [umm_heap]	# umm_heap.72_25, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _26, c
-	mov.w	r3, 3	# tmp192,
-	shl.w	r1, r3	# _27, tmp192
+	mov.w	r3, 3	# tmp193,
+	shl.w	r1, r3	# _27, tmp193
 	add.w	r0, r1 #222	# _28, _27
-	ld.b	r1, [r0]	# tmp193, *_28
-	mov.w	r3, 8	# tmp195,
-	shl.w	r1, r3	# tmp194, tmp195
-	ld.b	r0, [r0 + (1)]	# tmp196, *_28
-	or.w	r0, r1	# tmp197, tmp194
+	ld.b	r1, [r0]	# tmp194, *_28
+	mov.w	r3, 8	# tmp196,
+	shl.w	r1, r3	# tmp195, tmp196
+	ld.b	r0, [r0 + (1)]	# tmp197, *_28
+	or.w	r0, r1	# tmp198, tmp195
 	zex.s	r1, r0	# _30, _29
-	mov.w	r0, 3	# tmp198,
-	shl.w	r1, r0	# _31, tmp198
+	mov.w	r0, 3	# tmp199,
+	shl.w	r1, r0	# _31, tmp199
 	mov.w	r0, r2	# _32, umm_heap.71_24
 	add.w	r0, r1 #222	# _32, _31
-	ld.b	r1, [r0]	# tmp199, *_32
-	mov.w	r2, 8	# tmp201,
-	shl.w	r1, r2	# tmp200, tmp201
-	ld.b	r0, [r0 + (1)]	# tmp202, *_32
-	or.w	r0, r1	# tmp203, tmp200
+	ld.b	r1, [r0]	# tmp200, *_32
+	mov.w	r2, 8	# tmp202,
+	shl.w	r1, r2	# tmp201, tmp202
+	ld.b	r0, [r0 + (1)]	# tmp203, *_32
+	or.w	r0, r1	# tmp204, tmp201
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:567:       nextBlockSize = (UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_BLOCKNO_MASK) - UMM_NBLOCK(c);
-	mov.w	r1, 32767	# tmp205,
-	and.w	r0, r1	# tmp204, tmp205
-	mov.w	r2, r0	# _34, tmp204
+	mov.w	r1, 32767	# tmp206,
+	and.w	r0, r1	# tmp205, tmp206
+	mov.w	r2, r0	# _34, tmp205
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:567:       nextBlockSize = (UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_BLOCKNO_MASK) - UMM_NBLOCK(c);
 	ld.w	r0, [umm_heap]	# umm_heap.73_35, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _36, c
-	mov.w	r3, 3	# tmp206,
-	shl.w	r1, r3	# _37, tmp206
+	mov.w	r3, 3	# tmp207,
+	shl.w	r1, r3	# _37, tmp207
 	add.w	r0, r1 #222	# _38, _37
-	ld.b	r1, [r0]	# tmp207, *_38
-	mov.w	r3, 8	# tmp209,
-	shl.w	r1, r3	# tmp208, tmp209
-	ld.b	r0, [r0 + (1)]	# tmp210, *_38
-	or.w	r0, r1	# tmp211, tmp208
+	ld.b	r1, [r0]	# tmp208, *_38
+	mov.w	r3, 8	# tmp210,
+	shl.w	r1, r3	# tmp209, tmp210
+	ld.b	r0, [r0 + (1)]	# tmp211, *_38
+	or.w	r0, r1	# tmp212, tmp209
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:567:       nextBlockSize = (UMM_NBLOCK(UMM_NBLOCK(c)) & UMM_BLOCKNO_MASK) - UMM_NBLOCK(c);
-	mov.w	r1, r0	# tmp213, _39
-	mov.w	r0, r2	# tmp212,
-	sub.w	r0, r1 #222	# tmp212, tmp213
-	st.s	[r13 + (-6)], r0	# nextBlockSize, tmp214
+	mov.w	r1, r0	# tmp214, _39
+	mov.w	r0, r2	# tmp213,
+	sub.w	r0, r1 #222	# tmp213, tmp214
+	st.s	[r13 + (-6)], r0	# nextBlockSize, tmp215
 .L40:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:570:   if ((UMM_NBLOCK(UMM_PBLOCK(c)) & UMM_FREELIST_MASK)) {
 	ld.w	r2, [umm_heap]	# umm_heap.74_40, umm_heap
 	ld.w	r0, [umm_heap]	# umm_heap.75_41, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _42, c
-	mov.w	r3, 3	# tmp215,
-	shl.w	r1, r3	# _43, tmp215
+	mov.w	r3, 3	# tmp216,
+	shl.w	r1, r3	# _43, tmp216
 	add.w	r0, r1 #222	# _44, _43
-	ld.b	r1, [r0 + (2)]	# tmp216,
-	mov.w	r3, 8	# tmp218,
-	shl.w	r1, r3	# tmp217, tmp218
-	ld.b	r0, [r0 + (3)]	# tmp219,
-	or.w	r0, r1	# tmp220, tmp217
+	ld.b	r1, [r0 + (2)]	# tmp217,
+	mov.w	r3, 8	# tmp219,
+	shl.w	r1, r3	# tmp218, tmp219
+	ld.b	r0, [r0 + (3)]	# tmp220,
+	or.w	r0, r1	# tmp221, tmp218
 	zex.s	r1, r0	# _46, _45
-	mov.w	r0, 3	# tmp221,
-	shl.w	r1, r0	# _47, tmp221
+	mov.w	r0, 3	# tmp222,
+	shl.w	r1, r0	# _47, tmp222
 	mov.w	r0, r2	# _48, umm_heap.74_40
 	add.w	r0, r1 #222	# _48, _47
-	ld.b	r1, [r0]	# tmp222, *_48
-	mov.w	r2, 8	# tmp224,
-	shl.w	r1, r2	# tmp223, tmp224
-	ld.b	r0, [r0 + (1)]	# tmp225, *_48
-	or.w	r0, r1	# tmp226, tmp223
+	ld.b	r1, [r0]	# tmp223, *_48
+	mov.w	r2, 8	# tmp225,
+	shl.w	r1, r2	# tmp224, tmp225
+	ld.b	r0, [r0 + (1)]	# tmp226, *_48
+	or.w	r0, r1	# tmp227, tmp224
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:570:   if ((UMM_NBLOCK(UMM_PBLOCK(c)) & UMM_FREELIST_MASK)) {
-	sex.s	r1, r0	# tmp227, _50
-	xor.w	r0, r0	# tmp228
-	cmp.w	r1, r0	# tmp227, tmp228
+	sex.s	r1, r0	# tmp228, _50
+	xor.w	r0, r0	# tmp229
+	cmp.w	r1, r0	# tmp228, tmp229
 	jges	.L41		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:571:       prevBlockSize = (c - UMM_PBLOCK(c));
 	ld.w	r0, [umm_heap]	# umm_heap.76_51, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _52, c
-	mov.w	r2, 3	# tmp229,
-	shl.w	r1, r2	# _53, tmp229
+	mov.w	r2, 3	# tmp230,
+	shl.w	r1, r2	# _53, tmp230
 	add.w	r0, r1 #222	# _54, _53
-	ld.b	r1, [r0 + (2)]	# tmp230,
-	mov.w	r2, 8	# tmp232,
-	shl.w	r1, r2	# tmp231, tmp232
-	ld.b	r0, [r0 + (3)]	# tmp233,
-	or.w	r0, r1	# tmp234, tmp231
-	mov.w	r1, r0	# _55, tmp234
+	ld.b	r1, [r0 + (2)]	# tmp231,
+	mov.w	r2, 8	# tmp233,
+	shl.w	r1, r2	# tmp232, tmp233
+	ld.b	r0, [r0 + (3)]	# tmp234,
+	or.w	r0, r1	# tmp235, tmp232
+	mov.w	r1, r0	# _55, tmp235
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:571:       prevBlockSize = (c - UMM_PBLOCK(c));
-	ld.s	r0, [r13 + (-8)]	# tmp235, c
-	sub.w	r0, r1 #222	# tmp236, tmp237
-	st.s	[r13 + (-4)], r0	# prevBlockSize, tmp238
+	ld.s	r0, [r13 + (-8)]	# tmp236, c
+	sub.w	r0, r1 #222	# tmp237, tmp238
+	st.s	[r13 + (-4)], r0	# prevBlockSize, tmp239
 .L41:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:612:     if (blockSize >= blocks) {
-	ld.s	r1, [r13 + (-2)]	# tmp239, blockSize
-	ld.s	r0, [r13 + (-10)]	# tmp240, blocks
-	cmp.w	r1, r0	# tmp239, tmp240
+	ld.s	r1, [r13 + (-2)]	# tmp240, blockSize
+	ld.s	r0, [r13 + (-10)]	# tmp241, blocks
+	cmp.w	r1, r0	# tmp240, tmp241
 	jge	.L42		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:617:     } else if ((blockSize + nextBlockSize) == blocks) {
 	ld.s	r1, [r13 + (-2)]	# _56, blockSize
@@ -1592,20 +1593,20 @@ umm_realloc:
 	jnz	.L43		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:619:         umm_assimilate_up( c );
 	ld.s	r0, [r13 + (-8)]	# _60, c
-	mov.w	r1, sp	# tmp241,
+	mov.w	r1, sp	# tmp242,
 	st.w	[r1], r0	#, _60
 	call	umm_assimilate_up		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:620:         blockSize += nextBlockSize;
-	ld.s	r0, [r13 + (-2)]	# tmp242, blockSize
-	ld.s	r1, [r13 + (-6)]	# tmp243, nextBlockSize
-	add.w	r0, r1 #222	# tmp244, tmp245
-	st.s	[r13 + (-2)], r0	# blockSize, tmp246
+	ld.s	r0, [r13 + (-2)]	# tmp243, blockSize
+	ld.s	r1, [r13 + (-6)]	# tmp244, nextBlockSize
+	add.w	r0, r1 #222	# tmp245, tmp246
+	st.s	[r13 + (-2)], r0	# blockSize, tmp247
 	j	.L42		#
 .L43:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:623:     } else if ((0 == prevBlockSize) && (blockSize + nextBlockSize) >= blocks) {
-	ld.s	r1, [r13 + (-4)]	# tmp247, prevBlockSize
-	xor.w	r0, r0	# tmp248
-	cmp.w	r1, r0	# tmp247, tmp248
+	ld.s	r1, [r13 + (-4)]	# tmp248, prevBlockSize
+	xor.w	r0, r0	# tmp249
+	cmp.w	r1, r0	# tmp248, tmp249
 	jnz	.L44		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:623:     } else if ((0 == prevBlockSize) && (blockSize + nextBlockSize) >= blocks) {
 	ld.s	r1, [r13 + (-2)]	# _61, blockSize
@@ -1618,14 +1619,14 @@ umm_realloc:
 	jss	.L44		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:625:         umm_assimilate_up( c );
 	ld.s	r0, [r13 + (-8)]	# _65, c
-	mov.w	r1, sp	# tmp249,
+	mov.w	r1, sp	# tmp250,
 	st.w	[r1], r0	#, _65
 	call	umm_assimilate_up		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:626:         blockSize += nextBlockSize;
-	ld.s	r0, [r13 + (-2)]	# tmp250, blockSize
-	ld.s	r1, [r13 + (-6)]	# tmp251, nextBlockSize
-	add.w	r0, r1 #222	# tmp252, tmp253
-	st.s	[r13 + (-2)], r0	# blockSize, tmp254
+	ld.s	r0, [r13 + (-2)]	# tmp251, blockSize
+	ld.s	r1, [r13 + (-6)]	# tmp252, nextBlockSize
+	add.w	r0, r1 #222	# tmp253, tmp254
+	st.s	[r13 + (-2)], r0	# blockSize, tmp255
 	j	.L42		#
 .L44:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:629:     } else if ((prevBlockSize + blockSize) >= blocks) {
@@ -1640,58 +1641,58 @@ umm_realloc:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:631:         umm_disconnect_from_free_list( UMM_PBLOCK(c) );
 	ld.w	r0, [umm_heap]	# umm_heap.77_70, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _71, c
-	mov.w	r2, 3	# tmp255,
-	shl.w	r1, r2	# _72, tmp255
+	mov.w	r2, 3	# tmp256,
+	shl.w	r1, r2	# _72, tmp256
 	add.w	r0, r1 #222	# _73, _72
-	ld.b	r1, [r0 + (2)]	# tmp256,
-	mov.w	r2, 8	# tmp258,
-	shl.w	r1, r2	# tmp257, tmp258
-	ld.b	r0, [r0 + (3)]	# tmp259,
-	or.w	r0, r1	# tmp260, tmp257
+	ld.b	r1, [r0 + (2)]	# tmp257,
+	mov.w	r2, 8	# tmp259,
+	shl.w	r1, r2	# tmp258, tmp259
+	ld.b	r0, [r0 + (3)]	# tmp260,
+	or.w	r0, r1	# tmp261, tmp258
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:631:         umm_disconnect_from_free_list( UMM_PBLOCK(c) );
 	zex.s	r0, r0	# _75, _74
-	mov.w	r1, sp	# tmp261,
+	mov.w	r1, sp	# tmp262,
 	st.w	[r1], r0	#, _75
 	call	umm_disconnect_from_free_list		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:632:         c = umm_assimilate_down(c, 0);
 	ld.s	r1, [r13 + (-8)]	# _76, c
-	mov.w	r0, sp	# tmp262,
-	xor.w	r2, r2	# tmp263
-	st.w	[r0 + (4)], r2	#, tmp263
+	mov.w	r0, sp	# tmp263,
+	xor.w	r2, r2	# tmp264
+	st.w	[r0 + (4)], r2	#, tmp264
 	st.w	[r0], r1	#, _76
 	call	umm_assimilate_down		#
 	st.s	[r13 + (-8)], r0	# c,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:633:         memmove( (void *)&UMM_DATA(c), ptr, curSize );
 	ld.w	r0, [umm_heap]	# umm_heap.78_77, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _78, c
-	mov.w	r2, 3	# tmp264,
-	shl.w	r1, r2	# _79, tmp264
+	mov.w	r2, 3	# tmp265,
+	shl.w	r1, r2	# _79, tmp265
 	add.w	r0, r1 #222	# _80, _79
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:633:         memmove( (void *)&UMM_DATA(c), ptr, curSize );
 	mov.w	r1, r0	# _81, _80
 	add.w	r1, 4 #111	# _81,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:633:         memmove( (void *)&UMM_DATA(c), ptr, curSize );
 	ld.w	r2, [r13 + (-16)]	# curSize.79_82, curSize
-	mov.w	r0, sp	# tmp265,
+	mov.w	r0, sp	# tmp266,
 	st.w	[r0 + (8)], r2	#, curSize.79_82
-	ld.w	r2, [r13 + (8)]	# tmp266, ptr
-	st.w	[r0 + (4)], r2	#, tmp266
+	ld.w	r2, [r13 + (8)]	# tmp267, ptr
+	st.w	[r0 + (4)], r2	#, tmp267
 	st.w	[r0], r1	#, _81
 	call	memmove		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:634:         ptr = (void *)&UMM_DATA(c);
 	ld.w	r0, [umm_heap]	# umm_heap.80_83, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _84, c
-	mov.w	r2, 3	# tmp267,
-	shl.w	r1, r2	# _85, tmp267
+	mov.w	r2, 3	# tmp268,
+	shl.w	r1, r2	# _85, tmp268
 	add.w	r0, r1 #222	# _86, _85
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:634:         ptr = (void *)&UMM_DATA(c);
-	add.w	r0, 4 #111	# tmp268,
-	st.w	[r13 + (8)], r0	# ptr, tmp268
+	add.w	r0, 4 #111	# tmp269,
+	st.w	[r13 + (8)], r0	# ptr, tmp269
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:635:         blockSize += prevBlockSize;
-	ld.s	r0, [r13 + (-2)]	# tmp269, blockSize
-	ld.s	r1, [r13 + (-4)]	# tmp270, prevBlockSize
-	add.w	r0, r1 #222	# tmp271, tmp272
-	st.s	[r13 + (-2)], r0	# blockSize, tmp273
+	ld.s	r0, [r13 + (-2)]	# tmp270, blockSize
+	ld.s	r1, [r13 + (-4)]	# tmp271, prevBlockSize
+	add.w	r0, r1 #222	# tmp272, tmp273
+	st.s	[r13 + (-2)], r0	# blockSize, tmp274
 	j	.L42		#
 .L45:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:638:     } else if ((prevBlockSize + blockSize + nextBlockSize) >= blocks) {
@@ -1708,114 +1709,114 @@ umm_realloc:
 	jss	.L46		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:640:         umm_assimilate_up( c );
 	ld.s	r0, [r13 + (-8)]	# _93, c
-	mov.w	r1, sp	# tmp274,
+	mov.w	r1, sp	# tmp275,
 	st.w	[r1], r0	#, _93
 	call	umm_assimilate_up		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:641:         umm_disconnect_from_free_list( UMM_PBLOCK(c) );
 	ld.w	r0, [umm_heap]	# umm_heap.81_94, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _95, c
-	mov.w	r2, 3	# tmp275,
-	shl.w	r1, r2	# _96, tmp275
+	mov.w	r2, 3	# tmp276,
+	shl.w	r1, r2	# _96, tmp276
 	add.w	r0, r1 #222	# _97, _96
-	ld.b	r1, [r0 + (2)]	# tmp276,
-	mov.w	r2, 8	# tmp278,
-	shl.w	r1, r2	# tmp277, tmp278
-	ld.b	r0, [r0 + (3)]	# tmp279,
-	or.w	r0, r1	# tmp280, tmp277
+	ld.b	r1, [r0 + (2)]	# tmp277,
+	mov.w	r2, 8	# tmp279,
+	shl.w	r1, r2	# tmp278, tmp279
+	ld.b	r0, [r0 + (3)]	# tmp280,
+	or.w	r0, r1	# tmp281, tmp278
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:641:         umm_disconnect_from_free_list( UMM_PBLOCK(c) );
 	zex.s	r0, r0	# _99, _98
-	mov.w	r1, sp	# tmp281,
+	mov.w	r1, sp	# tmp282,
 	st.w	[r1], r0	#, _99
 	call	umm_disconnect_from_free_list		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:642:         c = umm_assimilate_down(c, 0);
 	ld.s	r1, [r13 + (-8)]	# _100, c
-	mov.w	r0, sp	# tmp282,
-	xor.w	r2, r2	# tmp283
-	st.w	[r0 + (4)], r2	#, tmp283
+	mov.w	r0, sp	# tmp283,
+	xor.w	r2, r2	# tmp284
+	st.w	[r0 + (4)], r2	#, tmp284
 	st.w	[r0], r1	#, _100
 	call	umm_assimilate_down		#
 	st.s	[r13 + (-8)], r0	# c,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:643:         memmove( (void *)&UMM_DATA(c), ptr, curSize );
 	ld.w	r0, [umm_heap]	# umm_heap.82_101, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _102, c
-	mov.w	r2, 3	# tmp284,
-	shl.w	r1, r2	# _103, tmp284
+	mov.w	r2, 3	# tmp285,
+	shl.w	r1, r2	# _103, tmp285
 	add.w	r0, r1 #222	# _104, _103
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:643:         memmove( (void *)&UMM_DATA(c), ptr, curSize );
 	mov.w	r1, r0	# _105, _104
 	add.w	r1, 4 #111	# _105,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:643:         memmove( (void *)&UMM_DATA(c), ptr, curSize );
 	ld.w	r2, [r13 + (-16)]	# curSize.83_106, curSize
-	mov.w	r0, sp	# tmp285,
+	mov.w	r0, sp	# tmp286,
 	st.w	[r0 + (8)], r2	#, curSize.83_106
-	ld.w	r2, [r13 + (8)]	# tmp286, ptr
-	st.w	[r0 + (4)], r2	#, tmp286
+	ld.w	r2, [r13 + (8)]	# tmp287, ptr
+	st.w	[r0 + (4)], r2	#, tmp287
 	st.w	[r0], r1	#, _105
 	call	memmove		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:644:         ptr = (void *)&UMM_DATA(c);
 	ld.w	r0, [umm_heap]	# umm_heap.84_107, umm_heap
 	ld.s	r1, [r13 + (-8)]	# _108, c
-	mov.w	r2, 3	# tmp287,
-	shl.w	r1, r2	# _109, tmp287
+	mov.w	r2, 3	# tmp288,
+	shl.w	r1, r2	# _109, tmp288
 	add.w	r0, r1 #222	# _110, _109
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:644:         ptr = (void *)&UMM_DATA(c);
-	add.w	r0, 4 #111	# tmp288,
-	st.w	[r13 + (8)], r0	# ptr, tmp288
+	add.w	r0, 4 #111	# tmp289,
+	st.w	[r13 + (8)], r0	# ptr, tmp289
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:645:         blockSize += (prevBlockSize + nextBlockSize);
-	ld.s	r0, [r13 + (-4)]	# tmp289, prevBlockSize
-	ld.s	r1, [r13 + (-6)]	# tmp290, nextBlockSize
-	add.w	r0, r1 #222	# tmp291, tmp292
-	mov.w	r1, r0	# _111, tmp291
+	ld.s	r0, [r13 + (-4)]	# tmp290, prevBlockSize
+	ld.s	r1, [r13 + (-6)]	# tmp291, nextBlockSize
+	add.w	r0, r1 #222	# tmp292, tmp293
+	mov.w	r1, r0	# _111, tmp292
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:645:         blockSize += (prevBlockSize + nextBlockSize);
-	ld.s	r0, [r13 + (-2)]	# tmp293, blockSize
-	add.w	r0, r1 #222	# tmp294, tmp295
-	st.s	[r13 + (-2)], r0	# blockSize, tmp296
+	ld.s	r0, [r13 + (-2)]	# tmp294, blockSize
+	add.w	r0, r1 #222	# tmp295, tmp296
+	st.s	[r13 + (-2)], r0	# blockSize, tmp297
 	j	.L42		#
 .L46:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:650:         void *oldptr = ptr;
-	ld.w	r0, [r13 + (8)]	# tmp297, ptr
-	st.w	[r13 + (-20)], r0	# oldptr, tmp297
+	ld.w	r0, [r13 + (8)]	# tmp298, ptr
+	st.w	[r13 + (-20)], r0	# oldptr, tmp298
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:651:         if( (ptr = umm_malloc_core( size )) ) {
-	mov.w	r1, sp	# tmp298,
-	ld.w	r0, [r13 + (12)]	# tmp299, size
-	st.w	[r1], r0	#, tmp299
+	mov.w	r1, sp	# tmp299,
+	ld.w	r0, [r13 + (12)]	# tmp300, size
+	st.w	[r1], r0	#, tmp300
 	call	umm_malloc_core		#
 	st.w	[r13 + (8)], r0	# ptr,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:651:         if( (ptr = umm_malloc_core( size )) ) {
-	ld.w	r1, [r13 + (8)]	# tmp300, ptr
-	xor.w	r0, r0	# tmp301
-	cmp.w	r1, r0	# tmp300, tmp301
+	ld.w	r1, [r13 + (8)]	# tmp301, ptr
+	xor.w	r0, r0	# tmp302
+	cmp.w	r1, r0	# tmp301, tmp302
 	jz	.L47		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:653:             memcpy( ptr, oldptr, curSize );
 	ld.w	r1, [r13 + (-16)]	# curSize.85_112, curSize
-	mov.w	r0, sp	# tmp302,
+	mov.w	r0, sp	# tmp303,
 	st.w	[r0 + (8)], r1	#, curSize.85_112
-	ld.w	r1, [r13 + (-20)]	# tmp303, oldptr
-	st.w	[r0 + (4)], r1	#, tmp303
-	ld.w	r1, [r13 + (8)]	# tmp304, ptr
-	st.w	[r0], r1	#, tmp304
+	ld.w	r1, [r13 + (-20)]	# tmp304, oldptr
+	st.w	[r0 + (4)], r1	#, tmp304
+	ld.w	r1, [r13 + (8)]	# tmp305, ptr
+	st.w	[r0], r1	#, tmp305
 	call	memcpy		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:654:             umm_free_core( oldptr );
-	mov.w	r1, sp	# tmp305,
-	ld.w	r0, [r13 + (-20)]	# tmp306, oldptr
-	st.w	[r1], r0	#, tmp306
+	mov.w	r1, sp	# tmp306,
+	ld.w	r0, [r13 + (-20)]	# tmp307, oldptr
+	st.w	[r1], r0	#, tmp307
 	call	umm_free_core		#
 .L47:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:659:         blockSize = blocks;
-	ld.s	r0, [r13 + (-10)]	# tmp307, blocks
-	st.s	[r13 + (-2)], r0	# blockSize, tmp307
+	ld.s	r0, [r13 + (-10)]	# tmp308, blocks
+	st.s	[r13 + (-2)], r0	# blockSize, tmp308
 .L42:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:666:     if (blockSize > blocks ) {
-	ld.s	r1, [r13 + (-2)]	# tmp308, blockSize
-	ld.s	r0, [r13 + (-10)]	# tmp309, blocks
-	cmp.w	r1, r0	# tmp308, tmp309
+	ld.s	r1, [r13 + (-2)]	# tmp309, blockSize
+	ld.s	r0, [r13 + (-10)]	# tmp310, blocks
+	cmp.w	r1, r0	# tmp309, tmp310
 	jse	.L48		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:668:         umm_split_block( c, blocks, 0 );
 	ld.s	r1, [r13 + (-8)]	# _113, c
 	ld.s	r2, [r13 + (-10)]	# _114, blocks
-	mov.w	r0, sp	# tmp310,
-	xor.w	r3, r3	# tmp311
-	st.w	[r0 + (8)], r3	#, tmp311
+	mov.w	r0, sp	# tmp311,
+	xor.w	r3, r3	# tmp312
+	st.w	[r0 + (8)], r3	#, tmp312
 	st.w	[r0 + (4)], r2	#, _114
 	st.w	[r0], r1	#, _113
 	call	umm_split_block		#
@@ -1824,13 +1825,13 @@ umm_realloc:
 	ld.s	r1, [r13 + (-8)]	# _116, c
 	ld.s	r2, [r13 + (-10)]	# _117, blocks
 	add.w	r1, r2 #222	# _118, _117
-	mov.w	r2, 3	# tmp312,
-	shl.w	r1, r2	# _120, tmp312
+	mov.w	r2, 3	# tmp313,
+	shl.w	r1, r2	# _120, tmp313
 	add.w	r0, r1 #222	# _121, _120
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:669:         umm_free_core( (void *)&UMM_DATA(c+blocks) );
 	add.w	r0, 4 #111	# _122,
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:669:         umm_free_core( (void *)&UMM_DATA(c+blocks) );
-	mov.w	r1, sp	# tmp313,
+	mov.w	r1, sp	# tmp314,
 	st.w	[r1], r0	#, _122
 	call	umm_free_core		#
 .L48:
@@ -1841,40 +1842,40 @@ umm_realloc:
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
-	.size	umm_realloc, .-umm_realloc
+	.size	realloc, .-realloc
 	.p2align	1
-	.global	umm_calloc
-	.type	umm_calloc, @function
-umm_calloc:
+	.global	calloc
+	.type	calloc, @function
+calloc:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:683:   ret = umm_malloc((size_t)(item_size * num));
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:683:   ret = malloc((size_t)(item_size * num));
 	ld.w	r0, [r13 + (12)]	# tmp31, item_size
 	ld.w	r1, [r13 + (8)]	# tmp32, num
 	mul.w	r0, r1	# _1, tmp32
-# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:683:   ret = umm_malloc((size_t)(item_size * num));
+# /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:683:   ret = malloc((size_t)(item_size * num));
 	mov.w	r1, sp	# tmp33,
 	st.w	[r1], r0	#, _1
-	call	umm_malloc		#
-	st.w	[r13 + (-4)], r0	# ret,
+	call	malloc		#
+	st.w	[r13 + (-4)], r0	# ret, tmp34
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:685:   if (ret)
-	ld.w	r1, [r13 + (-4)]	# tmp34, ret
-	xor.w	r0, r0	# tmp35
-	cmp.w	r1, r0	# tmp34, tmp35
+	ld.w	r1, [r13 + (-4)]	# tmp35, ret
+	xor.w	r0, r0	# tmp36
+	cmp.w	r1, r0	# tmp35, tmp36
 	jz	.L50		#
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:686:       memset(ret, 0x00, (size_t)(item_size * num));
-	ld.w	r0, [r13 + (12)]	# tmp36, item_size
-	ld.w	r1, [r13 + (8)]	# tmp37, num
-	mul.w	r0, r1	# _2, tmp37
+	ld.w	r0, [r13 + (12)]	# tmp37, item_size
+	ld.w	r1, [r13 + (8)]	# tmp38, num
+	mul.w	r0, r1	# _2, tmp38
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:686:       memset(ret, 0x00, (size_t)(item_size * num));
 	mov.w	r1, r0	# _3, _2
-	mov.w	r0, sp	# tmp38,
+	mov.w	r0, sp	# tmp39,
 	st.w	[r0 + (8)], r1	#, _3
-	xor.w	r1, r1	# tmp39
-	st.w	[r0 + (4)], r1	#, tmp39
-	ld.w	r1, [r13 + (-4)]	# tmp40, ret
-	st.w	[r0], r1	#, tmp40
+	xor.w	r1, r1	# tmp40
+	st.w	[r0 + (4)], r1	#, tmp40
+	ld.w	r1, [r13 + (-4)]	# tmp41, ret
+	st.w	[r0], r1	#, tmp41
 	call	memset		#
 .L50:
 # /mnt/c/Prj/Altera/C/moxiebox/modules/lib/umm_malloc.c:688:   return ret;
@@ -1883,5 +1884,5 @@ umm_calloc:
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
-	.size	umm_calloc, .-umm_calloc
+	.size	calloc, .-calloc
 	.ident	"GCC: (GNU) 10.0.0 20200111 (experimental)"

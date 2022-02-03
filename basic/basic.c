@@ -34,6 +34,7 @@ unsigned char *current_line;
 char *stack_limit;
 char *stack; // Software stack for things that should go on the CPU stack
 unsigned char *variables_begin;
+VAR *arrays_begin; 
 char *bsp;
 char *tempsp;
 char table_index;

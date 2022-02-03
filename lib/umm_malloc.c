@@ -40,7 +40,7 @@
 #include <string.h>
 
 #include <umm_malloc_cfg.h>   /* user-dependent */
-#include <umm_malloc.h>
+#include <malloc.h>
 
 /* ------------------------------------------------------------------------- */
 
@@ -314,7 +314,7 @@ void umm_init( void ) {
 
 /* ------------------------------------------------------------------------ */
 
-void umm_free( void *ptr ) {
+void free( void *ptr ) {
 
   if (umm_heap == NULL) {
     umm_init();
@@ -452,7 +452,7 @@ void umm_free( void *ptr ) {
 
 /* ------------------------------------------------------------------------ */
 
-void *umm_malloc( size_t size ) {
+void *malloc( size_t size ) {
 
   void *ptr = NULL;
 
@@ -486,7 +486,7 @@ void *umm_malloc( size_t size ) {
 
 /* ------------------------------------------------------------------------ */
 
-void *umm_realloc( void *ptr, size_t size ) {
+void *realloc( void *ptr, size_t size ) {
 
   uint16_t blocks;
   uint16_t blockSize;
@@ -512,7 +512,7 @@ void *umm_realloc( void *ptr, size_t size ) {
   if( ((void *)NULL == ptr) ) {
     //DBGLOG_DEBUG( "realloc the NULL pointer - call malloc()\n" );
 
-    return( umm_malloc(size) );
+    return( malloc(size) );
   }
 
   /*
@@ -524,7 +524,7 @@ void *umm_realloc( void *ptr, size_t size ) {
   if( 0 == size ) {
     //DBGLOG_DEBUG( "realloc to 0 size, just free the block\n" );
 
-    umm_free( ptr );
+    free( ptr );
 
     return( (void *)NULL );
   }
@@ -677,10 +677,10 @@ void *umm_realloc( void *ptr, size_t size ) {
 
 /* ------------------------------------------------------------------------ */
 
-void *umm_calloc( size_t num, size_t item_size ) {
+void *calloc( size_t num, size_t item_size ) {
   void *ret;
 
-  ret = umm_malloc((size_t)(item_size * num));
+  ret = malloc((size_t)(item_size * num));
 
   if (ret)
       memset(ret, 0x00, (size_t)(item_size * num));

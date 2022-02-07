@@ -21,6 +21,9 @@
 char *program = (char *)350000;
 char *buffer = (char *)197632;
 
+typedef unsigned LINENUM;
+typedef float VAR;
+
 unsigned char *program_start;
 unsigned char *program_end;
 int linenum;
@@ -45,8 +48,6 @@ int eth = 1;
 #define STACK_GOSUB_FLAG 'G'
 #define STACK_FOR_FLAG 'F'
 
-typedef unsigned LINENUM;
-typedef float VAR;
 struct stack_for_frame {
 	char frame_type;
 	char for_var;
@@ -1538,10 +1539,10 @@ void exec_load()
 	printf("Loading file: <%s>\n", s);
 	if (drive == 2) {
 		// DRIVE 2 - UART
-		//asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
+		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
 		delay(100);
 		i = uart_read_file(buffer, s);
-		//asm ("irq 1\n");  // IRQ 0000, xxx1 <- turn on timer irq
+		asm ("irq 1\n");  // IRQ 0000, xxx1 <- turn on timer irq
 	} else if (drive == 0)
 	{
 		// DRIVE 0 - SD card
@@ -1728,7 +1729,9 @@ void exec_save()
 		sd_write_file(buffer, i, s);
 	} else if (drive == 2) {
 		// DRIVE 2 - UART
+		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
 		uart_write_file(buffer, i, s);
+		asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
 	} else 
 	{
 		// DRIVE 1 - ethernet network drive
@@ -1744,7 +1747,9 @@ void exec_dir()
 	if (drive == 2)
 	{
 		// DRIVE 2 - UART
+		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
 		uart_ls_files(buffer);
+		asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
 		printf("%s\n", buffer);
 	}
 	else if (drive == 0)
@@ -2302,10 +2307,10 @@ load_again:
 	else if (drive == 2)
 	{
 		// DRIVE 2 - UART
-		//asm ("irq\t0\n"); // IRQ 0000, xxx0 <- turn off timer irq
+		asm ("irq\t0\n"); // IRQ 0000, xxx0 <- turn off timer irq
 		delay(100);
 		i = uart_read_file(buffer, s);
-		//asm ("irq\t1\n"); // IRQ 0000, xxx0 <- turn on timer irq
+		asm ("irq\t1\n"); // IRQ 0000, xxx0 <- turn on timer irq
 	} else {
 		// DRIVE 1 - ethernet network drive
 		i = eth_read_file(buffer, s);

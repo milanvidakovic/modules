@@ -31,7 +31,8 @@
 			"net.h": "c",
 			"types.h": "c",
 			"float.h": "c",
-			"math.h": "c"
+			"math.h": "c",
+			"uart.h": "c"
 		}
 	}
 }

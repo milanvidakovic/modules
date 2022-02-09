@@ -8,8 +8,8 @@
 
 
 /* ------------------------------------------------------------------------ */
-#define UMM_MALLOC_CFG_HEAP_ADDR (30000000)
-#define UMM_MALLOC_CFG_HEAP_SIZE (0x200000)
+#define UMM_MALLOC_CFG_HEAP_ADDR (500000)
+#define UMM_MALLOC_CFG_HEAP_SIZE (100000)
 
 typedef unsigned int size_t;
 typedef unsigned short int uint16_t;

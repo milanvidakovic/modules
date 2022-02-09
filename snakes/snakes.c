@@ -154,6 +154,7 @@ void PomeriZmiju()
   }
   else if ((x == sx) && (y == sy)) 
   {
+    // pojeo zvezdu
     xy(zx[0], zy[0]); printf("O");
     xy(x, y); printf("@");
     N = N + 1;

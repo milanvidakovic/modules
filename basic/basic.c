@@ -12,13 +12,14 @@
 #include <tcpip.h>
 #include <kernel.h>
 #include <math.h>
+#include <malloc.h>
 
 #define kVersion "v0.52"
 
 // size of our program ram
 #define kRamSize   64*1024 
-// stack is at the address of 465563
-char *program = (char *)350000;
+// stack is at the address of 500000
+char *program = (char *)280000;
 char *buffer = (char *)197632;
 
 typedef unsigned LINENUM;
@@ -37,7 +38,7 @@ unsigned char *current_line;
 char *stack_limit;
 char *stack; // Software stack for things that should go on the CPU stack
 unsigned char *variables_begin;
-VAR *arrays_begin; 
+VAR **arrays_begin = NULL; 
 char *bsp;
 char *tempsp;
 char table_index;
@@ -49,19 +50,24 @@ int eth = 1;
 #define STACK_FOR_FLAG 'F'
 
 struct stack_for_frame {
-	char frame_type;
-	char for_var;
-	VAR terminal;
-	VAR step;
-	char *current_line;
-	char *txtpos;
+	uint16_t frame_type; // 2
+	uint16_t for_var;    // 2
+	VAR terminal;		 // 4
+	VAR step;			 // 4
+	char *current_line;	 // 4
+	char *txtpos;		 // 4
 };
 
 struct stack_gosub_frame {
-	char frame_type;
-	char *current_line;
-	char *txtpos;
+	uint16_t frame_type;  // 2
+	uint16_t dummy3;	  // 2
+	VAR dummy1;			  // 4
+	VAR dummy2;			  // 4
+	char *current_line;	  // 4
+	char *txtpos;		  // 4
 };
+
+int ret_kind;
 
 VAR expression(void);
 int direct();
@@ -125,6 +131,7 @@ const char keywords[] = {
   '\''                    ,0x01,			// '
   'E','T','H'             ,0x01,			// ETH
   'C','O','L','O','R'     ,0x01,			// COLOR
+  'D','I','M'			  ,0x01,			// DIM
   0
 };
 // by moving the command list to an enum, we can easily remove sections 
@@ -170,6 +177,7 @@ enum {
 	KW_QUOTE,
 	KW_ETH,
 	KW_COLOR,
+	KW_DIM,
 	KW_DEFAULT /* always the final one*/
 };
 
@@ -250,6 +258,28 @@ const char relop_tab[] = {
 #define RELOP_OR		8
 #define RELOP_UNKNOWN	9
 
+void init_arrays()
+{
+	if (arrays_begin != NULL) 
+	{
+		for (int i = 0; i < 26; i++)
+		{
+			VAR *array = arrays_begin[i];
+			if (array != NULL)
+			{
+				free(array);
+			}
+		}
+		free(arrays_begin);
+	}
+	arrays_begin = (VAR **) malloc(sizeof(VAR*) * 26);
+	if (arrays_begin == NULL)
+	{
+		memset(arrays_begin, 0, sizeof(VAR*) * 26);
+		printf("PROBLEM! Not enough memory for the arrays!");
+	}
+
+}
 
 void getln(int prompt)
 {
@@ -615,15 +645,7 @@ VAR expr4(void)
 		txtpos++;
 		return -expr4();
 	}
-	// end fix
-
-/*
-	if (*txtpos == '0')
-	{
-		txtpos++;
-		return 0;
-	}
-*/
+	// is it a number?
 	if (*txtpos >= '0' && *txtpos <= '9')
 	{
 		VAR a = 0;
@@ -655,19 +677,46 @@ VAR expr4(void)
 #if DEBUG == 1
 	printf("expr4, first char: %c\n", txtpos[0]);
 #endif
-	// Is it a function or variable reference?
+	// Is it a function or variable reference? Starts with letter.
 	if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
 	{
+		int varName = *txtpos;	//x 
 		VAR val;
-		// Is it a variable reference (single alpha)
-		if (txtpos[1] < 'A' || txtpos[1] > 'Z')
+		if (txtpos[1] < 'A' || txtpos[1] > 'Z') // Is it a variable reference (single alpha)
 		{
-			// val = (VAR *)variables_begin + *txtpos - 'A';
+			// could be an array
+			for (int idx = 1; idx < strlen(txtpos); idx++)
+			{
+				if (txtpos[idx] == SPACE || txtpos[idx] == TAB) continue;
+				else if (txtpos[idx] == '(') //x(10)
+				{
+					// this is an array
+					txtpos += idx + 1;		//(10)
+											//10)
+					ignore_blanks();
+					expression_error = 0;
+					VAR index = expression();
+					ignore_blanks();
+					if (!expression_error && *txtpos == ')')
+					{
+						txtpos++;
+						VAR *array = arrays_begin[varName - 'A'];
+						return array[(int)index];
+					}
+					else 
+					{
+						expression_error = 1;
+						return 0;
+					}
+				} else break;
+			}
+			// not an array, just the ordinary variable
 #if DEBUG == 1
 			printf("expr4, var_begin: %d\n", variables_begin);
 #endif
-			val = ((VAR *)variables_begin)[*txtpos - 'A'];
-			txtpos++;
+			val = ((VAR *)variables_begin)[varName - 'A'];
+			if (*txtpos != NL)
+				txtpos++;
 			return val;
 		}
 
@@ -917,7 +966,7 @@ void assignment()
 {
 	VAR value;
 	VAR *var;
-
+	// a = 5 or a(3) = 5
 	if (*txtpos < 'A' || *txtpos > 'Z')
 	{
 		qhow();
@@ -926,7 +975,8 @@ void assignment()
 #if DEBUG == 1
 	printf("assignment, var_begin: %d\n", variables_begin);
 #endif	
-	var = (VAR *)variables_begin + *txtpos - 'A';
+	int varName = *txtpos;
+	//var = (VAR *)variables_begin + *txtpos - 'A';
 
 #if DEBUG == 1
 	printf("assignment, current var value is %d\n", *var);
@@ -934,8 +984,47 @@ void assignment()
 
 	txtpos++;
 
-	ignore_blanks();
-
+	ignore_blanks(); // TODO: do we really want to have: m  (3), or we insist on: m(3)
+	if (*txtpos == '(')
+	{
+		// arrays: (3) = 5
+		txtpos++;	//3) = 5
+		ignore_blanks();
+		expression_error = 0;
+		VAR index = expression();
+		ignore_blanks();
+		if (!expression_error && *txtpos == ')')
+		{
+			txtpos++;		// = 5
+			ignore_blanks();	//= 5
+			if (*txtpos == '=')
+			{
+				txtpos++;	// 5
+				ignore_blanks();	//5
+				expression_error = 0;
+				value = expression();
+				ignore_blanks();
+				VAR *array = arrays_begin[varName - 'A'];
+				if (array != NULL)
+				{
+					array[(int)index] = value;
+					return;
+				}
+				else 
+				{
+					qsorry();
+					return;
+				}				
+			} 
+			else 
+			{
+				qwhat();
+			}
+		} else {
+			qwhat();
+		}
+		return;
+	}
 	if (*txtpos != '=')
 	{
 		qwhat();
@@ -963,6 +1052,7 @@ void assignment()
 		qwhat();
 		return;
 	}
+	var = (VAR *)variables_begin + varName - 'A';
 	*var = value;
 
 #if DEBUG == 1
@@ -1218,11 +1308,11 @@ int exec_return()
 	tempsp = bsp;
 	while (tempsp < program + kRamSize - 1)
 	{
-
+		
 #if DEBUG == 3
 		printf("return: tempsp: %d\n", tempsp[0]);
 #endif
-		switch (tempsp[0])
+		switch (tempsp[1])
 		{
 		case STACK_GOSUB_FLAG:
 			if (table_index == KW_RETURN)
@@ -1600,6 +1690,7 @@ load_load_again:
 			printf("Loaded successfuly at address 0 (reachable by PEEK and POKE).\n");
 			return;
 		}
+
 		program_end = program_start;
 		k = 0;
 		for (j = 0; j <= i; j++)
@@ -2156,6 +2247,8 @@ void exec_delay()
 		qwhat();
 		return;
 	}
+	if (d <= 0)
+		return;
 	delay((int)d);
 }
 
@@ -2451,6 +2544,48 @@ void exec_color()
 	//printf("COLOR SET TO: %d\n", color);
 }
 
+void exec_dim() 
+{
+	// dim x(19)
+	ignore_blanks();	
+	{
+		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
+		{
+			int varName = txtpos[0];
+			//printf("1.%s\n", txtpos); // x(19)
+			txtpos++; // (19)
+			ignore_blanks();
+			// Is it a variable reference (single alpha)
+			if (*txtpos == '(')
+			{
+				txtpos++;  // 19)
+				ignore_blanks();
+				//printf("2.%s\n", txtpos); 
+				expression_error = 0;
+				VAR dim = expression();
+				//printf("3.%s\n", txtpos); // )
+				if (!expression_error && (*txtpos == ')'))
+				{
+					//printf("MALLOC: varName: %c, size:%f\n", varName, dim);
+					if (arrays_begin[varName-'A'] != NULL)
+					{
+						free(arrays_begin[varName-'A']);
+					}
+					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
+					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
+					if (arrays_begin[varName-'A'] == NULL)
+					{
+						qsorry();
+						return;
+					}
+					return;
+				}
+			}
+		}
+	}
+	qwhat();
+}
+
 int init_net() 
 {
 	if (init_tcpip()) 
@@ -2609,6 +2744,9 @@ int direct()
 	case KW_COLOR:
 		exec_color();
 		break;
+	case KW_DIM:
+		exec_dim();
+		break;
 	case KW_DEFAULT:
 		assignment();
 		break;
@@ -2705,6 +2843,9 @@ int main()
 	bsp = program + kRamSize;  // Needed for printnum
 	stack_limit = program + kRamSize - STACK_SIZE;
 	variables_begin = stack_limit - 28 * VAR_SIZE;
+
+	umm_init();
+	init_arrays();
 	
 	current_line = 0;
 

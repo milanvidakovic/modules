@@ -304,8 +304,24 @@ int vk_to_char(int vk)
 			case VK_SEMICOLON: 	if (!shift_pressed) return 59; else return 58   ;	// ;, :
 			case VK_QUOTE: 			if (!shift_pressed) return 39; else return 63;	// ', "
 			case VK_BACK_SLASH:	if (!shift_pressed) return 92; else return 124;		// \, |
-			case VK_COMMA: 			if (!shift_pressed) return 44; else return 59;	// ,, ;
-			case VK_FULL_STOP: 	if (!shift_pressed) return 46; else return 58;		// ., :
+			case VK_COMMA: 
+					if (altgr_pressed) 
+					{
+						return 60;	// <
+					}
+					else {
+						if (!shift_pressed) return 44; else return 59;	// ,, ;
+					}
+						
+			case VK_FULL_STOP: 	
+					if (altgr_pressed)
+					{
+						return 62;
+					}
+					else 
+					{
+						if (!shift_pressed) return 46; else return 58;		// ., :
+					}
 			case VK_LESS_THAN: 	if (!shift_pressed) return 60; else return 62;		// <, >
 			case VK_SLASH: 			if (!shift_pressed) return 45; else return 95;	// -, _
 			default:

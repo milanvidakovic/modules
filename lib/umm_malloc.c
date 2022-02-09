@@ -47,7 +47,7 @@
 UMM_H_ATTPACKPRE typedef struct umm_ptr_t {
   uint16_t next;
   uint16_t prev;
-} UMM_H_ATTPACKSUF umm_ptr;
+} umm_ptr; // UMM_H_ATTPACKSUF
 
 
 UMM_H_ATTPACKPRE typedef struct umm_block_t {
@@ -58,7 +58,7 @@ UMM_H_ATTPACKPRE typedef struct umm_block_t {
     umm_ptr free;
     uint8_t data[4];
   } body;
-} UMM_H_ATTPACKSUF umm_block;
+} umm_block; // UMM_H_ATTPACKSUF
 
 #define UMM_FREELIST_MASK (0x8000)
 #define UMM_BLOCKNO_MASK  (0x7FFF)

@@ -14,7 +14,7 @@
 #include <math.h>
 #include <malloc.h>
 
-#define kVersion "v0.52"
+#define kVersion "v0.60"
 
 // size of our program ram
 #define kRamSize   64*1024 
@@ -89,51 +89,171 @@ int init_net();
 #define CTRLS	0x13
 #define CTRLX	0x18
 
-// Keyword table and constants - the last character has 0x80 added to it
-const char keywords[] = {
-  'M','E','M'             ,0x01,			// MEM
-  'B','Y','E'             ,0x01,			// BYE
-  'E','X','I','T'         ,0x01,			// EXIT
-  'P','R','I','N','T'     ,0x01,			// PRINT
-  '?'					  ,0x01,			// ?
-  'L','I','S','T'         ,0x01,  			// LIST
-  'R','U','N'             ,0x01,			// RUN
-  'N','E','W'             ,0x01,			// NEW
-  'L','E','T'             ,0x01,			// LET
-  'I','F'                 ,0x01,			// IF
-  'G','O','T','O'         ,0x01,			// GOTO
-  'F','O','R'             ,0x01,			// FOR
-  'N','E','X','T'         ,0x01,			// NEXT
-  'R','E','T','U','R','N' ,0x01,			// RETURN
-  'G','O','S','U','B'     ,0x01,			// GOSUB
-  'E','N','D'             ,0x01,			// END
-  'S','T','O','P'         ,0x01,			// STOP
-  'I','N','P','U','T'     ,0x01,			// INPUT
-  'C','L','S'             ,0x01,			// CLS
-  'E','D','I', 'T'        ,0x01,			// EDIT
-  'L','O','A','D'         ,0x01,			// LOAD
-  'S','A','V','E'         ,0x01,			// SAVE
-  'D','I','R'			  ,0x01,			// DIR
-  'M','O','D','E'	      ,0x01,			// MODE
-  'P','L','O','T'		  ,0x01,			// PLOT
-  'L','I','N','E'		  ,0x01,			// LINE
-  'C','I','R','C','L','E' ,0x01,			// CIRCLE
-  'D','R','A','W'		  ,0x01,			// DRAW
-  'H','E','L','P'     	  ,0x01,			// HELP
-  'D','E','L','A','Y'     ,0x01,			// DELAY
-  'C','U','R','S','O','R' ,0x01,			// CURSOR
-  'P','O','K','E'         ,0x01,			// POKE
-  'E','X','E','C'	      ,0x01,			// EXEC
-  'S','Y','S'			  ,0x01,			// SYS
-  'D','R','I','V','E'	  ,0x01, 			// DRIVE
-  'T','I','M','E'		  ,0x01,			// TIME
-  'R','E','M'             ,0x01,			// REM
-  '\''                    ,0x01,			// '
-  'E','T','H'             ,0x01,			// ETH
-  'C','O','L','O','R'     ,0x01,			// COLOR
-  'D','I','M'			  ,0x01,			// DIM
-  0
+#define FUNC_OFFSET 197	// 197 bytes after the beginning of the keywords table, the function names begin
+#define FUNC_ENUM_OFFSET 42									// 42 keywords before function names (enums)
+#define RELOP_OFFSET FUNC_OFFSET + 86
+#define RELOP_ENUM_OFFSET FUNC_ENUM_OFFSET + 20				// 62
+#define TO_OFFSET RELOP_OFFSET + 26
+#define TO_ENUM_OFFSET RELOP_ENUM_OFFSET + 10				// 72
+
+int token_table[] =
+{
+0			,	//	0      MEM		                           
+4			,	//	1      BYE		                           
+8			,	//	2      EXIT		                           
+13			,	//	3      PRINT	                           
+19			,	//	4      ?			                           
+21			,	//	5      LIST		                           
+26			,	//	6      RUN		                           
+30			,	//	7      NEW		                           
+34			,	//	8      LET		                           
+38			,	//	9      IF			                           
+41			,	//	10     GOTO		                           
+46			,	//	11     FOR		                           
+50			,	//	12     NEXT		                           
+55			,	//	13     RETURN	                           
+62			,	//	14     GOSUB	                           
+68			,	//	15     END		                           
+72			,	//	16     STOP		                           
+77			,	//	17     INPUT	                           
+83			,	//	18     CLS		                           
+87			,	//	19     EDIT		                           
+92			,	//	20     LOAD		                           
+97			,	//	21     SAVE		                           
+102			,	//	22     DIR		                           
+106			,	//	23     MODE		                           
+111			,	//	24     PLOT		                           
+116			,	//	25     LINE		                           
+121			,	//	26     CIRCLE	                           
+128			,	//	27     DRAW		                           
+133			,	//	28     HELP		                           
+138			,	//	29     DELAY	                           
+144			,	//	30     CURSOR	                           
+151			,	//	31     POKE		                           
+156			,	//	32     EXEC		                           
+161			,	//	33     SYS		                           
+165			,	//	34     DRIVE	                           
+171			,	//	35     TIME		                           
+176			,	//	36     REM		                           
+180			,	//	37		 '                                 
+182			,	//	38		 ETH                               
+186			,	//	39		 COLOR                             
+192			,	//	40		 DIM                               
+196			,	//	41		 0x01--------------------          
+0 + FUNC_OFFSET		,	//	42		 PEEK                              
+5 + FUNC_OFFSET		,	//	43		 ABS                               
+9 + FUNC_OFFSET		,	//	44		 AREAD                             
+15 + FUNC_OFFSET	,	//	45		 DREAD                             
+21 + FUNC_OFFSET	,	//	46		 RND                               
+25 + FUNC_OFFSET	,	//	47		 KEY                               
+29 + FUNC_OFFSET	,	//	48		 ISKEY                             
+35 + FUNC_OFFSET	,	//	49		 SIN                               
+39 + FUNC_OFFSET	,	//	50		 COS                               
+43 + FUNC_OFFSET	,	//	51		 TAN                               
+47 + FUNC_OFFSET	,	//	52		 EXP                               
+51 + FUNC_OFFSET	,	//	53		 LOG                               
+55 + FUNC_OFFSET	,	//	54		 SQRT                              
+60 + FUNC_OFFSET	,	//	55		 POW                               
+64 + FUNC_OFFSET	,	//	56		 PI                                
+67 + FUNC_OFFSET	,	//	57		 EX                                
+70 + FUNC_OFFSET	,	//	58		 ATAN                              
+75 + FUNC_OFFSET	,	//	59		 ASIN                              
+80 + FUNC_OFFSET	,	//	60		 ACOS                              
+85 + FUNC_OFFSET	,	//	61		 0X01-------------------           
+0 + RELOP_OFFSET		,	//	62		 >=                                
+3 + RELOP_OFFSET		,	//	63		 <>                                
+6 + RELOP_OFFSET		,	//	64		 >                                 
+8 + RELOP_OFFSET		,	//	65		 =                                 
+10 + RELOP_OFFSET	,	//	66		 <=                                
+13 + RELOP_OFFSET	,	//	67		 <                                 
+15 + RELOP_OFFSET	,	//	68		 !=                                
+18 + RELOP_OFFSET	,	//	69		 AND                               
+22 + RELOP_OFFSET	,	//	70		 OR                                
+25 + RELOP_OFFSET	,	//	71		 0X01                              
+0 + TO_OFFSET		,	//	72		 TO                                
+3 + TO_OFFSET		,	//	73		 STEP                              
+8 + TO_OFFSET			//	74		 0X01----------------              
 };
+
+// Keyword table and constants - the last character has 0x80 added to it
+unsigned char keywords[] = {
+  'M','E','M'             ,0x00,			// MEM		0	0
+  'B','Y','E'             ,0x00,			// BYE		4	1
+  'E','X','I','T'         ,0x00,			// EXIT		8	2
+  'P','R','I','N','T'     ,0x00,			// PRINT	13	3
+  '?'					  ,0x00,			// ?		19	4
+  'L','I','S','T'         ,0x00,  			// LIST		21	5
+  'R','U','N'             ,0x00,			// RUN		26	6
+  'N','E','W'             ,0x00,			// NEW		30	7
+  'L','E','T'             ,0x00,			// LET		34	8
+  'I','F'                 ,0x00,			// IF		38	9
+  'G','O','T','O'         ,0x00,			// GOTO		41	10
+  'F','O','R'             ,0x00,			// FOR		46	11
+  'N','E','X','T'         ,0x00,			// NEXT		50	12
+  'R','E','T','U','R','N' ,0x00,			// RETURN	55	13
+  'G','O','S','U','B'     ,0x00,			// GOSUB	62	14
+  'E','N','D'             ,0x00,			// END		68	15
+  'S','T','O','P'         ,0x00,			// STOP		72	16
+  'I','N','P','U','T'     ,0x00,			// INPUT	77	17
+  'C','L','S'             ,0x00,			// CLS		83	18
+  'E','D','I', 'T'        ,0x00,			// EDIT		87	19
+  'L','O','A','D'         ,0x00,			// LOAD		92	20
+  'S','A','V','E'         ,0x00,			// SAVE		97	21
+  'D','I','R'			  ,0x00,			// DIR		102	22
+  'M','O','D','E'	      ,0x00,			// MODE		106	23
+  'P','L','O','T'		  ,0x00,			// PLOT		111	24
+  'L','I','N','E'		  ,0x00,			// LINE		116	25
+  'C','I','R','C','L','E' ,0x00,			// CIRCLE	121	26
+  'D','R','A','W'		  ,0x00,			// DRAW		128	27
+  'H','E','L','P'     	  ,0x00,			// HELP		133	28
+  'D','E','L','A','Y'     ,0x00,			// DELAY	138	29
+  'C','U','R','S','O','R' ,0x00,			// CURSOR	144	30
+  'P','O','K','E'         ,0x00,			// POKE		151	31
+  'E','X','E','C'	      ,0x00,			// EXEC		156	32
+  'S','Y','S'			  ,0x00,			// SYS		161	33
+  'D','R','I','V','E'	  ,0x00, 			// DRIVE	165	34
+  'T','I','M','E'		  ,0x00,			// TIME		171	35
+  'R','E','M'             ,0x00,			// REM		176	36
+  39	                  ,0x00,			// '		180	37
+  'E','T','H'             ,0x00,			// ETH		182	38
+  'C','O','L','O','R'     ,0x00,			// COLOR	186	39
+  'D','I','M'			  ,0x00,			// DIM		192	40
+  0x01,										//				41
+  'P','E','E','K'				,0x00,		// 0 + FUNC_OFFSET		42
+  'A','B','S'					,0x00,		// 5			43
+  'A','R','E','A','D'			,0x00,		// 9			44
+  'D','R','E','A','D'			,0x00,		// 15			45
+  'R','N','D'					,0x00,		// 21			46
+  'K','E','Y'			     	,0x00,		// 25			47
+  'I','S','K','E','Y'   		,0x00,		// 29			48
+  'S','I','N' 			   		,0x00,		// 35			49
+  'C','O','S' 			   		,0x00,		// 39			50
+  'T','A','N' 			   		,0x00,		// 43			51
+  'E','X','P' 			   		,0x00,		// 47			52
+  'L','O','G' 			   		,0x00,		// 51			53
+  'S','Q','R','T' 		   		,0x00,		// 55			54
+  'P','O','W'	 		   		,0x00,		// 60			55
+  'P','I'		 		   		,0x00,		// 64			56
+  'E','X'		 		   		,0x00,		// 67			57
+  'A','T','A','N' 		   		,0x00,		// 70			58
+  'A','S','I','N' 		   		,0x00,		// 75			59
+  'A','C','O','S' 		   		,0x00,		// 80 + FUNC_OFFSET		60	
+  0x01,										//				61
+   '>','='			,0x00,		// 0 + RELOP_OFFSET					62
+  '<','>'			,0x00,		// 3						63
+  '>'				,0x00,		// 6						64
+  '='				,0x00,		// 8						65
+  '<','='			,0x00,		// 10						66
+  '<'				,0x00,		// 13						67
+  '!','='			,0x00,		// 15						68
+  'A','N','D' 		,0x00,		// 18						69
+  'O','R'		  	,0x00,		// 22 + RELOP_OFFSET					70
+  0x01,							//							71
+  'T','O'			,0x00,		// 0 + TO_OFFSET					72
+  'S','T','E','P'	,0x00,		// 3 + TO_OFFSET					73
+  0x01							//							74
+  };
+
 // by moving the command list to an enum, we can easily remove sections 
 // above and below simultaneously to selectively obliterate functionality.
 enum {
@@ -178,85 +298,42 @@ enum {
 	KW_ETH,
 	KW_COLOR,
 	KW_DIM,
-	KW_DEFAULT /* always the final one*/
+	KW_DEFAULT, // after the the final command 
+	FUNC_PEEK,	// functions
+	FUNC_ABS,
+	FUNC_AREAD,
+	FUNC_DREAD,
+	FUNC_RND,
+	FUNC_KEY,
+	FUNC_ISKEY,
+	FUNC_SIN,
+	FUNC_COS,
+	FUNC_TAN,
+	FUNC_EXP,
+	FUNC_LOG,
+	FUNC_SQRT,
+	FUNC_POW,
+	CONST_PI,
+	CONST_E,
+	FUNC_ATAN,
+	FUNC_ASIN,
+	FUNC_ACOS,
+	FUNC_UNKNOWN,	// after the final function
+	RELOP_GE,		// relational operators
+	RELOP_NE,
+	RELOP_GT,
+	RELOP_EQ,
+	RELOP_LE,
+	RELOP_LT,
+	RELOP_NE_BANG,
+	RELOP_AND,
+	RELOP_OR,
+	RELOP_UNKNOWN,	// after the final relational operator
+	KW_TO,			// to and step keywords of the FOR loop
+	KW_STEP,	
+	KW_LAST_KEYWORD // after the last keyword
 };
 
-const unsigned char func_tab[] = {
-  'P','E','E','K'				, 0x01,
-  'A','B','S'					, 0x01,
-  'A','R','E','A','D'			, 0x01,
-  'D','R','E','A','D'			, 0x01,
-  'R','N','D'					, 0x01,
-  'K','E','Y'			     	, 0x01,
-  'I','S','K','E','Y'   		, 0x01,
-  'S','I','N' 			   		, 0x01,
-  'C','O','S' 			   		, 0x01,
-  'T','A','N' 			   		, 0x01,
-  'E','X','P' 			   		, 0x01,
-  'L','O','G' 			   		, 0x01,
-  'S','Q','R','T' 		   		, 0x01,
-  'P','O','W'	 		   		, 0x01,
-  'P','I'		 		   		, 0x01,
-  'E','X'		 		   		, 0x01,
-  'A','T','A','N' 		   		, 0x01,
-  'A','S','I','N' 		   		, 0x01,
-  'A','C','O','S' 		   		, 0x01,
-  0
-};
-#define FUNC_PEEK    0
-#define FUNC_ABS     1
-#define FUNC_AREAD   2
-#define FUNC_DREAD   3
-#define FUNC_RND     4
-#define FUNC_KEY     5
-#define FUNC_ISKEY	 6
-#define FUNC_SIN	 7
-#define FUNC_COS	 8
-#define FUNC_TAN	 9
-#define FUNC_EXP	 10
-#define FUNC_LOG	 11
-#define FUNC_SQRT	 12
-#define FUNC_POW	 13
-#define CONST_PI	 14
-#define CONST_E		 15
-#define FUNC_ATAN	 16
-#define FUNC_ASIN	 17
-#define FUNC_ACOS	 18
-#define FUNC_UNKNOWN 20
-
-const char to_tab[] = {
-  'T','O', 0x01,
-  0
-};
-
-const char step_tab[] = {
-  'S','T','E','P', 0x01,
-  0
-};
-
-const char relop_tab[] = {
-  '>','='			,0x01,
-  '<','>'			,0x01,
-  '>'				,0x01,
-  '='				,0x01,
-  '<','='			,0x01,
-  '<'				,0x01,
-  '!','='			,0x01,
-  'A','N','D' 		,0x01,
-  'O','R'		  	,0x01,
-  0
-};
-
-#define RELOP_GE		0
-#define RELOP_NE		1
-#define RELOP_GT		2
-#define RELOP_EQ		3
-#define RELOP_LE		4
-#define RELOP_LT		5
-#define RELOP_NE_BANG	6
-#define RELOP_AND		7
-#define RELOP_OR		8
-#define RELOP_UNKNOWN	9
 
 void init_arrays()
 {
@@ -273,10 +350,13 @@ void init_arrays()
 		free(arrays_begin);
 	}
 	arrays_begin = (VAR **) malloc(sizeof(VAR*) * 26);
-	if (arrays_begin == NULL)
+		if (arrays_begin == NULL)
 	{
-		memset(arrays_begin, 0, sizeof(VAR*) * 26);
+
 		printf("PROBLEM! Not enough memory for the arrays!");
+	}
+	else {
+		memset(arrays_begin, 0, sizeof(VAR*) * 26);
 	}
 
 }
@@ -362,18 +442,53 @@ unsigned char *findline(void)
 	}
 }
 
+void expand(char *line, char *buff)
+{
+	buff[0] = 0;
+	int len = strlen(line);
+	int j = 0;
+	int found_token = 0;
+	for (int i = 0; i < len; i++)
+	{
+		unsigned char c = line[i];
+		if (c == NL)
+			break;
+		if (found_token && (c == SPACE) && (line[i + 1] == SPACE)) continue;
+		if (c < 128)
+		{
+			found_token = 0;
+			buff[j++] = c;
+		}
+		else
+		{
+			found_token = 1;
+			c = c - 128;
+			int offset = token_table[c];
+			int token_len = strlen(&keywords[offset]);
+//			printf("c: %d, offset: %d, token_len: %d\n", c, offset, token_len);
+			memcpy((buff + j), &keywords[offset], token_len);
+			j += token_len;
+		}
+	}
+	buff[j] = 0;
+}
+
 void printline()
 {
 	LINENUM line_num;
+	char buff[512];
+	int i = 0;
 
-	line_num = *((LINENUM *)(list_line));
+	line_num = *((LINENUM*)(list_line));
 	list_line += sizeof(LINENUM) + sizeof(char);
 
+	expand(list_line, buff);
+
 	// Output the line */
-	printf("%d ", line_num);
+	printf("%d %s", line_num, buff);
 	while (*list_line != NL)
 	{
-		put_char(*list_line);
+
 		list_line++;
 	}
 	list_line++;
@@ -543,14 +658,15 @@ void exec_mem()
 	printf("%d bytes free\n", variables_begin - program_end);
 }
 
-void scantable(const char *table)
+void scantable(const char* table, int offset, int end_offset)
 {
 	int i = 0;
-	table_index = 0;
+	table_index = offset;
+
 	while (1)
 	{
 		// Run out of table entries?
-		if (*table == 0)
+		if (*table == 0x01)
 		{
 			return;
 		}
@@ -564,18 +680,42 @@ void scantable(const char *table)
 			i++;
 			table++;
 		}
+		else if (txtpos[i] >= 128)
+		{
+			int found = txtpos[i] - 128;
+
+			if (found >= offset && found <= end_offset)
+			{
+				// already parsed entry from the table
+				table_index = found;
+
+				txtpos += 1;  // Advance the pointer to following the keyword
+				ignore_blanks(txtpos);
+				return;
+			} 
+			else
+			{
+				i++;
+			}
+		}
 		else
 		{
-			// do we match the last character of keyword (with 0x80 added)? If so, return
-			if (*table == 0x01)
+			// do we match the last character of keyword? If so, return
+			if (*table == 0x00)
 			{
+				// instead of the original keyword, write the table_index (code of the keyword) into the source code
+				*txtpos = table_index + 128 ;
+				
+				// fill spaces over the rest of the characters of the recognized keyword
+				memset(txtpos + 1, SPACE, i - 1);
+
 				txtpos += i;  // Advance the pointer to following the keyword
 				ignore_blanks(txtpos);
 				return;
 			}
 
 			// Forward to the end of this keyword
-			while (*table != 0x01)
+			while (*table != 0x00)
 			{
 				table++;
 			}
@@ -588,7 +728,6 @@ void scantable(const char *table)
 		}
 	}
 }
-
 
 char print_quoted_string()
 {
@@ -678,11 +817,11 @@ VAR expr4(void)
 	printf("expr4, first char: %c\n", txtpos[0]);
 #endif
 	// Is it a function or variable reference? Starts with letter.
-	if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
+	if ((txtpos[0] >= 'A' && txtpos[0] <= 'Z' ) || txtpos[0] >= 128)
 	{
 		int varName = *txtpos;	//x 
 		VAR val;
-		if (txtpos[1] < 'A' || txtpos[1] > 'Z') // Is it a variable reference (single alpha)
+		if ((txtpos[0] < 128) && (txtpos[1] < 'A' || txtpos[1] > 'Z')) // Is it a variable reference (single alpha)
 		{
 			// could be an array
 			for (int idx = 1; idx < strlen(txtpos); idx++)
@@ -721,7 +860,7 @@ VAR expr4(void)
 		}
 
 		// Is it a function with no parameters, or with a single parameter, or constants
-		scantable(func_tab);
+		scantable(keywords + FUNC_OFFSET, FUNC_ENUM_OFFSET, RELOP_ENUM_OFFSET - 1);
 
 #if DEBUG == 1
 printf("expr4: table_index is: %d\n", table_index);
@@ -914,13 +1053,13 @@ VAR expression(void)
 	// Check if we have an error
 	if (expression_error)	return a;
 
-	scantable(relop_tab);
+	scantable(keywords + RELOP_OFFSET, RELOP_ENUM_OFFSET, TO_ENUM_OFFSET - 1);
 
 #if DEBUG == 1
 	printf("expression: table_index: %d\n", table_index);
 #endif
 
-	if (table_index == RELOP_UNKNOWN)
+	if (table_index >= RELOP_UNKNOWN || table_index < RELOP_GE)
 		return a;
 
 	switch (table_index)
@@ -1235,8 +1374,8 @@ void exec_for()
 		return;
 	}
 
-	scantable(to_tab);
-	if (table_index != 0)
+	scantable(keywords + TO_OFFSET, TO_ENUM_OFFSET, TO_ENUM_OFFSET + 2);
+	if (table_index != KW_TO)
 	{
 		qwhat();
 		return;
@@ -1249,8 +1388,8 @@ void exec_for()
 		return;
 	}
 
-	scantable(step_tab);
-	if (table_index == 0)
+	scantable(keywords + TO_OFFSET, TO_ENUM_OFFSET, TO_ENUM_OFFSET + 2);
+	if (table_index == KW_STEP)
 	{
 		step = expression();
 		if (expression_error)
@@ -1733,24 +1872,29 @@ int sprintline(int i)
 {
 	LINENUM line_num;
 	char s[10];
+	char buff[512];
 
-	line_num = *((LINENUM *)(list_line));
+	line_num = *((LINENUM*)(list_line));
 	list_line += sizeof(LINENUM) + sizeof(char);
 
 	// Output the line */
 	sprintf(s, "%d ", line_num);
 	strcpy(&buffer[i], s);
 	i += strlen(s);
+
+	expand(list_line, buff);
+	strcat(buffer + i, buff);
+	i += strlen(buff);
 	while (*list_line != NL)
 	{
-		buffer[i] = *list_line;
 		list_line++;
-		i++;
 	}
 	list_line++;
+
+
 	buffer[i] = NL;
 	i++;
-	
+
 	return i;
 }
 
@@ -2606,18 +2750,17 @@ int direct()
 #endif
 	if (*txtpos == NL)
 		return 0;
-
-	scantable(keywords);
-
 #if DEBUG == 1
 	printf("interpreter: table_index is: %d\n", table_index);
 #endif
 	
 	if (should_break())
 	{
+		video_mode(0);
 		return 0;
 	}
 
+	scantable(keywords, 0, FUNC_ENUM_OFFSET - 1);
 	switch (table_index)
 	{
 	case KW_MEM:

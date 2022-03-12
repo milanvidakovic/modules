@@ -1009,9 +1009,9 @@ init_arrays:
 	call	malloc		#
 # basic.c:352: 	arrays_begin = (VAR **) malloc(sizeof(VAR*) * 26);
 	st.w	[arrays_begin], r0	# arrays_begin, _7
-# basic.c:353: 		if (arrays_begin == NULL)
+# basic.c:353: 	if (arrays_begin == NULL)
 	ld.w	r1, [arrays_begin]	# arrays_begin.4_8, arrays_begin
-# basic.c:353: 		if (arrays_begin == NULL)
+# basic.c:353: 	if (arrays_begin == NULL)
 	xor.w	r0, r0	# tmp51
 	cmp.w	r1, r0	# arrays_begin.4_8, tmp51
 	jnz	.L6		#
@@ -5423,174 +5423,195 @@ exec_edit:
 	push	r13		#
 	mov.w	r13, sp	#,
 	push	r6		#
-	sub.w	sp, 36 #111	#,
-# basic.c:1606: 	ignore_blanks();
+	mov.w	r12, 548	#,
+	sub.w	sp, r12 #222	#,
+# basic.c:1607: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:1607: 	expression_error = 0;
-	xor.w	r0, r0	# tmp62
-	st.b	[expression_error], r0	# expression_error, tmp62
-# basic.c:1608: 	linenum = expression();
+# basic.c:1608: 	expression_error = 0;
+	xor.w	r0, r0	# tmp64
+	st.b	[expression_error], r0	# expression_error, tmp64
+# basic.c:1609: 	linenum = expression();
 	call	expression		#
 	mov.w	r1, r0	# _1,
-# basic.c:1608: 	linenum = expression();
-	mov.w	r0, r1	# tmp63, _1
-	st.w	[sp], r0	#, tmp63
+# basic.c:1609: 	linenum = expression();
+	mov.w	r0, r1	# tmp65, _1
+	st.w	[sp], r0	#, tmp65
 	call	__fixsfsi		#
 	st.w	[linenum], r0	# linenum, _2
-# basic.c:1609: 	if (expression_error)
+# basic.c:1610: 	if (expression_error)
 	ld.b	r0, [expression_error]	# expression_error.294_3, expression_error
-# basic.c:1609: 	if (expression_error)
-	sex.b	r1, r0	# tmp64, expression_error.294_3
-	xor.w	r0, r0	# tmp65
-	cmp.w	r1, r0	# tmp64, tmp65
+# basic.c:1610: 	if (expression_error)
+	sex.b	r1, r0	# tmp66, expression_error.294_3
+	xor.w	r0, r0	# tmp67
+	cmp.w	r1, r0	# tmp66, tmp67
 	jz	.L340		#
-# basic.c:1611: 		qhow();
+# basic.c:1612: 		qhow();
 	call	qhow		#
-# basic.c:1612: 		return 0;
-	xor.w	r0, r0	# _33
-	j	.L341		#
+# basic.c:1613: 		return 0;
+	xor.w	r0, r0	# _35
+	j	.L346		#
 .L340:
-# basic.c:1614: 	line = findline();
+# basic.c:1615: 	line = findline();
 	call	findline		#
 	st.w	[r13 + (-16)], r0	# line,
-# basic.c:1615: 	if (line == program_end)
+# basic.c:1616: 	if (line == program_end)
 	ld.w	r0, [program_end]	# program_end.295_4, program_end
-# basic.c:1615: 	if (line == program_end)
-	ld.w	r1, [r13 + (-16)]	# tmp66, line
-	cmp.w	r1, r0	# tmp66, program_end.295_4
+# basic.c:1616: 	if (line == program_end)
+	ld.w	r1, [r13 + (-16)]	# tmp68, line
+	cmp.w	r1, r0	# tmp68, program_end.295_4
 	jnz	.L342		#
-# basic.c:1617: 		qhow();
+# basic.c:1618: 		qhow();
 	call	qhow		#
-# basic.c:1618: 		return 0;
-	xor.w	r0, r0	# _33
-	j	.L341		#
+# basic.c:1619: 		return 0;
+	xor.w	r0, r0	# _35
+	j	.L346		#
 .L342:
-# basic.c:1621: 	txtpos = program_end + sizeof(LINENUM);
+# basic.c:1622: 	txtpos = program_end + sizeof(LINENUM);
 	ld.w	r0, [program_end]	# program_end.296_5, program_end
 	add.w	r0, 4 #111	# _6,
-# basic.c:1621: 	txtpos = program_end + sizeof(LINENUM);
+# basic.c:1622: 	txtpos = program_end + sizeof(LINENUM);
 	st.w	[txtpos], r0	# txtpos, _6
-# basic.c:1622: 	txtpos[0] = 0;
+# basic.c:1623: 	txtpos[0] = 0;
 	ld.w	r0, [txtpos]	# txtpos.297_7, txtpos
-# basic.c:1622: 	txtpos[0] = 0;
-	xor.w	r1, r1	# tmp67
-	st.b	[r0], r1	# *txtpos.297_7, tmp67
-# basic.c:1623: 	sprintf(txtpos, "%d ", linenum);
+# basic.c:1623: 	txtpos[0] = 0;
+	xor.w	r1, r1	# tmp69
+	st.b	[r0], r1	# *txtpos.297_7, tmp69
+# basic.c:1624: 	sprintf(txtpos, "%d ", linenum);
 	ld.w	r1, [txtpos]	# txtpos.298_8, txtpos
 	ld.w	r2, [linenum]	# linenum.299_9, linenum
-	mov.w	r0, sp	# tmp68,
+	mov.w	r0, sp	# tmp70,
 	st.w	[r0 + (8)], r2	#, linenum.299_9
-	mov.w	r2, .LC10	# tmp69,
-	st.w	[r0 + (4)], r2	#, tmp69
+	mov.w	r2, .LC10	# tmp71,
+	st.w	[r0 + (4)], r2	#, tmp71
 	st.w	[r0], r1	#, txtpos.298_8
 	call	sprintf		#
-# basic.c:1624: 	j = strlen(txtpos);
+# basic.c:1625: 	j = strlen(txtpos);
 	ld.w	r0, [txtpos]	# txtpos.300_10, txtpos
-	mov.w	r1, sp	# tmp70,
+	mov.w	r1, sp	# tmp72,
 	st.w	[r1], r0	#, txtpos.300_10
 	call	strlen		#
 	st.w	[r13 + (-12)], r0	# j,
-# basic.c:1625: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
-	mov.w	r0, 5	# tmp71,
-	st.w	[r13 + (-8)], r0	# i, tmp71
-# basic.c:1625: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
+# basic.c:1626: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
+	mov.w	r0, 5	# tmp73,
+	st.w	[r13 + (-8)], r0	# i, tmp73
+# basic.c:1626: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
 	j	.L343		#
 .L344:
-# basic.c:1628: 		txtpos[j++] = line[i];
+# basic.c:1629: 		txtpos[j++] = line[i];
 	ld.w	r0, [r13 + (-8)]	# i.301_11, i
-	ld.w	r1, [r13 + (-16)]	# tmp72, line
+	ld.w	r1, [r13 + (-16)]	# tmp74, line
 	add.w	r1, r0 #222	# _12, i.301_11
-# basic.c:1628: 		txtpos[j++] = line[i];
+# basic.c:1629: 		txtpos[j++] = line[i];
 	ld.w	r3, [txtpos]	# txtpos.302_13, txtpos
-# basic.c:1628: 		txtpos[j++] = line[i];
+# basic.c:1629: 		txtpos[j++] = line[i];
 	ld.w	r0, [r13 + (-12)]	# j.303_14, j
-	mov.w	r2, r0	# tmp73, j.303_14
-	add.w	r2, 1 #111	# tmp73,
-	st.w	[r13 + (-12)], r2	# j, tmp73
+	mov.w	r2, r0	# tmp75, j.303_14
+	add.w	r2, 1 #111	# tmp75,
+	st.w	[r13 + (-12)], r2	# j, tmp75
 	mov.w	r2, r0	# j.304_15, j.303_14
-# basic.c:1628: 		txtpos[j++] = line[i];
+# basic.c:1629: 		txtpos[j++] = line[i];
 	mov.w	r0, r3	# _16, txtpos.302_13
 	add.w	r0, r2 #222	# _16, j.304_15
-# basic.c:1628: 		txtpos[j++] = line[i];
+# basic.c:1629: 		txtpos[j++] = line[i];
 	ld.b	r1, [r1]	# _17, *_12
-# basic.c:1628: 		txtpos[j++] = line[i];
+# basic.c:1629: 		txtpos[j++] = line[i];
 	st.b	[r0], r1	# *_16, _17
-# basic.c:1625: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
-	ld.w	r0, [r13 + (-8)]	# tmp75, i
-	add.w	r0, 1 #111	# tmp74,
-	st.w	[r13 + (-8)], r0	# i, tmp74
+# basic.c:1626: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
+	ld.w	r0, [r13 + (-8)]	# tmp77, i
+	add.w	r0, 1 #111	# tmp76,
+	st.w	[r13 + (-8)], r0	# i, tmp76
 .L343:
-# basic.c:1625: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
-	ld.w	r0, [r13 + (-16)]	# tmp76, line
+# basic.c:1626: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
+	ld.w	r0, [r13 + (-16)]	# tmp78, line
 	add.w	r0, 4 #111	# _18,
 	ld.b	r0, [r0]	# _19, *_18
 	zex.b	r0, r0	# _20, _19
-# basic.c:1625: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
+# basic.c:1626: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
 	add.w	r0, -1 #111	# _21,
-# basic.c:1625: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
-	ld.w	r1, [r13 + (-8)]	# tmp77, i
-	cmp.w	r1, r0	# tmp77, _21
+# basic.c:1626: 	for (i = sizeof(VAR) + 1; i < line[sizeof(VAR)] - 1; i++)
+	ld.w	r1, [r13 + (-8)]	# tmp79, i
+	cmp.w	r1, r0	# tmp79, _21
 	jss	.L344		#
-# basic.c:1630: 	txtpos[j] = 0;
+# basic.c:1631: 	txtpos[j] = 0;
 	ld.w	r0, [txtpos]	# txtpos.305_22, txtpos
 	ld.w	r1, [r13 + (-12)]	# j.306_23, j
 	add.w	r0, r1 #222	# _24, j.306_23
-# basic.c:1630: 	txtpos[j] = 0;
-	xor.w	r1, r1	# tmp78
-	st.b	[r0], r1	# *_24, tmp78
-# basic.c:1631: 	put_char('#');
-	mov.w	r1, sp	# tmp79,
-	mov.w	r0, 35	# tmp80,
-	st.w	[r1], r0	#, tmp80
-	call	put_char		#
-# basic.c:1632: 	gets(txtpos);
-	ld.w	r0, [txtpos]	# txtpos.307_25, txtpos
-	mov.w	r1, sp	# tmp81,
-	st.w	[r1], r0	#, txtpos.307_25
+# basic.c:1631: 	txtpos[j] = 0;
+	xor.w	r1, r1	# tmp80
+	st.b	[r0], r1	# *_24, tmp80
+# basic.c:1633: 	expand(txtpos, buff);
+	ld.w	r1, [txtpos]	# txtpos.307_25, txtpos
+	mov.w	r0, sp	# tmp81,
+	mov.w	r3, -524	# tmp83,
+	mov.w	r2, -4	# tmp82,
+	add.w	r2, r13 #222	# tmp82,
+	add.w	r2, r3 #222	# tmp82, tmp83
+	st.w	[r0 + (4)], r2	#, tmp82
+	st.w	[r0], r1	#, txtpos.307_25
+	call	expand		#
+# basic.c:1634: 	strcpy(txtpos, buff);
+	ld.w	r1, [txtpos]	# txtpos.308_26, txtpos
+	mov.w	r0, sp	# tmp84,
+	mov.w	r3, -524	# tmp86,
+	mov.w	r2, -4	# tmp85,
+	add.w	r2, r13 #222	# tmp85,
+	add.w	r2, r3 #222	# tmp85, tmp86
+	st.w	[r0 + (4)], r2	#, tmp85
+	st.w	[r0], r1	#, txtpos.308_26
+	call	strcpy		#
+# basic.c:1636: 	putchar('#');
+	mov.w	r1, sp	# tmp87,
+	mov.w	r0, 35	# tmp88,
+	st.w	[r1], r0	#, tmp88
+	call	putchar		#
+# basic.c:1637: 	gets(txtpos);
+	ld.w	r0, [txtpos]	# txtpos.309_27, txtpos
+	mov.w	r1, sp	# tmp89,
+	st.w	[r1], r0	#, txtpos.309_27
 	call	gets		#
-# basic.c:1634: 	i = strlen(txtpos);
-	ld.w	r0, [txtpos]	# txtpos.308_26, txtpos
-	mov.w	r1, sp	# tmp82,
-	st.w	[r1], r0	#, txtpos.308_26
+# basic.c:1639: 	i = strlen(txtpos);
+	ld.w	r0, [txtpos]	# txtpos.310_28, txtpos
+	mov.w	r1, sp	# tmp90,
+	st.w	[r1], r0	#, txtpos.310_28
 	call	strlen		#
 	st.w	[r13 + (-8)], r0	# i,
-# basic.c:1635: 	if (i % 2 == 0)
-	ld.w	r1, [r13 + (-8)]	# i.309_27, i
-	mov.w	r0, 1	# tmp83,
-	and.w	r1, r0	# _28, tmp83
-# basic.c:1635: 	if (i % 2 == 0)
-	xor.w	r0, r0	# tmp84
-	cmp.w	r1, r0	# _28, tmp84
+# basic.c:1640: 	if (i % 2 == 0)
+	ld.w	r1, [r13 + (-8)]	# i.311_29, i
+	mov.w	r0, 1	# tmp91,
+	and.w	r1, r0	# _30, tmp91
+# basic.c:1640: 	if (i % 2 == 0)
+	xor.w	r0, r0	# tmp92
+	cmp.w	r1, r0	# _30, tmp92
 	jnz	.L345		#
-# basic.c:1636: 		strcat(txtpos, " ");
-	ld.w	r6, [txtpos]	# txtpos.310_29, txtpos
-	mov.w	r0, sp	# tmp85,
-	st.w	[r0], r6	#, txtpos.310_29
+# basic.c:1641: 		strcat(txtpos, " ");
+	ld.w	r6, [txtpos]	# txtpos.312_31, txtpos
+	mov.w	r0, sp	# tmp93,
+	st.w	[r0], r6	#, txtpos.312_31
 	call	strlen		#
-	mov.w	r1, r0	# _53, tmp86
-	mov.w	r0, r6	# _54, txtpos.310_29
-	add.w	r0, r1 #222	# _54, _53
-	mov.b	r1, 32	# tmp87,
-	st.b	[r0], r1	# MEM <char[1:2]> [(void *)_54], tmp87
-	xor.w	r1, r1	# tmp88
-	st.b	[r0 + (1)], r1	# MEM <char[1:2]> [(void *)_54], tmp88
+	mov.w	r1, r0	# _57, tmp94
+	mov.w	r0, r6	# _58, txtpos.312_31
+	add.w	r0, r1 #222	# _58, _57
+	mov.b	r1, 32	# tmp95,
+	st.b	[r0], r1	# MEM <char[1:2]> [(void *)_58], tmp95
+	xor.w	r1, r1	# tmp96
+	st.b	[r0 + (1)], r1	# MEM <char[1:2]> [(void *)_58], tmp96
 .L345:
-# basic.c:1638: 	strcat(txtpos, "\n");
-	ld.w	r6, [txtpos]	# txtpos.311_30, txtpos
-	mov.w	r0, sp	# tmp89,
-	st.w	[r0], r6	#, txtpos.311_30
+# basic.c:1643: 	strcat(txtpos, "\n");
+	ld.w	r6, [txtpos]	# txtpos.313_32, txtpos
+	mov.w	r0, sp	# tmp97,
+	st.w	[r0], r6	#, txtpos.313_32
 	call	strlen		#
-	mov.w	r1, r0	# _56, tmp90
-	mov.w	r0, r6	# _57, txtpos.311_30
-	add.w	r0, r1 #222	# _57, _56
-	mov.b	r1, 10	# tmp91,
-	st.b	[r0], r1	# MEM <char[1:2]> [(void *)_57], tmp91
-	xor.w	r1, r1	# tmp92
-	st.b	[r0 + (1)], r1	# MEM <char[1:2]> [(void *)_57], tmp92
-# basic.c:1640: 	return 3;
-	mov.w	r0, 3	# _33,
-.L341:
-# basic.c:1641: }
+	mov.w	r1, r0	# _60, tmp98
+	mov.w	r0, r6	# _61, txtpos.313_32
+	add.w	r0, r1 #222	# _61, _60
+	mov.b	r1, 10	# tmp99,
+	st.b	[r0], r1	# MEM <char[1:2]> [(void *)_61], tmp99
+	xor.w	r1, r1	# tmp100
+	st.b	[r0 + (1)], r1	# MEM <char[1:2]> [(void *)_61], tmp100
+# basic.c:1645: 	return 3;
+	mov.w	r0, 3	# _35,
+.L346:
+# basic.c:1646: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
 	mov.w	sp, r12	#,
@@ -5626,7 +5647,7 @@ my_callback:
 	st.b	[r13 + (-4)], r2	# status, tmp31
 	st.s	[r13 + (-8)], r1	# off, tmp33
 	st.s	[r13 + (-12)], r0	# len, tmp35
-# basic.c:1648: 	memcpy(to_print_buff, eth_buffer+off, len);
+# basic.c:1653: 	memcpy(to_print_buff, eth_buffer+off, len);
 	ld.s	r1, [r13 + (-8)]	# _1, off
 	mov.w	r0, eth_buffer	# tmp36,
 	add.w	r1, r0 #222	# _2, tmp36
@@ -5637,10 +5658,10 @@ my_callback:
 	mov.w	r1, to_print_buff	# tmp38,
 	st.w	[r0], r1	#, tmp38
 	call	memcpy		#
-# basic.c:1649: 	to_print_len = len;
+# basic.c:1654: 	to_print_len = len;
 	ld.s	r0, [r13 + (-12)]	# _4, len
 	st.w	[to_print_len], r0	# to_print_len, _4
-# basic.c:1651: } 
+# basic.c:1656: } 
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -5670,33 +5691,33 @@ eth_read_file:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 40 #111	#,
-# basic.c:1655: 	int len = 0;
+# basic.c:1660: 	int len = 0;
 	xor.w	r0, r0	# tmp44
 	st.w	[r13 + (-4)], r0	# len, tmp44
-# basic.c:1656: 	int init_offset = 0;
+# basic.c:1661: 	int init_offset = 0;
 	xor.w	r0, r0	# tmp45
 	st.w	[r13 + (-8)], r0	# init_offset, tmp45
-# basic.c:1657: 	int size = 1000000;
+# basic.c:1662: 	int size = 1000000;
 	mov.w	r0, 1000000	# tmp46,
 	st.w	[r13 + (-12)], r0	# size, tmp46
-# basic.c:1658: 	int fail_count = 0;
+# basic.c:1663: 	int fail_count = 0;
 	xor.w	r0, r0	# tmp47
 	st.w	[r13 + (-16)], r0	# fail_count, tmp47
-# basic.c:1659: 	printf("Loading file %s from the ethernet network drive\n", file_name);
+# basic.c:1664: 	printf("Loading file %s from the ethernet network drive\n", file_name);
 	mov.w	r0, sp	# tmp48,
 	ld.w	r1, [r13 + (12)]	# tmp49, file_name
 	st.w	[r0 + (4)], r1	#, tmp49
 	mov.w	r1, .LC11	# tmp50,
 	st.w	[r0], r1	#, tmp50
 	call	printf		#
-# basic.c:1660: 	to_print_len = 0;
+# basic.c:1665: 	to_print_len = 0;
 	xor.w	r0, r0	# tmp51
 	st.w	[to_print_len], r0	# to_print_len, tmp51
-# basic.c:1661: 	asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
-# 1661 "basic.c" 1
+# basic.c:1666: 	asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
+# 1666 "basic.c" 1
 	irq 0
 
-# basic.c:1662: 	browseUrl("/load:", file_name, server_ip, 0, my_callback);
+# basic.c:1667: 	browseUrl("/load:", file_name, server_ip, 0, my_callback);
 	mov.w	r0, sp	# tmp52,
 	mov.w	r1, my_callback	# tmp53,
 	st.w	[r0 + (16)], r1	#, tmp53
@@ -5709,178 +5730,178 @@ eth_read_file:
 	mov.w	r1, .LC12	# tmp57,
 	st.w	[r0], r1	#, tmp57
 	call	browseUrl		#
-# basic.c:1664: 	while (len < size) {
-	j	.L348		#
-.L354:
-# basic.c:1665: 		mainLoop(eth_buffer);
+# basic.c:1669: 	while (len < size) {
+	j	.L349		#
+.L355:
+# basic.c:1670: 		mainLoop(eth_buffer);
 	mov.w	r1, sp	# tmp58,
 	mov.w	r0, eth_buffer	# tmp59,
 	st.w	[r1], r0	#, tmp59
 	call	mainLoop		#
-# basic.c:1667: 		if (to_print_len > 0) {
-	ld.w	r1, [to_print_len]	# to_print_len.312_1, to_print_len
-# basic.c:1667: 		if (to_print_len > 0) {
+# basic.c:1672: 		if (to_print_len > 0) {
+	ld.w	r1, [to_print_len]	# to_print_len.314_1, to_print_len
+# basic.c:1672: 		if (to_print_len > 0) {
 	xor.w	r0, r0	# tmp60
-	cmp.w	r1, r0	# to_print_len.312_1, tmp60
-	jses	.L349		#
-# basic.c:1668: 			if (size == 1000000) {
+	cmp.w	r1, r0	# to_print_len.314_1, tmp60
+	jses	.L350		#
+# basic.c:1673: 			if (size == 1000000) {
 	ld.w	r1, [r13 + (-12)]	# tmp61, size
 	mov.w	r0, 1000000	# tmp62,
 	cmp.w	r1, r0	# tmp61, tmp62
-	jnz	.L350		#
-# basic.c:1669: 				size = to_print_buff[3];
+	jnz	.L351		#
+# basic.c:1674: 				size = to_print_buff[3];
 	ld.b	r0, [to_print_buff+3]	# _2, to_print_buff
-# basic.c:1669: 				size = to_print_buff[3];
+# basic.c:1674: 				size = to_print_buff[3];
 	zex.b	r0, r0	# tmp63, _2
 	st.w	[r13 + (-12)], r0	# size, tmp63
-# basic.c:1670: 				size <<= 8;
+# basic.c:1675: 				size <<= 8;
 	ld.w	r0, [r13 + (-12)]	# tmp65, size
 	mov.w	r1, 8	# tmp66,
 	shl.w	r0, r1	# tmp64, tmp66
 	st.w	[r13 + (-12)], r0	# size, tmp64
-# basic.c:1671: 				size |= to_print_buff[2];
+# basic.c:1676: 				size |= to_print_buff[2];
 	ld.b	r0, [to_print_buff+2]	# _3, to_print_buff
 	zex.b	r1, r0	# _4, _3
-# basic.c:1671: 				size |= to_print_buff[2];
+# basic.c:1676: 				size |= to_print_buff[2];
 	ld.w	r0, [r13 + (-12)]	# tmp68, size
 	or.w	r0, r1	# tmp67, _4
 	st.w	[r13 + (-12)], r0	# size, tmp67
-# basic.c:1672: 				size <<= 8;
+# basic.c:1677: 				size <<= 8;
 	ld.w	r0, [r13 + (-12)]	# tmp70, size
 	mov.w	r1, 8	# tmp71,
 	shl.w	r0, r1	# tmp69, tmp71
 	st.w	[r13 + (-12)], r0	# size, tmp69
-# basic.c:1673: 				size |= to_print_buff[1];
+# basic.c:1678: 				size |= to_print_buff[1];
 	ld.b	r0, [to_print_buff+1]	# _5, to_print_buff
 	zex.b	r1, r0	# _6, _5
-# basic.c:1673: 				size |= to_print_buff[1];
+# basic.c:1678: 				size |= to_print_buff[1];
 	ld.w	r0, [r13 + (-12)]	# tmp73, size
 	or.w	r0, r1	# tmp72, _6
 	st.w	[r13 + (-12)], r0	# size, tmp72
-# basic.c:1674: 				size <<= 8;
+# basic.c:1679: 				size <<= 8;
 	ld.w	r0, [r13 + (-12)]	# tmp75, size
 	mov.w	r1, 8	# tmp76,
 	shl.w	r0, r1	# tmp74, tmp76
 	st.w	[r13 + (-12)], r0	# size, tmp74
-# basic.c:1675: 				size |= to_print_buff[0];
+# basic.c:1680: 				size |= to_print_buff[0];
 	ld.b	r0, [to_print_buff]	# _7, to_print_buff
 	zex.b	r1, r0	# _8, _7
-# basic.c:1675: 				size |= to_print_buff[0];
+# basic.c:1680: 				size |= to_print_buff[0];
 	ld.w	r0, [r13 + (-12)]	# tmp78, size
 	or.w	r0, r1	# tmp77, _8
 	st.w	[r13 + (-12)], r0	# size, tmp77
-# basic.c:1676: 				init_offset = 4;
+# basic.c:1681: 				init_offset = 4;
 	mov.w	r0, 4	# tmp79,
 	st.w	[r13 + (-8)], r0	# init_offset, tmp79
-# basic.c:1677: 				if (size == 0) {
+# basic.c:1682: 				if (size == 0) {
 	ld.w	r1, [r13 + (-12)]	# tmp80, size
 	xor.w	r0, r0	# tmp81
 	cmp.w	r1, r0	# tmp80, tmp81
-	jnz	.L351		#
-# basic.c:1678: 					printf("File %s does not exist\n", file_name);
+	jnz	.L352		#
+# basic.c:1683: 					printf("File %s does not exist\n", file_name);
 	mov.w	r0, sp	# tmp82,
 	ld.w	r1, [r13 + (12)]	# tmp83, file_name
 	st.w	[r0 + (4)], r1	#, tmp83
 	mov.w	r1, .LC13	# tmp84,
 	st.w	[r0], r1	#, tmp84
 	call	printf		#
-# basic.c:1679: 					break;
-	j	.L352		#
-.L351:
-# basic.c:1681: 				printf("size: %d\n", size);
+# basic.c:1684: 					break;
+	j	.L353		#
+.L352:
+# basic.c:1686: 				printf("size: %d\n", size);
 	mov.w	r0, sp	# tmp85,
 	ld.w	r1, [r13 + (-12)]	# tmp86, size
 	st.w	[r0 + (4)], r1	#, tmp86
 	mov.w	r1, .LC14	# tmp87,
 	st.w	[r0], r1	#, tmp87
 	call	printf		#
-	j	.L353		#
-.L350:
-# basic.c:1683: 				init_offset = 0;
+	j	.L354		#
+.L351:
+# basic.c:1688: 				init_offset = 0;
 	xor.w	r0, r0	# tmp88
 	st.w	[r13 + (-8)], r0	# init_offset, tmp88
-.L353:
-# basic.c:1685: 			printf("#");
+.L354:
+# basic.c:1690: 			printf("#");
 	mov.w	r1, sp	# tmp89,
 	mov.w	r0, 35	# tmp90,
 	st.w	[r1], r0	#, tmp90
 	call	putchar		#
-# basic.c:1686: 			fail_count = 0;
+# basic.c:1691: 			fail_count = 0;
 	xor.w	r0, r0	# tmp91
 	st.w	[r13 + (-16)], r0	# fail_count, tmp91
-# basic.c:1687: 			to_print_buff[to_print_len] = 0;
-	ld.w	r0, [to_print_len]	# to_print_len.313_9, to_print_len
-# basic.c:1687: 			to_print_buff[to_print_len] = 0;
+# basic.c:1692: 			to_print_buff[to_print_len] = 0;
+	ld.w	r0, [to_print_len]	# to_print_len.315_9, to_print_len
+# basic.c:1692: 			to_print_buff[to_print_len] = 0;
 	mov.w	r1, to_print_buff	# tmp93,
 	add.w	r0, r1 #222	# tmp92, tmp93
 	xor.w	r1, r1	# tmp94
 	st.b	[r0], r1	# to_print_buff, tmp94
-# basic.c:1688: 			memcpy(buffer + len, to_print_buff + init_offset, to_print_len);
-	ld.w	r0, [r13 + (-4)]	# len.314_10, len
-# basic.c:1688: 			memcpy(buffer + len, to_print_buff + init_offset, to_print_len);
+# basic.c:1693: 			memcpy(buffer + len, to_print_buff + init_offset, to_print_len);
+	ld.w	r0, [r13 + (-4)]	# len.316_10, len
+# basic.c:1693: 			memcpy(buffer + len, to_print_buff + init_offset, to_print_len);
 	ld.w	r1, [r13 + (8)]	# tmp95, buffer
-	add.w	r1, r0 #222	# _11, len.314_10
-# basic.c:1688: 			memcpy(buffer + len, to_print_buff + init_offset, to_print_len);
-	ld.w	r2, [r13 + (-8)]	# init_offset.315_12, init_offset
+	add.w	r1, r0 #222	# _11, len.316_10
+# basic.c:1693: 			memcpy(buffer + len, to_print_buff + init_offset, to_print_len);
+	ld.w	r2, [r13 + (-8)]	# init_offset.317_12, init_offset
 	mov.w	r0, to_print_buff	# tmp96,
 	add.w	r2, r0 #222	# _13, tmp96
-	ld.w	r3, [to_print_len]	# to_print_len.316_14, to_print_len
+	ld.w	r3, [to_print_len]	# to_print_len.318_14, to_print_len
 	mov.w	r0, sp	# tmp97,
-	st.w	[r0 + (8)], r3	#, to_print_len.316_14
+	st.w	[r0 + (8)], r3	#, to_print_len.318_14
 	st.w	[r0 + (4)], r2	#, _13
 	st.w	[r0], r1	#, _11
 	call	memcpy		#
-# basic.c:1689: 			len += to_print_len - init_offset;
-	ld.w	r1, [to_print_len]	# to_print_len.317_15, to_print_len
+# basic.c:1694: 			len += to_print_len - init_offset;
+	ld.w	r1, [to_print_len]	# to_print_len.319_15, to_print_len
 	ld.w	r0, [r13 + (-8)]	# tmp98, init_offset
 	sub.w	r1, r0 #222	# _16, tmp98
-# basic.c:1689: 			len += to_print_len - init_offset;
+# basic.c:1694: 			len += to_print_len - init_offset;
 	ld.w	r0, [r13 + (-4)]	# tmp100, len
 	add.w	r0, r1 #222	# tmp99, _16
 	st.w	[r13 + (-4)], r0	# len, tmp99
-# basic.c:1691: 			to_print_len = 0;
+# basic.c:1696: 			to_print_len = 0;
 	xor.w	r0, r0	# tmp101
 	st.w	[to_print_len], r0	# to_print_len, tmp101
-	j	.L348		#
-.L349:
-# basic.c:1694: 			delay(10);
+	j	.L349		#
+.L350:
+# basic.c:1699: 			delay(10);
 	mov.w	r1, sp	# tmp102,
 	mov.w	r0, 10	# tmp103,
 	st.w	[r1], r0	#, tmp103
 	call	delay		#
-# basic.c:1695: 			fail_count++;
+# basic.c:1700: 			fail_count++;
 	ld.w	r0, [r13 + (-16)]	# tmp105, fail_count
 	add.w	r0, 1 #111	# tmp104,
 	st.w	[r13 + (-16)], r0	# fail_count, tmp104
-# basic.c:1696: 			if (fail_count > 256) {
+# basic.c:1701: 			if (fail_count > 256) {
 	ld.w	r1, [r13 + (-16)]	# tmp106, fail_count
 	mov.w	r0, 256	# tmp107,
 	cmp.w	r1, r0	# tmp106, tmp107
-	jses	.L348		#
-# basic.c:1697: 				printf("ETHERNET TIMEOUT\n");
+	jses	.L349		#
+# basic.c:1702: 				printf("ETHERNET TIMEOUT\n");
 	mov.w	r1, sp	# tmp108,
 	mov.w	r0, .LC15	# tmp109,
 	st.w	[r1], r0	#, tmp109
 	call	puts		#
-# basic.c:1698: 				len = 0;
+# basic.c:1703: 				len = 0;
 	xor.w	r0, r0	# tmp110
 	st.w	[r13 + (-4)], r0	# len, tmp110
-# basic.c:1699: 				break;
-	j	.L352		#
-.L348:
-# basic.c:1664: 	while (len < size) {
+# basic.c:1704: 				break;
+	j	.L353		#
+.L349:
+# basic.c:1669: 	while (len < size) {
 	ld.w	r1, [r13 + (-4)]	# tmp111, len
 	ld.w	r0, [r13 + (-12)]	# tmp112, size
 	cmp.w	r1, r0	# tmp111, tmp112
-	jss	.L354		#
-.L352:
-# basic.c:1704: 	asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn on timer irq
-# 1704 "basic.c" 1
+	jss	.L355		#
+.L353:
+# basic.c:1709: 	asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn on timer irq
+# 1709 "basic.c" 1
 	irq 1
 
-# basic.c:1705: 	return len;
+# basic.c:1710: 	return len;
 	ld.w	r0, [r13 + (-4)]	# _60, len
-# basic.c:1706: }
+# basic.c:1711: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -5912,12 +5933,12 @@ timer_irq_triggered:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:1713: 	asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
-# 1713 "basic.c" 1
+# basic.c:1718: 	asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
+# 1718 "basic.c" 1
 	irq 0
 
-# basic.c:1714: asm(
-# 1714 "basic.c" 1
+# basic.c:1719: asm(
+# 1719 "basic.c" 1
 	push r0
 push r1
 push r2
@@ -5933,30 +5954,30 @@ push r11
 push r12
 push r13
 
-# basic.c:1720: 	asm("push r13\npush r13\n");
-# 1720 "basic.c" 1
+# basic.c:1725: 	asm("push r13\npush r13\n");
+# 1725 "basic.c" 1
 	push r13
 push r13
 
-# basic.c:1722: 	if (eth)
-	ld.w	r1, [eth]	# eth.318_1, eth
-# basic.c:1722: 	if (eth)
+# basic.c:1727: 	if (eth)
+	ld.w	r1, [eth]	# eth.320_1, eth
+# basic.c:1727: 	if (eth)
 	xor.w	r0, r0	# tmp27
-	cmp.w	r1, r0	# eth.318_1, tmp27
-	jz	.L357		#
-# basic.c:1723: 		mainLoop(eth_buffer);
+	cmp.w	r1, r0	# eth.320_1, tmp27
+	jz	.L358		#
+# basic.c:1728: 		mainLoop(eth_buffer);
 	mov.w	r1, sp	# tmp28,
 	mov.w	r0, eth_buffer	# tmp29,
 	st.w	[r1], r0	#, tmp29
 	call	mainLoop		#
-.L357:
-# basic.c:1726: 	asm("pop r13\npop r13\n");
-# 1726 "basic.c" 1
+.L358:
+# basic.c:1731: 	asm("pop r13\npop r13\n");
+# 1731 "basic.c" 1
 	pop r13
 pop r13
 
-# basic.c:1729: 	asm 
-# 1729 "basic.c" 1
+# basic.c:1734: 	asm 
+# 1734 "basic.c" 1
 	pop r13
 pop r12
 pop r11
@@ -5976,7 +5997,7 @@ pop r13
 irq 1
 iret
 
-# basic.c:1733: }
+# basic.c:1738: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -5988,22 +6009,22 @@ iret
 de_init_timer:
 	push	r13		#
 	mov.w	r13, sp	#,
-# basic.c:1736: 	*TIMER_HANDLER_INSTR 	= 0;
-	ld.w	r0, [TIMER_HANDLER_INSTR]	# TIMER_HANDLER_INSTR.319_1, TIMER_HANDLER_INSTR
-# basic.c:1736: 	*TIMER_HANDLER_INSTR 	= 0;
+# basic.c:1741: 	*TIMER_HANDLER_INSTR 	= 0;
+	ld.w	r0, [TIMER_HANDLER_INSTR]	# TIMER_HANDLER_INSTR.321_1, TIMER_HANDLER_INSTR
+# basic.c:1741: 	*TIMER_HANDLER_INSTR 	= 0;
 	xor.w	r1, r1	# tmp29
-	st.s	[r0], r1	# *TIMER_HANDLER_INSTR.319_1, tmp29
-# basic.c:1737: 	*TIMER_HANDLER_ADDR 	= 0;
-	ld.w	r0, [TIMER_HANDLER_ADDR]	# TIMER_HANDLER_ADDR.320_2, TIMER_HANDLER_ADDR
-# basic.c:1737: 	*TIMER_HANDLER_ADDR 	= 0;
+	st.s	[r0], r1	# *TIMER_HANDLER_INSTR.321_1, tmp29
+# basic.c:1742: 	*TIMER_HANDLER_ADDR 	= 0;
+	ld.w	r0, [TIMER_HANDLER_ADDR]	# TIMER_HANDLER_ADDR.322_2, TIMER_HANDLER_ADDR
+# basic.c:1742: 	*TIMER_HANDLER_ADDR 	= 0;
 	xor.w	r1, r1	# tmp30
-	st.w	[r0], r1	# *TIMER_HANDLER_ADDR.320_2, tmp30
-# basic.c:1738: 	*PORT_TIMER = 0;
-	ld.w	r0, [PORT_TIMER]	# PORT_TIMER.321_3, PORT_TIMER
-# basic.c:1738: 	*PORT_TIMER = 0;
+	st.w	[r0], r1	# *TIMER_HANDLER_ADDR.322_2, tmp30
+# basic.c:1743: 	*PORT_TIMER = 0;
+	ld.w	r0, [PORT_TIMER]	# PORT_TIMER.323_3, PORT_TIMER
+# basic.c:1743: 	*PORT_TIMER = 0;
 	xor.w	r1, r1	# tmp31
-	st.s	[r0], r1	# *PORT_TIMER.321_3, tmp31
-# basic.c:1739: }
+	st.s	[r0], r1	# *PORT_TIMER.323_3, tmp31
+# basic.c:1744: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -6015,23 +6036,23 @@ de_init_timer:
 init_timer:
 	push	r13		#
 	mov.w	r13, sp	#,
-# basic.c:1743: 	*TIMER_HANDLER_INSTR 	= 1;
-	ld.w	r0, [TIMER_HANDLER_INSTR]	# TIMER_HANDLER_INSTR.322_1, TIMER_HANDLER_INSTR
-# basic.c:1743: 	*TIMER_HANDLER_INSTR 	= 1;
+# basic.c:1748: 	*TIMER_HANDLER_INSTR 	= 1;
+	ld.w	r0, [TIMER_HANDLER_INSTR]	# TIMER_HANDLER_INSTR.324_1, TIMER_HANDLER_INSTR
+# basic.c:1748: 	*TIMER_HANDLER_INSTR 	= 1;
 	mov.s	r1, 1	# tmp30,
-	st.s	[r0], r1	# *TIMER_HANDLER_INSTR.322_1, tmp30
-# basic.c:1744: 	*TIMER_HANDLER_ADDR 	= (int)&timer_irq_triggered;
-	ld.w	r0, [TIMER_HANDLER_ADDR]	# TIMER_HANDLER_ADDR.323_2, TIMER_HANDLER_ADDR
-# basic.c:1744: 	*TIMER_HANDLER_ADDR 	= (int)&timer_irq_triggered;
-	mov.w	r1, timer_irq_triggered	# timer_irq_triggered.324_3,
-# basic.c:1744: 	*TIMER_HANDLER_ADDR 	= (int)&timer_irq_triggered;
-	st.w	[r0], r1	# *TIMER_HANDLER_ADDR.323_2, timer_irq_triggered.324_3
-# basic.c:1745: 	*PORT_TIMER = 50;
-	ld.w	r0, [PORT_TIMER]	# PORT_TIMER.325_4, PORT_TIMER
-# basic.c:1745: 	*PORT_TIMER = 50;
+	st.s	[r0], r1	# *TIMER_HANDLER_INSTR.324_1, tmp30
+# basic.c:1749: 	*TIMER_HANDLER_ADDR 	= (int)&timer_irq_triggered;
+	ld.w	r0, [TIMER_HANDLER_ADDR]	# TIMER_HANDLER_ADDR.325_2, TIMER_HANDLER_ADDR
+# basic.c:1749: 	*TIMER_HANDLER_ADDR 	= (int)&timer_irq_triggered;
+	mov.w	r1, timer_irq_triggered	# timer_irq_triggered.326_3,
+# basic.c:1749: 	*TIMER_HANDLER_ADDR 	= (int)&timer_irq_triggered;
+	st.w	[r0], r1	# *TIMER_HANDLER_ADDR.325_2, timer_irq_triggered.326_3
+# basic.c:1750: 	*PORT_TIMER = 50;
+	ld.w	r0, [PORT_TIMER]	# PORT_TIMER.327_4, PORT_TIMER
+# basic.c:1750: 	*PORT_TIMER = 50;
 	mov.s	r1, 50	# tmp31,
-	st.s	[r0], r1	# *PORT_TIMER.325_4, tmp31
-# basic.c:1746: }
+	st.s	[r0], r1	# *PORT_TIMER.327_4, tmp31
+# basic.c:1751: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -6080,107 +6101,107 @@ exec_load:
 	mov.w	r13, sp	#,
 	push	r6		#
 	sub.w	sp, 168 #111	#,
-# basic.c:1753: 	ignore_blanks();
+# basic.c:1758: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:1754: 	if (*txtpos < 'A' || *txtpos > 'Z')
-	ld.w	r0, [txtpos]	# txtpos.326_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.326_1
-# basic.c:1754: 	if (*txtpos < 'A' || *txtpos > 'Z')
+# basic.c:1759: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	ld.w	r0, [txtpos]	# txtpos.328_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.328_1
+# basic.c:1759: 	if (*txtpos < 'A' || *txtpos > 'Z')
 	zex.b	r1, r0	# tmp116, _2
 	mov.w	r0, 64	# tmp117,
 	cmp.w	r1, r0	# tmp116, tmp117
-	jse	.L361		#
-# basic.c:1754: 	if (*txtpos < 'A' || *txtpos > 'Z')
-	ld.w	r0, [txtpos]	# txtpos.327_3, txtpos
-	ld.b	r0, [r0]	# _4, *txtpos.327_3
-# basic.c:1754: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	jse	.L362		#
+# basic.c:1759: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	ld.w	r0, [txtpos]	# txtpos.329_3, txtpos
+	ld.b	r0, [r0]	# _4, *txtpos.329_3
+# basic.c:1759: 	if (*txtpos < 'A' || *txtpos > 'Z')
 	zex.b	r1, r0	# tmp118, _4
 	mov.w	r0, 90	# tmp119,
 	cmp.w	r1, r0	# tmp118, tmp119
-	jse	.L362		#
-.L361:
-# basic.c:1756: 		qwhat();
-	call	qwhat		#
-# basic.c:1757: 		return;
-	j	.L360		#
+	jse	.L363		#
 .L362:
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+# basic.c:1761: 		qwhat();
+	call	qwhat		#
+# basic.c:1762: 		return;
+	j	.L361		#
+.L363:
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	xor.w	r0, r0	# tmp120
 	st.w	[r13 + (-8)], r0	# i, tmp120
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
-	j	.L364		#
-.L366:
-# basic.c:1764: 		s[i] = txtpos[i];
-	ld.w	r0, [txtpos]	# txtpos.328_5, txtpos
-	ld.w	r1, [r13 + (-8)]	# i.329_6, i
-	add.w	r0, r1 #222	# _7, i.329_6
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+	j	.L365		#
+.L367:
+# basic.c:1769: 		s[i] = txtpos[i];
+	ld.w	r0, [txtpos]	# txtpos.330_5, txtpos
+	ld.w	r1, [r13 + (-8)]	# i.331_6, i
+	add.w	r0, r1 #222	# _7, i.331_6
 	ld.b	r0, [r0]	# _8, *_7
 	mov.w	r1, r0	# _9, _8
-# basic.c:1764: 		s[i] = txtpos[i];
+# basic.c:1769: 		s[i] = txtpos[i];
 	mov.w	r0, r13	# tmp121,
 	add.w	r0, -72 #111	# tmp121,
 	ld.w	r2, [r13 + (-8)]	# tmp123, i
 	add.w	r0, r2 #222	# tmp122, tmp123
 	st.b	[r0], r1	# s, _9
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	ld.w	r0, [r13 + (-8)]	# tmp125, i
 	add.w	r0, 1 #111	# tmp124,
 	st.w	[r13 + (-8)], r0	# i, tmp124
-.L364:
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.330_10, txtpos
-	ld.w	r1, [r13 + (-8)]	# i.331_11, i
-	add.w	r0, r1 #222	# _12, i.331_11
+.L365:
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.332_10, txtpos
+	ld.w	r1, [r13 + (-8)]	# i.333_11, i
+	add.w	r0, r1 #222	# _12, i.333_11
 	ld.b	r0, [r0]	# _13, *_12
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	zex.b	r1, r0	# tmp126, _13
 	mov.w	r0, 10	# tmp127,
 	cmp.w	r1, r0	# tmp126, tmp127
-	jz	.L365		#
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.332_14, txtpos
-	ld.w	r1, [r13 + (-8)]	# i.333_15, i
-	add.w	r0, r1 #222	# _16, i.333_15
+	jz	.L366		#
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.334_14, txtpos
+	ld.w	r1, [r13 + (-8)]	# i.335_15, i
+	add.w	r0, r1 #222	# _16, i.335_15
 	ld.b	r0, [r0]	# _17, *_16
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	zex.b	r1, r0	# tmp128, _17
 	mov.w	r0, 13	# tmp129,
 	cmp.w	r1, r0	# tmp128, tmp129
-	jz	.L365		#
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.334_18, txtpos
-	ld.w	r1, [r13 + (-8)]	# i.335_19, i
-	add.w	r0, r1 #222	# _20, i.335_19
+	jz	.L366		#
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.336_18, txtpos
+	ld.w	r1, [r13 + (-8)]	# i.337_19, i
+	add.w	r0, r1 #222	# _20, i.337_19
 	ld.b	r0, [r0]	# _21, *_20
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	zex.b	r1, r0	# tmp130, _21
 	mov.w	r0, 32	# tmp131,
 	cmp.w	r1, r0	# tmp130, tmp131
-	jz	.L365		#
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.336_22, txtpos
-	ld.w	r1, [r13 + (-8)]	# i.337_23, i
-	add.w	r0, r1 #222	# _24, i.337_23
+	jz	.L366		#
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.338_22, txtpos
+	ld.w	r1, [r13 + (-8)]	# i.339_23, i
+	add.w	r0, r1 #222	# _24, i.339_23
 	ld.b	r0, [r0]	# _25, *_24
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	zex.b	r1, r0	# tmp132, _25
 	mov.w	r0, 9	# tmp133,
 	cmp.w	r1, r0	# tmp132, tmp133
-	jz	.L365		#
-# basic.c:1761: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
+	jz	.L366		#
+# basic.c:1766: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB && i < 32; i++)
 	ld.w	r1, [r13 + (-8)]	# tmp134, i
 	mov.w	r0, 31	# tmp135,
 	cmp.w	r1, r0	# tmp134, tmp135
-	jses	.L366		#
-.L365:
-# basic.c:1766: 	s[i] = 0;
+	jses	.L367		#
+.L366:
+# basic.c:1771: 	s[i] = 0;
 	mov.w	r0, r13	# tmp136,
 	add.w	r0, -72 #111	# tmp136,
 	ld.w	r1, [r13 + (-8)]	# tmp138, i
 	add.w	r0, r1 #222	# tmp137, tmp138
 	xor.w	r1, r1	# tmp139
 	st.b	[r0], r1	# s, tmp139
-# basic.c:1768: 	printf("Loading file: <%s>\n", s);
+# basic.c:1773: 	printf("Loading file: <%s>\n", s);
 	mov.w	r0, sp	# tmp140,
 	mov.w	r1, r13	# tmp141,
 	add.w	r1, -72 #111	# tmp141,
@@ -6188,48 +6209,48 @@ exec_load:
 	mov.w	r1, .LC16	# tmp142,
 	st.w	[r0], r1	#, tmp142
 	call	printf		#
-# basic.c:1769: 	if (drive == 2) {
-	ld.b	r0, [drive]	# drive.338_26, drive
-# basic.c:1769: 	if (drive == 2) {
-	sex.b	r1, r0	# tmp143, drive.338_26
+# basic.c:1774: 	if (drive == 2) {
+	ld.b	r0, [drive]	# drive.340_26, drive
+# basic.c:1774: 	if (drive == 2) {
+	sex.b	r1, r0	# tmp143, drive.340_26
 	mov.w	r0, 2	# tmp144,
 	cmp.w	r1, r0	# tmp143, tmp144
-	jnz	.L367		#
-# basic.c:1771: 		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
-# 1771 "basic.c" 1
+	jnz	.L368		#
+# basic.c:1776: 		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn off timer irq
+# 1776 "basic.c" 1
 	irq 0
 
-# basic.c:1772: 		delay(100);
+# basic.c:1777: 		delay(100);
 	mov.w	r1, sp	# tmp145,
 	mov.w	r0, 100	# tmp146,
 	st.w	[r1], r0	#, tmp146
 	call	delay		#
-# basic.c:1773: 		i = uart_read_file(buffer, s);
-	ld.w	r1, [buffer]	# buffer.339_27, buffer
+# basic.c:1778: 		i = uart_read_file(buffer, s);
+	ld.w	r1, [buffer]	# buffer.341_27, buffer
 	mov.w	r0, sp	# tmp147,
 	mov.w	r2, r13	# tmp148,
 	add.w	r2, -72 #111	# tmp148,
 	st.w	[r0 + (4)], r2	#, tmp148
-	st.w	[r0], r1	#, buffer.339_27
+	st.w	[r0], r1	#, buffer.341_27
 	call	uart_read_file		#
 	st.w	[r13 + (-8)], r0	# i,
-# basic.c:1774: 		asm ("irq 1\n");  // IRQ 0000, xxx1 <- turn on timer irq
-# 1774 "basic.c" 1
+# basic.c:1779: 		asm ("irq 1\n");  // IRQ 0000, xxx1 <- turn on timer irq
+# 1779 "basic.c" 1
 	irq 1
 
-	j	.L368		#
-.L367:
-# basic.c:1775: 	} else if (drive == 0)
-	ld.b	r0, [drive]	# drive.340_28, drive
-# basic.c:1775: 	} else if (drive == 0)
-	sex.b	r1, r0	# tmp149, drive.340_28
+	j	.L369		#
+.L368:
+# basic.c:1780: 	} else if (drive == 0)
+	ld.b	r0, [drive]	# drive.342_28, drive
+# basic.c:1780: 	} else if (drive == 0)
+	sex.b	r1, r0	# tmp149, drive.342_28
 	xor.w	r0, r0	# tmp150
 	cmp.w	r1, r0	# tmp149, tmp150
-	jnz	.L369		#
-# basic.c:1779: load_load_again:		
+	jnz	.L370		#
+# basic.c:1784: load_load_again:		
 	nop	
-.L370:
-# basic.c:1780: 		if(file_open(s, &fd, O_READ))
+.L371:
+# basic.c:1785: 		if(file_open(s, &fd, O_READ))
 	mov.w	r0, sp	# tmp151,
 	xor.w	r1, r1	# tmp152
 	st.w	[r0 + (8)], r1	#, tmp152
@@ -6240,25 +6261,25 @@ exec_load:
 	add.w	r1, -72 #111	# tmp154,
 	st.w	[r0], r1	#, tmp154
 	call	file_open		#
-# basic.c:1780: 		if(file_open(s, &fd, O_READ))
+# basic.c:1785: 		if(file_open(s, &fd, O_READ))
 	zex.b	r1, r0	# tmp155, _29
 	xor.w	r0, r0	# tmp156
 	cmp.w	r1, r0	# tmp155, tmp156
-	jz	.L371		#
-# basic.c:1782: 			int len = fd.dir_entry.filesize;
+	jz	.L372		#
+# basic.c:1787: 			int len = fd.dir_entry.filesize;
 	ld.w	r0, [r13 + (-116)]	# _30, fd.dir_entry.filesize
-# basic.c:1782: 			int len = fd.dir_entry.filesize;
+# basic.c:1787: 			int len = fd.dir_entry.filesize;
 	st.w	[r13 + (-32)], r0	# len, _30
-# basic.c:1783: 			int total = 0;
+# basic.c:1788: 			int total = 0;
 	xor.w	r0, r0	# tmp157
 	st.w	[r13 + (-20)], r0	# total, tmp157
-# basic.c:1785: 			while(total < len)
-	j	.L372		#
-.L375:
-# basic.c:1787: 				current = file_read(&fd, &buffer[total], 512);
-	ld.w	r1, [buffer]	# buffer.341_31, buffer
-	ld.w	r0, [r13 + (-20)]	# total.342_32, total
-	add.w	r1, r0 #222	# _33, total.342_32
+# basic.c:1790: 			while(total < len)
+	j	.L373		#
+.L376:
+# basic.c:1792: 				current = file_read(&fd, &buffer[total], 512);
+	ld.w	r1, [buffer]	# buffer.343_31, buffer
+	ld.w	r0, [r13 + (-20)]	# total.344_32, total
+	add.w	r1, r0 #222	# _33, total.344_32
 	mov.w	r0, sp	# tmp158,
 	mov.w	r2, 512	# tmp159,
 	st.w	[r0 + (8)], r2	#, tmp159
@@ -6267,66 +6288,66 @@ exec_load:
 	add.w	r1, -148 #111	# tmp160,
 	st.w	[r0], r1	#, tmp160
 	call	file_read		#
-# basic.c:1787: 				current = file_read(&fd, &buffer[total], 512);
+# basic.c:1792: 				current = file_read(&fd, &buffer[total], 512);
 	zex.s	r0, r0	# tmp161, _34
 	st.w	[r13 + (-36)], r0	# current, tmp161
-# basic.c:1788: 				if (current > 0) {
+# basic.c:1793: 				if (current > 0) {
 	ld.w	r1, [r13 + (-36)]	# tmp162, current
 	xor.w	r0, r0	# tmp163
 	cmp.w	r1, r0	# tmp162, tmp163
-	jses	.L373		#
-# basic.c:1789: 					total += current;
+	jses	.L374		#
+# basic.c:1794: 					total += current;
 	ld.w	r0, [r13 + (-20)]	# tmp165, total
 	ld.w	r1, [r13 + (-36)]	# tmp166, current
 	add.w	r0, r1 #222	# tmp164, tmp166
 	st.w	[r13 + (-20)], r0	# total, tmp164
-# basic.c:1790: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
-	ld.w	r1, [r13 + (-20)]	# total.343_35, total
-# basic.c:1790: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:1795: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+	ld.w	r1, [r13 + (-20)]	# total.345_35, total
+# basic.c:1795: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	ld.w	r0, [r13 + (-116)]	# _36, fd.dir_entry.filesize
-# basic.c:1790: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:1795: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	div.w	r1, r0	# _37, _36
-# basic.c:1790: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:1795: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	mov.w	r0, 100	# tmp167,
 	mul.w	r1, r0	# _38, tmp167
-# basic.c:1790: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:1795: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	mov.w	r0, 10	# tmp168,
 	div.w	r1, r0	# _39, tmp168
 mov.w	r1, r14	# _39
-# basic.c:1790: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:1795: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	xor.w	r0, r0	# tmp169
 	cmp.w	r1, r0	# _39, tmp169
-	jnz	.L372		#
-# basic.c:1791: 						printf("#");
+	jnz	.L373		#
+# basic.c:1796: 						printf("#");
 	mov.w	r1, sp	# tmp170,
 	mov.w	r0, 35	# tmp171,
 	st.w	[r1], r0	#, tmp171
 	call	putchar		#
-	j	.L372		#
-.L373:
-# basic.c:1793: 					printf("Error reading file!\n");
+	j	.L373		#
+.L374:
+# basic.c:1798: 					printf("Error reading file!\n");
 	mov.w	r1, sp	# tmp172,
 	mov.w	r0, .LC17	# tmp173,
 	st.w	[r1], r0	#, tmp173
 	call	puts		#
-	j	.L360		#
-.L372:
-# basic.c:1785: 			while(total < len)
+	j	.L361		#
+.L373:
+# basic.c:1790: 			while(total < len)
 	ld.w	r1, [r13 + (-20)]	# tmp174, total
 	ld.w	r0, [r13 + (-32)]	# tmp175, len
 	cmp.w	r1, r0	# tmp174, tmp175
-	jss	.L375		#
-# basic.c:1798: 			buffer[len] = 0;
-	ld.w	r0, [buffer]	# buffer.344_40, buffer
-	ld.w	r1, [r13 + (-32)]	# len.345_41, len
-	add.w	r0, r1 #222	# _42, len.345_41
-# basic.c:1798: 			buffer[len] = 0;
+	jss	.L376		#
+# basic.c:1803: 			buffer[len] = 0;
+	ld.w	r0, [buffer]	# buffer.346_40, buffer
+	ld.w	r1, [r13 + (-32)]	# len.347_41, len
+	add.w	r0, r1 #222	# _42, len.347_41
+# basic.c:1803: 			buffer[len] = 0;
 	xor.w	r1, r1	# tmp176
 	st.b	[r0], r1	# *_42, tmp176
-# basic.c:1799: 			i = len;
+# basic.c:1804: 			i = len;
 	ld.w	r0, [r13 + (-32)]	# tmp177, len
 	st.w	[r13 + (-8)], r0	# i, tmp177
-# basic.c:1803: 			strcpy(fileName, s);
+# basic.c:1808: 			strcpy(fileName, s);
 	mov.w	r0, sp	# tmp178,
 	mov.w	r1, r13	# tmp179,
 	add.w	r1, -72 #111	# tmp179,
@@ -6335,75 +6356,75 @@ mov.w	r1, r14	# _39
 	add.w	r1, -92 #111	# tmp180,
 	st.w	[r0], r1	#, tmp180
 	call	strcpy		#
-# basic.c:1804: 			int sum = 0;
+# basic.c:1809: 			int sum = 0;
 	xor.w	r0, r0	# tmp181
 	st.w	[r13 + (-24)], r0	# sum, tmp181
-# basic.c:1805: 			for (int j = 0; j < i; j++) {
+# basic.c:1810: 			for (int j = 0; j < i; j++) {
 	xor.w	r0, r0	# tmp182
 	st.w	[r13 + (-28)], r0	# j, tmp182
-# basic.c:1805: 			for (int j = 0; j < i; j++) {
-	j	.L376		#
-.L377:
-# basic.c:1806: 				sum += buffer[j];
-	ld.w	r0, [buffer]	# buffer.346_43, buffer
-	ld.w	r1, [r13 + (-28)]	# j.347_44, j
-	add.w	r0, r1 #222	# _45, j.347_44
+# basic.c:1810: 			for (int j = 0; j < i; j++) {
+	j	.L377		#
+.L378:
+# basic.c:1811: 				sum += buffer[j];
+	ld.w	r0, [buffer]	# buffer.348_43, buffer
+	ld.w	r1, [r13 + (-28)]	# j.349_44, j
+	add.w	r0, r1 #222	# _45, j.349_44
 	ld.b	r0, [r0]	# _46, *_45
 	sex.b	r1, r0	# _47, _46
-# basic.c:1806: 				sum += buffer[j];
+# basic.c:1811: 				sum += buffer[j];
 	ld.w	r0, [r13 + (-24)]	# tmp184, sum
 	add.w	r0, r1 #222	# tmp183, _47
 	st.w	[r13 + (-24)], r0	# sum, tmp183
-# basic.c:1805: 			for (int j = 0; j < i; j++) {
+# basic.c:1810: 			for (int j = 0; j < i; j++) {
 	ld.w	r0, [r13 + (-28)]	# tmp186, j
 	add.w	r0, 1 #111	# tmp185,
 	st.w	[r13 + (-28)], r0	# j, tmp185
-.L376:
-# basic.c:1805: 			for (int j = 0; j < i; j++) {
+.L377:
+# basic.c:1810: 			for (int j = 0; j < i; j++) {
 	ld.w	r1, [r13 + (-28)]	# tmp187, j
 	ld.w	r0, [r13 + (-8)]	# tmp188, i
 	cmp.w	r1, r0	# tmp187, tmp188
-	jss	.L377		#
-# basic.c:1808: 			printf("\nSum: %d\n", sum);
+	jss	.L378		#
+# basic.c:1813: 			printf("\nSum: %d\n", sum);
 	mov.w	r0, sp	# tmp189,
 	ld.w	r1, [r13 + (-24)]	# tmp190, sum
 	st.w	[r0 + (4)], r1	#, tmp190
 	mov.w	r1, .LC18	# tmp191,
 	st.w	[r0], r1	#, tmp191
 	call	printf		#
-	j	.L368		#
-.L371:
-# basic.c:1811: 			printf("SD card file open failed\n");
+	j	.L369		#
+.L372:
+# basic.c:1816: 			printf("SD card file open failed\n");
 	mov.w	r1, sp	# tmp192,
 	mov.w	r0, .LC19	# tmp193,
 	st.w	[r1], r0	#, tmp193
 	call	puts		#
-# basic.c:1812: 			return;
-	j	.L360		#
-.L369:
-# basic.c:1817: 		i = eth_read_file(buffer, s);
-	ld.w	r1, [buffer]	# buffer.348_48, buffer
+# basic.c:1817: 			return;
+	j	.L361		#
+.L370:
+# basic.c:1822: 		i = eth_read_file(buffer, s);
+	ld.w	r1, [buffer]	# buffer.350_48, buffer
 	mov.w	r0, sp	# tmp194,
 	mov.w	r2, r13	# tmp195,
 	add.w	r2, -72 #111	# tmp195,
 	st.w	[r0 + (4)], r2	#, tmp195
-	st.w	[r0], r1	#, buffer.348_48
+	st.w	[r0], r1	#, buffer.350_48
 	call	eth_read_file		#
 	st.w	[r13 + (-8)], r0	# i,
-.L368:
-# basic.c:1820: 	if (i > 0)
+.L369:
+# basic.c:1825: 	if (i > 0)
 	ld.w	r1, [r13 + (-8)]	# tmp196, i
 	xor.w	r0, r0	# tmp197
 	cmp.w	r1, r0	# tmp196, tmp197
-	jses	.L378		#
-# basic.c:1822: 		printf("File size: %d\n", i);
+	jses	.L379		#
+# basic.c:1827: 		printf("File size: %d\n", i);
 	mov.w	r0, sp	# tmp198,
 	ld.w	r1, [r13 + (-8)]	# tmp199, i
 	st.w	[r0 + (4)], r1	#, tmp199
 	mov.w	r1, .LC20	# tmp200,
 	st.w	[r0], r1	#, tmp200
 	call	printf		#
-# basic.c:1823: 		if (strstr(s, ".BIN") != (char *)0) 
+# basic.c:1828: 		if (strstr(s, ".BIN") != (char *)0) 
 	mov.w	r0, sp	# tmp201,
 	mov.w	r1, .LC21	# tmp202,
 	st.w	[r0 + (4)], r1	#, tmp202
@@ -6412,19 +6433,19 @@ mov.w	r1, r14	# _39
 	st.w	[r0], r1	#, tmp203
 	call	strstr		#
 	mov.w	r1, r0	# _49,
-# basic.c:1823: 		if (strstr(s, ".BIN") != (char *)0) 
+# basic.c:1828: 		if (strstr(s, ".BIN") != (char *)0) 
 	xor.w	r0, r0	# tmp204
 	cmp.w	r1, r0	# _49, tmp204
-	jz	.L379		#
-# basic.c:1825: 			printf("Loaded executable file. Run it using: SYS 0\n");
+	jz	.L380		#
+# basic.c:1830: 			printf("Loaded executable file. Run it using: SYS 0\n");
 	mov.w	r1, sp	# tmp205,
 	mov.w	r0, .LC22	# tmp206,
 	st.w	[r1], r0	#, tmp206
 	call	puts		#
-# basic.c:1826: 			return;
-	j	.L360		#
-.L379:
-# basic.c:1827: 		} else if (strstr(s, ".BAS") == (char *)0) 
+# basic.c:1831: 			return;
+	j	.L361		#
+.L380:
+# basic.c:1832: 		} else if (strstr(s, ".BAS") == (char *)0) 
 	mov.w	r0, sp	# tmp207,
 	mov.w	r1, .LC23	# tmp208,
 	st.w	[r0 + (4)], r1	#, tmp208
@@ -6433,173 +6454,173 @@ mov.w	r1, r14	# _39
 	st.w	[r0], r1	#, tmp209
 	call	strstr		#
 	mov.w	r1, r0	# _50,
-# basic.c:1827: 		} else if (strstr(s, ".BAS") == (char *)0) 
+# basic.c:1832: 		} else if (strstr(s, ".BAS") == (char *)0) 
 	xor.w	r0, r0	# tmp210
 	cmp.w	r1, r0	# _50, tmp210
-	jnz	.L380		#
-# basic.c:1829: 			printf("Loaded successfuly at address 0 (reachable by PEEK and POKE).\n");
+	jnz	.L381		#
+# basic.c:1834: 			printf("Loaded successfuly at address 0 (reachable by PEEK and POKE).\n");
 	mov.w	r1, sp	# tmp211,
 	mov.w	r0, .LC24	# tmp212,
 	st.w	[r1], r0	#, tmp212
 	call	puts		#
-# basic.c:1830: 			return;
-	j	.L360		#
-.L380:
-# basic.c:1833: 		program_end = program_start;
-	ld.w	r0, [program_start]	# program_start.349_51, program_start
-	st.w	[program_end], r0	# program_end, program_start.349_51
-# basic.c:1834: 		k = 0;
+# basic.c:1835: 			return;
+	j	.L361		#
+.L381:
+# basic.c:1838: 		program_end = program_start;
+	ld.w	r0, [program_start]	# program_start.351_51, program_start
+	st.w	[program_end], r0	# program_end, program_start.351_51
+# basic.c:1839: 		k = 0;
 	xor.w	r0, r0	# tmp213
 	st.w	[r13 + (-16)], r0	# k, tmp213
-# basic.c:1835: 		for (j = 0; j <= i; j++)
+# basic.c:1840: 		for (j = 0; j <= i; j++)
 	xor.w	r0, r0	# tmp214
 	st.w	[r13 + (-12)], r0	# j, tmp214
-# basic.c:1835: 		for (j = 0; j <= i; j++)
-	j	.L381		#
-.L386:
-# basic.c:1837: 			if (buffer[j] == CR)
-	ld.w	r0, [buffer]	# buffer.350_52, buffer
-	ld.w	r1, [r13 + (-12)]	# j.351_53, j
-	add.w	r0, r1 #222	# _54, j.351_53
+# basic.c:1840: 		for (j = 0; j <= i; j++)
+	j	.L382		#
+.L387:
+# basic.c:1842: 			if (buffer[j] == CR)
+	ld.w	r0, [buffer]	# buffer.352_52, buffer
+	ld.w	r1, [r13 + (-12)]	# j.353_53, j
+	add.w	r0, r1 #222	# _54, j.353_53
 	ld.b	r0, [r0]	# _55, *_54
-# basic.c:1837: 			if (buffer[j] == CR)
+# basic.c:1842: 			if (buffer[j] == CR)
 	sex.b	r1, r0	# tmp215, _55
 	mov.w	r0, 13	# tmp216,
 	cmp.w	r1, r0	# tmp215, tmp216
-	jnz	.L382		#
-# basic.c:1839: 				buffer[j] = NL;
-	ld.w	r0, [buffer]	# buffer.352_56, buffer
-	ld.w	r1, [r13 + (-12)]	# j.353_57, j
-	add.w	r0, r1 #222	# _58, j.353_57
-# basic.c:1839: 				buffer[j] = NL;
+	jnz	.L383		#
+# basic.c:1844: 				buffer[j] = NL;
+	ld.w	r0, [buffer]	# buffer.354_56, buffer
+	ld.w	r1, [r13 + (-12)]	# j.355_57, j
+	add.w	r0, r1 #222	# _58, j.355_57
+# basic.c:1844: 				buffer[j] = NL;
 	mov.b	r1, 10	# tmp217,
 	st.b	[r0], r1	# *_58, tmp217
-.L382:
-# basic.c:1841: 			if (buffer[j] == NL || buffer[j] == 0)
-	ld.w	r0, [buffer]	# buffer.354_59, buffer
-	ld.w	r1, [r13 + (-12)]	# j.355_60, j
-	add.w	r0, r1 #222	# _61, j.355_60
+.L383:
+# basic.c:1846: 			if (buffer[j] == NL || buffer[j] == 0)
+	ld.w	r0, [buffer]	# buffer.356_59, buffer
+	ld.w	r1, [r13 + (-12)]	# j.357_60, j
+	add.w	r0, r1 #222	# _61, j.357_60
 	ld.b	r0, [r0]	# _62, *_61
-# basic.c:1841: 			if (buffer[j] == NL || buffer[j] == 0)
+# basic.c:1846: 			if (buffer[j] == NL || buffer[j] == 0)
 	sex.b	r1, r0	# tmp218, _62
 	mov.w	r0, 10	# tmp219,
 	cmp.w	r1, r0	# tmp218, tmp219
-	jz	.L383		#
-# basic.c:1841: 			if (buffer[j] == NL || buffer[j] == 0)
-	ld.w	r0, [buffer]	# buffer.356_63, buffer
-	ld.w	r1, [r13 + (-12)]	# j.357_64, j
-	add.w	r0, r1 #222	# _65, j.357_64
+	jz	.L384		#
+# basic.c:1846: 			if (buffer[j] == NL || buffer[j] == 0)
+	ld.w	r0, [buffer]	# buffer.358_63, buffer
+	ld.w	r1, [r13 + (-12)]	# j.359_64, j
+	add.w	r0, r1 #222	# _65, j.359_64
 	ld.b	r0, [r0]	# _66, *_65
-# basic.c:1841: 			if (buffer[j] == NL || buffer[j] == 0)
+# basic.c:1846: 			if (buffer[j] == NL || buffer[j] == 0)
 	sex.b	r1, r0	# tmp220, _66
 	xor.w	r0, r0	# tmp221
 	cmp.w	r1, r0	# tmp220, tmp221
-	jnz	.L384		#
-.L383:
-# basic.c:1843: 				txtpos = program_end + sizeof(LINENUM);
-	ld.w	r0, [program_end]	# program_end.358_67, program_end
+	jnz	.L385		#
+.L384:
+# basic.c:1848: 				txtpos = program_end + sizeof(LINENUM);
+	ld.w	r0, [program_end]	# program_end.360_67, program_end
 	add.w	r0, 4 #111	# _68,
-# basic.c:1843: 				txtpos = program_end + sizeof(LINENUM);
+# basic.c:1848: 				txtpos = program_end + sizeof(LINENUM);
 	st.w	[txtpos], r0	# txtpos, _68
-# basic.c:1844: 				strncpy(txtpos, &buffer[k], j);
-	ld.w	r1, [txtpos]	# txtpos.359_69, txtpos
-	ld.w	r2, [buffer]	# buffer.360_70, buffer
-	ld.w	r0, [r13 + (-16)]	# k.361_71, k
-	add.w	r2, r0 #222	# _72, k.361_71
+# basic.c:1849: 				strncpy(txtpos, &buffer[k], j);
+	ld.w	r1, [txtpos]	# txtpos.361_69, txtpos
+	ld.w	r2, [buffer]	# buffer.362_70, buffer
+	ld.w	r0, [r13 + (-16)]	# k.363_71, k
+	add.w	r2, r0 #222	# _72, k.363_71
 	mov.w	r0, sp	# tmp222,
 	ld.w	r3, [r13 + (-12)]	# tmp223, j
 	st.w	[r0 + (8)], r3	#, tmp223
 	st.w	[r0 + (4)], r2	#, _72
-	st.w	[r0], r1	#, txtpos.359_69
+	st.w	[r0], r1	#, txtpos.361_69
 	call	strncpy		#
-# basic.c:1845: 				txtpos[j - k] = NL;
-	ld.w	r0, [txtpos]	# txtpos.362_73, txtpos
-# basic.c:1845: 				txtpos[j - k] = NL;
+# basic.c:1850: 				txtpos[j - k] = NL;
+	ld.w	r0, [txtpos]	# txtpos.364_73, txtpos
+# basic.c:1850: 				txtpos[j - k] = NL;
 	ld.w	r1, [r13 + (-12)]	# tmp224, j
 	ld.w	r2, [r13 + (-16)]	# tmp225, k
 	sub.w	r1, r2 #222	# _74, tmp225
-# basic.c:1845: 				txtpos[j - k] = NL;
+# basic.c:1850: 				txtpos[j - k] = NL;
 	add.w	r0, r1 #222	# _76, _75
-# basic.c:1845: 				txtpos[j - k] = NL;
+# basic.c:1850: 				txtpos[j - k] = NL;
 	mov.b	r1, 10	# tmp226,
 	st.b	[r0], r1	# *_76, tmp226
-# basic.c:1846: 				txtpos[j - k + 1] = 0;
-	ld.w	r0, [txtpos]	# txtpos.363_77, txtpos
-# basic.c:1846: 				txtpos[j - k + 1] = 0;
+# basic.c:1851: 				txtpos[j - k + 1] = 0;
+	ld.w	r0, [txtpos]	# txtpos.365_77, txtpos
+# basic.c:1851: 				txtpos[j - k + 1] = 0;
 	ld.w	r1, [r13 + (-12)]	# tmp227, j
 	ld.w	r2, [r13 + (-16)]	# tmp228, k
 	sub.w	r1, r2 #222	# _78, tmp228
-# basic.c:1846: 				txtpos[j - k + 1] = 0;
+# basic.c:1851: 				txtpos[j - k + 1] = 0;
 	add.w	r1, 1 #111	# _80,
 	add.w	r0, r1 #222	# _81, _80
-# basic.c:1846: 				txtpos[j - k + 1] = 0;
+# basic.c:1851: 				txtpos[j - k + 1] = 0;
 	xor.w	r1, r1	# tmp229
 	st.b	[r0], r1	# *_81, tmp229
-# basic.c:1847: 				k = j + 1;
+# basic.c:1852: 				k = j + 1;
 	ld.w	r0, [r13 + (-12)]	# tmp231, j
 	add.w	r0, 1 #111	# tmp230,
 	st.w	[r13 + (-16)], r0	# k, tmp230
-# basic.c:1848: 				l = strlen(txtpos);
-	ld.w	r0, [txtpos]	# txtpos.364_82, txtpos
+# basic.c:1853: 				l = strlen(txtpos);
+	ld.w	r0, [txtpos]	# txtpos.366_82, txtpos
 	mov.w	r1, sp	# tmp232,
-	st.w	[r1], r0	#, txtpos.364_82
+	st.w	[r1], r0	#, txtpos.366_82
 	call	strlen		#
 	st.w	[r13 + (-40)], r0	# l,
-# basic.c:1849: 				if (l % 2 == 0)
-	ld.w	r1, [r13 + (-40)]	# l.365_83, l
+# basic.c:1854: 				if (l % 2 == 0)
+	ld.w	r1, [r13 + (-40)]	# l.367_83, l
 	mov.w	r0, 1	# tmp233,
 	and.w	r1, r0	# _84, tmp233
-# basic.c:1849: 				if (l % 2 == 0)
+# basic.c:1854: 				if (l % 2 == 0)
 	xor.w	r0, r0	# tmp234
 	cmp.w	r1, r0	# _84, tmp234
-	jnz	.L385		#
-# basic.c:1850: 					strcat(txtpos, " ");
-	ld.w	r6, [txtpos]	# txtpos.366_85, txtpos
+	jnz	.L386		#
+# basic.c:1855: 					strcat(txtpos, " ");
+	ld.w	r6, [txtpos]	# txtpos.368_85, txtpos
 	mov.w	r0, sp	# tmp235,
-	st.w	[r0], r6	#, txtpos.366_85
+	st.w	[r0], r6	#, txtpos.368_85
 	call	strlen		#
 	mov.w	r1, r0	# _156, tmp236
-	mov.w	r0, r6	# _157, txtpos.366_85
+	mov.w	r0, r6	# _157, txtpos.368_85
 	add.w	r0, r1 #222	# _157, _156
 	mov.b	r1, 32	# tmp237,
 	st.b	[r0], r1	# MEM <char[1:2]> [(void *)_157], tmp237
 	xor.w	r1, r1	# tmp238
 	st.b	[r0 + (1)], r1	# MEM <char[1:2]> [(void *)_157], tmp238
-.L385:
-# basic.c:1851: 				toUppercaseBuffer();
+.L386:
+# basic.c:1856: 				toUppercaseBuffer();
 	call	toUppercaseBuffer		#
-# basic.c:1852: 				skip_to_end();
+# basic.c:1857: 				skip_to_end();
 	call	skip_to_end		#
-# basic.c:1853: 				linenum = testnum();
+# basic.c:1858: 				linenum = testnum();
 	call	testnum		#
 	mov.w	r1, r0	# _86,
-# basic.c:1853: 				linenum = testnum();
+# basic.c:1858: 				linenum = testnum();
 	mov.w	r0, r1	# tmp239, _86
 	st.w	[sp], r0	#, tmp239
 	call	__fixsfsi		#
 	st.w	[linenum], r0	# linenum, _87
-# basic.c:1854: 				if (linenum > 0)
-	ld.w	r1, [linenum]	# linenum.367_88, linenum
-# basic.c:1854: 				if (linenum > 0)
+# basic.c:1859: 				if (linenum > 0)
+	ld.w	r1, [linenum]	# linenum.369_88, linenum
+# basic.c:1859: 				if (linenum > 0)
 	xor.w	r0, r0	# tmp240
-	cmp.w	r1, r0	# linenum.367_88, tmp240
-	jses	.L384		#
-# basic.c:1858: 					ignore_blanks();
+	cmp.w	r1, r0	# linenum.369_88, tmp240
+	jses	.L385		#
+# basic.c:1863: 					ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:1859: 					entered_with_line_num();
+# basic.c:1864: 					entered_with_line_num();
 	call	entered_with_line_num		#
-.L384:
-# basic.c:1835: 		for (j = 0; j <= i; j++)
+.L385:
+# basic.c:1840: 		for (j = 0; j <= i; j++)
 	ld.w	r0, [r13 + (-12)]	# tmp242, j
 	add.w	r0, 1 #111	# tmp241,
 	st.w	[r13 + (-12)], r0	# j, tmp241
-.L381:
-# basic.c:1835: 		for (j = 0; j <= i; j++)
+.L382:
+# basic.c:1840: 		for (j = 0; j <= i; j++)
 	ld.w	r1, [r13 + (-12)]	# tmp243, j
 	ld.w	r0, [r13 + (-8)]	# tmp244, i
 	cmp.w	r1, r0	# tmp243, tmp244
-	jses	.L386		#
-# basic.c:1863: 		printf("OK loading file %s\n", s);
+	jses	.L387		#
+# basic.c:1868: 		printf("OK loading file %s\n", s);
 	mov.w	r0, sp	# tmp245,
 	mov.w	r1, r13	# tmp246,
 	add.w	r1, -72 #111	# tmp246,
@@ -6607,9 +6628,9 @@ mov.w	r1, r14	# _39
 	mov.w	r1, .LC25	# tmp247,
 	st.w	[r0], r1	#, tmp247
 	call	printf		#
-	j	.L360		#
-.L378:
-# basic.c:1867: 		printf("Error loading file %s\n", s);
+	j	.L361		#
+.L379:
+# basic.c:1872: 		printf("Error loading file %s\n", s);
 	mov.w	r0, sp	# tmp248,
 	mov.w	r1, r13	# tmp249,
 	add.w	r1, -72 #111	# tmp249,
@@ -6617,8 +6638,8 @@ mov.w	r1, r14	# _39
 	mov.w	r1, .LC26	# tmp250,
 	st.w	[r0], r1	#, tmp250
 	call	printf		#
-.L360:
-# basic.c:1869: }
+.L361:
+# basic.c:1874: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
 	mov.w	sp, r12	#,
@@ -6635,16 +6656,16 @@ sprintline:
 	mov.w	r13, sp	#,
 	mov.w	r12, 552	#,
 	sub.w	sp, r12 #222	#,
-# basic.c:1877: 	line_num = *((LINENUM*)(list_line));
-	ld.w	r0, [list_line]	# list_line.368_1, list_line
-# basic.c:1877: 	line_num = *((LINENUM*)(list_line));
-	ld.w	r0, [r0]	# tmp49, MEM[(LINENUM *)list_line.368_1]
+# basic.c:1882: 	line_num = *((LINENUM*)(list_line));
+	ld.w	r0, [list_line]	# list_line.370_1, list_line
+# basic.c:1882: 	line_num = *((LINENUM*)(list_line));
+	ld.w	r0, [r0]	# tmp49, MEM[(LINENUM *)list_line.370_1]
 	st.w	[r13 + (-4)], r0	# line_num, tmp49
-# basic.c:1878: 	list_line += sizeof(LINENUM) + sizeof(char);
-	ld.w	r0, [list_line]	# list_line.369_2, list_line
+# basic.c:1883: 	list_line += sizeof(LINENUM) + sizeof(char);
+	ld.w	r0, [list_line]	# list_line.371_2, list_line
 	add.w	r0, 5 #111	# _3,
 	st.w	[list_line], r0	# list_line, _3
-# basic.c:1881: 	sprintf(s, "%d ", line_num);
+# basic.c:1886: 	sprintf(s, "%d ", line_num);
 	mov.w	r0, sp	# tmp50,
 	ld.w	r1, [r13 + (-4)]	# tmp51, line_num
 	st.w	[r0 + (8)], r1	#, tmp51
@@ -6654,40 +6675,40 @@ sprintline:
 	add.w	r1, -14 #111	# tmp53,
 	st.w	[r0], r1	#, tmp53
 	call	sprintf		#
-# basic.c:1882: 	strcpy(&buffer[i], s);
-	ld.w	r1, [buffer]	# buffer.370_4, buffer
-	ld.w	r0, [r13 + (8)]	# i.371_5, i
-	add.w	r1, r0 #222	# _6, i.371_5
+# basic.c:1887: 	strcpy(&buffer[i], s);
+	ld.w	r1, [buffer]	# buffer.372_4, buffer
+	ld.w	r0, [r13 + (8)]	# i.373_5, i
+	add.w	r1, r0 #222	# _6, i.373_5
 	mov.w	r0, sp	# tmp54,
 	mov.w	r2, r13	# tmp55,
 	add.w	r2, -14 #111	# tmp55,
 	st.w	[r0 + (4)], r2	#, tmp55
 	st.w	[r0], r1	#, _6
 	call	strcpy		#
-# basic.c:1883: 	i += strlen(s);
+# basic.c:1888: 	i += strlen(s);
 	mov.w	r1, sp	# tmp56,
 	mov.w	r0, r13	# tmp57,
 	add.w	r0, -14 #111	# tmp57,
 	st.w	[r1], r0	#, tmp57
 	call	strlen		#
 	mov.w	r1, r0	# _7,
-# basic.c:1883: 	i += strlen(s);
+# basic.c:1888: 	i += strlen(s);
 	ld.w	r0, [r13 + (8)]	# tmp59, i
 	add.w	r0, r1 #222	# tmp58, _7
 	st.w	[r13 + (8)], r0	# i, tmp58
-# basic.c:1885: 	expand(list_line, buff);
-	ld.w	r1, [list_line]	# list_line.372_8, list_line
+# basic.c:1890: 	expand(list_line, buff);
+	ld.w	r1, [list_line]	# list_line.374_8, list_line
 	mov.w	r0, sp	# tmp60,
 	mov.w	r3, -526	# tmp62,
 	mov.w	r2, r13	# tmp61,
 	add.w	r2, r3 #222	# tmp61, tmp62
 	st.w	[r0 + (4)], r2	#, tmp61
-	st.w	[r0], r1	#, list_line.372_8
+	st.w	[r0], r1	#, list_line.374_8
 	call	expand		#
-# basic.c:1886: 	strcat(buffer + i, buff);
-	ld.w	r1, [buffer]	# buffer.373_9, buffer
-	ld.w	r0, [r13 + (8)]	# i.374_10, i
-	add.w	r1, r0 #222	# _11, i.374_10
+# basic.c:1891: 	strcat(buffer + i, buff);
+	ld.w	r1, [buffer]	# buffer.375_9, buffer
+	ld.w	r0, [r13 + (8)]	# i.376_10, i
+	add.w	r1, r0 #222	# _11, i.376_10
 	mov.w	r0, sp	# tmp63,
 	mov.w	r3, -526	# tmp65,
 	mov.w	r2, r13	# tmp64,
@@ -6695,7 +6716,7 @@ sprintline:
 	st.w	[r0 + (4)], r2	#, tmp64
 	st.w	[r0], r1	#, _11
 	call	strcat		#
-# basic.c:1887: 	i += strlen(buff);
+# basic.c:1892: 	i += strlen(buff);
 	mov.w	r2, sp	# tmp66,
 	mov.w	r1, -526	# tmp68,
 	mov.w	r0, r13	# tmp67,
@@ -6703,44 +6724,44 @@ sprintline:
 	st.w	[r2], r0	#, tmp67
 	call	strlen		#
 	mov.w	r1, r0	# _12,
-# basic.c:1887: 	i += strlen(buff);
+# basic.c:1892: 	i += strlen(buff);
 	ld.w	r0, [r13 + (8)]	# tmp70, i
 	add.w	r0, r1 #222	# tmp69, _12
 	st.w	[r13 + (8)], r0	# i, tmp69
-# basic.c:1888: 	while (*list_line != NL)
-	j	.L390		#
-.L391:
-# basic.c:1890: 		list_line++;
-	ld.w	r0, [list_line]	# list_line.375_13, list_line
+# basic.c:1893: 	while (*list_line != NL)
+	j	.L391		#
+.L392:
+# basic.c:1895: 		list_line++;
+	ld.w	r0, [list_line]	# list_line.377_13, list_line
 	add.w	r0, 1 #111	# _14,
 	st.w	[list_line], r0	# list_line, _14
-.L390:
-# basic.c:1888: 	while (*list_line != NL)
-	ld.w	r0, [list_line]	# list_line.376_15, list_line
-	ld.b	r0, [r0]	# _16, *list_line.376_15
-# basic.c:1888: 	while (*list_line != NL)
+.L391:
+# basic.c:1893: 	while (*list_line != NL)
+	ld.w	r0, [list_line]	# list_line.378_15, list_line
+	ld.b	r0, [r0]	# _16, *list_line.378_15
+# basic.c:1893: 	while (*list_line != NL)
 	zex.b	r1, r0	# tmp71, _16
 	mov.w	r0, 10	# tmp72,
 	cmp.w	r1, r0	# tmp71, tmp72
-	jnz	.L391		#
-# basic.c:1892: 	list_line++;
-	ld.w	r0, [list_line]	# list_line.377_17, list_line
+	jnz	.L392		#
+# basic.c:1897: 	list_line++;
+	ld.w	r0, [list_line]	# list_line.379_17, list_line
 	add.w	r0, 1 #111	# _18,
 	st.w	[list_line], r0	# list_line, _18
-# basic.c:1895: 	buffer[i] = NL;
-	ld.w	r0, [buffer]	# buffer.378_19, buffer
-	ld.w	r1, [r13 + (8)]	# i.379_20, i
-	add.w	r0, r1 #222	# _21, i.379_20
-# basic.c:1895: 	buffer[i] = NL;
+# basic.c:1900: 	buffer[i] = NL;
+	ld.w	r0, [buffer]	# buffer.380_19, buffer
+	ld.w	r1, [r13 + (8)]	# i.381_20, i
+	add.w	r0, r1 #222	# _21, i.381_20
+# basic.c:1900: 	buffer[i] = NL;
 	mov.b	r1, 10	# tmp73,
 	st.b	[r0], r1	# *_21, tmp73
-# basic.c:1896: 	i++;
+# basic.c:1901: 	i++;
 	ld.w	r0, [r13 + (8)]	# tmp75, i
 	add.w	r0, 1 #111	# tmp74,
 	st.w	[r13 + (8)], r0	# i, tmp74
-# basic.c:1898: 	return i;
+# basic.c:1903: 	return i;
 	ld.w	r0, [r13 + (8)]	# _36, i
-# basic.c:1899: }
+# basic.c:1904: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -6760,12 +6781,12 @@ sd_write_file:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 100 #111	#,
-# basic.c:1904: 	printf("\nSaving to SD card...\n");
+# basic.c:1909: 	printf("\nSaving to SD card...\n");
 	mov.w	r1, sp	# tmp36,
 	mov.w	r0, .LC27	# tmp37,
 	st.w	[r1], r0	#, tmp37
 	call	puts		#
-# basic.c:1905: 	int res = file_open(file_name, &fd, O_WRITE);
+# basic.c:1910: 	int res = file_open(file_name, &fd, O_WRITE);
 	mov.w	r0, sp	# tmp38,
 	mov.w	r1, 1	# tmp39,
 	st.w	[r0 + (8)], r1	#, tmp39
@@ -6775,49 +6796,49 @@ sd_write_file:
 	ld.w	r1, [r13 + (16)]	# tmp41, file_name
 	st.w	[r0], r1	#, tmp41
 	call	file_open		#
-# basic.c:1905: 	int res = file_open(file_name, &fd, O_WRITE);
+# basic.c:1910: 	int res = file_open(file_name, &fd, O_WRITE);
 	zex.b	r0, r0	# tmp42, _1
 	st.w	[r13 + (-12)], r0	# res, tmp42
-# basic.c:1906: 	if (res)
+# basic.c:1911: 	if (res)
 	ld.w	r1, [r13 + (-12)]	# tmp43, res
 	xor.w	r0, r0	# tmp44
 	cmp.w	r1, r0	# tmp43, tmp44
-	jz	.L394		#
-# basic.c:1908: 		int i, curr, total = 0, count = len /512 + 1;
+	jz	.L395		#
+# basic.c:1913: 		int i, curr, total = 0, count = len /512 + 1;
 	xor.w	r0, r0	# tmp45
 	st.w	[r13 + (-8)], r0	# total, tmp45
-# basic.c:1908: 		int i, curr, total = 0, count = len /512 + 1;
+# basic.c:1913: 		int i, curr, total = 0, count = len /512 + 1;
 	ld.w	r0, [r13 + (12)]	# tmp46, len
 	xor.w	r1, r1	# tmp48
 	cmp.w	r0, r1	# tmp47, tmp48
-	jges	.L395		#
+	jges	.L396		#
 	mov.w	r1, 511	# tmp49,
 	add.w	r0, r1 #222	# tmp47, tmp49
-.L395:
+.L396:
 	mov.w	r1, 9	# tmp51,
 	shr.w	r0, r1	# tmp50, tmp51
-# basic.c:1908: 		int i, curr, total = 0, count = len /512 + 1;
+# basic.c:1913: 		int i, curr, total = 0, count = len /512 + 1;
 	add.w	r0, 1 #111	# tmp52,
 	st.w	[r13 + (-16)], r0	# count, tmp52
-# basic.c:1909: 		for (i = 0; i < count; i++)
+# basic.c:1914: 		for (i = 0; i < count; i++)
 	xor.w	r0, r0	# tmp53
 	st.w	[r13 + (-4)], r0	# i, tmp53
-# basic.c:1909: 		for (i = 0; i < count; i++)
-	j	.L396		#
-.L401:
-# basic.c:1911: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
-	ld.w	r0, [r13 + (-8)]	# total.380_3, total
-# basic.c:1911: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
+# basic.c:1914: 		for (i = 0; i < count; i++)
+	j	.L397		#
+.L402:
+# basic.c:1916: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
+	ld.w	r0, [r13 + (-8)]	# total.382_3, total
+# basic.c:1916: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
 	ld.w	r1, [r13 + (8)]	# tmp54, buff
-	add.w	r1, r0 #222	# _4, total.380_3
-# basic.c:1911: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
+	add.w	r1, r0 #222	# _4, total.382_3
+# basic.c:1916: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
 	ld.w	r0, [r13 + (12)]	# _5, len
 	mov.w	r2, 512	# tmp55,
 	cmp.w	r0, r2	# _5, tmp55
-	jses	.L397		#
+	jses	.L398		#
 	mov.w	r0, 512	# _5,
-.L397:
-# basic.c:1911: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
+.L398:
+# basic.c:1916: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
 	zex.s	r2, r0	# _7, _6
 	mov.w	r0, sp	# tmp56,
 	st.w	[r0 + (8)], r2	#, _7
@@ -6826,60 +6847,60 @@ sd_write_file:
 	add.w	r1, -76 #111	# tmp57,
 	st.w	[r0], r1	#, tmp57
 	call	file_write		#
-# basic.c:1911: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
+# basic.c:1916: 			curr = file_write(&fd, &buff[total], len > 512 ? 512 : len);
 	zex.s	r0, r0	# tmp58, _8
 	st.w	[r13 + (-20)], r0	# curr, tmp58
-# basic.c:1912: 			if (curr > 0) {
+# basic.c:1917: 			if (curr > 0) {
 	ld.w	r1, [r13 + (-20)]	# tmp59, curr
 	xor.w	r0, r0	# tmp60
 	cmp.w	r1, r0	# tmp59, tmp60
-	jses	.L404		#
-# basic.c:1913: 				len -= curr;
+	jses	.L405		#
+# basic.c:1918: 				len -= curr;
 	ld.w	r0, [r13 + (12)]	# tmp62, len
 	ld.w	r1, [r13 + (-20)]	# tmp63, curr
 	sub.w	r0, r1 #222	# tmp61, tmp63
 	st.w	[r13 + (12)], r0	# len, tmp61
-# basic.c:1914: 				total += curr;
+# basic.c:1919: 				total += curr;
 	ld.w	r0, [r13 + (-8)]	# tmp65, total
 	ld.w	r1, [r13 + (-20)]	# tmp66, curr
 	add.w	r0, r1 #222	# tmp64, tmp66
 	st.w	[r13 + (-8)], r0	# total, tmp64
-# basic.c:1918: 			printf("#");
+# basic.c:1923: 			printf("#");
 	mov.w	r1, sp	# tmp67,
 	mov.w	r0, 35	# tmp68,
 	st.w	[r1], r0	#, tmp68
 	call	putchar		#
-# basic.c:1909: 		for (i = 0; i < count; i++)
+# basic.c:1914: 		for (i = 0; i < count; i++)
 	ld.w	r0, [r13 + (-4)]	# tmp70, i
 	add.w	r0, 1 #111	# tmp69,
 	st.w	[r13 + (-4)], r0	# i, tmp69
-.L396:
-# basic.c:1909: 		for (i = 0; i < count; i++)
+.L397:
+# basic.c:1914: 		for (i = 0; i < count; i++)
 	ld.w	r1, [r13 + (-4)]	# tmp71, i
 	ld.w	r0, [r13 + (-16)]	# tmp72, count
 	cmp.w	r1, r0	# tmp71, tmp72
-	jss	.L401		#
-	j	.L400		#
-.L404:
-# basic.c:1917: 				break;
+	jss	.L402		#
+	j	.L401		#
+.L405:
+# basic.c:1922: 				break;
 	nop	
-.L400:
-# basic.c:1921: 		printf("\n");
+.L401:
+# basic.c:1926: 		printf("\n");
 	mov.w	r1, sp	# tmp73,
 	mov.w	r0, 10	# tmp74,
 	st.w	[r1], r0	#, tmp74
 	call	putchar		#
-	j	.L402		#
-.L394:
-# basic.c:1925: 		printf("Could not open file for save.\n");
+	j	.L403		#
+.L395:
+# basic.c:1930: 		printf("Could not open file for save.\n");
 	mov.w	r1, sp	# tmp75,
 	mov.w	r0, .LC28	# tmp76,
 	st.w	[r1], r0	#, tmp76
 	call	puts		#
-.L402:
-# basic.c:1927: 	return 1;	
+.L403:
+# basic.c:1932: 	return 1;	
 	mov.w	r0, 1	# _33,
-# basic.c:1928: }
+# basic.c:1933: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -6896,7 +6917,7 @@ eth_write_file:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:1932: 	printf("Saving file %s of %d bytes to the ethernet network drive\n", file_name, len);
+# basic.c:1937: 	printf("Saving file %s of %d bytes to the ethernet network drive\n", file_name, len);
 	mov.w	r0, sp	# tmp27,
 	ld.w	r1, [r13 + (12)]	# tmp28, len
 	st.w	[r0 + (8)], r1	#, tmp28
@@ -6905,7 +6926,7 @@ eth_write_file:
 	mov.w	r1, .LC29	# tmp30,
 	st.w	[r0], r1	#, tmp30
 	call	printf		#
-# basic.c:1933: }
+# basic.c:1938: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -6926,94 +6947,94 @@ exec_save:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 64 #111	#,
-# basic.c:1940: 	ignore_blanks();
+# basic.c:1945: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:1941: 	if (*txtpos < 'A' || *txtpos > 'Z')
-	ld.w	r0, [txtpos]	# txtpos.381_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.381_1
-# basic.c:1941: 	if (*txtpos < 'A' || *txtpos > 'Z')
+# basic.c:1946: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	ld.w	r0, [txtpos]	# txtpos.383_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.383_1
+# basic.c:1946: 	if (*txtpos < 'A' || *txtpos > 'Z')
 	zex.b	r1, r0	# tmp55, _2
 	mov.w	r0, 64	# tmp56,
 	cmp.w	r1, r0	# tmp55, tmp56
-	jse	.L407		#
-# basic.c:1941: 	if (*txtpos < 'A' || *txtpos > 'Z')
-	ld.w	r0, [txtpos]	# txtpos.382_3, txtpos
-	ld.b	r0, [r0]	# _4, *txtpos.382_3
-# basic.c:1941: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	jse	.L408		#
+# basic.c:1946: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	ld.w	r0, [txtpos]	# txtpos.384_3, txtpos
+	ld.b	r0, [r0]	# _4, *txtpos.384_3
+# basic.c:1946: 	if (*txtpos < 'A' || *txtpos > 'Z')
 	zex.b	r1, r0	# tmp57, _4
 	mov.w	r0, 90	# tmp58,
 	cmp.w	r1, r0	# tmp57, tmp58
-	jse	.L408		#
-.L407:
-# basic.c:1943: 		qwhat();
-	call	qwhat		#
-	j	.L406		#
+	jse	.L409		#
 .L408:
-# basic.c:1947: 	int spi = 0;
+# basic.c:1948: 		qwhat();
+	call	qwhat		#
+	j	.L407		#
+.L409:
+# basic.c:1952: 	int spi = 0;
 	xor.w	r0, r0	# tmp59
 	st.w	[r13 + (-8)], r0	# spi, tmp59
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
 	xor.w	r0, r0	# tmp60
 	st.w	[r13 + (-4)], r0	# i, tmp60
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
-	j	.L410		#
-.L412:
-# basic.c:1950: 		s[i] = txtpos[i];
-	ld.w	r0, [txtpos]	# txtpos.383_5, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.384_6, i
-	add.w	r0, r1 #222	# _7, i.384_6
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+	j	.L411		#
+.L413:
+# basic.c:1955: 		s[i] = txtpos[i];
+	ld.w	r0, [txtpos]	# txtpos.385_5, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.386_6, i
+	add.w	r0, r1 #222	# _7, i.386_6
 	ld.b	r0, [r0]	# _8, *_7
 	mov.w	r1, r0	# _9, _8
-# basic.c:1950: 		s[i] = txtpos[i];
+# basic.c:1955: 		s[i] = txtpos[i];
 	mov.w	r0, r13	# tmp61,
 	add.w	r0, -40 #111	# tmp61,
 	ld.w	r2, [r13 + (-4)]	# tmp63, i
 	add.w	r0, r2 #222	# tmp62, tmp63
 	st.b	[r0], r1	# s, _9
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
 	ld.w	r0, [r13 + (-4)]	# tmp65, i
 	add.w	r0, 1 #111	# tmp64,
 	st.w	[r13 + (-4)], r0	# i, tmp64
-.L410:
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
-	ld.w	r0, [txtpos]	# txtpos.385_10, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.386_11, i
-	add.w	r0, r1 #222	# _12, i.386_11
+.L411:
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+	ld.w	r0, [txtpos]	# txtpos.387_10, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.388_11, i
+	add.w	r0, r1 #222	# _12, i.388_11
 	ld.b	r0, [r0]	# _13, *_12
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
 	zex.b	r1, r0	# tmp66, _13
 	mov.w	r0, 10	# tmp67,
 	cmp.w	r1, r0	# tmp66, tmp67
-	jz	.L411		#
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
-	ld.w	r0, [txtpos]	# txtpos.387_14, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.388_15, i
-	add.w	r0, r1 #222	# _16, i.388_15
+	jz	.L412		#
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+	ld.w	r0, [txtpos]	# txtpos.389_14, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.390_15, i
+	add.w	r0, r1 #222	# _16, i.390_15
 	ld.b	r0, [r0]	# _17, *_16
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
 	zex.b	r1, r0	# tmp68, _17
 	mov.w	r0, 32	# tmp69,
 	cmp.w	r1, r0	# tmp68, tmp69
-	jz	.L411		#
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
-	ld.w	r0, [txtpos]	# txtpos.389_18, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.390_19, i
-	add.w	r0, r1 #222	# _20, i.390_19
+	jz	.L412		#
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+	ld.w	r0, [txtpos]	# txtpos.391_18, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.392_19, i
+	add.w	r0, r1 #222	# _20, i.392_19
 	ld.b	r0, [r0]	# _21, *_20
-# basic.c:1948: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
+# basic.c:1953: 	for (i = 0; txtpos[i] != NL && txtpos[i] != SPACE && txtpos[i] != TAB; i++)
 	zex.b	r1, r0	# tmp70, _21
 	mov.w	r0, 9	# tmp71,
 	cmp.w	r1, r0	# tmp70, tmp71
-	jnz	.L412		#
-.L411:
-# basic.c:1952: 	s[i] = 0;
+	jnz	.L413		#
+.L412:
+# basic.c:1957: 	s[i] = 0;
 	mov.w	r0, r13	# tmp72,
 	add.w	r0, -40 #111	# tmp72,
 	ld.w	r1, [r13 + (-4)]	# tmp74, i
 	add.w	r0, r1 #222	# tmp73, tmp74
 	xor.w	r1, r1	# tmp75
 	st.b	[r0], r1	# s, tmp75
-# basic.c:1953: 	printf("Filename: <%s>\n", s);
+# basic.c:1958: 	printf("Filename: <%s>\n", s);
 	mov.w	r0, sp	# tmp76,
 	mov.w	r1, r13	# tmp77,
 	add.w	r1, -40 #111	# tmp77,
@@ -7021,87 +7042,87 @@ exec_save:
 	mov.w	r1, .LC30	# tmp78,
 	st.w	[r0], r1	#, tmp78
 	call	printf		#
-# basic.c:1956: 	list_line = findline();
+# basic.c:1961: 	list_line = findline();
 	call	findline		#
-# basic.c:1956: 	list_line = findline();
+# basic.c:1961: 	list_line = findline();
 	st.w	[list_line], r0	# list_line, _22
-# basic.c:1957: 	i = 0;
+# basic.c:1962: 	i = 0;
 	xor.w	r0, r0	# tmp79
 	st.w	[r13 + (-4)], r0	# i, tmp79
-# basic.c:1958: 	while (list_line < program_end)
-	j	.L413		#
-.L414:
-# basic.c:1960: 		i = sprintline(i);
+# basic.c:1963: 	while (list_line < program_end)
+	j	.L414		#
+.L415:
+# basic.c:1965: 		i = sprintline(i);
 	mov.w	r1, sp	# tmp80,
 	ld.w	r0, [r13 + (-4)]	# tmp81, i
 	st.w	[r1], r0	#, tmp81
 	call	sprintline		#
 	st.w	[r13 + (-4)], r0	# i,
-.L413:
-# basic.c:1958: 	while (list_line < program_end)
-	ld.w	r1, [list_line]	# list_line.391_23, list_line
-	ld.w	r0, [program_end]	# program_end.392_24, program_end
-# basic.c:1958: 	while (list_line < program_end)
-	cmp.w	r1, r0	# list_line.391_23, program_end.392_24
-	js	.L414		#
-# basic.c:1962: 	if (drive == 0) {
-	ld.b	r0, [drive]	# drive.393_25, drive
-# basic.c:1962: 	if (drive == 0) {
-	sex.b	r1, r0	# tmp82, drive.393_25
+.L414:
+# basic.c:1963: 	while (list_line < program_end)
+	ld.w	r1, [list_line]	# list_line.393_23, list_line
+	ld.w	r0, [program_end]	# program_end.394_24, program_end
+# basic.c:1963: 	while (list_line < program_end)
+	cmp.w	r1, r0	# list_line.393_23, program_end.394_24
+	js	.L415		#
+# basic.c:1967: 	if (drive == 0) {
+	ld.b	r0, [drive]	# drive.395_25, drive
+# basic.c:1967: 	if (drive == 0) {
+	sex.b	r1, r0	# tmp82, drive.395_25
 	xor.w	r0, r0	# tmp83
 	cmp.w	r1, r0	# tmp82, tmp83
-	jnz	.L415		#
-# basic.c:1964: 		sd_write_file(buffer, i, s);
-	ld.w	r1, [buffer]	# buffer.394_26, buffer
+	jnz	.L416		#
+# basic.c:1969: 		sd_write_file(buffer, i, s);
+	ld.w	r1, [buffer]	# buffer.396_26, buffer
 	mov.w	r0, sp	# tmp84,
 	mov.w	r2, r13	# tmp85,
 	add.w	r2, -40 #111	# tmp85,
 	st.w	[r0 + (8)], r2	#, tmp85
 	ld.w	r2, [r13 + (-4)]	# tmp86, i
 	st.w	[r0 + (4)], r2	#, tmp86
-	st.w	[r0], r1	#, buffer.394_26
+	st.w	[r0], r1	#, buffer.396_26
 	call	sd_write_file		#
-	j	.L416		#
-.L415:
-# basic.c:1965: 	} else if (drive == 2) {
-	ld.b	r0, [drive]	# drive.395_27, drive
-# basic.c:1965: 	} else if (drive == 2) {
-	sex.b	r1, r0	# tmp87, drive.395_27
+	j	.L417		#
+.L416:
+# basic.c:1970: 	} else if (drive == 2) {
+	ld.b	r0, [drive]	# drive.397_27, drive
+# basic.c:1970: 	} else if (drive == 2) {
+	sex.b	r1, r0	# tmp87, drive.397_27
 	mov.w	r0, 2	# tmp88,
 	cmp.w	r1, r0	# tmp87, tmp88
-	jnz	.L417		#
-# basic.c:1967: 		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
-# 1967 "basic.c" 1
+	jnz	.L418		#
+# basic.c:1972: 		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+# 1972 "basic.c" 1
 	irq 0
 
-# basic.c:1968: 		uart_write_file(buffer, i, s);
-	ld.w	r1, [buffer]	# buffer.396_28, buffer
+# basic.c:1973: 		uart_write_file(buffer, i, s);
+	ld.w	r1, [buffer]	# buffer.398_28, buffer
 	mov.w	r0, sp	# tmp89,
 	mov.w	r2, r13	# tmp90,
 	add.w	r2, -40 #111	# tmp90,
 	st.w	[r0 + (8)], r2	#, tmp90
 	ld.w	r2, [r13 + (-4)]	# tmp91, i
 	st.w	[r0 + (4)], r2	#, tmp91
-	st.w	[r0], r1	#, buffer.396_28
+	st.w	[r0], r1	#, buffer.398_28
 	call	uart_write_file		#
-# basic.c:1969: 		asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-# 1969 "basic.c" 1
+# basic.c:1974: 		asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
+# 1974 "basic.c" 1
 	irq 1
 
-	j	.L416		#
-.L417:
-# basic.c:1973: 		eth_write_file(buffer, i, s);
-	ld.w	r1, [buffer]	# buffer.397_29, buffer
+	j	.L417		#
+.L418:
+# basic.c:1978: 		eth_write_file(buffer, i, s);
+	ld.w	r1, [buffer]	# buffer.399_29, buffer
 	mov.w	r0, sp	# tmp92,
 	mov.w	r2, r13	# tmp93,
 	add.w	r2, -40 #111	# tmp93,
 	st.w	[r0 + (8)], r2	#, tmp93
 	ld.w	r2, [r13 + (-4)]	# tmp94, i
 	st.w	[r0 + (4)], r2	#, tmp94
-	st.w	[r0], r1	#, buffer.397_29
+	st.w	[r0], r1	#, buffer.399_29
 	call	eth_write_file		#
-.L416:
-# basic.c:1975: 	printf("OK saving file %s, length: %d\n", s, i);
+.L417:
+# basic.c:1980: 	printf("OK saving file %s, length: %d\n", s, i);
 	mov.w	r0, sp	# tmp95,
 	ld.w	r1, [r13 + (-4)]	# tmp96, i
 	st.w	[r0 + (8)], r1	#, tmp96
@@ -7111,8 +7132,8 @@ exec_save:
 	mov.w	r1, .LC31	# tmp98,
 	st.w	[r0], r1	#, tmp98
 	call	printf		#
-.L406:
-# basic.c:1976: }
+.L407:
+# basic.c:1981: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -7138,55 +7159,55 @@ exec_dir:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 88 #111	#,
-# basic.c:1982: 	if (drive == 2)
-	ld.b	r0, [drive]	# drive.398_1, drive
-# basic.c:1982: 	if (drive == 2)
-	sex.b	r1, r0	# tmp39, drive.398_1
+# basic.c:1987: 	if (drive == 2)
+	ld.b	r0, [drive]	# drive.400_1, drive
+# basic.c:1987: 	if (drive == 2)
+	sex.b	r1, r0	# tmp39, drive.400_1
 	mov.w	r0, 2	# tmp40,
 	cmp.w	r1, r0	# tmp39, tmp40
-	jnz	.L419		#
-# basic.c:1985: 		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
-# 1985 "basic.c" 1
+	jnz	.L420		#
+# basic.c:1990: 		asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+# 1990 "basic.c" 1
 	irq 0
 
-# basic.c:1986: 		uart_ls_files(buffer);
-	ld.w	r0, [buffer]	# buffer.399_2, buffer
+# basic.c:1991: 		uart_ls_files(buffer);
+	ld.w	r0, [buffer]	# buffer.401_2, buffer
 	mov.w	r1, sp	# tmp41,
-	st.w	[r1], r0	#, buffer.399_2
+	st.w	[r1], r0	#, buffer.401_2
 	call	uart_ls_files		#
-# basic.c:1987: 		asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-# 1987 "basic.c" 1
+# basic.c:1992: 		asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
+# 1992 "basic.c" 1
 	irq 1
 
-# basic.c:1988: 		printf("%s\n", buffer);
-	ld.w	r0, [buffer]	# buffer.400_3, buffer
+# basic.c:1993: 		printf("%s\n", buffer);
+	ld.w	r0, [buffer]	# buffer.402_3, buffer
 	mov.w	r1, sp	# tmp42,
-	st.w	[r1], r0	#, buffer.400_3
+	st.w	[r1], r0	#, buffer.402_3
 	call	puts		#
-	j	.L418		#
-.L419:
-# basic.c:1990: 	else if (drive == 0)
-	ld.b	r0, [drive]	# drive.401_4, drive
-# basic.c:1990: 	else if (drive == 0)
-	sex.b	r1, r0	# tmp43, drive.401_4
+	j	.L419		#
+.L420:
+# basic.c:1995: 	else if (drive == 0)
+	ld.b	r0, [drive]	# drive.403_4, drive
+# basic.c:1995: 	else if (drive == 0)
+	sex.b	r1, r0	# tmp43, drive.403_4
 	xor.w	r0, r0	# tmp44
 	cmp.w	r1, r0	# tmp43, tmp44
-	jnz	.L421		#
-# basic.c:1994: 		int next = 0;
+	jnz	.L422		#
+# basic.c:1999: 		int next = 0;
 	xor.w	r0, r0	# tmp45
 	st.w	[r13 + (-8)], r0	# next, tmp45
-# basic.c:1995: 		while ((next = getDirEntry(&fd, next)) != 0)
-	j	.L422		#
-.L423:
-# basic.c:1997: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
+# basic.c:2000: 		while ((next = getDirEntry(&fd, next)) != 0)
+	j	.L423		#
+.L424:
+# basic.c:2002: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
 	ld.w	r1, [r13 + (-32)]	# _5, fd.dir_entry.filesize
-# basic.c:1997: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
+# basic.c:2002: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
 	ld.s	r0, [r13 + (-16)]	# _6, fd.curr_cluster
-# basic.c:1997: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
+# basic.c:2002: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
 	zex.s	r2, r0	# _7, _6
-# basic.c:1997: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
+# basic.c:2002: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
 	ld.s	r0, [r13 + (-36)]	# _8, fd.dir_entry.first_cluster
-# basic.c:1997: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
+# basic.c:2002: 			printf("%s %d bytes, cluster: %d (%d)\n", fd.dir_entry.filename, fd.dir_entry.filesize, fd.curr_cluster, fd.dir_entry.first_cluster);
 	zex.s	r3, r0	# _9, _8
 	mov.w	r0, sp	# tmp46,
 	st.w	[r0 + (16)], r3	#, _9
@@ -7198,28 +7219,28 @@ exec_dir:
 	mov.w	r1, .LC32	# tmp48,
 	st.w	[r0], r1	#, tmp48
 	call	printf		#
-.L422:
-# basic.c:1995: 		while ((next = getDirEntry(&fd, next)) != 0)
-	ld.w	r1, [r13 + (-8)]	# next.402_10, next
+.L423:
+# basic.c:2000: 		while ((next = getDirEntry(&fd, next)) != 0)
+	ld.w	r1, [r13 + (-8)]	# next.404_10, next
 	mov.w	r0, sp	# tmp49,
-	st.w	[r0 + (4)], r1	#, next.402_10
+	st.w	[r0 + (4)], r1	#, next.404_10
 	mov.w	r1, r13	# tmp50,
 	add.w	r1, -64 #111	# tmp50,
 	st.w	[r0], r1	#, tmp50
 	call	getDirEntry		#
-# basic.c:1995: 		while ((next = getDirEntry(&fd, next)) != 0)
+# basic.c:2000: 		while ((next = getDirEntry(&fd, next)) != 0)
 	st.w	[r13 + (-8)], r0	# next, _11
-# basic.c:1995: 		while ((next = getDirEntry(&fd, next)) != 0)
+# basic.c:2000: 		while ((next = getDirEntry(&fd, next)) != 0)
 	ld.w	r1, [r13 + (-8)]	# tmp51, next
 	xor.w	r0, r0	# tmp52
 	cmp.w	r1, r0	# tmp51, tmp52
-	jnz	.L423		#
-	j	.L418		#
-.L421:
-# basic.c:2002: 		to_print_len = 0;
+	jnz	.L424		#
+	j	.L419		#
+.L422:
+# basic.c:2007: 		to_print_len = 0;
 	xor.w	r0, r0	# tmp53
 	st.w	[to_print_len], r0	# to_print_len, tmp53
-# basic.c:2003: 		browseUrl("/dir", "", server_ip, 0, my_callback);
+# basic.c:2008: 		browseUrl("/dir", "", server_ip, 0, my_callback);
 	mov.w	r0, sp	# tmp54,
 	mov.w	r1, my_callback	# tmp55,
 	st.w	[r0 + (16)], r1	#, tmp55
@@ -7232,63 +7253,63 @@ exec_dir:
 	mov.w	r1, .LC34	# tmp59,
 	st.w	[r0], r1	#, tmp59
 	call	browseUrl		#
-# basic.c:2004: 		delay(100);
+# basic.c:2009: 		delay(100);
 	mov.w	r1, sp	# tmp60,
 	mov.w	r0, 100	# tmp61,
 	st.w	[r1], r0	#, tmp61
 	call	delay		#
-# basic.c:2005: 		for (i = 0; i < 1000; i++) {
+# basic.c:2010: 		for (i = 0; i < 1000; i++) {
 	xor.w	r0, r0	# tmp62
 	st.w	[r13 + (-4)], r0	# i, tmp62
-# basic.c:2005: 		for (i = 0; i < 1000; i++) {
-	j	.L424		#
-.L426:
-# basic.c:2008: 			if (to_print_len > 0) {
-	ld.w	r1, [to_print_len]	# to_print_len.403_12, to_print_len
-# basic.c:2008: 			if (to_print_len > 0) {
+# basic.c:2010: 		for (i = 0; i < 1000; i++) {
+	j	.L425		#
+.L427:
+# basic.c:2013: 			if (to_print_len > 0) {
+	ld.w	r1, [to_print_len]	# to_print_len.405_12, to_print_len
+# basic.c:2013: 			if (to_print_len > 0) {
 	xor.w	r0, r0	# tmp63
-	cmp.w	r1, r0	# to_print_len.403_12, tmp63
-	jses	.L425		#
-# basic.c:2009: 				to_print_buff[to_print_len] = 0;
-	ld.w	r0, [to_print_len]	# to_print_len.404_13, to_print_len
-# basic.c:2009: 				to_print_buff[to_print_len] = 0;
+	cmp.w	r1, r0	# to_print_len.405_12, tmp63
+	jses	.L426		#
+# basic.c:2014: 				to_print_buff[to_print_len] = 0;
+	ld.w	r0, [to_print_len]	# to_print_len.406_13, to_print_len
+# basic.c:2014: 				to_print_buff[to_print_len] = 0;
 	mov.w	r1, to_print_buff	# tmp65,
 	add.w	r0, r1 #222	# tmp64, tmp65
 	xor.w	r1, r1	# tmp66
 	st.b	[r0], r1	# to_print_buff, tmp66
-# basic.c:2010: 				printf("%s\n", to_print_buff);
+# basic.c:2015: 				printf("%s\n", to_print_buff);
 	mov.w	r1, sp	# tmp67,
 	mov.w	r0, to_print_buff	# tmp68,
 	st.w	[r1], r0	#, tmp68
 	call	puts		#
-# basic.c:2011: 				to_print_len = 0;
+# basic.c:2016: 				to_print_len = 0;
 	xor.w	r0, r0	# tmp69
 	st.w	[to_print_len], r0	# to_print_len, tmp69
-# basic.c:2012: 				return;
-	j	.L418		#
-.L425:
-# basic.c:2014: 			  delay(10);
+# basic.c:2017: 				return;
+	j	.L419		#
+.L426:
+# basic.c:2019: 			  delay(10);
 	mov.w	r1, sp	# tmp70,
 	mov.w	r0, 10	# tmp71,
 	st.w	[r1], r0	#, tmp71
 	call	delay		#
-# basic.c:2005: 		for (i = 0; i < 1000; i++) {
+# basic.c:2010: 		for (i = 0; i < 1000; i++) {
 	ld.w	r0, [r13 + (-4)]	# tmp73, i
 	add.w	r0, 1 #111	# tmp72,
 	st.w	[r13 + (-4)], r0	# i, tmp72
-.L424:
-# basic.c:2005: 		for (i = 0; i < 1000; i++) {
+.L425:
+# basic.c:2010: 		for (i = 0; i < 1000; i++) {
 	ld.w	r1, [r13 + (-4)]	# tmp74, i
 	mov.w	r0, 999	# tmp75,
 	cmp.w	r1, r0	# tmp74, tmp75
-	jses	.L426		#
-# basic.c:2016: 		printf("NETWORK TIMEOUT\n");
+	jses	.L427		#
+# basic.c:2021: 		printf("NETWORK TIMEOUT\n");
 	mov.w	r1, sp	# tmp76,
 	mov.w	r0, .LC35	# tmp77,
 	st.w	[r1], r0	#, tmp77
 	call	puts		#
-.L418:
-# basic.c:2018: }
+.L419:
+# basic.c:2023: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -7305,75 +7326,75 @@ exec_mode:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# basic.c:2024: 	ignore_blanks();
+# basic.c:2029: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2025: 	expression_error = 0;
+# basic.c:2030: 	expression_error = 0;
 	xor.w	r0, r0	# tmp29
 	st.b	[expression_error], r0	# expression_error, tmp29
-# basic.c:2026: 	value = expression();	
+# basic.c:2031: 	value = expression();	
 	call	expression		#
 	st.w	[r13 + (-4)], r0	# value,
-# basic.c:2027: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.405_1, expression_error
-# basic.c:2027: 	if (expression_error)
-	sex.b	r1, r0	# tmp30, expression_error.405_1
+# basic.c:2032: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.407_1, expression_error
+# basic.c:2032: 	if (expression_error)
+	sex.b	r1, r0	# tmp30, expression_error.407_1
 	xor.w	r0, r0	# tmp31
 	cmp.w	r1, r0	# tmp30, tmp31
-	jz	.L428		#
-# basic.c:2029: 		qwhat();
+	jz	.L429		#
+# basic.c:2034: 		qwhat();
 	call	qwhat		#
-# basic.c:2030: 		return;
-	j	.L427		#
-.L428:
-# basic.c:2033: 	switch ((int)value)
+# basic.c:2035: 		return;
+	j	.L428		#
+.L429:
+# basic.c:2038: 	switch ((int)value)
 	ld.w	r0, [r13 + (-4)]	# tmp32, value
 	st.w	[sp], r0	#, tmp32
 	call	__fixsfsi		#
-# basic.c:2033: 	switch ((int)value)
+# basic.c:2038: 	switch ((int)value)
 	mov.w	r1, 2	# tmp33,
 	cmp.w	r0, r1	# _2, tmp33
-	jz	.L430		#
+	jz	.L431		#
 	mov.w	r1, 2	# tmp34,
 	cmp.w	r0, r1	# _2, tmp34
-	jgs	.L431		#
+	jgs	.L432		#
 	xor.w	r1, r1	# tmp35
 	cmp.w	r0, r1	# _2, tmp35
-	jz	.L432		#
+	jz	.L433		#
 	mov.w	r1, 1	# tmp36,
 	cmp.w	r0, r1	# _2, tmp36
-	jz	.L433		#
-	j	.L431		#
-.L432:
-# basic.c:2036: 			video_mode(0);
+	jz	.L434		#
+	j	.L432		#
+.L433:
+# basic.c:2041: 			video_mode(0);
 	mov.w	r1, sp	# tmp37,
 	xor.w	r0, r0	# tmp38
 	st.w	[r1], r0	#, tmp38
 	call	video_mode		#
-# basic.c:2038: 			break;
-	j	.L427		#
-.L433:
-# basic.c:2040: 			video_mode(1);
+# basic.c:2043: 			break;
+	j	.L428		#
+.L434:
+# basic.c:2045: 			video_mode(1);
 	mov.w	r1, sp	# tmp39,
 	mov.w	r0, 1	# tmp40,
 	st.w	[r1], r0	#, tmp40
 	call	video_mode		#
-# basic.c:2042: 			break;
-	j	.L427		#
-.L430:
-# basic.c:2044: 			video_mode(2);
+# basic.c:2047: 			break;
+	j	.L428		#
+.L431:
+# basic.c:2049: 			video_mode(2);
 	mov.w	r1, sp	# tmp41,
 	mov.w	r0, 2	# tmp42,
 	st.w	[r1], r0	#, tmp42
 	call	video_mode		#
-# basic.c:2046: 			break;
-	j	.L427		#
-.L431:
-# basic.c:2048: 			video_mode(0);
+# basic.c:2051: 			break;
+	j	.L428		#
+.L432:
+# basic.c:2053: 			video_mode(0);
 	mov.w	r1, sp	# tmp43,
 	xor.w	r0, r0	# tmp44
 	st.w	[r1], r0	#, tmp44
 	call	video_mode		#
-# basic.c:2050: 			printf("Invalid video mode: %d\n", value);
+# basic.c:2055: 			printf("Invalid video mode: %d\n", value);
 	ld.w	r0, [r13 + (-4)]	# tmp45, value
 	st.w	[sp], r0	#, tmp45
 	call	__extendsfdf2		#
@@ -7387,8 +7408,8 @@ exec_mode:
 	mov.w	r1, .LC36	# tmp49,
 	st.w	[r0], r1	#, tmp49
 	call	printf		#
-.L427:
-# basic.c:2052: }
+.L428:
+# basic.c:2057: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -7402,105 +7423,105 @@ exec_plot:
 	push	r6		#
 	push	r7		#
 	sub.w	sp, 36 #111	#,
-# basic.c:2058: 	ignore_blanks();
+# basic.c:2063: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2059: 	expression_error = 0;
+# basic.c:2064: 	expression_error = 0;
 	xor.w	r0, r0	# tmp40
 	st.b	[expression_error], r0	# expression_error, tmp40
-# basic.c:2060: 	x = expression();	
+# basic.c:2065: 	x = expression();	
 	call	expression		#
 	st.w	[r13 + (-12)], r0	# x,
-# basic.c:2061: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.406_1, expression_error
-# basic.c:2061: 	if (expression_error)
-	sex.b	r1, r0	# tmp41, expression_error.406_1
+# basic.c:2066: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.408_1, expression_error
+# basic.c:2066: 	if (expression_error)
+	sex.b	r1, r0	# tmp41, expression_error.408_1
 	xor.w	r0, r0	# tmp42
 	cmp.w	r1, r0	# tmp41, tmp42
-	jz	.L435		#
-# basic.c:2063: 		qwhat();
+	jz	.L436		#
+# basic.c:2068: 		qwhat();
 	call	qwhat		#
-# basic.c:2064: 		return;
-	j	.L434		#
-.L435:
-# basic.c:2066: 	ignore_blanks();
+# basic.c:2069: 		return;
+	j	.L435		#
+.L436:
+# basic.c:2071: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2067: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.407_2, txtpos
-	ld.b	r0, [r0]	# _3, *txtpos.407_2
-# basic.c:2067: 	if (*txtpos != ',')
+# basic.c:2072: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.409_2, txtpos
+	ld.b	r0, [r0]	# _3, *txtpos.409_2
+# basic.c:2072: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp43, _3
 	mov.w	r0, 44	# tmp44,
 	cmp.w	r1, r0	# tmp43, tmp44
-	jz	.L437		#
-# basic.c:2069: 		qwhat();
+	jz	.L438		#
+# basic.c:2074: 		qwhat();
 	call	qwhat		#
-# basic.c:2070: 		return;
-	j	.L434		#
-.L437:
-# basic.c:2074: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.408_4, txtpos
+# basic.c:2075: 		return;
+	j	.L435		#
+.L438:
+# basic.c:2079: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.410_4, txtpos
 	add.w	r0, 1 #111	# _5,
 	st.w	[txtpos], r0	# txtpos, _5
-# basic.c:2076: 	ignore_blanks();
+# basic.c:2081: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2077: 	expression_error = 0;
+# basic.c:2082: 	expression_error = 0;
 	xor.w	r0, r0	# tmp45
 	st.b	[expression_error], r0	# expression_error, tmp45
-# basic.c:2078: 	y = expression();	
+# basic.c:2083: 	y = expression();	
 	call	expression		#
 	st.w	[r13 + (-16)], r0	# y,
-# basic.c:2079: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.409_6, expression_error
-# basic.c:2079: 	if (expression_error)
-	sex.b	r1, r0	# tmp46, expression_error.409_6
+# basic.c:2084: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.411_6, expression_error
+# basic.c:2084: 	if (expression_error)
+	sex.b	r1, r0	# tmp46, expression_error.411_6
 	xor.w	r0, r0	# tmp47
 	cmp.w	r1, r0	# tmp46, tmp47
-	jz	.L438		#
-# basic.c:2081: 		qwhat();
+	jz	.L439		#
+# basic.c:2086: 		qwhat();
 	call	qwhat		#
-# basic.c:2082: 		return;
-	j	.L434		#
-.L438:
-# basic.c:2084: 	ignore_blanks();
+# basic.c:2087: 		return;
+	j	.L435		#
+.L439:
+# basic.c:2089: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2085: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.410_7, txtpos
-	ld.b	r0, [r0]	# _8, *txtpos.410_7
-# basic.c:2085: 	if (*txtpos != ',')
+# basic.c:2090: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.412_7, txtpos
+	ld.b	r0, [r0]	# _8, *txtpos.412_7
+# basic.c:2090: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp48, _8
 	mov.w	r0, 44	# tmp49,
 	cmp.w	r1, r0	# tmp48, tmp49
-	jz	.L439		#
-# basic.c:2087: 		qwhat();
+	jz	.L440		#
+# basic.c:2092: 		qwhat();
 	call	qwhat		#
-# basic.c:2088: 		return;
-	j	.L434		#
-.L439:
-# basic.c:2092: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.411_9, txtpos
+# basic.c:2093: 		return;
+	j	.L435		#
+.L440:
+# basic.c:2097: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.413_9, txtpos
 	add.w	r0, 1 #111	# _10,
 	st.w	[txtpos], r0	# txtpos, _10
-# basic.c:2094: 	ignore_blanks();
+# basic.c:2099: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2095: 	expression_error = 0;
+# basic.c:2100: 	expression_error = 0;
 	xor.w	r0, r0	# tmp50
 	st.b	[expression_error], r0	# expression_error, tmp50
-# basic.c:2096: 	c = expression();	
+# basic.c:2101: 	c = expression();	
 	call	expression		#
 	st.w	[r13 + (-20)], r0	# c,
-# basic.c:2097: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.412_11, expression_error
-# basic.c:2097: 	if (expression_error)
-	sex.b	r1, r0	# tmp51, expression_error.412_11
+# basic.c:2102: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.414_11, expression_error
+# basic.c:2102: 	if (expression_error)
+	sex.b	r1, r0	# tmp51, expression_error.414_11
 	xor.w	r0, r0	# tmp52
 	cmp.w	r1, r0	# tmp51, tmp52
-	jz	.L440		#
-# basic.c:2099: 		qwhat();
+	jz	.L441		#
+# basic.c:2104: 		qwhat();
 	call	qwhat		#
-# basic.c:2100: 		return;
-	j	.L434		#
-.L440:
-# basic.c:2103: 	pixel((int)x, (int)y, (int)c);
+# basic.c:2105: 		return;
+	j	.L435		#
+.L441:
+# basic.c:2108: 	pixel((int)x, (int)y, (int)c);
 	ld.w	r0, [r13 + (-12)]	# tmp53, x
 	st.w	[sp], r0	#, tmp53
 	call	__fixsfsi		#
@@ -7518,8 +7539,8 @@ exec_plot:
 	st.w	[r0 + (4)], r7	#, _13
 	st.w	[r0], r6	#, _12
 	call	pixel		#
-.L434:
-# basic.c:2104: }
+.L435:
+# basic.c:2109: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 8 #111	#,
 	mov.w	sp, r12	#,
@@ -7540,183 +7561,183 @@ exec_line:
 	push	r8		#
 	push	r9		#
 	sub.w	sp, 44 #111	#,
-# basic.c:2110: 	ignore_blanks();
+# basic.c:2115: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2111: 	expression_error = 0;
+# basic.c:2116: 	expression_error = 0;
 	xor.w	r0, r0	# tmp52
 	st.b	[expression_error], r0	# expression_error, tmp52
-# basic.c:2112: 	x1 = expression();	
+# basic.c:2117: 	x1 = expression();	
 	call	expression		#
 	st.w	[r13 + (-20)], r0	# x1,
-# basic.c:2113: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.413_1, expression_error
-# basic.c:2113: 	if (expression_error)
-	sex.b	r1, r0	# tmp53, expression_error.413_1
+# basic.c:2118: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.415_1, expression_error
+# basic.c:2118: 	if (expression_error)
+	sex.b	r1, r0	# tmp53, expression_error.415_1
 	xor.w	r0, r0	# tmp54
 	cmp.w	r1, r0	# tmp53, tmp54
-	jz	.L442		#
-# basic.c:2115: 		qwhat();
+	jz	.L443		#
+# basic.c:2120: 		qwhat();
 	call	qwhat		#
-# basic.c:2116: 		return;
-	j	.L441		#
-.L442:
-# basic.c:2118: 	ignore_blanks();
+# basic.c:2121: 		return;
+	j	.L442		#
+.L443:
+# basic.c:2123: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2119: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.414_2, txtpos
-	ld.b	r0, [r0]	# _3, *txtpos.414_2
-# basic.c:2119: 	if (*txtpos != ',')
+# basic.c:2124: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.416_2, txtpos
+	ld.b	r0, [r0]	# _3, *txtpos.416_2
+# basic.c:2124: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp55, _3
 	mov.w	r0, 44	# tmp56,
 	cmp.w	r1, r0	# tmp55, tmp56
-	jz	.L444		#
-# basic.c:2121: 		qwhat();
+	jz	.L445		#
+# basic.c:2126: 		qwhat();
 	call	qwhat		#
-# basic.c:2122: 		return;
-	j	.L441		#
-.L444:
-# basic.c:2126: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.415_4, txtpos
+# basic.c:2127: 		return;
+	j	.L442		#
+.L445:
+# basic.c:2131: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.417_4, txtpos
 	add.w	r0, 1 #111	# _5,
 	st.w	[txtpos], r0	# txtpos, _5
-# basic.c:2128: 	ignore_blanks();
+# basic.c:2133: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2129: 	expression_error = 0;
+# basic.c:2134: 	expression_error = 0;
 	xor.w	r0, r0	# tmp57
 	st.b	[expression_error], r0	# expression_error, tmp57
-# basic.c:2130: 	y1 = expression();	
+# basic.c:2135: 	y1 = expression();	
 	call	expression		#
 	st.w	[r13 + (-24)], r0	# y1,
-# basic.c:2131: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.416_6, expression_error
-# basic.c:2131: 	if (expression_error)
-	sex.b	r1, r0	# tmp58, expression_error.416_6
+# basic.c:2136: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.418_6, expression_error
+# basic.c:2136: 	if (expression_error)
+	sex.b	r1, r0	# tmp58, expression_error.418_6
 	xor.w	r0, r0	# tmp59
 	cmp.w	r1, r0	# tmp58, tmp59
-	jz	.L445		#
-# basic.c:2133: 		qwhat();
+	jz	.L446		#
+# basic.c:2138: 		qwhat();
 	call	qwhat		#
-# basic.c:2134: 		return;
-	j	.L441		#
-.L445:
-# basic.c:2137: 	ignore_blanks();
+# basic.c:2139: 		return;
+	j	.L442		#
+.L446:
+# basic.c:2142: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2138: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.417_7, txtpos
-	ld.b	r0, [r0]	# _8, *txtpos.417_7
-# basic.c:2138: 	if (*txtpos != ',')
+# basic.c:2143: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.419_7, txtpos
+	ld.b	r0, [r0]	# _8, *txtpos.419_7
+# basic.c:2143: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp60, _8
 	mov.w	r0, 44	# tmp61,
 	cmp.w	r1, r0	# tmp60, tmp61
-	jz	.L446		#
-# basic.c:2140: 		qwhat();
+	jz	.L447		#
+# basic.c:2145: 		qwhat();
 	call	qwhat		#
-# basic.c:2141: 		return;
-	j	.L441		#
-.L446:
-# basic.c:2145: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.418_9, txtpos
+# basic.c:2146: 		return;
+	j	.L442		#
+.L447:
+# basic.c:2150: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.420_9, txtpos
 	add.w	r0, 1 #111	# _10,
 	st.w	[txtpos], r0	# txtpos, _10
-# basic.c:2147: 	ignore_blanks();
+# basic.c:2152: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2148: 	expression_error = 0;
+# basic.c:2153: 	expression_error = 0;
 	xor.w	r0, r0	# tmp62
 	st.b	[expression_error], r0	# expression_error, tmp62
-# basic.c:2149: 	x2 = expression();	
+# basic.c:2154: 	x2 = expression();	
 	call	expression		#
 	st.w	[r13 + (-28)], r0	# x2,
-# basic.c:2150: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.419_11, expression_error
-# basic.c:2150: 	if (expression_error)
-	sex.b	r1, r0	# tmp63, expression_error.419_11
+# basic.c:2155: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.421_11, expression_error
+# basic.c:2155: 	if (expression_error)
+	sex.b	r1, r0	# tmp63, expression_error.421_11
 	xor.w	r0, r0	# tmp64
 	cmp.w	r1, r0	# tmp63, tmp64
-	jz	.L447		#
-# basic.c:2152: 		qwhat();
+	jz	.L448		#
+# basic.c:2157: 		qwhat();
 	call	qwhat		#
-# basic.c:2153: 		return;
-	j	.L441		#
-.L447:
-# basic.c:2155: 	ignore_blanks();
+# basic.c:2158: 		return;
+	j	.L442		#
+.L448:
+# basic.c:2160: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2156: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.420_12, txtpos
-	ld.b	r0, [r0]	# _13, *txtpos.420_12
-# basic.c:2156: 	if (*txtpos != ',')
+# basic.c:2161: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.422_12, txtpos
+	ld.b	r0, [r0]	# _13, *txtpos.422_12
+# basic.c:2161: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp65, _13
 	mov.w	r0, 44	# tmp66,
 	cmp.w	r1, r0	# tmp65, tmp66
-	jz	.L448		#
-# basic.c:2158: 		qwhat();
+	jz	.L449		#
+# basic.c:2163: 		qwhat();
 	call	qwhat		#
-# basic.c:2159: 		return;
-	j	.L441		#
-.L448:
-# basic.c:2163: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.421_14, txtpos
+# basic.c:2164: 		return;
+	j	.L442		#
+.L449:
+# basic.c:2168: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.423_14, txtpos
 	add.w	r0, 1 #111	# _15,
 	st.w	[txtpos], r0	# txtpos, _15
-# basic.c:2165: 	ignore_blanks();
+# basic.c:2170: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2166: 	expression_error = 0;
+# basic.c:2171: 	expression_error = 0;
 	xor.w	r0, r0	# tmp67
 	st.b	[expression_error], r0	# expression_error, tmp67
-# basic.c:2167: 	y2 = expression();	
+# basic.c:2172: 	y2 = expression();	
 	call	expression		#
 	st.w	[r13 + (-32)], r0	# y2,
-# basic.c:2168: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.422_16, expression_error
-# basic.c:2168: 	if (expression_error)
-	sex.b	r1, r0	# tmp68, expression_error.422_16
+# basic.c:2173: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.424_16, expression_error
+# basic.c:2173: 	if (expression_error)
+	sex.b	r1, r0	# tmp68, expression_error.424_16
 	xor.w	r0, r0	# tmp69
 	cmp.w	r1, r0	# tmp68, tmp69
-	jz	.L449		#
-# basic.c:2170: 		qwhat();
+	jz	.L450		#
+# basic.c:2175: 		qwhat();
 	call	qwhat		#
-# basic.c:2171: 		return;
-	j	.L441		#
-.L449:
-# basic.c:2173: 	ignore_blanks();
+# basic.c:2176: 		return;
+	j	.L442		#
+.L450:
+# basic.c:2178: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2174: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.423_17, txtpos
-	ld.b	r0, [r0]	# _18, *txtpos.423_17
-# basic.c:2174: 	if (*txtpos != ',')
+# basic.c:2179: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.425_17, txtpos
+	ld.b	r0, [r0]	# _18, *txtpos.425_17
+# basic.c:2179: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp70, _18
 	mov.w	r0, 44	# tmp71,
 	cmp.w	r1, r0	# tmp70, tmp71
-	jz	.L450		#
-# basic.c:2176: 		qwhat();
+	jz	.L451		#
+# basic.c:2181: 		qwhat();
 	call	qwhat		#
-# basic.c:2177: 		return;
-	j	.L441		#
-.L450:
-# basic.c:2181: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.424_19, txtpos
+# basic.c:2182: 		return;
+	j	.L442		#
+.L451:
+# basic.c:2186: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.426_19, txtpos
 	add.w	r0, 1 #111	# _20,
 	st.w	[txtpos], r0	# txtpos, _20
-# basic.c:2184: 	ignore_blanks();
+# basic.c:2189: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2185: 	expression_error = 0;
+# basic.c:2190: 	expression_error = 0;
 	xor.w	r0, r0	# tmp72
 	st.b	[expression_error], r0	# expression_error, tmp72
-# basic.c:2186: 	c = expression();	
+# basic.c:2191: 	c = expression();	
 	call	expression		#
 	st.w	[r13 + (-36)], r0	# c,
-# basic.c:2187: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.425_21, expression_error
-# basic.c:2187: 	if (expression_error)
-	sex.b	r1, r0	# tmp73, expression_error.425_21
+# basic.c:2192: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.427_21, expression_error
+# basic.c:2192: 	if (expression_error)
+	sex.b	r1, r0	# tmp73, expression_error.427_21
 	xor.w	r0, r0	# tmp74
 	cmp.w	r1, r0	# tmp73, tmp74
-	jz	.L451		#
-# basic.c:2189: 		qwhat();
+	jz	.L452		#
+# basic.c:2194: 		qwhat();
 	call	qwhat		#
-# basic.c:2190: 		return;
-	j	.L441		#
-.L451:
-# basic.c:2193: 	line((int)x1, (int)y1, (int)x2, (int)y2, (int)c);
+# basic.c:2195: 		return;
+	j	.L442		#
+.L452:
+# basic.c:2198: 	line((int)x1, (int)y1, (int)x2, (int)y2, (int)c);
 	ld.w	r0, [r13 + (-20)]	# tmp75, x1
 	st.w	[sp], r0	#, tmp75
 	call	__fixsfsi		#
@@ -7744,8 +7765,8 @@ exec_line:
 	st.w	[r0 + (4)], r7	#, _23
 	st.w	[r0], r6	#, _22
 	call	line		#
-.L441:
-# basic.c:2194: }
+.L442:
+# basic.c:2199: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 16 #111	#,
 	mov.w	sp, r12	#,
@@ -7767,144 +7788,144 @@ exec_circle:
 	push	r7		#
 	push	r8		#
 	sub.w	sp, 40 #111	#,
-# basic.c:2201: 	ignore_blanks();
+# basic.c:2206: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2202: 	expression_error = 0;
+# basic.c:2207: 	expression_error = 0;
 	xor.w	r0, r0	# tmp46
 	st.b	[expression_error], r0	# expression_error, tmp46
-# basic.c:2203: 	x = expression();	
+# basic.c:2208: 	x = expression();	
 	call	expression		#
 	st.w	[r13 + (-16)], r0	# x,
-# basic.c:2204: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.426_1, expression_error
-# basic.c:2204: 	if (expression_error)
-	sex.b	r1, r0	# tmp47, expression_error.426_1
+# basic.c:2209: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.428_1, expression_error
+# basic.c:2209: 	if (expression_error)
+	sex.b	r1, r0	# tmp47, expression_error.428_1
 	xor.w	r0, r0	# tmp48
 	cmp.w	r1, r0	# tmp47, tmp48
-	jz	.L453		#
-# basic.c:2206: 		qwhat();
+	jz	.L454		#
+# basic.c:2211: 		qwhat();
 	call	qwhat		#
-# basic.c:2207: 		return;
-	j	.L452		#
-.L453:
-# basic.c:2209: 	ignore_blanks();
+# basic.c:2212: 		return;
+	j	.L453		#
+.L454:
+# basic.c:2214: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2210: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.427_2, txtpos
-	ld.b	r0, [r0]	# _3, *txtpos.427_2
-# basic.c:2210: 	if (*txtpos != ',')
+# basic.c:2215: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.429_2, txtpos
+	ld.b	r0, [r0]	# _3, *txtpos.429_2
+# basic.c:2215: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp49, _3
 	mov.w	r0, 44	# tmp50,
 	cmp.w	r1, r0	# tmp49, tmp50
-	jz	.L455		#
-# basic.c:2212: 		qwhat();
+	jz	.L456		#
+# basic.c:2217: 		qwhat();
 	call	qwhat		#
-# basic.c:2213: 		return;
-	j	.L452		#
-.L455:
-# basic.c:2217: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.428_4, txtpos
+# basic.c:2218: 		return;
+	j	.L453		#
+.L456:
+# basic.c:2222: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.430_4, txtpos
 	add.w	r0, 1 #111	# _5,
 	st.w	[txtpos], r0	# txtpos, _5
-# basic.c:2219: 	ignore_blanks();
+# basic.c:2224: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2220: 	expression_error = 0;
+# basic.c:2225: 	expression_error = 0;
 	xor.w	r0, r0	# tmp51
 	st.b	[expression_error], r0	# expression_error, tmp51
-# basic.c:2221: 	y = expression();	
+# basic.c:2226: 	y = expression();	
 	call	expression		#
 	st.w	[r13 + (-20)], r0	# y,
-# basic.c:2222: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.429_6, expression_error
-# basic.c:2222: 	if (expression_error)
-	sex.b	r1, r0	# tmp52, expression_error.429_6
+# basic.c:2227: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.431_6, expression_error
+# basic.c:2227: 	if (expression_error)
+	sex.b	r1, r0	# tmp52, expression_error.431_6
 	xor.w	r0, r0	# tmp53
 	cmp.w	r1, r0	# tmp52, tmp53
-	jz	.L456		#
-# basic.c:2224: 		qwhat();
+	jz	.L457		#
+# basic.c:2229: 		qwhat();
 	call	qwhat		#
-# basic.c:2225: 		return;
-	j	.L452		#
-.L456:
-# basic.c:2227: 	ignore_blanks();
+# basic.c:2230: 		return;
+	j	.L453		#
+.L457:
+# basic.c:2232: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2228: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.430_7, txtpos
-	ld.b	r0, [r0]	# _8, *txtpos.430_7
-# basic.c:2228: 	if (*txtpos != ',')
+# basic.c:2233: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.432_7, txtpos
+	ld.b	r0, [r0]	# _8, *txtpos.432_7
+# basic.c:2233: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp54, _8
 	mov.w	r0, 44	# tmp55,
 	cmp.w	r1, r0	# tmp54, tmp55
-	jz	.L457		#
-# basic.c:2230: 		qwhat();
+	jz	.L458		#
+# basic.c:2235: 		qwhat();
 	call	qwhat		#
-# basic.c:2231: 		return;
-	j	.L452		#
-.L457:
-# basic.c:2235: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.431_9, txtpos
+# basic.c:2236: 		return;
+	j	.L453		#
+.L458:
+# basic.c:2240: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.433_9, txtpos
 	add.w	r0, 1 #111	# _10,
 	st.w	[txtpos], r0	# txtpos, _10
-# basic.c:2237: 	ignore_blanks();
+# basic.c:2242: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2238: 	expression_error = 0;
+# basic.c:2243: 	expression_error = 0;
 	xor.w	r0, r0	# tmp56
 	st.b	[expression_error], r0	# expression_error, tmp56
-# basic.c:2239: 	r = expression();	
+# basic.c:2244: 	r = expression();	
 	call	expression		#
 	st.w	[r13 + (-24)], r0	# r,
-# basic.c:2240: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.432_11, expression_error
-# basic.c:2240: 	if (expression_error)
-	sex.b	r1, r0	# tmp57, expression_error.432_11
+# basic.c:2245: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.434_11, expression_error
+# basic.c:2245: 	if (expression_error)
+	sex.b	r1, r0	# tmp57, expression_error.434_11
 	xor.w	r0, r0	# tmp58
 	cmp.w	r1, r0	# tmp57, tmp58
-	jz	.L458		#
-# basic.c:2242: 		qwhat();
+	jz	.L459		#
+# basic.c:2247: 		qwhat();
 	call	qwhat		#
-# basic.c:2243: 		return;
-	j	.L452		#
-.L458:
-# basic.c:2245: 	ignore_blanks();
+# basic.c:2248: 		return;
+	j	.L453		#
+.L459:
+# basic.c:2250: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2246: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.433_12, txtpos
-	ld.b	r0, [r0]	# _13, *txtpos.433_12
-# basic.c:2246: 	if (*txtpos != ',')
+# basic.c:2251: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.435_12, txtpos
+	ld.b	r0, [r0]	# _13, *txtpos.435_12
+# basic.c:2251: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp59, _13
 	mov.w	r0, 44	# tmp60,
 	cmp.w	r1, r0	# tmp59, tmp60
-	jz	.L459		#
-# basic.c:2248: 		qwhat();
+	jz	.L460		#
+# basic.c:2253: 		qwhat();
 	call	qwhat		#
-# basic.c:2249: 		return;
-	j	.L452		#
-.L459:
-# basic.c:2253: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.434_14, txtpos
+# basic.c:2254: 		return;
+	j	.L453		#
+.L460:
+# basic.c:2258: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.436_14, txtpos
 	add.w	r0, 1 #111	# _15,
 	st.w	[txtpos], r0	# txtpos, _15
-# basic.c:2255: 	ignore_blanks();
+# basic.c:2260: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2256: 	expression_error = 0;
+# basic.c:2261: 	expression_error = 0;
 	xor.w	r0, r0	# tmp61
 	st.b	[expression_error], r0	# expression_error, tmp61
-# basic.c:2257: 	c = expression();	
+# basic.c:2262: 	c = expression();	
 	call	expression		#
 	st.w	[r13 + (-28)], r0	# c,
-# basic.c:2258: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.435_16, expression_error
-# basic.c:2258: 	if (expression_error)
-	sex.b	r1, r0	# tmp62, expression_error.435_16
+# basic.c:2263: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.437_16, expression_error
+# basic.c:2263: 	if (expression_error)
+	sex.b	r1, r0	# tmp62, expression_error.437_16
 	xor.w	r0, r0	# tmp63
 	cmp.w	r1, r0	# tmp62, tmp63
-	jz	.L460		#
-# basic.c:2260: 		qwhat();
+	jz	.L461		#
+# basic.c:2265: 		qwhat();
 	call	qwhat		#
-# basic.c:2261: 		return;
-	j	.L452		#
-.L460:
-# basic.c:2264: 	circle((int)x, (int)y, (int)r, (int)c);
+# basic.c:2266: 		return;
+	j	.L453		#
+.L461:
+# basic.c:2269: 	circle((int)x, (int)y, (int)r, (int)c);
 	ld.w	r0, [r13 + (-16)]	# tmp64, x
 	st.w	[sp], r0	#, tmp64
 	call	__fixsfsi		#
@@ -7927,8 +7948,8 @@ exec_circle:
 	st.w	[r0 + (4)], r7	#, _18
 	st.w	[r0], r6	#, _17
 	call	circle		#
-.L452:
-# basic.c:2265: }
+.L453:
+# basic.c:2270: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 12 #111	#,
 	mov.w	sp, r12	#,
@@ -7948,220 +7969,220 @@ exec_draw:
 	push	r6		#
 	push	r7		#
 	sub.w	sp, 140 #111	#,
-# basic.c:2273: 	ignore_blanks();
+# basic.c:2278: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2274: 	expression_error = 0;
+# basic.c:2279: 	expression_error = 0;
 	xor.w	r0, r0	# tmp63
 	st.b	[expression_error], r0	# expression_error, tmp63
-# basic.c:2275: 	x = expression();	
+# basic.c:2280: 	x = expression();	
 	call	expression		#
 	st.w	[r13 + (-16)], r0	# x,
-# basic.c:2276: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.436_1, expression_error
-# basic.c:2276: 	if (expression_error)
-	sex.b	r1, r0	# tmp64, expression_error.436_1
+# basic.c:2281: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.438_1, expression_error
+# basic.c:2281: 	if (expression_error)
+	sex.b	r1, r0	# tmp64, expression_error.438_1
 	xor.w	r0, r0	# tmp65
 	cmp.w	r1, r0	# tmp64, tmp65
-	jz	.L462		#
-# basic.c:2278: 		qwhat();
+	jz	.L463		#
+# basic.c:2283: 		qwhat();
 	call	qwhat		#
-# basic.c:2279: 		return;
-	j	.L461		#
-.L462:
-# basic.c:2281: 	ignore_blanks();
+# basic.c:2284: 		return;
+	j	.L462		#
+.L463:
+# basic.c:2286: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2282: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.437_2, txtpos
-	ld.b	r0, [r0]	# _3, *txtpos.437_2
-# basic.c:2282: 	if (*txtpos != ',')
+# basic.c:2287: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.439_2, txtpos
+	ld.b	r0, [r0]	# _3, *txtpos.439_2
+# basic.c:2287: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp66, _3
 	mov.w	r0, 44	# tmp67,
 	cmp.w	r1, r0	# tmp66, tmp67
-	jz	.L464		#
-# basic.c:2284: 		qwhat();
+	jz	.L465		#
+# basic.c:2289: 		qwhat();
 	call	qwhat		#
-# basic.c:2285: 		return;
-	j	.L461		#
-.L464:
-# basic.c:2289: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.438_4, txtpos
+# basic.c:2290: 		return;
+	j	.L462		#
+.L465:
+# basic.c:2294: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.440_4, txtpos
 	add.w	r0, 1 #111	# _5,
 	st.w	[txtpos], r0	# txtpos, _5
-# basic.c:2291: 	ignore_blanks();
+# basic.c:2296: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2292: 	expression_error = 0;
+# basic.c:2297: 	expression_error = 0;
 	xor.w	r0, r0	# tmp68
 	st.b	[expression_error], r0	# expression_error, tmp68
-# basic.c:2293: 	y = expression();	
+# basic.c:2298: 	y = expression();	
 	call	expression		#
 	st.w	[r13 + (-20)], r0	# y,
-# basic.c:2294: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.439_6, expression_error
-# basic.c:2294: 	if (expression_error)
-	sex.b	r1, r0	# tmp69, expression_error.439_6
+# basic.c:2299: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.441_6, expression_error
+# basic.c:2299: 	if (expression_error)
+	sex.b	r1, r0	# tmp69, expression_error.441_6
 	xor.w	r0, r0	# tmp70
 	cmp.w	r1, r0	# tmp69, tmp70
-	jz	.L465		#
-# basic.c:2296: 		qwhat();
+	jz	.L466		#
+# basic.c:2301: 		qwhat();
 	call	qwhat		#
-# basic.c:2297: 		return;
-	j	.L461		#
-.L465:
-# basic.c:2299: 	ignore_blanks();
+# basic.c:2302: 		return;
+	j	.L462		#
+.L466:
+# basic.c:2304: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2300: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.440_7, txtpos
-	ld.b	r0, [r0]	# _8, *txtpos.440_7
-# basic.c:2300: 	if (*txtpos != ',')
+# basic.c:2305: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.442_7, txtpos
+	ld.b	r0, [r0]	# _8, *txtpos.442_7
+# basic.c:2305: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp71, _8
 	mov.w	r0, 44	# tmp72,
 	cmp.w	r1, r0	# tmp71, tmp72
-	jz	.L466		#
-# basic.c:2302: 		qwhat();
+	jz	.L467		#
+# basic.c:2307: 		qwhat();
 	call	qwhat		#
-# basic.c:2303: 		return;
-	j	.L461		#
-.L466:
-# basic.c:2307: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.441_9, txtpos
+# basic.c:2308: 		return;
+	j	.L462		#
+.L467:
+# basic.c:2312: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.443_9, txtpos
 	add.w	r0, 1 #111	# _10,
 	st.w	[txtpos], r0	# txtpos, _10
-# basic.c:2309: 	ignore_blanks();
+# basic.c:2314: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2310: 	expression_error = 0;
+# basic.c:2315: 	expression_error = 0;
 	xor.w	r0, r0	# tmp73
 	st.b	[expression_error], r0	# expression_error, tmp73
-# basic.c:2311: 	c = expression();	
+# basic.c:2316: 	c = expression();	
 	call	expression		#
 	st.w	[r13 + (-24)], r0	# c,
-# basic.c:2312: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.442_11, expression_error
-# basic.c:2312: 	if (expression_error)
-	sex.b	r1, r0	# tmp74, expression_error.442_11
+# basic.c:2317: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.444_11, expression_error
+# basic.c:2317: 	if (expression_error)
+	sex.b	r1, r0	# tmp74, expression_error.444_11
 	xor.w	r0, r0	# tmp75
 	cmp.w	r1, r0	# tmp74, tmp75
-	jz	.L467		#
-# basic.c:2314: 		qwhat();
+	jz	.L468		#
+# basic.c:2319: 		qwhat();
 	call	qwhat		#
-# basic.c:2315: 		return;
-	j	.L461		#
-.L467:
-# basic.c:2317: 	ignore_blanks();
+# basic.c:2320: 		return;
+	j	.L462		#
+.L468:
+# basic.c:2322: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2318: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.443_12, txtpos
-	ld.b	r0, [r0]	# _13, *txtpos.443_12
-# basic.c:2318: 	if (*txtpos != ',')
+# basic.c:2323: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.445_12, txtpos
+	ld.b	r0, [r0]	# _13, *txtpos.445_12
+# basic.c:2323: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp76, _13
 	mov.w	r0, 44	# tmp77,
 	cmp.w	r1, r0	# tmp76, tmp77
-	jz	.L468		#
-# basic.c:2320: 		qwhat();
+	jz	.L469		#
+# basic.c:2325: 		qwhat();
 	call	qwhat		#
-# basic.c:2321: 		return;
-	j	.L461		#
-.L468:
-# basic.c:2325: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.444_14, txtpos
+# basic.c:2326: 		return;
+	j	.L462		#
+.L469:
+# basic.c:2330: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.446_14, txtpos
 	add.w	r0, 1 #111	# _15,
 	st.w	[txtpos], r0	# txtpos, _15
-# basic.c:2327: 	ignore_blanks();
+# basic.c:2332: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2328: 	if (*txtpos != '"' && *txtpos != '\'')
-	ld.w	r0, [txtpos]	# txtpos.445_16, txtpos
-	ld.b	r0, [r0]	# _17, *txtpos.445_16
-# basic.c:2328: 	if (*txtpos != '"' && *txtpos != '\'')
+# basic.c:2333: 	if (*txtpos != '"' && *txtpos != '\'')
+	ld.w	r0, [txtpos]	# txtpos.447_16, txtpos
+	ld.b	r0, [r0]	# _17, *txtpos.447_16
+# basic.c:2333: 	if (*txtpos != '"' && *txtpos != '\'')
 	zex.b	r1, r0	# tmp78, _17
 	mov.w	r0, 34	# tmp79,
 	cmp.w	r1, r0	# tmp78, tmp79
-	jz	.L469		#
-# basic.c:2328: 	if (*txtpos != '"' && *txtpos != '\'')
-	ld.w	r0, [txtpos]	# txtpos.446_18, txtpos
-	ld.b	r0, [r0]	# _19, *txtpos.446_18
-# basic.c:2328: 	if (*txtpos != '"' && *txtpos != '\'')
+	jz	.L470		#
+# basic.c:2333: 	if (*txtpos != '"' && *txtpos != '\'')
+	ld.w	r0, [txtpos]	# txtpos.448_18, txtpos
+	ld.b	r0, [r0]	# _19, *txtpos.448_18
+# basic.c:2333: 	if (*txtpos != '"' && *txtpos != '\'')
 	zex.b	r1, r0	# tmp80, _19
 	mov.w	r0, 39	# tmp81,
 	cmp.w	r1, r0	# tmp80, tmp81
-	jz	.L469		#
-# basic.c:2330: 		qwhat();
+	jz	.L470		#
+# basic.c:2335: 		qwhat();
 	call	qwhat		#
-# basic.c:2331: 		return;
-	j	.L461		#
-.L469:
-# basic.c:2333: 	txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.447_20, txtpos
+# basic.c:2336: 		return;
+	j	.L462		#
+.L470:
+# basic.c:2338: 	txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.449_20, txtpos
 	add.w	r0, 1 #111	# _21,
 	st.w	[txtpos], r0	# txtpos, _21
-# basic.c:2334: 	i = 0;
+# basic.c:2339: 	i = 0;
 	xor.w	r0, r0	# tmp82
 	st.w	[r13 + (-12)], r0	# i, tmp82
-# basic.c:2335: 	while (*txtpos != NL && *txtpos != 0)
-	j	.L470		#
-.L474:
-# basic.c:2337: 		if (*txtpos == '"' || *txtpos == '\'')
-	ld.w	r0, [txtpos]	# txtpos.448_22, txtpos
-	ld.b	r0, [r0]	# _23, *txtpos.448_22
-# basic.c:2337: 		if (*txtpos == '"' || *txtpos == '\'')
+# basic.c:2340: 	while (*txtpos != NL && *txtpos != 0)
+	j	.L471		#
+.L475:
+# basic.c:2342: 		if (*txtpos == '"' || *txtpos == '\'')
+	ld.w	r0, [txtpos]	# txtpos.450_22, txtpos
+	ld.b	r0, [r0]	# _23, *txtpos.450_22
+# basic.c:2342: 		if (*txtpos == '"' || *txtpos == '\'')
 	zex.b	r1, r0	# tmp83, _23
 	mov.w	r0, 34	# tmp84,
 	cmp.w	r1, r0	# tmp83, tmp84
-	jz	.L471		#
-# basic.c:2337: 		if (*txtpos == '"' || *txtpos == '\'')
-	ld.w	r0, [txtpos]	# txtpos.449_24, txtpos
-	ld.b	r0, [r0]	# _25, *txtpos.449_24
-# basic.c:2337: 		if (*txtpos == '"' || *txtpos == '\'')
+	jz	.L472		#
+# basic.c:2342: 		if (*txtpos == '"' || *txtpos == '\'')
+	ld.w	r0, [txtpos]	# txtpos.451_24, txtpos
+	ld.b	r0, [r0]	# _25, *txtpos.451_24
+# basic.c:2342: 		if (*txtpos == '"' || *txtpos == '\'')
 	zex.b	r1, r0	# tmp85, _25
 	mov.w	r0, 39	# tmp86,
 	cmp.w	r1, r0	# tmp85, tmp86
-	jnz	.L472		#
-.L471:
-# basic.c:2339: 			s[i] = 0;
+	jnz	.L473		#
+.L472:
+# basic.c:2344: 			s[i] = 0;
 	mov.w	r0, r13	# tmp87,
 	add.w	r0, -124 #111	# tmp87,
 	ld.w	r1, [r13 + (-12)]	# tmp89, i
 	add.w	r0, r1 #222	# tmp88, tmp89
 	xor.w	r1, r1	# tmp90
 	st.b	[r0], r1	# s, tmp90
-# basic.c:2340: 			break;
-	j	.L473		#
-.L472:
-# basic.c:2342: 		s[i] = *txtpos;
-	ld.w	r0, [txtpos]	# txtpos.450_26, txtpos
-	ld.b	r0, [r0]	# _27, *txtpos.450_26
+# basic.c:2345: 			break;
+	j	.L474		#
+.L473:
+# basic.c:2347: 		s[i] = *txtpos;
+	ld.w	r0, [txtpos]	# txtpos.452_26, txtpos
+	ld.b	r0, [r0]	# _27, *txtpos.452_26
 	mov.w	r1, r0	# _28, _27
-# basic.c:2342: 		s[i] = *txtpos;
+# basic.c:2347: 		s[i] = *txtpos;
 	mov.w	r0, r13	# tmp91,
 	add.w	r0, -124 #111	# tmp91,
 	ld.w	r2, [r13 + (-12)]	# tmp93, i
 	add.w	r0, r2 #222	# tmp92, tmp93
 	st.b	[r0], r1	# s, _28
-# basic.c:2343: 		i++;
+# basic.c:2348: 		i++;
 	ld.w	r0, [r13 + (-12)]	# tmp95, i
 	add.w	r0, 1 #111	# tmp94,
 	st.w	[r13 + (-12)], r0	# i, tmp94
-# basic.c:2344: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.451_29, txtpos
+# basic.c:2349: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.453_29, txtpos
 	add.w	r0, 1 #111	# _30,
 	st.w	[txtpos], r0	# txtpos, _30
-.L470:
-# basic.c:2335: 	while (*txtpos != NL && *txtpos != 0)
-	ld.w	r0, [txtpos]	# txtpos.452_31, txtpos
-	ld.b	r0, [r0]	# _32, *txtpos.452_31
-# basic.c:2335: 	while (*txtpos != NL && *txtpos != 0)
+.L471:
+# basic.c:2340: 	while (*txtpos != NL && *txtpos != 0)
+	ld.w	r0, [txtpos]	# txtpos.454_31, txtpos
+	ld.b	r0, [r0]	# _32, *txtpos.454_31
+# basic.c:2340: 	while (*txtpos != NL && *txtpos != 0)
 	zex.b	r1, r0	# tmp96, _32
 	mov.w	r0, 10	# tmp97,
 	cmp.w	r1, r0	# tmp96, tmp97
-	jz	.L473		#
-# basic.c:2335: 	while (*txtpos != NL && *txtpos != 0)
-	ld.w	r0, [txtpos]	# txtpos.453_33, txtpos
-	ld.b	r0, [r0]	# _34, *txtpos.453_33
-# basic.c:2335: 	while (*txtpos != NL && *txtpos != 0)
+	jz	.L474		#
+# basic.c:2340: 	while (*txtpos != NL && *txtpos != 0)
+	ld.w	r0, [txtpos]	# txtpos.455_33, txtpos
+	ld.b	r0, [r0]	# _34, *txtpos.455_33
+# basic.c:2340: 	while (*txtpos != NL && *txtpos != 0)
 	zex.b	r1, r0	# tmp98, _34
 	xor.w	r0, r0	# tmp99
 	cmp.w	r1, r0	# tmp98, tmp99
-	jnz	.L474		#
-.L473:
-# basic.c:2346: 	draw((int)x, (int)y, (int)c, s);
+	jnz	.L475		#
+.L474:
+# basic.c:2351: 	draw((int)x, (int)y, (int)c, s);
 	ld.w	r0, [r13 + (-16)]	# tmp100, x
 	st.w	[sp], r0	#, tmp100
 	call	__fixsfsi		#
@@ -8182,8 +8203,8 @@ exec_draw:
 	st.w	[r0 + (4)], r7	#, _36
 	st.w	[r0], r6	#, _35
 	call	draw		#
-.L461:
-# basic.c:2347: }
+.L462:
+# basic.c:2352: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 8 #111	#,
 	mov.w	sp, r12	#,
@@ -8289,152 +8310,152 @@ exec_help:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:2351: 	printf("END\n");
+# basic.c:2356: 	printf("END\n");
 	mov.w	r1, sp	# tmp26,
 	mov.w	r0, .LC37	# tmp27,
 	st.w	[r1], r0	#, tmp27
 	call	puts		#
-# basic.c:2352: 	printf("MEM\n");
+# basic.c:2357: 	printf("MEM\n");
 	mov.w	r1, sp	# tmp28,
 	mov.w	r0, .LC38	# tmp29,
 	st.w	[r1], r0	#, tmp29
 	call	puts		#
-# basic.c:2353: 	printf("LET I = 5\n");
+# basic.c:2358: 	printf("LET I = 5\n");
 	mov.w	r1, sp	# tmp30,
 	mov.w	r0, .LC39	# tmp31,
 	st.w	[r1], r0	#, tmp31
 	call	puts		#
-# basic.c:2354: 	printf("I = 5\n");
+# basic.c:2359: 	printf("I = 5\n");
 	mov.w	r1, sp	# tmp32,
 	mov.w	r0, .LC40	# tmp33,
 	st.w	[r1], r0	#, tmp33
 	call	puts		#
-# basic.c:2355: 	printf("INPUT A\n");
+# basic.c:2360: 	printf("INPUT A\n");
 	mov.w	r1, sp	# tmp34,
 	mov.w	r0, .LC41	# tmp35,
 	st.w	[r1], r0	#, tmp35
 	call	puts		#
-# basic.c:2356: 	printf("PRINT A\n");
+# basic.c:2361: 	printf("PRINT A\n");
 	mov.w	r1, sp	# tmp36,
 	mov.w	r0, .LC42	# tmp37,
 	st.w	[r1], r0	#, tmp37
 	call	puts		#
-# basic.c:2357: 	printf("? A\n");
+# basic.c:2362: 	printf("? A\n");
 	mov.w	r1, sp	# tmp38,
 	mov.w	r0, .LC43	# tmp39,
 	st.w	[r1], r0	#, tmp39
 	call	puts		#
-# basic.c:2358: 	printf("FOR I = 1 TO 10 STEP 2\n");
+# basic.c:2363: 	printf("FOR I = 1 TO 10 STEP 2\n");
 	mov.w	r1, sp	# tmp40,
 	mov.w	r0, .LC44	# tmp41,
 	st.w	[r1], r0	#, tmp41
 	call	puts		#
-# basic.c:2359: 	printf("NEXT I\n");
+# basic.c:2364: 	printf("NEXT I\n");
 	mov.w	r1, sp	# tmp42,
 	mov.w	r0, .LC45	# tmp43,
 	st.w	[r1], r0	#, tmp43
 	call	puts		#
-# basic.c:2360: 	printf("IF I = 5 GOTO 100\n");
+# basic.c:2365: 	printf("IF I = 5 GOTO 100\n");
 	mov.w	r1, sp	# tmp44,
 	mov.w	r0, .LC46	# tmp45,
 	st.w	[r1], r0	#, tmp45
 	call	puts		#
-# basic.c:2361: 	printf("GOTO 100\n");
+# basic.c:2366: 	printf("GOTO 100\n");
 	mov.w	r1, sp	# tmp46,
 	mov.w	r0, .LC47	# tmp47,
 	st.w	[r1], r0	#, tmp47
 	call	puts		#
-# basic.c:2362: 	printf("GOSUB 100\n");
+# basic.c:2367: 	printf("GOSUB 100\n");
 	mov.w	r1, sp	# tmp48,
 	mov.w	r0, .LC48	# tmp49,
 	st.w	[r1], r0	#, tmp49
 	call	puts		#
-# basic.c:2363: 	printf("RETURN\n");
+# basic.c:2368: 	printf("RETURN\n");
 	mov.w	r1, sp	# tmp50,
 	mov.w	r0, .LC49	# tmp51,
 	st.w	[r1], r0	#, tmp51
 	call	puts		#
-# basic.c:2364: 	printf("LOAD P1.BAS\n");
+# basic.c:2369: 	printf("LOAD P1.BAS\n");
 	mov.w	r1, sp	# tmp52,
 	mov.w	r0, .LC50	# tmp53,
 	st.w	[r1], r0	#, tmp53
 	call	puts		#
-# basic.c:2365: 	printf("SAVE P2.BAS\n");
+# basic.c:2370: 	printf("SAVE P2.BAS\n");
 	mov.w	r1, sp	# tmp54,
 	mov.w	r0, .LC51	# tmp55,
 	st.w	[r1], r0	#, tmp55
 	call	puts		#
-# basic.c:2366: 	printf("MODE 0 (MODE 1, MODE 2)\n");
+# basic.c:2371: 	printf("MODE 0 (MODE 1, MODE 2)\n");
 	mov.w	r1, sp	# tmp56,
 	mov.w	r0, .LC52	# tmp57,
 	st.w	[r1], r0	#, tmp57
 	call	puts		#
-# basic.c:2367: 	printf("PLOT 100, 100, color\n");
+# basic.c:2372: 	printf("PLOT 100, 100, color\n");
 	mov.w	r1, sp	# tmp58,
 	mov.w	r0, .LC53	# tmp59,
 	st.w	[r1], r0	#, tmp59
 	call	puts		#
-# basic.c:2368: 	printf("LINE 100, 100, 200, 200, color\n");
+# basic.c:2373: 	printf("LINE 100, 100, 200, 200, color\n");
 	mov.w	r1, sp	# tmp60,
 	mov.w	r0, .LC54	# tmp61,
 	st.w	[r1], r0	#, tmp61
 	call	puts		#
-# basic.c:2369: 	printf("CIRCLE 100, 100, 50, color\n");
+# basic.c:2374: 	printf("CIRCLE 100, 100, 50, color\n");
 	mov.w	r1, sp	# tmp62,
 	mov.w	r0, .LC55	# tmp63,
 	st.w	[r1], r0	#, tmp63
 	call	puts		#
-# basic.c:2370: 	printf("DRAW 100, 100, color, 'TEXT'\n");
+# basic.c:2375: 	printf("DRAW 100, 100, color, 'TEXT'\n");
 	mov.w	r1, sp	# tmp64,
 	mov.w	r0, .LC56	# tmp65,
 	st.w	[r1], r0	#, tmp65
 	call	puts		#
-# basic.c:2371: 	printf("A = KEY()\n");
+# basic.c:2376: 	printf("A = KEY()\n");
 	mov.w	r1, sp	# tmp66,
 	mov.w	r0, .LC57	# tmp67,
 	st.w	[r1], r0	#, tmp67
 	call	puts		#
-# basic.c:2372: 	printf("A = ISKEY()\n");
+# basic.c:2377: 	printf("A = ISKEY()\n");
 	mov.w	r1, sp	# tmp68,
 	mov.w	r0, .LC58	# tmp69,
 	st.w	[r1], r0	#, tmp69
 	call	puts		#
-# basic.c:2373: 	printf("DELAY 1000\n");
+# basic.c:2378: 	printf("DELAY 1000\n");
 	mov.w	r1, sp	# tmp70,
 	mov.w	r0, .LC59	# tmp71,
 	st.w	[r1], r0	#, tmp71
 	call	puts		#
-# basic.c:2374: 	printf("CURSOR 10, 10\n");
+# basic.c:2379: 	printf("CURSOR 10, 10\n");
 	mov.w	r1, sp	# tmp72,
 	mov.w	r0, .LC60	# tmp73,
 	st.w	[r1], r0	#, tmp73
 	call	puts		#
-# basic.c:2375: 	printf("EXEC TEST.BIN\n");
+# basic.c:2380: 	printf("EXEC TEST.BIN\n");
 	mov.w	r1, sp	# tmp74,
 	mov.w	r0, .LC61	# tmp75,
 	st.w	[r1], r0	#, tmp75
 	call	puts		#
-# basic.c:2376: 	printf("SYS 0\n");
+# basic.c:2381: 	printf("SYS 0\n");
 	mov.w	r1, sp	# tmp76,
 	mov.w	r0, .LC62	# tmp77,
 	st.w	[r1], r0	#, tmp77
 	call	puts		#
-# basic.c:2377: 	printf("DRIVE 0 (SD) or DRIVE 1 (ETHERNET) or DRIVE 2 (UART)\n");
+# basic.c:2382: 	printf("DRIVE 0 (SD) or DRIVE 1 (ETHERNET) or DRIVE 2 (UART)\n");
 	mov.w	r1, sp	# tmp78,
 	mov.w	r0, .LC63	# tmp79,
 	st.w	[r1], r0	#, tmp79
 	call	puts		#
-# basic.c:2378: 	printf("TIME\n");
+# basic.c:2383: 	printf("TIME\n");
 	mov.w	r1, sp	# tmp80,
 	mov.w	r0, .LC64	# tmp81,
 	st.w	[r1], r0	#, tmp81
 	call	puts		#
-# basic.c:2379: 	printf("ETH 1 or ETH 0\n");
+# basic.c:2384: 	printf("ETH 1 or ETH 0\n");
 	mov.w	r1, sp	# tmp82,
 	mov.w	r0, .LC65	# tmp83,
 	st.w	[r1], r0	#, tmp83
 	call	puts		#
-# basic.c:2380: }
+# basic.c:2385: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -8447,27 +8468,27 @@ exec_delay:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# basic.c:2386: 	ignore_blanks();
+# basic.c:2391: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2387: 	expression_error = 0;
+# basic.c:2392: 	expression_error = 0;
 	xor.w	r0, r0	# tmp28
 	st.b	[expression_error], r0	# expression_error, tmp28
-# basic.c:2388: 	d = expression();	
+# basic.c:2393: 	d = expression();	
 	call	expression		#
 	st.w	[r13 + (-4)], r0	# d,
-# basic.c:2389: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.454_1, expression_error
-# basic.c:2389: 	if (expression_error)
-	sex.b	r1, r0	# tmp29, expression_error.454_1
+# basic.c:2394: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.456_1, expression_error
+# basic.c:2394: 	if (expression_error)
+	sex.b	r1, r0	# tmp29, expression_error.456_1
 	xor.w	r0, r0	# tmp30
 	cmp.w	r1, r0	# tmp29, tmp30
-	jz	.L478		#
-# basic.c:2391: 		qwhat();
+	jz	.L479		#
+# basic.c:2396: 		qwhat();
 	call	qwhat		#
-# basic.c:2392: 		return;
-	j	.L477		#
-.L478:
-# basic.c:2394: 	if (d <= 0)
+# basic.c:2397: 		return;
+	j	.L478		#
+.L479:
+# basic.c:2399: 	if (d <= 0)
 	xor.w	r0, r0	# tmp31
 	st.w	[sp + (4)], r0	#, tmp31
 	ld.w	r0, [r13 + (-4)]	# tmp32, d
@@ -8476,8 +8497,8 @@ exec_delay:
 	mov.w	r1, r0	# tmp33,
 	xor.w	r0, r0	# tmp34
 	cmp.w	r1, r0	# tmp33, tmp34
-	jses	.L482		#
-# basic.c:2396: 	delay((int)d);
+	jses	.L483		#
+# basic.c:2401: 	delay((int)d);
 	ld.w	r0, [r13 + (-4)]	# tmp35, d
 	st.w	[sp], r0	#, tmp35
 	call	__fixsfsi		#
@@ -8485,12 +8506,12 @@ exec_delay:
 	mov.w	r0, sp	# tmp36,
 	st.w	[r0], r1	#, _2
 	call	delay		#
-	j	.L477		#
-.L482:
-# basic.c:2395: 		return;
+	j	.L478		#
+.L483:
+# basic.c:2400: 		return;
 	nop	
-.L477:
-# basic.c:2397: }
+.L478:
+# basic.c:2402: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -8503,66 +8524,66 @@ exec_cursor:
 	mov.w	r13, sp	#,
 	push	r6		#
 	sub.w	sp, 32 #111	#,
-# basic.c:2403: 	ignore_blanks();
+# basic.c:2408: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2404: 	expression_error = 0;
+# basic.c:2409: 	expression_error = 0;
 	xor.w	r0, r0	# tmp34
 	st.b	[expression_error], r0	# expression_error, tmp34
-# basic.c:2405: 	x = expression();	
+# basic.c:2410: 	x = expression();	
 	call	expression		#
 	st.w	[r13 + (-8)], r0	# x,
-# basic.c:2406: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.455_1, expression_error
-# basic.c:2406: 	if (expression_error)
-	sex.b	r1, r0	# tmp35, expression_error.455_1
+# basic.c:2411: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.457_1, expression_error
+# basic.c:2411: 	if (expression_error)
+	sex.b	r1, r0	# tmp35, expression_error.457_1
 	xor.w	r0, r0	# tmp36
 	cmp.w	r1, r0	# tmp35, tmp36
-	jz	.L484		#
-# basic.c:2408: 		qwhat();
+	jz	.L485		#
+# basic.c:2413: 		qwhat();
 	call	qwhat		#
-# basic.c:2409: 		return;
-	j	.L483		#
-.L484:
-# basic.c:2411: 	ignore_blanks();
+# basic.c:2414: 		return;
+	j	.L484		#
+.L485:
+# basic.c:2416: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2412: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.456_2, txtpos
-	ld.b	r0, [r0]	# _3, *txtpos.456_2
-# basic.c:2412: 	if (*txtpos != ',')
+# basic.c:2417: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.458_2, txtpos
+	ld.b	r0, [r0]	# _3, *txtpos.458_2
+# basic.c:2417: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp37, _3
 	mov.w	r0, 44	# tmp38,
 	cmp.w	r1, r0	# tmp37, tmp38
-	jz	.L486		#
-# basic.c:2414: 		qwhat();
+	jz	.L487		#
+# basic.c:2419: 		qwhat();
 	call	qwhat		#
-# basic.c:2415: 		return;
-	j	.L483		#
-.L486:
-# basic.c:2419: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.457_4, txtpos
+# basic.c:2420: 		return;
+	j	.L484		#
+.L487:
+# basic.c:2424: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.459_4, txtpos
 	add.w	r0, 1 #111	# _5,
 	st.w	[txtpos], r0	# txtpos, _5
-# basic.c:2421: 	ignore_blanks();
+# basic.c:2426: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2422: 	expression_error = 0;
+# basic.c:2427: 	expression_error = 0;
 	xor.w	r0, r0	# tmp39
 	st.b	[expression_error], r0	# expression_error, tmp39
-# basic.c:2423: 	y = expression();	
+# basic.c:2428: 	y = expression();	
 	call	expression		#
 	st.w	[r13 + (-12)], r0	# y,
-# basic.c:2424: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.458_6, expression_error
-# basic.c:2424: 	if (expression_error)
-	sex.b	r1, r0	# tmp40, expression_error.458_6
+# basic.c:2429: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.460_6, expression_error
+# basic.c:2429: 	if (expression_error)
+	sex.b	r1, r0	# tmp40, expression_error.460_6
 	xor.w	r0, r0	# tmp41
 	cmp.w	r1, r0	# tmp40, tmp41
-	jz	.L487		#
-# basic.c:2426: 		qwhat();
+	jz	.L488		#
+# basic.c:2431: 		qwhat();
 	call	qwhat		#
-# basic.c:2427: 		return;
-	j	.L483		#
-.L487:
-# basic.c:2430: 	xy((int)x, (int)y);
+# basic.c:2432: 		return;
+	j	.L484		#
+.L488:
+# basic.c:2435: 	xy((int)x, (int)y);
 	ld.w	r0, [r13 + (-8)]	# tmp42, x
 	st.w	[sp], r0	#, tmp42
 	call	__fixsfsi		#
@@ -8575,8 +8596,8 @@ exec_cursor:
 	st.w	[r0 + (4)], r1	#, _8
 	st.w	[r0], r6	#, _7
 	call	xy		#
-.L483:
-# basic.c:2431: }
+.L484:
+# basic.c:2436: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
 	mov.w	sp, r12	#,
@@ -8594,85 +8615,85 @@ exec_poke:
 	push	r6		#
 	push	r7		#
 	sub.w	sp, 32 #111	#,
-# basic.c:2437: 	ignore_blanks();
+# basic.c:2442: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2438: 	expression_error = 0;
+# basic.c:2443: 	expression_error = 0;
 	xor.w	r0, r0	# tmp38
 	st.b	[expression_error], r0	# expression_error, tmp38
-# basic.c:2439: 	addr = expression();	
+# basic.c:2444: 	addr = expression();	
 	call	expression		#
 	st.w	[r13 + (-12)], r0	# addr,
-# basic.c:2440: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.459_1, expression_error
-# basic.c:2440: 	if (expression_error)
-	sex.b	r1, r0	# tmp39, expression_error.459_1
+# basic.c:2445: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.461_1, expression_error
+# basic.c:2445: 	if (expression_error)
+	sex.b	r1, r0	# tmp39, expression_error.461_1
 	xor.w	r0, r0	# tmp40
 	cmp.w	r1, r0	# tmp39, tmp40
-	jz	.L489		#
-# basic.c:2442: 		qwhat();
+	jz	.L490		#
+# basic.c:2447: 		qwhat();
 	call	qwhat		#
-# basic.c:2443: 		return;
-	j	.L488		#
-.L489:
-# basic.c:2445: 	ignore_blanks();
+# basic.c:2448: 		return;
+	j	.L489		#
+.L490:
+# basic.c:2450: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2446: 	if (*txtpos != ',')
-	ld.w	r0, [txtpos]	# txtpos.460_2, txtpos
-	ld.b	r0, [r0]	# _3, *txtpos.460_2
-# basic.c:2446: 	if (*txtpos != ',')
+# basic.c:2451: 	if (*txtpos != ',')
+	ld.w	r0, [txtpos]	# txtpos.462_2, txtpos
+	ld.b	r0, [r0]	# _3, *txtpos.462_2
+# basic.c:2451: 	if (*txtpos != ',')
 	zex.b	r1, r0	# tmp41, _3
 	mov.w	r0, 44	# tmp42,
 	cmp.w	r1, r0	# tmp41, tmp42
-	jz	.L491		#
-# basic.c:2448: 		qwhat();
+	jz	.L492		#
+# basic.c:2453: 		qwhat();
 	call	qwhat		#
-# basic.c:2449: 		return;
-	j	.L488		#
-.L491:
-# basic.c:2453: 		txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.461_4, txtpos
+# basic.c:2454: 		return;
+	j	.L489		#
+.L492:
+# basic.c:2458: 		txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.463_4, txtpos
 	add.w	r0, 1 #111	# _5,
 	st.w	[txtpos], r0	# txtpos, _5
-# basic.c:2455: 	ignore_blanks();
+# basic.c:2460: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2456: 	expression_error = 0;
+# basic.c:2461: 	expression_error = 0;
 	xor.w	r0, r0	# tmp43
 	st.b	[expression_error], r0	# expression_error, tmp43
-# basic.c:2457: 	value = expression();	
+# basic.c:2462: 	value = expression();	
 	call	expression		#
 	st.w	[r13 + (-16)], r0	# value,
-# basic.c:2458: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.462_6, expression_error
-# basic.c:2458: 	if (expression_error)
-	sex.b	r1, r0	# tmp44, expression_error.462_6
+# basic.c:2463: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.464_6, expression_error
+# basic.c:2463: 	if (expression_error)
+	sex.b	r1, r0	# tmp44, expression_error.464_6
 	xor.w	r0, r0	# tmp45
 	cmp.w	r1, r0	# tmp44, tmp45
-	jz	.L492		#
-# basic.c:2460: 		qwhat();
+	jz	.L493		#
+# basic.c:2465: 		qwhat();
 	call	qwhat		#
-# basic.c:2461: 		return;
-	j	.L488		#
-.L492:
-# basic.c:2464: 	buffer[(int)addr] = (int)value & 0XFF;
+# basic.c:2466: 		return;
+	j	.L489		#
+.L493:
+# basic.c:2469: 	buffer[(int)addr] = (int)value & 0XFF;
 	ld.w	r0, [r13 + (-16)]	# tmp46, value
 	st.w	[sp], r0	#, tmp46
 	call	__fixsfsi		#
 	mov.w	r7, r0	# _7,
-# basic.c:2464: 	buffer[(int)addr] = (int)value & 0XFF;
-	ld.w	r6, [buffer]	# buffer.463_8, buffer
-# basic.c:2464: 	buffer[(int)addr] = (int)value & 0XFF;
+# basic.c:2469: 	buffer[(int)addr] = (int)value & 0XFF;
+	ld.w	r6, [buffer]	# buffer.465_8, buffer
+# basic.c:2469: 	buffer[(int)addr] = (int)value & 0XFF;
 	ld.w	r0, [r13 + (-12)]	# tmp47, addr
 	st.w	[sp], r0	#, tmp47
 	call	__fixsfsi		#
 	mov.w	r1, r0	# _10, _9
-# basic.c:2464: 	buffer[(int)addr] = (int)value & 0XFF;
-	mov.w	r0, r6	# _11, buffer.463_8
+# basic.c:2469: 	buffer[(int)addr] = (int)value & 0XFF;
+	mov.w	r0, r6	# _11, buffer.465_8
 	add.w	r0, r1 #222	# _11, _10
-# basic.c:2464: 	buffer[(int)addr] = (int)value & 0XFF;
+# basic.c:2469: 	buffer[(int)addr] = (int)value & 0XFF;
 	mov.w	r1, r7	# _12, _7
 	st.b	[r0], r1	# *_11, _12
-.L488:
-# basic.c:2465: }
+.L489:
+# basic.c:2470: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 8 #111	#,
 	mov.w	sp, r12	#,
@@ -8697,38 +8718,38 @@ init_sd:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:2469: 	if(!sdcard_init())
+# basic.c:2474: 	if(!sdcard_init())
 	call	sdcard_init		#
-# basic.c:2469: 	if(!sdcard_init())
+# basic.c:2474: 	if(!sdcard_init())
 	zex.b	r1, r0	# tmp28, _1
 	xor.w	r0, r0	# tmp29
 	cmp.w	r1, r0	# tmp28, tmp29
-	jnz	.L494		#
-# basic.c:2471: 		printf("SD card init failed!\n");
+	jnz	.L495		#
+# basic.c:2476: 		printf("SD card init failed!\n");
 	mov.w	r1, sp	# tmp30,
 	mov.w	r0, .LC66	# tmp31,
 	st.w	[r1], r0	#, tmp31
 	call	puts		#
-# basic.c:2472: 		return;
-	j	.L493		#
-.L494:
-# basic.c:2474: 	if (!volume_init(1))
+# basic.c:2477: 		return;
+	j	.L494		#
+.L495:
+# basic.c:2479: 	if (!volume_init(1))
 	mov.w	r1, sp	# tmp32,
 	mov.w	r0, 1	# tmp33,
 	st.w	[r1], r0	#, tmp33
 	call	volume_init		#
-# basic.c:2474: 	if (!volume_init(1))
+# basic.c:2479: 	if (!volume_init(1))
 	zex.b	r1, r0	# tmp34, _2
 	xor.w	r0, r0	# tmp35
 	cmp.w	r1, r0	# tmp34, tmp35
-	jnz	.L493		#
-# basic.c:2476: 		printf("SD card volume failed!\n");
+	jnz	.L494		#
+# basic.c:2481: 		printf("SD card volume failed!\n");
 	mov.w	r1, sp	# tmp36,
 	mov.w	r0, .LC67	# tmp37,
 	st.w	[r1], r0	#, tmp37
 	call	puts		#
-.L493:
-# basic.c:2478: }
+.L494:
+# basic.c:2483: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -8751,110 +8772,110 @@ exec_exec:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 160 #111	#,
-# basic.c:2485: 	ignore_blanks();
+# basic.c:2490: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2486: 	if (*txtpos < 'A' || *txtpos > 'Z')
-	ld.w	r0, [txtpos]	# txtpos.464_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.464_1
-# basic.c:2486: 	if (*txtpos < 'A' || *txtpos > 'Z')
+# basic.c:2491: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	ld.w	r0, [txtpos]	# txtpos.466_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.466_1
+# basic.c:2491: 	if (*txtpos < 'A' || *txtpos > 'Z')
 	zex.b	r1, r0	# tmp75, _2
 	mov.w	r0, 64	# tmp76,
 	cmp.w	r1, r0	# tmp75, tmp76
-	jse	.L497		#
-# basic.c:2486: 	if (*txtpos < 'A' || *txtpos > 'Z')
-	ld.w	r0, [txtpos]	# txtpos.465_3, txtpos
-	ld.b	r0, [r0]	# _4, *txtpos.465_3
-# basic.c:2486: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	jse	.L498		#
+# basic.c:2491: 	if (*txtpos < 'A' || *txtpos > 'Z')
+	ld.w	r0, [txtpos]	# txtpos.467_3, txtpos
+	ld.b	r0, [r0]	# _4, *txtpos.467_3
+# basic.c:2491: 	if (*txtpos < 'A' || *txtpos > 'Z')
 	zex.b	r1, r0	# tmp77, _4
 	mov.w	r0, 90	# tmp78,
 	cmp.w	r1, r0	# tmp77, tmp78
-	jse	.L498		#
-.L497:
-# basic.c:2488: 		qwhat();
-	call	qwhat		#
-# basic.c:2489: 		return;
-	j	.L496		#
+	jse	.L499		#
 .L498:
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+# basic.c:2493: 		qwhat();
+	call	qwhat		#
+# basic.c:2494: 		return;
+	j	.L497		#
+.L499:
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	xor.w	r0, r0	# tmp79
 	st.w	[r13 + (-4)], r0	# i, tmp79
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
-	j	.L500		#
-.L502:
-# basic.c:2496: 		s[i] = txtpos[i];
-	ld.w	r0, [txtpos]	# txtpos.466_5, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.467_6, i
-	add.w	r0, r1 #222	# _7, i.467_6
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+	j	.L501		#
+.L503:
+# basic.c:2501: 		s[i] = txtpos[i];
+	ld.w	r0, [txtpos]	# txtpos.468_5, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.469_6, i
+	add.w	r0, r1 #222	# _7, i.469_6
 	ld.b	r0, [r0]	# _8, *_7
 	mov.w	r1, r0	# _9, _8
-# basic.c:2496: 		s[i] = txtpos[i];
+# basic.c:2501: 		s[i] = txtpos[i];
 	mov.w	r0, r13	# tmp80,
 	add.w	r0, -60 #111	# tmp80,
 	ld.w	r2, [r13 + (-4)]	# tmp82, i
 	add.w	r0, r2 #222	# tmp81, tmp82
 	st.b	[r0], r1	# s, _9
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	ld.w	r0, [r13 + (-4)]	# tmp84, i
 	add.w	r0, 1 #111	# tmp83,
 	st.w	[r13 + (-4)], r0	# i, tmp83
-.L500:
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.468_10, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.469_11, i
-	add.w	r0, r1 #222	# _12, i.469_11
+.L501:
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.470_10, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.471_11, i
+	add.w	r0, r1 #222	# _12, i.471_11
 	ld.b	r0, [r0]	# _13, *_12
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	zex.b	r1, r0	# tmp85, _13
 	mov.w	r0, 10	# tmp86,
 	cmp.w	r1, r0	# tmp85, tmp86
-	jz	.L501		#
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.470_14, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.471_15, i
-	add.w	r0, r1 #222	# _16, i.471_15
+	jz	.L502		#
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.472_14, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.473_15, i
+	add.w	r0, r1 #222	# _16, i.473_15
 	ld.b	r0, [r0]	# _17, *_16
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	zex.b	r1, r0	# tmp87, _17
 	mov.w	r0, 13	# tmp88,
 	cmp.w	r1, r0	# tmp87, tmp88
-	jz	.L501		#
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.472_18, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.473_19, i
-	add.w	r0, r1 #222	# _20, i.473_19
+	jz	.L502		#
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.474_18, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.475_19, i
+	add.w	r0, r1 #222	# _20, i.475_19
 	ld.b	r0, [r0]	# _21, *_20
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	zex.b	r1, r0	# tmp89, _21
 	mov.w	r0, 32	# tmp90,
 	cmp.w	r1, r0	# tmp89, tmp90
-	jz	.L501		#
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
-	ld.w	r0, [txtpos]	# txtpos.474_22, txtpos
-	ld.w	r1, [r13 + (-4)]	# i.475_23, i
-	add.w	r0, r1 #222	# _24, i.475_23
+	jz	.L502		#
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+	ld.w	r0, [txtpos]	# txtpos.476_22, txtpos
+	ld.w	r1, [r13 + (-4)]	# i.477_23, i
+	add.w	r0, r1 #222	# _24, i.477_23
 	ld.b	r0, [r0]	# _25, *_24
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	zex.b	r1, r0	# tmp91, _25
 	mov.w	r0, 9	# tmp92,
 	cmp.w	r1, r0	# tmp91, tmp92
-	jz	.L501		#
-# basic.c:2493: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
+	jz	.L502		#
+# basic.c:2498: 	for (i = 0; txtpos[i] != NL && txtpos[i] != CR && txtpos[i] != SPACE && txtpos[i] != TAB &&  i < 32; i++)
 	ld.w	r1, [r13 + (-4)]	# tmp93, i
 	mov.w	r0, 31	# tmp94,
 	cmp.w	r1, r0	# tmp93, tmp94
-	jses	.L502		#
-.L501:
-# basic.c:2498: 	s[i] = 0;
+	jses	.L503		#
+.L502:
+# basic.c:2503: 	s[i] = 0;
 	mov.w	r0, r13	# tmp95,
 	add.w	r0, -60 #111	# tmp95,
 	ld.w	r1, [r13 + (-4)]	# tmp97, i
 	add.w	r0, r1 #222	# tmp96, tmp97
 	xor.w	r1, r1	# tmp98
 	st.b	[r0], r1	# s, tmp98
-# basic.c:2500: 	i = 0;
+# basic.c:2505: 	i = 0;
 	xor.w	r0, r0	# tmp99
 	st.w	[r13 + (-4)], r0	# i, tmp99
-# basic.c:2501: 	printf("Loading program: [%s]\n", s);
+# basic.c:2506: 	printf("Loading program: [%s]\n", s);
 	mov.w	r0, sp	# tmp100,
 	mov.w	r1, r13	# tmp101,
 	add.w	r1, -60 #111	# tmp101,
@@ -8862,17 +8883,17 @@ exec_exec:
 	mov.w	r1, .LC68	# tmp102,
 	st.w	[r0], r1	#, tmp102
 	call	printf		#
-# basic.c:2502: 	if (drive == 0)
-	ld.b	r0, [drive]	# drive.476_26, drive
-# basic.c:2502: 	if (drive == 0)
-	sex.b	r1, r0	# tmp103, drive.476_26
+# basic.c:2507: 	if (drive == 0)
+	ld.b	r0, [drive]	# drive.478_26, drive
+# basic.c:2507: 	if (drive == 0)
+	sex.b	r1, r0	# tmp103, drive.478_26
 	xor.w	r0, r0	# tmp104
 	cmp.w	r1, r0	# tmp103, tmp104
-	jnz	.L503		#
-# basic.c:2506: load_again:		
+	jnz	.L504		#
+# basic.c:2511: load_again:		
 	nop	
-.L504:
-# basic.c:2507: 		if(file_open(s, &fd, O_READ))
+.L505:
+# basic.c:2512: 		if(file_open(s, &fd, O_READ))
 	mov.w	r0, sp	# tmp105,
 	xor.w	r1, r1	# tmp106
 	st.w	[r0 + (8)], r1	#, tmp106
@@ -8883,25 +8904,25 @@ exec_exec:
 	add.w	r1, -60 #111	# tmp108,
 	st.w	[r0], r1	#, tmp108
 	call	file_open		#
-# basic.c:2507: 		if(file_open(s, &fd, O_READ))
+# basic.c:2512: 		if(file_open(s, &fd, O_READ))
 	zex.b	r1, r0	# tmp109, _27
 	xor.w	r0, r0	# tmp110
 	cmp.w	r1, r0	# tmp109, tmp110
-	jz	.L505		#
-# basic.c:2509: 			int len = fd.dir_entry.filesize;
+	jz	.L506		#
+# basic.c:2514: 			int len = fd.dir_entry.filesize;
 	ld.w	r0, [r13 + (-104)]	# _28, fd.dir_entry.filesize
-# basic.c:2509: 			int len = fd.dir_entry.filesize;
+# basic.c:2514: 			int len = fd.dir_entry.filesize;
 	st.w	[r13 + (-20)], r0	# len, _28
-# basic.c:2510: 			int total = 0;
+# basic.c:2515: 			int total = 0;
 	xor.w	r0, r0	# tmp111
 	st.w	[r13 + (-8)], r0	# total, tmp111
-# basic.c:2512: 			while(total < len)
-	j	.L506		#
-.L509:
-# basic.c:2514: 				current = file_read(&fd, &buffer[total], 512);
-	ld.w	r1, [buffer]	# buffer.477_29, buffer
-	ld.w	r0, [r13 + (-8)]	# total.478_30, total
-	add.w	r1, r0 #222	# _31, total.478_30
+# basic.c:2517: 			while(total < len)
+	j	.L507		#
+.L510:
+# basic.c:2519: 				current = file_read(&fd, &buffer[total], 512);
+	ld.w	r1, [buffer]	# buffer.479_29, buffer
+	ld.w	r0, [r13 + (-8)]	# total.480_30, total
+	add.w	r1, r0 #222	# _31, total.480_30
 	mov.w	r0, sp	# tmp112,
 	mov.w	r2, 512	# tmp113,
 	st.w	[r0 + (8)], r2	#, tmp113
@@ -8910,66 +8931,66 @@ exec_exec:
 	add.w	r1, -136 #111	# tmp114,
 	st.w	[r0], r1	#, tmp114
 	call	file_read		#
-# basic.c:2514: 				current = file_read(&fd, &buffer[total], 512);
+# basic.c:2519: 				current = file_read(&fd, &buffer[total], 512);
 	zex.s	r0, r0	# tmp115, _32
 	st.w	[r13 + (-24)], r0	# current, tmp115
-# basic.c:2515: 				if (current > 0) {
+# basic.c:2520: 				if (current > 0) {
 	ld.w	r1, [r13 + (-24)]	# tmp116, current
 	xor.w	r0, r0	# tmp117
 	cmp.w	r1, r0	# tmp116, tmp117
-	jses	.L507		#
-# basic.c:2516: 					total += current;
+	jses	.L508		#
+# basic.c:2521: 					total += current;
 	ld.w	r0, [r13 + (-8)]	# tmp119, total
 	ld.w	r1, [r13 + (-24)]	# tmp120, current
 	add.w	r0, r1 #222	# tmp118, tmp120
 	st.w	[r13 + (-8)], r0	# total, tmp118
-# basic.c:2517: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
-	ld.w	r1, [r13 + (-8)]	# total.479_33, total
-# basic.c:2517: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:2522: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+	ld.w	r1, [r13 + (-8)]	# total.481_33, total
+# basic.c:2522: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	ld.w	r0, [r13 + (-104)]	# _34, fd.dir_entry.filesize
-# basic.c:2517: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:2522: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	div.w	r1, r0	# _35, _34
-# basic.c:2517: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:2522: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	mov.w	r0, 100	# tmp121,
 	mul.w	r1, r0	# _36, tmp121
-# basic.c:2517: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:2522: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	mov.w	r0, 10	# tmp122,
 	div.w	r1, r0	# _37, tmp122
 mov.w	r1, r14	# _37
-# basic.c:2517: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
+# basic.c:2522: 					if ((total / fd.dir_entry.filesize * 100) % 10 == 0)
 	xor.w	r0, r0	# tmp123
 	cmp.w	r1, r0	# _37, tmp123
-	jnz	.L506		#
-# basic.c:2518: 						printf("#");
+	jnz	.L507		#
+# basic.c:2523: 						printf("#");
 	mov.w	r1, sp	# tmp124,
 	mov.w	r0, 35	# tmp125,
 	st.w	[r1], r0	#, tmp125
 	call	putchar		#
-	j	.L506		#
-.L507:
-# basic.c:2521: 					printf("Error reading file!\n");
+	j	.L507		#
+.L508:
+# basic.c:2526: 					printf("Error reading file!\n");
 	mov.w	r1, sp	# tmp126,
 	mov.w	r0, .LC17	# tmp127,
 	st.w	[r1], r0	#, tmp127
 	call	puts		#
-	j	.L496		#
-.L506:
-# basic.c:2512: 			while(total < len)
+	j	.L497		#
+.L507:
+# basic.c:2517: 			while(total < len)
 	ld.w	r1, [r13 + (-8)]	# tmp128, total
 	ld.w	r0, [r13 + (-20)]	# tmp129, len
 	cmp.w	r1, r0	# tmp128, tmp129
-	jss	.L509		#
-# basic.c:2526: 			buffer[len] = 0;
-	ld.w	r0, [buffer]	# buffer.480_38, buffer
-	ld.w	r1, [r13 + (-20)]	# len.481_39, len
-	add.w	r0, r1 #222	# _40, len.481_39
-# basic.c:2526: 			buffer[len] = 0;
+	jss	.L510		#
+# basic.c:2531: 			buffer[len] = 0;
+	ld.w	r0, [buffer]	# buffer.482_38, buffer
+	ld.w	r1, [r13 + (-20)]	# len.483_39, len
+	add.w	r0, r1 #222	# _40, len.483_39
+# basic.c:2531: 			buffer[len] = 0;
 	xor.w	r1, r1	# tmp130
 	st.b	[r0], r1	# *_40, tmp130
-# basic.c:2527: 			i = len;
+# basic.c:2532: 			i = len;
 	ld.w	r0, [r13 + (-20)]	# tmp131, len
 	st.w	[r13 + (-4)], r0	# i, tmp131
-# basic.c:2531: 			strcpy(fileName, s);
+# basic.c:2536: 			strcpy(fileName, s);
 	mov.w	r0, sp	# tmp132,
 	mov.w	r1, r13	# tmp133,
 	add.w	r1, -60 #111	# tmp133,
@@ -8978,45 +8999,45 @@ mov.w	r1, r14	# _37
 	add.w	r1, -80 #111	# tmp134,
 	st.w	[r0], r1	#, tmp134
 	call	strcpy		#
-# basic.c:2532: 			int sum = 0;
+# basic.c:2537: 			int sum = 0;
 	xor.w	r0, r0	# tmp135
 	st.w	[r13 + (-12)], r0	# sum, tmp135
-# basic.c:2533: 			for (int j = 0; j < i; j++) {
+# basic.c:2538: 			for (int j = 0; j < i; j++) {
 	xor.w	r0, r0	# tmp136
 	st.w	[r13 + (-16)], r0	# j, tmp136
-# basic.c:2533: 			for (int j = 0; j < i; j++) {
-	j	.L510		#
-.L511:
-# basic.c:2534: 				sum += buffer[j];
-	ld.w	r0, [buffer]	# buffer.482_41, buffer
-	ld.w	r1, [r13 + (-16)]	# j.483_42, j
-	add.w	r0, r1 #222	# _43, j.483_42
+# basic.c:2538: 			for (int j = 0; j < i; j++) {
+	j	.L511		#
+.L512:
+# basic.c:2539: 				sum += buffer[j];
+	ld.w	r0, [buffer]	# buffer.484_41, buffer
+	ld.w	r1, [r13 + (-16)]	# j.485_42, j
+	add.w	r0, r1 #222	# _43, j.485_42
 	ld.b	r0, [r0]	# _44, *_43
 	sex.b	r1, r0	# _45, _44
-# basic.c:2534: 				sum += buffer[j];
+# basic.c:2539: 				sum += buffer[j];
 	ld.w	r0, [r13 + (-12)]	# tmp138, sum
 	add.w	r0, r1 #222	# tmp137, _45
 	st.w	[r13 + (-12)], r0	# sum, tmp137
-# basic.c:2533: 			for (int j = 0; j < i; j++) {
+# basic.c:2538: 			for (int j = 0; j < i; j++) {
 	ld.w	r0, [r13 + (-16)]	# tmp140, j
 	add.w	r0, 1 #111	# tmp139,
 	st.w	[r13 + (-16)], r0	# j, tmp139
-.L510:
-# basic.c:2533: 			for (int j = 0; j < i; j++) {
+.L511:
+# basic.c:2538: 			for (int j = 0; j < i; j++) {
 	ld.w	r1, [r13 + (-16)]	# tmp141, j
 	ld.w	r0, [r13 + (-4)]	# tmp142, i
 	cmp.w	r1, r0	# tmp141, tmp142
-	jss	.L511		#
-# basic.c:2536: 			printf("\nSum: %d\n", sum);
+	jss	.L512		#
+# basic.c:2541: 			printf("\nSum: %d\n", sum);
 	mov.w	r0, sp	# tmp143,
 	ld.w	r1, [r13 + (-12)]	# tmp144, sum
 	st.w	[r0 + (4)], r1	#, tmp144
 	mov.w	r1, .LC18	# tmp145,
 	st.w	[r0], r1	#, tmp145
 	call	printf		#
-	j	.L512		#
-.L505:
-# basic.c:2540: 			printf("File open failed for file: [%s]\n", s);
+	j	.L513		#
+.L506:
+# basic.c:2545: 			printf("File open failed for file: [%s]\n", s);
 	mov.w	r0, sp	# tmp146,
 	mov.w	r1, r13	# tmp147,
 	add.w	r1, -60 #111	# tmp147,
@@ -9024,90 +9045,90 @@ mov.w	r1, r14	# _37
 	mov.w	r1, .LC69	# tmp148,
 	st.w	[r0], r1	#, tmp148
 	call	printf		#
-# basic.c:2541: 			return;
-	j	.L496		#
-.L503:
-# basic.c:2544: 	else if (drive == 2)
-	ld.b	r0, [drive]	# drive.484_46, drive
-# basic.c:2544: 	else if (drive == 2)
-	sex.b	r1, r0	# tmp149, drive.484_46
+# basic.c:2546: 			return;
+	j	.L497		#
+.L504:
+# basic.c:2549: 	else if (drive == 2)
+	ld.b	r0, [drive]	# drive.486_46, drive
+# basic.c:2549: 	else if (drive == 2)
+	sex.b	r1, r0	# tmp149, drive.486_46
 	mov.w	r0, 2	# tmp150,
 	cmp.w	r1, r0	# tmp149, tmp150
-	jnz	.L513		#
-# basic.c:2547: 		asm ("irq\t0\n"); // IRQ 0000, xxx0 <- turn off timer irq
-# 2547 "basic.c" 1
+	jnz	.L514		#
+# basic.c:2552: 		asm ("irq\t0\n"); // IRQ 0000, xxx0 <- turn off timer irq
+# 2552 "basic.c" 1
 	irq	0
 
-# basic.c:2548: 		delay(100);
+# basic.c:2553: 		delay(100);
 	mov.w	r1, sp	# tmp151,
 	mov.w	r0, 100	# tmp152,
 	st.w	[r1], r0	#, tmp152
 	call	delay		#
-# basic.c:2549: 		i = uart_read_file(buffer, s);
-	ld.w	r1, [buffer]	# buffer.485_47, buffer
+# basic.c:2554: 		i = uart_read_file(buffer, s);
+	ld.w	r1, [buffer]	# buffer.487_47, buffer
 	mov.w	r0, sp	# tmp153,
 	mov.w	r2, r13	# tmp154,
 	add.w	r2, -60 #111	# tmp154,
 	st.w	[r0 + (4)], r2	#, tmp154
-	st.w	[r0], r1	#, buffer.485_47
+	st.w	[r0], r1	#, buffer.487_47
 	call	uart_read_file		#
 	st.w	[r13 + (-4)], r0	# i,
-# basic.c:2550: 		asm ("irq\t1\n"); // IRQ 0000, xxx0 <- turn on timer irq
-# 2550 "basic.c" 1
+# basic.c:2555: 		asm ("irq\t1\n"); // IRQ 0000, xxx0 <- turn on timer irq
+# 2555 "basic.c" 1
 	irq	1
 
-	j	.L512		#
-.L513:
-# basic.c:2553: 		i = eth_read_file(buffer, s);
-	ld.w	r1, [buffer]	# buffer.486_48, buffer
+	j	.L513		#
+.L514:
+# basic.c:2558: 		i = eth_read_file(buffer, s);
+	ld.w	r1, [buffer]	# buffer.488_48, buffer
 	mov.w	r0, sp	# tmp155,
 	mov.w	r2, r13	# tmp156,
 	add.w	r2, -60 #111	# tmp156,
 	st.w	[r0 + (4)], r2	#, tmp156
-	st.w	[r0], r1	#, buffer.486_48
+	st.w	[r0], r1	#, buffer.488_48
 	call	eth_read_file		#
 	st.w	[r13 + (-4)], r0	# i,
-.L512:
-# basic.c:2555: 	if (i > 0) 
+.L513:
+# basic.c:2560: 	if (i > 0) 
 	ld.w	r1, [r13 + (-4)]	# tmp157, i
 	xor.w	r0, r0	# tmp158
 	cmp.w	r1, r0	# tmp157, tmp158
-	jses	.L514		#
-# basic.c:2558: 		int old_color = color;
+	jses	.L515		#
+# basic.c:2563: 		int old_color = color;
 	ld.w	r0, [color]	# tmp159, color
 	st.w	[r13 + (-28)], r0	# old_color, tmp159
-# basic.c:2559: 		asm("mov.w r0, 197632\ncallr r0\n"); //asm("call 197632\n");
-# 2559 "basic.c" 1
+# basic.c:2564: 		asm("mov.w r0, 197632\ncallr r0\n"); //asm("call 197632\n");
+# 2564 "basic.c" 1
 	mov.w r0, 197632
 callr r0
 
-# basic.c:2560: 		init_stdio();
+# basic.c:2565: 		init_stdio();
 	call	init_stdio		#
-# basic.c:2561: 		video_mode(0);
+# basic.c:2566: 		video_mode(0);
 	mov.w	r1, sp	# tmp160,
 	xor.w	r0, r0	# tmp161
 	st.w	[r1], r0	#, tmp161
 	call	video_mode		#
-# basic.c:2562: 		color = old_color;
+# basic.c:2567: 		color = old_color;
 	ld.w	r0, [r13 + (-28)]	# tmp162, old_color
 	st.w	[color], r0	# color, tmp162
-# basic.c:2565: 		uart_init_files();
+# basic.c:2570: 		uart_init_files();
 	call	uart_init_files		#
-# basic.c:2566: 		if (eth)
-	ld.w	r1, [eth]	# eth.487_49, eth
-# basic.c:2566: 		if (eth)
+# basic.c:2571: 		if (eth)
+	ld.w	r1, [eth]	# eth.489_49, eth
+# basic.c:2571: 		if (eth)
 	xor.w	r0, r0	# tmp163
-	cmp.w	r1, r0	# eth.487_49, tmp163
-	jz	.L496		#
-# basic.c:2568: 			init_spi();
+	cmp.w	r1, r0	# eth.489_49, tmp163
+	jz	.L497		#
+# basic.c:2573: 			init_spi();
 	call	init_spi		#
-# basic.c:2569: 			init_net();
+# basic.c:2574: 			init_net();
 	call	init_net		#
-# basic.c:2570: 			init_sd();
+# basic.c:2575: 			init_sd();
 	call	init_sd		#
-	j	.L496		#
-.L514:
-# basic.c:2575: 		printf("Error loading program %s\n", s);
+	j	.L497		#
+.L515:
+# basic.c:2580: 		printf("Error loading program %s\n", s);
 	mov.w	r0, sp	# tmp164,
 	mov.w	r1, r13	# tmp165,
 	add.w	r1, -60 #111	# tmp165,
@@ -9115,8 +9136,8 @@ callr r0
 	mov.w	r1, .LC70	# tmp166,
 	st.w	[r0], r1	#, tmp166
 	call	printf		#
-.L496:
-# basic.c:2577: }
+.L497:
+# basic.c:2582: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -9133,76 +9154,76 @@ exec_sys:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 64 #111	#,
-# basic.c:2584: 	ignore_blanks();
+# basic.c:2589: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2585: 	expression_error = 0;
+# basic.c:2590: 	expression_error = 0;
 	xor.w	r0, r0	# tmp29
 	st.b	[expression_error], r0	# expression_error, tmp29
-# basic.c:2586: 	addr = (int)expression();	
+# basic.c:2591: 	addr = (int)expression();	
 	call	expression		#
 	mov.w	r1, r0	# _1,
-# basic.c:2586: 	addr = (int)expression();	
+# basic.c:2591: 	addr = (int)expression();	
 	mov.w	r0, r1	# tmp30, _1
 	st.w	[sp], r0	#, tmp30
 	call	__fixsfsi		#
 	st.w	[r13 + (-4)], r0	# addr, tmp31
-# basic.c:2587: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.488_2, expression_error
-# basic.c:2587: 	if (expression_error)
-	sex.b	r1, r0	# tmp32, expression_error.488_2
+# basic.c:2592: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.490_2, expression_error
+# basic.c:2592: 	if (expression_error)
+	sex.b	r1, r0	# tmp32, expression_error.490_2
 	xor.w	r0, r0	# tmp33
 	cmp.w	r1, r0	# tmp32, tmp33
-	jz	.L518		#
-# basic.c:2589: 		qwhat();
+	jz	.L519		#
+# basic.c:2594: 		qwhat();
 	call	qwhat		#
-	j	.L517		#
-.L518:
-# basic.c:2592: 	printf("call %d\n", addr);
+	j	.L518		#
+.L519:
+# basic.c:2597: 	printf("call %d\n", addr);
 	mov.w	r0, sp	# tmp34,
 	ld.w	r1, [r13 + (-4)]	# tmp35, addr
 	st.w	[r0 + (4)], r1	#, tmp35
 	mov.w	r1, .LC71	# tmp36,
 	st.w	[r0], r1	#, tmp36
 	call	printf		#
-# basic.c:2593: 	addr += 197632;
+# basic.c:2598: 	addr += 197632;
 	ld.w	r0, [r13 + (-4)]	# tmp38, addr
 	mov.w	r1, 197632	# tmp39,
 	add.w	r0, r1 #222	# tmp37, tmp39
 	st.w	[r13 + (-4)], r0	# addr, tmp37
-# basic.c:2594: 	int old_color = color;
+# basic.c:2599: 	int old_color = color;
 	ld.w	r0, [color]	# tmp40, color
 	st.w	[r13 + (-8)], r0	# old_color, tmp40
-# basic.c:2595: 	asm("ld.w r0, [r13 + (-4)]\ncallr r0\n");
-# 2595 "basic.c" 1
+# basic.c:2600: 	asm("ld.w r0, [r13 + (-4)]\ncallr r0\n");
+# 2600 "basic.c" 1
 	ld.w r0, [r13 + (-4)]
 callr r0
 
-# basic.c:2596: 	init_stdio();
+# basic.c:2601: 	init_stdio();
 	call	init_stdio		#
-# basic.c:2597: 	video_mode(0);
+# basic.c:2602: 	video_mode(0);
 	mov.w	r1, sp	# tmp41,
 	xor.w	r0, r0	# tmp42
 	st.w	[r1], r0	#, tmp42
 	call	video_mode		#
-# basic.c:2598: 	color = old_color;
+# basic.c:2603: 	color = old_color;
 	ld.w	r0, [r13 + (-8)]	# tmp43, old_color
 	st.w	[color], r0	# color, tmp43
-# basic.c:2601: 	uart_init_files();
+# basic.c:2606: 	uart_init_files();
 	call	uart_init_files		#
-# basic.c:2602: 	if (eth)
-	ld.w	r1, [eth]	# eth.489_3, eth
-# basic.c:2602: 	if (eth)
+# basic.c:2607: 	if (eth)
+	ld.w	r1, [eth]	# eth.491_3, eth
+# basic.c:2607: 	if (eth)
 	xor.w	r0, r0	# tmp44
-	cmp.w	r1, r0	# eth.489_3, tmp44
-	jz	.L517		#
-# basic.c:2604: 		init_spi();
+	cmp.w	r1, r0	# eth.491_3, tmp44
+	jz	.L518		#
+# basic.c:2609: 		init_spi();
 	call	init_spi		#
-# basic.c:2605: 		init_net();
+# basic.c:2610: 		init_net();
 	call	init_net		#
-# basic.c:2606: 		init_sd();
+# basic.c:2611: 		init_sd();
 	call	init_sd		#
-.L517:
-# basic.c:2608: }
+.L518:
+# basic.c:2613: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -9222,90 +9243,90 @@ exec_drive:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:2612: 	ignore_blanks();
+# basic.c:2617: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2613: 	if (*txtpos == NL)
-	ld.w	r0, [txtpos]	# txtpos.490_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.490_1
-# basic.c:2613: 	if (*txtpos == NL)
+# basic.c:2618: 	if (*txtpos == NL)
+	ld.w	r0, [txtpos]	# txtpos.492_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.492_1
+# basic.c:2618: 	if (*txtpos == NL)
 	zex.b	r1, r0	# tmp44, _2
 	mov.w	r0, 10	# tmp45,
 	cmp.w	r1, r0	# tmp44, tmp45
-	jnz	.L522		#
-# basic.c:2615: 		printf("DRIVE: %d\n", drive);
-	ld.b	r0, [drive]	# drive.491_3, drive
-	sex.b	r1, r0	# _4, drive.491_3
+	jnz	.L523		#
+# basic.c:2620: 		printf("DRIVE: %d\n", drive);
+	ld.b	r0, [drive]	# drive.493_3, drive
+	sex.b	r1, r0	# _4, drive.493_3
 	mov.w	r0, sp	# tmp46,
 	st.w	[r0 + (4)], r1	#, _4
 	mov.w	r1, .LC72	# tmp47,
 	st.w	[r0], r1	#, tmp47
 	call	printf		#
-# basic.c:2616: 		return;
-	j	.L521		#
-.L522:
-# basic.c:2618: 	if (*txtpos < '0' || *txtpos > '9')
-	ld.w	r0, [txtpos]	# txtpos.492_5, txtpos
-	ld.b	r0, [r0]	# _6, *txtpos.492_5
-# basic.c:2618: 	if (*txtpos < '0' || *txtpos > '9')
+# basic.c:2621: 		return;
+	j	.L522		#
+.L523:
+# basic.c:2623: 	if (*txtpos < '0' || *txtpos > '9')
+	ld.w	r0, [txtpos]	# txtpos.494_5, txtpos
+	ld.b	r0, [r0]	# _6, *txtpos.494_5
+# basic.c:2623: 	if (*txtpos < '0' || *txtpos > '9')
 	zex.b	r1, r0	# tmp48, _6
 	mov.w	r0, 47	# tmp49,
 	cmp.w	r1, r0	# tmp48, tmp49
-	jse	.L524		#
-# basic.c:2618: 	if (*txtpos < '0' || *txtpos > '9')
-	ld.w	r0, [txtpos]	# txtpos.493_7, txtpos
-	ld.b	r0, [r0]	# _8, *txtpos.493_7
-# basic.c:2618: 	if (*txtpos < '0' || *txtpos > '9')
+	jse	.L525		#
+# basic.c:2623: 	if (*txtpos < '0' || *txtpos > '9')
+	ld.w	r0, [txtpos]	# txtpos.495_7, txtpos
+	ld.b	r0, [r0]	# _8, *txtpos.495_7
+# basic.c:2623: 	if (*txtpos < '0' || *txtpos > '9')
 	zex.b	r1, r0	# tmp50, _8
 	mov.w	r0, 57	# tmp51,
 	cmp.w	r1, r0	# tmp50, tmp51
-	jse	.L525		#
-.L524:
-# basic.c:2620: 		qwhat();
-	call	qwhat		#
-# basic.c:2621: 		return;
-	j	.L521		#
+	jse	.L526		#
 .L525:
-# basic.c:2623: 	drive = *txtpos - '0';
-	ld.w	r0, [txtpos]	# txtpos.494_9, txtpos
-	ld.b	r0, [r0]	# _10, *txtpos.494_9
-# basic.c:2623: 	drive = *txtpos - '0';
+# basic.c:2625: 		qwhat();
+	call	qwhat		#
+# basic.c:2626: 		return;
+	j	.L522		#
+.L526:
+# basic.c:2628: 	drive = *txtpos - '0';
+	ld.w	r0, [txtpos]	# txtpos.496_9, txtpos
+	ld.b	r0, [r0]	# _10, *txtpos.496_9
+# basic.c:2628: 	drive = *txtpos - '0';
 	add.w	r0, -48 #111	# tmp52,
-# basic.c:2623: 	drive = *txtpos - '0';
+# basic.c:2628: 	drive = *txtpos - '0';
 	st.b	[drive], r0	# drive, _12
-# basic.c:2624: 	if (drive >= 0 && drive <= 2)
-	ld.b	r0, [drive]	# drive.495_13, drive
-# basic.c:2624: 	if (drive >= 0 && drive <= 2)
-	sex.b	r1, r0	# tmp53, drive.495_13
+# basic.c:2629: 	if (drive >= 0 && drive <= 2)
+	ld.b	r0, [drive]	# drive.497_13, drive
+# basic.c:2629: 	if (drive >= 0 && drive <= 2)
+	sex.b	r1, r0	# tmp53, drive.497_13
 	xor.w	r0, r0	# tmp54
 	cmp.w	r1, r0	# tmp53, tmp54
-	jss	.L526		#
-# basic.c:2624: 	if (drive >= 0 && drive <= 2)
-	ld.b	r0, [drive]	# drive.496_14, drive
-# basic.c:2624: 	if (drive >= 0 && drive <= 2)
-	sex.b	r1, r0	# tmp55, drive.496_14
+	jss	.L527		#
+# basic.c:2629: 	if (drive >= 0 && drive <= 2)
+	ld.b	r0, [drive]	# drive.498_14, drive
+# basic.c:2629: 	if (drive >= 0 && drive <= 2)
+	sex.b	r1, r0	# tmp55, drive.498_14
 	mov.w	r0, 2	# tmp56,
 	cmp.w	r1, r0	# tmp55, tmp56
-	jgs	.L526		#
-# basic.c:2625: 		printf("DRIVE: %d\n", drive);
-	ld.b	r0, [drive]	# drive.497_15, drive
-	sex.b	r1, r0	# _16, drive.497_15
+	jgs	.L527		#
+# basic.c:2630: 		printf("DRIVE: %d\n", drive);
+	ld.b	r0, [drive]	# drive.499_15, drive
+	sex.b	r1, r0	# _16, drive.499_15
 	mov.w	r0, sp	# tmp57,
 	st.w	[r0 + (4)], r1	#, _16
 	mov.w	r1, .LC72	# tmp58,
 	st.w	[r0], r1	#, tmp58
 	call	printf		#
-	j	.L521		#
-.L526:
-# basic.c:2628: 		printf("Invalid drive number: %d. Can be from 0 to 2.\n", drive);
-	ld.b	r0, [drive]	# drive.498_17, drive
-	sex.b	r1, r0	# _18, drive.498_17
+	j	.L522		#
+.L527:
+# basic.c:2633: 		printf("Invalid drive number: %d. Can be from 0 to 2.\n", drive);
+	ld.b	r0, [drive]	# drive.500_17, drive
+	sex.b	r1, r0	# _18, drive.500_17
 	mov.w	r0, sp	# tmp59,
 	st.w	[r0 + (4)], r1	#, _18
 	mov.w	r1, .LC73	# tmp60,
 	st.w	[r0], r1	#, tmp60
 	call	printf		#
-.L521:
-# basic.c:2631: }
+.L522:
+# basic.c:2636: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -9325,108 +9346,108 @@ exec_eth:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:2635: 	ignore_blanks();
+# basic.c:2640: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2636: 	if (*txtpos == NL)
-	ld.w	r0, [txtpos]	# txtpos.499_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.499_1
-# basic.c:2636: 	if (*txtpos == NL)
+# basic.c:2641: 	if (*txtpos == NL)
+	ld.w	r0, [txtpos]	# txtpos.501_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.501_1
+# basic.c:2641: 	if (*txtpos == NL)
 	zex.b	r1, r0	# tmp42, _2
 	mov.w	r0, 10	# tmp43,
 	cmp.w	r1, r0	# tmp42, tmp43
-	jnz	.L528		#
-# basic.c:2638: 		printf("ETHERNET: %d\n", eth);
-	ld.w	r1, [eth]	# eth.500_3, eth
+	jnz	.L529		#
+# basic.c:2643: 		printf("ETHERNET: %d\n", eth);
+	ld.w	r1, [eth]	# eth.502_3, eth
 	mov.w	r0, sp	# tmp44,
-	st.w	[r0 + (4)], r1	#, eth.500_3
+	st.w	[r0 + (4)], r1	#, eth.502_3
 	mov.w	r1, .LC74	# tmp45,
 	st.w	[r0], r1	#, tmp45
 	call	printf		#
-# basic.c:2639: 		return;
-	j	.L527		#
-.L528:
-# basic.c:2641: 	if (*txtpos < '0' || *txtpos > '9')
-	ld.w	r0, [txtpos]	# txtpos.501_4, txtpos
-	ld.b	r0, [r0]	# _5, *txtpos.501_4
-# basic.c:2641: 	if (*txtpos < '0' || *txtpos > '9')
+# basic.c:2644: 		return;
+	j	.L528		#
+.L529:
+# basic.c:2646: 	if (*txtpos < '0' || *txtpos > '9')
+	ld.w	r0, [txtpos]	# txtpos.503_4, txtpos
+	ld.b	r0, [r0]	# _5, *txtpos.503_4
+# basic.c:2646: 	if (*txtpos < '0' || *txtpos > '9')
 	zex.b	r1, r0	# tmp46, _5
 	mov.w	r0, 47	# tmp47,
 	cmp.w	r1, r0	# tmp46, tmp47
-	jse	.L530		#
-# basic.c:2641: 	if (*txtpos < '0' || *txtpos > '9')
-	ld.w	r0, [txtpos]	# txtpos.502_6, txtpos
-	ld.b	r0, [r0]	# _7, *txtpos.502_6
-# basic.c:2641: 	if (*txtpos < '0' || *txtpos > '9')
+	jse	.L531		#
+# basic.c:2646: 	if (*txtpos < '0' || *txtpos > '9')
+	ld.w	r0, [txtpos]	# txtpos.504_6, txtpos
+	ld.b	r0, [r0]	# _7, *txtpos.504_6
+# basic.c:2646: 	if (*txtpos < '0' || *txtpos > '9')
 	zex.b	r1, r0	# tmp48, _7
 	mov.w	r0, 57	# tmp49,
 	cmp.w	r1, r0	# tmp48, tmp49
-	jse	.L531		#
-.L530:
-# basic.c:2643: 		qwhat();
-	call	qwhat		#
-# basic.c:2644: 		return;
-	j	.L527		#
+	jse	.L532		#
 .L531:
-# basic.c:2646: 	eth = *txtpos - '0';
-	ld.w	r0, [txtpos]	# txtpos.503_8, txtpos
-	ld.b	r0, [r0]	# _9, *txtpos.503_8
+# basic.c:2648: 		qwhat();
+	call	qwhat		#
+# basic.c:2649: 		return;
+	j	.L528		#
+.L532:
+# basic.c:2651: 	eth = *txtpos - '0';
+	ld.w	r0, [txtpos]	# txtpos.505_8, txtpos
+	ld.b	r0, [r0]	# _9, *txtpos.505_8
 	zex.b	r0, r0	# _10, _9
-# basic.c:2646: 	eth = *txtpos - '0';
+# basic.c:2651: 	eth = *txtpos - '0';
 	add.w	r0, -48 #111	# _11,
-# basic.c:2646: 	eth = *txtpos - '0';
+# basic.c:2651: 	eth = *txtpos - '0';
 	st.w	[eth], r0	# eth, _11
-# basic.c:2647: 	if (eth >= 0 && eth <= 1) 
-	ld.w	r1, [eth]	# eth.504_12, eth
-# basic.c:2647: 	if (eth >= 0 && eth <= 1) 
+# basic.c:2652: 	if (eth >= 0 && eth <= 1) 
+	ld.w	r1, [eth]	# eth.506_12, eth
+# basic.c:2652: 	if (eth >= 0 && eth <= 1) 
 	xor.w	r0, r0	# tmp50
-	cmp.w	r1, r0	# eth.504_12, tmp50
-	jss	.L532		#
-# basic.c:2647: 	if (eth >= 0 && eth <= 1) 
-	ld.w	r1, [eth]	# eth.505_13, eth
-# basic.c:2647: 	if (eth >= 0 && eth <= 1) 
+	cmp.w	r1, r0	# eth.506_12, tmp50
+	jss	.L533		#
+# basic.c:2652: 	if (eth >= 0 && eth <= 1) 
+	ld.w	r1, [eth]	# eth.507_13, eth
+# basic.c:2652: 	if (eth >= 0 && eth <= 1) 
 	mov.w	r0, 1	# tmp51,
-	cmp.w	r1, r0	# eth.505_13, tmp51
-	jgs	.L532		#
-# basic.c:2649: 		printf("ETHERNET: %d\n", eth);
-	ld.w	r1, [eth]	# eth.506_14, eth
+	cmp.w	r1, r0	# eth.507_13, tmp51
+	jgs	.L533		#
+# basic.c:2654: 		printf("ETHERNET: %d\n", eth);
+	ld.w	r1, [eth]	# eth.508_14, eth
 	mov.w	r0, sp	# tmp52,
-	st.w	[r0 + (4)], r1	#, eth.506_14
+	st.w	[r0 + (4)], r1	#, eth.508_14
 	mov.w	r1, .LC74	# tmp53,
 	st.w	[r0], r1	#, tmp53
 	call	printf		#
-# basic.c:2651: 		if (eth == 1) 
-	ld.w	r1, [eth]	# eth.507_15, eth
-# basic.c:2651: 		if (eth == 1) 
+# basic.c:2656: 		if (eth == 1) 
+	ld.w	r1, [eth]	# eth.509_15, eth
+# basic.c:2656: 		if (eth == 1) 
 	mov.w	r0, 1	# tmp54,
-	cmp.w	r1, r0	# eth.507_15, tmp54
-	jnz	.L533		#
-# basic.c:2653: 			asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
-# 2653 "basic.c" 1
+	cmp.w	r1, r0	# eth.509_15, tmp54
+	jnz	.L534		#
+# basic.c:2658: 			asm ("irq 1\n"); // IRQ 0000, xxx1 <- turn ON timer irq
+# 2658 "basic.c" 1
 	irq 1
 
-# basic.c:2654: 			init_net();
+# basic.c:2659: 			init_net();
 	call	init_net		#
-# basic.c:2651: 		if (eth == 1) 
-	j	.L527		#
-.L533:
-# basic.c:2658: 			asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
-# 2658 "basic.c" 1
+# basic.c:2656: 		if (eth == 1) 
+	j	.L528		#
+.L534:
+# basic.c:2663: 			asm ("irq 0\n"); // IRQ 0000, xxx0 <- turn OFF timer irq
+# 2663 "basic.c" 1
 	irq 0
 
-# basic.c:2659: 			de_init_timer();
+# basic.c:2664: 			de_init_timer();
 	call	de_init_timer		#
-# basic.c:2651: 		if (eth == 1) 
-	j	.L527		#
-.L532:
-# basic.c:2666: 		printf("Invalid ethernet value: %d. Can be 0 or 1.\n", eth);
-	ld.w	r1, [eth]	# eth.508_16, eth
+# basic.c:2656: 		if (eth == 1) 
+	j	.L528		#
+.L533:
+# basic.c:2671: 		printf("Invalid ethernet value: %d. Can be 0 or 1.\n", eth);
+	ld.w	r1, [eth]	# eth.510_16, eth
 	mov.w	r0, sp	# tmp55,
-	st.w	[r0 + (4)], r1	#, eth.508_16
+	st.w	[r0 + (4)], r1	#, eth.510_16
 	mov.w	r1, .LC75	# tmp56,
 	st.w	[r0], r1	#, tmp56
 	call	printf		#
-.L527:
-# basic.c:2668: }
+.L528:
+# basic.c:2673: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -9443,54 +9464,54 @@ exec_color:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 60 #111	#,
-# basic.c:2674: 	ignore_blanks();
+# basic.c:2679: 	ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2675: 	if (*txtpos == NL)
-	ld.w	r0, [txtpos]	# txtpos.509_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.509_1
-# basic.c:2675: 	if (*txtpos == NL)
+# basic.c:2680: 	if (*txtpos == NL)
+	ld.w	r0, [txtpos]	# txtpos.511_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.511_1
+# basic.c:2680: 	if (*txtpos == NL)
 	zex.b	r1, r0	# tmp31, _2
 	mov.w	r0, 10	# tmp32,
 	cmp.w	r1, r0	# tmp31, tmp32
-	jnz	.L536		#
-# basic.c:2677: 		printf("COLOR: %d\n", color);
-	ld.w	r1, [color]	# color.510_3, color
+	jnz	.L537		#
+# basic.c:2682: 		printf("COLOR: %d\n", color);
+	ld.w	r1, [color]	# color.512_3, color
 	mov.w	r0, sp	# tmp33,
-	st.w	[r0 + (4)], r1	#, color.510_3
+	st.w	[r0 + (4)], r1	#, color.512_3
 	mov.w	r1, .LC76	# tmp34,
 	st.w	[r0], r1	#, tmp34
 	call	printf		#
-# basic.c:2678: 		return;
-	j	.L535		#
-.L536:
-# basic.c:2680: 	expression_error = 0;
+# basic.c:2683: 		return;
+	j	.L536		#
+.L537:
+# basic.c:2685: 	expression_error = 0;
 	xor.w	r0, r0	# tmp35
 	st.b	[expression_error], r0	# expression_error, tmp35
-# basic.c:2681: 	int c = (int)expression();	
+# basic.c:2686: 	int c = (int)expression();	
 	call	expression		#
 	mov.w	r1, r0	# _4,
-# basic.c:2681: 	int c = (int)expression();	
+# basic.c:2686: 	int c = (int)expression();	
 	mov.w	r0, r1	# tmp36, _4
 	st.w	[sp], r0	#, tmp36
 	call	__fixsfsi		#
 	st.w	[r13 + (-4)], r0	# c, tmp37
-# basic.c:2682: 	if (expression_error)
-	ld.b	r0, [expression_error]	# expression_error.511_5, expression_error
-# basic.c:2682: 	if (expression_error)
-	sex.b	r1, r0	# tmp38, expression_error.511_5
+# basic.c:2687: 	if (expression_error)
+	ld.b	r0, [expression_error]	# expression_error.513_5, expression_error
+# basic.c:2687: 	if (expression_error)
+	sex.b	r1, r0	# tmp38, expression_error.513_5
 	xor.w	r0, r0	# tmp39
 	cmp.w	r1, r0	# tmp38, tmp39
-	jz	.L538		#
-# basic.c:2684: 		qwhat();
+	jz	.L539		#
+# basic.c:2689: 		qwhat();
 	call	qwhat		#
-# basic.c:2685: 		return;
-	j	.L535		#
-.L538:
-# basic.c:2687: 	color = c;
+# basic.c:2690: 		return;
+	j	.L536		#
+.L539:
+# basic.c:2692: 	color = c;
 	ld.w	r0, [r13 + (-4)]	# tmp40, c
 	st.w	[color], r0	# color, tmp40
-.L535:
-# basic.c:2689: }
+.L536:
+# basic.c:2694: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -9504,99 +9525,99 @@ exec_dim:
 	mov.w	r13, sp	#,
 	push	r6		#
 	sub.w	sp, 32 #111	#,
-# basic.c:2694: 	ignore_blanks();	
+# basic.c:2699: 	ignore_blanks();	
 	call	ignore_blanks		#
-# basic.c:2696: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
-	ld.w	r0, [txtpos]	# txtpos.512_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.512_1
-# basic.c:2696: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
+# basic.c:2701: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
+	ld.w	r0, [txtpos]	# txtpos.514_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.514_1
+# basic.c:2701: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
 	zex.b	r1, r0	# tmp75, _2
 	mov.w	r0, 64	# tmp76,
 	cmp.w	r1, r0	# tmp75, tmp76
-	jse	.L541		#
-# basic.c:2696: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
-	ld.w	r0, [txtpos]	# txtpos.513_3, txtpos
-	ld.b	r0, [r0]	# _4, *txtpos.513_3
-# basic.c:2696: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
+	jse	.L542		#
+# basic.c:2701: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
+	ld.w	r0, [txtpos]	# txtpos.515_3, txtpos
+	ld.b	r0, [r0]	# _4, *txtpos.515_3
+# basic.c:2701: 		if (txtpos[0] >= 'A' && txtpos[0] <= 'Z')
 	zex.b	r1, r0	# tmp77, _4
 	mov.w	r0, 90	# tmp78,
 	cmp.w	r1, r0	# tmp77, tmp78
-	jg	.L541		#
-# basic.c:2698: 			int varName = txtpos[0];
-	ld.w	r0, [txtpos]	# txtpos.514_5, txtpos
-	ld.b	r0, [r0]	# _6, *txtpos.514_5
-# basic.c:2698: 			int varName = txtpos[0];
+	jg	.L542		#
+# basic.c:2703: 			int varName = txtpos[0];
+	ld.w	r0, [txtpos]	# txtpos.516_5, txtpos
+	ld.b	r0, [r0]	# _6, *txtpos.516_5
+# basic.c:2703: 			int varName = txtpos[0];
 	zex.b	r0, r0	# tmp79, _6
 	st.w	[r13 + (-8)], r0	# varName, tmp79
-# basic.c:2700: 			txtpos++; // (19)
-	ld.w	r0, [txtpos]	# txtpos.515_7, txtpos
+# basic.c:2705: 			txtpos++; // (19)
+	ld.w	r0, [txtpos]	# txtpos.517_7, txtpos
 	add.w	r0, 1 #111	# _8,
 	st.w	[txtpos], r0	# txtpos, _8
-# basic.c:2701: 			ignore_blanks();
+# basic.c:2706: 			ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2703: 			if (*txtpos == '(')
-	ld.w	r0, [txtpos]	# txtpos.516_9, txtpos
-	ld.b	r0, [r0]	# _10, *txtpos.516_9
-# basic.c:2703: 			if (*txtpos == '(')
+# basic.c:2708: 			if (*txtpos == '(')
+	ld.w	r0, [txtpos]	# txtpos.518_9, txtpos
+	ld.b	r0, [r0]	# _10, *txtpos.518_9
+# basic.c:2708: 			if (*txtpos == '(')
 	zex.b	r1, r0	# tmp80, _10
 	mov.w	r0, 40	# tmp81,
 	cmp.w	r1, r0	# tmp80, tmp81
-	jnz	.L541		#
-# basic.c:2705: 				txtpos++;  // 19)
-	ld.w	r0, [txtpos]	# txtpos.517_11, txtpos
+	jnz	.L542		#
+# basic.c:2710: 				txtpos++;  // 19)
+	ld.w	r0, [txtpos]	# txtpos.519_11, txtpos
 	add.w	r0, 1 #111	# _12,
 	st.w	[txtpos], r0	# txtpos, _12
-# basic.c:2706: 				ignore_blanks();
+# basic.c:2711: 				ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:2708: 				expression_error = 0;
+# basic.c:2713: 				expression_error = 0;
 	xor.w	r0, r0	# tmp82
 	st.b	[expression_error], r0	# expression_error, tmp82
-# basic.c:2709: 				VAR dim = expression();
+# basic.c:2714: 				VAR dim = expression();
 	call	expression		#
 	st.w	[r13 + (-12)], r0	# dim,
-# basic.c:2711: 				if (!expression_error && (*txtpos == ')'))
-	ld.b	r0, [expression_error]	# expression_error.518_13, expression_error
-# basic.c:2711: 				if (!expression_error && (*txtpos == ')'))
-	sex.b	r1, r0	# tmp83, expression_error.518_13
+# basic.c:2716: 				if (!expression_error && (*txtpos == ')'))
+	ld.b	r0, [expression_error]	# expression_error.520_13, expression_error
+# basic.c:2716: 				if (!expression_error && (*txtpos == ')'))
+	sex.b	r1, r0	# tmp83, expression_error.520_13
 	xor.w	r0, r0	# tmp84
 	cmp.w	r1, r0	# tmp83, tmp84
-	jnz	.L541		#
-# basic.c:2711: 				if (!expression_error && (*txtpos == ')'))
-	ld.w	r0, [txtpos]	# txtpos.519_14, txtpos
-	ld.b	r0, [r0]	# _15, *txtpos.519_14
-# basic.c:2711: 				if (!expression_error && (*txtpos == ')'))
+	jnz	.L542		#
+# basic.c:2716: 				if (!expression_error && (*txtpos == ')'))
+	ld.w	r0, [txtpos]	# txtpos.521_14, txtpos
+	ld.b	r0, [r0]	# _15, *txtpos.521_14
+# basic.c:2716: 				if (!expression_error && (*txtpos == ')'))
 	zex.b	r1, r0	# tmp85, _15
 	mov.w	r0, 41	# tmp86,
 	cmp.w	r1, r0	# tmp85, tmp86
-	jnz	.L541		#
-# basic.c:2714: 					if (arrays_begin[varName-'A'] != NULL)
-	ld.w	r0, [arrays_begin]	# arrays_begin.520_16, arrays_begin
-	ld.w	r1, [r13 + (-8)]	# varName.521_17, varName
+	jnz	.L542		#
+# basic.c:2719: 					if (arrays_begin[varName-'A'] != NULL)
+	ld.w	r0, [arrays_begin]	# arrays_begin.522_16, arrays_begin
+	ld.w	r1, [r13 + (-8)]	# varName.523_17, varName
 	mov.w	r2, 1073741759	# tmp87,
 	add.w	r1, r2 #222	# _18, tmp87
 	mov.w	r2, 2	# tmp88,
 	shl.w	r1, r2	# _19, tmp88
 	add.w	r0, r1 #222	# _20, _19
 	ld.w	r1, [r0]	# _21, *_20
-# basic.c:2714: 					if (arrays_begin[varName-'A'] != NULL)
+# basic.c:2719: 					if (arrays_begin[varName-'A'] != NULL)
 	xor.w	r0, r0	# tmp89
 	cmp.w	r1, r0	# _21, tmp89
-	jz	.L542		#
-# basic.c:2716: 						free(arrays_begin[varName-'A']);
-	ld.w	r0, [arrays_begin]	# arrays_begin.522_22, arrays_begin
-	ld.w	r1, [r13 + (-8)]	# varName.523_23, varName
+	jz	.L543		#
+# basic.c:2721: 						free(arrays_begin[varName-'A']);
+	ld.w	r0, [arrays_begin]	# arrays_begin.524_22, arrays_begin
+	ld.w	r1, [r13 + (-8)]	# varName.525_23, varName
 	mov.w	r2, 1073741759	# tmp90,
 	add.w	r1, r2 #222	# _24, tmp90
 	mov.w	r2, 2	# tmp91,
 	shl.w	r1, r2	# _25, tmp91
 	add.w	r0, r1 #222	# _26, _25
-# basic.c:2716: 						free(arrays_begin[varName-'A']);
+# basic.c:2721: 						free(arrays_begin[varName-'A']);
 	ld.w	r0, [r0]	# _27, *_26
 	mov.w	r1, sp	# tmp92,
 	st.w	[r1], r0	#, _27
 	call	free		#
-.L542:
-# basic.c:2718: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
+.L543:
+# basic.c:2723: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
 	mov.w	r0, 1082130432	# tmp93,
 	st.w	[sp + (4)], r0	#, tmp93
 	ld.w	r0, [r13 + (-12)]	# tmp94, dim
@@ -9604,36 +9625,36 @@ exec_dim:
 	call	__mulsf3		#
 	mov.w	r1, r0	# tmp95,
 	mov.w	r0, r1	# _28, tmp95
-# basic.c:2718: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
+# basic.c:2723: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
 	st.w	[sp], r0	#, tmp96
 	call	__fixunssfsi		#
 	mov.w	r3, r0	# _29,
-# basic.c:2718: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
-	ld.w	r1, [arrays_begin]	# arrays_begin.524_30, arrays_begin
-	ld.w	r0, [r13 + (-8)]	# varName.525_31, varName
+# basic.c:2723: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
+	ld.w	r1, [arrays_begin]	# arrays_begin.526_30, arrays_begin
+	ld.w	r0, [r13 + (-8)]	# varName.527_31, varName
 	mov.w	r2, 1073741759	# tmp97,
 	add.w	r0, r2 #222	# _32, tmp97
 	mov.w	r2, 2	# tmp98,
 	shl.w	r0, r2	# _33, tmp98
-	mov.w	r6, r1	# _34, arrays_begin.524_30
+	mov.w	r6, r1	# _34, arrays_begin.526_30
 	add.w	r6, r0 #222	# _34, _33
-# basic.c:2718: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
+# basic.c:2723: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
 	mov.w	r0, sp	# tmp99,
 	st.w	[r0], r3	#, _29
 	call	malloc		#
-# basic.c:2718: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
+# basic.c:2723: 					arrays_begin[varName-'A'] = (VAR *) malloc(sizeof(VAR) * dim);
 	st.w	[r6], r0	# *_34, _35
-# basic.c:2719: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
-	ld.w	r0, [arrays_begin]	# arrays_begin.526_36, arrays_begin
-	ld.w	r1, [r13 + (-8)]	# varName.527_37, varName
+# basic.c:2724: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
+	ld.w	r0, [arrays_begin]	# arrays_begin.528_36, arrays_begin
+	ld.w	r1, [r13 + (-8)]	# varName.529_37, varName
 	mov.w	r2, 1073741759	# tmp101,
 	add.w	r1, r2 #222	# _38, tmp101
 	mov.w	r2, 2	# tmp102,
 	shl.w	r1, r2	# _39, tmp102
 	add.w	r0, r1 #222	# _40, _39
-# basic.c:2719: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
+# basic.c:2724: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
 	ld.w	r6, [r0]	# _41, *_40
-# basic.c:2719: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
+# basic.c:2724: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
 	mov.w	r0, 1082130432	# tmp103,
 	st.w	[sp + (4)], r0	#, tmp103
 	ld.w	r0, [r13 + (-12)]	# tmp104, dim
@@ -9641,7 +9662,7 @@ exec_dim:
 	call	__mulsf3		#
 	mov.w	r1, r0	# tmp105,
 	mov.w	r0, r1	# _42, tmp105
-# basic.c:2719: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
+# basic.c:2724: 					memset(arrays_begin[varName-'A'], 0, sizeof(VAR *) * dim);
 	st.w	[sp], r0	#, tmp106
 	call	__fixsfsi		#
 	mov.w	r1, r0	# _43,
@@ -9651,32 +9672,32 @@ exec_dim:
 	st.w	[r0 + (4)], r1	#, tmp108
 	st.w	[r0], r6	#, _41
 	call	memset		#
-# basic.c:2720: 					if (arrays_begin[varName-'A'] == NULL)
-	ld.w	r0, [arrays_begin]	# arrays_begin.528_44, arrays_begin
-	ld.w	r1, [r13 + (-8)]	# varName.529_45, varName
+# basic.c:2725: 					if (arrays_begin[varName-'A'] == NULL)
+	ld.w	r0, [arrays_begin]	# arrays_begin.530_44, arrays_begin
+	ld.w	r1, [r13 + (-8)]	# varName.531_45, varName
 	mov.w	r2, 1073741759	# tmp109,
 	add.w	r1, r2 #222	# _46, tmp109
 	mov.w	r2, 2	# tmp110,
 	shl.w	r1, r2	# _47, tmp110
 	add.w	r0, r1 #222	# _48, _47
 	ld.w	r1, [r0]	# _49, *_48
-# basic.c:2720: 					if (arrays_begin[varName-'A'] == NULL)
+# basic.c:2725: 					if (arrays_begin[varName-'A'] == NULL)
 	xor.w	r0, r0	# tmp111
 	cmp.w	r1, r0	# _49, tmp111
-	jnz	.L545		#
-# basic.c:2722: 						qsorry();
+	jnz	.L546		#
+# basic.c:2727: 						qsorry();
 	call	qsorry		#
-# basic.c:2723: 						return;
-	j	.L540		#
-.L541:
-# basic.c:2730: 	qwhat();
+# basic.c:2728: 						return;
+	j	.L541		#
+.L542:
+# basic.c:2735: 	qwhat();
 	call	qwhat		#
-	j	.L540		#
-.L545:
-# basic.c:2725: 					return;
+	j	.L541		#
+.L546:
+# basic.c:2730: 					return;
 	nop	
-.L540:
-# basic.c:2731: }
+.L541:
+# basic.c:2736: }
 	mov.w	r12, r13	#,
 	sub.w	r12, 4 #111	#,
 	mov.w	sp, r12	#,
@@ -9697,31 +9718,31 @@ init_net:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:2735: 	if (init_tcpip()) 
+# basic.c:2740: 	if (init_tcpip()) 
 	call	init_tcpip		#
 	mov.w	r1, r0	# _1,
-# basic.c:2735: 	if (init_tcpip()) 
+# basic.c:2740: 	if (init_tcpip()) 
 	xor.w	r0, r0	# tmp29
 	cmp.w	r1, r0	# _1, tmp29
-	jz	.L547		#
-# basic.c:2737: 		init_timer();
+	jz	.L548		#
+# basic.c:2742: 		init_timer();
 	call	init_timer		#
-# basic.c:2738: 		return true;
+# basic.c:2743: 		return true;
 	mov.w	r0, 1	# _2,
-	j	.L548		#
-.L547:
-# basic.c:2740: 		printf("No ethernet link available\n.");
+	j	.L549		#
+.L548:
+# basic.c:2745: 		printf("No ethernet link available\n.");
 	mov.w	r1, sp	# tmp30,
 	mov.w	r0, .LC77	# tmp31,
 	st.w	[r1], r0	#, tmp31
 	call	printf		#
-# basic.c:2741: 		eth = 0;
+# basic.c:2746: 		eth = 0;
 	xor.w	r0, r0	# tmp32
 	st.w	[eth], r0	# eth, tmp32
-# basic.c:2742: 		return false;
+# basic.c:2747: 		return false;
 	xor.w	r0, r0	# _2
-.L548:
-# basic.c:2744: }
+.L549:
+# basic.c:2749: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -9741,35 +9762,35 @@ direct:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 24 #111	#,
-# basic.c:2751: 	if (*txtpos == NL)
-	ld.w	r0, [txtpos]	# txtpos.530_1, txtpos
-	ld.b	r0, [r0]	# _2, *txtpos.530_1
-# basic.c:2751: 	if (*txtpos == NL)
+# basic.c:2756: 	if (*txtpos == NL)
+	ld.w	r0, [txtpos]	# txtpos.532_1, txtpos
+	ld.b	r0, [r0]	# _2, *txtpos.532_1
+# basic.c:2756: 	if (*txtpos == NL)
 	zex.b	r1, r0	# tmp49, _2
 	mov.w	r0, 10	# tmp50,
 	cmp.w	r1, r0	# tmp49, tmp50
-	jnz	.L550		#
-# basic.c:2752: 		return 0;
+	jnz	.L551		#
+# basic.c:2757: 		return 0;
 	xor.w	r0, r0	# _20
-	j	.L551		#
-.L550:
-# basic.c:2757: 	if (should_break())
+	j	.L552		#
+.L551:
+# basic.c:2762: 	if (should_break())
 	call	should_break		#
 	mov.w	r1, r0	# _3,
-# basic.c:2757: 	if (should_break())
+# basic.c:2762: 	if (should_break())
 	xor.w	r0, r0	# tmp51
 	cmp.w	r1, r0	# _3, tmp51
-	jz	.L552		#
-# basic.c:2759: 		video_mode(0);
+	jz	.L553		#
+# basic.c:2764: 		video_mode(0);
 	mov.w	r1, sp	# tmp52,
 	xor.w	r0, r0	# tmp53
 	st.w	[r1], r0	#, tmp53
 	call	video_mode		#
-# basic.c:2760: 		return 0;
+# basic.c:2765: 		return 0;
 	xor.w	r0, r0	# _20
-	j	.L551		#
-.L552:
-# basic.c:2763: 	scantable(keywords, 0, FUNC_ENUM_OFFSET - 1);
+	j	.L552		#
+.L553:
+# basic.c:2768: 	scantable(keywords, 0, FUNC_ENUM_OFFSET - 1);
 	mov.w	r0, sp	# tmp54,
 	mov.w	r1, 41	# tmp55,
 	st.w	[r0 + (8)], r1	#, tmp55
@@ -9778,462 +9799,462 @@ direct:
 	mov.w	r1, keywords	# tmp57,
 	st.w	[r0], r1	#, tmp57
 	call	scantable		#
-# basic.c:2764: 	switch (table_index)
-	ld.b	r0, [table_index]	# table_index.531_4, table_index
-	sex.b	r0, r0	# _5, table_index.531_4
+# basic.c:2769: 	switch (table_index)
+	ld.b	r0, [table_index]	# table_index.533_4, table_index
+	sex.b	r0, r0	# _5, table_index.533_4
 	mov.w	r1, 41	# tmp58,
 	cmp.w	r0, r1	# _5, tmp58
-	jz	.L553		#
+	jz	.L554		#
 	mov.w	r1, 41	# tmp59,
 	cmp.w	r0, r1	# _5, tmp59
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 40	# tmp60,
 	cmp.w	r0, r1	# _5, tmp60
-	jz	.L555		#
+	jz	.L556		#
 	mov.w	r1, 40	# tmp61,
 	cmp.w	r0, r1	# _5, tmp61
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 39	# tmp62,
 	cmp.w	r0, r1	# _5, tmp62
-	jz	.L556		#
+	jz	.L557		#
 	mov.w	r1, 39	# tmp63,
 	cmp.w	r0, r1	# _5, tmp63
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 38	# tmp64,
 	cmp.w	r0, r1	# _5, tmp64
-	jz	.L557		#
+	jz	.L558		#
 	mov.w	r1, 38	# tmp65,
 	cmp.w	r0, r1	# _5, tmp65
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 37	# tmp66,
 	cmp.w	r0, r1	# _5, tmp66
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 36	# tmp67,
 	cmp.w	r0, r1	# _5, tmp67
-	jges	.L599		#
+	jges	.L600		#
 	mov.w	r1, 35	# tmp68,
 	cmp.w	r0, r1	# _5, tmp68
-	jz	.L559		#
+	jz	.L560		#
 	mov.w	r1, 35	# tmp69,
 	cmp.w	r0, r1	# _5, tmp69
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 34	# tmp70,
 	cmp.w	r0, r1	# _5, tmp70
-	jz	.L560		#
+	jz	.L561		#
 	mov.w	r1, 34	# tmp71,
 	cmp.w	r0, r1	# _5, tmp71
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 33	# tmp72,
 	cmp.w	r0, r1	# _5, tmp72
-	jz	.L561		#
+	jz	.L562		#
 	mov.w	r1, 33	# tmp73,
 	cmp.w	r0, r1	# _5, tmp73
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 32	# tmp74,
 	cmp.w	r0, r1	# _5, tmp74
-	jz	.L562		#
+	jz	.L563		#
 	mov.w	r1, 32	# tmp75,
 	cmp.w	r0, r1	# _5, tmp75
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 31	# tmp76,
 	cmp.w	r0, r1	# _5, tmp76
-	jz	.L563		#
+	jz	.L564		#
 	mov.w	r1, 31	# tmp77,
 	cmp.w	r0, r1	# _5, tmp77
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 30	# tmp78,
 	cmp.w	r0, r1	# _5, tmp78
-	jz	.L564		#
+	jz	.L565		#
 	mov.w	r1, 30	# tmp79,
 	cmp.w	r0, r1	# _5, tmp79
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 29	# tmp80,
 	cmp.w	r0, r1	# _5, tmp80
-	jz	.L565		#
+	jz	.L566		#
 	mov.w	r1, 29	# tmp81,
 	cmp.w	r0, r1	# _5, tmp81
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 28	# tmp82,
 	cmp.w	r0, r1	# _5, tmp82
-	jz	.L566		#
+	jz	.L567		#
 	mov.w	r1, 28	# tmp83,
 	cmp.w	r0, r1	# _5, tmp83
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 27	# tmp84,
 	cmp.w	r0, r1	# _5, tmp84
-	jz	.L567		#
+	jz	.L568		#
 	mov.w	r1, 27	# tmp85,
 	cmp.w	r0, r1	# _5, tmp85
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 26	# tmp86,
 	cmp.w	r0, r1	# _5, tmp86
-	jz	.L568		#
+	jz	.L569		#
 	mov.w	r1, 26	# tmp87,
 	cmp.w	r0, r1	# _5, tmp87
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 25	# tmp88,
 	cmp.w	r0, r1	# _5, tmp88
-	jz	.L569		#
+	jz	.L570		#
 	mov.w	r1, 25	# tmp89,
 	cmp.w	r0, r1	# _5, tmp89
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 24	# tmp90,
 	cmp.w	r0, r1	# _5, tmp90
-	jz	.L570		#
+	jz	.L571		#
 	mov.w	r1, 24	# tmp91,
 	cmp.w	r0, r1	# _5, tmp91
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 23	# tmp92,
 	cmp.w	r0, r1	# _5, tmp92
-	jz	.L571		#
+	jz	.L572		#
 	mov.w	r1, 23	# tmp93,
 	cmp.w	r0, r1	# _5, tmp93
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 22	# tmp94,
 	cmp.w	r0, r1	# _5, tmp94
-	jz	.L572		#
+	jz	.L573		#
 	mov.w	r1, 22	# tmp95,
 	cmp.w	r0, r1	# _5, tmp95
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 21	# tmp96,
 	cmp.w	r0, r1	# _5, tmp96
-	jz	.L573		#
+	jz	.L574		#
 	mov.w	r1, 21	# tmp97,
 	cmp.w	r0, r1	# _5, tmp97
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 20	# tmp98,
 	cmp.w	r0, r1	# _5, tmp98
-	jz	.L574		#
+	jz	.L575		#
 	mov.w	r1, 20	# tmp99,
 	cmp.w	r0, r1	# _5, tmp99
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 19	# tmp100,
 	cmp.w	r0, r1	# _5, tmp100
-	jz	.L575		#
+	jz	.L576		#
 	mov.w	r1, 19	# tmp101,
 	cmp.w	r0, r1	# _5, tmp101
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 18	# tmp102,
 	cmp.w	r0, r1	# _5, tmp102
-	jz	.L576		#
+	jz	.L577		#
 	mov.w	r1, 18	# tmp103,
 	cmp.w	r0, r1	# _5, tmp103
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 17	# tmp104,
 	cmp.w	r0, r1	# _5, tmp104
-	jz	.L577		#
+	jz	.L578		#
 	mov.w	r1, 17	# tmp105,
 	cmp.w	r0, r1	# _5, tmp105
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 16	# tmp106,
 	cmp.w	r0, r1	# _5, tmp106
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 15	# tmp107,
 	cmp.w	r0, r1	# _5, tmp107
-	jges	.L578		#
+	jges	.L579		#
 	mov.w	r1, 14	# tmp108,
 	cmp.w	r0, r1	# _5, tmp108
-	jz	.L579		#
+	jz	.L580		#
 	mov.w	r1, 14	# tmp109,
 	cmp.w	r0, r1	# _5, tmp109
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 13	# tmp110,
 	cmp.w	r0, r1	# _5, tmp110
-	jz	.L580		#
+	jz	.L581		#
 	mov.w	r1, 13	# tmp111,
 	cmp.w	r0, r1	# _5, tmp111
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 12	# tmp112,
 	cmp.w	r0, r1	# _5, tmp112
-	jz	.L581		#
+	jz	.L582		#
 	mov.w	r1, 12	# tmp113,
 	cmp.w	r0, r1	# _5, tmp113
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 11	# tmp114,
 	cmp.w	r0, r1	# _5, tmp114
-	jz	.L582		#
+	jz	.L583		#
 	mov.w	r1, 11	# tmp115,
 	cmp.w	r0, r1	# _5, tmp115
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 10	# tmp116,
 	cmp.w	r0, r1	# _5, tmp116
-	jz	.L583		#
+	jz	.L584		#
 	mov.w	r1, 10	# tmp117,
 	cmp.w	r0, r1	# _5, tmp117
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 9	# tmp118,
 	cmp.w	r0, r1	# _5, tmp118
-	jz	.L584		#
+	jz	.L585		#
 	mov.w	r1, 9	# tmp119,
 	cmp.w	r0, r1	# _5, tmp119
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 8	# tmp120,
 	cmp.w	r0, r1	# _5, tmp120
-	jz	.L585		#
+	jz	.L586		#
 	mov.w	r1, 8	# tmp121,
 	cmp.w	r0, r1	# _5, tmp121
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 7	# tmp122,
 	cmp.w	r0, r1	# _5, tmp122
-	jz	.L586		#
+	jz	.L587		#
 	mov.w	r1, 7	# tmp123,
 	cmp.w	r0, r1	# _5, tmp123
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 6	# tmp124,
 	cmp.w	r0, r1	# _5, tmp124
-	jz	.L587		#
+	jz	.L588		#
 	mov.w	r1, 6	# tmp125,
 	cmp.w	r0, r1	# _5, tmp125
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 5	# tmp126,
 	cmp.w	r0, r1	# _5, tmp126
-	jz	.L588		#
+	jz	.L589		#
 	mov.w	r1, 5	# tmp127,
 	cmp.w	r0, r1	# _5, tmp127
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 4	# tmp128,
 	cmp.w	r0, r1	# _5, tmp128
-	jgs	.L554		#
+	jgs	.L555		#
 	mov.w	r1, 3	# tmp129,
 	cmp.w	r0, r1	# _5, tmp129
-	jges	.L589		#
+	jges	.L590		#
 	xor.w	r1, r1	# tmp130
 	cmp.w	r0, r1	# _5, tmp130
-	jz	.L590		#
+	jz	.L591		#
 	xor.w	r1, r1	# tmp131
 	cmp.w	r0, r1	# _5, tmp131
-	jss	.L554		#
+	jss	.L555		#
 	mov.w	r1, r0	# _83, _82
 	add.w	r1, -1 #111	# _83,
 	mov.w	r0, 1	# tmp132,
 	cmp.w	r1, r0	# _83, tmp132
-	jg	.L554		#
-	j	.L598		#
-.L590:
-# basic.c:2768: 		exec_mem();
+	jg	.L555		#
+	j	.L599		#
+.L591:
+# basic.c:2773: 		exec_mem();
 	call	exec_mem		#
-# basic.c:2769: 		return 0;
+# basic.c:2774: 		return 0;
 	xor.w	r0, r0	# _20
-	j	.L551		#
-.L598:
-# basic.c:2773: 		printf("I cannot exit. I am the boss.\n");
+	j	.L552		#
+.L599:
+# basic.c:2778: 		printf("I cannot exit. I am the boss.\n");
 	mov.w	r1, sp	# tmp133,
 	mov.w	r0, .LC78	# tmp134,
 	st.w	[r1], r0	#, tmp134
 	call	puts		#
-# basic.c:2774: 		break;
-	j	.L592		#
-.L589:
-# basic.c:2777: 		exec_print();
+# basic.c:2779: 		break;
+	j	.L593		#
+.L590:
+# basic.c:2782: 		exec_print();
 	call	exec_print		#
-# basic.c:2778: 		break;
-	j	.L592		#
-.L588:
-# basic.c:2780: 		exec_list();
+# basic.c:2783: 		break;
+	j	.L593		#
+.L589:
+# basic.c:2785: 		exec_list();
 	call	exec_list		#
-# basic.c:2781: 		break;
-	j	.L592		#
-.L587:
-# basic.c:2783: 		current_line = program_start;
-	ld.w	r0, [program_start]	# program_start.532_6, program_start
-	st.w	[current_line], r0	# current_line, program_start.532_6
-# basic.c:2784: 		exec_run();
+# basic.c:2786: 		break;
+	j	.L593		#
+.L588:
+# basic.c:2788: 		current_line = program_start;
+	ld.w	r0, [program_start]	# program_start.534_6, program_start
+	st.w	[current_line], r0	# current_line, program_start.534_6
+# basic.c:2789: 		exec_run();
 	call	exec_run		#
-# basic.c:2785: 		break;
-	j	.L592		#
+# basic.c:2790: 		break;
+	j	.L593		#
+.L587:
+# basic.c:2792: 		program_end = program_start;
+	ld.w	r0, [program_start]	# program_start.535_7, program_start
+	st.w	[program_end], r0	# program_end, program_start.535_7
+# basic.c:2793: 		break;
+	j	.L593		#
 .L586:
-# basic.c:2787: 		program_end = program_start;
-	ld.w	r0, [program_start]	# program_start.533_7, program_start
-	st.w	[program_end], r0	# program_end, program_start.533_7
-# basic.c:2788: 		break;
-	j	.L592		#
-.L585:
-# basic.c:2790: 		assignment();
+# basic.c:2795: 		assignment();
 	call	assignment		#
-# basic.c:2791: 		break;
-	j	.L592		#
-.L584:
-# basic.c:2793: 		exec_if();
+# basic.c:2796: 		break;
+	j	.L593		#
+.L585:
+# basic.c:2798: 		exec_if();
 	call	exec_if		#
-# basic.c:2794: 		break;
-	j	.L592		#
-.L583:
-# basic.c:2796: 		expression_error = 0;
+# basic.c:2799: 		break;
+	j	.L593		#
+.L584:
+# basic.c:2801: 		expression_error = 0;
 	xor.w	r0, r0	# tmp135
 	st.b	[expression_error], r0	# expression_error, tmp135
-# basic.c:2797: 		linenum = expression();
+# basic.c:2802: 		linenum = expression();
 	call	expression		#
 	mov.w	r1, r0	# _8,
-# basic.c:2797: 		linenum = expression();
+# basic.c:2802: 		linenum = expression();
 	mov.w	r0, r1	# tmp136, _8
 	st.w	[sp], r0	#, tmp136
 	call	__fixsfsi		#
 	st.w	[linenum], r0	# linenum, _9
-# basic.c:2798: 		if (expression_error || *txtpos != NL)
-	ld.b	r0, [expression_error]	# expression_error.534_10, expression_error
-# basic.c:2798: 		if (expression_error || *txtpos != NL)
-	sex.b	r1, r0	# tmp137, expression_error.534_10
+# basic.c:2803: 		if (expression_error || *txtpos != NL)
+	ld.b	r0, [expression_error]	# expression_error.536_10, expression_error
+# basic.c:2803: 		if (expression_error || *txtpos != NL)
+	sex.b	r1, r0	# tmp137, expression_error.536_10
 	xor.w	r0, r0	# tmp138
 	cmp.w	r1, r0	# tmp137, tmp138
-	jnz	.L593		#
-# basic.c:2798: 		if (expression_error || *txtpos != NL)
-	ld.w	r0, [txtpos]	# txtpos.535_11, txtpos
-	ld.b	r0, [r0]	# _12, *txtpos.535_11
-# basic.c:2798: 		if (expression_error || *txtpos != NL)
+	jnz	.L594		#
+# basic.c:2803: 		if (expression_error || *txtpos != NL)
+	ld.w	r0, [txtpos]	# txtpos.537_11, txtpos
+	ld.b	r0, [r0]	# _12, *txtpos.537_11
+# basic.c:2803: 		if (expression_error || *txtpos != NL)
 	zex.b	r1, r0	# tmp139, _12
 	mov.w	r0, 10	# tmp140,
 	cmp.w	r1, r0	# tmp139, tmp140
-	jz	.L594		#
-.L593:
-# basic.c:2799: 			qhow();
-	call	qhow		#
+	jz	.L595		#
 .L594:
-# basic.c:2800: 		current_line = findline();
+# basic.c:2804: 			qhow();
+	call	qhow		#
+.L595:
+# basic.c:2805: 		current_line = findline();
 	call	findline		#
-# basic.c:2800: 		current_line = findline();
+# basic.c:2805: 		current_line = findline();
 	st.w	[current_line], r0	# current_line, _13
-# basic.c:2801: 		return 2;
+# basic.c:2806: 		return 2;
 	mov.w	r0, 2	# _20,
-	j	.L551		#
-.L582:
-# basic.c:2803: 		exec_for();
+	j	.L552		#
+.L583:
+# basic.c:2808: 		exec_for();
 	call	exec_for		#
-# basic.c:2804: 		break;
-	j	.L592		#
-.L581:
-# basic.c:2806: 		exec_next();
+# basic.c:2809: 		break;
+	j	.L593		#
+.L582:
+# basic.c:2811: 		exec_next();
 	call	exec_next		#
-# basic.c:2807: 		break;
-	j	.L592		#
-.L579:
-# basic.c:2809: 		exec_gosub();
-	call	exec_gosub		#
-# basic.c:2810: 		break;
-	j	.L592		#
+# basic.c:2812: 		break;
+	j	.L593		#
 .L580:
-# basic.c:2812: 		if (!exec_return())
+# basic.c:2814: 		exec_gosub();
+	call	exec_gosub		#
+# basic.c:2815: 		break;
+	j	.L593		#
+.L581:
+# basic.c:2817: 		if (!exec_return())
 	call	exec_return		#
 	mov.w	r1, r0	# _14,
-# basic.c:2812: 		if (!exec_return())
+# basic.c:2817: 		if (!exec_return())
 	xor.w	r0, r0	# tmp141
 	cmp.w	r1, r0	# _14, tmp141
-	jnz	.L600		#
-# basic.c:2813: 			return 1;
+	jnz	.L601		#
+# basic.c:2818: 			return 1;
 	mov.w	r0, 1	# _20,
-	j	.L551		#
-.L578:
-# basic.c:2818: 		if (txtpos[0] != NL)
-	ld.w	r0, [txtpos]	# txtpos.536_15, txtpos
-	ld.b	r0, [r0]	# _16, *txtpos.536_15
-# basic.c:2818: 		if (txtpos[0] != NL)
+	j	.L552		#
+.L579:
+# basic.c:2823: 		if (txtpos[0] != NL)
+	ld.w	r0, [txtpos]	# txtpos.538_15, txtpos
+	ld.b	r0, [r0]	# _16, *txtpos.538_15
+# basic.c:2823: 		if (txtpos[0] != NL)
 	zex.b	r1, r0	# tmp142, _16
 	mov.w	r0, 10	# tmp143,
 	cmp.w	r1, r0	# tmp142, tmp143
-	jz	.L596		#
-# basic.c:2820: 			qwhat();
+	jz	.L597		#
+# basic.c:2825: 			qwhat();
 	call	qwhat		#
-# basic.c:2824: 		break;
-	j	.L592		#
-.L596:
-# basic.c:2823: 			current_line = program_end;
-	ld.w	r0, [program_end]	# program_end.537_17, program_end
-	st.w	[current_line], r0	# current_line, program_end.537_17
-# basic.c:2824: 		break;
-	j	.L592		#
-.L577:
-# basic.c:2826: 		exec_input();
+# basic.c:2829: 		break;
+	j	.L593		#
+.L597:
+# basic.c:2828: 			current_line = program_end;
+	ld.w	r0, [program_end]	# program_end.539_17, program_end
+	st.w	[current_line], r0	# current_line, program_end.539_17
+# basic.c:2829: 		break;
+	j	.L593		#
+.L578:
+# basic.c:2831: 		exec_input();
 	call	exec_input		#
-# basic.c:2827: 		break;
-	j	.L592		#
-.L576:
-# basic.c:2829: 		cls(color);
-	ld.w	r0, [color]	# color.538_18, color
+# basic.c:2832: 		break;
+	j	.L593		#
+.L577:
+# basic.c:2834: 		cls(color);
+	ld.w	r0, [color]	# color.540_18, color
 	mov.w	r1, sp	# tmp144,
-	st.w	[r1], r0	#, color.538_18
+	st.w	[r1], r0	#, color.540_18
 	call	cls		#
-# basic.c:2830: 		break;
-	j	.L592		#
-.L575:
-# basic.c:2832: 		return exec_edit();
-	call	exec_edit		#
-	j	.L551		#
-.L574:
-# basic.c:2834: 		exec_load();
-	call	exec_load		#
 # basic.c:2835: 		break;
-	j	.L592		#
-.L573:
-# basic.c:2837: 		exec_save();
+	j	.L593		#
+.L576:
+# basic.c:2837: 		return exec_edit();
+	call	exec_edit		#
+	j	.L552		#
+.L575:
+# basic.c:2839: 		exec_load();
+	call	exec_load		#
+# basic.c:2840: 		break;
+	j	.L593		#
+.L574:
+# basic.c:2842: 		exec_save();
 	call	exec_save		#
-# basic.c:2838: 		break;
-	j	.L592		#
-.L572:
-# basic.c:2840: 		exec_dir();
+# basic.c:2843: 		break;
+	j	.L593		#
+.L573:
+# basic.c:2845: 		exec_dir();
 	call	exec_dir		#
-# basic.c:2841: 		break;
-	j	.L592		#
-.L571:
-# basic.c:2843: 		exec_mode();
+# basic.c:2846: 		break;
+	j	.L593		#
+.L572:
+# basic.c:2848: 		exec_mode();
 	call	exec_mode		#
-# basic.c:2844: 		break;
-	j	.L592		#
-.L570:
-# basic.c:2846: 		exec_plot();
+# basic.c:2849: 		break;
+	j	.L593		#
+.L571:
+# basic.c:2851: 		exec_plot();
 	call	exec_plot		#
-# basic.c:2847: 		break;
-	j	.L592		#
-.L569:
-# basic.c:2849: 		exec_line();
+# basic.c:2852: 		break;
+	j	.L593		#
+.L570:
+# basic.c:2854: 		exec_line();
 	call	exec_line		#
-# basic.c:2850: 		break;
-	j	.L592		#
-.L568:
-# basic.c:2852: 		exec_circle();
+# basic.c:2855: 		break;
+	j	.L593		#
+.L569:
+# basic.c:2857: 		exec_circle();
 	call	exec_circle		#
-# basic.c:2853: 		break;
-	j	.L592		#
-.L567:
-# basic.c:2855: 		exec_draw();
+# basic.c:2858: 		break;
+	j	.L593		#
+.L568:
+# basic.c:2860: 		exec_draw();
 	call	exec_draw		#
-# basic.c:2856: 		break;
-	j	.L592		#
-.L566:
-# basic.c:2858: 		exec_help();
+# basic.c:2861: 		break;
+	j	.L593		#
+.L567:
+# basic.c:2863: 		exec_help();
 	call	exec_help		#
-# basic.c:2859: 		break;
-	j	.L592		#
-.L565:
-# basic.c:2861: 		exec_delay();
+# basic.c:2864: 		break;
+	j	.L593		#
+.L566:
+# basic.c:2866: 		exec_delay();
 	call	exec_delay		#
-# basic.c:2862: 		break;
-	j	.L592		#
-.L564:
-# basic.c:2864: 		exec_cursor();
+# basic.c:2867: 		break;
+	j	.L593		#
+.L565:
+# basic.c:2869: 		exec_cursor();
 	call	exec_cursor		#
-# basic.c:2865: 		break;
-	j	.L592		#
-.L563:
-# basic.c:2867: 		exec_poke();
+# basic.c:2870: 		break;
+	j	.L593		#
+.L564:
+# basic.c:2872: 		exec_poke();
 	call	exec_poke		#
-# basic.c:2868: 		break;
-	j	.L592		#
-.L562:
-# basic.c:2870: 		exec_exec();
+# basic.c:2873: 		break;
+	j	.L593		#
+.L563:
+# basic.c:2875: 		exec_exec();
 	call	exec_exec		#
-# basic.c:2871: 		break;
-	j	.L592		#
-.L561:
-# basic.c:2873: 		exec_sys();
+# basic.c:2876: 		break;
+	j	.L593		#
+.L562:
+# basic.c:2878: 		exec_sys();
 	call	exec_sys		#
-# basic.c:2874: 		break;
-	j	.L592		#
-.L560:
-# basic.c:2876: 		exec_drive();
+# basic.c:2879: 		break;
+	j	.L593		#
+.L561:
+# basic.c:2881: 		exec_drive();
 	call	exec_drive		#
-# basic.c:2877: 		break;
-	j	.L592		#
-.L559:
-# basic.c:2879: 		printf("Current millis: %d\n", get_millis());
+# basic.c:2882: 		break;
+	j	.L593		#
+.L560:
+# basic.c:2884: 		printf("Current millis: %d\n", get_millis());
 	call	get_millis		#
 	mov.w	r1, r0	# _19,
 	mov.w	r0, sp	# tmp145,
@@ -10241,44 +10262,44 @@ direct:
 	mov.w	r1, .LC79	# tmp146,
 	st.w	[r0], r1	#, tmp146
 	call	printf		#
-# basic.c:2880: 	break;
-	j	.L592		#
-.L557:
-# basic.c:2885: 		exec_eth();
+# basic.c:2885: 	break;
+	j	.L593		#
+.L558:
+# basic.c:2890: 		exec_eth();
 	call	exec_eth		#
-# basic.c:2886: 		break;
-	j	.L592		#
-.L556:
-# basic.c:2888: 		exec_color();
+# basic.c:2891: 		break;
+	j	.L593		#
+.L557:
+# basic.c:2893: 		exec_color();
 	call	exec_color		#
-# basic.c:2889: 		break;
-	j	.L592		#
-.L555:
-# basic.c:2891: 		exec_dim();
+# basic.c:2894: 		break;
+	j	.L593		#
+.L556:
+# basic.c:2896: 		exec_dim();
 	call	exec_dim		#
-# basic.c:2892: 		break;
-	j	.L592		#
-.L553:
-# basic.c:2894: 		assignment();
-	call	assignment		#
-# basic.c:2895: 		break;
-	j	.L592		#
+# basic.c:2897: 		break;
+	j	.L593		#
 .L554:
-# basic.c:2897: 		return 0;
+# basic.c:2899: 		assignment();
+	call	assignment		#
+# basic.c:2900: 		break;
+	j	.L593		#
+.L555:
+# basic.c:2902: 		return 0;
 	xor.w	r0, r0	# _20
-	j	.L551		#
-.L599:
-# basic.c:2883: 		break;
-	nop	
-	j	.L592		#
+	j	.L552		#
 .L600:
-# basic.c:2814: 		break;
+# basic.c:2888: 		break;
 	nop	
-.L592:
-# basic.c:2899: 	return 0;
+	j	.L593		#
+.L601:
+# basic.c:2819: 		break;
+	nop	
+.L593:
+# basic.c:2904: 	return 0;
 	xor.w	r0, r0	# _20
-.L551:
-# basic.c:2900: }
+.L552:
+# basic.c:2905: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	
@@ -10289,603 +10310,603 @@ direct:
 init_K_API:
 	push	r13		#
 	mov.w	r13, sp	#,
-# basic.c:2903: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
-	mov.w	r1, cls	# cls.539_1,
-# basic.c:2903: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.540_2, K_API_STDIO
-# basic.c:2903: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
+# basic.c:2908: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
+	mov.w	r1, cls	# cls.541_1,
+# basic.c:2908: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.542_2, K_API_STDIO
+# basic.c:2908: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
 	add.w	r1, 4 #111	# _3,
-# basic.c:2903: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
-	st.w	[r0], r1	# *K_API_STDIO.540_2, _3
-# basic.c:2904: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
-	mov.w	r1, put_char	# put_char.541_4,
-# basic.c:2904: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.542_5, K_API_STDIO
+# basic.c:2908: 	K_API_STDIO[K_CLS] 				= ((int)cls) + 4;               // 190000 
+	st.w	[r0], r1	# *K_API_STDIO.542_2, _3
+# basic.c:2909: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
+	mov.w	r1, put_char	# put_char.543_4,
+# basic.c:2909: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.544_5, K_API_STDIO
 	add.w	r0, 4 #111	# _6,
-# basic.c:2904: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
+# basic.c:2909: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
 	add.w	r1, 4 #111	# _7,
-# basic.c:2904: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
+# basic.c:2909: 	K_API_STDIO[K_PUT_CHAR] 		= ((int)put_char) + 4;          // 190004 
 	st.w	[r0], r1	# *_6, _7
-# basic.c:2905: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
-	mov.w	r1, printf	# printf.543_8,
-# basic.c:2905: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.544_9, K_API_STDIO
+# basic.c:2910: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
+	mov.w	r1, printf	# printf.545_8,
+# basic.c:2910: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.546_9, K_API_STDIO
 	add.w	r0, 8 #111	# _10,
-# basic.c:2905: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
+# basic.c:2910: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
 	add.w	r1, 4 #111	# _11,
-# basic.c:2905: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
+# basic.c:2910: 	K_API_STDIO[K_PRINTF] 			= ((int)printf) + 4;            // 190008 
 	st.w	[r0], r1	# *_10, _11
-# basic.c:2906: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
-	mov.w	r1, puts	# puts.545_12,
-# basic.c:2906: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.546_13, K_API_STDIO
+# basic.c:2911: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
+	mov.w	r1, puts	# puts.547_12,
+# basic.c:2911: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.548_13, K_API_STDIO
 	add.w	r0, 12 #111	# _14,
-# basic.c:2906: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
+# basic.c:2911: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
 	add.w	r1, 4 #111	# _15,
-# basic.c:2906: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
+# basic.c:2911: 	K_API_STDIO[K_PUTS] 			= ((int)puts) + 4;              // 190012 
 	st.w	[r0], r1	# *_14, _15
-# basic.c:2907: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
-	mov.w	r1, rand	# rand.547_16,
-# basic.c:2907: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.548_17, K_API_STDIO
+# basic.c:2912: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
+	mov.w	r1, rand	# rand.549_16,
+# basic.c:2912: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.550_17, K_API_STDIO
 	add.w	r0, 16 #111	# _18,
-# basic.c:2907: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
+# basic.c:2912: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
 	add.w	r1, 4 #111	# _19,
-# basic.c:2907: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
+# basic.c:2912: 	K_API_STDIO[K_RAND] 			= ((int)rand) + 4;              // 190016 
 	st.w	[r0], r1	# *_18, _19
-# basic.c:2908: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
-	mov.w	r1, should_break	# should_break.549_20,
-# basic.c:2908: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.550_21, K_API_STDIO
+# basic.c:2913: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
+	mov.w	r1, should_break	# should_break.551_20,
+# basic.c:2913: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.552_21, K_API_STDIO
 	add.w	r0, 20 #111	# _22,
-# basic.c:2908: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
+# basic.c:2913: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
 	add.w	r1, 4 #111	# _23,
-# basic.c:2908: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
+# basic.c:2913: 	K_API_STDIO[K_SHOULD_BREAK] 	= ((int)should_break) + 4;      // 190020 
 	st.w	[r0], r1	# *_22, _23
-# basic.c:2909: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
-	mov.w	r1, getc	# getc.551_24,
-# basic.c:2909: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.552_25, K_API_STDIO
+# basic.c:2914: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
+	mov.w	r1, getc	# getc.553_24,
+# basic.c:2914: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.554_25, K_API_STDIO
 	add.w	r0, 24 #111	# _26,
-# basic.c:2909: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
+# basic.c:2914: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
 	add.w	r1, 4 #111	# _27,
-# basic.c:2909: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
+# basic.c:2914: 	K_API_STDIO[K_GETC] 			= ((int)getc) + 4;              // 190024 
 	st.w	[r0], r1	# *_26, _27
-# basic.c:2910: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
-	mov.w	r1, gets	# gets.553_28,
-# basic.c:2910: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.554_29, K_API_STDIO
+# basic.c:2915: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
+	mov.w	r1, gets	# gets.555_28,
+# basic.c:2915: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.556_29, K_API_STDIO
 	add.w	r0, 28 #111	# _30,
-# basic.c:2910: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
+# basic.c:2915: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
 	add.w	r1, 4 #111	# _31,
-# basic.c:2910: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
+# basic.c:2915: 	K_API_STDIO[K_GETS] 			= ((int)gets) + 4;              // 190028 
 	st.w	[r0], r1	# *_30, _31
-# basic.c:2911: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
-	mov.w	r1, init_stdio	# init_stdio.555_32,
-# basic.c:2911: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.556_33, K_API_STDIO
+# basic.c:2916: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
+	mov.w	r1, init_stdio	# init_stdio.557_32,
+# basic.c:2916: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.558_33, K_API_STDIO
 	add.w	r0, 32 #111	# _34,
-# basic.c:2911: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
+# basic.c:2916: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
 	add.w	r1, 4 #111	# _35,
-# basic.c:2911: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
+# basic.c:2916: 	K_API_STDIO[K_INIT_STDIO] 		= ((int)init_stdio) + 4;        // 190032 
 	st.w	[r0], r1	# *_34, _35
-# basic.c:2912: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
-	mov.w	r1, delay	# delay.557_36,
-# basic.c:2912: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.558_37, K_API_STDIO
+# basic.c:2917: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
+	mov.w	r1, delay	# delay.559_36,
+# basic.c:2917: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.560_37, K_API_STDIO
 	add.w	r0, 36 #111	# _38,
-# basic.c:2912: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
+# basic.c:2917: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
 	add.w	r1, 4 #111	# _39,
-# basic.c:2912: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
+# basic.c:2917: 	K_API_STDIO[K_DELAY] 			= ((int)delay) + 4;             // 190036 
 	st.w	[r0], r1	# *_38, _39
-# basic.c:2913: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
-	mov.w	r1, xy	# xy.559_40,
-# basic.c:2913: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.560_41, K_API_STDIO
+# basic.c:2918: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
+	mov.w	r1, xy	# xy.561_40,
+# basic.c:2918: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.562_41, K_API_STDIO
 	add.w	r0, 40 #111	# _42,
-# basic.c:2913: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
+# basic.c:2918: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
 	add.w	r1, 4 #111	# _43,
-# basic.c:2913: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
+# basic.c:2918: 	K_API_STDIO[K_XY] 				= ((int)xy) + 4;                // 190040 
 	st.w	[r0], r1	# *_42, _43
-# basic.c:2914: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
-	mov.w	r1, get_millis	# get_millis.561_44,
-# basic.c:2914: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.562_45, K_API_STDIO
+# basic.c:2919: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
+	mov.w	r1, get_millis	# get_millis.563_44,
+# basic.c:2919: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.564_45, K_API_STDIO
 	add.w	r0, 44 #111	# _46,
-# basic.c:2914: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
+# basic.c:2919: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
 	add.w	r1, 4 #111	# _47,
-# basic.c:2914: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
+# basic.c:2919: 	K_API_STDIO[K_GET_MILLIS]		= ((int)get_millis) + 4;        // 190044 
 	st.w	[r0], r1	# *_46, _47
-# basic.c:2915: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
-	mov.w	r1, is_key_pressed	# is_key_pressed.563_48,
-# basic.c:2915: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.564_49, K_API_STDIO
+# basic.c:2920: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
+	mov.w	r1, is_key_pressed	# is_key_pressed.565_48,
+# basic.c:2920: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.566_49, K_API_STDIO
 	add.w	r0, 48 #111	# _50,
-# basic.c:2915: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
+# basic.c:2920: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
 	add.w	r1, 4 #111	# _51,
-# basic.c:2915: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
+# basic.c:2920: 	K_API_STDIO[K_IS_KEY_PRESSED]	= ((int)is_key_pressed) + 4;    // 190048 
 	st.w	[r0], r1	# *_50, _51
-# basic.c:2916: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
-	mov.w	r1, is_key_released	# is_key_released.565_52,
-# basic.c:2916: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.566_53, K_API_STDIO
+# basic.c:2921: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
+	mov.w	r1, is_key_released	# is_key_released.567_52,
+# basic.c:2921: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.568_53, K_API_STDIO
 	add.w	r0, 52 #111	# _54,
-# basic.c:2916: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
+# basic.c:2921: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
 	add.w	r1, 4 #111	# _55,
-# basic.c:2916: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
+# basic.c:2921: 	K_API_STDIO[K_IS_KEY_RELEASED]	= ((int)is_key_released) + 4;   // 190052 
 	st.w	[r0], r1	# *_54, _55
-# basic.c:2917: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
-	mov.w	r1, toggle_cursor	# toggle_cursor.567_56,
-# basic.c:2917: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.568_57, K_API_STDIO
+# basic.c:2922: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
+	mov.w	r1, toggle_cursor	# toggle_cursor.569_56,
+# basic.c:2922: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.570_57, K_API_STDIO
 	add.w	r0, 56 #111	# _58,
-# basic.c:2917: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
+# basic.c:2922: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
 	add.w	r1, 4 #111	# _59,
-# basic.c:2917: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
+# basic.c:2922: 	K_API_STDIO[K_TOGGLE_CURSOR] 	= ((int)toggle_cursor) + 4;     // 190056 
 	st.w	[r0], r1	# *_58, _59
-# basic.c:2918: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
-	mov.w	r1, putchar	# putchar.569_60,
-# basic.c:2918: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.570_61, K_API_STDIO
+# basic.c:2923: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
+	mov.w	r1, putchar	# putchar.571_60,
+# basic.c:2923: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.572_61, K_API_STDIO
 	add.w	r0, 60 #111	# _62,
-# basic.c:2918: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
+# basic.c:2923: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
 	add.w	r1, 4 #111	# _63,
-# basic.c:2918: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
+# basic.c:2923: 	K_API_STDIO[K_PUTCHAR]			= ((int)putchar) + 4;           // 190060 
 	st.w	[r0], r1	# *_62, _63
-# basic.c:2919: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
-	mov.w	r1, video_mode	# video_mode.571_64,
-# basic.c:2919: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
-	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.572_65, K_API_STDIO
+# basic.c:2924: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
+	mov.w	r1, video_mode	# video_mode.573_64,
+# basic.c:2924: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
+	ld.w	r0, [K_API_STDIO]	# K_API_STDIO.574_65, K_API_STDIO
 	add.w	r0, 64 #111	# _66,
-# basic.c:2919: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
+# basic.c:2924: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
 	add.w	r1, 4 #111	# _67,
-# basic.c:2919: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
+# basic.c:2924: 	K_API_STDIO[K_VIDEO_MODE]		= ((int)video_mode) + 4;        // 190064 
 	st.w	[r0], r1	# *_66, _67
-# basic.c:2920: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
-	mov.w	r1, scroll_up	# scroll_up.573_68,
-# basic.c:2920: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.574_69, K_API_GRAPHICS
+# basic.c:2925: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
+	mov.w	r1, scroll_up	# scroll_up.575_68,
+# basic.c:2925: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.576_69, K_API_GRAPHICS
 	add.w	r0, 68 #111	# _70,
-# basic.c:2920: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
+# basic.c:2925: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
 	add.w	r1, 4 #111	# _71,
-# basic.c:2920: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
+# basic.c:2925: 	K_API_GRAPHICS[K_SCROLL_UP]	    = ((int)scroll_up) + 4;			// 190068
 	st.w	[r0], r1	# *_70, _71
-# basic.c:2922: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
-	mov.w	r1, strlen	# strlen.575_72,
-# basic.c:2922: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.576_73, K_API_STRING
-# basic.c:2922: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
+# basic.c:2927: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
+	mov.w	r1, strlen	# strlen.577_72,
+# basic.c:2927: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.578_73, K_API_STRING
+# basic.c:2927: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
 	add.w	r1, 4 #111	# _74,
-# basic.c:2922: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
-	st.w	[r0], r1	# *K_API_STRING.576_73, _74
-# basic.c:2923: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
-	mov.w	r1, strcmp	# strcmp.577_75,
-# basic.c:2923: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.578_76, K_API_STRING
+# basic.c:2927: 	K_API_STRING[K_STRLEN] =        ((int)strlen) + 4;				// 190100 
+	st.w	[r0], r1	# *K_API_STRING.578_73, _74
+# basic.c:2928: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
+	mov.w	r1, strcmp	# strcmp.579_75,
+# basic.c:2928: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.580_76, K_API_STRING
 	add.w	r0, 4 #111	# _77,
-# basic.c:2923: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
+# basic.c:2928: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
 	add.w	r1, 4 #111	# _78,
-# basic.c:2923: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
+# basic.c:2928: 	K_API_STRING[K_STRCMP] =        ((int)strcmp) + 4;				// 190104 
 	st.w	[r0], r1	# *_77, _78
-# basic.c:2924: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
-	mov.w	r1, strncmp	# strncmp.579_79,
-# basic.c:2924: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.580_80, K_API_STRING
+# basic.c:2929: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
+	mov.w	r1, strncmp	# strncmp.581_79,
+# basic.c:2929: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.582_80, K_API_STRING
 	add.w	r0, 8 #111	# _81,
-# basic.c:2924: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
+# basic.c:2929: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
 	add.w	r1, 4 #111	# _82,
-# basic.c:2924: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
+# basic.c:2929: 	K_API_STRING[K_STRNCMP] =       ((int)strncmp) + 4;				// 190108 
 	st.w	[r0], r1	# *_81, _82
-# basic.c:2925: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
-	mov.w	r1, memcpy	# memcpy.581_83,
-# basic.c:2925: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.582_84, K_API_STRING
+# basic.c:2930: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
+	mov.w	r1, memcpy	# memcpy.583_83,
+# basic.c:2930: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.584_84, K_API_STRING
 	add.w	r0, 12 #111	# _85,
-# basic.c:2925: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
+# basic.c:2930: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
 	add.w	r1, 4 #111	# _86,
-# basic.c:2925: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
+# basic.c:2930: 	K_API_STRING[K_MEMCPY] =        ((int)memcpy) + 4; 				// 190112 
 	st.w	[r0], r1	# *_85, _86
-# basic.c:2926: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
-	mov.w	r1, memset	# memset.583_87,
-# basic.c:2926: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.584_88, K_API_STRING
+# basic.c:2931: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
+	mov.w	r1, memset	# memset.585_87,
+# basic.c:2931: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.586_88, K_API_STRING
 	add.w	r0, 16 #111	# _89,
-# basic.c:2926: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
+# basic.c:2931: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
 	add.w	r1, 4 #111	# _90,
-# basic.c:2926: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
+# basic.c:2931: 	K_API_STRING[K_MEMSET] =        ((int)memset) + 4; 				// 190116 
 	st.w	[r0], r1	# *_89, _90
-# basic.c:2927: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
-	mov.w	r1, memmove	# memmove.585_91,
-# basic.c:2927: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.586_92, K_API_STRING
+# basic.c:2932: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
+	mov.w	r1, memmove	# memmove.587_91,
+# basic.c:2932: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.588_92, K_API_STRING
 	add.w	r0, 20 #111	# _93,
-# basic.c:2927: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
+# basic.c:2932: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
 	add.w	r1, 4 #111	# _94,
-# basic.c:2927: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
+# basic.c:2932: 	K_API_STRING[K_MEMMOVE] =       ((int)memmove) + 4; 			// 190120 
 	st.w	[r0], r1	# *_93, _94
-# basic.c:2928: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
-	mov.w	r1, strcpy	# strcpy.587_95,
-# basic.c:2928: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.588_96, K_API_STRING
+# basic.c:2933: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
+	mov.w	r1, strcpy	# strcpy.589_95,
+# basic.c:2933: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.590_96, K_API_STRING
 	add.w	r0, 24 #111	# _97,
-# basic.c:2928: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
+# basic.c:2933: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
 	add.w	r1, 4 #111	# _98,
-# basic.c:2928: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
+# basic.c:2933: 	K_API_STRING[K_STRCPY] =        ((int)strcpy) + 4; 				// 190124 
 	st.w	[r0], r1	# *_97, _98
-# basic.c:2929: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
-	mov.w	r1, strncpy	# strncpy.589_99,
-# basic.c:2929: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.590_100, K_API_STRING
+# basic.c:2934: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
+	mov.w	r1, strncpy	# strncpy.591_99,
+# basic.c:2934: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.592_100, K_API_STRING
 	add.w	r0, 28 #111	# _101,
-# basic.c:2929: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
+# basic.c:2934: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
 	add.w	r1, 4 #111	# _102,
-# basic.c:2929: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
+# basic.c:2934: 	K_API_STRING[K_STRNCPY] =       ((int)strncpy) + 4; 			// 190128 
 	st.w	[r0], r1	# *_101, _102
-# basic.c:2930: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
-	mov.w	r1, strcat	# strcat.591_103,
-# basic.c:2930: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.592_104, K_API_STRING
+# basic.c:2935: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
+	mov.w	r1, strcat	# strcat.593_103,
+# basic.c:2935: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.594_104, K_API_STRING
 	add.w	r0, 32 #111	# _105,
-# basic.c:2930: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
+# basic.c:2935: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
 	add.w	r1, 4 #111	# _106,
-# basic.c:2930: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
+# basic.c:2935: 	K_API_STRING[K_STRCAT] =        ((int)strcat) + 4;				// 190132 
 	st.w	[r0], r1	# *_105, _106
-# basic.c:2931: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
-	mov.w	r1, strstr	# strstr.593_107,
-# basic.c:2931: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.594_108, K_API_STRING
+# basic.c:2936: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
+	mov.w	r1, strstr	# strstr.595_107,
+# basic.c:2936: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.596_108, K_API_STRING
 	add.w	r0, 36 #111	# _109,
-# basic.c:2931: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
+# basic.c:2936: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
 	add.w	r1, 4 #111	# _110,
-# basic.c:2931: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
+# basic.c:2936: 	K_API_STRING[K_STRSTR] =        ((int)strstr) + 4;				// 190136 
 	st.w	[r0], r1	# *_109, _110
-# basic.c:2932: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
-	mov.w	r1, tolower	# tolower.595_111,
-# basic.c:2932: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.596_112, K_API_STRING
+# basic.c:2937: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
+	mov.w	r1, tolower	# tolower.597_111,
+# basic.c:2937: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.598_112, K_API_STRING
 	add.w	r0, 40 #111	# _113,
-# basic.c:2932: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
+# basic.c:2937: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
 	add.w	r1, 4 #111	# _114,
-# basic.c:2932: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
+# basic.c:2937: 	K_API_STRING[K_TOLOWER] =       ((int)tolower) + 4;				// 190140 
 	st.w	[r0], r1	# *_113, _114
-# basic.c:2933: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
-	mov.w	r1, toupper	# toupper.597_115,
-# basic.c:2933: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.598_116, K_API_STRING
+# basic.c:2938: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
+	mov.w	r1, toupper	# toupper.599_115,
+# basic.c:2938: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.600_116, K_API_STRING
 	add.w	r0, 44 #111	# _117,
-# basic.c:2933: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
+# basic.c:2938: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
 	add.w	r1, 4 #111	# _118,
-# basic.c:2933: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
+# basic.c:2938: 	K_API_STRING[K_TOUPPER] =       ((int)toupper) + 4;				// 190144 
 	st.w	[r0], r1	# *_117, _118
-# basic.c:2934: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
-	mov.w	r1, str_toupper	# str_toupper.599_119,
-# basic.c:2934: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.600_120, K_API_STRING
+# basic.c:2939: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
+	mov.w	r1, str_toupper	# str_toupper.601_119,
+# basic.c:2939: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.602_120, K_API_STRING
 	add.w	r0, 48 #111	# _121,
-# basic.c:2934: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
+# basic.c:2939: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
 	add.w	r1, 4 #111	# _122,
-# basic.c:2934: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
+# basic.c:2939: 	K_API_STRING[K_STR_TOUPPER] =   ((int)str_toupper) + 4;			// 190148 
 	st.w	[r0], r1	# *_121, _122
-# basic.c:2935: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
-	mov.w	r1, str_n_toupper	# str_n_toupper.601_123,
-# basic.c:2935: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.602_124, K_API_STRING
+# basic.c:2940: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
+	mov.w	r1, str_n_toupper	# str_n_toupper.603_123,
+# basic.c:2940: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.604_124, K_API_STRING
 	add.w	r0, 52 #111	# _125,
-# basic.c:2935: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
+# basic.c:2940: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
 	add.w	r1, 4 #111	# _126,
-# basic.c:2935: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
+# basic.c:2940: 	K_API_STRING[K_STR_N_TOUPPER] = ((int)str_n_toupper) + 4;		// 190152 
 	st.w	[r0], r1	# *_125, _126
-# basic.c:2936: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
-	mov.w	r1, isdigit	# isdigit.603_127,
-# basic.c:2936: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.604_128, K_API_STRING
+# basic.c:2941: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
+	mov.w	r1, isdigit	# isdigit.605_127,
+# basic.c:2941: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.606_128, K_API_STRING
 	add.w	r0, 56 #111	# _129,
-# basic.c:2936: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
+# basic.c:2941: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
 	add.w	r1, 4 #111	# _130,
-# basic.c:2936: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
+# basic.c:2941: 	K_API_STRING[K_ISDIGIT] =       ((int)isdigit) + 4;				// 190156 
 	st.w	[r0], r1	# *_129, _130
-# basic.c:2937: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
-	mov.w	r1, islower	# islower.605_131,
-# basic.c:2937: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.606_132, K_API_STRING
+# basic.c:2942: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
+	mov.w	r1, islower	# islower.607_131,
+# basic.c:2942: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.608_132, K_API_STRING
 	add.w	r0, 60 #111	# _133,
-# basic.c:2937: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
+# basic.c:2942: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
 	add.w	r1, 4 #111	# _134,
-# basic.c:2937: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
+# basic.c:2942: 	K_API_STRING[K_ISLOWER] =       ((int)islower) + 4;				// 190160 
 	st.w	[r0], r1	# *_133, _134
-# basic.c:2938: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
-	mov.w	r1, isupper	# isupper.607_135,
-# basic.c:2938: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.608_136, K_API_STRING
+# basic.c:2943: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
+	mov.w	r1, isupper	# isupper.609_135,
+# basic.c:2943: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.610_136, K_API_STRING
 	add.w	r0, 64 #111	# _137,
-# basic.c:2938: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
+# basic.c:2943: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
 	add.w	r1, 4 #111	# _138,
-# basic.c:2938: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
+# basic.c:2943: 	K_API_STRING[K_ISUPPER] =       ((int)isupper) + 4;				// 190164 
 	st.w	[r0], r1	# *_137, _138
-# basic.c:2939: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
-	mov.w	r1, isalpha	# isalpha.609_139,
-# basic.c:2939: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.610_140, K_API_STRING
+# basic.c:2944: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
+	mov.w	r1, isalpha	# isalpha.611_139,
+# basic.c:2944: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.612_140, K_API_STRING
 	add.w	r0, 68 #111	# _141,
-# basic.c:2939: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
+# basic.c:2944: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
 	add.w	r1, 4 #111	# _142,
-# basic.c:2939: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
+# basic.c:2944: 	K_API_STRING[K_ISALPHA] =       ((int)isalpha) + 4;				// 190168 
 	st.w	[r0], r1	# *_141, _142
-# basic.c:2940: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
-	mov.w	r1, isalnum	# isalnum.611_143,
-# basic.c:2940: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.612_144, K_API_STRING
+# basic.c:2945: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
+	mov.w	r1, isalnum	# isalnum.613_143,
+# basic.c:2945: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.614_144, K_API_STRING
 	add.w	r0, 72 #111	# _145,
-# basic.c:2940: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
+# basic.c:2945: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
 	add.w	r1, 4 #111	# _146,
-# basic.c:2940: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
+# basic.c:2945: 	K_API_STRING[K_ISALNUM] =       ((int)isalnum) + 4;				// 190172 
 	st.w	[r0], r1	# *_145, _146
-# basic.c:2941: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
-	mov.w	r1, atoi	# atoi.613_147,
-# basic.c:2941: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.614_148, K_API_STRING
+# basic.c:2946: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
+	mov.w	r1, atoi	# atoi.615_147,
+# basic.c:2946: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.616_148, K_API_STRING
 	add.w	r0, 76 #111	# _149,
-# basic.c:2941: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
+# basic.c:2946: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
 	add.w	r1, 4 #111	# _150,
-# basic.c:2941: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
+# basic.c:2946: 	K_API_STRING[K_ATOI] =          ((int)atoi) + 4;				// 190176 
 	st.w	[r0], r1	# *_149, _150
-# basic.c:2942: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
-	mov.w	r1, isspace	# isspace.615_151,
-# basic.c:2942: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.616_152, K_API_STRING
+# basic.c:2947: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
+	mov.w	r1, isspace	# isspace.617_151,
+# basic.c:2947: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.618_152, K_API_STRING
 	add.w	r0, 80 #111	# _153,
-# basic.c:2942: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
+# basic.c:2947: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
 	add.w	r1, 4 #111	# _154,
-# basic.c:2942: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
+# basic.c:2947: 	K_API_STRING[K_ISSPACE] =       ((int)isspace) + 4;				// 190180 
 	st.w	[r0], r1	# *_153, _154
-# basic.c:2943: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
-	mov.w	r1, memcmp	# memcmp.617_155,
-# basic.c:2943: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.618_156, K_API_STRING
+# basic.c:2948: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
+	mov.w	r1, memcmp	# memcmp.619_155,
+# basic.c:2948: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.620_156, K_API_STRING
 	add.w	r0, 84 #111	# _157,
-# basic.c:2943: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
+# basic.c:2948: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
 	add.w	r1, 4 #111	# _158,
-# basic.c:2943: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
+# basic.c:2948: 	K_API_STRING[K_MEMCMP] =        ((int)memcmp) + 4;		 	 	// 190184 
 	st.w	[r0], r1	# *_157, _158
-# basic.c:2944: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
-	mov.w	r1, strtok	# strtok.619_159,
-# basic.c:2944: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.620_160, K_API_STRING
+# basic.c:2949: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
+	mov.w	r1, strtok	# strtok.621_159,
+# basic.c:2949: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.622_160, K_API_STRING
 	add.w	r0, 88 #111	# _161,
-# basic.c:2944: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
+# basic.c:2949: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
 	add.w	r1, 4 #111	# _162,
-# basic.c:2944: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
+# basic.c:2949: 	K_API_STRING[K_STRTOK] =        ((int)strtok) + 4;				// 190188 
 	st.w	[r0], r1	# *_161, _162
-# basic.c:2945: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
-	mov.w	r1, strchr	# strchr.621_163,
-# basic.c:2945: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.622_164, K_API_STRING
+# basic.c:2950: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
+	mov.w	r1, strchr	# strchr.623_163,
+# basic.c:2950: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.624_164, K_API_STRING
 	add.w	r0, 92 #111	# _165,
-# basic.c:2945: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
+# basic.c:2950: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
 	add.w	r1, 4 #111	# _166,
-# basic.c:2945: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
+# basic.c:2950: 	K_API_STRING[K_STRCHR] =        ((int)strchr) + 4; 				// 190192 
 	st.w	[r0], r1	# *_165, _166
-# basic.c:2946: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
-	mov.w	r1, strrchr	# strrchr.623_167,
-# basic.c:2946: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.624_168, K_API_STRING
+# basic.c:2951: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
+	mov.w	r1, strrchr	# strrchr.625_167,
+# basic.c:2951: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.626_168, K_API_STRING
 	add.w	r0, 96 #111	# _169,
-# basic.c:2946: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
+# basic.c:2951: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
 	add.w	r1, 4 #111	# _170,
-# basic.c:2946: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
+# basic.c:2951: 	K_API_STRING[K_STRRRCHR] =      ((int)strrchr) + 4; 			// 190196 
 	st.w	[r0], r1	# *_169, _170
-# basic.c:2947: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
-	mov.w	r1, strncasecmp	# strncasecmp.625_171,
-# basic.c:2947: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
-	ld.w	r0, [K_API_STRING]	# K_API_STRING.626_172, K_API_STRING
+# basic.c:2952: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
+	mov.w	r1, strncasecmp	# strncasecmp.627_171,
+# basic.c:2952: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
+	ld.w	r0, [K_API_STRING]	# K_API_STRING.628_172, K_API_STRING
 	add.w	r0, 100 #111	# _173,
-# basic.c:2947: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
+# basic.c:2952: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
 	add.w	r1, 4 #111	# _174,
-# basic.c:2947: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
+# basic.c:2952: 	K_API_STRING[K_STRNCASECMP] =   ((int)strncasecmp) + 4; 		// 190200 
 	st.w	[r0], r1	# *_173, _174
-# basic.c:2949: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
-	mov.w	r1, sprintf	# sprintf.627_175,
-# basic.c:2949: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
-	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.628_176, K_API_SPRINTF
-# basic.c:2949: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
+# basic.c:2954: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
+	mov.w	r1, sprintf	# sprintf.629_175,
+# basic.c:2954: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
+	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.630_176, K_API_SPRINTF
+# basic.c:2954: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
 	add.w	r1, 4 #111	# _177,
-# basic.c:2949: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
-	st.w	[r0], r1	# *K_API_SPRINTF.628_176, _177
-# basic.c:2950: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
-	mov.w	r1, vsprintf	# vsprintf.629_178,
-# basic.c:2950: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
-	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.630_179, K_API_SPRINTF
+# basic.c:2954: 	K_API_SPRINTF[K_SPRINTF]	= 	((int)sprintf) + 4;				// 190300
+	st.w	[r0], r1	# *K_API_SPRINTF.630_176, _177
+# basic.c:2955: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
+	mov.w	r1, vsprintf	# vsprintf.631_178,
+# basic.c:2955: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
+	ld.w	r0, [K_API_SPRINTF]	# K_API_SPRINTF.632_179, K_API_SPRINTF
 	add.w	r0, 4 #111	# _180,
-# basic.c:2950: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
+# basic.c:2955: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
 	add.w	r1, 4 #111	# _181,
-# basic.c:2950: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
+# basic.c:2955: 	K_API_SPRINTF[K_VSPRINTF]	= 	((int)vsprintf) + 4;			// 190304
 	st.w	[r0], r1	# *_180, _181
-# basic.c:2952: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
-	mov.w	r1, pixel	# pixel.631_182,
-# basic.c:2952: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.632_183, K_API_GRAPHICS
-# basic.c:2952: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
+# basic.c:2957: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
+	mov.w	r1, pixel	# pixel.633_182,
+# basic.c:2957: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.634_183, K_API_GRAPHICS
+# basic.c:2957: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
 	add.w	r1, 4 #111	# _184,
-# basic.c:2952: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
-	st.w	[r0], r1	# *K_API_GRAPHICS.632_183, _184
-# basic.c:2953: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
-	mov.w	r1, line	# line.633_185,
-# basic.c:2953: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.634_186, K_API_GRAPHICS
+# basic.c:2957: 	K_API_GRAPHICS[K_PIXEL]		=	((int)pixel) + 4;				// 190400
+	st.w	[r0], r1	# *K_API_GRAPHICS.634_183, _184
+# basic.c:2958: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
+	mov.w	r1, line	# line.635_185,
+# basic.c:2958: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.636_186, K_API_GRAPHICS
 	add.w	r0, 4 #111	# _187,
-# basic.c:2953: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
+# basic.c:2958: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
 	add.w	r1, 4 #111	# _188,
-# basic.c:2953: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
+# basic.c:2958: 	K_API_GRAPHICS[K_LINE]		=	((int)line) + 4;				// 190404
 	st.w	[r0], r1	# *_187, _188
-# basic.c:2954: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
-	mov.w	r1, circle	# circle.635_189,
-# basic.c:2954: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.636_190, K_API_GRAPHICS
+# basic.c:2959: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
+	mov.w	r1, circle	# circle.637_189,
+# basic.c:2959: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.638_190, K_API_GRAPHICS
 	add.w	r0, 8 #111	# _191,
-# basic.c:2954: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
+# basic.c:2959: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
 	add.w	r1, 4 #111	# _192,
-# basic.c:2954: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
+# basic.c:2959: 	K_API_GRAPHICS[K_CIRCLE]	=	((int)circle) + 4;				// 190408
 	st.w	[r0], r1	# *_191, _192
-# basic.c:2955: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
-	mov.w	r1, draw	# draw.637_193,
-# basic.c:2955: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
-	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.638_194, K_API_GRAPHICS
+# basic.c:2960: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
+	mov.w	r1, draw	# draw.639_193,
+# basic.c:2960: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
+	ld.w	r0, [K_API_GRAPHICS]	# K_API_GRAPHICS.640_194, K_API_GRAPHICS
 	add.w	r0, 12 #111	# _195,
-# basic.c:2955: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
+# basic.c:2960: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
 	add.w	r1, 4 #111	# _196,
-# basic.c:2955: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
+# basic.c:2960: 	K_API_GRAPHICS[K_DRAW]		=	((int)draw) + 4;				// 190412
 	st.w	[r0], r1	# *_195, _196
-# basic.c:2957: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
-	mov.w	r1, init_spi	# init_spi.639_197,
-# basic.c:2957: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.640_198, K_API_SPI
-# basic.c:2957: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
+# basic.c:2962: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
+	mov.w	r1, init_spi	# init_spi.641_197,
+# basic.c:2962: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.642_198, K_API_SPI
+# basic.c:2962: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
 	add.w	r1, 4 #111	# _199,
-# basic.c:2957: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
-	st.w	[r0], r1	# *K_API_SPI.640_198, _199
-# basic.c:2958: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
-	mov.w	r1, deinit_spi	# deinit_spi.641_200,
-# basic.c:2958: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.642_201, K_API_SPI
+# basic.c:2962: 	K_API_SPI[K_INIT_SPI]		=    ((int)init_spi) + 4; 			// 190500
+	st.w	[r0], r1	# *K_API_SPI.642_198, _199
+# basic.c:2963: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
+	mov.w	r1, deinit_spi	# deinit_spi.643_200,
+# basic.c:2963: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.644_201, K_API_SPI
 	add.w	r0, 4 #111	# _202,
-# basic.c:2958: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
+# basic.c:2963: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
 	add.w	r1, 4 #111	# _203,
-# basic.c:2958: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
+# basic.c:2963: 	K_API_SPI[K_DEINIT_SPI]		=    ((int)deinit_spi) + 4; 		// 190504
 	st.w	[r0], r1	# *_202, _203
-# basic.c:2959: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
-	mov.w	r1, send_spi	# send_spi.643_204,
-# basic.c:2959: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.644_205, K_API_SPI
+# basic.c:2964: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
+	mov.w	r1, send_spi	# send_spi.645_204,
+# basic.c:2964: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.646_205, K_API_SPI
 	add.w	r0, 8 #111	# _206,
-# basic.c:2959: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
+# basic.c:2964: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
 	add.w	r1, 4 #111	# _207,
-# basic.c:2959: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
+# basic.c:2964: 	K_API_SPI[K_SEND_SPI]		=    ((int)send_spi) + 4; 			// 190508
 	st.w	[r0], r1	# *_206, _207
-# basic.c:2960: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
-	mov.w	r1, read_spi	# read_spi.645_208,
-# basic.c:2960: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.646_209, K_API_SPI
+# basic.c:2965: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
+	mov.w	r1, read_spi	# read_spi.647_208,
+# basic.c:2965: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.648_209, K_API_SPI
 	add.w	r0, 12 #111	# _210,
-# basic.c:2960: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
+# basic.c:2965: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
 	add.w	r1, 4 #111	# _211,
-# basic.c:2960: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
+# basic.c:2965: 	K_API_SPI[K_READ_SPI]		=    ((int)read_spi) + 4; 			// 190512
 	st.w	[r0], r1	# *_210, _211
-# basic.c:2961: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
-	mov.w	r1, SPI_Byte	# SPI_Byte.647_212,
-# basic.c:2961: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
-	ld.w	r0, [K_API_SPI]	# K_API_SPI.648_213, K_API_SPI
+# basic.c:2966: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
+	mov.w	r1, SPI_Byte	# SPI_Byte.649_212,
+# basic.c:2966: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
+	ld.w	r0, [K_API_SPI]	# K_API_SPI.650_213, K_API_SPI
 	add.w	r0, 16 #111	# _214,
-# basic.c:2961: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
+# basic.c:2966: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
 	add.w	r1, 4 #111	# _215,
-# basic.c:2961: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
+# basic.c:2966: 	K_API_SPI[K_SPI_BYTE]		=    ((int)SPI_Byte) + 4; 			// 190516
 	st.w	[r0], r1	# *_214, _215
-# basic.c:2963: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
-	mov.w	r1, init_tcpip	# init_tcpip.649_216,
-# basic.c:2963: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
-	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.650_217, K_API_TCPIP
-# basic.c:2963: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
+# basic.c:2968: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
+	mov.w	r1, init_tcpip	# init_tcpip.651_216,
+# basic.c:2968: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
+	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.652_217, K_API_TCPIP
+# basic.c:2968: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
 	add.w	r1, 4 #111	# _218,
-# basic.c:2963: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
-	st.w	[r0], r1	# *K_API_TCPIP.650_217, _218
-# basic.c:2964: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
-	mov.w	r1, browseUrl	# browseUrl.651_219,
-# basic.c:2964: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
-	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.652_220, K_API_TCPIP
+# basic.c:2968: 	K_API_TCPIP[K_INIT_TCPIP]	= 	 ((int)init_tcpip) + 4;			// 190600
+	st.w	[r0], r1	# *K_API_TCPIP.652_217, _218
+# basic.c:2969: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
+	mov.w	r1, browseUrl	# browseUrl.653_219,
+# basic.c:2969: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
+	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.654_220, K_API_TCPIP
 	add.w	r0, 4 #111	# _221,
-# basic.c:2964: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
+# basic.c:2969: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
 	add.w	r1, 4 #111	# _222,
-# basic.c:2964: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
+# basic.c:2969: 	K_API_TCPIP[K_BROWSE_URL]	= 	 ((int)browseUrl) + 4;			// 190604
 	st.w	[r0], r1	# *_221, _222
-# basic.c:2965: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
-	mov.w	r1, httpPost	# httpPost.653_223,
-# basic.c:2965: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
-	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.654_224, K_API_TCPIP
+# basic.c:2970: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
+	mov.w	r1, httpPost	# httpPost.655_223,
+# basic.c:2970: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
+	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.656_224, K_API_TCPIP
 	add.w	r0, 8 #111	# _225,
-# basic.c:2965: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
+# basic.c:2970: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
 	add.w	r1, 4 #111	# _226,
-# basic.c:2965: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
+# basic.c:2970: 	K_API_TCPIP[K_HTTP_POST]	= 	 ((int)httpPost) + 4;			// 190608
 	st.w	[r0], r1	# *_225, _226
-# basic.c:2966: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
-	mov.w	r1, mainLoop	# mainLoop.655_227,
-# basic.c:2966: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
-	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.656_228, K_API_TCPIP
+# basic.c:2971: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
+	mov.w	r1, mainLoop	# mainLoop.657_227,
+# basic.c:2971: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
+	ld.w	r0, [K_API_TCPIP]	# K_API_TCPIP.658_228, K_API_TCPIP
 	add.w	r0, 12 #111	# _229,
-# basic.c:2966: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
+# basic.c:2971: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
 	add.w	r1, 4 #111	# _230,
-# basic.c:2966: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
+# basic.c:2971: 	K_API_TCPIP[K_MAIN_LOOP]	= 	 ((int)mainLoop) + 4;			// 190612
 	st.w	[r0], r1	# *_229, _230
-# basic.c:2969: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
-	mov.w	r1, sdcard_init	# sdcard_init.657_231,
-# basic.c:2969: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.658_232, K_API_FAT
-# basic.c:2969: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
+# basic.c:2974: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
+	mov.w	r1, sdcard_init	# sdcard_init.659_231,
+# basic.c:2974: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.660_232, K_API_FAT
+# basic.c:2974: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
 	add.w	r1, 4 #111	# _233,
-# basic.c:2969: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
-	st.w	[r0], r1	# *K_API_FAT.658_232, _233
-# basic.c:2970: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
-	mov.w	r1, volume_init	# volume_init.659_234,
-# basic.c:2970: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.660_235, K_API_FAT
+# basic.c:2974: 	K_API_FAT[K_SDCARD_INIT]	= 	 ((int)sdcard_init) + 4;		// 190700
+	st.w	[r0], r1	# *K_API_FAT.660_232, _233
+# basic.c:2975: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
+	mov.w	r1, volume_init	# volume_init.661_234,
+# basic.c:2975: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.662_235, K_API_FAT
 	add.w	r0, 4 #111	# _236,
-# basic.c:2970: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
+# basic.c:2975: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
 	add.w	r1, 4 #111	# _237,
-# basic.c:2970: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
+# basic.c:2975: 	K_API_FAT[K_VOLUME_INIT]	= 	 ((int)volume_init) + 4;		// 190704
 	st.w	[r0], r1	# *_236, _237
-# basic.c:2971: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
-	mov.w	r1, file_open	# file_open.661_238,
-# basic.c:2971: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.662_239, K_API_FAT
+# basic.c:2976: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
+	mov.w	r1, file_open	# file_open.663_238,
+# basic.c:2976: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.664_239, K_API_FAT
 	add.w	r0, 8 #111	# _240,
-# basic.c:2971: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
+# basic.c:2976: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
 	add.w	r1, 4 #111	# _241,
-# basic.c:2971: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
+# basic.c:2976: 	K_API_FAT[K_FILE_OPEN]		= 	 ((int)file_open) + 4;			// 190708
 	st.w	[r0], r1	# *_240, _241
-# basic.c:2972: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
-	mov.w	r1, file_read	# file_read.663_242,
-# basic.c:2972: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.664_243, K_API_FAT
+# basic.c:2977: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
+	mov.w	r1, file_read	# file_read.665_242,
+# basic.c:2977: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.666_243, K_API_FAT
 	add.w	r0, 12 #111	# _244,
-# basic.c:2972: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
+# basic.c:2977: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
 	add.w	r1, 4 #111	# _245,
-# basic.c:2972: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
+# basic.c:2977: 	K_API_FAT[K_FILE_READ]		= 	 ((int)file_read) + 4;			// 190712
 	st.w	[r0], r1	# *_244, _245
-# basic.c:2973: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
-	mov.w	r1, getDirEntry	# getDirEntry.665_246,
-# basic.c:2973: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.666_247, K_API_FAT
+# basic.c:2978: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
+	mov.w	r1, getDirEntry	# getDirEntry.667_246,
+# basic.c:2978: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.668_247, K_API_FAT
 	add.w	r0, 16 #111	# _248,
-# basic.c:2973: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
+# basic.c:2978: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
 	add.w	r1, 4 #111	# _249,
-# basic.c:2973: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
+# basic.c:2978: 	K_API_FAT[K_GET_DIR_ENTRY]	= 	 ((int)getDirEntry) + 4;		// 190716
 	st.w	[r0], r1	# *_248, _249
-# basic.c:2974: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
-	mov.w	r1, file_seek	# file_seek.667_250,
-# basic.c:2974: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.668_251, K_API_FAT
+# basic.c:2979: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
+	mov.w	r1, file_seek	# file_seek.669_250,
+# basic.c:2979: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.670_251, K_API_FAT
 	add.w	r0, 20 #111	# _252,
-# basic.c:2974: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
+# basic.c:2979: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
 	add.w	r1, 4 #111	# _253,
-# basic.c:2974: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
+# basic.c:2979: 	K_API_FAT[K_FILE_SEEK]		= 	 ((int)file_seek) + 4;			// 190720
 	st.w	[r0], r1	# *_252, _253
-# basic.c:2975: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
-	mov.w	r1, file_write	# file_write.669_254,
-# basic.c:2975: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.670_255, K_API_FAT
+# basic.c:2980: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
+	mov.w	r1, file_write	# file_write.671_254,
+# basic.c:2980: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.672_255, K_API_FAT
 	add.w	r0, 24 #111	# _256,
-# basic.c:2975: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
+# basic.c:2980: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
 	add.w	r1, 4 #111	# _257,
-# basic.c:2975: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
+# basic.c:2980: 	K_API_FAT[K_FILE_WRITE]		= 	 ((int)file_write) + 4;			// 190724
 	st.w	[r0], r1	# *_256, _257
-# basic.c:2976: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
-	mov.w	r1, file_delete	# file_delete.671_258,
-# basic.c:2976: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
-	ld.w	r0, [K_API_FAT]	# K_API_FAT.672_259, K_API_FAT
+# basic.c:2981: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
+	mov.w	r1, file_delete	# file_delete.673_258,
+# basic.c:2981: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
+	ld.w	r0, [K_API_FAT]	# K_API_FAT.674_259, K_API_FAT
 	add.w	r0, 28 #111	# _260,
-# basic.c:2976: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
+# basic.c:2981: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
 	add.w	r1, 4 #111	# _261,
-# basic.c:2976: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
+# basic.c:2981: 	K_API_FAT[K_FILE_DELETE]	= 	 ((int)file_delete) + 4;		// 190728
 	st.w	[r0], r1	# *_260, _261
-# basic.c:2978: }
+# basic.c:2983: }
 	nop	
 	mov.w	sp, r13	#,
 	pop	r13		#
@@ -10898,175 +10919,175 @@ main:
 	push	r13		#
 	mov.w	r13, sp	#,
 	sub.w	sp, 28 #111	#,
-# basic.c:2984: 	program_start = program;
-	ld.w	r0, [program]	# program.673_1, program
-	st.w	[program_start], r0	# program_start, program.673_1
-# basic.c:2985: 	program_end = program_start;
-	ld.w	r0, [program_start]	# program_start.674_2, program_start
-	st.w	[program_end], r0	# program_end, program_start.674_2
-# basic.c:2986: 	bsp = program + kRamSize;  // Needed for printnum
-	ld.w	r0, [program]	# program.675_3, program
+# basic.c:2989: 	program_start = program;
+	ld.w	r0, [program]	# program.675_1, program
+	st.w	[program_start], r0	# program_start, program.675_1
+# basic.c:2990: 	program_end = program_start;
+	ld.w	r0, [program_start]	# program_start.676_2, program_start
+	st.w	[program_end], r0	# program_end, program_start.676_2
+# basic.c:2991: 	bsp = program + kRamSize;  // Needed for printnum
+	ld.w	r0, [program]	# program.677_3, program
 	mov.w	r1, 65536	# tmp49,
 	add.w	r0, r1 #222	# _4, tmp49
-# basic.c:2986: 	bsp = program + kRamSize;  // Needed for printnum
+# basic.c:2991: 	bsp = program + kRamSize;  // Needed for printnum
 	st.w	[bsp], r0	# bsp, _4
-# basic.c:2987: 	stack_limit = program + kRamSize - STACK_SIZE;
-	ld.w	r0, [program]	# program.676_5, program
+# basic.c:2992: 	stack_limit = program + kRamSize - STACK_SIZE;
+	ld.w	r0, [program]	# program.678_5, program
 	mov.w	r1, 65336	# tmp50,
 	add.w	r0, r1 #222	# _6, tmp50
-# basic.c:2987: 	stack_limit = program + kRamSize - STACK_SIZE;
+# basic.c:2992: 	stack_limit = program + kRamSize - STACK_SIZE;
 	st.w	[stack_limit], r0	# stack_limit, _6
-# basic.c:2988: 	variables_begin = stack_limit - 28 * VAR_SIZE;
-	ld.w	r0, [stack_limit]	# stack_limit.677_7, stack_limit
+# basic.c:2993: 	variables_begin = stack_limit - 28 * VAR_SIZE;
+	ld.w	r0, [stack_limit]	# stack_limit.679_7, stack_limit
 	add.w	r0, -112 #111	# _8,
-# basic.c:2988: 	variables_begin = stack_limit - 28 * VAR_SIZE;
+# basic.c:2993: 	variables_begin = stack_limit - 28 * VAR_SIZE;
 	st.w	[variables_begin], r0	# variables_begin, _8
-# basic.c:2990: 	umm_init();
+# basic.c:2995: 	umm_init();
 	call	umm_init		#
-# basic.c:2991: 	init_arrays();
+# basic.c:2996: 	init_arrays();
 	call	init_arrays		#
-# basic.c:2993: 	current_line = 0;
+# basic.c:2998: 	current_line = 0;
 	xor.w	r0, r0	# tmp51
 	st.w	[current_line], r0	# current_line, tmp51
-# basic.c:2995: 	init_K_API();
+# basic.c:3000: 	init_K_API();
 	call	init_K_API		#
-# basic.c:2997: 	init_stdio();
+# basic.c:3002: 	init_stdio();
 	call	init_stdio		#
-# basic.c:2999: 	video_mode(0);
+# basic.c:3004: 	video_mode(0);
 	mov.w	r1, sp	# tmp52,
 	xor.w	r0, r0	# tmp53
 	st.w	[r1], r0	#, tmp53
 	call	video_mode		#
-# basic.c:3000: 	color = 1;
+# basic.c:3005: 	color = 1;
 	mov.w	r0, 1	# tmp54,
 	st.w	[color], r0	# color, tmp54
-# basic.c:3001: 	cls(color);
-	ld.w	r0, [color]	# color.678_9, color
+# basic.c:3006: 	cls(color);
+	ld.w	r0, [color]	# color.680_9, color
 	mov.w	r1, sp	# tmp55,
-	st.w	[r1], r0	#, color.678_9
+	st.w	[r1], r0	#, color.680_9
 	call	cls		#
-# basic.c:3002: 	uart_init_files();
+# basic.c:3007: 	uart_init_files();
 	call	uart_init_files		#
-# basic.c:3003: 	init_spi();
+# basic.c:3008: 	init_spi();
 	call	init_spi		#
-# basic.c:3004: 	init_sd();
+# basic.c:3009: 	init_sd();
 	call	init_sd		#
-# basic.c:3005: 	init_net();
+# basic.c:3010: 	init_net();
 	call	init_net		#
-# basic.c:3007: 	exec_mem();
+# basic.c:3012: 	exec_mem();
 	call	exec_mem		#
-# basic.c:3010: 	res = 0;
+# basic.c:3015: 	res = 0;
 	xor.w	r0, r0	# tmp56
 	st.w	[r13 + (-4)], r0	# res, tmp56
-.L613:
-# basic.c:3013: 		if (res != 3)
+.L614:
+# basic.c:3018: 		if (res != 3)
 	ld.w	r1, [r13 + (-4)]	# tmp57, res
 	mov.w	r0, 3	# tmp58,
 	cmp.w	r1, r0	# tmp57, tmp58
-	jz	.L603		#
-# basic.c:3015: 			getln('>');
+	jz	.L604		#
+# basic.c:3020: 			getln('>');
 	mov.w	r1, sp	# tmp59,
 	mov.w	r0, 62	# tmp60,
 	st.w	[r1], r0	#, tmp60
 	call	getln		#
-# basic.c:3016: 			toUppercaseBuffer();
+# basic.c:3021: 			toUppercaseBuffer();
 	call	toUppercaseBuffer		#
-# basic.c:3017: 			skip_to_end();
+# basic.c:3022: 			skip_to_end();
 	call	skip_to_end		#
-	j	.L604		#
-.L603:
-# basic.c:3021: 			res = 0;
+	j	.L605		#
+.L604:
+# basic.c:3026: 			res = 0;
 	xor.w	r0, r0	# tmp61
 	st.w	[r13 + (-4)], r0	# res, tmp61
-# basic.c:3022: 			toUppercaseBuffer();
+# basic.c:3027: 			toUppercaseBuffer();
 	call	toUppercaseBuffer		#
-.L604:
-# basic.c:3025: 		linenum = testnum();
+.L605:
+# basic.c:3030: 		linenum = testnum();
 	call	testnum		#
 	mov.w	r1, r0	# _10,
-# basic.c:3025: 		linenum = testnum();
+# basic.c:3030: 		linenum = testnum();
 	mov.w	r0, r1	# tmp62, _10
 	st.w	[sp], r0	#, tmp62
 	call	__fixsfsi		#
 	st.w	[linenum], r0	# linenum, _11
-# basic.c:3027: 		ignore_blanks();
+# basic.c:3032: 		ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:3029: 		if (linenum == 0)
-	ld.w	r1, [linenum]	# linenum.679_12, linenum
-# basic.c:3029: 		if (linenum == 0)
+# basic.c:3034: 		if (linenum == 0)
+	ld.w	r1, [linenum]	# linenum.681_12, linenum
+# basic.c:3034: 		if (linenum == 0)
 	xor.w	r0, r0	# tmp63
-	cmp.w	r1, r0	# linenum.679_12, tmp63
-	jnz	.L605		#
-.L611:
-# basic.c:3032: 				res = direct();
+	cmp.w	r1, r0	# linenum.681_12, tmp63
+	jnz	.L606		#
+.L612:
+# basic.c:3037: 				res = direct();
 	call	direct		#
 	st.w	[r13 + (-4)], r0	# res,
-# basic.c:3033: 				if (res == 1)
+# basic.c:3038: 				if (res == 1)
 	ld.w	r1, [r13 + (-4)]	# tmp64, res
 	mov.w	r0, 1	# tmp65,
 	cmp.w	r1, r0	# tmp64, tmp65
-	jnz	.L606		#
-# basic.c:3034: 					return 0;
+	jnz	.L607		#
+# basic.c:3039: 					return 0;
 	xor.w	r0, r0	# _66
-	j	.L614		#
-.L606:
-# basic.c:3035: 				if (res == 2)
+	j	.L615		#
+.L607:
+# basic.c:3040: 				if (res == 2)
 	ld.w	r1, [r13 + (-4)]	# tmp66, res
 	mov.w	r0, 2	# tmp67,
 	cmp.w	r1, r0	# tmp66, tmp67
-	jnz	.L608		#
-# basic.c:3037: 					txtpos = current_line + sizeof(LINENUM) + sizeof(char);
-	ld.w	r0, [current_line]	# current_line.680_13, current_line
+	jnz	.L609		#
+# basic.c:3042: 					txtpos = current_line + sizeof(LINENUM) + sizeof(char);
+	ld.w	r0, [current_line]	# current_line.682_13, current_line
 	add.w	r0, 5 #111	# _14,
-# basic.c:3037: 					txtpos = current_line + sizeof(LINENUM) + sizeof(char);
+# basic.c:3042: 					txtpos = current_line + sizeof(LINENUM) + sizeof(char);
 	st.w	[txtpos], r0	# txtpos, _14
-# basic.c:3038: 					continue;
-	j	.L609		#
-.L608:
-# basic.c:3040: 				ignore_blanks();
+# basic.c:3043: 					continue;
+	j	.L610		#
+.L609:
+# basic.c:3045: 				ignore_blanks();
 	call	ignore_blanks		#
-# basic.c:3041: 				if (*txtpos == NL || *txtpos != ':')
-	ld.w	r0, [txtpos]	# txtpos.681_15, txtpos
-	ld.b	r0, [r0]	# _16, *txtpos.681_15
-# basic.c:3041: 				if (*txtpos == NL || *txtpos != ':')
+# basic.c:3046: 				if (*txtpos == NL || *txtpos != ':')
+	ld.w	r0, [txtpos]	# txtpos.683_15, txtpos
+	ld.b	r0, [r0]	# _16, *txtpos.683_15
+# basic.c:3046: 				if (*txtpos == NL || *txtpos != ':')
 	zex.b	r1, r0	# tmp68, _16
 	mov.w	r0, 10	# tmp69,
 	cmp.w	r1, r0	# tmp68, tmp69
-	jz	.L613		#
-# basic.c:3041: 				if (*txtpos == NL || *txtpos != ':')
-	ld.w	r0, [txtpos]	# txtpos.682_17, txtpos
-	ld.b	r0, [r0]	# _18, *txtpos.682_17
-# basic.c:3041: 				if (*txtpos == NL || *txtpos != ':')
+	jz	.L614		#
+# basic.c:3046: 				if (*txtpos == NL || *txtpos != ':')
+	ld.w	r0, [txtpos]	# txtpos.684_17, txtpos
+	ld.b	r0, [r0]	# _18, *txtpos.684_17
+# basic.c:3046: 				if (*txtpos == NL || *txtpos != ':')
 	zex.b	r1, r0	# tmp70, _18
 	mov.w	r0, 58	# tmp71,
 	cmp.w	r1, r0	# tmp70, tmp71
-	jnz	.L613		#
-# basic.c:3043: 				txtpos++;
-	ld.w	r0, [txtpos]	# txtpos.683_19, txtpos
+	jnz	.L614		#
+# basic.c:3048: 				txtpos++;
+	ld.w	r0, [txtpos]	# txtpos.685_19, txtpos
 	add.w	r0, 1 #111	# _20,
 	st.w	[txtpos], r0	# txtpos, _20
-# basic.c:3044: 				ignore_blanks();
+# basic.c:3049: 				ignore_blanks();
 	call	ignore_blanks		#
-.L609:
-# basic.c:3032: 				res = direct();
-	j	.L611		#
-.L605:
-# basic.c:3047: 		else if (linenum == 0xFFFF)
-	ld.w	r1, [linenum]	# linenum.684_21, linenum
-# basic.c:3047: 		else if (linenum == 0xFFFF)
+.L610:
+# basic.c:3037: 				res = direct();
+	j	.L612		#
+.L606:
+# basic.c:3052: 		else if (linenum == 0xFFFF)
+	ld.w	r1, [linenum]	# linenum.686_21, linenum
+# basic.c:3052: 		else if (linenum == 0xFFFF)
 	mov.w	r0, 65535	# tmp72,
-	cmp.w	r1, r0	# linenum.684_21, tmp72
-	jnz	.L612		#
-# basic.c:3049: 			qhow();
+	cmp.w	r1, r0	# linenum.686_21, tmp72
+	jnz	.L613		#
+# basic.c:3054: 			qhow();
 	call	qhow		#
-	j	.L613		#
-.L612:
-# basic.c:3053: 			entered_with_line_num();
+	j	.L614		#
+.L613:
+# basic.c:3058: 			entered_with_line_num();
 	call	entered_with_line_num		#
-# basic.c:3013: 		if (res != 3)
-	j	.L613		#
-.L614:
-# basic.c:3056: }
+# basic.c:3018: 		if (res != 3)
+	j	.L614		#
+.L615:
+# basic.c:3061: }
 	mov.w	sp, r13	#,
 	pop	r13		#
 	ret	

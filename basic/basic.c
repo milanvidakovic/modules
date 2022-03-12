@@ -160,10 +160,10 @@ int token_table[] =
 75 + FUNC_OFFSET	,	//	59		 ASIN                              
 80 + FUNC_OFFSET	,	//	60		 ACOS                              
 85 + FUNC_OFFSET	,	//	61		 0X01-------------------           
-0 + RELOP_OFFSET		,	//	62		 >=                                
-3 + RELOP_OFFSET		,	//	63		 <>                                
-6 + RELOP_OFFSET		,	//	64		 >                                 
-8 + RELOP_OFFSET		,	//	65		 =                                 
+0 + RELOP_OFFSET	,	//	62		 >=                                
+3 + RELOP_OFFSET	,	//	63		 <>                                
+6 + RELOP_OFFSET	,	//	64		 >                                 
+8 + RELOP_OFFSET	,	//	65		 =                                 
 10 + RELOP_OFFSET	,	//	66		 <=                                
 13 + RELOP_OFFSET	,	//	67		 <                                 
 15 + RELOP_OFFSET	,	//	68		 !=                                
@@ -219,38 +219,38 @@ unsigned char keywords[] = {
   'C','O','L','O','R'     ,0x00,			// COLOR	186	39
   'D','I','M'			  ,0x00,			// DIM		192	40
   0x01,										//				41
-  'P','E','E','K'				,0x00,		// 0 + FUNC_OFFSET		42
-  'A','B','S'					,0x00,		// 5			43
-  'A','R','E','A','D'			,0x00,		// 9			44
-  'D','R','E','A','D'			,0x00,		// 15			45
-  'R','N','D'					,0x00,		// 21			46
-  'K','E','Y'			     	,0x00,		// 25			47
-  'I','S','K','E','Y'   		,0x00,		// 29			48
-  'S','I','N' 			   		,0x00,		// 35			49
-  'C','O','S' 			   		,0x00,		// 39			50
-  'T','A','N' 			   		,0x00,		// 43			51
-  'E','X','P' 			   		,0x00,		// 47			52
-  'L','O','G' 			   		,0x00,		// 51			53
-  'S','Q','R','T' 		   		,0x00,		// 55			54
-  'P','O','W'	 		   		,0x00,		// 60			55
-  'P','I'		 		   		,0x00,		// 64			56
-  'E','X'		 		   		,0x00,		// 67			57
-  'A','T','A','N' 		   		,0x00,		// 70			58
-  'A','S','I','N' 		   		,0x00,		// 75			59
-  'A','C','O','S' 		   		,0x00,		// 80 + FUNC_OFFSET		60	
+  'P','E','E','K'			,0x00,	// 0 + FUNC_OFFSET		42
+  'A','B','S'				,0x00,	// 5 + FUNC_OFFSET		43
+  'A','R','E','A','D'		,0x00,	// 9 + FUNC_OFFSET		44
+  'D','R','E','A','D'		,0x00,	// 15 + FUNC_OFFSET		45
+  'R','N','D'				,0x00,	// 21 + FUNC_OFFSET		46
+  'K','E','Y'			   	,0x00,	// 25 + FUNC_OFFSET		47
+  'I','S','K','E','Y'   	,0x00,	// 29 + FUNC_OFFSET		48
+  'S','I','N' 				,0x00,	// 35 + FUNC_OFFSET		49
+  'C','O','S' 				,0x00,	// 39 + FUNC_OFFSET		50
+  'T','A','N' 				,0x00,	// 43 + FUNC_OFFSET		51
+  'E','X','P' 				,0x00,	// 47 + FUNC_OFFSET		52
+  'L','O','G' 				,0x00,	// 51 + FUNC_OFFSET		53
+  'S','Q','R','T' 			,0x00,	// 55 + FUNC_OFFSET		54
+  'P','O','W'	 			,0x00,	// 60 + FUNC_OFFSET		55
+  'P','I'		 			,0x00,	// 64 + FUNC_OFFSET		56
+  'E','X'		 			,0x00,	// 67 + FUNC_OFFSET		57
+  'A','T','A','N' 			,0x00,	// 70 + FUNC_OFFSET		58
+  'A','S','I','N' 			,0x00,	// 75 + FUNC_OFFSET		59
+  'A','C','O','S' 			,0x00,	// 80 + FUNC_OFFSET		60	
   0x01,										//				61
-   '>','='			,0x00,		// 0 + RELOP_OFFSET					62
-  '<','>'			,0x00,		// 3						63
-  '>'				,0x00,		// 6						64
-  '='				,0x00,		// 8						65
-  '<','='			,0x00,		// 10						66
-  '<'				,0x00,		// 13						67
-  '!','='			,0x00,		// 15						68
-  'A','N','D' 		,0x00,		// 18						69
-  'O','R'		  	,0x00,		// 22 + RELOP_OFFSET					70
+   '>','='			,0x00,		// 0 + RELOP_OFFSET			62
+  '<','>'			,0x00,		// 3 + RELOP_OFFSET			63
+  '>'				,0x00,		// 6 + RELOP_OFFSET			64
+  '='				,0x00,		// 8 + RELOP_OFFSET			65
+  '<','='			,0x00,		// 10 + RELOP_OFFSET		66
+  '<'				,0x00,		// 13 + RELOP_OFFSET		67
+  '!','='			,0x00,		// 15 + RELOP_OFFSET		68
+  'A','N','D' 		,0x00,		// 18 + RELOP_OFFSET		69
+  'O','R'		  	,0x00,		// 22 + RELOP_OFFSET		70
   0x01,							//							71
-  'T','O'			,0x00,		// 0 + TO_OFFSET					72
-  'S','T','E','P'	,0x00,		// 3 + TO_OFFSET					73
+  'T','O'			,0x00,		// 0 + TO_OFFSET			72
+  'S','T','E','P'	,0x00,		// 3 + TO_OFFSET			73
   0x01							//							74
   };
 
@@ -350,7 +350,7 @@ void init_arrays()
 		free(arrays_begin);
 	}
 	arrays_begin = (VAR **) malloc(sizeof(VAR*) * 26);
-		if (arrays_begin == NULL)
+	if (arrays_begin == NULL)
 	{
 
 		printf("PROBLEM! Not enough memory for the arrays!");
@@ -1599,6 +1599,7 @@ void exec_input()
 
 int exec_edit()
 {
+	unsigned char buff[512];
 	unsigned char *line;
 	int i;
 	int j;
@@ -1628,7 +1629,11 @@ int exec_edit()
 		txtpos[j++] = line[i];
 	}
 	txtpos[j] = 0;
-	put_char('#');
+
+	expand(txtpos, buff);
+	strcpy(txtpos, buff);
+
+	putchar('#');
 	gets(txtpos);
 
 	i = strlen(txtpos);
